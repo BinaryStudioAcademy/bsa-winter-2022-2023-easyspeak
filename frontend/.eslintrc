@@ -9,6 +9,9 @@
             }
         }
     },
+    "env": {
+        "browser": true
+    },
     "overrides": [
         {
             "files": ["*.ts"],
@@ -24,6 +27,7 @@
             "plugins": ["prettier", "simple-import-sort", "@typescript-eslint"],
             "parser": "@typescript-eslint/parser",
             "rules": {
+                "no-shadow": "off",
                 "@angular-eslint/directive-selector": [
                     "error",
                     {
@@ -62,6 +66,7 @@
                 "no-bitwise": "off",
                 "no-underscore-dangle": "off",
                 "operator-linebreak": "off",
+                "dot-notation": "off",
                 "@typescript-eslint/naming-convention": "off",
                 "import/extensions": [
                     "error",
@@ -149,7 +154,7 @@
                         "ignoreRegExpLiterals": true
                     }
                 ],
-                "indent": ["error", 4]
+                "indent": ["error", 4, { "SwitchCase": 1 }]
             }
         },
         {
