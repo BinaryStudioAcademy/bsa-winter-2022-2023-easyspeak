@@ -1,0 +1,51 @@
+version: '3.1'
+services:
+
+    easyspeak_core:
+        image: tatihutii/easyspeak_core:latest
+        container_name: 'easyspeak_core'
+        restart: on-failure
+        networks:
+            - back
+        ports:
+            - "5050:5050"
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Production
+        env_file:
+            - /etc/environment
+        volumes:
+           - ./resources:/app/Resources
+
+    easyspeak_notifier:
+        image: tatihutii/easyspeak_notifier:latest
+        container_name: 'easyspeak_notifier'
+        restart: on-failure
+        networks:
+            - back
+        ports:
+            - "5070:5070"
+        environment:
+            ASPNETCORE_ENVIRONMENT: 'Production'
+        env_file:
+            - /etc/environment
+
+    easyspeak_frontend:
+        depends_on:
+            - easyspeak_core
+            - easyspeak_notifier
+        image: tatihutii/easyspeak_frontend:latest
+        container_name: 'easyspeak_frontend'
+        restart: on-failure
+        networks:
+            - back
+            - front
+        ports:
+            - "80:80"
+            - "443:443"
+        volumes:
+            - /etc/letsencrypt:/etc/letsencrypt
+networks:
+    back:
+        driver: bridge
+    front:
+        driver: bridge
