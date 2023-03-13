@@ -71,7 +71,7 @@ erDiagram
     bigint id PK
     bigint requesterId FK
     bigint userId FK
-    boolean isApproved
+    int friendshipStatus
   }
 
   Subquestions {
