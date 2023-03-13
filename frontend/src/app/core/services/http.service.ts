@@ -7,6 +7,7 @@ import { catchError } from 'rxjs/operators';
     providedIn: 'root',
 })
 export class HttpService {
+    // eslint-disable-next-line no-empty-function
     constructor(private httpClient: HttpClient, private baseUrl: string) {
     }
 
