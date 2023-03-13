@@ -1,80 +1,79 @@
 import { ITopic } from '@shared/models/ITopic';
 
-// eslint-disable-next-line import/no-mutable-exports
 export const topics: ITopic[] = [
     {
         name: 'Architecture',
-        imgName: 'Classical Building.png',
+        imgName: 'Classical Building.svg',
         selected: false,
     },
     {
         name: 'Art',
-        imgName: 'Artist Palette.png',
+        imgName: 'Artist Palette.svg',
         selected: false,
     },
     {
         name: 'Cars',
-        imgName: 'Racing Car.png',
+        imgName: 'Racing Car.svg',
         selected: false,
     },
     {
         name: 'Celebrities',
-        imgName: 'Crown.png',
+        imgName: 'Crown.svg',
         selected: false,
     },
     {
         name: 'Cooking',
-        imgName: 'Cook.png',
+        imgName: 'Cook.svg',
         selected: false,
     },
     {
         name: 'Dancing',
-        imgName: 'Woman Dancing.png',
+        imgName: 'Woman Dancing.svg',
         selected: false,
     },
     {
         name: 'Design',
-        imgName: 'Artist.png',
+        imgName: 'Artist.svg',
         selected: false,
     },
     {
         name: 'Ecology',
-        imgName: 'Four Leaf Clover.png',
+        imgName: 'Four Leaf Clover.svg',
         selected: false,
     },
     {
         name: 'Fashion',
-        imgName: 'Dress.png',
+        imgName: 'Dress.svg',
         selected: false,
     },
     {
         name: 'History',
-        imgName: 'Crossed Swords.png',
+        imgName: 'Crossed Swords.svg',
         selected: false,
     },
     {
         name: 'Medicine',
-        imgName: 'Pill.png',
+        imgName: 'Pill.svg',
         selected: false,
     },
     {
         name: 'Technologies',
-        imgName: 'Robot.png',
+        imgName: 'Robot.svg',
         selected: false,
     },
     {
         name: 'Pets',
-        imgName: 'Dog Face.png',
+        imgName: 'Dog Face.svg',
         selected: false,
     },
     {
         name: 'Philosophy',
-        imgName: 'Face With Monocle.png',
+        imgName: 'Face With Monocle.svg',
         selected: false,
     },
     {
         name: 'Photography',
-        imgName: 'Camera.png',
+        imgName: 'Camera.svg',
         selected: false,
     },
 ];

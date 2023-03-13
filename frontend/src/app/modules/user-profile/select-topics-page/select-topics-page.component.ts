@@ -13,12 +13,9 @@ export class SelectTopicsPageComponent {
     selectedTopics: ITopic[] = [];
 
     topicClick(topic: ITopic) {
-        topic.selected = !topic.selected;
-        if (topic.selected) {
-            this.selectedTopics.push(topic);
-        } else {
-            delete this.selectedTopics[this.selectedTopics.findIndex(t => t.name === topic.name)];
-            this.selectedTopics = this.selectedTopics.filter(topicToFilter => topicToFilter !== undefined);
-        }
+        const updatedTopics = this.topics.map(t => (t.name === topic.name ? { ...t, selected: !t.selected } : t));
+
+        this.selectedTopics = updatedTopics.filter(t => t.selected);
+        this.topics = updatedTopics;
     }
 }
