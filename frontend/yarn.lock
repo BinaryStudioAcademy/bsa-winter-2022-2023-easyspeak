@@ -176,12 +176,21 @@
     "@angular-eslint/bundled-angular-compiler" "14.0.2"
     "@typescript-eslint/utils" "5.29.0"
 
-"@angular/animations@^14.1.1", "@angular/animations@14.1.1":
+"@angular/animations@^14.1.1", "@angular/animations@>=7.0.0", "@angular/animations@14.1.1":
   version "14.1.1"
   resolved "https://registry.npmjs.org/@angular/animations/-/animations-14.1.1.tgz"
   integrity sha512-/fXzJzr8Pr7/xpwErX9PjbIc790RF818WgW7SUNev6pN6UUq3gvjmPjDTdZBZfiAZWY49nBLibPo2FvmyCP7tg==
   dependencies:
     tslib "^2.3.0"
+
+"@angular/cdk@7.0.0":
+  version "7.0.0"
+  resolved "https://registry.npmjs.org/@angular/cdk/-/cdk-7.0.0.tgz"
+  integrity sha512-HX+gIJzST/Nu07ASg1XR583KSEmHI6kUbiSBdq0LqF3mIQgId5z3auBqQcXAgvB0Cg29+/38aj31hnoK/LswEQ==
+  dependencies:
+    tslib "^1.7.1"
+  optionalDependencies:
+    parse5 "^5.0.0"
 
 "@angular/cli@^14.1.1", "@angular/cli@>= 14.0.0 < 15.0.0":
   version "14.1.1"
@@ -209,7 +218,7 @@
     uuid "8.3.2"
     yargs "17.5.1"
 
-"@angular/common@^14.1.1", "@angular/common@14.1.1":
+"@angular/common@^14.1.1", "@angular/common@>=7.0.0", "@angular/common@14.1.1":
   version "14.1.1"
   resolved "https://registry.npmjs.org/@angular/common/-/common-14.1.1.tgz"
   integrity sha512-neFCnrIrGOuj3oOFBTLi4QrdI4fgKQprVLUEyL5LhCQ5R0K/F+gh61ovi7nT4XYnv41p4eqtG81YNMtVXH49pg==
@@ -239,7 +248,7 @@
   dependencies:
     tslib "^2.3.0"
 
-"@angular/core@^14.1.1", "@angular/core@14.1.1":
+"@angular/core@^14.1.1", "@angular/core@>=7.0.0", "@angular/core@14.1.1":
   version "14.1.1"
   resolved "https://registry.npmjs.org/@angular/core/-/core-14.1.1.tgz"
   integrity sha512-l3ms6/jxIUIeuCkXhz5nhRb94KLQ6wv9+B4lE0aJXcgHTqOmhc/ZIacT51LCjvVcok/vczF3f7w71Ii8b10yKQ==
@@ -252,6 +261,13 @@
   integrity sha512-s4VuaivJ+s2hLlE8CMHLsAAmJNV/03EgBEJQV7rt1H0ogHs0jB/zlkzVw5K5bynCFkfIeDbwd6RvxzWhwE+ong==
   dependencies:
     tslib "^2.3.0"
+
+"@angular/material@^7.0.0":
+  version "7.0.0"
+  resolved "https://registry.npmjs.org/@angular/material/-/material-7.0.0.tgz"
+  integrity sha512-HgHzHWsUvNiSpRmoOJqnH/TVb4Ki7sXxbWuw5OVKOKiBW6Gwvd29+cP4XauzH47wHMyvS9/HH8kj3gC72pLhJQ==
+  dependencies:
+    tslib "^1.7.1"
 
 "@angular/platform-browser-dynamic@^14.1.1":
   version "14.1.1"
@@ -5850,6 +5866,11 @@ parse5-sax-parser@^6.0.1:
   dependencies:
     parse5 "^6.0.1"
 
+parse5@^5.0.0:
+  version "5.1.1"
+  resolved "https://registry.npmjs.org/parse5/-/parse5-5.1.1.tgz"
+  integrity sha512-ugq4DFI0Ptb+WWjAdOK16+u/nHfiIrcE+sh8kZMaM0WllQKLI9rOUq6c2b7cwPkXdzfQESqvoqK6ug7U/Yyzug==
+
 parse5@^6.0.1:
   version "6.0.1"
   resolved "https://registry.npmjs.org/parse5/-/parse5-6.0.1.tgz"
@@ -7306,6 +7327,11 @@ tsconfig-paths@^3.14.1, tsconfig-paths@^3.9.0:
     json5 "^1.0.1"
     minimist "^1.2.6"
     strip-bom "^3.0.0"
+
+tslib@^1.7.1:
+  version "1.14.1"
+  resolved "https://registry.npmjs.org/tslib/-/tslib-1.14.1.tgz"
+  integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
 
 tslib@^1.8.1:
   version "1.14.1"
