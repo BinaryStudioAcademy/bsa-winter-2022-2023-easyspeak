@@ -105,20 +105,20 @@ erDiagram
     datetime finishedAt
   }
 
-  Countries ||--|{ Users : living
+  Countries ||--|{ Users : countryId
   Countries {
     bigint id PK
     nvarchar name 
     nvarchar imagePath
   }
 
-  Languages ||--|{ Users : speaking
+  Languages ||--|{ Users : languageId
   Languages {
     bigint id PK
     nvarchar name
   }
 
-  Timezones ||--|{ Users : living
+  Timezones ||--|{ Users : timezoneId
   Timezones {
     bigint id PK
     nvarchar zoneValue
