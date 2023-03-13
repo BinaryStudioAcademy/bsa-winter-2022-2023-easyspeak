@@ -1,5 +1,5 @@
 @import '../../../../styles/colors'
-@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@700&display=swap')
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;700&display=swap')
 
 *
     margin: 0
@@ -38,9 +38,12 @@
 
 .photo
     position: relative
+    display: inline-block
 
     width: 128px
     height: 97px
+
+    margin-right: 15px
 
 .photo img
     width: 128px
@@ -58,3 +61,55 @@
     top: 50%
     left: 50%
     transform: translate(-50%, -50%)
+
+.info
+    display: inline-block
+    vertical-align: top
+
+.lesson-theme
+    vertical-align: top
+
+    font-family: 'Barlow'
+    font-style: normal
+    font-weight: 500
+    font-size: 16px
+    line-height: 150%
+
+    color: $black
+
+.lesson-tutor
+    position: relative
+
+    margin: 5px 0 9px 0
+
+.avatar
+    display: inline-block
+
+    width: 20.62px
+    height: 20.62px
+
+    border-radius: 50%
+
+.origin
+    position: absolute
+
+    background-color: $white
+
+    border-radius: 90%
+
+    left: 13px
+    top: 11px
+
+.tutor-name
+    display: inline-block
+    vertical-align: top
+
+    margin-left: 6px
+
+    font-family: 'Barlow'
+    font-style: normal
+    font-weight: 400
+    font-size: 14px
+    line-height: 146%
+
+    color: $gray-300
