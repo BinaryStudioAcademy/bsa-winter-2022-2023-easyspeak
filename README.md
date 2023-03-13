@@ -54,12 +54,20 @@ erDiagram
     int age
     nvarchar email
     nvarchar imagePath
-    Sex sex
-    LanguageLevel languageLevel
-    UserStatus status
+    int sex
+    int languageLevel
+    int status
     boolean isAdmin
     boolean isSubscribed
     boolean isBanned
+  }
+
+  Notifications {
+    bigint id PK
+    bigint userId FK
+    nvarchar text
+    int type
+    boolean isRead
   }
 
   Friends{
@@ -115,14 +123,6 @@ erDiagram
     bigint id PK
     nvarchar zoneValue
   } 
-
-  Notifications {
-    bigint id PK
-    bigint userId FK
-    nvarchar text
-    NotificationType type
-    boolean isRead
-  }
 
   Tags }|--|{ Users : id
   Tags }|--|{ Lessons : id
