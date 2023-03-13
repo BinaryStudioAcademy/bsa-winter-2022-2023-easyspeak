@@ -36,8 +36,8 @@ _Tip: If you want to connect to the specific service outside of docker, then use
 
 ```mermaid
 erDiagram
-  Users ||--|{ Friends : user1Id
-  Users ||--|{ Friends : user2Id
+  Users ||--|{ Friends : requesterId
+  Users ||--|{ Friends : userId
   Users ||--|{ Notifications : userId
   Users }|--|{ Chats : id
   Users }|--|{ Lessons : id
@@ -69,8 +69,8 @@ erDiagram
 
   Friends{
     bigint id PK
-    bigint user1Id FK
-    bigint user2Id FK
+    bigint requesterId FK
+    bigint userId FK
     boolean isApproved
   }
 
