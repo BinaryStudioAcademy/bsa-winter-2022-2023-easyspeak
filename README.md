@@ -44,9 +44,9 @@ erDiagram
 
   Users {
     bigint Id PK
-    int countryId
-    int languageId
-    int timezoneId
+    int country
+    int language
+    int timezone
     nvarchar firstName
     nvarchar lastName
     int age
