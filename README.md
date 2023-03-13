@@ -41,14 +41,12 @@ erDiagram
   Users ||--|{ Notifications : userId
   Users }|--|{ Chats : id
   Users }|--|{ Lessons : id
-  Users }|--|{ Calls : id
 
   Users {
     bigint Id PK
-    bigint countryId FK
-    bigint languageId FK
-    bigint timezoneId FK
-    nvarchar password
+    int countryId
+    int languageId
+    int timezoneId
     nvarchar firstName
     nvarchar lastName
     int age
@@ -57,7 +55,6 @@ erDiagram
     int sex
     int languageLevel
     int status
-    boolean isAdmin
     boolean isSubscribed
     boolean isBanned
   }
@@ -84,6 +81,7 @@ erDiagram
   }
 
   Chats ||--|{ Messages : chatId
+  Chats ||--|{ Calls : chatId
   Chats {
     bigint id PK
     nvarchar name
@@ -101,28 +99,10 @@ erDiagram
 
   Calls {
     bigint id PK
+    bigint chatId FK
     datetime startedAt
     datetime finishedAt
   }
-
-  Countries ||--|{ Users : countryId
-  Countries {
-    bigint id PK
-    nvarchar name 
-    nvarchar imagePath
-  }
-
-  Languages ||--|{ Users : languageId
-  Languages {
-    bigint id PK
-    nvarchar name
-  }
-
-  Timezones ||--|{ Users : timezoneId
-  Timezones {
-    bigint id PK
-    nvarchar zoneValue
-  } 
 
   Tags }|--|{ Users : id
   Tags }|--|{ Lessons : id
