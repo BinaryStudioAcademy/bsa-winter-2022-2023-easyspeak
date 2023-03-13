@@ -36,20 +36,116 @@ _Tip: If you want to connect to the specific service outside of docker, then use
 
 ```mermaid
 erDiagram
-  User {
-      bigint Id
-      nvarchar Name
-      nvarchar Email
-      nvarchar PhoneCode
-      nvarchar PhoneNumber
-      nvarchar ImagePath
-      int Country
-      int Language
-      int TimeFormat
-      int DateFormat
-      boolean IsBanned
-      boolean IsDeleted
+  Users ||--|{ Friends : user1Id
+  Users ||--|{ Friends : user2Id
+  Users ||--|{ Notifications : userId
+  Users }|--|{ Chats : id
+  Users }|--|{ Lessons : id
+  Users }|--|{ Calls : id
+
+  Users {
+    bigint Id PK
+    bigint countryId FK
+    bigint languageId FK
+    bigint timezoneId FK
+    nvarchar password
+    nvarchar firstName
+    nvarchar lastName
+    int age
+    nvarchar email
+    nvarchar imagePath
+    Sex sex
+    LanguageLevel languageLevel
+    UserStatus status
+    boolean isAdmin
+    boolean isSubscribed
+    boolean isBanned
   }
+
+  Friends{
+    bigint id PK
+    bigint user1Id FK
+    bigint user2Id FK
+    boolean isApproved
+  }
+
+  Subquestions {
+	  bigint id PK
+	  bigint questionId FK
+	  nvarchar text
+  }
+
+  Chats ||--|{ Messages : chatId
+  Chats {
+    bigint id PK
+    nvarchar name
+  }
+
+  Lessons ||--|{ Questions : lessonId
+  Lessons {
+    bigint id PK
+    nvarchar name
+    nvarchar description
+    nvarchar mediaPath
+    datetime startsAt
+    int limitOfUsers
+  }
+
+  Calls {
+    bigint id PK
+    datetime startedAt
+    datetime finishedAt
+  }
+
+  Countries ||--|{ Users : living
+  Countries {
+    bigint id PK
+    nvarchar name 
+    nvarchar imagePath
+  }
+
+  Languages ||--|{ Users : speaking
+  Languages {
+    bigint id PK
+    nvarchar name
+  }
+
+  Timezones ||--|{ Users : living
+  Timezones {
+    bigint id PK
+    nvarchar zoneValue
+  } 
+
+  Notifications {
+    bigint id PK
+    bigint userId FK
+    nvarchar text
+    NotificationType type
+    boolean isRead
+  }
+
+  Tags }|--|{ Users : id
+  Tags }|--|{ Lessons : id
+  Tags {
+    bigint id PK
+    nvarchar text
+  }
+
+  Messages {
+    bigint id PK
+    bigint chatId FK
+    nvarchar text
+    datetime createdAt
+    boolean isDeleted
+  }
+
+  Questions ||--|{ Subquestions : questionId
+  Questions {
+    bigint id PK
+    bigint lessonId FK
+    nvarchar topic
+  }
+
 ```
 
 ## Code quality
