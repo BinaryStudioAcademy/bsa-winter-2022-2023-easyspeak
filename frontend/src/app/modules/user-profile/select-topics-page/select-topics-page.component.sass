@@ -1,0 +1,103 @@
+@import '../../../../styles/colors'
+
+@font-face
+    font-family: Barlow
+    src: url('../../../../assets/fonts/Barlow-Medium.ttf')
+
+main
+    width: 50%
+    margin: 30px auto 0 auto
+    font-family: Barlow, serif
+
+#back
+    background-color: $white
+    padding: 10px
+    border: none
+    width: 15%
+    display: flex
+    justify-content: center
+    align-items: center
+
+#back:hover, button:hover
+    background-color: rgba(0,0,0, 0.2)
+    cursor: pointer
+    transition: background-color 0.3s ease-out
+
+#back img
+    padding: 0 10px 0 0
+
+h2
+    color: $main-color
+    margin: 10px 0 0 0
+
+#topics
+    display: grid
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr
+    grid-gap: 30px
+    margin: 10px 0 50px 0
+
+.topic
+    padding: 20px 0
+
+.not-selected
+    color: $gray-300
+
+.not-selected div
+    background-color: $inactive-color
+
+.selected
+    color: $black
+
+.selected div
+    background-color: $time-color
+
+.topic div
+    padding: 10px
+    border-radius: 50%
+    height: 100%
+    display: flex
+    align-items: center
+    justify-content: center
+
+.topic div:hover
+    cursor: pointer
+    background-color: rgba(0,0,0,0.2)
+    transition: background-color 0.3s ease-out
+
+.topic p
+    text-align: center
+    margin: 0
+
+#next button
+    width: 35%
+    padding: 11px 60px
+    font-size: 16px
+
+#create
+    background-color: $main-color
+    color: $white
+    margin-right: 15px
+    border: none
+
+button:disabled
+    opacity: 0.5
+    cursor: not-allowed
+
+#skip
+    border: 1px solid $main-color
+    color: $main-color
+
+button
+    border-radius: 50px
+
+#has-account
+    margin-top: 20px
+    font-size: 16px
+    text-align: center
+
+#has-account span
+    color: $gray-300
+
+#has-account a
+    text-decoration: none
+    color: $time-color
