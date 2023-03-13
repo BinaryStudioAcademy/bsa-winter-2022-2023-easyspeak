@@ -53,15 +53,16 @@ namespace EasySpeak.Core.WebAPI.Extentions
                 .Build();
 
             var projectId = config.GetValue<string>("project_id");
+            var secureUri = config.GetValue<string>("secure_uri");
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
-                    options.Authority = $"https://securetoken.google.com/{projectId}";
+                    options.Authority = $"{secureUri}/{projectId}";
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidateIssuer = true,
-                        ValidIssuer = $"https://securetoken.google.com/{projectId}",
+                        ValidIssuer = $"{secureUri}/{projectId}",
                         ValidateAudience = true,
                         ValidAudience = projectId,
                         ValidateLifetime = true
