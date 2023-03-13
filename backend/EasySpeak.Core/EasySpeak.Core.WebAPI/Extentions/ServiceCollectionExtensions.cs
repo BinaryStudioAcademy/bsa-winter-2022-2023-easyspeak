@@ -63,7 +63,7 @@ namespace EasySpeak.Core.WebAPI.Extentions
                         ValidateIssuer = true,
                         ValidIssuer = $"https://securetoken.google.com/{projectId}",
                         ValidateAudience = true,
-                        ValidAudience = $"https://securetoken.google.com/{projectId}",
+                        ValidAudience = projectId,
                         ValidateLifetime = true
                     };
                 });
