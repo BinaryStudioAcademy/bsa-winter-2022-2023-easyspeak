@@ -1,5 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from '@env/environment';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
@@ -7,8 +8,10 @@ import { catchError } from 'rxjs/operators';
     providedIn: 'root',
 })
 export class HttpService {
+    private baseUrl: string = environment.coreUrl;
+
     // eslint-disable-next-line no-empty-function
-    constructor(private httpClient: HttpClient, private baseUrl: string) {
+    constructor(private httpClient: HttpClient) {
     }
 
     get<T>(url: string): Observable<T[]> {
