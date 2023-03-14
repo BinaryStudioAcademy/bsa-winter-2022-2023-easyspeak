@@ -21,8 +21,11 @@
                 <div class="dropdown-item-content">
                     <input type="checkbox" [checked]="this.selectedItems.has(item.title)" (click)="selectItem(item.title)">
                     <div class="dropdown-item-info">
-                        <div class="item-info-title">
+                        <div *ngIf="item.subtitle" class="item-info-title">
                             {{item.title + ' : ' + item.subtitle}}
+                        </div>
+                        <div *ngIf="!item.subtitle">
+                            {{item.title}}
                         </div>
                         <div *ngIf="item.desc" class="item-info-subtitle">
                             {{item.desc}}
