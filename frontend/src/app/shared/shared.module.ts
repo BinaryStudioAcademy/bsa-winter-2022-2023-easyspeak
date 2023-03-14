@@ -3,12 +3,16 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
+import { MatDialogModule } from '@angular/material/dialog';
+import { YouTubePlayerModule } from '@angular/youtube-player';
+
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { YoutubePlayerComponent } from './components/youtube-player/youtube-player.component';
 
 @NgModule({
-    imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule, RouterModule],
-    declarations: [LoadingSpinnerComponent, NotFoundComponent],
+    imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule, RouterModule, MatDialogModule, YouTubePlayerModule,],
+    declarations: [LoadingSpinnerComponent, NotFoundComponent, YoutubePlayerComponent],
     exports: [
         CommonModule,
         RouterModule,
