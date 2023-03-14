@@ -11,7 +11,18 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { TimetablePageComponent } from './timetable-page/timetable-page.component';
 
 @NgModule({
-    declarations: [MainComponent, HeaderComponent, TimetablePageComponent],
-    imports: [SharedModule, MainRoutingModule, MatButtonModule, MatToolbarModule, MatMenuModule, MatBadgeModule],
+    declarations: [
+        MainComponent, 
+        HeaderComponent, 
+        TimetablePageComponent
+    ],
+    imports: [
+        SharedModule, 
+        MainRoutingModule, 
+        MatButtonModule, 
+        MatToolbarModule, 
+        MatMenuModule, 
+        MatBadgeModule
+    ],
 })
 export class MainModule {}
