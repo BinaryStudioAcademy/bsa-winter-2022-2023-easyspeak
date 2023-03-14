@@ -1,7 +1,7 @@
 <div class="filters-section-container">
     <div class="filter-options-wrp">
         <div class="filter-options-btn-wrp">
-            <div (click)="selectLanguage()" class="filter-options-btn">
+            <div (click)="showLevelsList()" class="filter-options-btn">
                 <div *ngIf="this.selectedLanguageFilters.size > 0" class="filters-count-group">
                     <div class="filters-count-val">
                         {{this.selectedLanguageFilters.size}}
@@ -11,7 +11,12 @@
                     Level
                 </div>
                 <div class="lang-level-title">
-                    B1
+                    <span *ngIf="this.selectedLanguageFilters.size > 0">
+                        {{this.selectedLanguageFilters.keys().next().value}}
+                    </span>
+                    <span *ngIf="this.selectedLanguageFilters.size === 0">
+                        None
+                    </span>
                 </div>
                 <div class="dropdown-icon-wrp">
                     <mat-icon>expand_more</mat-icon>
@@ -38,7 +43,7 @@
         </div>
 
         <div class="filter-options-btn-wrp">
-            <div class="filter-options-btn" (click)="selectInterests()">
+            <div class="filter-options-btn" (click)="showTopicsList()">
                 <div *ngIf="this.selectedTopicsFilters.size > 0" class="filters-count-group">
                     <div class="filters-count-val">
                         {{this.selectedTopicsFilters.size}}

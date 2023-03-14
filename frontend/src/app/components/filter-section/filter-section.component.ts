@@ -78,11 +78,11 @@ export class FilterSectionComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  selectLanguage(){
+  showLevelsList(){
     this.showLangDropdown = !this.showLangDropdown;
   }
 
-  selectInterests(){
+  showTopicsList(){
     this.showTopicsDropdown = !this.showTopicsDropdown;
   }
 
@@ -93,7 +93,6 @@ export class FilterSectionComponent implements OnInit {
     else{
       this.selectedLanguageFilters.add(title);
     }
-    console.log(this.selectedLanguageFilters.size);
   }
 
   selectTopic(title: any){
@@ -103,7 +102,6 @@ export class FilterSectionComponent implements OnInit {
     else{
       this.selectedTopicsFilters.add(title);
     }
-    console.log(this.selectedLanguageFilters);
   }
 
   closeAllFilters(){
