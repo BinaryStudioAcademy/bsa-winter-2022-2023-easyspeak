@@ -26,6 +26,7 @@ namespace EasySpeak.Core.DAL.Entities
         public ICollection<Lesson> Lessons { get; private set; }
         public ICollection<Tag> Tags { get; private set; }
         public ICollection<Friend> Friends { get; private set; }
+        public ICollection<Friend> Users { get; private set; }
         public ICollection<Notification> Notifications { get; private set; }
 
         public User()
@@ -34,6 +35,7 @@ namespace EasySpeak.Core.DAL.Entities
             Lessons = new List<Lesson>();
             Tags = new List<Tag>();
             Friends = new List<Friend>();
+            Users = new List<Friend>();
             Notifications = new List<Notification>();
         }
 

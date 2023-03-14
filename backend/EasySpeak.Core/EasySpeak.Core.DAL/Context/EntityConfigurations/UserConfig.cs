@@ -13,10 +13,6 @@ namespace EasySpeak.Core.DAL.Context.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.HasMany(u => u.Friends)
-                .WithOne(f => f.User)
-                .HasForeignKey(f => f.UserId);
-
             builder.HasMany(u => u.Tags)
                 .WithMany(t => t.Users);
 

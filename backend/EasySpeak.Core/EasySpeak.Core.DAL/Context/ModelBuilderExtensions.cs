@@ -15,6 +15,7 @@ namespace EasySpeak.Core.DAL.Context
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(TagConfig).Assembly);
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(LessonConfig).Assembly);
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(QuestionConfig).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(FriendConfig).Assembly);
         }
 
         public static void Seed(this ModelBuilder modelBuilder)
