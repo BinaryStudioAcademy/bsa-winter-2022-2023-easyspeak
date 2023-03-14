@@ -11,11 +11,11 @@ namespace EasySpeak.Core.DAL.Entities
         public Country Country { get; set; }
         public Language Language { get; set; }
         public Timezone Timezone { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public string FirstName { get; set; } = string.Empty;
+        public string LastName { get; set; } = string.Empty;
         public short Age { get; set; }
-        public string Email { get;set; }
-        public string ImagePath { get; set; }
+        public string Email { get;set; } = string.Empty;
+        public string ImagePath { get; set; } = string.Empty;
         public Sex Sex { get; set; }
         public LanguageLevel LanguageLevel { get; set; }
         public UserStatus Status { get; set; }

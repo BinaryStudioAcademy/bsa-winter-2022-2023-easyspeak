@@ -8,7 +8,7 @@ namespace EasySpeak.Core.DAL.Entities
 {
     public class Tag : Entity<long>
     {
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
         public ICollection<User> Users { get; private set; }
         public ICollection<Lesson> Lessons { get; private set; }
 
