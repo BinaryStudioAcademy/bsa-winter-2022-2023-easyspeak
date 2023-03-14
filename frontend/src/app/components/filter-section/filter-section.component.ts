@@ -14,8 +14,8 @@ export class FilterSectionComponent implements OnInit {
   public langBtnLabel = 'Level';
   public topicsBtnLabel = 'Interests'
 
-  public selectedLanguageFilters = new Set();
-  public selectedTopicsFilters = new Set();
+  public selectedLanguageFilters = new Set<string>();
+  public selectedTopicsFilters = new Set<string>();
 
   public topics = topicsSample;
   public langLevels = langLevelsSample;
@@ -25,11 +25,11 @@ export class FilterSectionComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  removeLangLevel(title: any){
+  removeLangLevel(title: string){
     this.selectedLanguageFilters.delete(title);
   }
 
-  removeTopic(title: any){
+  removeTopic(title: string){
     this.selectedTopicsFilters.delete(title);
   }
 

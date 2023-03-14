@@ -1,32 +1,38 @@
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { EventEmitter } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-dropdown',
   templateUrl: './dropdown.component.html',
   styleUrls: ['./dropdown.component.sass']
 })
-export class DropdownComponent implements OnInit {
+export class DropdownComponent implements OnInit, OnDestroy {
   @Input() data: any[];
   @Input() btnLabel: string | undefined;
   @Output() selectedFilters = new EventEmitter<Set<string>>();
   @Input() resetEvent: Observable<void>;
 
-  public withLabel = false;
 
   public showDropdown = false;
 
   public selectedItems = new Set<string>();
 
+  private unsubscribe$ = new Subject<void>();
+
   constructor() { }
 
   ngOnInit(): void {
-    this.resetEvent.subscribe(() => {
+    this.resetEvent
+    .pipe(takeUntil(this.unsubscribe$))
+    .subscribe(() => {
       this.selectedItems = new Set();
-    })
+    });
+  }
 
-    this.withLabel = this.data[0].hasOwnProperty('subtitle');
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   selectItem(title: string){
@@ -42,10 +48,6 @@ export class DropdownComponent implements OnInit {
 
   showDropdownMenu(){
     this.showDropdown = !this.showDropdown;
-  }
-
-  reset(){
-
   }
 
 }
