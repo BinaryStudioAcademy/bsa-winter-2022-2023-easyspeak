@@ -55,4 +55,6 @@ app.UseEndpoints(endpoinds =>
     endpoinds.MapControllers();
 });
 
+app.UseCodiCoreContext();
+
 app.Run();
