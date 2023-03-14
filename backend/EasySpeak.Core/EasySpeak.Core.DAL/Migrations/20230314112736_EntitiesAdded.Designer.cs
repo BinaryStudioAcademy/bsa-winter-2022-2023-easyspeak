@@ -4,6 +4,7 @@ using EasySpeak.Core.DAL.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EasySpeak.Core.DAL.Migrations
 {
     [DbContext(typeof(EasySpeakCoreContext))]
-    partial class EasySpeakCoreContextModelSnapshot : ModelSnapshot
+    [Migration("20230314112736_EntitiesAdded")]
+    partial class EntitiesAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -499,7 +501,7 @@ namespace EasySpeak.Core.DAL.Migrations
                     b.HasOne("EasySpeak.Core.DAL.Entities.User", "User")
                         .WithMany("Friends")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Requester");
