@@ -4,13 +4,12 @@ public class LessonWebDto
 {
     public long Id { get; set; }
     public string Name { get; set; }
-    public AuthorDto AuthorDto { get; set; }
+    public UserDto User { get; set; }
     public string Description { get; set; }
     public string MediaPath { get; set; }
     public DateTime StartAt { get; set; }
-    public int? LimitOfUsers { get; set; }
 
-    public LanguageLevelDto LanguageLevelDto { get; set; }
+    public LanguageLevelDto LanguageLevel { get; set; }
 
 
     public int Subscribers { get; set; }

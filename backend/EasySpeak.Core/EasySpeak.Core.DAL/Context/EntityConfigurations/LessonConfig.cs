@@ -16,6 +16,9 @@ namespace EasySpeak.Core.DAL.Context.EntityConfigurations
             builder.HasMany(l => l.Questions)
                 .WithOne(q => q.Lesson)
                 .HasForeignKey(q => q.LessonId);
+
+            builder.HasOne(l => l.User)
+                .WithOne();
         }
     }
 }

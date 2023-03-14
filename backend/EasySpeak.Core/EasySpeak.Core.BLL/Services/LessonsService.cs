@@ -3,6 +3,9 @@ using EasySpeak.Core.BLL.Interfaces;
 using EasySpeak.Core.Common.DTO.Lesson;
 using EasySpeak.Core.DAL.Context;
 using EasySpeak.Core.DAL.Entities;
+using EasySpeak.Core.DAL.Entities.Enums;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 
 namespace EasySpeak.Core.BLL.Services;
 
@@ -12,15 +15,52 @@ public class LessonsService : BaseService, ILessonsService
 
     public async Task<ICollection<LessonWebDto>> GetAllLessonsAsync(RequestDto requestDto)
     {
-        List<Lesson> lessons = new List<Lesson>();
+        List<LessonWebDto> lessons = new List<LessonWebDto>();
 
-        foreach (var requestDtoLanguageLevel in requestDto.LanguageLevels)
+        var lessonsFromDb = await _context.Lessons
+            .Include(l => l.Tags)
+            .Include(l => l.Questions)
+            .Include(l => l.Subscribers)
+            .ToListAsync();
+
+        lessonsFromDb = new List<Lesson>
         {
-            _context.Lessons.Where(l => l.LanguageLevel)
+            new Lesson
+            {
+                User = new User(),
+                UserId = 0,
+                Description = "1",
+                Id=0,
+                LanguageLevel = LanguageLevel.A2,
+                StartAt = new DateTime(2023,04,12)
+            }
+        };
+
+        var mappedLessons = _mapper.Map<ICollection<LessonWebDto>>(lessonsFromDb);
+
+        foreach (var lesson in mappedLessons)
+        {
+            if (lesson.StartAt > requestDto.Date)
+            {
+                lessons.Add(lesson);
+                continue;
+            }
+
+            if (requestDto.LanguageLevels != null && requestDto.LanguageLevels.Any(l => l == lesson.LanguageLevel))
+            {
+                lessons.Add(lesson);
+                continue;
+            }
+
+            if (requestDto.Tags != null)
+            {
+                if (requestDto.Tags.Any(tag => lesson.Tags.Any(t => t == tag)))
+                {
+                    lessons.Add(lesson);
+                }
+            }
         }
 
-        var samples = await _context.Lessons.Where(l => l.LanguageLevel)
-        return _mapper.Map<ICollection<LessonWebDto>>(samples);
+        return lessons;
     }
-
 }

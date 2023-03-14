@@ -1,7 +1,7 @@
 ﻿
 namespace EasySpeak.Core.Common.DTO.Lesson;
 
-public class AuthorDto
+public class UserDto
 {
     public CountryDto Country { get; set; }
     public string FirstName { get; set; }
