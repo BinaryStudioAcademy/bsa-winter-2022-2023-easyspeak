@@ -1,0 +1,90 @@
+<div class="filters-section-container">
+    <div class="filter-options-wrp">
+        <div class="filter-options-btn-wrp">
+            <div (click)="selectLanguage()" class="filter-options-btn">
+                <div *ngIf="this.selectedLanguageFilters.size > 0" class="filters-count-group">
+                    <div class="filters-count-val">
+                        {{this.selectedLanguageFilters.size}}
+                    </div>
+                </div>
+                <div class="lang-level-subtitle">
+                    Level
+                </div>
+                <div class="lang-level-title">
+                    B1
+                </div>
+                <div class="dropdown-icon-wrp">
+                    <mat-icon>expand_more</mat-icon>
+                </div>
+            </div>
+
+            <div *ngIf="this.showLangDropdown" class="filters-dropdown">
+                <div *ngFor="let level of this.langLevels">
+                    <div class="levels-list-option">
+                        <div class="list-option-content">
+                            <input type="checkbox" [checked]="this.selectedLanguageFilters.has(level.title)" (click)="selectLangLevel(level.title)">
+                            <div class="filters-option-info">
+                                <div class="filters-option-title">
+                                    {{level.title + ' : ' + level.subtitle}}
+                                </div>
+                                <div class="filters-option-description">
+                                    {{level.desc}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="filter-options-btn-wrp">
+            <div class="filter-options-btn" (click)="selectInterests()">
+                <div *ngIf="this.selectedTopicsFilters.size > 0" class="filters-count-group">
+                    <div class="filters-count-val">
+                        {{this.selectedTopicsFilters.size}}
+                    </div>
+                </div>
+                <div class="filters-dropdown-title">
+                    Interests
+                </div>
+                <div class="dropdown-icon-wrp">
+                    <mat-icon>expand_more</mat-icon>
+                </div>
+            </div>
+
+            <div *ngIf="this.showTopicsDropdown" class="filters-dropdown">
+                <div *ngFor="let topic of this.topics">
+                    <div class="topics-list-option">
+                        <div class="list-option-content">
+                            <input type="checkbox" [checked]="this.selectedTopicsFilters.has(topic.title)" (click)="selectTopic(topic.title)">
+                            <div class="filters-option-info">
+                                <div class="filters-option-title">
+                                    {{topic.title}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="selected-filters-wrp">
+        <div class="selected-filters-list">
+            <div style="margin: 0px;" *ngFor="let selectedTopic of this.selectedLanguageFilters">
+                <div *ngIf="selectedTopic" class="selected-filter-item">
+                    {{selectedTopic}}
+                    <mat-icon (click)="selectLangLevel(selectedTopic)">close</mat-icon>
+                </div>
+            </div>
+            <div style="margin: 0px;" *ngFor="let selectedTopic of this.selectedTopicsFilters">
+                <div *ngIf="selectedTopic" class="selected-filter-item">
+                    {{selectedTopic}}
+                    <mat-icon (click)="selectTopic(selectedTopic)">close</mat-icon>
+                </div>
+            </div>
+        </div>
+        <button class="close-filters-btn" (click)="closeAllFilters()">
+            Close all
+        </button>
+    </div>
+</div>
