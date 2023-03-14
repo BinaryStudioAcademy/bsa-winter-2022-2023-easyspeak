@@ -1,6 +1,7 @@
 import { Component, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 import { Observable, Subject, takeUntil } from 'rxjs';
+import { Filter } from 'src/app/models/filters/filter';
 
 @Component({
   selector: 'app-dropdown',
@@ -8,7 +9,7 @@ import { Observable, Subject, takeUntil } from 'rxjs';
   styleUrls: ['./dropdown.component.sass']
 })
 export class DropdownComponent implements OnInit, OnDestroy {
-  @Input() data: any[];
+  @Input() data: Filter[];
   @Input() btnLabel: string | undefined;
   @Output() selectedFilters = new EventEmitter<Set<string>>();
   @Input() resetEvent: Observable<void>;
@@ -38,12 +39,12 @@ export class DropdownComponent implements OnInit, OnDestroy {
   selectItem(title: string){
     if(this.selectedItems.has(title)){
       this.selectedItems.delete(title);
-      this.selectedFilters.emit(this.selectedItems)
     }
     else{
       this.selectedItems.add(title);
-      this.selectedFilters.emit(this.selectedItems)
     }
+
+    this.selectedFilters.emit(this.selectedItems)
   }
 
   showDropdownMenu(){

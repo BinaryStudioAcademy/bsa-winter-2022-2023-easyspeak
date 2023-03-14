@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 import { Subject } from 'rxjs';
 import {topicsSample, langLevelsSample} from 'src/app/components/filter-section/filter-section.util'
+import { Filter } from 'src/app/models/filters/filter';
 
 @Component({
   selector: 'app-filter-section',
@@ -17,12 +18,25 @@ export class FilterSectionComponent implements OnInit {
   public selectedLanguageFilters = new Set<string>();
   public selectedTopicsFilters = new Set<string>();
 
-  public topics = topicsSample;
-  public langLevels = langLevelsSample;
+  public topics: Filter[];
+  public langLevels: Filter[]
 
   constructor() { }
 
   ngOnInit(): void {
+    this.topics = topicsSample.map(x => {
+      return {
+        title: x.title
+      }
+    });
+
+    this.langLevels = langLevelsSample.map(x => {
+        return {
+          title: x.title,
+          subtitle: x.subtitle,
+          description: x.description
+        }
+    })
   }
 
   removeLangLevel(title: string){

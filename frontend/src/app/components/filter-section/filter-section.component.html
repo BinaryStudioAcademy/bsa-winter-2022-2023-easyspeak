@@ -11,7 +11,7 @@
                     <mat-icon (click)="removeLangLevel(selectedTopic)">close</mat-icon>
                 </div>
             </div>
-            <div style="margin: 0px;" *ngFor="let selectedTopic of this.selectedTopicsFilters">
+            <div *ngFor="let selectedTopic of this.selectedTopicsFilters">
                 <div *ngIf="selectedTopic" class="selected-filter-item">
                     {{selectedTopic}}
                     <mat-icon (click)="removeTopic(selectedTopic)">close</mat-icon>
