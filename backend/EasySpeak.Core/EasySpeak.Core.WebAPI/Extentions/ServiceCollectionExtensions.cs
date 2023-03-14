@@ -47,8 +47,12 @@ namespace EasySpeak.Core.WebAPI.Extentions
 
         public static void AddFirebaseAuthorization(this IServiceCollection services, IConfiguration configuration)
         {
-            var projectId = configuration.GetSection("project_id").Value;
-            var secureUri = configuration.GetSection("secure_uri").Value;
+            var projectId = configuration.GetSection("FirebaseConfig")
+                .GetValue<string>("project_id");
+
+            var secureUri = configuration.GetSection("FirebaseConfig")
+                .GetValue<string>("secure_uri");
+
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
