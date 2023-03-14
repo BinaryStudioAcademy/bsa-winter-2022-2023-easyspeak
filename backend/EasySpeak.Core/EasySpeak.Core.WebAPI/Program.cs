@@ -19,7 +19,7 @@ builder.Services.RegisterCustomServices();
 builder.Services.AddAutoMapper();
 builder.Services.AddSwaggerGen();
 builder.Services.AddValidation();
-builder.Services.AddFirebaseAuthorization();
+builder.Services.AddFirebaseAuthorization(builder.Configuration);
 
 
 builder.Services.AddCors();

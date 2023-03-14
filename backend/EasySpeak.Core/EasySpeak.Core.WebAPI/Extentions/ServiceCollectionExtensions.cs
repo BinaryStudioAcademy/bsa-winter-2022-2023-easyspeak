@@ -9,6 +9,7 @@ using System.Reflection;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Configuration;
 
 namespace EasySpeak.Core.WebAPI.Extentions
 {
@@ -44,16 +45,10 @@ namespace EasySpeak.Core.WebAPI.Extentions
                     opt => opt.MigrationsAssembly(typeof(EasySpeakCoreContext).Assembly.GetName().Name)));
         }
 
-        public static void AddFirebaseAuthorization(this IServiceCollection services)
+        public static void AddFirebaseAuthorization(this IServiceCollection services, IConfiguration configuration)
         {
-
-            var config = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("firebaseconfig.json", true)
-                .Build();
-
-            var projectId = config.GetValue<string>("project_id");
-            var secureUri = config.GetValue<string>("secure_uri");
+            var projectId = configuration.GetSection("project_id").Value;
+            var secureUri = configuration.GetSection("secure_uri").Value;
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
