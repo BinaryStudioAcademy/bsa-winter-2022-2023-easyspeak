@@ -26,19 +26,18 @@ export class AuthService {
             if (user) {
                 this.userData = user;
                 localStorage.setItem('user', JSON.stringify(this.userData));
-                JSON.parse(localStorage.getItem('user')!);
             } else {
-                localStorage.setItem('user', 'null');
-                JSON.parse(localStorage.getItem('user')!);
+                localStorage.removeItem('user');
             }
-        });
+            this.getUserData();
+        }).unsubscribe();
     }
 
     SignIn(email: string, password: string) {
         return this.afAuth
             .signInWithEmailAndPassword(email, password)
             .then((result) => {
-                this.SetUserData(result.user);
+                this.setUserData(result.user);
                 this.afAuth.authState.subscribe((user) => {
                     if (user) {
                         this.router.navigate(['']);
@@ -54,8 +53,8 @@ export class AuthService {
         return this.afAuth
             .createUserWithEmailAndPassword(email, password)
             .then((result) => {
-                this.SetUserData(result.user);
-                this.httpService.post<any>(this.url, result.user);
+                this.setUserData(result.user);
+                this.httpService.post<firebase.User | null>(this.url, result.user);
             })
             .catch((error) => {
                 window.alert(error.message);
@@ -63,58 +62,51 @@ export class AuthService {
     }
 
     get isLoggedIn(): boolean {
-        const user = JSON.parse(localStorage.getItem('user')!);
+        const user = this.getUserData();
 
-        return user !== null;
+        return !!user;
     }
 
     FacebookAuth() {
-        return this.AuthLogin(new auth.FacebookAuthProvider()).then((res: any) => {
+        return this.AuthLogin(new auth.FacebookAuthProvider()).then((res: void) => {
             this.router.navigate(['']);
         });
     }
 
     GoogleAuth() {
-        return this.AuthLogin(new auth.GoogleAuthProvider()).then((res: any) => {
+        return this.AuthLogin(new auth.GoogleAuthProvider()).then((res: void) => {
             this.router.navigate(['']);
         });
     }
 
-    AuthLogin(provider: any) {
+    AuthLogin(provider: auth.AuthProvider) {
         return this.afAuth
             .signInWithPopup(provider)
             .then((result) => {
                 this.router.navigate(['']);
-                this.SetUserData(result.user);
+                this.setUserData(result.user);
             })
             .catch((error) => {
                 window.alert(error);
             });
     }
 
-    SetUserData(user: any) {
-        const userRef: AngularFirestoreDocument<any> = this.afs.doc(
+    setUserData(user: any) {
+        const userRef: AngularFirestoreDocument = this.afs.doc(
             `users/${user.uid}`,
         );
         const userData: IUser = {
-            uid: user.uid,
-            country: user.country,
-            language: user.language,
-            timezone: user.timezone,
             firstName: user.firstName,
             lastName: user.lastName,
-            age: user.age,
             email: user.email,
-            imagePath: user.imagePath,
-            sex: user.sex,
-            languageLevel: user.languageLevel,
-            status: user.status,
-            isSubscribed: user.isSubscribed,
-            isBanned: user.isBanned,
         };
 
         return userRef.set(userData, {
             merge: true,
         });
+    }
+
+    getUserData(): IUser {
+        return JSON.parse(localStorage.getItem('user')!);
     }
 }
