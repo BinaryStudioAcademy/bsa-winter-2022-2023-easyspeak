@@ -1,8 +1,8 @@
 @import src\styles\colors.sass
 
-@font-face
-    font-family: Barlow
-    src: url('~src/assets/fonts/Barlow-Medium.ttf')
+// @font-face
+//     font-family: Barlow
+//     src: url('~src/assets/fonts/Barlow-Medium.ttf')
 
 @mixin background-icon
     position: absolute
@@ -27,12 +27,11 @@
 
 .registration-form
     position: absolute
-    left: 198px
-    top: 164px
+    left: 10%
+    top: 100px
     display: flex
     flex-direction: column
-    width: 371px
-    height: 771px
+    width: 20%
     h1
         font-size: 24px
         line-height: 146%
@@ -111,36 +110,28 @@
         position: absolute
         right: 41.2%
         top: 169px
-    .mdc-text-field
-        padding-right: 0px !important
 
-.mdc-text-field__input, .mat-mdc-select
-    width: 321px
-    height: 26px !important
-    border-radius: 50px
+input, select
     background: $white
-    padding: 10px
-    padding-left: 15px
-
-.mdc-line-ripple
-    border-bottom-style: none !important
-    border-bottom-width: 0px
-    color: white
-
-.mdc-line-ripple:before, .mdc-line-ripple:after
-    position: absolute
-    bottom: 0
-    left: 0
     width: 100%
-    content: none !important
+    border: 0
+    outline: 0
+    border-radius: 50px
+    margin-bottom: 15px
+    padding: 15px
 
-.mat-mdc-select-trigger
-    color: $main-color
+select
+    padding: 15px
 
-.mat-mdc-select-arrow
-    width: 20px
-    height: 50px !important
-    position: relative
+
+.name-age-sex-section
+    width: 117%
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+    input, select
+        width: 70%
+
 
 
 

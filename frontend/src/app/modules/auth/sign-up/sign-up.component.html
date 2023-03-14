@@ -1,24 +1,45 @@
 <div class="sign-up">
     <div class="registration-form">
         <h1>Create Account</h1>
-        <mat-form-field appearance="fill">
-            <mat-label style="color: #cbc9d0; margin-left: 18px">Email</mat-label>
-            <input matInput />
-        </mat-form-field>
-        <mat-form-field>
-            <mat-select placeholder="State">
-                <mat-option>None</mat-option>
-                <mat-option *ngFor="let state of states" [value]="state">{{ state }}</mat-option>
-            </mat-select>
-        </mat-form-field>
-        <!-- <mat-form-field style="width: 60px" appearance="fill">
-            <mat-label style="color: #cbc9d0; margin-left: 18px">First Name</mat-label>
-            <input matInput />
-        </mat-form-field>
-        <mat-form-field style="width: 60px" appearance="fill">
-            <mat-label style="color: #cbc9d0; margin-left: 18px">Last Name</mat-label>
-            <input matInput />
-        </mat-form-field> -->
+        <label>
+            <input type="text" placeholder="Email" />
+        </label>
+        <div class="name-age-sex-section">
+            <label>
+                <input type="text" placeholder="First Name" />
+            </label>
+            <label>
+                <input type="text" placeholder="Last Name" />
+            </label>
+        </div>
+        <div class="name-age-sex-section">
+            <select placeholder="Last Name">
+                <option></option>
+                <option>Canada</option>
+                <option>USA</option>
+            </select>
+            <select>
+                <option>Australia</option>
+                <option>Canada</option>
+                <option>USA</option>
+            </select>
+        </div>
+        <select>
+            <option>Australia</option>
+            <option>Canada</option>
+            <option>USA</option>
+        </select>
+        <select>
+            <option>Australia</option>
+            <option>Canada</option>
+            <option>USA</option>
+        </select>
+        <label>
+            <input type="password" placeholder="Password" />
+        </label>
+        <label>
+            <input type="password" placeholder="Repeat The Password" />
+        </label>
     </div>
     <div class="image-section">
         <div class="car-background"></div>
