@@ -9,7 +9,7 @@ namespace EasySpeak.Core.WebAPI.Extentions
         {
             using var scope = app.ApplicationServices.GetService<IServiceScopeFactory>()?.CreateScope();
             using var context = scope?.ServiceProvider.GetRequiredService<EasySpeakCoreContext>();
-            context?.Database.Migrate();
+            //context?.Database.Migrate();
         }
     }
 }

@@ -16,7 +16,7 @@ namespace EasySpeak.Core.WebAPI.Controllers
 
         [HttpGet]
         [Route("")]
-        public async Task<ActionResult<ICollection<LessonWebDto>>> GetAllAsync([FromBody] RequestDto requestDto)
+        public async Task<ActionResult<ICollection<LessonWebDto>>> GetAllAsync([FromQuery] RequestDto requestDto)
         {
             var lessons = await _lessonsService.GetAllLessonsAsync(requestDto);
             return Ok(lessons);

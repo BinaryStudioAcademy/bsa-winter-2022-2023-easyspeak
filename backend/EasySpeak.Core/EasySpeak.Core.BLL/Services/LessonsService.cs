@@ -17,13 +17,13 @@ public class LessonsService : BaseService, ILessonsService
     {
         List<LessonWebDto> lessons = new List<LessonWebDto>();
 
-        var lessonsFromDb = await _context.Lessons
-            .Include(l => l.Tags)
-            .Include(l => l.Questions)
-            .Include(l => l.Subscribers)
-            .ToListAsync();
+        //var lessonsFromDb = await _context.Lessons
+        //    .Include(l => l.Tags)
+        //    .Include(l => l.Questions)
+        //    .Include(l => l.Subscribers)
+        //    .ToListAsync();
 
-        lessonsFromDb = new List<Lesson>
+        var lessonsFromDb = new List<Lesson>
         {
             new Lesson
             {

@@ -1,3 +1,5 @@
+using EasySpeak.Core.BLL.Interfaces;
+using EasySpeak.Core.BLL.Services;
 using EasySpeak.Core.WebAPI.Extentions;
 using EasySpeak.Core.WebAPI.Middlewares;
 
@@ -20,6 +22,7 @@ builder.Services.AddAutoMapper();
 builder.Services.AddSwaggerGen();
 builder.Services.AddValidation();
 builder.Services.AddFirebaseAuthorization(builder.Configuration);
+builder.Services.AddTransient<ILessonsService, LessonsService>();
 
 
 builder.Services.AddCors();
