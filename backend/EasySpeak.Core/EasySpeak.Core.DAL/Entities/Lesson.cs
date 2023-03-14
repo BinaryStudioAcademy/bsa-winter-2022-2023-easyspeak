@@ -3,16 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EasySpeak.Core.DAL.Entities.Enums;
 
 namespace EasySpeak.Core.DAL.Entities
 {
-    public class Lesson: Entity<long>
+    public class Lesson : Entity<long>
     {
         public string Name { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         public string MediaPath { get; set; } = string.Empty;
+        public long AuthorId { get; set; }
         public DateTime StartAt { get; set; }
         public int? LimitOfUsers { get; set; }
+        public LanguageLevel LanguageLevel { get; set; }
 
         public ICollection<User> Subscribers { get; private set; }
         public ICollection<Tag> Tags { get; private set; }
