@@ -27,6 +27,8 @@
     gap: 57px
 
 .card
+    position: relative
+
     box-sizing: border-box
 
     height: 187px
@@ -139,8 +141,32 @@
     font-size: 12px
     line-height: 146%
 
-
     color: $main-color
+
+.time-icon
+    position: absolute
+    right: 66px
+    background-color: $time-color
+    border: 4px solid $time-color
+    border-radius: 50%
+
+.lesson-time
+    display: inline-block
+    position: absolute
+    right: 31px
+    top: 25px
+
+    font-family: 'Barlow'
+    font-style: normal
+    font-weight: 700
+    font-size: 14px
+    line-height: 146%
+    /* or 20px */
+
+
+    /* Black/100 */
+
+    color: $black
 
 .divider
     margin-top: 11px
