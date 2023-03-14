@@ -1,3 +1,6 @@
+import { LanguageLevel } from '@shared/models/enums/LanguageLevel';
+import { Sex } from '@shared/models/enums/Sex';
+
 export interface IUser {
     uid: string;
     country: number;
@@ -8,8 +11,8 @@ export interface IUser {
     age: number;
     email: string;
     imagePath: string;
-    sex: number;
-    languageLevel: number;
+    sex: Sex;
+    languageLevel: LanguageLevel;
     status: number;
     isSubscribed: boolean;
     isBanned: boolean;
