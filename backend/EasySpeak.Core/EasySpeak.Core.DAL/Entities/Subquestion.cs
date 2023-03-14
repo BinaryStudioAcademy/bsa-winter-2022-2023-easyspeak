@@ -9,7 +9,7 @@ namespace EasySpeak.Core.DAL.Entities
     public class Subquestion : Entity<long>
     {
         public long QuestionId { get; set; }
-        public Question Question { get; set; }
-        public string Text { get; set; }
+        public Question Question { get; set; } = null!;
+        public string Text { get; set; } = string.Empty;
     }
 }
