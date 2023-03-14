@@ -6,7 +6,6 @@
 
 .container
     width: 75%
-    height: 1125px
     background: $gray-100
     margin: auto
     padding: 0 57px
@@ -24,7 +23,7 @@
 .lessons-section
     display: grid
     grid-template-columns: repeat(2, 1fr)
-    gap: 57px
+    gap: 0px 57px
 
 .card
     position: relative
@@ -32,7 +31,7 @@
     box-sizing: border-box
 
     height: 187px
-    margin: 30px 0
+    margin-top: 30px
     padding: 23px 31px 23px 26px
 
     background: $white
@@ -71,6 +70,12 @@
 .lesson-theme
     vertical-align: top
 
+    max-width: 348px
+    overflow: hidden
+    white-space: nowrap
+    text-overflow: ellipsis
+
+
     font-family: 'Barlow'
     font-style: normal
     font-weight: 500
@@ -82,7 +87,7 @@
 .lesson-tutor
     position: relative
 
-    margin: 5px 0 9px 0
+    margin: 5px 0 5px 0
 
 .avatar
     display: inline-block
@@ -116,22 +121,11 @@
 
     color: $gray-300
 
-.lesson-topics
-    grid-auto-flow: column
-    gap: 5px
-    max-width: 348px
-    display: grid
-
-    overflow-x: auto
-    overflow-y: hidden
-
-.lesson-topics::-webkit-scrollbar
-    display: none
-
 .topic
     display: inline-block
 
     padding: 1px 6px 2px 6px
+    margin-right: 5px
     background: $accent-color
 
     border-radius: 10px
@@ -142,6 +136,9 @@
     line-height: 146%
 
     color: $main-color
+
+.topic:last-child
+    margin: 0
 
 .time-icon
     position: absolute
@@ -161,10 +158,6 @@
     font-weight: 700
     font-size: 14px
     line-height: 146%
-    /* or 20px */
-
-
-    /* Black/100 */
 
     color: $black
 
@@ -236,3 +229,59 @@
 
     text-decoration: none
     color: #5B8DEF
+
+.expanded
+    position: absolute
+    top: 100%
+    left: 0
+
+
+
+    background-color: $black
+    width: 100%
+    height: 440px
+
+.card-expanded
+    position: relative
+
+
+    box-sizing: border-box
+
+    height: 623px
+    margin-top: 30px
+    padding: 23px 31px 23px 26px
+
+    background: $white
+    border-radius: 10px
+
+.questions
+    margin-top: 40px
+
+.icebreaker
+    font-family: 'Barlow'
+    font-style: normal
+    font-weight: 500
+    font-size: 16px
+    line-height: 150%
+
+.questions ul
+    margin-top: 4px
+    list-style-position: inside
+    padding: 0
+    color: $main-color
+
+.question
+    font-family: 'Barlow'
+    font-style: normal
+    font-weight: 400
+    font-size: 14px
+    line-height: 157.5%
+    color: black
+
+.menu
+    font-family: 'Barlow'
+    font-style: normal
+    font-weight: 500
+    font-size: 16px
+    line-height: 150%
+    margin-top: 40px
