@@ -1,5 +1,4 @@
 ﻿using EasySpeak.Core.BLL.Interfaces;
-using EasySpeak.Core.Common.DTO;
 using EasySpeak.Core.Common.DTO.Lesson;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,15 +17,8 @@ namespace EasySpeak.Core.WebAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<ICollection<LessonWebDto>>> GetAllAsync([FromBody] RequestDto requestDto)
         {
-            var lessons = await _lessonsService.GetAllLessonsAsync();
-            var tags = requestDto.Tags;
-            var date = requestDto.Date;
-            var levels = requestDto.LanguageLevels;
-            // TODO 
-
+            var lessons = await _lessonsService.GetAllLessonsAsync(requestDto);
             return Ok(lessons);
         }
-
-
     }
 }
