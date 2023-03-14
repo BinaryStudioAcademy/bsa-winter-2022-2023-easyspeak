@@ -8,6 +8,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AuthService } from '@core/services/auth.service';
 import { environment } from '@env/environment';
 import { SharedModule } from '@shared/shared.module';
+import { ToastrModule } from 'ngx-toastr';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -18,6 +19,7 @@ import { AppRoutingModule } from './app-routing.module';
         BrowserModule,
         SharedModule,
         AppRoutingModule,
+        ToastrModule.forRoot(),
         AngularFireModule.initializeApp(environment.firebaseConfig, 'EasySpeak'),
         AngularFireAuthModule,
         AngularFirestoreModule,
