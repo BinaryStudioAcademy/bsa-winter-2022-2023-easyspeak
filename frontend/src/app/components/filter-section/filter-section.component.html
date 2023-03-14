@@ -1,77 +1,7 @@
 <div class="filters-section-container">
-    <div class="filter-options-wrp">
-        <div class="filter-options-btn-wrp">
-            <div (click)="showLevelsList()" class="filter-options-btn">
-                <div *ngIf="this.selectedLanguageFilters.size > 0" class="filters-count-group">
-                    <div class="filters-count-val">
-                        {{this.selectedLanguageFilters.size}}
-                    </div>
-                </div>
-                <div class="lang-level-subtitle">
-                    Level
-                </div>
-                <div class="lang-level-title">
-                    <span *ngIf="this.selectedLanguageFilters.size > 0">
-                        {{this.selectedLanguageFilters.keys().next().value}}
-                    </span>
-                    <span *ngIf="this.selectedLanguageFilters.size === 0">
-                        None
-                    </span>
-                </div>
-                <div class="dropdown-icon-wrp">
-                    <mat-icon>expand_more</mat-icon>
-                </div>
-            </div>
-
-            <div *ngIf="this.showLangDropdown" class="filters-dropdown">
-                <div *ngFor="let level of this.langLevels">
-                    <div class="levels-list-option">
-                        <div class="list-option-content">
-                            <input type="checkbox" [checked]="this.selectedLanguageFilters.has(level.title)" (click)="selectLangLevel(level.title)">
-                            <div class="filters-option-info">
-                                <div class="filters-option-title">
-                                    {{level.title + ' : ' + level.subtitle}}
-                                </div>
-                                <div class="filters-option-description">
-                                    {{level.desc}}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="filter-options-btn-wrp">
-            <div class="filter-options-btn" (click)="showTopicsList()">
-                <div *ngIf="this.selectedTopicsFilters.size > 0" class="filters-count-group">
-                    <div class="filters-count-val">
-                        {{this.selectedTopicsFilters.size}}
-                    </div>
-                </div>
-                <div class="filters-dropdown-title">
-                    Interests
-                </div>
-                <div class="dropdown-icon-wrp">
-                    <mat-icon>expand_more</mat-icon>
-                </div>
-            </div>
-
-            <div *ngIf="this.showTopicsDropdown" class="filters-dropdown">
-                <div *ngFor="let topic of this.topics">
-                    <div class="topics-list-option">
-                        <div class="list-option-content">
-                            <input type="checkbox" [checked]="this.selectedTopicsFilters.has(topic.title)" (click)="selectTopic(topic.title)">
-                            <div class="filters-option-info">
-                                <div class="filters-option-title">
-                                    {{topic.title}}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="btns-wrp">
+        <app-dropdown [btnLabel]="this.langBtnLabel" [resetEvent]="this.resetFiltersEvent" [data]="this.langLevels" (selectedFilters)="updateLangFilters($event)"></app-dropdown>
+        <app-dropdown [btnLabel]="this.topicsBtnLabel" [resetEvent]="this.resetFiltersEvent" [data]="this.topics" (selectedFilters)="updateTopicFilters($event)"></app-dropdown>
     </div>
     <div class="selected-filters-wrp">
         <div class="selected-filters-list">
@@ -88,7 +18,7 @@
                 </div>
             </div>
         </div>
-        <button class="close-filters-btn" (click)="closeAllFilters()">
+        <button class="close-filters-btn" (click)="resetFilters()">
             Close all
         </button>
     </div>

@@ -1,4 +1,6 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { EventEmitter } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-filter-section',
@@ -6,12 +8,10 @@ import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
   styleUrls: ['./filter-section.component.sass']
 })
 export class FilterSectionComponent implements OnInit {
+  resetFiltersEvent: Subject<void> = new Subject<void>();
 
-  public showLangDropdown = false;
-  public showTopicsDropdown = false;
-
-  public selectedLanguageCount = 0;
-  public selectedTopicsCount = 0;
+  public langBtnLabel = 'Level';
+  public topicsBtnLabel = 'Interests'
 
   public selectedLanguageFilters = new Set();
   public selectedTopicsFilters = new Set();
@@ -78,14 +78,6 @@ export class FilterSectionComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  showLevelsList(){
-    this.showLangDropdown = !this.showLangDropdown;
-  }
-
-  showTopicsList(){
-    this.showTopicsDropdown = !this.showTopicsDropdown;
-  }
-
   selectLangLevel(title: any){
     if(this.selectedLanguageFilters.has(title)){
       this.selectedLanguageFilters.delete(title);
@@ -105,6 +97,22 @@ export class FilterSectionComponent implements OnInit {
   }
 
   closeAllFilters(){
+    this.selectedLanguageFilters = new Set();
+    this.selectedTopicsFilters = new Set();
+
+    
+  }
+
+  updateLangFilters(eventData: Set<string>){
+    this.selectedLanguageFilters = eventData;
+  }
+
+  updateTopicFilters(eventData: Set<string>){
+    this.selectedTopicsFilters = eventData;
+  }
+
+  resetFilters(){
+    this.resetFiltersEvent.next();
     this.selectedLanguageFilters = new Set();
     this.selectedTopicsFilters = new Set();
   }

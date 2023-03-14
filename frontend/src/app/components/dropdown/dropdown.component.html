@@ -1,0 +1,35 @@
+<div class="container">
+    <div class="dropdown-btn" (click)="showDropdownMenu()">
+        <div *ngIf="this.selectedItems.size" class="filters-count-group">
+            <div class="filters-count-val">
+                {{this.selectedItems.size}}
+            </div>
+        </div>
+        <div class="dropdown-btn-title">
+            {{this.selectedItems.keys().next().value ?? 'None'}}
+        </div>
+        <div *ngIf="this.btnLabel" class="dropdown-btn-subtitle">
+            {{this.btnLabel}}
+        </div>
+        <div class="dropdown-btn-icon">
+            <mat-icon>expand_more</mat-icon>
+        </div>
+    </div>
+    <div *ngIf="this.showDropdown" class="dropdown-wrp">
+        <div *ngFor="let item of this.data">
+            <div class="dropdown-item">
+                <div class="dropdown-item-content">
+                    <input type="checkbox" [checked]="this.selectedItems.has(item.title)" (click)="selectItem(item.title)">
+                    <div class="dropdown-item-info">
+                        <div class="item-info-title">
+                            {{item.title + ' : ' + item.subtitle}}
+                        </div>
+                        <div *ngIf="item.desc" class="item-info-subtitle">
+                            {{item.desc}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
