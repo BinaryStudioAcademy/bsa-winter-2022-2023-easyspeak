@@ -68,13 +68,13 @@ export class AuthService {
     }
 
     facebookAuth() {
-        return this.authLogin(new auth.FacebookAuthProvider()).then((res: void) => {
+        return this.authLogin(new auth.FacebookAuthProvider()).then(() => {
             this.router.navigate(['']);
         });
     }
 
     googleAuth() {
-        return this.authLogin(new auth.GoogleAuthProvider()).then((res: void) => {
+        return this.authLogin(new auth.GoogleAuthProvider()).then(() => {
             this.router.navigate(['']);
         });
     }
