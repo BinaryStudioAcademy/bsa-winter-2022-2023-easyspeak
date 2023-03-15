@@ -9,8 +9,8 @@ namespace EasySpeak.Core.DAL.Entities
     public class Message: Entity<long>
     {
         public long ChatId { get; set; }
-        public Chat Chat { get; set; }
-        public string Text { get; set; }
+        public Chat Chat { get; set; } = null!;
+        public string Text { get; set; } = string.Empty;
         public DateTime CreatedAt { get; set; }
         public bool IsDeleted { get; set; }
     }
