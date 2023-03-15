@@ -19,10 +19,10 @@ export class YoutubePlayerComponent implements OnInit {
         this.videoHeight = window.innerHeight * 0.8 - 4;
 
         if (!this.apiLoaded) {
-        const tag = document.createElement('script');
-        tag.src = 'https://www.youtube.com/iframe_api';
-        document.body.appendChild(tag);
-        this.apiLoaded = true;
+            const tag = document.createElement('script');
+            tag.src = 'https://www.youtube.com/iframe_api';
+            document.body.appendChild(tag);
+            this.apiLoaded = true;
         }
     }
 }
