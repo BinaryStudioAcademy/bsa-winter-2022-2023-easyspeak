@@ -1,4 +1,3 @@
-using AutoMapper;
 using EasySpeak.Core.BLL.Interfaces;
 using EasySpeak.Core.BLL.MappingProfiles;
 using EasySpeak.Core.BLL.Services;
@@ -22,7 +21,14 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.RegisterCustomServices();
 
 //mapper
-builder.Services.AddAutoMapper(c => c.AddProfile(new LessonsProfile()));
+builder.Services.AddAutoMapper(c =>
+{
+    c.AddProfile(new LessonsProfile());
+    c.AddProfile(new UserProfile());
+    c.AddProfile(new TagForLessonProfile());
+    c.AddProfile(new QuestionsProfile());
+    c.AddProfile(new SubQuestionsProfile());
+});
 
 builder.Services.AddSwaggerGen();
 builder.Services.AddValidation();

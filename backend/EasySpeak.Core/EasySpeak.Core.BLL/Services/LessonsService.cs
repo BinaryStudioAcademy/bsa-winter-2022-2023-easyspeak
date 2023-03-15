@@ -4,9 +4,6 @@ using EasySpeak.Core.Common.DTO.Lesson;
 using EasySpeak.Core.DAL.Context;
 using EasySpeak.Core.DAL.Entities;
 using EasySpeak.Core.DAL.Entities.Enums;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
-using System.Collections.ObjectModel;
 
 namespace EasySpeak.Core.BLL.Services;
 
@@ -24,6 +21,21 @@ public class LessonsService : BaseService, ILessonsService
         //    .Include(l => l.Subscribers)
         //    .ToListAsync();
 
+        var q = new Question
+        {
+            Id = 1,
+            Subquestions =
+            {
+                new Subquestion
+                {
+                    Id = 3,
+                    QuestionId = 1,
+                }
+            }
+        };
+
+        q.Subquestions.FirstOrDefault().Question = q;
+
         var lessonsFromDb = new List<Lesson>
         {
             new Lesson
@@ -34,7 +46,8 @@ public class LessonsService : BaseService, ILessonsService
                 Id=0,
                 LanguageLevel = LanguageLevel.A2,
                 StartAt = new DateTime(2023,04,12),
-                Tags = new List<Tag> () {new Tag(){Id = 0, Name= "food"}, new Tag(){ Id = 1, Name = "mood"} }
+                Tags = new List<Tag> () {new Tag(){Id = 0, Name= "food"}, new Tag(){ Id = 1, Name = "mood"} },
+                Questions = { q }
             },
             new Lesson
             {
@@ -44,7 +57,8 @@ public class LessonsService : BaseService, ILessonsService
                 Id=1,
                 LanguageLevel = LanguageLevel.A1,
                 StartAt = new DateTime(2023,04,13),
-                Tags = new List<Tag> () {new Tag(){ Id = 0, Name = "food"}, new Tag(){ Id = 1, Name = "mood"} }
+                Tags = new List<Tag> () {new Tag(){ Id = 0, Name = "food"}, new Tag(){ Id = 1, Name = "mood"} },
+                Questions = { q }
             },
 
             new Lesson
@@ -55,7 +69,8 @@ public class LessonsService : BaseService, ILessonsService
             Id=2,
             LanguageLevel = LanguageLevel.A2,
             StartAt = new DateTime(2023,04,13),
-            Tags = new List<Tag> () {new Tag(){ Id = 0, Name = "food"}, new Tag(){ Id = 1, Name = "mood"} }
+            Tags = new List<Tag> () {new Tag(){ Id = 0, Name = "food"}, new Tag(){ Id = 1, Name = "mood"} },
+            Questions = { q }
         },
             new Lesson
             {
@@ -65,7 +80,8 @@ public class LessonsService : BaseService, ILessonsService
                 Id=3,
                 LanguageLevel = LanguageLevel.B2,
                 StartAt = new DateTime(2023,04,13),
-                Tags = new List<Tag> () {new Tag(){ Id = 2, Name = "wood"}, new Tag(){ Id = 3, Name = "good"} }
+                Tags = new List<Tag> () {new Tag(){ Id = 2, Name = "wood"}, new Tag(){ Id = 3, Name = "good"} },
+                Questions = { q }
             },
             new Lesson
             {
@@ -74,12 +90,14 @@ public class LessonsService : BaseService, ILessonsService
                 Description = "4",
                 Id=4,
                 LanguageLevel = LanguageLevel.B1,
+                Subscribers = { new User(){Id = 1}, new User() { Id = 2 } },
                 StartAt = new DateTime(2023,04,13),
-                Tags = new List<Tag> () {new Tag(){ Id = 4, Name = "cool"}, new Tag(){ Id = 5, Name = "fool"} }
+                Tags = new List<Tag> () {new Tag(){ Id = 4, Name = "cool"}, new Tag(){ Id = 5, Name = "fool"} },
+                Questions = { q }
             }
         };
 
-        var mappedLessons = _mapper.Map<ICollection<LessonWebDto>>(lessonsFromDb);
+        var mappedLessons = _mapper.Map<List<Lesson>, List<LessonWebDto>>(lessonsFromDb);
 
         foreach (var lesson in mappedLessons)
         {
@@ -103,7 +121,6 @@ public class LessonsService : BaseService, ILessonsService
                 }
             }
         }
-       
 
         return lessons;
     }
