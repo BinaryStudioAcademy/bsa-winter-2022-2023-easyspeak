@@ -1,5 +1,6 @@
 using EasySpeak.Notifier.Hubs;
 using EasySpeak.Notifier.WebAPI.Extentions;
+using EasySpeak.Notifier.WebAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +20,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHealthChecks();
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
+builder.Services.AddHostedService<ConsumerHostedService>();
 builder.WebHost.UseUrls("http://*:5070");
 
 var app = builder.Build();
@@ -44,9 +46,8 @@ app.UseEndpoints(endpoints =>
     endpoints.MapHealthChecks("/health");
 });
 
-//app.UseHttpsRedirection();
+app.UseHttpsRedirection();
 
 app.MapControllers();
-app.SubscribeOnMessageRecieving();
 
 app.Run();
