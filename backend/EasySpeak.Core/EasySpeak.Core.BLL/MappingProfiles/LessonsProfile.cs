@@ -11,6 +11,4 @@ public sealed class LessonsProfile : Profile
         CreateMap<Lesson, LessonWebDto>()
             .ForMember(t => t.Subscribers, opt => opt.MapFrom(src => src.Subscribers.Count));
     }
-
-
 }

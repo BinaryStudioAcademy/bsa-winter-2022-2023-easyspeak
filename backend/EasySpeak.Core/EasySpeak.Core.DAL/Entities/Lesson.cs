@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using EasySpeak.Core.DAL.Entities.Enums;
+﻿using EasySpeak.Core.DAL.Entities.Enums;
 
 namespace EasySpeak.Core.DAL.Entities
 {
@@ -19,7 +14,7 @@ namespace EasySpeak.Core.DAL.Entities
         public LanguageLevel LanguageLevel { get; set; }
 
         public ICollection<User> Subscribers { get; private set; }
-        public ICollection<Tag> Tags { get; set; }
+        public ICollection<Tag> Tags { get; private set; }
         public ICollection<Question> Questions { get; private set; }
 
         public Lesson()
