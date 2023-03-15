@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-youtube-player',
@@ -14,9 +15,14 @@ export class YoutubePlayerComponent implements OnInit {
     videoWidth: number
     videoHeight: number
 
+    constructor(
+        @Inject(MAT_DIALOG_DATA) public data: any
+    ) { }
+
     ngOnInit() {
         this.videoWidth = window.innerWidth * 0.8;
         this.videoHeight = window.innerHeight * 0.8 - 4;
+        this.videoId = this.data.videoId;
 
         if (!this.apiLoaded) {
             const tag = document.createElement('script');
