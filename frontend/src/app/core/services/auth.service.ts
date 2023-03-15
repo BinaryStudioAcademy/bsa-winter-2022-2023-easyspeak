@@ -16,11 +16,11 @@ export class AuthService {
     private url = '';
 
     constructor(
-        public afs: AngularFirestore,
-        public afAuth: AngularFireAuth,
-        public router: Router,
-        public ngZone: NgZone,
-        public httpService: HttpService,
+        private afs: AngularFirestore,
+        private afAuth: AngularFireAuth,
+        private router: Router,
+        private ngZone: NgZone,
+        private httpService: HttpService,
     ) {
         this.afAuth.authState.subscribe((user) => {
             if (user) {
@@ -33,7 +33,7 @@ export class AuthService {
         }).unsubscribe();
     }
 
-    SignIn(email: string, password: string) {
+    signIn(email: string, password: string) {
         return this.afAuth
             .signInWithEmailAndPassword(email, password)
             .then((result) => {
@@ -49,7 +49,7 @@ export class AuthService {
             });
     }
 
-    SignUp(email: string, password: string) {
+    signUp(email: string, password: string) {
         return this.afAuth
             .createUserWithEmailAndPassword(email, password)
             .then((result) => {
@@ -67,19 +67,19 @@ export class AuthService {
         return !!user;
     }
 
-    FacebookAuth() {
-        return this.AuthLogin(new auth.FacebookAuthProvider()).then((res: void) => {
+    facebookAuth() {
+        return this.authLogin(new auth.FacebookAuthProvider()).then((res: void) => {
             this.router.navigate(['']);
         });
     }
 
-    GoogleAuth() {
-        return this.AuthLogin(new auth.GoogleAuthProvider()).then((res: void) => {
+    googleAuth() {
+        return this.authLogin(new auth.GoogleAuthProvider()).then((res: void) => {
             this.router.navigate(['']);
         });
     }
 
-    AuthLogin(provider: auth.AuthProvider) {
+    authLogin(provider: auth.AuthProvider) {
         return this.afAuth
             .signInWithPopup(provider)
             .then((result) => {
