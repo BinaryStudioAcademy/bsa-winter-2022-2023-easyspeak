@@ -11,7 +11,15 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { YoutubePlayerComponent } from './components/youtube-player/youtube-player.component';
 
 @NgModule({
-    imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule, RouterModule, MatDialogModule, YouTubePlayerModule,],
+    imports: [
+        CommonModule,
+        RouterModule,
+        FormsModule,
+        ReactiveFormsModule,
+        RouterModule,
+        MatDialogModule,
+        YouTubePlayerModule,
+    ],
     declarations: [LoadingSpinnerComponent, NotFoundComponent, YoutubePlayerComponent],
     exports: [
         CommonModule,
