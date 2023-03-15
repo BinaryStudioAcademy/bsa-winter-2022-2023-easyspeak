@@ -10,48 +10,29 @@ import { catchError } from 'rxjs/operators';
 export class HttpService {
     private baseUrl: string = environment.coreUrl;
 
-    // eslint-disable-next-line no-empty-function
-    constructor(private httpClient: HttpClient) {
-    }
+    constructor(private httpClient: HttpClient) {}
 
     get<T>(url: string): Observable<T[]> {
-        return this.httpClient.get<T[]>(this.buildUrl(url))
-            .pipe(
-                catchError(this.handleError),
-            );
+        return this.httpClient.get<T[]>(this.buildUrl(url)).pipe(catchError(this.handleError));
     }
 
-    getById<T>(url: string, id: string | number): Observable<T> {
-        return this.httpClient.get<T>(`${this.buildUrl(url)}/${id}`)
-            .pipe(
-                catchError(this.handleError),
-            );
+    getById<T>(url: string, id: string | number) {
+        return this.httpClient.get<T>(`${this.buildUrl(url)}/${id}`).pipe(catchError(this.handleError));
     }
 
-    post<T>(url: string, resource: T): Observable<any> {
-        return this.httpClient.post(this.buildUrl(url), resource)
-            .pipe(
-                catchError(this.handleError),
-            );
+    post<T>(url: string, resource: T) {
+        return this.httpClient.post<T>(this.buildUrl(url), resource).pipe(catchError(this.handleError));
     }
 
-    delete(url: string, id: string | number): Observable<any> {
-        return this.httpClient.delete(`${this.buildUrl(url)}/${id}`)
-            .pipe(
-                catchError(this.handleError),
-            );
+    delete(url: string, id: string | number) {
+        return this.httpClient.delete(`${this.buildUrl(url)}/${id}`).pipe(catchError(this.handleError));
     }
 
-    put<T>(url: string, resource: T): Observable<any> {
-        return this.httpClient.put(this.buildUrl(url), resource)
-            .pipe(
-                catchError(this.handleError),
-            );
+    put<T>(url: string, resource: T) {
+        return this.httpClient.put<T>(this.buildUrl(url), resource).pipe(catchError(this.handleError));
     }
 
-    private handleError(err: HttpErrorResponse): Observable<never> {
-        console.log(err);
-
+    private handleError(err: HttpErrorResponse) {
         return throwError(() => err);
     }
 
