@@ -1,0 +1,28 @@
+<div class="container">
+    <h2>Create a lesson</h2>
+
+    <form #form="ngForm" *ngIf="lessonToCreate" (ngSubmit)="createLesson()" autocomplete="off">
+        <mat-form-field appearance="fill">
+            <mat-label>Name</mat-label>
+            <input matInput type="text" class="form-control" placeholder="Enter lesson name" name="name" [(ngModel)]="lessonToCreate.name">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Description</mat-label>
+            <input matInput type="text" class="form-control" placeholder="Enter lesson description" name="description" [(ngModel)]="lessonToCreate.description">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Image URL</mat-label>
+            <input matInput type="text" class="form-control" placeholder="Enter image URL" name="mediaPath" [(ngModel)]="lessonToCreate.mediaPath">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Users capacity</mat-label>
+            <input matInput type="number" min="0" class="form-control" placeholder="Enter maximum user count" name="limitOfUsers" [(ngModel)]="lessonToCreate.limitOfUsers">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Date</mat-label>
+            <input matInput type="datetime-local" class="form-control" name="startsAt" [(ngModel)]="lessonToCreate.startsAt">
+        </mat-form-field>
+
+        <button type="submit" mat-raised-button color="primary" (click)="createLesson()">Create</button>
+    </form>
+</div>
