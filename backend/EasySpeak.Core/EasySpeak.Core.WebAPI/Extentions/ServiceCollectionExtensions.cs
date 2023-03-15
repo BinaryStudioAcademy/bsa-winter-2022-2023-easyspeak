@@ -10,6 +10,8 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
+using FirebaseAdmin;
+using Google.Apis.Auth.OAuth2;
 
 namespace EasySpeak.Core.WebAPI.Extentions
 {
@@ -22,6 +24,8 @@ namespace EasySpeak.Core.WebAPI.Extentions
                 .AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             services.AddTransient<ISampleService, SampleService>();
+            services.AddScoped<IFirebaseAuthService, FirebaseAuthService>();
+            services.AddFirebaseApp();
         }
 
         public static void AddAutoMapper(this IServiceCollection services)
@@ -67,6 +71,14 @@ namespace EasySpeak.Core.WebAPI.Extentions
                         ValidateLifetime = true
                     };
                 });
+        }
+
+        public static void AddFirebaseApp(this IServiceCollection services)
+        {
+            FirebaseApp.Create(new AppOptions()
+            {
+                Credential = GoogleCredential.FromFile($"{Environment.CurrentDirectory}/FirebaseServiceAccountKey.json")
+            });
         }
     }
 }

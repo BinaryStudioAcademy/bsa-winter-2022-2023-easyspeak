@@ -19,8 +19,9 @@ builder.Services.RegisterCustomServices();
 builder.Services.AddAutoMapper();
 builder.Services.AddSwaggerGen();
 builder.Services.AddValidation();
-builder.Services.AddFirebaseAuthorization(builder.Configuration);
 
+builder.Services.AddFirebaseAuthorization(builder.Configuration);
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddCors();
 builder.Services.AddHealthChecks();
@@ -38,12 +39,14 @@ if (app.Environment.IsDevelopment())
 
 app.UseMiddleware<GenericExceptionHandlerMiddleware>();
 
+
+
 app.UseCors(opt => opt
     .AllowAnyHeader()
     .AllowAnyMethod()
     .AllowAnyOrigin());
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseRouting();
 
@@ -51,11 +54,15 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 
+app.UseMiddleware<FirebaseAuthMiddleware>();
+
 app.UseEndpoints(endpoinds =>
 {
     endpoinds.MapHealthChecks("/health");
     endpoinds.MapControllers();
 });
+
+
 
 app.UseCodiCoreContext();
 
