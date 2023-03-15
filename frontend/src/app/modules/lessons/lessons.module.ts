@@ -1,9 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
+import { LessonsCreateComponent } from './lessons-create/lessons-create.component';
 import { LessonsPageComponent } from './lessons-page/lessons-page.component';
 import { LessonsRoutingModule } from './lessons-routing.module';
-import { LessonsCreateComponent } from './lessons-create/lessons-create.component';
 
 @NgModule({
     declarations: [
@@ -13,6 +17,10 @@ import { LessonsCreateComponent } from './lessons-create/lessons-create.componen
     imports: [
         CommonModule,
         LessonsRoutingModule,
+        MatFormFieldModule,
+        FormsModule,
+        MatInputModule,
+        MatButtonModule,
     ],
 })
 export class LessonsModule { }
