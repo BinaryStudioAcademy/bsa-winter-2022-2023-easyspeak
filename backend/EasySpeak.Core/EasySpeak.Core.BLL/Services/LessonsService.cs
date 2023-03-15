@@ -13,15 +13,12 @@ public class LessonsService : BaseService, ILessonsService
 
     public async Task<ICollection<LessonWebDto>> GetAllLessonsAsync(RequestDto requestDto)
     {
-        List<LessonWebDto> lessons = new List<LessonWebDto>();
-
         var lessonsFromContext = await _context.Lessons
             .Include(l => l.Tags)
             .Include(l => l.Questions).ThenInclude(t => t.Subquestions)
             .Include(l => l.Subscribers)
             .Include(l => l.User)
             .ToListAsync();
-
 
         var mappedLessons = _mapper.Map<List<Lesson>, List<LessonWebDto>>(lessonsFromContext);
         for (int i = mappedLessons.Count - 1; i >= 0; i--)
@@ -38,12 +35,13 @@ public class LessonsService : BaseService, ILessonsService
                 continue;
             }
 
-            if (requestDto.Tags != null)
-            {
-                if (requestDto.Tags.All(tag => mappedLessons[i].Tags.All(t => t != tag)))
+            if (requestDto.Tags != null && requestDto.Tags.All(tag =>
                 {
-                    mappedLessons.RemoveAt(i);
-                }
+                    var tagForLessonDtos = mappedLessons[i].Tags;
+                    return tagForLessonDtos != null && tagForLessonDtos.All(t => t != tag);
+                }))
+            {
+                mappedLessons.RemoveAt(i);
             }
         }
 
