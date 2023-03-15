@@ -1,4 +1,6 @@
+using AutoMapper;
 using EasySpeak.Core.BLL.Interfaces;
+using EasySpeak.Core.BLL.MappingProfiles;
 using EasySpeak.Core.BLL.Services;
 using EasySpeak.Core.WebAPI.Extentions;
 using EasySpeak.Core.WebAPI.Middlewares;
@@ -18,7 +20,10 @@ builder.Services.AddEasySpeakCoreContext(builder.Configuration);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.RegisterCustomServices();
-builder.Services.AddAutoMapper();
+
+//mapper
+builder.Services.AddAutoMapper(c => c.AddProfile(new LessonsProfile()));
+
 builder.Services.AddSwaggerGen();
 builder.Services.AddValidation();
 builder.Services.AddFirebaseAuthorization(builder.Configuration);
