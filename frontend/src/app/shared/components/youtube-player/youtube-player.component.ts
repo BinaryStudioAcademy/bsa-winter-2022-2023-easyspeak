@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-youtube-player',
@@ -9,7 +9,8 @@ export class YoutubePlayerComponent implements OnInit {
 
     apiLoaded = false;
 
-    videoId = 'xqAriI87lFU';
+    @Input() videoId: string;
+
     videoWidth: number
     videoHeight: number
 
