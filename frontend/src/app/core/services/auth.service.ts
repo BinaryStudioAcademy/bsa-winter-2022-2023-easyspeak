@@ -91,6 +91,7 @@ export class AuthService {
             });
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     setUserData(user: any) {
         const userRef: AngularFirestoreDocument = this.afs.doc(
             `users/${user.uid}`,
