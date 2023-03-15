@@ -1,4 +1,5 @@
 using EasySpeak.Notifier.Hubs;
+using EasySpeak.Notifier.WebAPI.Extentions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,7 @@ builder.Configuration
 
 // Add services to the container.
 builder.Services.AddControllers();
+builder.Services.RegisterCustomServices(builder.Configuration);
 builder.Services.AddSignalR();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -42,8 +44,9 @@ app.UseEndpoints(endpoints =>
     endpoints.MapHealthChecks("/health");
 });
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.MapControllers();
+app.SubscribeOnMessageRecieving();
 
 app.Run();

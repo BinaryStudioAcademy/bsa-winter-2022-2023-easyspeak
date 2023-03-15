@@ -1,5 +1,6 @@
 ﻿using EasySpeak.Core.BLL.Interfaces;
 using EasySpeak.Core.Common.DTO;
+using EasySpeak.RabbitMQ.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EasySpeak.Core.WebAPI.Controllers
@@ -8,9 +9,10 @@ namespace EasySpeak.Core.WebAPI.Controllers
     [Route("[controller]")]
     public class SampleController : ControllerBase
     {
-        public SampleController(ISampleService sampleService)
+        public SampleController(ISampleService sampleService, IMessageProducer messageProducer)
         {
             _sampleService = sampleService;
+            _messageProducer = messageProducer;
         }
 
         [HttpGet]
@@ -65,6 +67,15 @@ namespace EasySpeak.Core.WebAPI.Controllers
             return NoContent();
         }
 
+
+        [HttpPost("send-message")]
+        public async Task<IActionResult> SendMessage(string message)
+        {
+            await _messageProducer.SendMessageAsync("notifier" ,message);
+            return Ok();
+        }
+
         private readonly ISampleService _sampleService;
+        private readonly IMessageProducer _messageProducer;
     }
 }
