@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Bogus.DataSets;
 using EasySpeak.Core.BLL.Interfaces;
 using EasySpeak.Core.Common.DTO.Lesson;
 using EasySpeak.Core.DAL.Context;
@@ -9,7 +10,9 @@ namespace EasySpeak.Core.BLL.Services;
 
 public class LessonsService : BaseService, ILessonsService
 {
-    public LessonsService(EasySpeakCoreContext context, IMapper mapper) : base(context, mapper) { }
+    public LessonsService(EasySpeakCoreContext context, IMapper mapper) : base(context, mapper)
+    {
+    }
 
     public async Task<ICollection<LessonWebDto>> GetAllLessonsAsync(RequestDto requestDto)
     {
@@ -29,7 +32,8 @@ public class LessonsService : BaseService, ILessonsService
                 continue;
             }
 
-            if (requestDto.LanguageLevels != null && requestDto.LanguageLevels.All(l => l != mappedLessons[i].LanguageLevel))
+            if (requestDto.LanguageLevels != null &&
+                requestDto.LanguageLevels.All(l => l != mappedLessons[i].LanguageLevel))
             {
                 mappedLessons.RemoveAt(i);
                 continue;
@@ -46,5 +50,26 @@ public class LessonsService : BaseService, ILessonsService
         }
 
         return mappedLessons;
+    }
+
+    public async Task<ICollection<DayCardDto>> GetDayCardsOfWeekAsync(RequestDayCardDto requestDto)
+    {
+        var lessonsFromContext = await _context.Lessons.ToListAsync();
+        var listOfWeeksDayCards = new List<DayCardDto>();
+
+        for (int i = 0; i < 7; i++)
+        {
+            var date = requestDto.Date.AddDays(i);
+            var meetingAmount = lessonsFromContext.Count(l => l.StartAt.Date == requestDto.Date.Date);
+            listOfWeeksDayCards.Add(
+                new DayCardDto()
+                {
+                    Date = date,
+                    DayOfWeek = date.DayOfWeek,
+                    MeetingsAmount = meetingAmount
+                });
+        }
+
+        return listOfWeeksDayCards;
     }
 }
