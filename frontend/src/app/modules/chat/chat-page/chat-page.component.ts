@@ -1,0 +1,40 @@
+import { Component } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+// import { HttpService } from '@core/services/http.service';
+import { Observable, of } from 'rxjs';
+
+@Component({
+    selector: 'app-chat-page',
+    templateUrl: './chat-page.component.html',
+    styleUrls: ['./chat-page.component.sass'],
+})
+export class ChatPageComponent {
+    //This values are temporary, they will be received from the server
+    chatId = 1;
+
+    viewerId = 1;
+
+    messages$: Observable<[]> = of([]);
+
+    messages = [
+        { chatId: 1, userId: 1, text: 'Hello', createdAt: new Date() },
+        { chatId: 1, userId: 1, text: 'Anyone here?', createdAt: new Date() },
+        { chatId: 1, userId: 2, text: 'Hi', createdAt: new Date() },
+        { chatId: 1, userId: 1, text: 'How are you?', createdAt: new Date() },
+        { chatId: 1, userId: 2, text: 'I am fine, thanks', createdAt: new Date() },
+        { chatId: 1, userId: 1, text: 'Awesome :)', createdAt: new Date() },
+    ];
+
+    form = new FormGroup({
+        message: new FormControl('', { nonNullable: true }),
+    });
+
+    sendMessage() {
+        const message = this.form.controls.message.value;
+
+        this.form.reset();
+
+        this.messages.push({ chatId: this.chatId, userId: this.viewerId, text: message, createdAt: new Date() });
+        //TODO: this.httpService.post('message', { chatId: this.chatId, userId: this.viewerId, text: message, createdAt: new Date() });
+    }
+}
