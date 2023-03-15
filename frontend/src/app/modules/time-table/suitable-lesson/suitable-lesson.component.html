@@ -1,0 +1,57 @@
+<div class="main">
+    <div class="header">
+        <h1>Find a Suitable Lesson</h1>
+    </div>
+    <div class="container">
+        <div class="ChooseDay">
+            <button class="buttonWeek" (click)="weekDec()"><mat-icon>keyboard_arrow_left</mat-icon> Last Week</button>
+
+            <div class="calendar-block">
+                <button class="button-icon" mat-icon-button [matMenuTriggerFor]="appMenu">
+                    <mat-icon>calendar_today</mat-icon>
+                </button>
+                <mat-menu #appMenu="matMenu">
+                    <mat-calendar #calendar (selectedChange)="select($event, calendar)" [dateClass]="isSelected">
+                    </mat-calendar>
+                </mat-menu>
+                {{ getDayNumber(days[0].getDate()) }} {{ getMonthString(days[0]) }} -
+                {{ getDayNumber(days[6].getDate()) }}
+                {{ getMonthString(days[6]) }}
+            </div>
+
+            <button class="buttonWeek" (click)="weekInc()">
+                Next Week
+                <mat-icon>keyboard_arrow_right</mat-icon>
+            </button>
+        </div>
+        <div class="days">
+            <div
+                class="day-elem"
+                [ngClass]="{
+                    'day-elem-blue': item.getDate() === todayDate.getDate() && item.getMonth() === todayDate.getMonth(),
+                    'day-elem-grey': compareDate(item, todayDate)
+                }"
+                *ngFor="let item of days">
+                {{ getDayNumber(item.getDate()) }} {{ getMonthString(item) }}
+                <h2>{{ getWeekDayString(item) }}</h2>
+                <div class="labels">
+                    <div
+                        *ngIf="item.getDate() === todayDate.getDate() && item.getMonth() === todayDate.getMonth()"
+                        class="mettings todayLabel"
+                        [ngClass]="{
+                            'mettings-grey': compareDate(item, todayDate)
+                        }">
+                        today
+                    </div>
+                    <div
+                        class="mettings"
+                        [ngClass]="{
+                            'mettings-grey': compareDate(item, todayDate)
+                        }">
+                        6 meetings
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
