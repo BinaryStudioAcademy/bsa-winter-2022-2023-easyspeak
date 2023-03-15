@@ -1,12 +1,11 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { LessonsRoutingModule } from './lessons-routing.module';
 import { LessonsPageComponent } from './lessons-page/lessons-page.component';
+import { LessonsRoutingModule } from './lessons-routing.module';
+import { NgModule } from '@angular/core';
 
 @NgModule({
     declarations: [
-        LessonsPageComponent
+        LessonsPageComponent,
     ],
     imports: [
         CommonModule,

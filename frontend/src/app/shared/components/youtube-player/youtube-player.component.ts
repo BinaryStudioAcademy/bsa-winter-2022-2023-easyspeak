@@ -16,7 +16,7 @@ export class YoutubePlayerComponent implements OnInit {
     videoHeight: number;
 
     constructor(
-        @Inject(MAT_DIALOG_DATA) public data: {videoId: string},
+        @Inject(MAT_DIALOG_DATA) public data: { videoId: string },
     ) { }
 
     ngOnInit() {

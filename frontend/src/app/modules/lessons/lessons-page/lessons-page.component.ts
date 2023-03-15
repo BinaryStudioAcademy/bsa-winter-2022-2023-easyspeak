@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { YoutubePlayerComponent } from '@shared/components/youtube-player/youtube-player.component';
 
@@ -7,7 +7,7 @@ import { YoutubePlayerComponent } from '@shared/components/youtube-player/youtub
     templateUrl: './lessons-page.component.html',
     styleUrls: ['./lessons-page.component.sass'],
 })
-export class LessonsPageComponent implements OnInit {
+export class LessonsPageComponent {
     lessons = [
         {
             imgPath: '../../../../assets/lesson-mocks/Photo-4.png',
@@ -98,11 +98,8 @@ export class LessonsPageComponent implements OnInit {
             height: '80%',
             width: '80%',
             data: {
-                videoId: videoId
-            }
+                videoId,
+            },
         });
-    }
-
-    ngOnInit(): void {
     }
 }
