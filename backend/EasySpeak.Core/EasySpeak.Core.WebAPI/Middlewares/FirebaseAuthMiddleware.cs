@@ -22,7 +22,6 @@ namespace EasySpeak.Core.WebAPI.Middlewares
                 try
                 {
                     var decodedToken = await FirebaseAuth.DefaultInstance.VerifyIdTokenAsync(idToken);
-                    //context.Items["userId"] = decodedToken.Uid;
 
                      firebaseAuthService.SetUserId(decodedToken.Claims["email"].ToString());
                 }
