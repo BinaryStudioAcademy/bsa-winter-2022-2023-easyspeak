@@ -4,6 +4,7 @@ using EasySpeak.Core.Common.DTO.Lesson;
 using EasySpeak.Core.DAL.Context;
 using EasySpeak.Core.DAL.Entities;
 using EasySpeak.Core.DAL.Entities.Enums;
+using Microsoft.EntityFrameworkCore;
 
 namespace EasySpeak.Core.BLL.Services;
 
@@ -15,11 +16,11 @@ public class LessonsService : BaseService, ILessonsService
     {
         List<LessonWebDto> lessons = new List<LessonWebDto>();
 
-        //var lessonsFromDb = await _context.Lessons
-        //    .Include(l => l.Tags)
-        //    .Include(l => l.Questions)
-        //    .Include(l => l.Subscribers)
-        //    .ToListAsync();
+        var lessonsFromDb = await _context.Lessons
+            .Include(l => l.Tags)
+            .Include(l => l.Questions)
+            .Include(l => l.Subscribers)
+            .ToListAsync();
 
         var q = new Question
         {
@@ -36,7 +37,7 @@ public class LessonsService : BaseService, ILessonsService
 
         q.Subquestions.FirstOrDefault().Question = q;
 
-        var lessonsFromDb = new List<Lesson>
+        lessonsFromDb = new List<Lesson>
         {
             new Lesson
             {
