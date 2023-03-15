@@ -2,12 +2,26 @@
     <form name="authForm" #authForm="ngForm" class="registration-form">
         <h1>Sign In</h1>
         <label>
-            <input type="text" placeholder="Email" />
+            <mat-error *ngIf="submitted">{{ getEmailErrorMessage() }}</mat-error>
+            <input
+                type="text"
+                [(ngModel)]="email"
+                matInput
+                required
+                placeholder="Email"
+                [ngModelOptions]="{ standalone: true }" />
         </label>
         <label>
-            <input type="password" placeholder="Password" />
+            <mat-error *ngIf="submitted">{{ getPasswordErrorMessage() }}</mat-error>
+            <input
+                type="password"
+                [(ngModel)]="password"
+                #upPassword="ngModel"
+                required
+                placeholder="Password"
+                [ngModelOptions]="{ standalone: true }" />
         </label>
-        <button mat-button>Confirm</button>
+        <button mat-button (click)="validation()">Confirm</button>
     </form>
     <div class="image-section">
         <div class="car-background"></div>

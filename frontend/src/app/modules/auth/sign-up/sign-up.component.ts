@@ -20,7 +20,7 @@ export class SignUpComponent {
 
     Countries = ['Ukraine', 'Austria', 'England', 'Scotland', 'Poland', 'Romania'];
 
-    public email = '';
+    email = '';
 
     firstName: string = '';
 
@@ -110,7 +110,6 @@ export class SignUpComponent {
                 ],
             ],
             confirmPassword: [this.confirmPassword, Validators.required],
-            acceptTerms: [false, Validators.requiredTrue],
         });
     }
 }
