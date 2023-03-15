@@ -116,9 +116,6 @@ namespace EasySpeak.Core.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("LanguageLevel")
-                        .HasColumnType("int");
-
                     b.Property<int?>("LimitOfUsers")
                         .HasColumnType("int");
 
@@ -133,13 +130,7 @@ namespace EasySpeak.Core.DAL.Migrations
                     b.Property<DateTime>("StartAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId")
-                        .IsUnique();
 
                     b.ToTable("Lessons");
                 });
@@ -512,17 +503,6 @@ namespace EasySpeak.Core.DAL.Migrations
                         .IsRequired();
 
                     b.Navigation("Requester");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("EasySpeak.Core.DAL.Entities.Lesson", b =>
-                {
-                    b.HasOne("EasySpeak.Core.DAL.Entities.User", "User")
-                        .WithOne()
-                        .HasForeignKey("EasySpeak.Core.DAL.Entities.Lesson", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
 
                     b.Navigation("User");
                 });
