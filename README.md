@@ -90,11 +90,13 @@ erDiagram
   Lessons ||--|{ Questions : lessonId
   Lessons {
     bigint id PK
+    bigint userId FK
     nvarchar name
     nvarchar description
     nvarchar mediaPath
     datetime startsAt
     int limitOfUsers
+    int languageLevel 
   }
 
   Calls {
