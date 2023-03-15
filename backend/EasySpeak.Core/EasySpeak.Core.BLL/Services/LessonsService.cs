@@ -36,29 +36,37 @@ public class LessonsService : BaseService, ILessonsService
             }
         };
 
-        var mappedLessons = _mapper.Map<ICollection<LessonWebDto>>(lessonsFromDb);
-
-        foreach (var lesson in mappedLessons)
+        try
         {
-            if (lesson.StartAt > requestDto.Date)
-            {
-                lessons.Add(lesson);
-                continue;
-            }
+            var mappedLessons = _mapper.Map<ICollection<LessonWebDto>>(lessonsFromDb);
 
-            if (requestDto.LanguageLevels != null && requestDto.LanguageLevels.Any(l => l == lesson.LanguageLevel))
+            foreach (var lesson in mappedLessons)
             {
-                lessons.Add(lesson);
-                continue;
-            }
-
-            if (requestDto.Tags != null)
-            {
-                if (requestDto.Tags.Any(tag => lesson.Tags.Any(t => t == tag)))
+                if (lesson.StartAt > requestDto.Date)
                 {
                     lessons.Add(lesson);
+                    continue;
+                }
+
+                if (requestDto.LanguageLevels != null && requestDto.LanguageLevels.Any(l => l == lesson.LanguageLevel))
+                {
+                    lessons.Add(lesson);
+                    continue;
+                }
+
+                if (requestDto.Tags != null)
+                {
+                    if (requestDto.Tags.Any(tag => lesson.Tags.Any(t => t == tag)))
+                    {
+                        lessons.Add(lesson);
+                    }
                 }
             }
+        }
+        catch (Exception ex)
+        {
+
+           
         }
 
         return lessons;

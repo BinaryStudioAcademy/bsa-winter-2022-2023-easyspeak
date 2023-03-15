@@ -18,7 +18,7 @@ namespace EasySpeak.Core.DAL.Context.EntityConfigurations
                 .HasForeignKey(q => q.LessonId);
 
             builder.HasOne(l => l.User)
-                .WithOne();
+                .WithOne().OnDelete(DeleteBehavior.NoAction);
         }
     }
 }
