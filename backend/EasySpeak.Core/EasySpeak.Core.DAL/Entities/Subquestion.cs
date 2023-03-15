@@ -11,5 +11,7 @@ namespace EasySpeak.Core.DAL.Entities
         public long QuestionId { get; set; }
         public Question Question { get; set; } = null!;
         public string Text { get; set; } = string.Empty;
+        public User? CreatedBy { get; set; }
+        public DateTime CreatedAt { get; set; }
     }
 }

@@ -12,6 +12,7 @@ namespace EasySpeak.Core.DAL.Entities
         public ICollection<User> Users { get; private set; }
         public ICollection<Message> Messages { get; private set; }
         public ICollection<Call> Calls { get; private set; }
+        public DateTime CreatedAt { get; set; }
 
         public Chat()
         {

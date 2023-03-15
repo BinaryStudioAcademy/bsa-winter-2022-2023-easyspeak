@@ -17,7 +17,7 @@ namespace EasySpeak.Core.DAL.Entities
         public ICollection<User> Subscribers { get; private set; }
         public ICollection<Tag> Tags { get; private set; }
         public ICollection<Question> Questions { get; private set; }
-
+        public DateTime CreatedAt { get; set; }
         public Lesson()
         {
             Tags = new List<Tag>();

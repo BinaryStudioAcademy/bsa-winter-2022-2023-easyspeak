@@ -12,5 +12,7 @@ namespace EasySpeak.Core.DAL.Entities
         public Chat Chat { get; set; } = null!;
         public DateTime StartedAt { get; set; }
         public DateTime? FinishedAt { get; set; }
+        public User? CreatedBy { get; set; }
+        public DateTime CreatedAt { get; set; }
     }
 }

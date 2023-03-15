@@ -28,7 +28,7 @@ namespace EasySpeak.Core.DAL.Entities
         public ICollection<Friend> Friends { get; private set; }
         public ICollection<Friend> Users { get; private set; }
         public ICollection<Notification> Notifications { get; private set; }
-
+        public DateTime CreatedAt { get; set; }
         public User()
         {
             Chats = new List<Chat>();
