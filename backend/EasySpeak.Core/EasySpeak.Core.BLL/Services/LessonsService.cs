@@ -3,6 +3,7 @@ using EasySpeak.Core.BLL.Interfaces;
 using EasySpeak.Core.Common.DTO.Lesson;
 using EasySpeak.Core.DAL.Context;
 using EasySpeak.Core.DAL.Entities;
+using EasySpeak.Core.DAL.Entities.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace EasySpeak.Core.BLL.Services;
@@ -23,7 +24,7 @@ public class LessonsService : BaseService, ILessonsService
             .Where(m => m.StartAt > filtersRequest.Date)
             .Where(m =>
                 (filtersRequest.LanguageLevels != null &&
-                 filtersRequest.LanguageLevels.Contains((LanguageLevelDto)m.LanguageLevel)
+                 filtersRequest.LanguageLevels.Contains((LanguageLevel)m.LanguageLevel)
                  || filtersRequest.LanguageLevels == null)).ToListAsync();
 
         // IEnumerable

@@ -1,16 +1,16 @@
-﻿using Newtonsoft.Json;
+﻿using EasySpeak.Core.DAL.Entities.Enums;
+using Newtonsoft.Json;
 
 namespace EasySpeak.Core.Common.DTO.Lesson;
 
 public class FiltersRequest
 {
-    [JsonProperty("languageLevels", Required = Required.Default)]
-    public ICollection<LanguageLevelDto>? LanguageLevels { get; set; }
+    [JsonProperty(Required = Required.Default)]
+    public ICollection<LanguageLevel>? LanguageLevels { get; set; }
 
-    [JsonProperty("tags", Required = Required.Default)]
+    [JsonProperty(Required = Required.Default)]
     public ICollection<TagForLessonDto>? Tags { get; set; }
 
-    [JsonRequired]
-    [JsonProperty("date")]
+    [JsonProperty(Required = Required.Always)]
     public DateTime Date { get; set; }
 }

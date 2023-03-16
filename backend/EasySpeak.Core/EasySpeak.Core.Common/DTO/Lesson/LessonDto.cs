@@ -1,4 +1,6 @@
-﻿namespace EasySpeak.Core.Common.DTO.Lesson;
+﻿using EasySpeak.Core.DAL.Entities.Enums;
+
+namespace EasySpeak.Core.Common.DTO.Lesson;
 
 public class LessonDto
 {
@@ -8,7 +10,7 @@ public class LessonDto
     public string? Description { get; set; }
     public string? MediaPath { get; set; }
     public DateTime StartAt { get; set; }
-    public LanguageLevelDto LanguageLevel { get; set; }
+    public LanguageLevel LanguageLevel { get; set; }
     public int SubscrubersCount { get; set; }
 
     public ICollection<TagForLessonDto>? Tags { get; set; }
