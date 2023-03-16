@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -13,7 +14,7 @@ export class SignInComponent {
 
     submitted = false;
 
-    private validationErrorMessage = {
+    private validationErrorMessage: { [id: string]: string } = {
         required: 'Enter a value',
         maxlength: 'Can not be more than 30 characters',
         email: 'Not a valid email',
@@ -28,32 +29,14 @@ export class SignInComponent {
 
     constructor(private formBuilder: FormBuilder) {}
 
-    getEmailErrorMessage() {
-        if (this.form.controls['email'].hasError('required')) {
-            return this.validationErrorMessage.required;
+    getErrorMessage(field: string) {
+        for (const message in this.validationErrorMessage) {
+            if (this.form.controls[field].hasError(message)) {
+                return this.validationErrorMessage[message];
+            }
         }
 
-        if (this.form.controls['email'].hasError('email')) {
-            return this.validationErrorMessage.email;
-        }
-
-        return this.form.controls['email'].hasError('maxlength') ? this.validationErrorMessage.maxlength : '';
-    }
-
-    getPasswordErrorMessage() {
-        if (this.form.controls['password'].hasError('required')) {
-            return this.validationErrorMessage.required;
-        }
-
-        if (this.form.controls['password'].hasError('minlength')) {
-            return this.validationErrorMessage.minlength;
-        }
-
-        if (this.form.controls['password'].hasError('pattern')) {
-            return this.validationErrorMessage.pattern;
-        }
-
-        return this.form.controls['password'].hasError('maxlength') ? 'Can not be more than 25 characters' : '';
+        return '';
     }
 
     validation() {

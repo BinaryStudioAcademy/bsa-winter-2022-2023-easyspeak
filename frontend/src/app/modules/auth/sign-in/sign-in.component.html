@@ -8,7 +8,7 @@
             required
             placeholder="Email"
             [ngModelOptions]="{ standalone: true }" />
-        <mat-error *ngIf="submitted">{{ getEmailErrorMessage() }}</mat-error>
+        <mat-error *ngIf="submitted && form.controls['email'].errors">{{ getErrorMessage('email') }}</mat-error>
     </label>
     <label>
         <input
@@ -18,7 +18,7 @@
             required
             placeholder="Password"
             [ngModelOptions]="{ standalone: true }" />
-        <mat-error *ngIf="submitted">{{ getPasswordErrorMessage() }}</mat-error>
+        <mat-error *ngIf="submitted && form.controls['password'].errors">{{ getErrorMessage('password') }}</mat-error>
     </label>
     <button mat-button (click)="validation()">Confirm</button>
 </div>

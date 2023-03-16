@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -20,7 +21,7 @@ export class SignUpComponent {
 
     Countries = ['Ukraine', 'Austria', 'England', 'Scotland', 'Poland', 'Romania'];
 
-    private validationErrorMessage = {
+    private validationErrorMessage: { [id: string]: string } = {
         required: 'Enter a value',
         maxlength: "Can't be more than 25 characters",
         email: 'Not a valid email',
@@ -50,52 +51,32 @@ export class SignUpComponent {
 
     constructor(private formBuilder: FormBuilder) {}
 
-    getEmailErrorMessage() {
-        if (this.form.controls['email'].hasError('required')) {
-            return this.validationErrorMessage.required;
-        }
-
-        if (this.form.controls['email'].hasError('email')) {
-            return this.validationErrorMessage.email;
+    getErrorMessage(field: string) {
+        for (const message in this.validationErrorMessage) {
+            if (this.form.controls[field].hasError(message)) {
+                return this.validationErrorMessage[message];
+            }
         }
 
         return this.form.controls['email'].hasError('maxlength') ? 'Can not be more than 30 characters' : '';
     }
 
     getPasswordErrorMessage() {
-        if (this.form.controls['password'].hasError('required')) {
-            return this.validationErrorMessage.required;
+        for (const message in this.validationErrorMessage) {
+            if (this.form.controls['password'].hasError(message)) {
+                return this.validationErrorMessage[message];
+            }
         }
 
-        if (this.form.controls['password'].hasError('minlength')) {
-            return 'Can not be less than 6 symbols';
-        }
-
-        if (this.form.controls['password'].hasError('pattern')) {
-            return this.validationErrorMessage.pattern;
-        }
-
-        return this.form.controls['password'].hasError('maxlength') ? this.validationErrorMessage.maxlength : '';
+        return this.form.controls['password'].hasError('minlength') ? 'Can not be less than 6 symbols' : '';
     }
 
     getConfirmPasswordErrorMessage() {
         if (this.form.controls['confirmPassword'].hasError('required')) {
-            return this.validationErrorMessage.required;
+            return this.validationErrorMessage['required'];
         }
 
         return this.confirmPassword !== this.password ? 'The password does not match' : '';
-    }
-
-    getNameErrorMessage(field: string) {
-        if (this.form.controls[field].hasError('required')) {
-            return this.validationErrorMessage.required;
-        }
-
-        if (this.form.controls[field].hasError('minlength')) {
-            return this.validationErrorMessage.minlength;
-        }
-
-        return this.form.controls[field].hasError('maxlength') ? this.validationErrorMessage.maxlength : '';
     }
 
     validation() {

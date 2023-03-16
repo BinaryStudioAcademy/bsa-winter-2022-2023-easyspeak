@@ -7,7 +7,7 @@
         required
         placeholder="Email"
         [ngModelOptions]="{ standalone: true }" />
-    <mat-error *ngIf="submitted">{{ getEmailErrorMessage() }}</mat-error>
+    <mat-error *ngIf="submitted && form.controls['email'].errors">{{ getErrorMessage('email') }}</mat-error>
 </label>
 
 <div class="name-section">
@@ -19,7 +19,7 @@
             matInput
             placeholder="First Name"
             [ngModelOptions]="{ standalone: true }" />
-        <mat-error *ngIf="submitted">{{ getNameErrorMessage('firstName') }}</mat-error>
+        <mat-error *ngIf="submitted && form.controls['firstName'].errors">{{ getErrorMessage('firstName') }}</mat-error>
     </label>
 
     <label>
@@ -31,7 +31,7 @@
             required
             placeholder="Last Name"
             [ngModelOptions]="{ standalone: true }" />
-        <mat-error *ngIf="submitted">{{ getNameErrorMessage('lastName') }}</mat-error>
+        <mat-error *ngIf="submitted && form.controls['lastName'].errors">{{ getErrorMessage('lastName') }}</mat-error>
     </label>
 </div>
 <div class="age-sex-section">
@@ -65,7 +65,7 @@
         required
         placeholder="Password"
         [ngModelOptions]="{ standalone: true }" />
-    <mat-error *ngIf="submitted">{{ getPasswordErrorMessage() }}</mat-error>
+    <mat-error *ngIf="submitted && form.controls['password'].errors">{{ getPasswordErrorMessage() }}</mat-error>
 </label>
 <label>
     <input
@@ -73,7 +73,9 @@
         [(ngModel)]="confirmPassword"
         placeholder="Repeat The Password"
         [ngModelOptions]="{ standalone: true }" />
-    <mat-error *ngIf="submitted">{{ getConfirmPasswordErrorMessage() }}</mat-error>
+    <mat-error *ngIf="submitted && form.controls['confirmPassword'].errors">{{
+        getConfirmPasswordErrorMessage()
+    }}</mat-error>
 </label>
 <button mat-button (click)="validation()">Create Account</button>
 <div id="has-account">
