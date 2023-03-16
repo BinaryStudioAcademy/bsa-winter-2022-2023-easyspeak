@@ -1,4 +1,5 @@
 ﻿using Bogus;
+using EasySpeak.Core.DAL.Context.EntityConfigurations;
 using EasySpeak.Core.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,6 +10,12 @@ namespace EasySpeak.Core.DAL.Context
         public static void Configure(this ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(SampleConfig).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(UserConfig).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(ChatConfig).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(TagConfig).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(LessonConfig).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(QuestionConfig).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(FriendConfig).Assembly);
         }
 
         public static void Seed(this ModelBuilder modelBuilder)
