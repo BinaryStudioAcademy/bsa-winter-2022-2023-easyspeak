@@ -18,18 +18,18 @@ namespace EasySpeak.Core.WebAPI.Middlewares
 
             if (!string.IsNullOrEmpty(authToken) && authToken.StartsWith("Bearer "))
             {
-                var idToken = authToken.Substring("Bearer ".Length);
+                var idToken = authToken.Split(' ')[1];
 
-                
-                    var decodedToken = await FirebaseAuth.DefaultInstance.VerifyIdTokenAsync(idToken);
+                var decodedToken = await FirebaseAuth.DefaultInstance.VerifyIdTokenAsync(idToken);
 
-                    var userEmail = decodedToken.Claims["email"].ToString();
+                var userEmail = decodedToken.Claims["email"].ToString();
 
-                    if (userEmail != null)
-                    {
-                        await firebaseAuthService.SetUserId(userEmail);
-                    }
+                if (userEmail != null)
+                {
+                    await firebaseAuthService.SetUserId(userEmail);
+                }
             }
+
             await next(context);
         }
     }
