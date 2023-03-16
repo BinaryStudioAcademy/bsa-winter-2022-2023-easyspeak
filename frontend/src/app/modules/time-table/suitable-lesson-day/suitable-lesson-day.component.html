@@ -1,0 +1,11 @@
+<div [ngClass]="{ 'day-elem-blue': isToday(), 'day-elem-grey': compareDate() }" class="day-elem">
+    {{ formatDayMonthString() }}
+
+    <h2>{{ getWeekDayString() }}</h2>
+
+    <div class="labels">
+        <div *ngIf="isToday()" class="mettings today-label">today</div>
+
+        <div [ngClass]="{ 'mettings-grey': compareDate() }" class="mettings">{{ meetingCount }} meetings</div>
+    </div>
+</div>

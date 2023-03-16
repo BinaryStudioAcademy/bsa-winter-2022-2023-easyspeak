@@ -13,9 +13,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { SuitableLessonComponent } from './suitable-lesson/suitable-lesson.component';
+import { SuitableLessonDayComponent } from './suitable-lesson-day/suitable-lesson-day.component';
 
 @NgModule({
-    declarations: [SuitableLessonComponent],
+    declarations: [SuitableLessonComponent, SuitableLessonDayComponent],
     imports: [
         BrowserModule,
         CommonModule,

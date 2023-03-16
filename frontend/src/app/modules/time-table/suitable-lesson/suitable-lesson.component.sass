@@ -3,16 +3,12 @@
   font-family: "mainfont"
   src: url("../../../../assets/fonts/Barlow-Medium.ttf") format("truetype")
 
-$inactiveDayFont: rgb(181,183,196)
-$inactiveDayBackground: rgb(224, 226, 242)
-$inactiveDayLabel: rgb(201,203,218)
 .main
     display: flex
     flex-direction: column
     align-items: center
     background-color: $white
     padding: 25px
-    font-family: mainfont
 
 .container
     display: flex
@@ -25,7 +21,8 @@ $inactiveDayLabel: rgb(201,203,218)
 
 .header 
     height: 105px
-.buttonWeek 
+
+.button-week 
   display: flex
   justify-content: center
   align-items: center
@@ -44,76 +41,28 @@ $inactiveDayLabel: rgb(201,203,218)
     color: $main-color
     transform: scale(1.5)
 
-.buttonWeek 
+.button-week 
     &:hover
-        border: solid
-        border-width: 2px
-        border-color: $main-color
-        background-color: $gray-200
+        background-color: $selected-color
+
 .days
     display: flex
     flex-direction: row
     flex-wrap: wrap
 
-.day-elem
-    display: flex
-    flex-direction: column
-    align-content: center
-    align-items: center
-    justify-content: center
-    color: $black
-    background-color: $white
-    margin: 8px
-    width: 167px
-    height: 115px
-    border-radius: 10px
-    h2
-        margin: 0
-        margin-bottom: 10px
-        margin-top: 5px
-    
-.day-elem-blue
-    background-color: $main-color
-    color: $white
-.day-elem-grey
-    background-color: $inactiveDayBackground
-    color: $inactiveDayFont
-.mettings
-    display: flex
-    justify-content: center
-    align-items: center
-    background-color: $accent-color
-    color: $main-color
-    font-size: 18px
-    border-radius: 15px
-    text-align: center
-    font-size: 12px
-    margin-right: 5px
-    height: 24px
-    width: 77px
-.mettings-grey
-    background-color: $inactiveDayLabel
-    color: $inactive-color
-.ChooseDay
+.choose-day
     display: flex
     align-self: flex-start
     align-items: center
     margin-left: 10px
-.labels
-    display: flex
-    flex-direction: row
-.todayLabel
-    width: 50px
-    height: 24px
-.order7
-    order: 7
+
 .button-icon
     border-width: 0
     height: 28px
     background-color: $white
     color: $main-color
     &:hover
-        color: red
+        color: $selected-color
         
 .calendar-block
     display: flex
@@ -123,4 +72,3 @@ $inactiveDayLabel: rgb(201,203,218)
     border-radius: 18px
     padding-left: 15px
     padding-right: 15px
-    

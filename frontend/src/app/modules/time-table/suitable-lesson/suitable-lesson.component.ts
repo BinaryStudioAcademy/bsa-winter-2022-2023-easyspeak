@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,70 +7,41 @@ import { Component } from '@angular/core';
     styleUrls: ['./suitable-lesson.component.sass'],
 })
 export class SuitableLessonComponent {
-    update: any = true;
-
-    weekdays: string[] = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-
-    month: string[] = [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July   ',
-        'August',
-        'September',
-        'October',
-        'November',
-        'December',
-    ];
-
-    days: Date[] = [new Date(), new Date(), new Date(), new Date(), new Date(), new Date(), new Date()];
-
-    todayDate: Date = new Date();
-
-    dayOfWeek: any;
-
-    startDate: Date = new Date();
-
-    currentDate: Date = new Date();
+    days: Date[] = [];
 
     selectedDate: Date = new Date();
 
     isSelected: any;
 
     constructor() {
-        this.dayOfWeek = this.weekdays[new Date(this.currentDate.getMilliseconds()).getUTCDay()];
+        this.setDays();
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
+    select(event: any, calendar: any) {
+        this.selectedDate = event;
+        this.selectedDate.setDate(this.selectedDate.getDate() - 1);
         this.setDays();
     }
 
     weekInc(): void {
-        this.currentDate = this.startDate;
-
-        this.startDate = new Date(this.currentDate.setDate(this.currentDate.getDate() + 7));
+        this.selectedDate.setDate(this.selectedDate.getDate() + 7);
 
         this.setDays();
     }
 
     weekDec(): void {
-        this.currentDate = this.startDate;
-
-        this.startDate = new Date(this.currentDate.setDate(this.currentDate.getDate() - 7));
+        this.selectedDate.setDate(this.selectedDate.getDate() - 7);
 
         this.setDays();
     }
 
     getWeekDayString(inDate: Date): string {
-        return this.weekdays[new Date(inDate).getUTCDay()];
-    }
-
-    getWeekDayNumber(inDate: Date): number {
-        return new Date(inDate).getUTCDay();
+        return new DatePipe('en-US').transform(inDate, 'EEEE') ?? '';
     }
 
     getMonthString(inDate: Date): string {
-        return this.month[inDate.getMonth()];
+        return new DatePipe('en-US').transform(inDate, 'MMMM') ?? ' ';
     }
 
     getDayNumber(inNumber: number): string {
@@ -81,10 +53,18 @@ export class SuitableLessonComponent {
         return '0' + inNumber.toString();
     }
 
-    setDays(): void {
-        const tempDate: Date = this.startDate;
+    getCalendarMonthString(): string {
+        const dateFormat = 'dd MMMM';
+        const formattedDate1 = new DatePipe('en-US').transform(this.days[0], dateFormat);
+        const formattedDate2 = new DatePipe('en-US').transform(this.days[6], dateFormat);
 
-        const tempDayOfWeek: number = this.startDate.getDay();
+        return `${formattedDate1} - ${formattedDate2}`;
+    }
+
+    setDays(): void {
+        const tempDate: Date = this.selectedDate;
+
+        const tempDayOfWeek: number = this.selectedDate.getDay();
 
         for (let i = 0; i < 7; i++) {
             const day: Date = new Date(
@@ -95,17 +75,5 @@ export class SuitableLessonComponent {
 
             this.days[i] = day;
         }
-    }
-
-    select(event: any, calendar: any) {
-        this.startDate = event;
-        this.setDays();
-        calendar.updateTodaysDate();
-    }
-
-    compareDate(dateToCheck: Date, dateNow: Date): boolean {
-        const value: Date = new Date(dateToCheck.getFullYear(), dateToCheck.getMonth(), dateToCheck.getDate() + 1);
-
-        return value < dateNow;
     }
 }
