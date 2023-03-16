@@ -1,5 +1,5 @@
-import { DatePipe } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-suitable-lesson-day',
@@ -15,20 +15,11 @@ export class SuitableLessonDayComponent {
 
     todayDate: Date = new Date();
 
-    getWeekDayString(): string {
-        return new DatePipe('en-US').transform(this.item, 'EEEE') ?? '';
-    }
-
-    getMonthString(inDate: Date): string {
-        return new DatePipe('en-US').transform(inDate, 'MMMM') ?? ' ';
-    }
-
     isToday(): boolean {
-        if (
-            this.item.getDate() === this.todayDate.getDate() &&
-            this.item.getMonth() === this.todayDate.getMonth() &&
-            this.item.getFullYear() === this.todayDate.getFullYear()
-        ) {
+        const itemMoment = moment(this.item);
+        const todayMoment = moment(this.todayDate);
+
+        if (itemMoment.diff(todayMoment, 'days', true) > -1 && itemMoment.diff(todayMoment, 'days', true) < 0) {
             return true;
         }
 
@@ -36,15 +27,10 @@ export class SuitableLessonDayComponent {
     }
 
     compareDate(): boolean {
-        const value: Date = new Date(this.item.getFullYear(), this.item.getMonth(), this.item.getDate() + 1);
+        const valueMoment = moment(this.item);
 
-        return value < this.todayDate;
-    }
+        const todayMoment = moment();
 
-    formatDayMonthString(): string {
-        const dateFormat = 'dd MMMM';
-        const formattedDate1 = new DatePipe('en-US').transform(this.item, dateFormat);
-
-        return `${formattedDate1}`;
+        return valueMoment.isBefore(todayMoment, 'day');
     }
 }

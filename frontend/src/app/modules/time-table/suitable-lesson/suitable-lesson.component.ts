@@ -1,5 +1,8 @@
 import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
+import { MatCalendar, MatDatepicker } from '@angular/material/datepicker';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-suitable-lesson',
@@ -11,17 +14,25 @@ export class SuitableLessonComponent {
 
     selectedDate: Date = new Date();
 
-    isSelected: any;
+    isSelected = (date: Date): string | string[] => {
+        if (this.selectedDate && date.getDate() === this.selectedDate.getDate()) {
+            return 'selected';
+        }
+
+        return '';
+    };
 
     constructor() {
         this.setDays();
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
-    select(event: any, calendar: any) {
-        this.selectedDate = event;
-        this.selectedDate.setDate(this.selectedDate.getDate() - 1);
-        this.setDays();
+    select(event: Date | null, calendar: MatCalendar<Date>) {
+        if (event !== null) {
+            this.selectedDate = event;
+            this.selectedDate.setDate(this.selectedDate.getDate() - 1);
+            this.setDays();
+        }
     }
 
     weekInc(): void {
@@ -67,11 +78,9 @@ export class SuitableLessonComponent {
         const tempDayOfWeek: number = this.selectedDate.getDay();
 
         for (let i = 0; i < 7; i++) {
-            const day: Date = new Date(
-                tempDate.getFullYear(),
-                tempDate.getMonth(),
-                tempDate.getDate() + i - tempDayOfWeek + 1,
-            );
+            const day = moment(tempDate)
+                .add(i - tempDayOfWeek + 1, 'day')
+                .toDate();
 
             this.days[i] = day;
         }
