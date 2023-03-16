@@ -36,20 +36,96 @@ _Tip: If you want to connect to the specific service outside of docker, then use
 
 ```mermaid
 erDiagram
-  User {
-      bigint Id
-      nvarchar Name
-      nvarchar Email
-      nvarchar PhoneCode
-      nvarchar PhoneNumber
-      nvarchar ImagePath
-      int Country
-      int Language
-      int TimeFormat
-      int DateFormat
-      boolean IsBanned
-      boolean IsDeleted
+  Users ||--|{ Friends : requesterId
+  Users ||--|{ Friends : userId
+  Users ||--|{ Notifications : userId
+  Users }|--|{ Chats : id
+  Users }|--|{ Lessons : id
+
+  Users {
+    bigint Id PK
+    int country
+    int language
+    int timezone
+    nvarchar firstName
+    nvarchar lastName
+    int age
+    nvarchar email
+    nvarchar imagePath
+    int sex
+    int languageLevel
+    int status
+    boolean isSubscribed
+    boolean isBanned
   }
+
+  Notifications {
+    bigint id PK
+    bigint userId FK
+    nvarchar text
+    int type
+    boolean isRead
+  }
+
+  Friends{
+    bigint id PK
+    bigint requesterId FK
+    bigint userId FK
+    int friendshipStatus
+  }
+
+  Subquestions {
+	  bigint id PK
+	  bigint questionId FK
+	  nvarchar text
+  }
+
+  Chats ||--|{ Messages : chatId
+  Chats ||--|{ Calls : chatId
+  Chats {
+    bigint id PK
+    nvarchar name
+  }
+
+  Lessons ||--|{ Questions : lessonId
+  Lessons {
+    bigint id PK
+    nvarchar name
+    nvarchar description
+    nvarchar mediaPath
+    datetime startsAt
+    int limitOfUsers
+  }
+
+  Calls {
+    bigint id PK
+    bigint chatId FK
+    datetime startedAt
+    datetime finishedAt
+  }
+
+  Tags }|--|{ Users : id
+  Tags }|--|{ Lessons : id
+  Tags {
+    bigint id PK
+    nvarchar text
+  }
+
+  Messages {
+    bigint id PK
+    bigint chatId FK
+    nvarchar text
+    datetime createdAt
+    boolean isDeleted
+  }
+
+  Questions ||--|{ Subquestions : questionId
+  Questions {
+    bigint id PK
+    bigint lessonId FK
+    nvarchar topic
+  }
+
 ```
 
 ## Code quality
