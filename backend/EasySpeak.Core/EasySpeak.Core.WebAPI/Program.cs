@@ -52,6 +52,8 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 
+app.UseMiddleware<FirebaseAuthMiddleware>();
+
 app.UseEndpoints(endpoinds =>
 {
     endpoinds.MapHealthChecks("/health");
