@@ -3,11 +3,14 @@ using EasySpeak.Core.BLL.MappingProfiles;
 using EasySpeak.Core.BLL.Services;
 using EasySpeak.Core.DAL.Context;
 using EasySpeak.Core.WebAPI.Validators;
+using FirebaseAdmin;
 using FluentValidation.AspNetCore;
+using Google.Apis.Auth.OAuth2;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Reflection;
+
 
 namespace EasySpeak.Core.WebAPI.Extentions
 {
@@ -21,6 +24,8 @@ namespace EasySpeak.Core.WebAPI.Extentions
 
             services.AddTransient<ISampleService, SampleService>();
             services.AddTransient<ILessonsService, LessonsService>();
+            services.AddScoped<IFirebaseAuthService, FirebaseAuthService>();
+            services.AddFirebaseApp();
         }
 
         public static void AddAutoMapper(this IServiceCollection services)
@@ -72,6 +77,14 @@ namespace EasySpeak.Core.WebAPI.Extentions
                         ValidateLifetime = true
                     };
                 });
+        }
+
+        public static void AddFirebaseApp(this IServiceCollection services)
+        {
+            FirebaseApp.Create(new AppOptions()
+            {
+                Credential = GoogleCredential.FromFile($"{Environment.CurrentDirectory}/FirebaseServiceAccountKey.json")
+            });
         }
     }
 }

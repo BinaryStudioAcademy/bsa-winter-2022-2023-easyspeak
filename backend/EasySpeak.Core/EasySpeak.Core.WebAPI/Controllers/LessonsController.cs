@@ -16,9 +16,9 @@ namespace EasySpeak.Core.WebAPI.Controllers
         }
 
         [HttpPost("filters")]
-        public async Task<ActionResult<ICollection<LessonDto>>> GetAllAsync([FromBody] RequestWithFiltersDto requestWithFiltersDto)
+        public async Task<ActionResult<ICollection<LessonDto>>> GetAllAsync([FromBody] FiltersRequest filtersRequest)
         {
-            var lessons = await _lessonsService.GetAllLessonsAsync(requestWithFiltersDto);
+            var lessons = await _lessonsService.GetAllLessonsAsync(filtersRequest);
 
             return Ok(lessons);
         }

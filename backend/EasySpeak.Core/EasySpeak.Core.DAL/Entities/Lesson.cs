@@ -1,4 +1,4 @@
-﻿using EasySpeak.Core.DAL.Entities.Enums;
+﻿using EasySpeak.Core.Common.Enums;
 
 namespace EasySpeak.Core.DAL.Entities
 {
