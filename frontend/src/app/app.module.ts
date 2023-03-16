@@ -10,7 +10,14 @@ import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
     declarations: [AppComponent],
-    imports: [BrowserModule, SharedModule, ToastrModule.forRoot(), AppRoutingModule, BrowserAnimationsModule, CoreModule],
+    imports: [
+        BrowserModule,
+        SharedModule,
+        ToastrModule.forRoot(),
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        CoreModule,
+    ],
     providers: [],
     bootstrap: [AppComponent],
 })
