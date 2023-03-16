@@ -20,8 +20,7 @@ namespace EasySpeak.Core.WebAPI.Middlewares
             {
                 var idToken = authToken.Substring("Bearer ".Length);
 
-                try
-                {
+                
                     var decodedToken = await FirebaseAuth.DefaultInstance.VerifyIdTokenAsync(idToken);
 
                     var userEmail = decodedToken.Claims["email"].ToString();
@@ -30,12 +29,6 @@ namespace EasySpeak.Core.WebAPI.Middlewares
                     {
                         await firebaseAuthService.SetUserId(userEmail);
                     }
-                }
-                catch (Exception)
-                {
-                    context.Response.StatusCode = StatusCodes.Status401Unauthorized;
-                    return;
-                }
             }
             await next(context);
         }
