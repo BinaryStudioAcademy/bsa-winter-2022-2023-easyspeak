@@ -5,10 +5,10 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { BrowserModule } from '@angular/platform-browser';
-import { AuthService } from '@core/services/auth.service';
-import { environment } from '@env/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from '@core/core.module';
+import { AuthService } from '@core/services/auth.service';
+import { environment } from '@env/environment';
 import { SharedModule } from '@shared/shared.module';
 import { ToastrModule } from 'ngx-toastr';
 
