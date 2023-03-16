@@ -13,9 +13,9 @@ export class SelectTopicsPageComponent {
     selectedTopics: ITopic[] = [];
 
     topicClick(topic: ITopic) {
-        const updatedTopics = this.topics.map((t) => (t.name === topic.name ? { ...t, selected: !t.selected } : t));
+        const updatedTopics = this.topics.map(t => (t.name === topic.name ? { ...t, selected: !t.selected } : t));
 
-        this.selectedTopics = updatedTopics.filter((t) => t.selected);
+        this.selectedTopics = updatedTopics.filter(t => t.selected);
         this.topics = updatedTopics;
     }
 }
