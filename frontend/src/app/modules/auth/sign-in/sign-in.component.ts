@@ -13,6 +13,14 @@ export class SignInComponent {
 
     submitted = false;
 
+    private validationErrorMessage = {
+        required: 'Enter a value',
+        maxlength: 'Can not be more than 30 characters',
+        email: 'Not a valid email',
+        minlength: "Can't be less 6 symbols",
+        pattern: 'Should be at least one small and one capital letter',
+    };
+
     form: FormGroup = new FormGroup({
         email: new FormControl(this.email),
         password: new FormControl(this.password),
@@ -22,30 +30,30 @@ export class SignInComponent {
 
     getEmailErrorMessage() {
         if (this.form.controls['email'].hasError('required')) {
-            return 'You must enter a value';
+            return this.validationErrorMessage.required;
         }
 
         if (this.form.controls['email'].hasError('email')) {
-            return 'Not a valid email';
+            return this.validationErrorMessage.email;
         }
 
-        return this.form.controls['email'].hasError('maxlength') ? 'Can not be more than 30 characters' : '';
+        return this.form.controls['email'].hasError('maxlength') ? this.validationErrorMessage.maxlength : '';
     }
 
     getPasswordErrorMessage() {
         if (this.form.controls['password'].hasError('required')) {
-            return 'Enter a value';
+            return this.validationErrorMessage.required;
         }
 
         if (this.form.controls['password'].hasError('minlength')) {
-            return 'Can not be less than 2 symbols';
+            return this.validationErrorMessage.minlength;
         }
 
         if (this.form.controls['password'].hasError('pattern')) {
-            return 'Should be at least one small and one capital letter';
+            return this.validationErrorMessage.pattern;
         }
 
-        return this.form.controls['password'].hasError('maxlength') ? 'Can not be more than 25 symbols' : '';
+        return this.form.controls['password'].hasError('maxlength') ? 'Can not be more than 25 characters' : '';
     }
 
     validation() {
@@ -56,7 +64,15 @@ export class SignInComponent {
     private validateData() {
         this.form = this.formBuilder.group({
             email: [this.email, [Validators.required, Validators.email, Validators.maxLength(30)]],
-            password: [this.password, [Validators.required]],
+            password: [
+                this.password,
+                [
+                    Validators.required,
+                    Validators.minLength(6),
+                    Validators.maxLength(25),
+                    Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\\d@$!%*?&\\.]{6,}$'),
+                ],
+            ],
         });
     }
 }

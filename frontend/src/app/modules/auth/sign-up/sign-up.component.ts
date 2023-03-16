@@ -20,6 +20,14 @@ export class SignUpComponent {
 
     Countries = ['Ukraine', 'Austria', 'England', 'Scotland', 'Poland', 'Romania'];
 
+    private validationErrorMessage = {
+        required: 'Enter a value',
+        maxlength: "Can't be more than 25 characters",
+        email: 'Not a valid email',
+        minlength: "Can't be less 2 symbols",
+        pattern: 'Should be at least one small and one capital letter',
+    };
+
     email = '';
 
     firstName: string = '';
@@ -44,11 +52,11 @@ export class SignUpComponent {
 
     getEmailErrorMessage() {
         if (this.form.controls['email'].hasError('required')) {
-            return 'You must enter a value';
+            return this.validationErrorMessage.required;
         }
 
         if (this.form.controls['email'].hasError('email')) {
-            return 'Not a valid email';
+            return this.validationErrorMessage.email;
         }
 
         return this.form.controls['email'].hasError('maxlength') ? 'Can not be more than 30 characters' : '';
@@ -56,23 +64,23 @@ export class SignUpComponent {
 
     getPasswordErrorMessage() {
         if (this.form.controls['password'].hasError('required')) {
-            return 'Enter a value';
+            return this.validationErrorMessage.required;
         }
 
         if (this.form.controls['password'].hasError('minlength')) {
-            return 'Can not be less than 2 symbols';
+            return 'Can not be less than 6 symbols';
         }
 
         if (this.form.controls['password'].hasError('pattern')) {
-            return 'Should be at least one small and one capital letter';
+            return this.validationErrorMessage.pattern;
         }
 
-        return this.form.controls['password'].hasError('maxlength') ? 'Can not be more than 25 symbols' : '';
+        return this.form.controls['password'].hasError('maxlength') ? this.validationErrorMessage.maxlength : '';
     }
 
     getConfirmPasswordErrorMessage() {
         if (this.form.controls['confirmPassword'].hasError('required')) {
-            return 'Enter a value';
+            return this.validationErrorMessage.required;
         }
 
         return this.confirmPassword !== this.password ? 'The password does not match' : '';
@@ -80,14 +88,14 @@ export class SignUpComponent {
 
     getNameErrorMessage(field: string) {
         if (this.form.controls[field].hasError('required')) {
-            return 'Enter a value';
+            return this.validationErrorMessage.required;
         }
 
         if (this.form.controls[field].hasError('minlength')) {
-            return 'Can not be less than 6 symbols';
+            return this.validationErrorMessage.minlength;
         }
 
-        return this.form.controls[field].hasError('maxlength') ? 'Can not be more than 25 symbols' : '';
+        return this.form.controls[field].hasError('maxlength') ? this.validationErrorMessage.maxlength : '';
     }
 
     validation() {

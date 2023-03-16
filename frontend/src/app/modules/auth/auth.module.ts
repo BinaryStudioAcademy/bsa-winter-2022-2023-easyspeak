@@ -8,9 +8,10 @@ import { MatSelectModule } from '@angular/material/select';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { AuthRoutingModule } from './auth-routing.module';
+import { AuthPageComponent } from './auth-page/auth-page.component';
 
 @NgModule({
-    declarations: [SignUpComponent, SignInComponent],
+    declarations: [SignUpComponent, SignInComponent, AuthPageComponent],
     imports: [
         CommonModule,
         AuthRoutingModule,
