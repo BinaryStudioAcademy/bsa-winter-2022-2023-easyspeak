@@ -24,7 +24,7 @@ namespace EasySpeak.Core.WebAPI.Controllers
 
         [HttpGet("week")]
 
-        public async Task<ActionResult<ICollection<LessonWebDto>>> GetDayCardAsync([FromQuery] RequestDayCardDto requestDto)
+        public async Task<ActionResult<ICollection<DayCardDto>>> GetDayCardAsync([FromQuery] RequestDayCardDto requestDto)
         {
             var lessons = await _lessonsService.GetDayCardsOfWeekAsync(requestDto);
             return Ok(lessons);

@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Bogus.DataSets;
 using EasySpeak.Core.BLL.Interfaces;
 using EasySpeak.Core.Common.DTO.Lesson;
 using EasySpeak.Core.DAL.Context;
@@ -52,7 +51,7 @@ public class LessonsService : BaseService, ILessonsService
         return mappedLessons;
     }
 
-    public async Task<ICollection<DayCardDto>> GetDayCardsOfWeekAsync(RequestDayCardDto requestDto)
+    public async Task<ICollection<DayCardDto>?> GetDayCardsOfWeekAsync(RequestDayCardDto requestDto)
     {
         var lessonsFromContext = await _context.Lessons.ToListAsync();
         var listOfWeeksDayCards = new List<DayCardDto>();
@@ -64,12 +63,22 @@ public class LessonsService : BaseService, ILessonsService
             listOfWeeksDayCards.Add(
                 new DayCardDto()
                 {
-                    Date = date,
+                    Date = date.Date,
                     DayOfWeek = date.DayOfWeek,
                     MeetingsAmount = meetingAmount
                 });
         }
 
-        return listOfWeeksDayCards;
+        bool totalAmount = false;
+        foreach (var item in listOfWeeksDayCards)
+        {
+            if (item.MeetingsAmount > 0)
+            {
+                totalAmount = true;
+                continue;
+            }
+        }
+
+        return totalAmount ? listOfWeeksDayCards : null;
     }
 }
