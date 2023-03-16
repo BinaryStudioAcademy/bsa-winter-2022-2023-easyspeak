@@ -9,9 +9,7 @@ namespace EasySpeak.Core.BLL.Services;
 
 public class LessonsService : BaseService, ILessonsService
 {
-    public LessonsService(EasySpeakCoreContext context, IMapper mapper) : base(context, mapper)
-    {
-    }
+    public LessonsService(EasySpeakCoreContext context, IMapper mapper) : base(context, mapper) { }
 
     public async Task<ICollection<LessonDto>> GetAllLessonsAsync(RequestWithFiltersDto requestWithFiltersDto)
     {
@@ -59,7 +57,6 @@ public class LessonsService : BaseService, ILessonsService
             if (item.MeetingsAmount > 0)
             {
                 totalAmount = true;
-                continue;
             }
         }
 

@@ -16,12 +16,7 @@ namespace EasySpeak.Core.WebAPI.Controllers
         }
 
         [HttpPost("filters")]
-<<<<<<< HEAD
-
-        public async Task<ActionResult<ICollection<LessonWebDto>>> GetAllAsync([FromBody] RequestDto requestDto)
-=======
         public async Task<ActionResult<ICollection<LessonDto>>> GetAllAsync([FromBody] RequestWithFiltersDto requestWithFiltersDto)
->>>>>>> 23-endpoints-ещ-get-list-of-lessons
         {
             var lessons = await _lessonsService.GetAllLessonsAsync(requestWithFiltersDto);
 
@@ -29,7 +24,6 @@ namespace EasySpeak.Core.WebAPI.Controllers
         }
 
         [HttpGet("week")]
-
         public async Task<ActionResult<ICollection<DayCardDto>>> GetDayCardAsync([FromQuery] RequestDayCardDto requestDto)
         {
             var lessons = await _lessonsService.GetDayCardsOfWeekAsync(requestDto);
