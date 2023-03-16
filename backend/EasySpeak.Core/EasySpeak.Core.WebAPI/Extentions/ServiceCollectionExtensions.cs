@@ -2,7 +2,6 @@
 using EasySpeak.Core.WebAPI.Validators;
 using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection;
 
 namespace EasySpeak.Core.WebAPI.Extentions
 {

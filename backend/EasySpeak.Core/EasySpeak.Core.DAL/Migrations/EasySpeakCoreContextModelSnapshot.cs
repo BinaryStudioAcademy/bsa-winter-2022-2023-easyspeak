@@ -35,6 +35,108 @@ namespace EasySpeak.Core.DAL.Migrations
                     b.HasIndex("UsersId");
 
                     b.ToTable("ChatUser");
+
+                    b.HasData(
+                        new
+                        {
+                            ChatsId = 1L,
+                            UsersId = 1L
+                        },
+                        new
+                        {
+                            ChatsId = 2L,
+                            UsersId = 1L
+                        },
+                        new
+                        {
+                            ChatsId = 3L,
+                            UsersId = 1L
+                        },
+                        new
+                        {
+                            ChatsId = 4L,
+                            UsersId = 1L
+                        },
+                        new
+                        {
+                            ChatsId = 5L,
+                            UsersId = 2L
+                        },
+                        new
+                        {
+                            ChatsId = 6L,
+                            UsersId = 2L
+                        },
+                        new
+                        {
+                            ChatsId = 7L,
+                            UsersId = 2L
+                        },
+                        new
+                        {
+                            ChatsId = 8L,
+                            UsersId = 2L
+                        },
+                        new
+                        {
+                            ChatsId = 9L,
+                            UsersId = 3L
+                        },
+                        new
+                        {
+                            ChatsId = 10L,
+                            UsersId = 3L
+                        },
+                        new
+                        {
+                            ChatsId = 11L,
+                            UsersId = 3L
+                        },
+                        new
+                        {
+                            ChatsId = 12L,
+                            UsersId = 3L
+                        },
+                        new
+                        {
+                            ChatsId = 13L,
+                            UsersId = 4L
+                        },
+                        new
+                        {
+                            ChatsId = 14L,
+                            UsersId = 4L
+                        },
+                        new
+                        {
+                            ChatsId = 15L,
+                            UsersId = 4L
+                        },
+                        new
+                        {
+                            ChatsId = 16L,
+                            UsersId = 4L
+                        },
+                        new
+                        {
+                            ChatsId = 17L,
+                            UsersId = 5L
+                        },
+                        new
+                        {
+                            ChatsId = 18L,
+                            UsersId = 5L
+                        },
+                        new
+                        {
+                            ChatsId = 19L,
+                            UsersId = 5L
+                        },
+                        new
+                        {
+                            ChatsId = 20L,
+                            UsersId = 5L
+                        });
                 });
 
             modelBuilder.Entity("EasySpeak.Core.DAL.Entities.Call", b =>
@@ -59,6 +161,281 @@ namespace EasySpeak.Core.DAL.Migrations
                     b.HasIndex("ChatId");
 
                     b.ToTable("Calls");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            ChatId = 1L,
+                            FinishedAt = new DateTime(2023, 3, 15, 17, 50, 18, 440, DateTimeKind.Local).AddTicks(7257),
+                            StartedAt = new DateTime(2023, 3, 15, 15, 35, 2, 116, DateTimeKind.Local).AddTicks(1424)
+                        },
+                        new
+                        {
+                            Id = 2L,
+                            ChatId = 2L,
+                            FinishedAt = new DateTime(2023, 3, 15, 21, 59, 16, 981, DateTimeKind.Local).AddTicks(3798),
+                            StartedAt = new DateTime(2023, 3, 15, 21, 5, 40, 62, DateTimeKind.Local).AddTicks(4762)
+                        },
+                        new
+                        {
+                            Id = 3L,
+                            ChatId = 15L,
+                            FinishedAt = new DateTime(2023, 3, 16, 12, 7, 34, 605, DateTimeKind.Local).AddTicks(12),
+                            StartedAt = new DateTime(2023, 3, 16, 9, 14, 33, 478, DateTimeKind.Local).AddTicks(3128)
+                        },
+                        new
+                        {
+                            Id = 4L,
+                            ChatId = 19L,
+                            FinishedAt = new DateTime(2023, 3, 16, 4, 14, 23, 844, DateTimeKind.Local).AddTicks(7695),
+                            StartedAt = new DateTime(2023, 3, 16, 2, 13, 25, 547, DateTimeKind.Local).AddTicks(4025)
+                        },
+                        new
+                        {
+                            Id = 5L,
+                            ChatId = 9L,
+                            FinishedAt = new DateTime(2023, 3, 16, 13, 23, 55, 664, DateTimeKind.Local).AddTicks(491),
+                            StartedAt = new DateTime(2023, 3, 16, 12, 48, 45, 988, DateTimeKind.Local).AddTicks(2501)
+                        },
+                        new
+                        {
+                            Id = 6L,
+                            ChatId = 1L,
+                            FinishedAt = new DateTime(2023, 3, 16, 11, 48, 19, 340, DateTimeKind.Local).AddTicks(4029),
+                            StartedAt = new DateTime(2023, 3, 16, 10, 54, 4, 17, DateTimeKind.Local).AddTicks(8100)
+                        },
+                        new
+                        {
+                            Id = 7L,
+                            ChatId = 18L,
+                            FinishedAt = new DateTime(2023, 3, 16, 0, 57, 0, 716, DateTimeKind.Local).AddTicks(1754),
+                            StartedAt = new DateTime(2023, 3, 15, 22, 4, 33, 82, DateTimeKind.Local).AddTicks(3047)
+                        },
+                        new
+                        {
+                            Id = 8L,
+                            ChatId = 13L,
+                            FinishedAt = new DateTime(2023, 3, 16, 7, 23, 6, 947, DateTimeKind.Local).AddTicks(3368),
+                            StartedAt = new DateTime(2023, 3, 16, 6, 58, 52, 124, DateTimeKind.Local).AddTicks(815)
+                        },
+                        new
+                        {
+                            Id = 9L,
+                            ChatId = 17L,
+                            StartedAt = new DateTime(2023, 3, 16, 6, 45, 14, 249, DateTimeKind.Local).AddTicks(9416)
+                        },
+                        new
+                        {
+                            Id = 10L,
+                            ChatId = 14L,
+                            StartedAt = new DateTime(2023, 3, 16, 6, 51, 45, 138, DateTimeKind.Local).AddTicks(7097)
+                        },
+                        new
+                        {
+                            Id = 11L,
+                            ChatId = 18L,
+                            FinishedAt = new DateTime(2023, 3, 16, 11, 30, 30, 22, DateTimeKind.Local).AddTicks(7806),
+                            StartedAt = new DateTime(2023, 3, 16, 10, 1, 32, 545, DateTimeKind.Local).AddTicks(1859)
+                        },
+                        new
+                        {
+                            Id = 12L,
+                            ChatId = 1L,
+                            FinishedAt = new DateTime(2023, 3, 16, 11, 53, 32, 440, DateTimeKind.Local).AddTicks(1471),
+                            StartedAt = new DateTime(2023, 3, 16, 10, 5, 19, 858, DateTimeKind.Local).AddTicks(6181)
+                        },
+                        new
+                        {
+                            Id = 13L,
+                            ChatId = 18L,
+                            FinishedAt = new DateTime(2023, 3, 16, 13, 3, 16, 449, DateTimeKind.Local).AddTicks(1496),
+                            StartedAt = new DateTime(2023, 3, 16, 11, 25, 31, 957, DateTimeKind.Local).AddTicks(8874)
+                        },
+                        new
+                        {
+                            Id = 14L,
+                            ChatId = 14L,
+                            FinishedAt = new DateTime(2023, 3, 15, 18, 40, 25, 726, DateTimeKind.Local).AddTicks(3998),
+                            StartedAt = new DateTime(2023, 3, 15, 17, 5, 53, 164, DateTimeKind.Local).AddTicks(9355)
+                        },
+                        new
+                        {
+                            Id = 15L,
+                            ChatId = 3L,
+                            StartedAt = new DateTime(2023, 3, 16, 12, 43, 35, 86, DateTimeKind.Local).AddTicks(3816)
+                        },
+                        new
+                        {
+                            Id = 16L,
+                            ChatId = 2L,
+                            FinishedAt = new DateTime(2023, 3, 15, 21, 30, 57, 52, DateTimeKind.Local).AddTicks(7198),
+                            StartedAt = new DateTime(2023, 3, 15, 20, 0, 25, 795, DateTimeKind.Local).AddTicks(7655)
+                        },
+                        new
+                        {
+                            Id = 17L,
+                            ChatId = 18L,
+                            FinishedAt = new DateTime(2023, 3, 16, 14, 8, 8, 739, DateTimeKind.Local).AddTicks(1317),
+                            StartedAt = new DateTime(2023, 3, 16, 12, 25, 13, 124, DateTimeKind.Local).AddTicks(6273)
+                        },
+                        new
+                        {
+                            Id = 18L,
+                            ChatId = 11L,
+                            FinishedAt = new DateTime(2023, 3, 16, 3, 51, 1, 702, DateTimeKind.Local).AddTicks(1217),
+                            StartedAt = new DateTime(2023, 3, 16, 1, 29, 38, 19, DateTimeKind.Local).AddTicks(6384)
+                        },
+                        new
+                        {
+                            Id = 19L,
+                            ChatId = 16L,
+                            StartedAt = new DateTime(2023, 3, 16, 11, 2, 36, 704, DateTimeKind.Local).AddTicks(4771)
+                        },
+                        new
+                        {
+                            Id = 20L,
+                            ChatId = 14L,
+                            FinishedAt = new DateTime(2023, 3, 16, 4, 9, 45, 217, DateTimeKind.Local).AddTicks(3388),
+                            StartedAt = new DateTime(2023, 3, 16, 3, 19, 55, 120, DateTimeKind.Local).AddTicks(8270)
+                        },
+                        new
+                        {
+                            Id = 21L,
+                            ChatId = 18L,
+                            FinishedAt = new DateTime(2023, 3, 16, 11, 53, 58, 67, DateTimeKind.Local).AddTicks(4835),
+                            StartedAt = new DateTime(2023, 3, 16, 9, 8, 45, 821, DateTimeKind.Local).AddTicks(4295)
+                        },
+                        new
+                        {
+                            Id = 22L,
+                            ChatId = 14L,
+                            FinishedAt = new DateTime(2023, 3, 16, 2, 50, 49, 966, DateTimeKind.Local).AddTicks(9104),
+                            StartedAt = new DateTime(2023, 3, 16, 0, 53, 15, 724, DateTimeKind.Local).AddTicks(2554)
+                        },
+                        new
+                        {
+                            Id = 23L,
+                            ChatId = 16L,
+                            StartedAt = new DateTime(2023, 3, 16, 13, 23, 12, 754, DateTimeKind.Local).AddTicks(7223)
+                        },
+                        new
+                        {
+                            Id = 24L,
+                            ChatId = 17L,
+                            FinishedAt = new DateTime(2023, 3, 16, 10, 52, 22, 287, DateTimeKind.Local).AddTicks(1778),
+                            StartedAt = new DateTime(2023, 3, 16, 9, 59, 39, 133, DateTimeKind.Local).AddTicks(1757)
+                        },
+                        new
+                        {
+                            Id = 25L,
+                            ChatId = 8L,
+                            FinishedAt = new DateTime(2023, 3, 16, 8, 25, 4, 264, DateTimeKind.Local).AddTicks(8249),
+                            StartedAt = new DateTime(2023, 3, 16, 6, 8, 11, 795, DateTimeKind.Local).AddTicks(6212)
+                        },
+                        new
+                        {
+                            Id = 26L,
+                            ChatId = 17L,
+                            StartedAt = new DateTime(2023, 3, 15, 22, 54, 46, 868, DateTimeKind.Local).AddTicks(4657)
+                        },
+                        new
+                        {
+                            Id = 27L,
+                            ChatId = 12L,
+                            StartedAt = new DateTime(2023, 3, 16, 0, 26, 38, 971, DateTimeKind.Local).AddTicks(195)
+                        },
+                        new
+                        {
+                            Id = 28L,
+                            ChatId = 1L,
+                            FinishedAt = new DateTime(2023, 3, 16, 3, 32, 12, 525, DateTimeKind.Local).AddTicks(5733),
+                            StartedAt = new DateTime(2023, 3, 16, 1, 53, 57, 802, DateTimeKind.Local).AddTicks(7963)
+                        },
+                        new
+                        {
+                            Id = 29L,
+                            ChatId = 7L,
+                            FinishedAt = new DateTime(2023, 3, 15, 19, 57, 8, 966, DateTimeKind.Local).AddTicks(1882),
+                            StartedAt = new DateTime(2023, 3, 15, 17, 9, 4, 388, DateTimeKind.Local).AddTicks(2485)
+                        },
+                        new
+                        {
+                            Id = 30L,
+                            ChatId = 14L,
+                            FinishedAt = new DateTime(2023, 3, 15, 21, 43, 2, 279, DateTimeKind.Local).AddTicks(1314),
+                            StartedAt = new DateTime(2023, 3, 15, 20, 33, 53, 571, DateTimeKind.Local).AddTicks(8495)
+                        },
+                        new
+                        {
+                            Id = 31L,
+                            ChatId = 10L,
+                            FinishedAt = new DateTime(2023, 3, 16, 5, 57, 38, 243, DateTimeKind.Local).AddTicks(2778),
+                            StartedAt = new DateTime(2023, 3, 16, 5, 28, 19, 212, DateTimeKind.Local).AddTicks(214)
+                        },
+                        new
+                        {
+                            Id = 32L,
+                            ChatId = 19L,
+                            FinishedAt = new DateTime(2023, 3, 16, 1, 13, 29, 621, DateTimeKind.Local).AddTicks(2635),
+                            StartedAt = new DateTime(2023, 3, 15, 22, 35, 9, 726, DateTimeKind.Local).AddTicks(9159)
+                        },
+                        new
+                        {
+                            Id = 33L,
+                            ChatId = 1L,
+                            FinishedAt = new DateTime(2023, 3, 16, 4, 44, 14, 363, DateTimeKind.Local).AddTicks(4974),
+                            StartedAt = new DateTime(2023, 3, 16, 3, 45, 40, 503, DateTimeKind.Local).AddTicks(1194)
+                        },
+                        new
+                        {
+                            Id = 34L,
+                            ChatId = 19L,
+                            FinishedAt = new DateTime(2023, 3, 15, 17, 42, 53, 292, DateTimeKind.Local).AddTicks(796),
+                            StartedAt = new DateTime(2023, 3, 15, 15, 29, 52, 257, DateTimeKind.Local).AddTicks(3479)
+                        },
+                        new
+                        {
+                            Id = 35L,
+                            ChatId = 7L,
+                            FinishedAt = new DateTime(2023, 3, 15, 19, 27, 52, 602, DateTimeKind.Local).AddTicks(7448),
+                            StartedAt = new DateTime(2023, 3, 15, 18, 11, 58, 223, DateTimeKind.Local).AddTicks(6287)
+                        },
+                        new
+                        {
+                            Id = 36L,
+                            ChatId = 4L,
+                            FinishedAt = new DateTime(2023, 3, 16, 2, 39, 35, 773, DateTimeKind.Local).AddTicks(9354),
+                            StartedAt = new DateTime(2023, 3, 16, 0, 47, 5, 953, DateTimeKind.Local).AddTicks(9906)
+                        },
+                        new
+                        {
+                            Id = 37L,
+                            ChatId = 8L,
+                            FinishedAt = new DateTime(2023, 3, 16, 8, 15, 44, 476, DateTimeKind.Local).AddTicks(162),
+                            StartedAt = new DateTime(2023, 3, 16, 7, 15, 36, 346, DateTimeKind.Local).AddTicks(8978)
+                        },
+                        new
+                        {
+                            Id = 38L,
+                            ChatId = 11L,
+                            FinishedAt = new DateTime(2023, 3, 15, 20, 29, 10, 153, DateTimeKind.Local).AddTicks(8584),
+                            StartedAt = new DateTime(2023, 3, 15, 20, 25, 24, 462, DateTimeKind.Local).AddTicks(1233)
+                        },
+                        new
+                        {
+                            Id = 39L,
+                            ChatId = 5L,
+                            FinishedAt = new DateTime(2023, 3, 16, 11, 14, 20, 172, DateTimeKind.Local).AddTicks(7981),
+                            StartedAt = new DateTime(2023, 3, 16, 8, 33, 28, 912, DateTimeKind.Local).AddTicks(4238)
+                        },
+                        new
+                        {
+                            Id = 40L,
+                            ChatId = 10L,
+                            FinishedAt = new DateTime(2023, 3, 16, 8, 34, 27, 793, DateTimeKind.Local).AddTicks(8445),
+                            StartedAt = new DateTime(2023, 3, 16, 8, 30, 7, 383, DateTimeKind.Local).AddTicks(5238)
+                        });
                 });
 
             modelBuilder.Entity("EasySpeak.Core.DAL.Entities.Chat", b =>
@@ -76,6 +453,108 @@ namespace EasySpeak.Core.DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Chats");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            Name = "input Singapore Dollar functionalities"
+                        },
+                        new
+                        {
+                            Id = 2L,
+                            Name = "Versatile withdrawal"
+                        },
+                        new
+                        {
+                            Id = 3L,
+                            Name = "invoice actuating"
+                        },
+                        new
+                        {
+                            Id = 4L,
+                            Name = "Directives"
+                        },
+                        new
+                        {
+                            Id = 5L,
+                            Name = "neural-net"
+                        },
+                        new
+                        {
+                            Id = 6L,
+                            Name = "Platinum Thailand"
+                        },
+                        new
+                        {
+                            Id = 7L,
+                            Name = "Fresh"
+                        },
+                        new
+                        {
+                            Id = 8L,
+                            Name = "core"
+                        },
+                        new
+                        {
+                            Id = 9L,
+                            Name = "orange"
+                        },
+                        new
+                        {
+                            Id = 10L,
+                            Name = "Generic Concrete Shoes"
+                        },
+                        new
+                        {
+                            Id = 11L,
+                            Name = "channels Run Checking Account"
+                        },
+                        new
+                        {
+                            Id = 12L,
+                            Name = "Flat EXE"
+                        },
+                        new
+                        {
+                            Id = 13L,
+                            Name = "deposit"
+                        },
+                        new
+                        {
+                            Id = 14L,
+                            Name = "Shoes, Beauty & Games"
+                        },
+                        new
+                        {
+                            Id = 15L,
+                            Name = "Awesome"
+                        },
+                        new
+                        {
+                            Id = 16L,
+                            Name = "interactive parse GB"
+                        },
+                        new
+                        {
+                            Id = 17L,
+                            Name = "Health & Home"
+                        },
+                        new
+                        {
+                            Id = 18L,
+                            Name = "Intelligent Legacy"
+                        },
+                        new
+                        {
+                            Id = 19L,
+                            Name = "North Carolina indigo Sleek Wooden Car"
+                        },
+                        new
+                        {
+                            Id = 20L,
+                            Name = "strategy"
+                        });
                 });
 
             modelBuilder.Entity("EasySpeak.Core.DAL.Entities.Friend", b =>
@@ -102,6 +581,148 @@ namespace EasySpeak.Core.DAL.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Friends");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            FriendshipStatus = 2,
+                            RequesterId = 2L,
+                            UserId = 4L
+                        },
+                        new
+                        {
+                            Id = 2L,
+                            FriendshipStatus = 2,
+                            RequesterId = 1L,
+                            UserId = 2L
+                        },
+                        new
+                        {
+                            Id = 3L,
+                            FriendshipStatus = 2,
+                            RequesterId = 1L,
+                            UserId = 2L
+                        },
+                        new
+                        {
+                            Id = 4L,
+                            FriendshipStatus = 2,
+                            RequesterId = 4L,
+                            UserId = 3L
+                        },
+                        new
+                        {
+                            Id = 5L,
+                            FriendshipStatus = 2,
+                            RequesterId = 1L,
+                            UserId = 1L
+                        },
+                        new
+                        {
+                            Id = 6L,
+                            FriendshipStatus = 0,
+                            RequesterId = 3L,
+                            UserId = 2L
+                        },
+                        new
+                        {
+                            Id = 7L,
+                            FriendshipStatus = 1,
+                            RequesterId = 3L,
+                            UserId = 3L
+                        },
+                        new
+                        {
+                            Id = 8L,
+                            FriendshipStatus = 1,
+                            RequesterId = 2L,
+                            UserId = 4L
+                        },
+                        new
+                        {
+                            Id = 9L,
+                            FriendshipStatus = 0,
+                            RequesterId = 1L,
+                            UserId = 3L
+                        },
+                        new
+                        {
+                            Id = 10L,
+                            FriendshipStatus = 2,
+                            RequesterId = 3L,
+                            UserId = 1L
+                        },
+                        new
+                        {
+                            Id = 11L,
+                            FriendshipStatus = 1,
+                            RequesterId = 3L,
+                            UserId = 2L
+                        },
+                        new
+                        {
+                            Id = 12L,
+                            FriendshipStatus = 0,
+                            RequesterId = 3L,
+                            UserId = 1L
+                        },
+                        new
+                        {
+                            Id = 13L,
+                            FriendshipStatus = 1,
+                            RequesterId = 2L,
+                            UserId = 1L
+                        },
+                        new
+                        {
+                            Id = 14L,
+                            FriendshipStatus = 2,
+                            RequesterId = 4L,
+                            UserId = 4L
+                        },
+                        new
+                        {
+                            Id = 15L,
+                            FriendshipStatus = 2,
+                            RequesterId = 1L,
+                            UserId = 2L
+                        },
+                        new
+                        {
+                            Id = 16L,
+                            FriendshipStatus = 0,
+                            RequesterId = 4L,
+                            UserId = 3L
+                        },
+                        new
+                        {
+                            Id = 17L,
+                            FriendshipStatus = 0,
+                            RequesterId = 3L,
+                            UserId = 2L
+                        },
+                        new
+                        {
+                            Id = 18L,
+                            FriendshipStatus = 0,
+                            RequesterId = 2L,
+                            UserId = 2L
+                        },
+                        new
+                        {
+                            Id = 19L,
+                            FriendshipStatus = 2,
+                            RequesterId = 1L,
+                            UserId = 4L
+                        },
+                        new
+                        {
+                            Id = 20L,
+                            FriendshipStatus = 0,
+                            RequesterId = 1L,
+                            UserId = 2L
+                        });
                 });
 
             modelBuilder.Entity("EasySpeak.Core.DAL.Entities.Lesson", b =>
@@ -133,6 +754,96 @@ namespace EasySpeak.Core.DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Lessons");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            Description = "Singapore Dollar functionalities Field Branding impactful invoice actuating lavender",
+                            LimitOfUsers = 74,
+                            MediaPath = "https://picsum.photos/640/480/?image=202",
+                            Name = "Mobility",
+                            StartAt = new DateTime(2023, 3, 20, 23, 14, 14, 647, DateTimeKind.Local).AddTicks(3315)
+                        },
+                        new
+                        {
+                            Id = 2L,
+                            Description = "Thailand budgetary management SDD core Concrete complexity Generic Concrete Shoes navigating plum pixel",
+                            LimitOfUsers = 123,
+                            MediaPath = "https://picsum.photos/640/480/?image=134",
+                            Name = "Palau",
+                            StartAt = new DateTime(2023, 4, 1, 21, 21, 42, 900, DateTimeKind.Local).AddTicks(2627)
+                        },
+                        new
+                        {
+                            Id = 3L,
+                            Description = "deposit Advanced input",
+                            MediaPath = "https://picsum.photos/640/480/?image=545",
+                            Name = "EXE",
+                            StartAt = new DateTime(2023, 3, 21, 2, 27, 3, 303, DateTimeKind.Local).AddTicks(9823)
+                        },
+                        new
+                        {
+                            Id = 4L,
+                            Description = "South Carolina Accountability Plastic Health & Home",
+                            LimitOfUsers = 59,
+                            MediaPath = "https://picsum.photos/640/480/?image=376",
+                            Name = "Ville",
+                            StartAt = new DateTime(2023, 3, 18, 23, 9, 23, 145, DateTimeKind.Local).AddTicks(5810)
+                        },
+                        new
+                        {
+                            Id = 5L,
+                            Description = "deposit auxiliary Avon Intelligent strategy Forint copy",
+                            MediaPath = "https://picsum.photos/640/480/?image=659",
+                            Name = "input",
+                            StartAt = new DateTime(2023, 4, 4, 22, 52, 49, 128, DateTimeKind.Local).AddTicks(854)
+                        },
+                        new
+                        {
+                            Id = 6L,
+                            Description = "Awesome Malta indigo XSS Texas interface Israel orchestrate",
+                            LimitOfUsers = 139,
+                            MediaPath = "https://picsum.photos/640/480/?image=245",
+                            Name = "front-end",
+                            StartAt = new DateTime(2023, 3, 18, 3, 57, 42, 97, DateTimeKind.Local).AddTicks(3138)
+                        },
+                        new
+                        {
+                            Id = 7L,
+                            Description = "B2C Platinum system bus channels",
+                            LimitOfUsers = 133,
+                            MediaPath = "https://picsum.photos/640/480/?image=934",
+                            Name = "Peso Uruguayo",
+                            StartAt = new DateTime(2023, 4, 2, 14, 43, 16, 562, DateTimeKind.Local).AddTicks(5569)
+                        },
+                        new
+                        {
+                            Id = 8L,
+                            Description = "white driver Usability Total Multi-tiered",
+                            LimitOfUsers = 142,
+                            MediaPath = "https://picsum.photos/640/480/?image=266",
+                            Name = "Bedfordshire",
+                            StartAt = new DateTime(2023, 3, 17, 7, 45, 23, 474, DateTimeKind.Local).AddTicks(3265)
+                        },
+                        new
+                        {
+                            Id = 9L,
+                            Description = "Multi-tiered hacking Seychelles",
+                            LimitOfUsers = 56,
+                            MediaPath = "https://picsum.photos/640/480/?image=7",
+                            Name = "Music",
+                            StartAt = new DateTime(2023, 3, 26, 5, 41, 57, 38, DateTimeKind.Local).AddTicks(8190)
+                        },
+                        new
+                        {
+                            Id = 10L,
+                            Description = "application cross-platform Corners niches bleeding-edge Sleek Frozen Hat 1080p Cambridgeshire dot-com Gorgeous",
+                            LimitOfUsers = 29,
+                            MediaPath = "https://picsum.photos/640/480/?image=878",
+                            Name = "USB",
+                            StartAt = new DateTime(2023, 3, 31, 11, 8, 4, 20, DateTimeKind.Local).AddTicks(92)
+                        });
                 });
 
             modelBuilder.Entity("EasySpeak.Core.DAL.Entities.Message", b =>
@@ -161,6 +872,328 @@ namespace EasySpeak.Core.DAL.Migrations
                     b.HasIndex("ChatId");
 
                     b.ToTable("Messages");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            ChatId = 16L,
+                            CreatedAt = new DateTime(2023, 3, 13, 3, 22, 6, 262, DateTimeKind.Local).AddTicks(490),
+                            IsDeleted = false,
+                            Text = "input Singapore Dollar functionalities Field Branding impactful invoice actuating lavender purple neural-net Palau Operations SQL Fresh Incredible Customer-focused orange green Savings Account"
+                        },
+                        new
+                        {
+                            Id = 2L,
+                            ChatId = 2L,
+                            CreatedAt = new DateTime(2023, 3, 12, 22, 9, 21, 565, DateTimeKind.Local).AddTicks(3699),
+                            IsDeleted = false,
+                            Text = "Run Checking Account New Hampshire Team-oriented"
+                        },
+                        new
+                        {
+                            Id = 3L,
+                            ChatId = 9L,
+                            CreatedAt = new DateTime(2023, 3, 13, 1, 54, 34, 617, DateTimeKind.Local).AddTicks(9326),
+                            IsDeleted = false,
+                            Text = "Advanced input"
+                        },
+                        new
+                        {
+                            Id = 4L,
+                            ChatId = 1L,
+                            CreatedAt = new DateTime(2023, 3, 11, 2, 25, 38, 788, DateTimeKind.Local).AddTicks(3109),
+                            IsDeleted = false,
+                            Text = "Ville interactive"
+                        },
+                        new
+                        {
+                            Id = 5L,
+                            ChatId = 19L,
+                            CreatedAt = new DateTime(2023, 3, 16, 1, 9, 6, 106, DateTimeKind.Local).AddTicks(1205),
+                            IsDeleted = false,
+                            Text = "ability withdrawal even-keeled"
+                        },
+                        new
+                        {
+                            Id = 6L,
+                            ChatId = 9L,
+                            CreatedAt = new DateTime(2023, 3, 10, 15, 51, 56, 313, DateTimeKind.Local).AddTicks(7103),
+                            IsDeleted = false,
+                            Text = "quantify deposit auxiliary Avon Intelligent strategy Forint copy Credit Card Account Avon front-end Bahraini Dinar Mount Georgia optical Infrastructure"
+                        },
+                        new
+                        {
+                            Id = 7L,
+                            ChatId = 7L,
+                            CreatedAt = new DateTime(2023, 3, 13, 3, 1, 43, 722, DateTimeKind.Local).AddTicks(8747),
+                            IsDeleted = false,
+                            Text = "Islands Intelligent Steel Tuna SMTP indexing B2C Platinum system bus channels COM Money Market Account"
+                        },
+                        new
+                        {
+                            Id = 8L,
+                            ChatId = 17L,
+                            CreatedAt = new DateTime(2023, 3, 11, 20, 14, 26, 843, DateTimeKind.Local).AddTicks(3452),
+                            IsDeleted = false,
+                            Text = "Reduced Industrial, Computers & Outdoors Multi-tiered Ameliorated"
+                        },
+                        new
+                        {
+                            Id = 9L,
+                            ChatId = 16L,
+                            CreatedAt = new DateTime(2023, 3, 12, 0, 8, 55, 981, DateTimeKind.Local).AddTicks(40),
+                            IsDeleted = false,
+                            Text = "Concrete Multi-tiered hacking Seychelles Electronics"
+                        },
+                        new
+                        {
+                            Id = 10L,
+                            ChatId = 16L,
+                            CreatedAt = new DateTime(2023, 3, 11, 15, 10, 5, 376, DateTimeKind.Local).AddTicks(4775),
+                            IsDeleted = false,
+                            Text = "application cross-platform Corners niches bleeding-edge Sleek Frozen Hat 1080p Cambridgeshire dot-com Gorgeous online Handmade Frozen Chair Auto Loan Account Burgs Borders Estonia value-added Crossing"
+                        },
+                        new
+                        {
+                            Id = 11L,
+                            ChatId = 8L,
+                            CreatedAt = new DateTime(2023, 3, 12, 18, 14, 11, 304, DateTimeKind.Local).AddTicks(1388),
+                            IsDeleted = false,
+                            Text = "calculate"
+                        },
+                        new
+                        {
+                            Id = 12L,
+                            ChatId = 18L,
+                            CreatedAt = new DateTime(2023, 3, 11, 13, 53, 20, 700, DateTimeKind.Local).AddTicks(723),
+                            IsDeleted = false,
+                            Text = "transmitter Egypt online Creative Credit Card Account Fantastic Soft Soap TCP Industrial & Toys brand client-server compress drive"
+                        },
+                        new
+                        {
+                            Id = 13L,
+                            ChatId = 2L,
+                            CreatedAt = new DateTime(2023, 3, 13, 4, 16, 48, 706, DateTimeKind.Local).AddTicks(6841),
+                            IsDeleted = false,
+                            Text = "backing up Licensed Granite Bike back up back-end e-enable Specialist Games alarm orange Savings Account interactive web-enabled Colorado Ergonomic Concrete Shoes"
+                        },
+                        new
+                        {
+                            Id = 14L,
+                            ChatId = 17L,
+                            CreatedAt = new DateTime(2023, 3, 13, 1, 16, 24, 46, DateTimeKind.Local).AddTicks(5110),
+                            IsDeleted = false,
+                            Text = "Awesome quantify Integration SDD reinvent Bedfordshire Generic Frozen Cheese Electronics & Sports open-source Licensed Concrete Sausages Practical Wooden Shirt"
+                        },
+                        new
+                        {
+                            Id = 15L,
+                            ChatId = 9L,
+                            CreatedAt = new DateTime(2023, 3, 12, 23, 59, 39, 524, DateTimeKind.Local).AddTicks(7228),
+                            IsDeleted = false,
+                            Text = "Intelligent Fresh Soap strategize e-business Rustic Frozen Gloves Awesome Wooden Table Avon functionalities program implement clicks-and-mortar Practical Frozen Chips Syrian Pound Paradigm Pennsylvania Markets Consultant"
+                        },
+                        new
+                        {
+                            Id = 16L,
+                            ChatId = 3L,
+                            CreatedAt = new DateTime(2023, 3, 12, 18, 49, 22, 735, DateTimeKind.Local).AddTicks(7810),
+                            IsDeleted = false,
+                            Text = "reboot Investor non-volatile Identity Graphic Interface Sports compressing facilitate AGP turquoise Grass-roots matrix relationships Rustic Rubber Shirt Soft enhance partnerships Estate green hierarchy"
+                        },
+                        new
+                        {
+                            Id = 17L,
+                            ChatId = 13L,
+                            CreatedAt = new DateTime(2023, 3, 11, 19, 11, 20, 145, DateTimeKind.Local).AddTicks(5841),
+                            IsDeleted = false,
+                            Text = "Rustic Investment Account Money Market Account EXE New Hampshire Generic Fresh Mouse CSS Armenian Dram AI Pine compressing International Rustic Wooden Cheese online Investment Account experiences Idaho application Human"
+                        },
+                        new
+                        {
+                            Id = 18L,
+                            ChatId = 6L,
+                            CreatedAt = new DateTime(2023, 3, 13, 18, 53, 28, 584, DateTimeKind.Local).AddTicks(6758),
+                            IsDeleted = true,
+                            Text = "workforce yellow generate web services Berkshire frame Uganda paradigm drive synthesize Coordinator reboot withdrawal asynchronous Borders Lead approach"
+                        },
+                        new
+                        {
+                            Id = 19L,
+                            ChatId = 16L,
+                            CreatedAt = new DateTime(2023, 3, 11, 16, 15, 29, 282, DateTimeKind.Local).AddTicks(754),
+                            IsDeleted = true,
+                            Text = "Books"
+                        },
+                        new
+                        {
+                            Id = 20L,
+                            ChatId = 7L,
+                            CreatedAt = new DateTime(2023, 3, 14, 7, 18, 22, 643, DateTimeKind.Local).AddTicks(5481),
+                            IsDeleted = false,
+                            Text = "magenta online tan Senior static Dynamic Multi-channelled database bleeding-edge COM actuating Mountain Re-engineered"
+                        },
+                        new
+                        {
+                            Id = 21L,
+                            ChatId = 19L,
+                            CreatedAt = new DateTime(2023, 3, 12, 22, 7, 18, 851, DateTimeKind.Local).AddTicks(9701),
+                            IsDeleted = false,
+                            Text = "exuding compressing Buckinghamshire Pines asymmetric Books, Electronics & Health calculating Road Handmade Concrete Keyboard viral Concrete data-warehouse Bedfordshire Generic Rubber Towels"
+                        },
+                        new
+                        {
+                            Id = 22L,
+                            ChatId = 2L,
+                            CreatedAt = new DateTime(2023, 3, 14, 18, 29, 8, 283, DateTimeKind.Local).AddTicks(8701),
+                            IsDeleted = false,
+                            Text = "South Carolina microchip multi-byte value-added Assimilated implement protocol Villages Beauty National Avon wireless Internal bleeding-edge invoice Buckinghamshire Savings Account Visionary Incredible Soft Chair Small"
+                        },
+                        new
+                        {
+                            Id = 23L,
+                            ChatId = 12L,
+                            CreatedAt = new DateTime(2023, 3, 15, 16, 40, 17, 36, DateTimeKind.Local).AddTicks(2161),
+                            IsDeleted = false,
+                            Text = "Rustic Home Loan Account systemic Movies & Baby seize USB Planner Center Future"
+                        },
+                        new
+                        {
+                            Id = 24L,
+                            ChatId = 2L,
+                            CreatedAt = new DateTime(2023, 3, 16, 7, 24, 56, 497, DateTimeKind.Local).AddTicks(6098),
+                            IsDeleted = false,
+                            Text = "Factors circuit grid-enabled Central interactive microchip primary Nepalese Rupee matrix Generic Credit Card Account Burg Health & Electronics Manager conglomeration Technician Inlet Wooden benchmark capacitor"
+                        },
+                        new
+                        {
+                            Id = 25L,
+                            ChatId = 5L,
+                            CreatedAt = new DateTime(2023, 3, 10, 18, 14, 52, 952, DateTimeKind.Local).AddTicks(3412),
+                            IsDeleted = false,
+                            Text = "connect envisioneer Burkina Faso multi-byte B2B Buckinghamshire USB Developer Avon sky blue yellow Grenada Borders Investment Account SMTP Checking Account Intelligent Soft Chips"
+                        },
+                        new
+                        {
+                            Id = 26L,
+                            ChatId = 12L,
+                            CreatedAt = new DateTime(2023, 3, 12, 3, 17, 16, 904, DateTimeKind.Local).AddTicks(5860),
+                            IsDeleted = true,
+                            Text = "portals B2C ADP motivating"
+                        },
+                        new
+                        {
+                            Id = 27L,
+                            ChatId = 7L,
+                            CreatedAt = new DateTime(2023, 3, 16, 12, 16, 11, 971, DateTimeKind.Local).AddTicks(9900),
+                            IsDeleted = false,
+                            Text = "Multi-channelled Credit Card Account Supervisor programming French Southern Territories feed Investment Account payment Strategist IB synergies Refined digital Avon website transmitting Re-contextualized multi-byte Colorado"
+                        },
+                        new
+                        {
+                            Id = 28L,
+                            ChatId = 12L,
+                            CreatedAt = new DateTime(2023, 3, 15, 7, 49, 18, 653, DateTimeKind.Local).AddTicks(8587),
+                            IsDeleted = true,
+                            Text = "deposit payment withdrawal calculate payment Generic Granite Bike wireless synthesizing South Carolina Mount Turnpike experiences deposit Refined Associate Garden & Industrial"
+                        },
+                        new
+                        {
+                            Id = 29L,
+                            ChatId = 12L,
+                            CreatedAt = new DateTime(2023, 3, 11, 23, 55, 6, 35, DateTimeKind.Local).AddTicks(4552),
+                            IsDeleted = false,
+                            Text = "open system concept"
+                        },
+                        new
+                        {
+                            Id = 30L,
+                            ChatId = 7L,
+                            CreatedAt = new DateTime(2023, 3, 15, 3, 44, 57, 82, DateTimeKind.Local).AddTicks(70),
+                            IsDeleted = false,
+                            Text = "real-time dedicated 4th generation yellow payment Reduced feed Somalia deposit Summit copying Credit Card Account"
+                        },
+                        new
+                        {
+                            Id = 31L,
+                            ChatId = 4L,
+                            CreatedAt = new DateTime(2023, 3, 14, 7, 3, 21, 246, DateTimeKind.Local).AddTicks(5022),
+                            IsDeleted = false,
+                            Text = "white Robust deposit virtual Oregon mobile Ford magnetic Forward seamless Sleek Rubber Hat Fantastic Metal Salad Awesome Steel Bacon Finland Regional Berkshire Generic Fresh Mouse upward-trending"
+                        },
+                        new
+                        {
+                            Id = 32L,
+                            ChatId = 9L,
+                            CreatedAt = new DateTime(2023, 3, 12, 4, 15, 25, 613, DateTimeKind.Local).AddTicks(6075),
+                            IsDeleted = false,
+                            Text = "Shoes infrastructures SMS Seychelles Rupee Saint Helena Pound functionalities Corporate Developer Architect Incredible Frozen Sausages Run monitor Engineer"
+                        },
+                        new
+                        {
+                            Id = 33L,
+                            ChatId = 7L,
+                            CreatedAt = new DateTime(2023, 3, 12, 9, 27, 39, 900, DateTimeKind.Local).AddTicks(2614),
+                            IsDeleted = true,
+                            Text = "Refined Creative payment payment magenta 1080p compress Solutions content-based e-business Front-line Gorgeous monitoring orchestrate connect Sleek encryption application De-engineered Jewelery"
+                        },
+                        new
+                        {
+                            Id = 34L,
+                            ChatId = 11L,
+                            CreatedAt = new DateTime(2023, 3, 13, 20, 27, 34, 559, DateTimeKind.Local).AddTicks(8283),
+                            IsDeleted = false,
+                            Text = "matrix Buckinghamshire Metrics"
+                        },
+                        new
+                        {
+                            Id = 35L,
+                            ChatId = 2L,
+                            CreatedAt = new DateTime(2023, 3, 13, 2, 19, 10, 701, DateTimeKind.Local).AddTicks(221),
+                            IsDeleted = false,
+                            Text = "1080p firewall Specialist Buckinghamshire alarm help-desk Cambridgeshire SAS Intelligent Fantastic Rubber Mouse SDD Ridge PCI online Balboa Beauty & Home"
+                        },
+                        new
+                        {
+                            Id = 36L,
+                            ChatId = 13L,
+                            CreatedAt = new DateTime(2023, 3, 14, 1, 18, 13, 4, DateTimeKind.Local).AddTicks(1047),
+                            IsDeleted = false,
+                            Text = "productivity"
+                        },
+                        new
+                        {
+                            Id = 37L,
+                            ChatId = 19L,
+                            CreatedAt = new DateTime(2023, 3, 10, 2, 1, 49, 430, DateTimeKind.Local).AddTicks(9553),
+                            IsDeleted = false,
+                            Text = "Borders Corporate CSS programming Rubber HDD"
+                        },
+                        new
+                        {
+                            Id = 38L,
+                            ChatId = 11L,
+                            CreatedAt = new DateTime(2023, 3, 12, 13, 59, 11, 466, DateTimeKind.Local).AddTicks(5958),
+                            IsDeleted = false,
+                            Text = "Automotive Som Division"
+                        },
+                        new
+                        {
+                            Id = 39L,
+                            ChatId = 7L,
+                            CreatedAt = new DateTime(2023, 3, 12, 0, 19, 32, 225, DateTimeKind.Local).AddTicks(5012),
+                            IsDeleted = false,
+                            Text = "Small Fresh Pizza demand-driven cohesive bleeding-edge"
+                        },
+                        new
+                        {
+                            Id = 40L,
+                            ChatId = 17L,
+                            CreatedAt = new DateTime(2023, 3, 14, 14, 16, 28, 923, DateTimeKind.Local).AddTicks(4232),
+                            IsDeleted = false,
+                            Text = "Cotton District USB quantify ivory Metal Unbranded Rubber Computer next-generation Brooks optical optimizing Money Market Account deposit Handcrafted benchmark Tunnel"
+                        });
                 });
 
             modelBuilder.Entity("EasySpeak.Core.DAL.Entities.Notification", b =>
@@ -189,6 +1222,328 @@ namespace EasySpeak.Core.DAL.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Notifications");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            IsRead = false,
+                            Text = "Facere possimus eligendi quisquam ullam iure praesentium numquam sapiente distinctio.",
+                            Type = 1,
+                            UserId = 3L
+                        },
+                        new
+                        {
+                            Id = 2L,
+                            IsRead = false,
+                            Text = "Voluptatibus ad et adipisci hic amet ratione corporis.",
+                            Type = 1,
+                            UserId = 4L
+                        },
+                        new
+                        {
+                            Id = 3L,
+                            IsRead = false,
+                            Text = "A provident rerum nemo dolores debitis dicta voluptatem.",
+                            Type = 0,
+                            UserId = 2L
+                        },
+                        new
+                        {
+                            Id = 4L,
+                            IsRead = false,
+                            Text = "Ipsam adipisci illo quidem.",
+                            Type = 0,
+                            UserId = 2L
+                        },
+                        new
+                        {
+                            Id = 5L,
+                            IsRead = false,
+                            Text = "Ea dolor animi quod laborum quia perspiciatis sunt tempora.",
+                            Type = 1,
+                            UserId = 2L
+                        },
+                        new
+                        {
+                            Id = 6L,
+                            IsRead = false,
+                            Text = "Est quasi incidunt perferendis.",
+                            Type = 1,
+                            UserId = 2L
+                        },
+                        new
+                        {
+                            Id = 7L,
+                            IsRead = false,
+                            Text = "Voluptatem beatae vitae sunt a ut sed.",
+                            Type = 1,
+                            UserId = 2L
+                        },
+                        new
+                        {
+                            Id = 8L,
+                            IsRead = false,
+                            Text = "Eos enim consequatur et praesentium ad ut beatae eius.",
+                            Type = 1,
+                            UserId = 2L
+                        },
+                        new
+                        {
+                            Id = 9L,
+                            IsRead = false,
+                            Text = "Error et velit autem ipsa atque consequuntur vitae sit.",
+                            Type = 1,
+                            UserId = 2L
+                        },
+                        new
+                        {
+                            Id = 10L,
+                            IsRead = false,
+                            Text = "Nisi omnis quia est facilis rem architecto laboriosam.",
+                            Type = 1,
+                            UserId = 3L
+                        },
+                        new
+                        {
+                            Id = 11L,
+                            IsRead = false,
+                            Text = "In occaecati perspiciatis.",
+                            Type = 1,
+                            UserId = 4L
+                        },
+                        new
+                        {
+                            Id = 12L,
+                            IsRead = true,
+                            Text = "Recusandae perspiciatis pariatur quod eum sint molestiae quis neque tempora.",
+                            Type = 1,
+                            UserId = 2L
+                        },
+                        new
+                        {
+                            Id = 13L,
+                            IsRead = false,
+                            Text = "Nobis nulla dignissimos voluptas nemo cumque tenetur quod et placeat.",
+                            Type = 0,
+                            UserId = 1L
+                        },
+                        new
+                        {
+                            Id = 14L,
+                            IsRead = false,
+                            Text = "Eos similique fuga enim.",
+                            Type = 0,
+                            UserId = 1L
+                        },
+                        new
+                        {
+                            Id = 15L,
+                            IsRead = false,
+                            Text = "Velit magnam placeat voluptatem itaque.",
+                            Type = 0,
+                            UserId = 3L
+                        },
+                        new
+                        {
+                            Id = 16L,
+                            IsRead = false,
+                            Text = "Ut atque dolore accusantium soluta cumque perferendis labore magni adipisci.",
+                            Type = 0,
+                            UserId = 4L
+                        },
+                        new
+                        {
+                            Id = 17L,
+                            IsRead = false,
+                            Text = "Ratione et quibusdam consequatur voluptatem velit expedita eos maxime.",
+                            Type = 1,
+                            UserId = 4L
+                        },
+                        new
+                        {
+                            Id = 18L,
+                            IsRead = false,
+                            Text = "Quia nobis iusto aspernatur nihil iure ut blanditiis veritatis.",
+                            Type = 1,
+                            UserId = 3L
+                        },
+                        new
+                        {
+                            Id = 19L,
+                            IsRead = false,
+                            Text = "Illum quod atque nulla voluptas quos beatae.",
+                            Type = 1,
+                            UserId = 3L
+                        },
+                        new
+                        {
+                            Id = 20L,
+                            IsRead = false,
+                            Text = "Ab placeat tenetur perferendis et omnis.",
+                            Type = 0,
+                            UserId = 1L
+                        },
+                        new
+                        {
+                            Id = 21L,
+                            IsRead = true,
+                            Text = "Deserunt sint enim ex sit culpa.",
+                            Type = 1,
+                            UserId = 1L
+                        },
+                        new
+                        {
+                            Id = 22L,
+                            IsRead = false,
+                            Text = "Necessitatibus doloremque omnis facilis unde exercitationem consectetur culpa porro.",
+                            Type = 1,
+                            UserId = 1L
+                        },
+                        new
+                        {
+                            Id = 23L,
+                            IsRead = false,
+                            Text = "Vel rem rerum eum harum.",
+                            Type = 0,
+                            UserId = 3L
+                        },
+                        new
+                        {
+                            Id = 24L,
+                            IsRead = false,
+                            Text = "Est officia accusamus doloremque perferendis ea.",
+                            Type = 1,
+                            UserId = 3L
+                        },
+                        new
+                        {
+                            Id = 25L,
+                            IsRead = false,
+                            Text = "Laudantium ut amet repellendus enim consequatur.",
+                            Type = 1,
+                            UserId = 3L
+                        },
+                        new
+                        {
+                            Id = 26L,
+                            IsRead = false,
+                            Text = "Sed expedita dolorem aperiam ipsa omnis.",
+                            Type = 0,
+                            UserId = 4L
+                        },
+                        new
+                        {
+                            Id = 27L,
+                            IsRead = false,
+                            Text = "Ipsa quia cupiditate iure necessitatibus asperiores corporis doloremque corporis.",
+                            Type = 1,
+                            UserId = 1L
+                        },
+                        new
+                        {
+                            Id = 28L,
+                            IsRead = false,
+                            Text = "Consectetur enim rerum consectetur magnam perspiciatis ut rem.",
+                            Type = 0,
+                            UserId = 2L
+                        },
+                        new
+                        {
+                            Id = 29L,
+                            IsRead = false,
+                            Text = "Aut modi corrupti corrupti.",
+                            Type = 1,
+                            UserId = 2L
+                        },
+                        new
+                        {
+                            Id = 30L,
+                            IsRead = true,
+                            Text = "Explicabo provident omnis culpa earum modi eos.",
+                            Type = 0,
+                            UserId = 1L
+                        },
+                        new
+                        {
+                            Id = 31L,
+                            IsRead = false,
+                            Text = "Deleniti labore veritatis dolorum.",
+                            Type = 1,
+                            UserId = 2L
+                        },
+                        new
+                        {
+                            Id = 32L,
+                            IsRead = false,
+                            Text = "Ut sit nulla.",
+                            Type = 0,
+                            UserId = 3L
+                        },
+                        new
+                        {
+                            Id = 33L,
+                            IsRead = false,
+                            Text = "Voluptas ut itaque nesciunt.",
+                            Type = 0,
+                            UserId = 1L
+                        },
+                        new
+                        {
+                            Id = 34L,
+                            IsRead = false,
+                            Text = "Molestias porro exercitationem omnis et eius.",
+                            Type = 1,
+                            UserId = 1L
+                        },
+                        new
+                        {
+                            Id = 35L,
+                            IsRead = false,
+                            Text = "Esse sit quia dolorem sequi.",
+                            Type = 0,
+                            UserId = 1L
+                        },
+                        new
+                        {
+                            Id = 36L,
+                            IsRead = false,
+                            Text = "Perspiciatis qui dignissimos.",
+                            Type = 0,
+                            UserId = 2L
+                        },
+                        new
+                        {
+                            Id = 37L,
+                            IsRead = true,
+                            Text = "Saepe facere eos eum perferendis nisi.",
+                            Type = 0,
+                            UserId = 4L
+                        },
+                        new
+                        {
+                            Id = 38L,
+                            IsRead = false,
+                            Text = "Repudiandae ut nobis voluptas rerum ullam.",
+                            Type = 1,
+                            UserId = 2L
+                        },
+                        new
+                        {
+                            Id = 39L,
+                            IsRead = false,
+                            Text = "Ea voluptatibus voluptas sint et et asperiores omnis recusandae saepe.",
+                            Type = 0,
+                            UserId = 1L
+                        },
+                        new
+                        {
+                            Id = 40L,
+                            IsRead = false,
+                            Text = "Non consequatur voluptatem in aut quia quo quo.",
+                            Type = 0,
+                            UserId = 4L
+                        });
                 });
 
             modelBuilder.Entity("EasySpeak.Core.DAL.Entities.Question", b =>
@@ -211,114 +1566,127 @@ namespace EasySpeak.Core.DAL.Migrations
                     b.HasIndex("LessonId");
 
                     b.ToTable("Questions");
-                });
-
-            modelBuilder.Entity("EasySpeak.Core.DAL.Entities.Sample", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
-
-                    b.Property<string>("Body")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long?>("CreatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Samples");
 
                     b.HasData(
                         new
                         {
+                            Id = 1L,
+                            LessonId = 3L,
+                            Topic = "input Singapore Dollar functionalities Field Branding impactful"
+                        },
+                        new
+                        {
                             Id = 2L,
-                            Body = "Eligendi quisquam ullam iure praesentium numquam sapiente distinctio ad. Tempore voluptatibus ad et adipisci hic amet. Corporis soluta cupiditate soluta. Provident rerum nemo dolores debitis dicta voluptatem labore dolores adipisci. Adipisci illo quidem sit dolores. Ea dolor animi quod laborum quia perspiciatis sunt tempora.",
-                            CreatedAt = new DateTime(2020, 7, 1, 1, 14, 20, 556, DateTimeKind.Unspecified).AddTicks(7372),
-                            CreatedBy = 5L,
-                            Title = "hic"
+                            LessonId = 6L,
+                            Topic = "Engineer Intelligent Frozen Mouse Incredible Metal Hat Platinum Thailand"
                         },
                         new
                         {
                             Id = 3L,
-                            Body = "Incidunt perferendis omnis. Quas voluptatem beatae vitae sunt a ut sed repellendus. Accusamus eos enim consequatur et praesentium ad ut beatae eius. Omnis voluptas error et velit autem ipsa atque consequuntur vitae. Nostrum accusamus soluta nisi.",
-                            CreatedAt = new DateTime(2020, 11, 26, 1, 10, 54, 982, DateTimeKind.Unspecified).AddTicks(9175),
-                            CreatedBy = 4L,
-                            Title = "velit"
+                            LessonId = 2L,
+                            Topic = "Fresh Incredible"
                         },
                         new
                         {
                             Id = 4L,
-                            Body = "Architecto laboriosam culpa cumque dicta in. Perspiciatis amet autem rerum recusandae perspiciatis pariatur. Eum sint molestiae quis neque tempora ab distinctio. Nobis nulla dignissimos voluptas nemo cumque tenetur quod et placeat. Nihil sit eos similique fuga enim dolores ullam suscipit.",
-                            CreatedAt = new DateTime(2021, 1, 18, 12, 14, 38, 642, DateTimeKind.Unspecified).AddTicks(7703),
-                            CreatedBy = 1L,
-                            Title = "est"
+                            LessonId = 8L,
+                            Topic = "Concrete complexity"
                         },
                         new
                         {
                             Id = 5L,
-                            Body = "Sapiente et saepe ut atque dolore accusantium soluta cumque perferendis. Magni adipisci labore corrupti. Ratione et quibusdam consequatur voluptatem velit expedita eos maxime.",
-                            CreatedAt = new DateTime(2020, 2, 2, 15, 3, 56, 551, DateTimeKind.Unspecified).AddTicks(1864),
-                            CreatedBy = 5L,
-                            Title = "placeat"
+                            LessonId = 6L,
+                            Topic = "Savings Account"
                         },
                         new
                         {
                             Id = 6L,
-                            Body = "Iusto aspernatur nihil iure ut blanditiis veritatis quas. Et illum quod atque nulla voluptas quos beatae quaerat consequatur. Ab placeat tenetur perferendis et omnis. Doloremque corrupti deserunt sint enim ex sit.",
-                            CreatedAt = new DateTime(2021, 4, 7, 16, 50, 6, 239, DateTimeKind.Unspecified).AddTicks(5929),
-                            CreatedBy = 3L,
-                            Title = "facere"
+                            LessonId = 1L,
+                            Topic = "navigating plum pixel"
                         },
                         new
                         {
                             Id = 7L,
-                            Body = "Doloremque omnis facilis unde exercitationem consectetur culpa porro consequatur sed. Vel rem rerum eum harum. Ratione voluptate est officia accusamus doloremque perferendis ea. Unde iure laudantium ut amet repellendus enim consequatur dolor porro. Sed expedita dolorem aperiam ipsa omnis. Ut omnis ipsa quia cupiditate iure.",
-                            CreatedAt = new DateTime(2019, 7, 23, 7, 33, 40, 245, DateTimeKind.Unspecified).AddTicks(9313),
-                            CreatedBy = 5L,
-                            Title = "impedit"
+                            LessonId = 7L,
+                            Topic = "New Hampshire"
                         },
                         new
                         {
                             Id = 8L,
-                            Body = "Nesciunt placeat et consectetur enim. Consectetur magnam perspiciatis ut rem perspiciatis odit dolorem. Modi corrupti corrupti.",
-                            CreatedAt = new DateTime(2020, 1, 27, 9, 1, 30, 801, DateTimeKind.Unspecified).AddTicks(8159),
-                            CreatedBy = 3L,
-                            Title = "corporis"
+                            LessonId = 3L,
+                            Topic = "EXE olive"
                         },
                         new
                         {
                             Id = 9L,
-                            Body = "Omnis culpa earum modi eos beatae autem. Deleniti labore veritatis dolorum. Omnis perferendis ut sit nulla autem ut voluptatem voluptas ut.",
-                            CreatedAt = new DateTime(2021, 3, 25, 21, 11, 5, 602, DateTimeKind.Unspecified).AddTicks(6614),
-                            CreatedBy = 5L,
-                            Title = "perspiciatis"
+                            LessonId = 8L,
+                            Topic = "Advanced"
                         },
                         new
                         {
                             Id = 10L,
-                            Body = "Molestias porro exercitationem omnis et eius. Est consequatur esse sit quia dolorem sequi doloribus corporis. Perspiciatis qui dignissimos.",
-                            CreatedAt = new DateTime(2021, 4, 7, 22, 46, 32, 439, DateTimeKind.Unspecified).AddTicks(5958),
-                            CreatedBy = 3L,
-                            Title = "esse"
+                            LessonId = 8L,
+                            Topic = "generate Ergonomic Steel Towels Functionality South Carolina Accountability"
                         },
                         new
                         {
                             Id = 11L,
-                            Body = "Eos eum perferendis nisi alias et ducimus repudiandae ut. Voluptas rerum ullam omnis placeat non ea voluptatibus. Sint et et asperiores omnis recusandae saepe laborum enim. Non consequatur voluptatem in aut quia quo quo. Commodi aliquid aut quaerat adipisci. Modi ea maxime doloribus qui sint.",
-                            CreatedAt = new DateTime(2021, 3, 24, 14, 25, 37, 776, DateTimeKind.Unspecified).AddTicks(56),
-                            CreatedBy = 1L,
-                            Title = "in"
+                            LessonId = 7L,
+                            Topic = "ability"
+                        },
+                        new
+                        {
+                            Id = 12L,
+                            LessonId = 2L,
+                            Topic = "Gardens revolutionary Universal input"
+                        },
+                        new
+                        {
+                            Id = 13L,
+                            LessonId = 5L,
+                            Topic = "deposit auxiliary Avon Intelligent"
+                        },
+                        new
+                        {
+                            Id = 14L,
+                            LessonId = 2L,
+                            Topic = "SMTP enterprise"
+                        },
+                        new
+                        {
+                            Id = 15L,
+                            LessonId = 4L,
+                            Topic = "Credit Card Account Avon"
+                        },
+                        new
+                        {
+                            Id = 16L,
+                            LessonId = 6L,
+                            Topic = "Ridges Awesome Malta"
+                        },
+                        new
+                        {
+                            Id = 17L,
+                            LessonId = 5L,
+                            Topic = "optical Infrastructure"
+                        },
+                        new
+                        {
+                            Id = 18L,
+                            LessonId = 2L,
+                            Topic = "interface Israel orchestrate Balanced invoice Peso Uruguayo"
+                        },
+                        new
+                        {
+                            Id = 19L,
+                            LessonId = 4L,
+                            Topic = "B2C Platinum system"
+                        },
+                        new
+                        {
+                            Id = 20L,
+                            LessonId = 8L,
+                            Topic = "navigating fuchsia New York hybrid flexibility"
                         });
                 });
 
@@ -342,6 +1710,248 @@ namespace EasySpeak.Core.DAL.Migrations
                     b.HasIndex("QuestionId");
 
                     b.ToTable("Subquestions");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            QuestionId = 6L,
+                            Text = "Possimus eligendi quisquam ullam iure praesentium numquam sapiente distinctio.\nMolestias tempore voluptatibus ad et.\nHic amet ratione corporis.\nCupiditate soluta a provident rerum nemo dolores debitis.\nVoluptatem labore dolores."
+                        },
+                        new
+                        {
+                            Id = 2L,
+                            QuestionId = 10L,
+                            Text = "Adipisci illo quidem sit dolores."
+                        },
+                        new
+                        {
+                            Id = 3L,
+                            QuestionId = 13L,
+                            Text = "Dolor animi quod laborum quia perspiciatis.\nTempora rerum cupiditate velit est quasi incidunt.\nOmnis voluptas quas.\nBeatae vitae sunt a.\nSed repellendus sapiente accusamus eos."
+                        },
+                        new
+                        {
+                            Id = 4L,
+                            QuestionId = 7L,
+                            Text = "Et praesentium ad.\nBeatae eius sint omnis voluptas."
+                        },
+                        new
+                        {
+                            Id = 5L,
+                            QuestionId = 18L,
+                            Text = "Velit autem ipsa atque consequuntur vitae sit nostrum.\nSoluta nisi omnis quia est facilis rem architecto laboriosam.\nCumque dicta in occaecati perspiciatis amet autem."
+                        },
+                        new
+                        {
+                            Id = 6L,
+                            QuestionId = 11L,
+                            Text = "Perspiciatis pariatur quod eum sint molestiae quis neque tempora ab.\nAut nobis nulla dignissimos voluptas nemo cumque tenetur.\nEt placeat voluptas nihil sit eos similique fuga.\nDolores ullam suscipit velit magnam.\nVoluptatem itaque sapiente et saepe ut atque dolore."
+                        },
+                        new
+                        {
+                            Id = 7L,
+                            QuestionId = 6L,
+                            Text = "Cumque perferendis labore magni adipisci labore corrupti quo."
+                        },
+                        new
+                        {
+                            Id = 8L,
+                            QuestionId = 15L,
+                            Text = "Quibusdam consequatur voluptatem velit expedita eos maxime."
+                        },
+                        new
+                        {
+                            Id = 9L,
+                            QuestionId = 6L,
+                            Text = "Facere quia nobis iusto aspernatur nihil iure ut.\nVeritatis quas hic et illum quod.\nNulla voluptas quos beatae quaerat consequatur.\nAb placeat tenetur perferendis et omnis.\nDoloremque corrupti deserunt sint enim ex sit."
+                        },
+                        new
+                        {
+                            Id = 10L,
+                            QuestionId = 10L,
+                            Text = "Impedit aut necessitatibus doloremque.\nFacilis unde exercitationem consectetur culpa porro consequatur sed aliquam.\nRem rerum eum harum est ratione voluptate est officia."
+                        },
+                        new
+                        {
+                            Id = 11L,
+                            QuestionId = 1L,
+                            Text = "Perferendis ea maiores.\nIure laudantium ut amet repellendus enim consequatur.\nPorro voluptate sed expedita dolorem aperiam ipsa omnis dolores.\nOmnis ipsa quia cupiditate.\nNecessitatibus asperiores corporis doloremque corporis nesciunt."
+                        },
+                        new
+                        {
+                            Id = 12L,
+                            QuestionId = 7L,
+                            Text = "Consectetur enim rerum consectetur magnam perspiciatis ut rem.\nOdit dolorem aut modi corrupti corrupti qui.\nPerspiciatis explicabo provident omnis culpa earum modi eos.\nAutem consectetur deleniti."
+                        },
+                        new
+                        {
+                            Id = 13L,
+                            QuestionId = 13L,
+                            Text = "Dolorum ut omnis.\nUt sit nulla."
+                        },
+                        new
+                        {
+                            Id = 14L,
+                            QuestionId = 7L,
+                            Text = "Voluptatem voluptas ut itaque.\nEsse neque ea molestias.\nExercitationem omnis et eius pariatur est consequatur esse.\nQuia dolorem sequi doloribus corporis."
+                        },
+                        new
+                        {
+                            Id = 15L,
+                            QuestionId = 11L,
+                            Text = "Qui dignissimos voluptatum qui in saepe facere."
+                        },
+                        new
+                        {
+                            Id = 16L,
+                            QuestionId = 10L,
+                            Text = "Perferendis nisi alias et ducimus repudiandae.\nNobis voluptas rerum ullam omnis placeat non ea voluptatibus voluptas.\nEt et asperiores omnis recusandae saepe laborum.\nPorro non consequatur voluptatem in.\nQuia quo quo."
+                        },
+                        new
+                        {
+                            Id = 17L,
+                            QuestionId = 15L,
+                            Text = "Aliquid aut quaerat adipisci rem.\nEa maxime doloribus qui."
+                        },
+                        new
+                        {
+                            Id = 18L,
+                            QuestionId = 4L,
+                            Text = "Nesciunt quidem vel.\nQuibusdam iure labore velit.\nQui dolor velit."
+                        },
+                        new
+                        {
+                            Id = 19L,
+                            QuestionId = 4L,
+                            Text = "Ducimus perspiciatis nostrum ut repudiandae."
+                        },
+                        new
+                        {
+                            Id = 20L,
+                            QuestionId = 1L,
+                            Text = "Et velit harum ex."
+                        },
+                        new
+                        {
+                            Id = 21L,
+                            QuestionId = 3L,
+                            Text = "Omnis in voluptatem dolorum debitis velit eos.\nSoluta voluptatem officiis voluptate.\nMollitia at aliquam ut nihil veritatis.\nSequi omnis vel qui.\nDeleniti nihil non perspiciatis modi placeat dolor molestiae."
+                        },
+                        new
+                        {
+                            Id = 22L,
+                            QuestionId = 6L,
+                            Text = "Quo a eum corporis repellat dolor fugit voluptas.\nEsse itaque laudantium dolores quis ea excepturi.\nNostrum quo consequatur est omnis cumque reiciendis qui omnis non.\nPraesentium enim explicabo atque culpa repudiandae perferendis ullam.\nEa et aut."
+                        },
+                        new
+                        {
+                            Id = 23L,
+                            QuestionId = 12L,
+                            Text = "Quis aperiam nihil."
+                        },
+                        new
+                        {
+                            Id = 24L,
+                            QuestionId = 8L,
+                            Text = "Rerum sit impedit illum corrupti non et voluptates architecto quaerat."
+                        },
+                        new
+                        {
+                            Id = 25L,
+                            QuestionId = 5L,
+                            Text = "Modi magnam qui corporis magnam quia blanditiis rerum qui ad.\nDignissimos non tempora.\nVoluptas omnis rem nam ad vel pariatur nostrum.\nFacere blanditiis id enim vitae alias.\nIpsa eius dolores nulla est officia quo eaque quo dolore."
+                        },
+                        new
+                        {
+                            Id = 26L,
+                            QuestionId = 18L,
+                            Text = "Consequatur quia ut nostrum voluptatem."
+                        },
+                        new
+                        {
+                            Id = 27L,
+                            QuestionId = 2L,
+                            Text = "Voluptatem id deserunt in.\nQuis a aut unde quibusdam quisquam sit.\nCulpa suscipit voluptatem modi doloremque eum perferendis quod ab."
+                        },
+                        new
+                        {
+                            Id = 28L,
+                            QuestionId = 9L,
+                            Text = "Doloremque magnam quas molestiae ex corrupti neque laboriosam et voluptates.\nSuscipit ducimus facilis ut rem assumenda laborum neque labore.\nEt voluptas omnis doloremque aut ipsa voluptatem aut praesentium et."
+                        },
+                        new
+                        {
+                            Id = 29L,
+                            QuestionId = 10L,
+                            Text = "Rerum unde ad accusamus."
+                        },
+                        new
+                        {
+                            Id = 30L,
+                            QuestionId = 4L,
+                            Text = "Veritatis quidem eum eum saepe minus repellat."
+                        },
+                        new
+                        {
+                            Id = 31L,
+                            QuestionId = 3L,
+                            Text = "Veritatis voluptates dolore magni rerum velit sapiente.\nEt quod saepe aliquam dignissimos ut praesentium laboriosam deleniti placeat.\nAut aspernatur optio animi."
+                        },
+                        new
+                        {
+                            Id = 32L,
+                            QuestionId = 17L,
+                            Text = "Aspernatur animi est soluta iusto doloremque doloremque non laudantium velit.\nNumquam corporis numquam ut soluta qui aliquid magni eos commodi.\nId et ipsa velit maiores eum assumenda.\nConsequatur enim excepturi eos temporibus mollitia."
+                        },
+                        new
+                        {
+                            Id = 33L,
+                            QuestionId = 16L,
+                            Text = "Corrupti impedit eos qui voluptatibus.\nCorrupti consequuntur dolor provident velit consequuntur excepturi nisi."
+                        },
+                        new
+                        {
+                            Id = 34L,
+                            QuestionId = 18L,
+                            Text = "Fuga deleniti et nobis rerum voluptatem quae.\nOmnis voluptatibus fugiat distinctio.\nNeque molestiae autem quia corporis et quam minima."
+                        },
+                        new
+                        {
+                            Id = 35L,
+                            QuestionId = 14L,
+                            Text = "Eaque iusto repudiandae ut qui et rerum ut.\nVoluptas sint excepturi.\nQui tempore rerum laudantium nam.\nDelectus repellat et eum nihil perferendis odit dolorem."
+                        },
+                        new
+                        {
+                            Id = 36L,
+                            QuestionId = 2L,
+                            Text = "Deleniti ab ipsam maiores.\nEum magnam est temporibus mollitia sunt sed perferendis vel.\nRepellendus et sed facilis et distinctio in possimus et.\nRerum ipsum id corrupti eius nisi aut voluptas.\nPerspiciatis temporibus animi cupiditate laudantium ut quam repudiandae tempore."
+                        },
+                        new
+                        {
+                            Id = 37L,
+                            QuestionId = 13L,
+                            Text = "Pariatur maiores illo."
+                        },
+                        new
+                        {
+                            Id = 38L,
+                            QuestionId = 6L,
+                            Text = "Commodi maiores sit voluptatem omnis beatae nostrum cumque."
+                        },
+                        new
+                        {
+                            Id = 39L,
+                            QuestionId = 8L,
+                            Text = "Expedita facilis labore sunt.\nVoluptas minima aliquam ut doloremque."
+                        },
+                        new
+                        {
+                            Id = 40L,
+                            QuestionId = 2L,
+                            Text = "Expedita quod incidunt maxime."
+                        });
                 });
 
             modelBuilder.Entity("EasySpeak.Core.DAL.Entities.Tag", b =>
@@ -359,6 +1969,108 @@ namespace EasySpeak.Core.DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Tags");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            Name = "Mobility"
+                        },
+                        new
+                        {
+                            Id = 2L,
+                            Name = "synthesize"
+                        },
+                        new
+                        {
+                            Id = 3L,
+                            Name = "card"
+                        },
+                        new
+                        {
+                            Id = 4L,
+                            Name = "brand"
+                        },
+                        new
+                        {
+                            Id = 5L,
+                            Name = "Versatile"
+                        },
+                        new
+                        {
+                            Id = 6L,
+                            Name = "withdrawal"
+                        },
+                        new
+                        {
+                            Id = 7L,
+                            Name = "Oman"
+                        },
+                        new
+                        {
+                            Id = 8L,
+                            Name = "Engineer"
+                        },
+                        new
+                        {
+                            Id = 9L,
+                            Name = "Intelligent Frozen Mouse"
+                        },
+                        new
+                        {
+                            Id = 10L,
+                            Name = "Incredible Metal Hat"
+                        },
+                        new
+                        {
+                            Id = 11L,
+                            Name = "Platinum"
+                        },
+                        new
+                        {
+                            Id = 12L,
+                            Name = "Thailand"
+                        },
+                        new
+                        {
+                            Id = 13L,
+                            Name = "budgetary management"
+                        },
+                        new
+                        {
+                            Id = 14L,
+                            Name = "SDD"
+                        },
+                        new
+                        {
+                            Id = 15L,
+                            Name = "core"
+                        },
+                        new
+                        {
+                            Id = 16L,
+                            Name = "Concrete"
+                        },
+                        new
+                        {
+                            Id = 17L,
+                            Name = "complexity"
+                        },
+                        new
+                        {
+                            Id = 18L,
+                            Name = "Generic Concrete Shoes"
+                        },
+                        new
+                        {
+                            Id = 19L,
+                            Name = "navigating"
+                        },
+                        new
+                        {
+                            Id = 20L,
+                            Name = "plum"
+                        });
                 });
 
             modelBuilder.Entity("EasySpeak.Core.DAL.Entities.User", b =>
@@ -415,6 +2127,93 @@ namespace EasySpeak.Core.DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            Age = (short)30,
+                            Country = 0,
+                            Email = "Della.Rosenbaum@yahoo.com",
+                            FirstName = "Della",
+                            ImagePath = "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/343.jpg",
+                            IsBanned = false,
+                            IsSubscribed = true,
+                            Language = 0,
+                            LanguageLevel = 4,
+                            LastName = "Rosenbaum",
+                            Sex = 1,
+                            Status = 3,
+                            Timezone = 0
+                        },
+                        new
+                        {
+                            Id = 2L,
+                            Age = (short)57,
+                            Country = 0,
+                            Email = "Robert21@yahoo.com",
+                            FirstName = "Robert",
+                            ImagePath = "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/957.jpg",
+                            IsBanned = false,
+                            IsSubscribed = true,
+                            Language = 0,
+                            LanguageLevel = 2,
+                            LastName = "O'Hara",
+                            Sex = 2,
+                            Status = 0,
+                            Timezone = 0
+                        },
+                        new
+                        {
+                            Id = 3L,
+                            Age = (short)16,
+                            Country = 0,
+                            Email = "Rhonda74@gmail.com",
+                            FirstName = "Rhonda",
+                            ImagePath = "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1199.jpg",
+                            IsBanned = true,
+                            IsSubscribed = true,
+                            Language = 0,
+                            LanguageLevel = 4,
+                            LastName = "Kunze",
+                            Sex = 1,
+                            Status = 2,
+                            Timezone = 0
+                        },
+                        new
+                        {
+                            Id = 4L,
+                            Age = (short)57,
+                            Country = 0,
+                            Email = "Myrtle70@yahoo.com",
+                            FirstName = "Myrtle",
+                            ImagePath = "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/37.jpg",
+                            IsBanned = false,
+                            IsSubscribed = true,
+                            Language = 0,
+                            LanguageLevel = 1,
+                            LastName = "Glover",
+                            Sex = 1,
+                            Status = 1,
+                            Timezone = 0
+                        },
+                        new
+                        {
+                            Id = 5L,
+                            Age = (short)18,
+                            Country = 0,
+                            Email = "Ivan11@gmail.com",
+                            FirstName = "Ivan",
+                            ImagePath = "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/610.jpg",
+                            IsBanned = false,
+                            IsSubscribed = true,
+                            Language = 0,
+                            LanguageLevel = 0,
+                            LastName = "Heidenreich",
+                            Sex = 1,
+                            Status = 1,
+                            Timezone = 0
+                        });
                 });
 
             modelBuilder.Entity("LessonTag", b =>
@@ -430,6 +2229,108 @@ namespace EasySpeak.Core.DAL.Migrations
                     b.HasIndex("TagsId");
 
                     b.ToTable("LessonTag");
+
+                    b.HasData(
+                        new
+                        {
+                            LessonsId = 1L,
+                            TagsId = 1L
+                        },
+                        new
+                        {
+                            LessonsId = 1L,
+                            TagsId = 2L
+                        },
+                        new
+                        {
+                            LessonsId = 2L,
+                            TagsId = 3L
+                        },
+                        new
+                        {
+                            LessonsId = 2L,
+                            TagsId = 4L
+                        },
+                        new
+                        {
+                            LessonsId = 3L,
+                            TagsId = 5L
+                        },
+                        new
+                        {
+                            LessonsId = 3L,
+                            TagsId = 6L
+                        },
+                        new
+                        {
+                            LessonsId = 4L,
+                            TagsId = 7L
+                        },
+                        new
+                        {
+                            LessonsId = 4L,
+                            TagsId = 8L
+                        },
+                        new
+                        {
+                            LessonsId = 5L,
+                            TagsId = 9L
+                        },
+                        new
+                        {
+                            LessonsId = 5L,
+                            TagsId = 10L
+                        },
+                        new
+                        {
+                            LessonsId = 6L,
+                            TagsId = 11L
+                        },
+                        new
+                        {
+                            LessonsId = 6L,
+                            TagsId = 12L
+                        },
+                        new
+                        {
+                            LessonsId = 7L,
+                            TagsId = 13L
+                        },
+                        new
+                        {
+                            LessonsId = 7L,
+                            TagsId = 14L
+                        },
+                        new
+                        {
+                            LessonsId = 8L,
+                            TagsId = 15L
+                        },
+                        new
+                        {
+                            LessonsId = 8L,
+                            TagsId = 16L
+                        },
+                        new
+                        {
+                            LessonsId = 9L,
+                            TagsId = 17L
+                        },
+                        new
+                        {
+                            LessonsId = 9L,
+                            TagsId = 18L
+                        },
+                        new
+                        {
+                            LessonsId = 10L,
+                            TagsId = 19L
+                        },
+                        new
+                        {
+                            LessonsId = 10L,
+                            TagsId = 20L
+                        });
                 });
 
             modelBuilder.Entity("LessonUser", b =>
@@ -445,6 +2346,58 @@ namespace EasySpeak.Core.DAL.Migrations
                     b.HasIndex("SubscribersId");
 
                     b.ToTable("LessonUser");
+
+                    b.HasData(
+                        new
+                        {
+                            LessonsId = 1L,
+                            SubscribersId = 1L
+                        },
+                        new
+                        {
+                            LessonsId = 2L,
+                            SubscribersId = 1L
+                        },
+                        new
+                        {
+                            LessonsId = 3L,
+                            SubscribersId = 2L
+                        },
+                        new
+                        {
+                            LessonsId = 4L,
+                            SubscribersId = 2L
+                        },
+                        new
+                        {
+                            LessonsId = 5L,
+                            SubscribersId = 3L
+                        },
+                        new
+                        {
+                            LessonsId = 6L,
+                            SubscribersId = 3L
+                        },
+                        new
+                        {
+                            LessonsId = 7L,
+                            SubscribersId = 4L
+                        },
+                        new
+                        {
+                            LessonsId = 8L,
+                            SubscribersId = 4L
+                        },
+                        new
+                        {
+                            LessonsId = 9L,
+                            SubscribersId = 5L
+                        },
+                        new
+                        {
+                            LessonsId = 10L,
+                            SubscribersId = 5L
+                        });
                 });
 
             modelBuilder.Entity("TagUser", b =>
@@ -460,6 +2413,108 @@ namespace EasySpeak.Core.DAL.Migrations
                     b.HasIndex("UsersId");
 
                     b.ToTable("TagUser");
+
+                    b.HasData(
+                        new
+                        {
+                            TagsId = 1L,
+                            UsersId = 1L
+                        },
+                        new
+                        {
+                            TagsId = 2L,
+                            UsersId = 1L
+                        },
+                        new
+                        {
+                            TagsId = 3L,
+                            UsersId = 1L
+                        },
+                        new
+                        {
+                            TagsId = 4L,
+                            UsersId = 1L
+                        },
+                        new
+                        {
+                            TagsId = 5L,
+                            UsersId = 2L
+                        },
+                        new
+                        {
+                            TagsId = 6L,
+                            UsersId = 2L
+                        },
+                        new
+                        {
+                            TagsId = 7L,
+                            UsersId = 2L
+                        },
+                        new
+                        {
+                            TagsId = 8L,
+                            UsersId = 2L
+                        },
+                        new
+                        {
+                            TagsId = 9L,
+                            UsersId = 3L
+                        },
+                        new
+                        {
+                            TagsId = 10L,
+                            UsersId = 3L
+                        },
+                        new
+                        {
+                            TagsId = 11L,
+                            UsersId = 3L
+                        },
+                        new
+                        {
+                            TagsId = 12L,
+                            UsersId = 3L
+                        },
+                        new
+                        {
+                            TagsId = 13L,
+                            UsersId = 4L
+                        },
+                        new
+                        {
+                            TagsId = 14L,
+                            UsersId = 4L
+                        },
+                        new
+                        {
+                            TagsId = 15L,
+                            UsersId = 4L
+                        },
+                        new
+                        {
+                            TagsId = 16L,
+                            UsersId = 4L
+                        },
+                        new
+                        {
+                            TagsId = 17L,
+                            UsersId = 5L
+                        },
+                        new
+                        {
+                            TagsId = 18L,
+                            UsersId = 5L
+                        },
+                        new
+                        {
+                            TagsId = 19L,
+                            UsersId = 5L
+                        },
+                        new
+                        {
+                            TagsId = 20L,
+                            UsersId = 5L
+                        });
                 });
 
             modelBuilder.Entity("ChatUser", b =>

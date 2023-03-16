@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using EasySpeak.Core.DAL.Entities;
+﻿using EasySpeak.Core.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace EasySpeak.Core.DAL.Context

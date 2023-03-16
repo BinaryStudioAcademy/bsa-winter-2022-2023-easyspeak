@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System.Security.Cryptography;
 using Bogus;
 using EasySpeak.Core.DAL.Context.EntityConfigurations;
 using EasySpeak.Core.DAL.Entities;
@@ -8,8 +8,6 @@ namespace EasySpeak.Core.DAL.Context
 {
     public static class ModelBuilderExtensions
     {
-        private static readonly Random Rand = new Random();
-        
         public static void Configure(this ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(FriendConfig).Assembly);
@@ -24,7 +22,7 @@ namespace EasySpeak.Core.DAL.Context
             
             var friends = GenerateFriends()
                 .AddForeignKeys(users, 5);
-            
+
             var notifications = GenerateNotitficetions()
                 .AddForeingKeys(users, 5);
             
@@ -209,8 +207,8 @@ namespace EasySpeak.Core.DAL.Context
         {
             foreach (var friend in friends)
             {
-                friend.UserId = users[Rand.Next(count - 1)].Id;
-                friend.RequesterId = users[Rand.Next(count - 1)].Id;
+                friend.UserId = users[RandomNumberGenerator.GetInt32(count)].Id;
+                friend.RequesterId = users[RandomNumberGenerator.GetInt32(count)].Id;
             }
 
             return friends;
@@ -221,7 +219,7 @@ namespace EasySpeak.Core.DAL.Context
         {
             foreach (var notification in notifications)
             {
-                notification.UserId = users[Rand.Next(count - 1)].Id;
+                notification.UserId = users[RandomNumberGenerator.GetInt32(count)].Id;
             }
 
             return notifications;
@@ -231,7 +229,7 @@ namespace EasySpeak.Core.DAL.Context
         {
             foreach (var question in questions)
             {
-                question.LessonId = lessons[Rand.Next(count - 1)].Id;
+                question.LessonId = lessons[RandomNumberGenerator.GetInt32(count)].Id;
             }
 
             return questions;
@@ -242,7 +240,7 @@ namespace EasySpeak.Core.DAL.Context
         {
             foreach (var subquestion in subquestions)
             {
-                subquestion.QuestionId = questions[Rand.Next(count - 1)].Id;
+                subquestion.QuestionId = questions[RandomNumberGenerator.GetInt32(count)].Id;
             }
 
             return subquestions;
@@ -252,7 +250,7 @@ namespace EasySpeak.Core.DAL.Context
         {
             foreach (var call in calls)
             {
-                call.ChatId = chats[Rand.Next(count - 1)].Id;
+                call.ChatId = chats[RandomNumberGenerator.GetInt32(count)].Id;
             }
 
             return calls;
@@ -262,7 +260,7 @@ namespace EasySpeak.Core.DAL.Context
         {
             foreach (var message in messages)
             {
-                message.ChatId = chats[Rand.Next(count - 1)].Id;
+                message.ChatId = chats[RandomNumberGenerator.GetInt32(count)].Id;
             }
 
             return messages;
@@ -273,10 +271,10 @@ namespace EasySpeak.Core.DAL.Context
         where K : Entity<TK>
         where TK : struct
     {
-        public static IEnumerable<(TK, TK)> GetTablesJoin(IList<T> users, IList<K> chats, int DataPerEntity)
+        public static IEnumerable<(TK, TK)> GetTablesJoin(IList<T> users, IList<K> chats, int dataPerEntity)
         {
             int start = 0;
-            int end = DataPerEntity;
+            int end = dataPerEntity;
             
             foreach (var user in users)
             {
@@ -285,8 +283,8 @@ namespace EasySpeak.Core.DAL.Context
                     yield return (user.Id, chats[i].Id);
                 }
 
-                start += DataPerEntity;
-                end += DataPerEntity;
+                start += dataPerEntity;
+                end += dataPerEntity;
             }
         }
     }
