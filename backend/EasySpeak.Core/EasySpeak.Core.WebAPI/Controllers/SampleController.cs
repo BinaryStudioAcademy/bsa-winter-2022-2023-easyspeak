@@ -13,6 +13,7 @@ namespace EasySpeak.Core.WebAPI.Controllers
         {
             _sampleService = sampleService;
             _messageProducer = messageProducer;
+            _messageProducer.Init("notifier", "");
         }
 
         [HttpGet]
@@ -71,7 +72,6 @@ namespace EasySpeak.Core.WebAPI.Controllers
         [HttpPost("send-message")]
         public IActionResult SendMessage(string message)
         {
-            _messageProducer.Init("notifier", "");
             _messageProducer.SendMessage(message);
             return Ok();
         }

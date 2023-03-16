@@ -24,12 +24,11 @@ namespace EasySpeak.RabbitMQ.Services
         {
             this.queue = queue ?? string.Empty;
             this.exchange = exchange ?? string.Empty;
+            channel.QueueDeclare(queue, true, false, false);
         }
         public void SendMessage<T>(T message)
         {
-            channel.QueueDeclare(queue, true, false, false);
             var json = JsonConvert.SerializeObject(message);
-
             var body = Encoding.UTF8.GetBytes(json);
             channel.BasicPublish(exchange: exchange, routingKey: queue, body: body);
         }

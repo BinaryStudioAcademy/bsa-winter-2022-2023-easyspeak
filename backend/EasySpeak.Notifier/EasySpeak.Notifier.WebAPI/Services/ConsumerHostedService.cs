@@ -7,9 +7,12 @@ namespace EasySpeak.Notifier.WebAPI.Services
     public class ConsumerHostedService : BackgroundService
     {
         private readonly IMessageConsumer _consumer;
-        public ConsumerHostedService(IMessageConsumer consumer) 
+        private readonly ILogger<ConsumerHostedService> _logger;
+        public ConsumerHostedService(IMessageConsumer consumer, ILogger<ConsumerHostedService> logger) 
         { 
             _consumer = consumer;
+            _logger = logger;
+            _consumer.Init("notifier");
         }
 
         public override async Task StartAsync(CancellationToken cancellationToken)
@@ -26,7 +29,6 @@ namespace EasySpeak.Notifier.WebAPI.Services
         {
             try
                 {
-                    _consumer.Init("notifier");
                     _consumer.Recieve<string>((data) =>
                     {
                         Console.WriteLine(data);
@@ -34,7 +36,7 @@ namespace EasySpeak.Notifier.WebAPI.Services
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"{ex.Message}");
+                    _logger.LogError(ex, "Exception");
                 }          
             return Task.CompletedTask;
         }
