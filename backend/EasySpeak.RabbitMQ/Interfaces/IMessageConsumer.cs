@@ -8,6 +8,6 @@ namespace EasySpeak.RabbitMQ.Interfaces
 {
     public interface IMessageConsumer
     {
-        void Recieve<T>(string queue, Action<T?> onMessage);
+        void Recieve<T>(Action<T?> onMessage);
     }
 }

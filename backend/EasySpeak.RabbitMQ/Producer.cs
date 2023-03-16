@@ -7,25 +7,22 @@ namespace EasySpeak.RabbitMQ
 {
     public class Producer : IMessageProducer
     {
-        private readonly string _hostname;
-        public Producer(string hostname)
+        private readonly string _queue;
+        private readonly IModel channel = null!;
+        public Producer(string hostname, string queue)
         {
-            _hostname = hostname;
+            _queue = queue;
+            var factory = new ConnectionFactory { Uri = new Uri(hostname) };
+            var connection = factory.CreateConnection();
+            channel = connection.CreateModel();
+            channel.QueueDeclare(queue, true, false, false);
         }
-        public async Task SendMessageAsync<T>(string queue,T message)
+        public void SendMessage<T>(T message)
         {
-            await Task.Run(() =>
-            {
-                var factory = new ConnectionFactory { Uri = new Uri(_hostname) };
-                var connection = factory.CreateConnection();
-                using var channel = connection.CreateModel();
-                channel.QueueDeclare(queue, true, false, false);
+            var json = JsonConvert.SerializeObject(message);
 
-                var json = JsonConvert.SerializeObject(message);
-
-                var body = Encoding.UTF8.GetBytes(json);
-                channel.BasicPublish(exchange: "", routingKey: queue, body: body);
-            });
+            var body = Encoding.UTF8.GetBytes(json);
+            channel.BasicPublish(exchange: "", routingKey: _queue, body: body);
         }
     }
 }

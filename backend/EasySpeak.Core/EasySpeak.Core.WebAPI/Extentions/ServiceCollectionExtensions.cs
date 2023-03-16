@@ -24,7 +24,7 @@ namespace EasySpeak.Core.WebAPI.Extentions
                 .AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             services.AddTransient<ISampleService, SampleService>();
-            services.AddTransient<IMessageProducer>(_ => new Producer(configuration.GetValue<string>("Rabbit")));
+            services.AddSingleton<IMessageProducer>(_ => new Producer(configuration.GetValue<string>("Rabbit"), "notifier"));
         }
 
         public static void AddAutoMapper(this IServiceCollection services)

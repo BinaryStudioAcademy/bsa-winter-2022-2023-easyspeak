@@ -31,7 +31,7 @@ namespace EasySpeak.Notifier.WebAPI.Services
                 try
                 {
                     //var hubContext = (IHubContext) app.ApplicationServices.GetService<IHubContext>()!;
-                    _consumer.Recieve<string>("notifier", (data) =>
+                    _consumer.Recieve<string>((data) =>
                     {
                         Console.WriteLine(data);
                         //await hubContext.Clients.All.SendAsync("user", data);
