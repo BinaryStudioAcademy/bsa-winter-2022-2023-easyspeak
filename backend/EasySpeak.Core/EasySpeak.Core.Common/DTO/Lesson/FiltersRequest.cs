@@ -2,7 +2,7 @@
 
 namespace EasySpeak.Core.Common.DTO.Lesson;
 
-public class RequestWithFiltersDto
+public class FiltersRequest
 {
     [JsonProperty("languageLevels", Required = Required.Default)]
     public ICollection<LanguageLevelDto>? LanguageLevels { get; set; }

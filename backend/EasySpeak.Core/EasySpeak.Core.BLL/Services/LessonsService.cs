@@ -11,25 +11,30 @@ public class LessonsService : BaseService, ILessonsService
 {
     public LessonsService(EasySpeakCoreContext context, IMapper mapper) : base(context, mapper) { }
 
-    public async Task<ICollection<LessonDto>> GetAllLessonsAsync(RequestWithFiltersDto requestWithFiltersDto)
+    public async Task<ICollection<LessonDto>> GetAllLessonsAsync(FiltersRequest filtersRequest)
     {
         var lessonsFromContext = await _context.Lessons
             .Include(l => l.Tags)
             .Include(l => l.Questions).ThenInclude(t => t.Subquestions)
             .Include(l => l.Subscribers)
             .Include(l => l.User)
-            .ToListAsync();
+            .Where(m => m.StartAt > filtersRequest.Date)
+            .Where(m =>
+                (filtersRequest.LanguageLevels != null &&
+                 filtersRequest.LanguageLevels.Contains((LanguageLevelDto)m.LanguageLevel)
+                 || filtersRequest.LanguageLevels == null))
+            .Where(m => (filtersRequest.Tags != null &&
+                         filtersRequest.Tags.Select(t => t.Name).Intersect(m.Tags.Select(t => t.Name).Count() > 0))
+                        || filtersRequest.Tags == null);
 
-        var mappedLessons = _mapper.Map<List<Lesson>, List<LessonDto>>(lessonsFromContext);
+        await Task.Delay(1);
 
-        var lessons = mappedLessons
-            .Where(m => m.StartAt > requestWithFiltersDto.Date)
-            .Where(m => (requestWithFiltersDto.LanguageLevels != null && requestWithFiltersDto.LanguageLevels.Contains(m.LanguageLevel))
-                        || requestWithFiltersDto.LanguageLevels == null)
-            .Where(m => (requestWithFiltersDto.Tags != null && m.Tags != null && requestWithFiltersDto.Tags.Intersect(m.Tags).Any())
-                        || requestWithFiltersDto.Tags == null)
-            .ToList();
+        var res = lessonsFromContext
+            .Where(m => (filtersRequest.Tags != null &&
+                         filtersRequest.Tags.Select(t => t.Name).Intersect(m.Tags.Select(t => t.Name)).Any())
+                        || filtersRequest.Tags == null).ToList();
 
-        return lessons;
+
+        return _mapper.Map<List<Lesson>, List<LessonDto>>(res);
     }
 }
