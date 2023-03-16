@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using EasySpeak.Core.DAL.Entities.Enums;
+using EasySpeak.Core.Common.Enums;
+
 
 namespace EasySpeak.Core.DAL.Entities
 {
@@ -41,33 +42,4 @@ namespace EasySpeak.Core.DAL.Entities
         }
 
     }
-
-    public enum Country
-    {
-
-    }
-    public enum Language
-    {
-
-    }
-    public enum Timezone
-    {
-
-    }
-
-    public enum Sex
-    {
-        Male,
-        Female,
-        NonBinary
-    }
-
-    public enum UserStatus
-    {
-        Online,
-        Offline,
-        Missed,
-        NotDisturb
-    }
-    
 }

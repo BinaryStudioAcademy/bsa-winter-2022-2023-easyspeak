@@ -3,7 +3,6 @@ using EasySpeak.Core.BLL.Interfaces;
 using EasySpeak.Core.Common.DTO.Lesson;
 using EasySpeak.Core.DAL.Context;
 using EasySpeak.Core.DAL.Entities;
-using EasySpeak.Core.DAL.Entities.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace EasySpeak.Core.BLL.Services;

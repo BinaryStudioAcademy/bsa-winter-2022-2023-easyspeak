@@ -1,4 +1,4 @@
-﻿namespace EasySpeak.Core.DAL.Entities.Enums;
+﻿namespace EasySpeak.Core.Common.Enums;
 
 public enum LanguageLevel
 {

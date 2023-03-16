@@ -1,4 +1,4 @@
-﻿using EasySpeak.Core.DAL.Entities.Enums;
+﻿using EasySpeak.Core.Common.Enums;
 using Newtonsoft.Json;
 
 namespace EasySpeak.Core.Common.DTO.Lesson;
