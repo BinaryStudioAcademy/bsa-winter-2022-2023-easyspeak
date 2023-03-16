@@ -3,7 +3,7 @@ import { HttpService } from '@core/services/http.service';
 import { INewLesson } from '@shared/models/lesson/INewLesson';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root',
 })
 export class LessonsService {
     public routePrefix = '/api/lessons';

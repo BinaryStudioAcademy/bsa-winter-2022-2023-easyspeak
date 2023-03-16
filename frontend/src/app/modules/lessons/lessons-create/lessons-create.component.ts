@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { INewLesson } from '@shared/models/lesson/INewLesson';
 
@@ -18,27 +18,50 @@ export class LessonsCreateComponent {
         mediaPath: '',
         startsAt: new Date(),
         questions: [],
-        tags: []
+        tags: [],
     };
 
     tagsControl = new FormControl();
-    tagsList: string[] = ['Architecture', 'Arts', 'Cars', 'Celebrities', 'Cooking', 'Dancing', 'Ecology', 'Design', 'History', 'Fashion', 'Medicine', 'Technologies', 'Pets', 'Philosophy', 'Photography', 'Politics'];
+
+    tagsList: string[] = [
+        'Architecture',
+        'Arts',
+        'Cars',
+        'Celebrities',
+        'Cooking',
+        'Dancing',
+        'Ecology',
+        'Design',
+        'History',
+        'Fashion',
+        'Medicine',
+        'Technologies',
+        'Pets',
+        'Philosophy',
+        'Photography',
+        'Politics',
+    ];
 
     questions = '';
+
     tags: string[] = [];
 
     constructor(
         private dialogRef: MatDialogRef<LessonsCreateComponent>,
         private lessonService: LessonsService,
-        private notificationService: NotificationService
+        private notificationService: NotificationService,
     ) { }
 
     createLesson() {
-        this.lessonToCreate.questions = this.questions.split('\n').filter(function(entry) { return entry.trim() != ''; });
+        this.lessonToCreate.questions =
+            this.questions
+                .split('\n')
+                .filter((entry) => entry.trim() !== '');
 
         this.lessonToCreate.tags = this.tags;
 
-        if (this.lessonToCreate.name != '' && this.lessonToCreate.description != '' && this.lessonToCreate.questions.length > 0 && this.lessonToCreate.tags.length > 0) {
+        if (this.lessonToCreate.name !== '' && this.lessonToCreate.description !== '' &&
+            this.lessonToCreate.questions.length > 0 && this.lessonToCreate.tags.length > 0) {
             this.lessonService.createLesson(this.lessonToCreate);
             this.notificationService.showSuccess('Lesson was successfully created!', 'Success!');
             this.dialogRef.close();
