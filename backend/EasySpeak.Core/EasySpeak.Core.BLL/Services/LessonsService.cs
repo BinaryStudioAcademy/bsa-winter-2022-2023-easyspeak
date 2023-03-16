@@ -13,7 +13,8 @@ public class LessonsService : BaseService, ILessonsService
 
     public async Task<ICollection<LessonDto>> GetAllLessonsAsync(FiltersRequest filtersRequest)
     {
-        var lessonsFromContext = await _context.Lessons
+
+        var lessonsFromContext = _context.Lessons
             .Include(l => l.Tags)
             .Include(l => l.Questions).ThenInclude(t => t.Subquestions)
             .Include(l => l.Subscribers)
@@ -23,10 +24,13 @@ public class LessonsService : BaseService, ILessonsService
                 (filtersRequest.LanguageLevels != null &&
                  filtersRequest.LanguageLevels.Contains((LanguageLevelDto)m.LanguageLevel)
                  || filtersRequest.LanguageLevels == null))
-            .Where(m => (filtersRequest.Tags != null &&
-                         filtersRequest.Tags.Select(t => t.Name).Intersect(m.Tags.Select(t => t.Name).Count() > 0))
-                        || filtersRequest.Tags == null);
-
+            .Where(m =>
+                ((filtersRequest.Tags != null && m.Tags.Select(t=>t.Name).Intersect<string>(filtersRequest.Tags.Select(t=>t.Name)).Count()>0))
+                || filtersRequest.Tags == null)
+            //.Where(m => (filtersRequest.Tags != null &&
+            //             filtersRequest.Tags.Select(t => t.Name).Intersect(m.Tags.Select(t => t.Name).Count() > 0))
+            //            || filtersRequest.Tags == null);
+            .ToList();
         await Task.Delay(1);
 
         var res = lessonsFromContext
