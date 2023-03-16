@@ -11,7 +11,7 @@ public class LessonDto
     public string? MediaPath { get; set; }
     public DateTime StartAt { get; set; }
     public LanguageLevel LanguageLevel { get; set; }
-    public int SubscrubersCount { get; set; }
+    public int SubscribersCount { get; set; }
 
     public ICollection<TagForLessonDto>? Tags { get; set; }
     public ICollection<QuestionForLessonDto>? Questions { get; set; }

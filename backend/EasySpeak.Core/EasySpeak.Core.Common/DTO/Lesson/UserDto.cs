@@ -1,5 +1,5 @@
 ﻿
-using EasySpeak.Core.DAL.Entities;
+using EasySpeak.Core.Common.Enums;
 
 namespace EasySpeak.Core.Common.DTO.Lesson;
 
