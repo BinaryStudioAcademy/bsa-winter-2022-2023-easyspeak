@@ -13,6 +13,9 @@ using Microsoft.Extensions.Configuration;
 using EasySpeak.RabbitMQ.Interfaces;
 using EasySpeak.RabbitMQ;
 using EasySpeak.RabbitMQ.Services;
+using Microsoft.AspNetCore.Builder.Extensions;
+using FirebaseAdmin;
+using Google.Apis.Auth.OAuth2;
 
 namespace EasySpeak.Core.WebAPI.Extentions
 {
