@@ -15,10 +15,12 @@ builder.Services.AddControllers();
 builder.Services.AddEasySpeakCoreContext(builder.Configuration);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.RegisterCustomServices();
 
+builder.Services.RegisterCustomServices(builder.Configuration);
 builder.Services.AddSwaggerGen();
 builder.Services.AddValidation();
+builder.Services.AddFirebaseAuthorization(builder.Configuration);
+
 
 builder.Services.AddCors();
 builder.Services.AddHealthChecks();
@@ -48,6 +50,8 @@ app.UseRouting();
 app.UseAuthentication();
 
 app.UseAuthorization();
+
+app.UseMiddleware<FirebaseAuthMiddleware>();
 
 app.UseEndpoints(endpoinds =>
 {

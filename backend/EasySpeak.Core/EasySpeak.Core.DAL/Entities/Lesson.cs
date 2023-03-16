@@ -8,9 +8,9 @@ namespace EasySpeak.Core.DAL.Entities
 {
     public class Lesson: Entity<long>
     {
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public string MediaPath { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
+        public string MediaPath { get; set; } = string.Empty;
         public DateTime StartAt { get; set; }
         public int? LimitOfUsers { get; set; }
 
@@ -23,6 +23,7 @@ namespace EasySpeak.Core.DAL.Entities
             Subscribers = new List<User>();
             Tags = new List<Tag>();
             Questions = new List<Question>();
+            Subscribers = new List<User>();
         }
     }
 }

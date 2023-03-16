@@ -1,4 +1,6 @@
 using EasySpeak.Notifier.Hubs;
+using EasySpeak.Notifier.WebAPI.Extentions;
+using EasySpeak.Notifier.WebAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,12 +13,14 @@ builder.Configuration
 
 // Add services to the container.
 builder.Services.AddControllers();
+builder.Services.RegisterCustomServices(builder.Configuration);
 builder.Services.AddSignalR();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHealthChecks();
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
+builder.Services.AddHostedService<ConsumerHostedService>();
 builder.WebHost.UseUrls("http://*:5070");
 
 var app = builder.Build();
