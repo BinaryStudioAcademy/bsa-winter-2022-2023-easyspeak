@@ -1,6 +1,7 @@
-import { Component, Input, OnDestroy, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { BaseComponent } from '@core/base/base.component';
 import { Observable } from 'rxjs';
+
 import { Filter } from 'src/app/models/filters/filter';
 
 @Component({
@@ -23,15 +24,16 @@ export class DropdownComponent extends BaseComponent implements OnInit, OnDestro
 
     ngOnInit(): void {
         this.resetEvent
-        .pipe(this.untilThis)
-        .subscribe(() => this.selectedItems = new Set());
+            .pipe(this.untilThis)
+            .subscribe(() => {
+                this.selectedItems = new Set();
+            });
     }
 
     selectItem(title: string) {
         if (this.selectedItems.has(title)) {
             this.selectedItems.delete(title);
-        }
-        else {
+        } else {
             this.selectedItems.add(title);
         }
 
