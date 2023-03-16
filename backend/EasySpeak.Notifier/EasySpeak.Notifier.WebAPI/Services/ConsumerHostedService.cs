@@ -26,7 +26,7 @@ namespace EasySpeak.Notifier.WebAPI.Services
         {
             try
                 {
-                    _consumer.Init("notifier", "");
+                    _consumer.Init("notifier");
                     _consumer.Recieve<string>((data) =>
                     {
                         Console.WriteLine(data);

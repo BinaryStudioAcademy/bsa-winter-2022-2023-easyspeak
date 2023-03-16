@@ -11,14 +11,12 @@ namespace EasySpeak.RabbitMQ.Services
 {
     public class MessageProducer: IMessageProducer
     {
-        private readonly IConnectionProvider connectionProvider;
         private readonly IModel channel;
         private string queue = string.Empty;
         private string exchange = string.Empty; 
 
         public MessageProducer(IConnectionProvider connectionProvider)
         {
-            this.connectionProvider = connectionProvider;
             channel = connectionProvider.Connection!.CreateModel();
         }
 

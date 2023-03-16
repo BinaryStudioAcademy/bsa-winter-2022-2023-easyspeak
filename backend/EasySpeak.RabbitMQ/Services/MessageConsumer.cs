@@ -12,20 +12,16 @@ namespace EasySpeak.RabbitMQ.Services
 {
     public class MessageConsumer: IMessageConsumer
     {
-        private readonly IConnectionProvider connectionProvider;
         private readonly IModel channel;
         private string queue = string.Empty;
-        private string exchange = string.Empty;
 
         public MessageConsumer(IConnectionProvider connectionProvider)
         {
-            this.connectionProvider = connectionProvider;
             channel = connectionProvider.Connection!.CreateModel();
         }
-        public void Init(string queue, string exchange)
+        public void Init(string queue)
         {
             this.queue = queue ?? string.Empty;
-            this.exchange = exchange ?? string.Empty;
         }
         public void Recieve<T>(Action<T?> onMessage)
         {
