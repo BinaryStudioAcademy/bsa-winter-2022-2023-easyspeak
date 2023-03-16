@@ -17,8 +17,7 @@ namespace EasySpeak.Core.BLL.Services
         public async Task SetUserId(string email)
         {
             var user =  await _context.Users
-                .Where(user => user.Email == email)
-                .FirstOrDefaultAsync();
+                .FirstOrDefaultAsync(user => user.Email == email);
 
             if (user != null)
             {
