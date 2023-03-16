@@ -8,6 +8,7 @@ namespace EasySpeak.RabbitMQ.Interfaces
 {
     public interface IMessageProducer
     {
-        void SendMessage<T>(string queue, T message);
+        void Init(string queue, string exchange);
+        void SendMessage<T>(T message);
     }
 }

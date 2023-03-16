@@ -14,22 +14,22 @@ namespace EasySpeak.RabbitMQ.Services
     public class MessageConsumer: IMessageConsumer
     {
         private readonly IConnectionProvider connectionProvider;
-        private readonly IConfiguration configuration;
         private readonly IModel channel;
+        private string queue = string.Empty;
+        private string exchange = string.Empty;
 
-        public MessageConsumer(IConnectionProvider connectionProvider, IConfiguration configuration)
+        public MessageConsumer(IConnectionProvider connectionProvider)
         {
             this.connectionProvider = connectionProvider;
-            this.configuration = configuration;
             channel = connectionProvider.Connection!.CreateModel();
         }
-        public void Recieve<T>(string queueKey, Action<T?> onMessage)
+        public void Init(string queue, string exchange)
         {
-            string queue = configuration.GetSection("RabbitQueues").GetRequiredSection(queueKey).Value;
-            if (string.IsNullOrEmpty(queue))
-            {
-                throw new ArgumentException("Queue not found");
-            }
+            this.queue = queue ?? string.Empty;
+            this.exchange = exchange ?? string.Empty;
+        }
+        public void Recieve<T>(Action<T?> onMessage)
+        {
             channel.QueueDeclare(queue, true, false, false);
             var consumer = new EventingBasicConsumer(channel);
             consumer.Received += (model, eventArgs) =>

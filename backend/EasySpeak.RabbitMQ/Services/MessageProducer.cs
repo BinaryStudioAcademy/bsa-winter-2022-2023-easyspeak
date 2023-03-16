@@ -13,27 +13,28 @@ namespace EasySpeak.RabbitMQ.Services
     public class MessageProducer: IMessageProducer
     {
         private readonly IConnectionProvider connectionProvider;
-        private readonly IConfiguration configuration;
         private readonly IModel channel;
+        private string queue = string.Empty;
+        private string exchange = string.Empty; 
 
-        public MessageProducer(IConnectionProvider connectionProvider, IConfiguration configuration)
+        public MessageProducer(IConnectionProvider connectionProvider)
         {
             this.connectionProvider = connectionProvider;
-            this.configuration = configuration;
             channel = connectionProvider.Connection!.CreateModel();
         }
-        public void SendMessage<T>(string queueKey, T message)
+
+        public void Init(string queue, string exchange)
         {
-            string queue = configuration.GetSection("RabbitQueues").GetRequiredSection(queueKey).Value;
-            if (string.IsNullOrEmpty(queue))
-            {
-                throw new ArgumentException("Queue not found");
-            }
+            this.queue = queue ?? string.Empty;
+            this.exchange = exchange ?? string.Empty;
+        }
+        public void SendMessage<T>(T message)
+        {
             channel.QueueDeclare(queue, true, false, false);
             var json = JsonConvert.SerializeObject(message);
 
             var body = Encoding.UTF8.GetBytes(json);
-            channel.BasicPublish(exchange: "", routingKey: queue, body: body);
+            channel.BasicPublish(exchange: exchange, routingKey: queue, body: body);
         }
     }
 }
