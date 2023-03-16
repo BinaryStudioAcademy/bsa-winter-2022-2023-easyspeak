@@ -9,6 +9,6 @@ public sealed class LessonsProfile : Profile
     public LessonsProfile()
     {
         CreateMap<Lesson, LessonDto>()
-            .ForMember(t => t.Subscribers, opt => opt.MapFrom(src => src.Subscribers.Count));
+            .ForMember(t => t.SubscrubersCount, opt => opt.MapFrom(src => src.Subscribers.Count));
     }
 }

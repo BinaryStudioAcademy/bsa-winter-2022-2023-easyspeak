@@ -1,15 +1,13 @@
-﻿using EasySpeak.Core.BLL.MappingProfiles;
+﻿using EasySpeak.Core.BLL.Interfaces;
+using EasySpeak.Core.BLL.MappingProfiles;
 using EasySpeak.Core.BLL.Services;
 using EasySpeak.Core.DAL.Context;
-using EasySpeak.Core.BLL.Interfaces;
 using EasySpeak.Core.WebAPI.Validators;
 using FluentValidation.AspNetCore;
-using Microsoft.EntityFrameworkCore;
-using System.Reflection;
-using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Reflection;
 
 namespace EasySpeak.Core.WebAPI.Extentions
 {
@@ -22,11 +20,18 @@ namespace EasySpeak.Core.WebAPI.Extentions
                 .AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             services.AddTransient<ISampleService, SampleService>();
+            services.AddTransient<ILessonsService, LessonsService>();
         }
 
         public static void AddAutoMapper(this IServiceCollection services)
         {
-            services.AddAutoMapper(Assembly.GetAssembly(typeof(SampleProfile)));
+            services.AddAutoMapper(
+                Assembly.GetAssembly(typeof(SampleProfile)),
+                Assembly.GetAssembly(typeof(LessonsProfile)),
+                Assembly.GetAssembly(typeof(UserProfile)),
+                Assembly.GetAssembly(typeof(TagForLessonProfile)),
+                Assembly.GetAssembly(typeof(QuestionsProfile)),
+                Assembly.GetAssembly(typeof(SubQuestionsProfile)));
         }
 
         public static void AddValidation(this IServiceCollection services)
