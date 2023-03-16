@@ -5,6 +5,7 @@ import { CoreModule } from '@core/core.module';
 import { SharedModule } from '@shared/shared.module';
 import { ToastrModule } from 'ngx-toastr';
 
+import { AuthModule } from './modules/auth/auth.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -15,6 +16,8 @@ import { AppRoutingModule } from './app-routing.module';
         SharedModule,
         ToastrModule.forRoot(),
         AppRoutingModule,
+        AppRoutingModule,
+        AuthModule,
         BrowserAnimationsModule,
         CoreModule,
     ],
