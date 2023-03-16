@@ -1,7 +1,4 @@
-﻿using EasySpeak.Core.BLL.MappingProfiles;
-using EasySpeak.Core.BLL.Services;
-using EasySpeak.Core.DAL.Context;
-using EasySpeak.Core.BLL.Interfaces;
+﻿using EasySpeak.Core.DAL.Context;
 using EasySpeak.Core.WebAPI.Validators;
 using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
@@ -16,13 +13,11 @@ namespace EasySpeak.Core.WebAPI.Extentions
             services
                 .AddControllers()
                 .AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
-
-            services.AddTransient<ISampleService, SampleService>();
         }
 
         public static void AddAutoMapper(this IServiceCollection services)
         {
-            services.AddAutoMapper(Assembly.GetAssembly(typeof(SampleProfile)));
+            
         }
 
         public static void AddValidation(this IServiceCollection services)
