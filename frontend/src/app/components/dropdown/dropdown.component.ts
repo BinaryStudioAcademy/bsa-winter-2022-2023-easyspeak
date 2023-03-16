@@ -1,6 +1,6 @@
 import { Component, Input, OnDestroy, OnInit, Output, EventEmitter } from '@angular/core';
 import { BaseComponent } from '@core/base/base.component';
-import { Observable, Subject, takeUntil } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Filter } from 'src/app/models/filters/filter';
 
 @Component({
@@ -10,8 +10,11 @@ import { Filter } from 'src/app/models/filters/filter';
 })
 export class DropdownComponent extends BaseComponent implements OnInit, OnDestroy {
     @Input() data: Filter[];
+
     @Input() btnLabel: string | undefined;
+
     @Output() selectedFilters = new EventEmitter<Set<string>>();
+
     @Input() resetEvent: Observable<void>;
 
     public showDropdown = false;
@@ -21,12 +24,10 @@ export class DropdownComponent extends BaseComponent implements OnInit, OnDestro
     ngOnInit(): void {
         this.resetEvent
         .pipe(this.untilThis)
-        .subscribe(() => {
-          this.selectedItems = new Set();
-        });
+        .subscribe(() => this.selectedItems = new Set());
     }
 
-    selectItem(title: string){
+    selectItem(title: string) {
         if (this.selectedItems.has(title)) {
             this.selectedItems.delete(title);
         }
@@ -37,7 +38,7 @@ export class DropdownComponent extends BaseComponent implements OnInit, OnDestro
         this.selectedFilters.emit(this.selectedItems);
     }
 
-    showDropdownMenu(){
+    showDropdownMenu() {
         this.showDropdown = !this.showDropdown;
     }
 }

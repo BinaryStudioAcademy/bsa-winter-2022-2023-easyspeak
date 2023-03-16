@@ -1,4 +1,4 @@
-export var topicsSample = [
+export const topicsSample = [
     {
         title: 'Traveling',
     },
@@ -46,10 +46,10 @@ export var topicsSample = [
     },
     {
         title: 'Politics',
-    }
+    },
 ];
 
-export var langLevelsSample = [
+export const langLevelsSample = [
     {
         title: 'B1',
         subtitle: 'Intermadiate',
@@ -79,5 +79,5 @@ export var langLevelsSample = [
         title: 'C2',
         subtitle: 'Proficient',
         description: 'I am fluent at English',
-    }
-]
+    },
+];

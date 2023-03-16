@@ -1,5 +1,5 @@
-export interface Filter{
+export interface Filter {
     title: string,
-    subtitle?: string
+    subtitle?: string,
     description?: string,
 }

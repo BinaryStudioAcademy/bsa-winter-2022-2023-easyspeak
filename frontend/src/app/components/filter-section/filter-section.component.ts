@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
-import { topicsSample, langLevelsSample } from 'src/app/components/filter-section/filter-section.util'
+import { topicsSample, langLevelsSample } from 'src/app/components/filter-section/filter-section.util';
 import { Filter } from 'src/app/models/filters/filter';
 
 @Component({
@@ -9,7 +9,6 @@ import { Filter } from 'src/app/models/filters/filter';
     styleUrls: ['./filter-section.component.sass'],
 })
 export class FilterSectionComponent implements OnInit {
-
     resetFiltersEvent: Subject<void> = new Subject<void>();
 
     public langBtnLabel = 'Level';
@@ -26,26 +25,26 @@ export class FilterSectionComponent implements OnInit {
 
     ngOnInit(): void {
         this.topics = topicsSample;
-        this.langLevels = langLevelsSample;  
+        this.langLevels = langLevelsSample;
     }
 
-    removeLangLevel(title: string){
+    removeLangLevel(title: string) {
         this.selectedLanguageFilters.delete(title);
     }
 
-    removeTopic(title: string){
+    removeTopic(title: string) {
         this.selectedTopicsFilters.delete(title);
     }
 
-    updateLangFilters(eventData: Set<string>){
+    updateLangFilters(eventData: Set<string>) {
         this.selectedLanguageFilters = eventData;
     }
 
-    updateTopicFilters(eventData: Set<string>){
+    updateTopicFilters(eventData: Set<string>) {
         this.selectedTopicsFilters = eventData;
     }
 
-    resetFilters(){
+    resetFilters() {
         this.resetFiltersEvent.next();
         this.selectedLanguageFilters = new Set();
         this.selectedTopicsFilters = new Set();
