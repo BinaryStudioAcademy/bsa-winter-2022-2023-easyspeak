@@ -8,7 +8,7 @@ namespace EasySpeak.Core.DAL.Context
 {
     public static class ModelBuilderExtensions
     {
-        public static Random Rand = new Random();
+        private static Random Rand = new Random();
         
         public static void Configure(this ModelBuilder modelBuilder)
         {
