@@ -71,7 +71,7 @@ namespace EasySpeak.Core.WebAPI.Controllers
         [HttpPost("send-message")]
         public IActionResult SendMessage(string message)
         {
-            _messageProducer.SendMessage(message);
+            _messageProducer.SendMessage("notifier", message);
             return Ok();
         }
 

@@ -14,26 +14,26 @@ namespace EasySpeak.RabbitMQ
 {
     public class Consumer : IMessageConsumer
     {
-        private EventingBasicConsumer consumer = null!;
-        public Consumer(string hostname, string queue) 
+        private readonly IConnection connection = null!;
+
+        public Consumer(string hostname) 
         {
             var factory = new ConnectionFactory { Uri = new Uri(hostname) };
             factory.AutomaticRecoveryEnabled = true;
-            var connection = factory.CreateConnection();
+            connection = factory.CreateConnection();
+        }
+        public void Recieve<T>(string queue, Action<T?> onMessage)
+        {
             var channel = connection.CreateModel();
             channel.QueueDeclare(queue, true, false, false);
-            consumer = new EventingBasicConsumer(channel);
-            channel.BasicConsume(queue: queue, autoAck: true, consumer: consumer);
-        }
-        public void Recieve<T>(Action<T?> onMessage)
-        {         
+            var consumer = new EventingBasicConsumer(channel);
             consumer.Received += (model, eventArgs) =>
             {
                 var jsonSpecified = Encoding.UTF8.GetString(eventArgs.Body.Span);
                 var item = JsonConvert.DeserializeObject<T>(jsonSpecified);
                 onMessage(item);
             };
-           
+            channel.BasicConsume(queue: queue, autoAck: true, consumer: consumer);
         }
     }
 }

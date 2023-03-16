@@ -8,7 +8,7 @@ namespace EasySpeak.Notifier.WebAPI.Extentions
         public static void RegisterCustomServices(this IServiceCollection services, IConfiguration configuration)
         {
             var hostname = configuration.GetValue<string>("Rabbit");
-            services.AddSingleton<IMessageConsumer>(_ => new Consumer(hostname, "notifier"));
+            services.AddTransient<IMessageConsumer>(_ => new Consumer(hostname));
         }
     }
 }
