@@ -10,6 +10,9 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
+using EasySpeak.RabbitMQ.Interfaces;
+using EasySpeak.RabbitMQ;
+using EasySpeak.RabbitMQ.Services;
 using Microsoft.AspNetCore.Builder.Extensions;
 using FirebaseAdmin;
 using Google.Apis.Auth.OAuth2;
@@ -18,13 +21,15 @@ namespace EasySpeak.Core.WebAPI.Extentions
 {
     public static class ServiceCollectionExtensions
     {
-        public static void RegisterCustomServices(this IServiceCollection services)
+        public static void RegisterCustomServices(this IServiceCollection services, IConfiguration configuration)
         {
             services
                 .AddControllers()
                 .AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             services.AddTransient<ISampleService, SampleService>();
+            services.AddSingleton<IConnectionProvider>(_ => new ConnectionProvider(configuration.GetValue<string>("Rabbit")));
+            services.AddTransient<IMessageProducer, MessageProducer>();
             services.AddScoped<IFirebaseAuthService, FirebaseAuthService>();
             services.AddFirebaseApp();
         }
