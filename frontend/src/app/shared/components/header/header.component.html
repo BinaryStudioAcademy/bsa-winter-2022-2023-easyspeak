@@ -1,0 +1,42 @@
+<mat-toolbar class="header-wrp">
+  <div class="header">
+    <div class="header-content left-area">
+      <div class="header-content title" [routerLink]="['/']">
+        <img src="/assets/header/logo.svg">
+          Logo
+      </div>
+    </div>
+    <div class="header-content main-area">
+      <p routerLink="social" routerLinkActive="active" #link="routerLinkActive" [class.disabled]="!link.isActive">Social</p>
+      <p routerLink="timetable" routerLinkActive="active" #linkTimetable="routerLinkActive" [class.disabled]="!linkTimetable.isActive">Timetable</p>
+    </div>
+    <div class="header-content">
+      <div class="remaindings">
+        <div matBadge="1" class="reminding">
+          <img src="/assets/header/mail-icon.svg"/>
+        </div>
+        <div matBadge="3" class="reminding">
+          <img src="/assets/header/notification-icon.svg"/>
+        </div>
+      </div>
+      <div [matMenuTriggerFor]="menu" class="user-area">
+        <img class="avatar avatar-size" src="/assets/header/avatar.svg" alt="avatar">
+        <span>James Workman</span>
+        <img src="/assets/header/chevron-down-icon.svg"/>
+        <mat-menu #menu="matMenu" xPosition="before">
+          <button mat-menu-item class="menu-element">
+            <img class="menu-icon" src="/assets/header/user-profile.svg" alt="profile">
+            <span class="menu-text">User profile</span>
+          </button>
+          <button mat-menu-item class="menu-element">
+            <img class="menu-icon" src="/assets/header/log-out.svg" alt="logOut">
+            <span class="menu-text log-out">Log Out</span>
+          </button>
+          <div mat-menu-item>
+            <button class="subscription">Subscription</button>
+          </div>
+        </mat-menu>
+      </div>
+    </div>
+  </div>
+</mat-toolbar>
