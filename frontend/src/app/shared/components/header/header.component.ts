@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { HttpService } from '@core/services/http.service';
 
 @Component({
     selector: 'app-header',
@@ -7,7 +6,4 @@ import { HttpService } from '@core/services/http.service';
     styleUrls: ['./header.component.sass'],
 })
 export class HeaderComponent {
-    constructor(private ser: HttpService) {
-        this.ser.get("/someUrl").subscribe();
-    }
 }
