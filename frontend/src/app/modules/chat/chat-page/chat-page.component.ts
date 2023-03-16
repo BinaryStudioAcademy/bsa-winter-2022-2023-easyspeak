@@ -10,9 +10,9 @@ import { Observable, of } from 'rxjs';
 })
 export class ChatPageComponent {
     //This values are temporary, they will be received from the server
-    chatId = 1;
+    currentChatId = 1;
 
-    viewerId = 1;
+    currentUserId = 1;
 
     messages$: Observable<[]> = of([]);
 
@@ -34,7 +34,13 @@ export class ChatPageComponent {
 
         this.form.reset();
 
-        this.messages.push({ chatId: this.chatId, userId: this.viewerId, text: message, createdAt: new Date() });
-        //TODO: this.httpService.post('message', { chatId: this.chatId, userId: this.viewerId, text: message, createdAt: new Date() });
+        this.messages.push({
+            chatId: this.currentChatId,
+            userId: this.currentUserId,
+            text: message,
+            createdAt: new Date(),
+        });
+        //this.httpService.post('messages',
+        // { chatId: this.currentChatId, userId: this.currentUserId, text: message, createdAt: new Date() });
     }
 }
