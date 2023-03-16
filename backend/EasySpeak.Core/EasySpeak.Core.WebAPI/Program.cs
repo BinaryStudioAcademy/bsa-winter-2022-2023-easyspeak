@@ -1,6 +1,3 @@
-using EasySpeak.Core.BLL.Interfaces;
-using EasySpeak.Core.BLL.MappingProfiles;
-using EasySpeak.Core.BLL.Services;
 using EasySpeak.Core.WebAPI.Extentions;
 using EasySpeak.Core.WebAPI.Middlewares;
 
@@ -20,20 +17,10 @@ builder.Services.AddEasySpeakCoreContext(builder.Configuration);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.RegisterCustomServices();
 
-//mapper
-builder.Services.AddAutoMapper(c =>
-{
-    c.AddProfile(new LessonsProfile());
-    c.AddProfile(new UserProfile());
-    c.AddProfile(new TagForLessonProfile());
-    c.AddProfile(new QuestionsProfile());
-    c.AddProfile(new SubQuestionsProfile());
-});
-
+builder.Services.AddAutoMapper();
 builder.Services.AddSwaggerGen();
 builder.Services.AddValidation();
 builder.Services.AddFirebaseAuthorization(builder.Configuration);
-builder.Services.AddTransient<ILessonsService, LessonsService>();
 
 
 builder.Services.AddCors();

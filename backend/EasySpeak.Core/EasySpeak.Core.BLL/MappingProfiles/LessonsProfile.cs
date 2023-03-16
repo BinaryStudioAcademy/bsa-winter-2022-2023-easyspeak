@@ -8,7 +8,7 @@ public sealed class LessonsProfile : Profile
 {
     public LessonsProfile()
     {
-        CreateMap<Lesson, LessonWebDto>()
-            .ForMember(t => t.Subscribers, opt => opt.MapFrom(src => src.Subscribers.Count));
+        CreateMap<Lesson, LessonDto>()
+            .ForMember(t => t.SubscrubersCount, opt => opt.MapFrom(src => src.Subscribers.Count));
     }
 }
