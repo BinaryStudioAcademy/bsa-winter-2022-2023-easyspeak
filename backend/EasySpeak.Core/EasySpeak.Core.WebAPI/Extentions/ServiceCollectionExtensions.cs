@@ -17,7 +17,7 @@ namespace EasySpeak.Core.WebAPI.Extentions
 
         public static void AddAutoMapper(this IServiceCollection services)
         {
-            
+            throw new NotImplementedException();
         }
 
         public static void AddValidation(this IServiceCollection services)
