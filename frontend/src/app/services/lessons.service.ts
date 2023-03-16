@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from '@core/services/http.service';
-import { ILesson } from '@shared/models/ILesson';
+import { INewLesson } from '@shared/models/lesson/INewLesson';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,7 @@ export class LessonsService {
 
     constructor(private http: HttpService) { }
 
-    createLesson(lesson: ILesson) {
+    createLesson(lesson: INewLesson) {
         this.http.post(this.routePrefix, lesson);
     }
 }
