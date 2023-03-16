@@ -51,15 +51,8 @@ public class LessonsService : BaseService, ILessonsService
                 });
         }
 
-        bool totalAmount = false;
-        foreach (var item in listOfWeeksDayCards)
-        {
-            if (item.MeetingsAmount > 0)
-            {
-                totalAmount = true;
-            }
-        }
+        var notNullResponse = listOfWeeksDayCards.Count(t => t.MeetingsAmount > 0) > 0;
 
-        return totalAmount ? listOfWeeksDayCards : null;
+        return notNullResponse ? listOfWeeksDayCards : null;
     }
 }
