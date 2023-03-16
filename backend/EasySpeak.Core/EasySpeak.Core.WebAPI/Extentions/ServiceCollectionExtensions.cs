@@ -6,6 +6,10 @@ using EasySpeak.Core.WebAPI.Validators;
 using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Configuration;
 
 namespace EasySpeak.Core.WebAPI.Extentions
 {
@@ -39,6 +43,30 @@ namespace EasySpeak.Core.WebAPI.Extentions
                 options.UseSqlServer(
                     connectionsString,
                     opt => opt.MigrationsAssembly(typeof(EasySpeakCoreContext).Assembly.GetName().Name)));
+        }
+
+        public static void AddFirebaseAuthorization(this IServiceCollection services, IConfiguration configuration)
+        {
+            var projectId = configuration.GetSection("FirebaseConfig")
+                .GetValue<string>("project_id");
+
+            var secureUri = configuration.GetSection("FirebaseConfig")
+                .GetValue<string>("secure_uri");
+
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.Authority = $"{secureUri}/{projectId}";
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidIssuer = $"{secureUri}/{projectId}",
+                        ValidateAudience = true,
+                        ValidAudience = projectId,
+                        ValidateLifetime = true
+                    };
+                });
         }
     }
 }
