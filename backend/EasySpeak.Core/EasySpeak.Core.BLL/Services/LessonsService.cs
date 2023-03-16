@@ -24,7 +24,7 @@ public class LessonsService : BaseService, ILessonsService
             .Where(m => m.StartAt > filtersRequest.Date)
             .Where(m =>
                 (filtersRequest.LanguageLevels != null &&
-                 filtersRequest.LanguageLevels.Contains((LanguageLevel)m.LanguageLevel)
+                 filtersRequest.LanguageLevels.Contains(m.LanguageLevel)
                  || filtersRequest.LanguageLevels == null)).ToListAsync();
 
         // IEnumerable

@@ -5,12 +5,10 @@ namespace EasySpeak.Core.Common.DTO.Lesson;
 
 public class FiltersRequest
 {
-    [JsonProperty(Required = Required.Default)]
     public ICollection<LanguageLevel>? LanguageLevels { get; set; }
 
-    [JsonProperty(Required = Required.Default)]
     public ICollection<TagForLessonDto>? Tags { get; set; }
 
-    [JsonProperty(Required = Required.Always)]
+    [JsonRequired]
     public DateTime Date { get; set; }
 }
