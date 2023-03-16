@@ -11,11 +11,6 @@ namespace EasySpeak.Notifier.WebAPI.Services
             _consumer = consumer;
         }
 
-        public override void Dispose()
-        {
-            base.Dispose();
-        }
-
         public override async Task StartAsync(CancellationToken cancellationToken)
         {
             await base.StartAsync(cancellationToken);
@@ -30,11 +25,9 @@ namespace EasySpeak.Notifier.WebAPI.Services
         {
                 try
                 {
-                    //var hubContext = (IHubContext) app.ApplicationServices.GetService<IHubContext>()!;
-                    _consumer.Recieve<string>("notifier", (data) =>
+                    _consumer.Recieve<string>("NotificationQueue", (data) =>
                     {
                         Console.WriteLine(data);
-                        //await hubContext.Clients.All.SendAsync("user", data);
                     });
 
                 }

@@ -1,4 +1,5 @@
 ﻿using EasySpeak.RabbitMQ.Interfaces;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
@@ -13,14 +14,22 @@ namespace EasySpeak.RabbitMQ.Services
     public class MessageConsumer: IMessageConsumer
     {
         private readonly IConnectionProvider connectionProvider;
+        private readonly IConfiguration configuration;
+        private readonly IModel channel;
 
-        public MessageConsumer(IConnectionProvider connectionProvider)
+        public MessageConsumer(IConnectionProvider connectionProvider, IConfiguration configuration)
         {
             this.connectionProvider = connectionProvider;
+            this.configuration = configuration;
+            channel = connectionProvider.Connection!.CreateModel();
         }
-        public void Recieve<T>(string queue, Action<T?> onMessage)
+        public void Recieve<T>(string queueKey, Action<T?> onMessage)
         {
-            var channel = connectionProvider.Connection?.CreateModel();
+            string queue = configuration.GetSection("RabbitQueues").GetRequiredSection(queueKey).Value;
+            if (string.IsNullOrEmpty(queue))
+            {
+                throw new ArgumentException("Queue not found");
+            }
             channel.QueueDeclare(queue, true, false, false);
             var consumer = new EventingBasicConsumer(channel);
             consumer.Received += (model, eventArgs) =>

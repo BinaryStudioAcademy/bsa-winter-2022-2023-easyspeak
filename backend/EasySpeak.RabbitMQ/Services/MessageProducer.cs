@@ -1,4 +1,5 @@
 ﻿using EasySpeak.RabbitMQ.Interfaces;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using System;
@@ -12,14 +13,22 @@ namespace EasySpeak.RabbitMQ.Services
     public class MessageProducer: IMessageProducer
     {
         private readonly IConnectionProvider connectionProvider;
+        private readonly IConfiguration configuration;
+        private readonly IModel channel;
 
-        public MessageProducer(IConnectionProvider connectionProvider)
+        public MessageProducer(IConnectionProvider connectionProvider, IConfiguration configuration)
         {
             this.connectionProvider = connectionProvider;
+            this.configuration = configuration;
+            channel = connectionProvider.Connection!.CreateModel();
         }
-        public void SendMessage<T>(string queue, T message)
+        public void SendMessage<T>(string queueKey, T message)
         {
-            var channel = connectionProvider.Connection?.CreateModel();
+            string queue = configuration.GetSection("RabbitQueues").GetRequiredSection(queueKey).Value;
+            if (string.IsNullOrEmpty(queue))
+            {
+                throw new ArgumentException("Queue not found");
+            }
             channel.QueueDeclare(queue, true, false, false);
             var json = JsonConvert.SerializeObject(message);
 
