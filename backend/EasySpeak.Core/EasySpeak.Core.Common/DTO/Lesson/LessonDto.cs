@@ -1,6 +1,6 @@
 ﻿namespace EasySpeak.Core.Common.DTO.Lesson;
 
-public class LessonWebDto
+public class LessonDto
 {
     public long Id { get; set; }
     public string? Name { get; set; }

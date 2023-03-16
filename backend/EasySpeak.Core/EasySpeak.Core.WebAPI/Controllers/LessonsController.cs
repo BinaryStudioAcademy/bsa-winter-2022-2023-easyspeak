@@ -9,16 +9,17 @@ namespace EasySpeak.Core.WebAPI.Controllers
     public class LessonsController : ControllerBase
     {
         private readonly ILessonsService _lessonsService;
+
         public LessonsController(ILessonsService lessonsService)
         {
             _lessonsService = lessonsService;
         }
 
         [HttpPost("filters")]
-        
-        public async Task<ActionResult<ICollection<LessonWebDto>>> GetAllAsync([FromBody] RequestDto requestDto)
+        public async Task<ActionResult<ICollection<LessonDto>>> GetAllAsync([FromBody] RequestWithFiltersDto requestWithFiltersDto)
         {
-            var lessons = await _lessonsService.GetAllLessonsAsync(requestDto);
+            var lessons = await _lessonsService.GetAllLessonsAsync(requestWithFiltersDto);
+
             return Ok(lessons);
         }
     }

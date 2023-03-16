@@ -4,5 +4,5 @@ namespace EasySpeak.Core.BLL.Interfaces;
 
 public interface ILessonsService
 {
-    Task<ICollection<LessonWebDto>> GetAllLessonsAsync(RequestDto requestDto);
+    Task<ICollection<LessonDto>> GetAllLessonsAsync(RequestWithFiltersDto requestWithFiltersDto);
 }

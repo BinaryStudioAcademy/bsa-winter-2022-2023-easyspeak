@@ -11,7 +11,7 @@ public class LessonsService : BaseService, ILessonsService
 {
     public LessonsService(EasySpeakCoreContext context, IMapper mapper) : base(context, mapper) { }
 
-    public async Task<ICollection<LessonWebDto>> GetAllLessonsAsync(RequestDto requestDto)
+    public async Task<ICollection<LessonDto>> GetAllLessonsAsync(RequestWithFiltersDto requestWithFiltersDto)
     {
         var lessonsFromContext = await _context.Lessons
             .Include(l => l.Tags)
@@ -20,31 +20,16 @@ public class LessonsService : BaseService, ILessonsService
             .Include(l => l.User)
             .ToListAsync();
 
-        var mappedLessons = _mapper.Map<List<Lesson>, List<LessonWebDto>>(lessonsFromContext);
-        for (int i = mappedLessons.Count - 1; i >= 0; i--)
-        {
-            if (mappedLessons[i].StartAt < requestDto.Date)
-            {
-                mappedLessons.RemoveAt(i);
-                continue;
-            }
+        var mappedLessons = _mapper.Map<List<Lesson>, List<LessonDto>>(lessonsFromContext);
 
-            if (requestDto.LanguageLevels != null && requestDto.LanguageLevels.All(l => l != mappedLessons[i].LanguageLevel))
-            {
-                mappedLessons.RemoveAt(i);
-                continue;
-            }
+        var lessons = mappedLessons
+            .Where(m => m.StartAt > requestWithFiltersDto.Date)
+            .Where(m => (requestWithFiltersDto.LanguageLevels != null && requestWithFiltersDto.LanguageLevels.Contains(m.LanguageLevel))
+                        || requestWithFiltersDto.LanguageLevels == null)
+            .Where(m => (requestWithFiltersDto.Tags != null && m.Tags != null && requestWithFiltersDto.Tags.Intersect(m.Tags).Any())
+                        || requestWithFiltersDto.Tags == null)
+            .ToList();
 
-            if (requestDto.Tags != null && requestDto.Tags.All(tag =>
-                {
-                    var tagForLessonDtos = mappedLessons[i].Tags;
-                    return tagForLessonDtos != null && tagForLessonDtos.All(t => t != tag);
-                }))
-            {
-                mappedLessons.RemoveAt(i);
-            }
-        }
-
-        return mappedLessons;
+        return lessons;
     }
 }
