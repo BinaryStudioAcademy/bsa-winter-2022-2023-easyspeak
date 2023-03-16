@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using EasySpeak.RabbitMQ.Interfaces;
 using EasySpeak.RabbitMQ;
+using EasySpeak.RabbitMQ.Services;
 
 namespace EasySpeak.Core.WebAPI.Extentions
 {
@@ -24,7 +25,8 @@ namespace EasySpeak.Core.WebAPI.Extentions
                 .AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             services.AddTransient<ISampleService, SampleService>();
-            services.AddTransient<IMessageProducer>(_ => new Producer(configuration.GetValue<string>("Rabbit")));
+            services.AddSingleton<IConnectionProvider>(_ => new ConnectionProvider(configuration.GetValue<string>("Rabbit")));
+            services.AddTransient<IMessageProducer, MessageProducer>();
         }
 
         public static void AddAutoMapper(this IServiceCollection services)

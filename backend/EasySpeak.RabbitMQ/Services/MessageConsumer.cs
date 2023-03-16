@@ -3,28 +3,24 @@ using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Channels;
 using System.Threading.Tasks;
 
-namespace EasySpeak.RabbitMQ
+namespace EasySpeak.RabbitMQ.Services
 {
-    public class Consumer : IMessageConsumer
+    public class MessageConsumer: IMessageConsumer
     {
-        private readonly IConnection connection = null!;
+        private readonly IConnectionProvider connectionProvider;
 
-        public Consumer(string hostname) 
+        public MessageConsumer(IConnectionProvider connectionProvider)
         {
-            var factory = new ConnectionFactory { Uri = new Uri(hostname) };
-            factory.AutomaticRecoveryEnabled = true;
-            connection = factory.CreateConnection();
+            this.connectionProvider = connectionProvider;
         }
         public void Recieve<T>(string queue, Action<T?> onMessage)
         {
-            var channel = connection.CreateModel();
+            var channel = connectionProvider.Connection?.CreateModel();
             channel.QueueDeclare(queue, true, false, false);
             var consumer = new EventingBasicConsumer(channel);
             consumer.Received += (model, eventArgs) =>

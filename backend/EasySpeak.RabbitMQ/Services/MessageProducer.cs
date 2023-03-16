@@ -1,21 +1,25 @@
 ﻿using EasySpeak.RabbitMQ.Interfaces;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace EasySpeak.RabbitMQ
+namespace EasySpeak.RabbitMQ.Services
 {
-    public class Producer : IMessageProducer
+    public class MessageProducer: IMessageProducer
     {
-        private readonly IConnection connection = null!;
-        public Producer(string hostname)
+        private readonly IConnectionProvider connectionProvider;
+
+        public MessageProducer(IConnectionProvider connectionProvider)
         {
-            var factory = new ConnectionFactory { Uri = new Uri(hostname) };
-            connection = factory.CreateConnection();
+            this.connectionProvider = connectionProvider;
         }
         public void SendMessage<T>(string queue, T message)
         {
-            var channel = connection.CreateModel();
+            var channel = connectionProvider.Connection?.CreateModel();
             channel.QueueDeclare(queue, true, false, false);
             var json = JsonConvert.SerializeObject(message);
 
