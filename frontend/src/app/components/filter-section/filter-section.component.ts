@@ -1,64 +1,53 @@
 import { Component, OnInit } from '@angular/core';
-import { EventEmitter } from '@angular/core';
 import { Subject } from 'rxjs';
-import {topicsSample, langLevelsSample} from 'src/app/components/filter-section/filter-section.util'
+import { topicsSample, langLevelsSample } from 'src/app/components/filter-section/filter-section.util'
 import { Filter } from 'src/app/models/filters/filter';
 
 @Component({
-  selector: 'app-filter-section',
-  templateUrl: './filter-section.component.html',
-  styleUrls: ['./filter-section.component.sass']
+    selector: 'app-filter-section',
+    templateUrl: './filter-section.component.html',
+    styleUrls: ['./filter-section.component.sass'],
 })
 export class FilterSectionComponent implements OnInit {
-  resetFiltersEvent: Subject<void> = new Subject<void>();
 
-  public langBtnLabel = 'Level';
-  public topicsBtnLabel = 'Interests'
+    resetFiltersEvent: Subject<void> = new Subject<void>();
 
-  public selectedLanguageFilters = new Set<string>();
-  public selectedTopicsFilters = new Set<string>();
+    public langBtnLabel = 'Level';
 
-  public topics: Filter[];
-  public langLevels: Filter[]
+    public topicsBtnLabel = 'Interests';
 
-  constructor() { }
+    public selectedLanguageFilters = new Set<string>();
 
-  ngOnInit(): void {
-    this.topics = topicsSample.map(x => {
-      return {
-        title: x.title
-      }
-    });
+    public selectedTopicsFilters = new Set<string>();
 
-    this.langLevels = langLevelsSample.map(x => {
-        return {
-          title: x.title,
-          subtitle: x.subtitle,
-          description: x.description
-        }
-    })
-  }
+    public topics: Filter[];
 
-  removeLangLevel(title: string){
-    this.selectedLanguageFilters.delete(title);
-  }
+    public langLevels: Filter[];
 
-  removeTopic(title: string){
-    this.selectedTopicsFilters.delete(title);
-  }
+    ngOnInit(): void {
+        this.topics = topicsSample;
+        this.langLevels = langLevelsSample;  
+    }
 
-  updateLangFilters(eventData: Set<string>){
-    this.selectedLanguageFilters = eventData;
-  }
+    removeLangLevel(title: string){
+        this.selectedLanguageFilters.delete(title);
+    }
 
-  updateTopicFilters(eventData: Set<string>){
-    this.selectedTopicsFilters = eventData;
-  }
+    removeTopic(title: string){
+        this.selectedTopicsFilters.delete(title);
+    }
 
-  resetFilters(){
-    this.resetFiltersEvent.next();
-    this.selectedLanguageFilters = new Set();
-    this.selectedTopicsFilters = new Set();
-  }
+    updateLangFilters(eventData: Set<string>){
+        this.selectedLanguageFilters = eventData;
+    }
 
+    updateTopicFilters(eventData: Set<string>){
+        this.selectedTopicsFilters = eventData;
+    }
+
+    resetFilters(){
+        this.resetFiltersEvent.next();
+        this.selectedLanguageFilters = new Set();
+        this.selectedTopicsFilters = new Set();
+    }
 }

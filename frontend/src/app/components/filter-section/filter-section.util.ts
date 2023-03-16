@@ -1,4 +1,4 @@
- export var topicsSample = [
+export var topicsSample = [
     {
         title: 'Traveling',
     },
@@ -21,63 +21,63 @@
         title: 'Ecology',
     },
     {
-        title: 'Design'
+        title: 'Design',
     },
     {
-        title: 'History'
+        title: 'History',
     },
     {
-        title: 'Fashion'
+        title: 'Fashion',
     },
     {
-        title: 'Medicine'
+        title: 'Medicine',
     },
     {
-        title: 'Technologies'
+        title: 'Technologies',
     },
     {
-        title: 'Pets'
+        title: 'Pets',
     },
     {
-        title: 'Philosophy'
+        title: 'Philosophy',
     },
     {
-        title: 'Photography'
+        title: 'Photography',
     },
     {
-        title: 'Politics'
+        title: 'Politics',
     }
-  ];
+];
 
 export var langLevelsSample = [
     {
-      title: 'B1',
-      subtitle: 'Intermadiate',
-      description: 'I am beginning to able to express myself clearly'
+        title: 'B1',
+        subtitle: 'Intermadiate',
+        description: 'I am beginning to able to express myself clearly',
     },
     {
-      title: 'A1',
-      subtitle: 'Beginner',
-      description: 'I am complete beginner'
+        title: 'A1',
+        subtitle: 'Beginner',
+        description: 'I am complete beginner',
     },
     {
-      title: 'A2',
-      subtitle: 'Pre-Intermadiate',
-      description: 'I have some experience, but I still can not express myself properly'
+        title: 'A2',
+        subtitle: 'Pre-Intermadiate',
+        description: 'I have some experience, but I still can not express myself properly',
     },
     {
-      title: 'B2',
-      subtitle: 'Upper-Intermadiate',
-      description: 'I feel confident in using English'
+        title: 'B2',
+        subtitle: 'Upper-Intermadiate',
+        description: 'I feel confident in using English',
     },
     {
-      title: 'C1',
-      subtitle: 'Advanced',
-      description: 'I have a lot of experience and I feel that I can help someone to learn language'
+        title: 'C1',
+        subtitle: 'Advanced',
+        description: 'I have a lot of experience and I feel that I can help someone to learn language',
     },
     {
-      title: 'C2',
-      subtitle: 'Proficient',
-      description: 'I am fluent at English'
+        title: 'C2',
+        subtitle: 'Proficient',
+        description: 'I am fluent at English',
     }
-  ]
+]
