@@ -4,6 +4,7 @@ using EasySpeak.Core.DAL.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EasySpeak.Core.DAL.Migrations
 {
     [DbContext(typeof(EasySpeakCoreContext))]
-    partial class EasySpeakCoreContextModelSnapshot : ModelSnapshot
+    [Migration("20230316122345_DataSeed")]
+    partial class DataSeed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -148,12 +150,6 @@ namespace EasySpeak.Core.DAL.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
                     b.Property<long>("ChatId")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long?>("CreatedBy")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime?>("FinishedAt")
@@ -452,11 +448,6 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
-                    b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getutcdate()");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -575,11 +566,6 @@ namespace EasySpeak.Core.DAL.Migrations
                         .HasColumnType("bigint");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getutcdate()");
 
                     b.Property<int>("FriendshipStatus")
                         .HasColumnType("int");
@@ -749,14 +735,6 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
-                    b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getutcdate()");
-
-                    b.Property<long?>("CreatedBy")
-                        .HasColumnType("bigint");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -883,9 +861,6 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
-
-                    b.Property<long?>("CreatedBy")
-                        .HasColumnType("bigint");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -1230,9 +1205,6 @@ namespace EasySpeak.Core.DAL.Migrations
                         .HasColumnType("bigint");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
 
                     b.Property<bool>("IsRead")
                         .HasColumnType("bit");
@@ -1584,14 +1556,6 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
-                    b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getutcdate()");
-
-                    b.Property<long?>("CreatedBy")
-                        .HasColumnType("bigint");
-
                     b.Property<long>("LessonId")
                         .HasColumnType("bigint");
 
@@ -1604,8 +1568,129 @@ namespace EasySpeak.Core.DAL.Migrations
                     b.HasIndex("LessonId");
 
                     b.ToTable("Questions");
-                });
 
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            LessonId = 3L,
+                            Topic = "input Singapore Dollar functionalities Field Branding impactful"
+                        },
+                        new
+                        {
+                            Id = 2L,
+                            LessonId = 6L,
+                            Topic = "Engineer Intelligent Frozen Mouse Incredible Metal Hat Platinum Thailand"
+                        },
+                        new
+                        {
+                            Id = 3L,
+                            LessonId = 2L,
+                            Topic = "Fresh Incredible"
+                        },
+                        new
+                        {
+                            Id = 4L,
+                            LessonId = 8L,
+                            Topic = "Concrete complexity"
+                        },
+                        new
+                        {
+                            Id = 5L,
+                            LessonId = 6L,
+                            Topic = "Savings Account"
+                        },
+                        new
+                        {
+                            Id = 6L,
+                            LessonId = 1L,
+                            Topic = "navigating plum pixel"
+                        },
+                        new
+                        {
+                            Id = 7L,
+                            LessonId = 7L,
+                            Topic = "New Hampshire"
+                        },
+                        new
+                        {
+                            Id = 8L,
+                            LessonId = 3L,
+                            Topic = "EXE olive"
+                        },
+                        new
+                        {
+                            Id = 9L,
+                            LessonId = 8L,
+                            Topic = "Advanced"
+                        },
+                        new
+                        {
+                            Id = 10L,
+                            LessonId = 8L,
+                            Topic = "generate Ergonomic Steel Towels Functionality South Carolina Accountability"
+                        },
+                        new
+                        {
+                            Id = 11L,
+                            LessonId = 7L,
+                            Topic = "ability"
+                        },
+                        new
+                        {
+                            Id = 12L,
+                            LessonId = 2L,
+                            Topic = "Gardens revolutionary Universal input"
+                        },
+                        new
+                        {
+                            Id = 13L,
+                            LessonId = 5L,
+                            Topic = "deposit auxiliary Avon Intelligent"
+                        },
+                        new
+                        {
+                            Id = 14L,
+                            LessonId = 2L,
+                            Topic = "SMTP enterprise"
+                        },
+                        new
+                        {
+                            Id = 15L,
+                            LessonId = 4L,
+                            Topic = "Credit Card Account Avon"
+                        },
+                        new
+                        {
+                            Id = 16L,
+                            LessonId = 6L,
+                            Topic = "Ridges Awesome Malta"
+                        },
+                        new
+                        {
+                            Id = 17L,
+                            LessonId = 5L,
+                            Topic = "optical Infrastructure"
+                        },
+                        new
+                        {
+                            Id = 18L,
+                            LessonId = 2L,
+                            Topic = "interface Israel orchestrate Balanced invoice Peso Uruguayo"
+                        },
+                        new
+                        {
+                            Id = 19L,
+                            LessonId = 4L,
+                            Topic = "B2C Platinum system"
+                        },
+                        new
+                        {
+                            Id = 20L,
+                            LessonId = 8L,
+                            Topic = "navigating fuchsia New York hybrid flexibility"
+                        });
+                });
 
             modelBuilder.Entity("EasySpeak.Core.DAL.Entities.Subquestion", b =>
                 {
@@ -1614,12 +1699,6 @@ namespace EasySpeak.Core.DAL.Migrations
                         .HasColumnType("bigint");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long?>("CreatedBy")
-                        .HasColumnType("bigint");
 
                     b.Property<long>("QuestionId")
                         .HasColumnType("bigint");
@@ -1885,11 +1964,6 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
-                    b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getutcdate()");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -2014,11 +2088,6 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.Property<int>("Country")
                         .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getutcdate()");
 
                     b.Property<string>("Email")
                         .IsRequired()
