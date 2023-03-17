@@ -1,0 +1,11 @@
+<div [ngClass]="{ 'day-elem-blue': isToday(), 'day-elem-grey': compareDate() }" class="day-elem">
+    {{ item | date : 'dd MMMM' }}
+
+    <h2>{{ item | date : 'EEEE' }}</h2>
+
+    <div class="labels">
+        <div *ngIf="isToday()" class="meetings today-label">today</div>
+
+        <div [ngClass]="{ 'meetings-grey': compareDate() }" class="meetings">{{ meetingCount }} meetings</div>
+    </div>
+</div>
