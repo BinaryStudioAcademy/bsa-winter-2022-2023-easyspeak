@@ -14,7 +14,6 @@ public class LessonsService : BaseService, ILessonsService
     public async Task<ICollection<LessonDto>> GetAllLessonsAsync(FiltersRequest filtersRequest)
     {
         var tagsName = filtersRequest.Tags?.Select(x => x.Name);
-        var levelsName = filtersRequest.LanguageLevels;
 
         var lessonsFromContext = _context.Lessons
             .Include(l => l.Tags)
@@ -28,12 +27,9 @@ public class LessonsService : BaseService, ILessonsService
             lessonsFromContext = lessonsFromContext.Where(x => x.Tags.Any(y => tagsName.Contains(y.Name)));
         }
 
-        if (levelsName != null)
+        if (filtersRequest.LanguageLevels != null)
         {
-            lessonsFromContext = lessonsFromContext.
-                Where(m => filtersRequest.LanguageLevels != null
-                           && filtersRequest.LanguageLevels.Contains(m.LanguageLevel)
-                           || filtersRequest.LanguageLevels == null);
+            lessonsFromContext = lessonsFromContext.Where(m => filtersRequest.LanguageLevels.Contains(m.LanguageLevel));
         }
 
         return _mapper.Map<List<Lesson>, List<LessonDto>>(await lessonsFromContext.ToListAsync());
