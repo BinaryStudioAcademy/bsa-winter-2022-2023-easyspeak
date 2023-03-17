@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Bogus.DataSets;
 using EasySpeak.Core.BLL.Interfaces;
 using EasySpeak.Core.Common.DTO.Lesson;
 using EasySpeak.Core.DAL.Context;
@@ -38,30 +37,21 @@ public class LessonsService : BaseService, ILessonsService
 
     public async Task<ICollection<DayCardDto>?> GetDayCardsOfWeekAsync(RequestDayCardDto requestDto)
     {
-        var lessons = await _context.Lessons
-            .Where(c=>c.StartAt.Date>=requestDto.Date && c.StartAt.Date<=requestDto.Date.AddDays(6))
-            .GroupBy(c=>c.StartAt.Date)
-            .Select(t=> new DayCardDto() { Date = t.Key, DayOfWeek = t.Key.DayOfWeek, MeetingsAmount = t.Count()})
+        var dayCards = await _context.Lessons
+            .Where(c => c.StartAt.Date >= requestDto.Date.Date
+                        && c.StartAt.Date <= requestDto.Date.AddDays(6).Date
+                        )
+            .GroupBy(c => c.StartAt.Date)
+            .Select(t =>
+                new DayCardDto()
+                {
+                    Date = t.Key,
+                    DayOfWeek = t.Key.DayOfWeek.ToString(),
+                    MeetingsAmount = t.Count()
+                }
+            )
             .ToListAsync();
-        
-        //var listOfWeeksDayCards = new List<DayCardDto>();
 
-        //for (int i = 0; i < 7; i++)
-        //{
-        //    var date = requestDto.Date.AddDays(i);
-        //    var meetingAmount = lessonsFromContext.Count(l => l.StartAt.Date == requestDto.Date.Date);
-        //    listOfWeeksDayCards.Add(
-        //        new DayCardDto()
-        //        {
-        //            Date = date.Date,
-        //            DayOfWeek = date.DayOfWeek,
-        //            MeetingsAmount = meetingAmount
-        //        });
-        //}
-
-        //var notNullResponse = listOfWeeksDayCards.Count(t => t.MeetingsAmount > 0) > 0;
-
-        //return notNullResponse ? listOfWeeksDayCards : null;
-        return lessons;
+        return dayCards;
     }
 }
