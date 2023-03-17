@@ -39,15 +39,9 @@ public class LessonsService : BaseService, ILessonsService
 
         await Task.WhenAll(subscribersCountDict, lessons);
 
-        var lessonsAwaited = await lessons;
-        var subscribersCountDictAwaited = await subscribersCountDict;
+        var lessonDtos = _mapper.Map<List<Lesson>, List<LessonDto>>(lessons.Result);
 
-        var lessonDtos = _mapper.Map<List<Lesson>, List<LessonDto>>(lessonsAwaited);
-
-        foreach (var lesson in lessonDtos)
-        {
-            lesson.SubscribersCount = subscribersCountDictAwaited[lesson.Id].SbCount;
-        }
+        lessonDtos.ForEach(t => t.SubscribersCount = subscribersCountDict.Result[t.Id].SbCount);
 
         return lessonDtos;
     }
