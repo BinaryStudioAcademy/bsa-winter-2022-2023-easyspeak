@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { INewLesson } from '@shared/models/lesson/INewLesson';
 
@@ -11,18 +11,7 @@ import { NotificationService } from 'src/app/services/notification.service';
     templateUrl: './lessons-create.component.html',
     styleUrls: ['./lessons-create.component.sass'],
 })
-export class LessonsCreateComponent {
-    lessonToCreate: INewLesson = {
-        name: '',
-        description: '',
-        mediaPath: '',
-        startsAt: new Date(),
-        questions: [],
-        tags: [],
-    };
-
-    tagsControl = new FormControl();
-
+export class LessonsCreateComponent implements OnInit {
     tagsList: string[] = [
         'Architecture',
         'Arts',
@@ -42,31 +31,62 @@ export class LessonsCreateComponent {
         'Politics',
     ];
 
-    questions = '';
-
-    tags: string[] = [];
+    myForm: FormGroup;
 
     constructor(
-        private dialogRef: MatDialogRef<LessonsCreateComponent>,
+        private fb: FormBuilder,
         private lessonService: LessonsService,
+        private dialogRef: MatDialogRef<LessonsCreateComponent>,
         private notificationService: NotificationService,
-    ) { }
+    ) {}
+
+    ngOnInit(): void {
+        this.myForm = this.fb.group({
+            name: ['', [
+                Validators.required,
+            ]],
+            date: ['', [
+                Validators.required,
+            ]],
+            questions: ['', [
+                Validators.required,
+            ]],
+            tags: ['', [
+                Validators.required,
+            ]],
+        })
+    }
+
+    get name() {
+        return this.myForm.get('name');
+    }
+
+    get date() {
+        return this.myForm.get('date');
+    }
+
+    get questions() {
+        return this.myForm.get('questions');
+    }
+
+    get tags() {
+        return this.myForm.get('tags');
+    }
 
     createLesson() {
-        this.lessonToCreate.questions =
-            this.questions
-                .split('\n')
-                .filter((entry) => entry.trim() !== '');
-
-        this.lessonToCreate.tags = this.tags;
-
-        if (this.lessonToCreate.name !== '' && this.lessonToCreate.description !== '' &&
-            this.lessonToCreate.questions.length > 0 && this.lessonToCreate.tags.length > 0) {
-            this.lessonService.createLesson(this.lessonToCreate);
-            this.notificationService.showSuccess('Lesson was successfully created!', 'Success!');
-            this.dialogRef.close();
-        } else {
-            this.notificationService.showError('Something went wrong.', 'Error!');
+        const lessonToCreate: INewLesson = {
+            name: this.name?.value,
+            description: '',
+            mediaPath: '',
+            startsAt: this.date?.value,
+            questions: this.questions?.value.split('\n').filter((entry: string) => entry.trim()),
+            tags: this.tags?.value,
         }
+
+        this.lessonService.createLesson(lessonToCreate);
+
+        this.dialogRef.close();
+
+        this.notificationService.showSuccess('Successfully created a lesson!', 'Success');
     }
 }

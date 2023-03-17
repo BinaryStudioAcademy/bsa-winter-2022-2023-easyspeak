@@ -1,46 +1,47 @@
 <div class="container">
     <h2>Create a lesson</h2>
 
-    <form #form="ngForm" *ngIf="lessonToCreate" (ngSubmit)="createLesson()" autocomplete="off">
-        <mat-form-field appearance="fill">
-            <mat-error>Name is required</mat-error>
+    <form [formGroup]="myForm" autocomplete="off">
+
+        <mat-form-field>
             <mat-label>Name</mat-label>
-            <input matInput type="text" class="form-control" placeholder="Enter lesson name" name="name"
-                [(ngModel)]="lessonToCreate.name" required>
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-error>Description is required</mat-error>
-            <mat-label>Description</mat-label>
-            <input matInput type="text" class="form-control" placeholder="Enter lesson description" name="description"
-                [(ngModel)]="lessonToCreate.description" required>
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-error>Questions are required</mat-error>
-            <mat-label>Questions</mat-label>
-            <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
-                class="form-control" placeholder="Enter lesson questions" name="questions"
-                [(ngModel)]="questions" required></textarea>
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-error>Tags are required</mat-error>
-            <mat-label>Tags</mat-label>
-            <mat-select [formControl]="tagsControl" multiple [(ngModel)]="tags" required>
-                <mat-option *ngFor="let tag of tagsList" [value]="tag">{{ tag }}</mat-option>
-            </mat-select>
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-error>Users capacity is required</mat-error>
-            <mat-label>Users capacity</mat-label>
-            <input matInput type="number" min="0" class="form-control" placeholder="Enter maximum user count"
-                name="limitOfUsers" [(ngModel)]="lessonToCreate.limitOfUsers" required>
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-error>Date is required</mat-error>
-            <mat-label>Date</mat-label>
-            <input matInput type="datetime-local" class="form-control" name="startsAt"
-                [(ngModel)]="lessonToCreate.startsAt" required>
+            <input matInput placeholder="Enter a lesson name" formControlName="name">
+
+            <mat-error *ngIf="name?.invalid && name?.touched">
+                Name is Required
+            </mat-error>
         </mat-form-field>
 
-        <button type="submit" mat-raised-button color="primary">Create</button>
+        <mat-form-field>
+            <mat-label>Date</mat-label>
+            <input matInput type="datetime-local" placeholder="Enter lesson date" formControlName="date">
+
+            <mat-error *ngIf="date?.invalid && date?.touched">
+                Date is Required
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Questions</mat-label>
+            <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" placeholder="Enter lesson questions" formControlName="questions"></textarea>
+
+            <mat-error *ngIf="questions?.invalid && questions?.touched">
+                At least one question is required
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Tags</mat-label>
+            <mat-select placeholder="Select lesson tags" formControlName="tags" multiple>
+                <mat-option *ngFor="let tag of tagsList" [value]="tag">{{ tag }}</mat-option>
+            </mat-select>
+
+            <mat-error *ngIf="tags?.invalid && tags?.touched">
+                At least one tag is required
+            </mat-error>
+        </mat-form-field>
+
+        <button mat-raised-button [disabled]="myForm.invalid" color="primary" (click)="createLesson()">Create a lesson</button>
+
     </form>
 </div>
