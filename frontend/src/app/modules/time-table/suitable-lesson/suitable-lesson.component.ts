@@ -1,7 +1,4 @@
-import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
-import { MatCalendar, MatDatepicker } from '@angular/material/datepicker';
 import * as moment from 'moment';
 
 @Component({
@@ -14,21 +11,12 @@ export class SuitableLessonComponent {
 
     selectedDate: Date = new Date();
 
-    isSelected = (date: Date): string | string[] => {
-        if (this.selectedDate && date.getDate() === this.selectedDate.getDate()) {
-            return 'selected';
-        }
-
-        return '';
-    };
-
     constructor() {
         this.setDays();
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
-    select(event: Date | null, calendar: MatCalendar<Date>) {
-        if (event !== null) {
+    select(event: Date | null) {
+        if (event) {
             this.selectedDate = event;
             this.selectedDate.setDate(this.selectedDate.getDate() - 1);
             this.setDays();
@@ -47,42 +35,11 @@ export class SuitableLessonComponent {
         this.setDays();
     }
 
-    getWeekDayString(inDate: Date): string {
-        return new DatePipe('en-US').transform(inDate, 'EEEE') ?? '';
-    }
-
-    getMonthString(inDate: Date): string {
-        return new DatePipe('en-US').transform(inDate, 'MMMM') ?? ' ';
-    }
-
-    getDayNumber(inNumber: number): string {
-        if (inNumber > 9) {
-            return inNumber.toString();
-        }
-
-        // eslint-disable-next-line prefer-template
-        return '0' + inNumber.toString();
-    }
-
-    getCalendarMonthString(): string {
-        const dateFormat = 'dd MMMM';
-        const formattedDate1 = new DatePipe('en-US').transform(this.days[0], dateFormat);
-        const formattedDate2 = new DatePipe('en-US').transform(this.days[6], dateFormat);
-
-        return `${formattedDate1} - ${formattedDate2}`;
-    }
-
     setDays(): void {
-        const tempDate: Date = this.selectedDate;
-
-        const tempDayOfWeek: number = this.selectedDate.getDay();
-
         for (let i = 0; i < 7; i++) {
-            const day = moment(tempDate)
-                .add(i - tempDayOfWeek + 1, 'day')
+            this.days[i] = moment(this.selectedDate)
+                .add(i - this.selectedDate.getDay() + 1, 'day')
                 .toDate();
-
-            this.days[i] = day;
         }
     }
 }

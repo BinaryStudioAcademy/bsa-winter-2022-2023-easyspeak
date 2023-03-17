@@ -15,10 +15,10 @@
                     <mat-icon>calendar_today</mat-icon>
                 </button>
                 <mat-menu #appMenu="matMenu">
-                    <mat-calendar #calendar (selectedChange)="select($event, calendar)" [dateClass]="isSelected">
-                    </mat-calendar>
+                    <mat-calendar #calendar (selectedChange)="select($event)"> </mat-calendar>
                 </mat-menu>
-                {{ getCalendarMonthString() }}
+
+                {{ this.days[0] | date : 'dd MMMM' }} - {{ this.days[6] | date : 'dd MMMM' }}
             </div>
 
             <button class="button-week" (click)="weekInc()">

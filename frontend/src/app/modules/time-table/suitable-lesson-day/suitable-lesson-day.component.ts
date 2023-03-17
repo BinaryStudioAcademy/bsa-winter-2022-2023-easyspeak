@@ -16,21 +16,10 @@ export class SuitableLessonDayComponent {
     todayDate: Date = new Date();
 
     isToday(): boolean {
-        const itemMoment = moment(this.item);
-        const todayMoment = moment(this.todayDate);
-
-        if (itemMoment.diff(todayMoment, 'days', true) > -1 && itemMoment.diff(todayMoment, 'days', true) < 0) {
-            return true;
-        }
-
-        return false;
+        return moment(this.item).isSame(this.todayDate, 'days');
     }
 
     compareDate(): boolean {
-        const valueMoment = moment(this.item);
-
-        const todayMoment = moment();
-
-        return valueMoment.isBefore(todayMoment, 'day');
+        return moment(this.item).isBefore(moment(), 'day');
     }
 }
