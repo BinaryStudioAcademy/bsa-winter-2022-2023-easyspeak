@@ -13,7 +13,6 @@ namespace EasySpeak.Core.DAL.Entities
         public string Topic { get; set; } = string.Empty;
 
         public ICollection<Subquestion> Subquestions { get; private set; }
-
         public string CreatedBy { get; set; } = string.Empty;
         public Question()
         {
