@@ -4,6 +4,7 @@ using EasySpeak.Core.DAL.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EasySpeak.Core.DAL.Migrations
 {
     [DbContext(typeof(EasySpeakCoreContext))]
-    partial class EasySpeakCoreContextModelSnapshot : ModelSnapshot
+    [Migration("20230317130619_FixCreatedAtByAgain")]
+    partial class FixCreatedAtByAgain
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -140,9 +142,6 @@ namespace EasySpeak.Core.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("LanguageLevel")
-                        .HasColumnType("int");
-
                     b.Property<int?>("LimitOfUsers")
                         .HasColumnType("int");
 
@@ -157,13 +156,7 @@ namespace EasySpeak.Core.DAL.Migrations
                     b.Property<DateTime>("StartAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId")
-                        .IsUnique();
 
                     b.ToTable("Lessons");
                 });
@@ -568,17 +561,6 @@ namespace EasySpeak.Core.DAL.Migrations
                         .IsRequired();
 
                     b.Navigation("Requester");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("EasySpeak.Core.DAL.Entities.Lesson", b =>
-                {
-                    b.HasOne("EasySpeak.Core.DAL.Entities.User", "User")
-                        .WithOne()
-                        .HasForeignKey("EasySpeak.Core.DAL.Entities.Lesson", "UserId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
 
                     b.Navigation("User");
                 });

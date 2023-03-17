@@ -1,10 +1,14 @@
 ﻿using EasySpeak.Core.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
+using System.Security.Claims;
 
 namespace EasySpeak.Core.DAL.Context
 {
     public class EasySpeakCoreContext : DbContext
     {
+        private readonly IHttpContextAccessor _httpContextAccessor;
+
         public DbSet<Sample> Samples => Set<Sample>();
         public DbSet<User> Users => Set<User>();
         public DbSet<Friend> Friends => Set<Friend>();
@@ -18,14 +22,36 @@ namespace EasySpeak.Core.DAL.Context
         public DbSet<Subquestion> Subquestions => Set<Subquestion>();
 
 
-        public EasySpeakCoreContext(DbContextOptions<EasySpeakCoreContext> options) : base(options)
+        public EasySpeakCoreContext(DbContextOptions<EasySpeakCoreContext> options, IHttpContextAccessor httpContextAccessor) : base(options)
         {
+            _httpContextAccessor = httpContextAccessor;
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Configure();
             modelBuilder.Seed();
+        }
+        public override int SaveChanges()
+        {
+            AddTimestamps();
+            return base.SaveChanges();
+        }
+        private void AddTimestamps()
+        {
+            var entities = ChangeTracker.Entries().Where(x => x.Entity is Entity<long> && (x.State == EntityState.Added));
+
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
+            var userId = long.Parse(_httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
+
+            foreach (var entity in entities)
+            {
+                if (entity.State == EntityState.Added)
+                {
+                    ((AuditEntity<long>)entity.Entity).CreatedBy = userId;
+                }
+            }
         }
     }
 }

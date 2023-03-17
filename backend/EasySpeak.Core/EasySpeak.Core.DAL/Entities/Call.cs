@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EasySpeak.Core.DAL.Entities
 {
-    public class Call : Entity<long>
+    public class Call : AuditEntity<long>
     {
         public long ChatId { get; set; }
         public Chat Chat { get; set; } = null!;

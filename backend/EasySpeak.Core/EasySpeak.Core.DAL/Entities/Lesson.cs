@@ -2,7 +2,7 @@
 
 namespace EasySpeak.Core.DAL.Entities
 {
-    public class Lesson : Entity<long>
+    public class Lesson : AuditEntity<long>
     {
         public string Name { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;

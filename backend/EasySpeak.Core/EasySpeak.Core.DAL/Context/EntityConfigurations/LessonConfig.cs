@@ -1,11 +1,6 @@
 ﻿using EasySpeak.Core.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EasySpeak.Core.DAL.Context.EntityConfigurations
 {
@@ -19,6 +14,9 @@ namespace EasySpeak.Core.DAL.Context.EntityConfigurations
 
             builder.HasOne(l => l.User)
                 .WithOne().OnDelete(DeleteBehavior.NoAction);
+
+            builder.Property(q => q.CreatedAt)
+                .HasDefaultValueSql("getutcdate()");
         }
     }
 }
