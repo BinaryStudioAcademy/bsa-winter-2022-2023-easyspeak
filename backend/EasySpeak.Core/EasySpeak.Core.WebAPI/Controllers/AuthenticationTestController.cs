@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+﻿using EasySpeak.Core.BLL.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EasySpeak.Core.WebAPI.Controllers
@@ -9,10 +9,16 @@ namespace EasySpeak.Core.WebAPI.Controllers
     [ApiController]
     public class AuthenticationTestController : ControllerBase
     {
+        readonly IFirebaseAuthService _firebaseAuthService;
+
+        public AuthenticationTestController(IFirebaseAuthService firebaseAuthService)
+        {
+            _firebaseAuthService = firebaseAuthService;
+        }
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok();
+            return Ok(_firebaseAuthService.UserId);
         }
     }
 }
