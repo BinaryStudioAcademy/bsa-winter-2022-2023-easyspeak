@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EasySpeak.Core.DAL.Entities
 {
-    public class Question : AuditEntity<long>
+    public class Question : Entity<long>
     {
         public long LessonId { get; set; }
         public Lesson Lesson { get; set; } = null!;
