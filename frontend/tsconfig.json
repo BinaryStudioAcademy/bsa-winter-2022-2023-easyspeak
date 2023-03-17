@@ -37,7 +37,8 @@
           "src/app/modules/*"
         ]
       },
-      "useDefineForClassFields": false
+      "useDefineForClassFields": false,
+        "skipLibCheck": true
     },
     "angularCompilerOptions": {
         "enableI18nLegacyMessageIdFormat": false,
