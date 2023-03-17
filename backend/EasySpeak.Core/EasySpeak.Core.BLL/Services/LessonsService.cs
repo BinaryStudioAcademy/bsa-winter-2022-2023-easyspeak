@@ -9,7 +9,9 @@ namespace EasySpeak.Core.BLL.Services;
 
 public class LessonsService : BaseService, ILessonsService
 {
-    public LessonsService(EasySpeakCoreContext context, IMapper mapper) : base(context, mapper) { }
+    public LessonsService(EasySpeakCoreContext context, IMapper mapper) : base(context, mapper)
+    {
+    }
 
     public async Task<ICollection<LessonDto>> GetAllLessonsAsync(FiltersRequest filtersRequest)
     {
@@ -18,7 +20,6 @@ public class LessonsService : BaseService, ILessonsService
         var lessonsFromContext = _context.Lessons
             .Include(l => l.Tags)
             .Include(l => l.Questions)
-            .Include(l => l.Subscribers)
             .Include(l => l.User)
             .Where(x => x.StartAt > filtersRequest.Date);
 
@@ -32,6 +33,22 @@ public class LessonsService : BaseService, ILessonsService
             lessonsFromContext = lessonsFromContext.Where(m => filtersRequest.LanguageLevels.Contains(m.LanguageLevel));
         }
 
-        return _mapper.Map<List<Lesson>, List<LessonDto>>(await lessonsFromContext.ToListAsync());
+        // Create 2 queries
+        var subscribersCountDict = lessonsFromContext.Select(t => new { Id = t.Id, SbCount = t.Subscribers.Count }).ToDictionaryAsync(t => t.Id);
+        var lessons = lessonsFromContext.ToListAsync();
+
+        await Task.WhenAll(subscribersCountDict, lessons);
+
+        var lessonsAwaited = await lessons;
+        var subscribersCountDictAwaited = await subscribersCountDict;
+
+        var lessonDtos = _mapper.Map<List<Lesson>, List<LessonDto>>(lessonsAwaited);
+
+        foreach (var lesson in lessonDtos)
+        {
+            lesson.SubscribersCount = subscribersCountDictAwaited[lesson.Id].SbCount;
+        }
+
+        return lessonDtos;
     }
 }
