@@ -9,30 +9,47 @@ namespace EasySpeak.Core.BLL.Services;
 
 public class LessonsService : BaseService, ILessonsService
 {
-    public LessonsService(EasySpeakCoreContext context, IMapper mapper) : base(context, mapper) { }
+    public LessonsService(EasySpeakCoreContext context, IMapper mapper) : base(context, mapper)
+    {
+    }
 
     public async Task<ICollection<LessonDto>> GetAllLessonsAsync(FiltersRequest filtersRequest)
     {
+        var tagsName = filtersRequest.Tags?.Select(x => x.Name);
 
-        // IQueryable
-        var lessonsFromContext = await _context.Lessons
+        var lessonsFromContext = _context.Lessons
             .Include(l => l.Tags)
-            .Include(l => l.Questions).ThenInclude(t => t.Subquestions)
-            .Include(l => l.Subscribers)
+            .Include(l => l.Questions)
             .Include(l => l.User)
-            .Where(m => m.StartAt > filtersRequest.Date)
-            .Where(m =>
-                (filtersRequest.LanguageLevels != null &&
-                 filtersRequest.LanguageLevels.Contains(m.LanguageLevel)
-                 || filtersRequest.LanguageLevels == null)).ToListAsync();
+            .Where(x => x.StartAt > filtersRequest.Date);
 
-        // IEnumerable
-        lessonsFromContext = lessonsFromContext
-            .Where(m => (filtersRequest.Tags != null &&
-                         filtersRequest.Tags.Select(t => t.Name).Intersect(m.Tags.Select(t => t.Name)).Any()
-                         || filtersRequest.Tags == null)).ToList();
+        if (tagsName != null)
+        {
+            lessonsFromContext = lessonsFromContext.Where(x => x.Tags.Any(y => tagsName.Contains(y.Name)));
+        }
 
-        return _mapper.Map<List<Lesson>, List<LessonDto>>(lessonsFromContext);
+        if (filtersRequest.LanguageLevels != null)
+        {
+            lessonsFromContext = lessonsFromContext.Where(m => filtersRequest.LanguageLevels.Contains(m.LanguageLevel));
+        }
+
+        // Create 2 queries
+        var subscribersCountDict = lessonsFromContext.Select(t => new { Id = t.Id, SbCount = t.Subscribers.Count }).ToDictionaryAsync(t => t.Id);
+        var lessons = lessonsFromContext.ToListAsync();
+
+        await Task.WhenAll(subscribersCountDict, lessons);
+
+        var lessonsAwaited = await lessons;
+        var subscribersCountDictAwaited = await subscribersCountDict;
+
+        var lessonDtos = _mapper.Map<List<Lesson>, List<LessonDto>>(lessonsAwaited);
+
+        foreach (var lesson in lessonDtos)
+        {
+            lesson.SubscribersCount = subscribersCountDictAwaited[lesson.Id].SbCount;
+        }
+
+        return lessonDtos;
     }
 
     public async Task<ICollection<DayCardDto>?> GetDayCardsOfWeekAsync(RequestDayCardDto requestDto)

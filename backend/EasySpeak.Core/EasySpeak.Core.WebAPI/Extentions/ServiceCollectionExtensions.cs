@@ -3,6 +3,9 @@ using EasySpeak.Core.BLL.MappingProfiles;
 using EasySpeak.Core.BLL.Services;
 using EasySpeak.Core.DAL.Context;
 using EasySpeak.Core.WebAPI.Validators;
+using EasySpeak.RabbitMQ;
+using EasySpeak.RabbitMQ.Interfaces;
+using EasySpeak.RabbitMQ.Services;
 using FirebaseAdmin;
 using FluentValidation.AspNetCore;
 using Google.Apis.Auth.OAuth2;
@@ -16,7 +19,7 @@ namespace EasySpeak.Core.WebAPI.Extentions
 {
     public static class ServiceCollectionExtensions
     {
-        public static void RegisterCustomServices(this IServiceCollection services)
+        public static void RegisterCustomServices(this IServiceCollection services, IConfiguration configuration)
         {
             services
                 .AddControllers()
@@ -24,19 +27,15 @@ namespace EasySpeak.Core.WebAPI.Extentions
 
             services.AddTransient<ISampleService, SampleService>();
             services.AddTransient<ILessonsService, LessonsService>();
+            services.AddSingleton<IConnectionProvider>(_ => new ConnectionProvider(configuration.GetValue<string>("Rabbit")));
+            services.AddTransient<IMessageProducer, MessageProducer>();
             services.AddScoped<IFirebaseAuthService, FirebaseAuthService>();
             services.AddFirebaseApp();
         }
 
         public static void AddAutoMapper(this IServiceCollection services)
         {
-            services.AddAutoMapper(
-                Assembly.GetAssembly(typeof(SampleProfile)),
-                Assembly.GetAssembly(typeof(LessonsProfile)),
-                Assembly.GetAssembly(typeof(UserProfile)),
-                Assembly.GetAssembly(typeof(TagForLessonProfile)),
-                Assembly.GetAssembly(typeof(QuestionsProfile)),
-                Assembly.GetAssembly(typeof(SubQuestionsProfile)));
+            services.AddAutoMapper(Assembly.GetAssembly(typeof(SampleProfile)));
         }
 
         public static void AddValidation(this IServiceCollection services)
