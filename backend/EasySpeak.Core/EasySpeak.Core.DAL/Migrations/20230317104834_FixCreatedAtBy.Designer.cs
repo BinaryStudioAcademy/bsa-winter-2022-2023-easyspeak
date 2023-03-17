@@ -4,6 +4,7 @@ using EasySpeak.Core.DAL.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EasySpeak.Core.DAL.Migrations
 {
     [DbContext(typeof(EasySpeakCoreContext))]
-    partial class EasySpeakCoreContextModelSnapshot : ModelSnapshot
+    [Migration("20230317104834_FixCreatedAtBy")]
+    partial class FixCreatedAtBy
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,8 +53,9 @@ namespace EasySpeak.Core.DAL.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<long?>("CreatedBy")
-                        .HasColumnType("bigint");
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("FinishedAt")
                         .HasColumnType("datetime2");
@@ -78,7 +81,7 @@ namespace EasySpeak.Core.DAL.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getutcdate()");
+                        .HasDefaultValueSql("getdate()");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -100,7 +103,7 @@ namespace EasySpeak.Core.DAL.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getutcdate()");
+                        .HasDefaultValueSql("getdate()");
 
                     b.Property<int>("FriendshipStatus")
                         .HasColumnType("int");
@@ -131,10 +134,11 @@ namespace EasySpeak.Core.DAL.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getutcdate()");
+                        .HasDefaultValueSql("getdate()");
 
-                    b.Property<long?>("CreatedBy")
-                        .HasColumnType("bigint");
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -173,8 +177,9 @@ namespace EasySpeak.Core.DAL.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<long?>("CreatedBy")
-                        .HasColumnType("bigint");
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -232,10 +237,11 @@ namespace EasySpeak.Core.DAL.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getutcdate()");
+                        .HasDefaultValueSql("getdate()");
 
-                    b.Property<long?>("CreatedBy")
-                        .HasColumnType("bigint");
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<long>("LessonId")
                         .HasColumnType("bigint");
@@ -265,7 +271,7 @@ namespace EasySpeak.Core.DAL.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getutcdate()");
+                        .HasDefaultValueSql("getdate()");
 
                     b.Property<long?>("CreatedBy")
                         .HasColumnType("bigint");
@@ -373,8 +379,9 @@ namespace EasySpeak.Core.DAL.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<long?>("CreatedBy")
-                        .HasColumnType("bigint");
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<long>("QuestionId")
                         .HasColumnType("bigint");
@@ -401,7 +408,7 @@ namespace EasySpeak.Core.DAL.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getutcdate()");
+                        .HasDefaultValueSql("getdate()");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -429,7 +436,7 @@ namespace EasySpeak.Core.DAL.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getutcdate()");
+                        .HasDefaultValueSql("getdate()");
 
                     b.Property<string>("Email")
                         .IsRequired()
