@@ -4,6 +4,6 @@ namespace EasySpeak.Core.Common.DTO.Lesson;
 
 public class RequestDayCardDto
 {
-    [JsonProperty("date", Required = Required.Always)]
+    [JsonRequired]
     public DateTime Date { get; set; }
 }

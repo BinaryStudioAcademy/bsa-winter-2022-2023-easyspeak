@@ -63,7 +63,7 @@ public class LessonsService : BaseService, ILessonsService
                 new DayCardDto()
                 {
                     Date = t.Key,
-                    DayOfWeek = t.Key.DayOfWeek.ToString(),
+                    DayOfWeek = t.Key.DayOfWeek,
                     MeetingsAmount = t.Count()
                 }
             )
