@@ -7,6 +7,8 @@ import * as moment from 'moment';
     styleUrls: ['./suitable-lesson.component.sass'],
 })
 export class SuitableLessonComponent {
+    readonly amountOfDayInWeek: number = 7;
+
     days: Date[] = [];
 
     selectedDate: Date = new Date();
@@ -24,13 +26,13 @@ export class SuitableLessonComponent {
     }
 
     weekInc(): void {
-        this.selectedDate.setDate(this.selectedDate.getDate() + 7);
+        this.selectedDate.setDate(this.selectedDate.getDate() + this.amountOfDayInWeek);
 
         this.setDays();
     }
 
     weekDec(): void {
-        this.selectedDate.setDate(this.selectedDate.getDate() - 7);
+        this.selectedDate.setDate(this.selectedDate.getDate() - this.amountOfDayInWeek);
 
         this.setDays();
     }
