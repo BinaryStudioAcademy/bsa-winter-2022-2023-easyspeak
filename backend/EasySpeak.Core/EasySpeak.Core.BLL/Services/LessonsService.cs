@@ -13,43 +13,29 @@ public class LessonsService : BaseService, ILessonsService
 
     public async Task<ICollection<LessonDto>> GetAllLessonsAsync(FiltersRequest filtersRequest)
     {
+        var tagsName = filtersRequest.Tags?.Select(x => x.Name);
+        var levelsName = filtersRequest.LanguageLevels;
 
-        // IQueryable
-        var lessonsFromContext = await _context.Lessons
+        var lessonsFromContext = _context.Lessons
             .Include(l => l.Tags)
             .Include(l => l.Questions)
             .Include(l => l.Subscribers)
             .Include(l => l.User)
-            .Where(m => m.StartAt > filtersRequest.Date)
-            .Where(m =>
-                (filtersRequest.LanguageLevels != null &&
-                 filtersRequest.LanguageLevels.Contains(m.LanguageLevel)
-                 || filtersRequest.LanguageLevels == null)).ToListAsync();// make it IEnumerable
+            .Where(x => x.StartAt > filtersRequest.Date);
 
-        // IEnumerable
-        lessonsFromContext = lessonsFromContext
-            .Where(m => (filtersRequest.Tags != null &&
-                         filtersRequest.Tags.Select(t => t.Name).Intersect(m.Tags.Select(t => t.Name)).Any()
-                         || filtersRequest.Tags == null)).ToList();
+        if (tagsName != null)
+        {
+            lessonsFromContext = lessonsFromContext.Where(x => x.Tags.Any(y => tagsName.Contains(y.Name)));
+        }
 
-        // Tetiana's request
-        /*         
-        filtersRequest ??= new FiltersRequest();
-        var tagsName = filtersRequest.Tags?.Select(x => x.Name) ?? Enumerable.Empty<string>();
-        var levelsName = filtersRequest.LanguageLevels ?? Enumerable.Empty<LanguageLevel>();
-        
-        var lessonsFromContext = await _context.Lessons
-            .Include(l => l.Tags)
-            .Include(l => l.Questions)
-            .Include(l => l.Subscribers)
-            .Include(l => l.User)
-            .Where(x => x.StartAt > filtersRequest.Date
-            && levelsName.Any(y => y == x.LanguageLevel)
-            && x.Tags.Any(y => tagsName.Contains(y.Name))
-           )
-            .ToListAsync();
-         */
+        if (levelsName != null)
+        {
+            lessonsFromContext = lessonsFromContext.
+                Where(m => filtersRequest.LanguageLevels != null
+                           && filtersRequest.LanguageLevels.Contains(m.LanguageLevel)
+                           || filtersRequest.LanguageLevels == null);
+        }
 
-        return _mapper.Map<List<Lesson>, List<LessonDto>>(lessonsFromContext);
+        return _mapper.Map<List<Lesson>, List<LessonDto>>(await lessonsFromContext.ToListAsync());
     }
 }

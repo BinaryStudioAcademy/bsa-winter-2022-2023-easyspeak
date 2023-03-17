@@ -35,13 +35,7 @@ namespace EasySpeak.Core.WebAPI.Extentions
 
         public static void AddAutoMapper(this IServiceCollection services)
         {
-            services.AddAutoMapper(
-                Assembly.GetAssembly(typeof(SampleProfile)),
-                Assembly.GetAssembly(typeof(LessonsProfile)),
-                Assembly.GetAssembly(typeof(UserProfile)),
-                Assembly.GetAssembly(typeof(TagForLessonProfile)),
-                Assembly.GetAssembly(typeof(QuestionsProfile)),
-                Assembly.GetAssembly(typeof(SubQuestionsProfile)));
+            services.AddAutoMapper(Assembly.GetAssembly(typeof(SampleProfile)));
         }
 
         public static void AddValidation(this IServiceCollection services)
