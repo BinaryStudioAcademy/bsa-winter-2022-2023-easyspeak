@@ -12,6 +12,8 @@ namespace EasySpeak.Core.DAL.Context
              .IsRequired()
              .HasMaxLength(50);
 
+            builder.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("getdate()");
         }
     }
 }

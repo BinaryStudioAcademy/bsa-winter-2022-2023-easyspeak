@@ -26,6 +26,9 @@ namespace EasySpeak.Core.DAL.Context.EntityConfigurations
 
             builder.HasMany(u => u.Lessons)
                 .WithMany(l => l.Subscribers);
+
+            builder.Property(u => u.CreatedAt)
+                .HasDefaultValueSql("getdate()");
         }
     }
 }
