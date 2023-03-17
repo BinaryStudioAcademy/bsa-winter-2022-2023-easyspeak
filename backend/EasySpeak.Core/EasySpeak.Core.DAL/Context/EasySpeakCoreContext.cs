@@ -47,7 +47,7 @@ namespace EasySpeak.Core.DAL.Context
 
             var currentUsername = !string.IsNullOrEmpty(userId)
                 ? userId
-                : throw new ArgumentNullException();
+                : throw new ArgumentNullException("User was not found");
 
             foreach (var entity in entities)
             {
