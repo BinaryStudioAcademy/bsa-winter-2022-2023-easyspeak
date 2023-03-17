@@ -23,7 +23,7 @@ namespace EasySpeak.Core.DAL.Context.EntityConfigurations
                 .OnDelete(DeleteBehavior.NoAction);
 
             builder.Property(f => f.CreatedAt)
-                .HasDefaultValueSql("getdate()");
+                .HasDefaultValueSql("getutcdate()");
         }
     }
 }

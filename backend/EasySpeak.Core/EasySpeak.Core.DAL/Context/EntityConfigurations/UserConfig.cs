@@ -28,7 +28,7 @@ namespace EasySpeak.Core.DAL.Context.EntityConfigurations
                 .WithMany(l => l.Subscribers);
 
             builder.Property(u => u.CreatedAt)
-                .HasDefaultValueSql("getdate()");
+                .HasDefaultValueSql("getutcdate()");
         }
     }
 }

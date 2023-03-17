@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace EasySpeak.Core.DAL.Entities
 {
-    public class Message: Entity<long>, ICreatedBy
+    public class Message : AuditEntity<long>
     {
         public long ChatId { get; set; }
         public Chat Chat { get; set; } = null!;
         public string Text { get; set; } = string.Empty;
-        public string CreatedBy { get; set; } = string.Empty;
         public bool IsDeleted { get; set; }
     }
 }

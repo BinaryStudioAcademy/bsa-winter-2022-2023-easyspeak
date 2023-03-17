@@ -42,18 +42,14 @@ namespace EasySpeak.Core.DAL.Context
             var entities = ChangeTracker.Entries().Where(x => x.Entity is Entity<long> && (x.State == EntityState.Added));
 
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
-            var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Email).Value;
+            var userId = long.Parse(_httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
 #pragma warning restore CS8602 // Dereference of a possibly null reference.
-
-            var currentUsername = !string.IsNullOrEmpty(userId)
-                ? userId
-                : throw new ArgumentNullException("userId", "User was not found");
 
             foreach (var entity in entities)
             {
                 if (entity.State == EntityState.Added)
                 {
-                    ((ICreatedBy)entity.Entity).CreatedBy = currentUsername;
+                    ((AuditEntity<long>)entity.Entity).CreatedBy = userId;
                 }
             }
         }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EasySpeak.Core.DAL.Entities
 {
-    public class Lesson: Entity<long>, ICreatedBy
+    public class Lesson : AuditEntity<long>
     {
         public string Name { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
@@ -18,7 +18,6 @@ namespace EasySpeak.Core.DAL.Entities
         public ICollection<Tag> Tags { get; private set; }
         public ICollection<Question> Questions { get; private set; }
 
-        public string CreatedBy { get; set; } = string.Empty;
         public Lesson()
         {
             Tags = new List<Tag>();

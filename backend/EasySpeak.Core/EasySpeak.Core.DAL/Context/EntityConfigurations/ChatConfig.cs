@@ -22,7 +22,7 @@ namespace EasySpeak.Core.DAL.Context.EntityConfigurations
                 .HasForeignKey(m => m.ChatId);
 
             builder.Property(c => c.CreatedAt)
-                .HasDefaultValueSql("getdate()");
+                .HasDefaultValueSql("getutcdate()");
             
         }
     }

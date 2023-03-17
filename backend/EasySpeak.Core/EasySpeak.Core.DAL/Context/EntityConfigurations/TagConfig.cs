@@ -17,7 +17,7 @@ namespace EasySpeak.Core.DAL.Context.EntityConfigurations
                .WithMany(l => l.Tags);
 
             builder.Property(t => t.CreatedAt)
-                .HasDefaultValueSql("getdate()");
+                .HasDefaultValueSql("getutcdate()");
         }
     }
 }

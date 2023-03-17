@@ -13,7 +13,7 @@ namespace EasySpeak.Core.DAL.Context
              .HasMaxLength(50);
 
             builder.Property(e => e.CreatedAt)
-                .HasDefaultValueSql("getdate()");
+                .HasDefaultValueSql("getutcdate()");
         }
     }
 }

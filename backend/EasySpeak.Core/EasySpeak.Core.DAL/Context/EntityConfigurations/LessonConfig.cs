@@ -18,7 +18,7 @@ namespace EasySpeak.Core.DAL.Context.EntityConfigurations
                 .HasForeignKey(q => q.LessonId);
 
             builder.Property(q => q.CreatedAt)
-                .HasDefaultValueSql("getdate()");
+                .HasDefaultValueSql("getutcdate()");
         }
     }
 }
