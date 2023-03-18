@@ -7,7 +7,6 @@ namespace EasySpeak.Core.DAL.Entities
         public string Name { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         public string MediaPath { get; set; } = string.Empty;
-        public long UserId { get; set; }
         public User? User { get; set; }
         public DateTime StartAt { get; set; }
         public int? LimitOfUsers { get; set; }

@@ -13,7 +13,10 @@ namespace EasySpeak.Core.DAL.Context.EntityConfigurations
                 .HasForeignKey(q => q.LessonId);
 
             builder.HasOne(l => l.User)
-                .WithOne().OnDelete(DeleteBehavior.NoAction);
+                .WithMany(u => u.CreatedLessons)
+                .HasForeignKey(l => l.CreatedBy)
+                .OnDelete(DeleteBehavior.NoAction);
+
 
             builder.Property(q => q.CreatedAt)
                 .HasDefaultValueSql("getutcdate()");
