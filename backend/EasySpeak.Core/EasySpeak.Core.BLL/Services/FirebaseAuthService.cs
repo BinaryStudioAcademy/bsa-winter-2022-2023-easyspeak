@@ -12,7 +12,7 @@ namespace EasySpeak.Core.BLL.Services
             _context = context;
         }
         public long UserId { get; private set; }
-        
+        public string Email { get; private set; }
         
         public async Task SetUserId(string email)
         {
@@ -22,6 +22,7 @@ namespace EasySpeak.Core.BLL.Services
             if (user != null)
             {
                 UserId = user.Id;
+                Email = user.Email;
             }
         }
     }

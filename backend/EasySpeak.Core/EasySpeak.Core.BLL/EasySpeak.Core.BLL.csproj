@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\EasySpeak.RabbitMQ\EasySpeak.RabbitMQ.csproj" />
     <ProjectReference Include="..\EasySpeak.Core.Common\EasySpeak.Core.Common.csproj" />
     <ProjectReference Include="..\EasySpeak.Core.DAL\EasySpeak.Core.DAL.csproj" />
   </ItemGroup>

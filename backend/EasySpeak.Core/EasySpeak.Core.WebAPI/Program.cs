@@ -43,7 +43,7 @@ app.UseCors(opt => opt
     .AllowAnyMethod()
     .AllowAnyOrigin());
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseRouting();
 
