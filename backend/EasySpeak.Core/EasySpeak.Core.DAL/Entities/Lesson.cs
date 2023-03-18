@@ -2,12 +2,11 @@
 
 namespace EasySpeak.Core.DAL.Entities
 {
-    public class Lesson : Entity<long>
+    public class Lesson : AuditEntity<long>
     {
         public string Name { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         public string MediaPath { get; set; } = string.Empty;
-        public long UserId { get; set; }
         public User? User { get; set; }
         public DateTime StartAt { get; set; }
         public int? LimitOfUsers { get; set; }
@@ -19,6 +18,7 @@ namespace EasySpeak.Core.DAL.Entities
 
         public Lesson()
         {
+            Subscribers = new List<User>();
             Tags = new List<Tag>();
             Questions = new List<Question>();
             Subscribers = new List<User>();

@@ -4,6 +4,7 @@ using EasySpeak.Core.DAL.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EasySpeak.Core.DAL.Migrations
 {
     [DbContext(typeof(EasySpeakCoreContext))]
-    partial class EasySpeakCoreContextModelSnapshot : ModelSnapshot
+    [Migration("20230318002404_RecreateMigrations")]
+    partial class RecreateMigrations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -841,9 +843,6 @@ namespace EasySpeak.Core.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("LanguageLevel")
-                        .HasColumnType("int");
-
                     b.Property<int?>("LimitOfUsers")
                         .HasColumnType("int");
 
@@ -860,8 +859,6 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CreatedBy");
-
                     b.ToTable("Lessons");
 
                     b.HasData(
@@ -870,7 +867,6 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 1L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Singapore Dollar functionalities Field Branding impactful invoice actuating lavender",
-                            LanguageLevel = 0,
                             LimitOfUsers = 74,
                             MediaPath = "https://picsum.photos/640/480/?image=202",
                             Name = "Mobility",
@@ -881,7 +877,6 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 2L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Thailand budgetary management SDD core Concrete complexity Generic Concrete Shoes navigating plum pixel",
-                            LanguageLevel = 0,
                             LimitOfUsers = 123,
                             MediaPath = "https://picsum.photos/640/480/?image=134",
                             Name = "Palau",
@@ -892,7 +887,6 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 3L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "deposit Advanced input",
-                            LanguageLevel = 0,
                             MediaPath = "https://picsum.photos/640/480/?image=545",
                             Name = "EXE",
                             StartAt = new DateTime(2023, 4, 3, 23, 3, 18, 306, DateTimeKind.Utc).AddTicks(6493)
@@ -902,7 +896,6 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 4L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "South Carolina Accountability Plastic Health & Home",
-                            LanguageLevel = 0,
                             LimitOfUsers = 59,
                             MediaPath = "https://picsum.photos/640/480/?image=376",
                             Name = "Ville",
@@ -913,7 +906,6 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 5L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "deposit auxiliary Avon Intelligent strategy Forint copy",
-                            LanguageLevel = 0,
                             MediaPath = "https://picsum.photos/640/480/?image=659",
                             Name = "input",
                             StartAt = new DateTime(2023, 4, 18, 19, 29, 4, 130, DateTimeKind.Utc).AddTicks(7404)
@@ -923,7 +915,6 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 6L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Awesome Malta indigo XSS Texas interface Israel orchestrate",
-                            LanguageLevel = 0,
                             LimitOfUsers = 139,
                             MediaPath = "https://picsum.photos/640/480/?image=245",
                             Name = "front-end",
@@ -934,7 +925,6 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 7L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "B2C Platinum system bus channels",
-                            LanguageLevel = 0,
                             LimitOfUsers = 133,
                             MediaPath = "https://picsum.photos/640/480/?image=934",
                             Name = "Peso Uruguayo",
@@ -945,7 +935,6 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 8L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "white driver Usability Total Multi-tiered",
-                            LanguageLevel = 0,
                             LimitOfUsers = 142,
                             MediaPath = "https://picsum.photos/640/480/?image=266",
                             Name = "Bedfordshire",
@@ -956,7 +945,6 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 9L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Multi-tiered hacking Seychelles",
-                            LanguageLevel = 0,
                             LimitOfUsers = 56,
                             MediaPath = "https://picsum.photos/640/480/?image=7",
                             Name = "Music",
@@ -967,7 +955,6 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 10L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "application cross-platform Corners niches bleeding-edge Sleek Frozen Hat 1080p Cambridgeshire dot-com Gorgeous",
-                            LanguageLevel = 0,
                             LimitOfUsers = 29,
                             MediaPath = "https://picsum.photos/640/480/?image=878",
                             Name = "USB",
@@ -2840,16 +2827,6 @@ namespace EasySpeak.Core.DAL.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("EasySpeak.Core.DAL.Entities.Lesson", b =>
-                {
-                    b.HasOne("EasySpeak.Core.DAL.Entities.User", "User")
-                        .WithMany("CreatedLessons")
-                        .HasForeignKey("CreatedBy")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("EasySpeak.Core.DAL.Entities.Message", b =>
                 {
                     b.HasOne("EasySpeak.Core.DAL.Entities.Chat", "Chat")
@@ -2958,8 +2935,6 @@ namespace EasySpeak.Core.DAL.Migrations
 
             modelBuilder.Entity("EasySpeak.Core.DAL.Entities.User", b =>
                 {
-                    b.Navigation("CreatedLessons");
-
                     b.Navigation("Friends");
 
                     b.Navigation("Notifications");

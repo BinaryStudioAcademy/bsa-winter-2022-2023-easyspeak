@@ -4,7 +4,7 @@
 
 namespace EasySpeak.Core.DAL.Migrations
 {
-    public partial class Addedcontsrains : Migration
+    public partial class UpdatedDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,23 +15,15 @@ namespace EasySpeak.Core.DAL.Migrations
                 nullable: false,
                 defaultValue: 0);
 
-            migrationBuilder.AddColumn<long>(
-                name: "UserId",
-                table: "Lessons",
-                type: "bigint",
-                nullable: false,
-                defaultValue: 0L);
-
             migrationBuilder.CreateIndex(
-                name: "IX_Lessons_UserId",
+                name: "IX_Lessons_CreatedBy",
                 table: "Lessons",
-                column: "UserId",
-                unique: true);
+                column: "CreatedBy");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Lessons_Users_UserId",
+                name: "FK_Lessons_Users_CreatedBy",
                 table: "Lessons",
-                column: "UserId",
+                column: "CreatedBy",
                 principalTable: "Users",
                 principalColumn: "Id");
         }
@@ -39,19 +31,15 @@ namespace EasySpeak.Core.DAL.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Lessons_Users_UserId",
+                name: "FK_Lessons_Users_CreatedBy",
                 table: "Lessons");
 
             migrationBuilder.DropIndex(
-                name: "IX_Lessons_UserId",
+                name: "IX_Lessons_CreatedBy",
                 table: "Lessons");
 
             migrationBuilder.DropColumn(
                 name: "LanguageLevel",
-                table: "Lessons");
-
-            migrationBuilder.DropColumn(
-                name: "UserId",
                 table: "Lessons");
         }
     }
