@@ -34,6 +34,7 @@ namespace EasySpeak.Core.DAL.Entities
             Friends = new List<Friend>();
             Users = new List<Friend>();
             Notifications = new List<Notification>();
+            CreatedLessons = new List<Lesson>();
         }
 
     }
