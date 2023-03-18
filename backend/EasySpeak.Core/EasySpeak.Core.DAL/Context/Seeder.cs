@@ -1,5 +1,5 @@
-using System.Security.Cryptography;
 using Bogus;
+using EasySpeak.Core.Common.Enums;
 using EasySpeak.Core.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -67,7 +67,7 @@ public static class Seeder
         modelBuilder.Entity("LessonUser").HasData(lessonUser);
         modelBuilder.Entity("TagUser").HasData(tagUser);
     }
-    
+
     private static IList<Friend> GenerateFriends(int count = 20)
     {
         Faker.GlobalUniqueIndex = 0;
@@ -78,7 +78,7 @@ public static class Seeder
             .RuleFor(fr => fr.FriendshipStatus, f => f.PickRandom<FriendshipStatus>())
             .Generate(count);
     }
-    
+
     private static IList<Notification> GenerateNotitficetions(int count = 40)
     {
         Faker.GlobalUniqueIndex = 0;
@@ -91,7 +91,7 @@ public static class Seeder
             .RuleFor(n => n.Type, f => f.PickRandom<NotificationType>())
             .Generate(count);
     }
-    
+
     private static IList<Subquestion> GenerateSubquestions(int count = 40)
     {
         Faker.GlobalUniqueIndex = 0;
@@ -102,7 +102,7 @@ public static class Seeder
             .RuleFor(s => s.Text, f => f.Lorem.Sentences(f.Random.Number(1, 5)))
             .Generate(count);
     }
-    
+
     private static IList<Question> GenerateQuestions(int count = 20)
     {
         Faker.GlobalUniqueIndex = 0;
@@ -113,7 +113,7 @@ public static class Seeder
             .RuleFor(q => q.Topic, f => f.Random.Words(f.Random.Number(1, 6)))
             .Generate(count);
     }
-    
+
     private static IList<Call> GenerateCalls(int count = 40)
     {
         Faker.GlobalUniqueIndex = 0;
@@ -127,7 +127,7 @@ public static class Seeder
             .RuleFor(c => c.ChatId, f => f.Random.Number(1, 40))
             .Generate(count);
     }
-    
+
     private static IList<Message> GenerateMessages(int count = 40)
     {
         Faker.GlobalUniqueIndex = 0;
@@ -141,7 +141,7 @@ public static class Seeder
             .RuleFor(m => m.ChatId, f => f.Random.Number(1, 40))
             .Generate(count);
     }
-    
+
     private static IList<Chat> GenerateChats(int count = 20)
     {
         Faker.GlobalUniqueIndex = 0;
@@ -152,7 +152,7 @@ public static class Seeder
             .RuleFor(c => c.Name, f => f.Random.Words(f.Random.Number(1, 3)))
             .Generate(count);
     }
-    
+
     private static IList<Lesson> GenerateLessons(int count = 10)
     {
         Faker.GlobalUniqueIndex = 0;
@@ -167,7 +167,7 @@ public static class Seeder
             .RuleFor(l => l.LimitOfUsers, f => f.Random.Int(20, 200).OrNull(f, .2f))
             .Generate(count);
     }
-    
+
     private static IList<Tag> GenerateTags(int count = 20)
     {
         Faker.GlobalUniqueIndex = 0;
@@ -178,7 +178,7 @@ public static class Seeder
             .RuleFor(t => t.Name, f => f.Random.Word())
             .Generate(count);
     }
-    
+
     private static IList<User> GenerateUsers(int count = 5)
     {
         Faker.GlobalUniqueIndex = 0;
@@ -189,7 +189,7 @@ public static class Seeder
             .RuleFor(u => u.FirstName, f => f.Person.FirstName)
             .RuleFor(u => u.LastName, f => f.Person.LastName)
             .RuleFor(u => u.Email, f => f.Person.Email)
-            .RuleFor(u => u.Age, f => (short) f.Random.Number(16, 70))
+            .RuleFor(u => u.Age, f => (short)f.Random.Number(16, 70))
             .RuleFor(u => u.Sex, f => f.PickRandom<Sex>())
             .RuleFor(u => u.LanguageLevel, f => f.PickRandom<LanguageLevel>())
             .RuleFor(u => u.Status, f => f.PickRandom<UserStatus>())
@@ -198,7 +198,7 @@ public static class Seeder
             .RuleFor(u => u.IsSubscribed, f => f.Random.Bool(.9f))
             .Generate(count);
     }
-    
+
     private static IList<Friend> AddForeignKeys(this IList<Friend> friends, IList<User> users, int count)
     {
         foreach (var friend in friends)
@@ -209,7 +209,7 @@ public static class Seeder
 
         return friends;
     }
-    
+
     private static IList<Notification> AddForeingKeys(this IList<Notification> notifications, IList<User> users,
         int count)
     {
@@ -220,7 +220,7 @@ public static class Seeder
 
         return notifications;
     }
-    
+
     private static IList<Question> AddForeignKeys(this IList<Question> questions, IList<Lesson> lessons, int count)
     {
         foreach (var question in questions)
@@ -263,7 +263,7 @@ public static class Seeder
     }
 }
 
-public static class SeedHelper<T, K ,TK> where T: Entity<TK>
+public static class SeedHelper<T, K, TK> where T : Entity<TK>
     where K : Entity<TK>
     where TK : struct
 {
@@ -271,7 +271,7 @@ public static class SeedHelper<T, K ,TK> where T: Entity<TK>
     {
         int start = 0;
         int end = dataPerEntity;
-            
+
         foreach (var user in users)
         {
             for (int i = start; i < end; i++)
