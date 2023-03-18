@@ -7,6 +7,9 @@ namespace EasySpeak.Core.DAL.Context;
 
 public static class Seeder
 {
+    private static readonly DateTime DefaultDate = new DateTime(2023, 3, 30, 11, 0, 0, DateTimeKind.Utc);
+    private static readonly Random Rnd = new Random(42);
+
     public static void Seed(ModelBuilder modelBuilder)
     {
         var users = GenerateUsers();
@@ -118,7 +121,7 @@ public static class Seeder
         return new Faker<Call>()
             .UseSeed(10)
             .RuleFor(c => c.Id, f => f.IndexGlobal)
-            .RuleFor(c => c.StartedAt, f => f.Date.Recent(1, DateTime.Now))
+            .RuleFor(c => c.StartedAt, f => f.Date.Recent(1, DefaultDate))
             .RuleFor(c => c.FinishedAt,
                 (f, c) => f.Date.Between(c.StartedAt, c.StartedAt.AddMinutes(180)).OrNull(f, 0.15f))
             .RuleFor(c => c.ChatId, f => f.Random.Number(1, 40))
@@ -133,7 +136,7 @@ public static class Seeder
             .UseSeed(10)
             .RuleFor(m => m.Id, f => f.IndexGlobal)
             .RuleFor(m => m.Text, f => f.Random.Words(f.Random.Number(1, 20)))
-            .RuleFor(m => m.CreatedAt, f => f.Date.Recent(7, DateTime.Now))
+            .RuleFor(m => m.CreatedAt, f => f.Date.Recent(7, DefaultDate))
             .RuleFor(m => m.IsDeleted, f => f.Random.Bool(.15f))
             .RuleFor(m => m.ChatId, f => f.Random.Number(1, 40))
             .Generate(count);
@@ -160,7 +163,7 @@ public static class Seeder
             .RuleFor(l => l.Name, f => f.Random.Word())
             .RuleFor(l => l.Description, f => f.Random.Words(f.Random.Number(2, 10)))
             .RuleFor(l => l.MediaPath, f => f.Image.PicsumUrl())
-            .RuleFor(l => l.StartAt, f => f.Date.Soon(30, DateTime.Now))
+            .RuleFor(l => l.StartAt, f => f.Date.Soon(30, DefaultDate))
             .RuleFor(l => l.LimitOfUsers, f => f.Random.Int(20, 200).OrNull(f, .2f))
             .Generate(count);
     }
@@ -200,8 +203,8 @@ public static class Seeder
     {
         foreach (var friend in friends)
         {
-            friend.UserId = users[RandomNumberGenerator.GetInt32(count)].Id;
-            friend.RequesterId = users[RandomNumberGenerator.GetInt32(count)].Id;
+            friend.UserId = users[Rnd.Next(count)].Id;
+            friend.RequesterId = users[Rnd.Next(count)].Id;
         }
 
         return friends;
@@ -212,7 +215,7 @@ public static class Seeder
     {
         foreach (var notification in notifications)
         {
-            notification.UserId = users[RandomNumberGenerator.GetInt32(count)].Id;
+            notification.UserId = users[Rnd.Next(count)].Id;
         }
 
         return notifications;
@@ -222,7 +225,7 @@ public static class Seeder
     {
         foreach (var question in questions)
         {
-            question.LessonId = lessons[RandomNumberGenerator.GetInt32(count)].Id;
+            question.LessonId = lessons[Rnd.Next(count)].Id;
         }
 
         return questions;
@@ -233,7 +236,7 @@ public static class Seeder
     {
         foreach (var subquestion in subquestions)
         {
-            subquestion.QuestionId = questions[RandomNumberGenerator.GetInt32(count)].Id;
+            subquestion.QuestionId = questions[Rnd.Next(count)].Id;
         }
 
         return subquestions;
@@ -243,7 +246,7 @@ public static class Seeder
     {
         foreach (var call in calls)
         {
-            call.ChatId = chats[RandomNumberGenerator.GetInt32(count)].Id;
+            call.ChatId = chats[Rnd.Next(count)].Id;
         }
 
         return calls;
@@ -253,7 +256,7 @@ public static class Seeder
     {
         foreach (var message in messages)
         {
-            message.ChatId = chats[RandomNumberGenerator.GetInt32(count)].Id;
+            message.ChatId = chats[Rnd.Next(count)].Id;
         }
 
         return messages;
