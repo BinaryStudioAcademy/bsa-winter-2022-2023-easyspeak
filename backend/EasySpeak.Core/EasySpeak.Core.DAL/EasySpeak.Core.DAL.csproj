@@ -20,5 +20,9 @@
   <ItemGroup>
     <ProjectReference Include="..\EasySpeak.Core.Common\EasySpeak.Core.Common.csproj" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
 
 </Project>

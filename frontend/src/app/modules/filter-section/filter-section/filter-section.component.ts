@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { langLevelsSample, topicsSample } from '@modules/filter-section/filter-section/filter-section.util';
 import { Subject } from 'rxjs';
 
-import { langLevelsSample, topicsSample } from 'src/app/components/filter-section/filter-section.util';
 import { Filter } from 'src/app/models/filters/filter';
 
 @Component({

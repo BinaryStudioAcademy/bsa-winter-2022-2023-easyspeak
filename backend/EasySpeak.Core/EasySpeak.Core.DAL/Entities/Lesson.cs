@@ -19,6 +19,7 @@ namespace EasySpeak.Core.DAL.Entities
 
         public Lesson()
         {
+            Subscribers = new List<User>();
             Tags = new List<Tag>();
             Questions = new List<Question>();
             Subscribers = new List<User>();

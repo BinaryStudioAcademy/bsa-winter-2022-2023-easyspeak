@@ -25,7 +25,6 @@ namespace EasySpeak.Core.WebAPI.Extentions
                 .AddControllers()
                 .AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
-            services.AddTransient<ISampleService, SampleService>();
             services.AddTransient<ILessonsService, LessonsService>();
             services.AddSingleton<IConnectionProvider>(_ => new ConnectionProvider(configuration.GetValue<string>("Rabbit")));
             services.AddTransient<IMessageProducer, MessageProducer>();
@@ -35,7 +34,7 @@ namespace EasySpeak.Core.WebAPI.Extentions
 
         public static void AddAutoMapper(this IServiceCollection services)
         {
-            services.AddAutoMapper(Assembly.GetAssembly(typeof(SampleProfile)));
+            services.AddAutoMapper(Assembly.GetAssembly(typeof(LessonsProfile)));
         }
 
         public static void AddValidation(this IServiceCollection services)
