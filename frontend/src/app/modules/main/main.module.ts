@@ -9,6 +9,9 @@ import { SharedModule } from '@shared/shared.module';
 import { MainComponent } from './main-page/main-page.component';
 import { TimetablePageComponent } from './timetable-page/timetable-page.component';
 import { MainRoutingModule } from './main-routing.module';
+import { FilterSectionRoutingModule } from '@modules/filter-section/filter-section.module';
+import { LessonsModule } from '@modules/lessons/lessons.module';
+import { TimeTable1Module } from '@modules/time-table/time-table.module';
 
 @NgModule({
     declarations: [
@@ -23,6 +26,9 @@ import { MainRoutingModule } from './main-routing.module';
         MatToolbarModule,
         MatMenuModule,
         MatBadgeModule,
+        FilterSectionRoutingModule,
+        LessonsModule,
+        TimeTable1Module
     ],
 })
 export class MainModule {}
