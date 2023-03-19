@@ -1,0 +1,73 @@
+@import "src/styles/colors"
+
+.main
+    display: flex
+    flex-direction: column
+    align-items: center
+    background-color: $white
+    padding: 25px
+
+.container
+    display: flex
+    flex-direction: column
+    align-items: center
+    background-color: $gray-100
+    border-radius: 15px
+    max-width: 75%
+    padding: 25px
+
+.header 
+    height: 105px
+
+.button-week 
+  display: flex
+  justify-content: center
+  align-items: center
+  padding-top: 8px
+  padding-bottom: 8px
+  color: $black
+  background-color: $white
+  border: none
+  border-radius: 18px
+  text-align: center
+  font-size: 14px
+  margin: 15px 15px
+  height: 35px
+  width: 120px
+  mat-icon
+    color: $main-color
+    transform: scale(1.5)
+
+.button-week 
+    &:hover
+        background-color: $selected-color
+
+.days
+    display: flex
+    flex-direction: row
+    flex-wrap: wrap
+
+.choose-day
+    display: flex
+    justify-content: space-between
+    align-self: flex-start
+    align-items: center
+    margin-left: 10px
+
+.button-icon
+    border-width: 0
+    height: 28px
+    background-color: $white
+    color: $main-color
+    &:hover
+        color: $selected-color
+        
+.calendar-block
+    display: flex
+    align-items: center
+    height: 35px
+    background-color: $white
+    border-radius: 18px
+    padding-left: 15px
+    padding-right: 15px
+    

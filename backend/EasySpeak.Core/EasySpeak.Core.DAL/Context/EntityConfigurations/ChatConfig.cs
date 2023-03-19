@@ -20,6 +20,10 @@ namespace EasySpeak.Core.DAL.Context.EntityConfigurations
             builder.HasMany(c => c.Messages)
                 .WithOne(m => m.Chat)
                 .HasForeignKey(m => m.ChatId);
+
+            builder.Property(c => c.CreatedAt)
+                .HasDefaultValueSql("getutcdate()");
+            
         }
     }
 }

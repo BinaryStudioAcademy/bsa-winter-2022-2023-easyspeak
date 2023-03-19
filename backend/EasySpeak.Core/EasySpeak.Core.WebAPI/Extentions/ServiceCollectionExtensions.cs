@@ -1,19 +1,14 @@
-﻿using EasySpeak.Core.BLL.MappingProfiles;
-using EasySpeak.Core.BLL.Services;
-using EasySpeak.Core.DAL.Context;
-using EasySpeak.Core.BLL.Interfaces;
+﻿using EasySpeak.Core.DAL.Context;
 using EasySpeak.Core.WebAPI.Validators;
 using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection;
-using Microsoft.Extensions.Options;
+using EasySpeak.Core.BLL.Interfaces;
+using EasySpeak.Core.BLL.Services;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Extensions.Configuration;
 using EasySpeak.RabbitMQ.Interfaces;
 using EasySpeak.RabbitMQ;
 using EasySpeak.RabbitMQ.Services;
-using Microsoft.AspNetCore.Builder.Extensions;
 using FirebaseAdmin;
 using Google.Apis.Auth.OAuth2;
 
@@ -26,8 +21,7 @@ namespace EasySpeak.Core.WebAPI.Extentions
             services
                 .AddControllers()
                 .AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
-
-            services.AddTransient<ISampleService, SampleService>();
+            
             services.AddSingleton<IConnectionProvider>(_ => new ConnectionProvider(configuration.GetValue<string>("Rabbit")));
             services.AddTransient<IMessageProducer, MessageProducer>();
             services.AddScoped<IFirebaseAuthService, FirebaseAuthService>();
@@ -37,7 +31,7 @@ namespace EasySpeak.Core.WebAPI.Extentions
 
         public static void AddAutoMapper(this IServiceCollection services)
         {
-            services.AddAutoMapper(Assembly.GetAssembly(typeof(SampleProfile)));
+            throw new NotImplementedException();
         }
 
         public static void AddValidation(this IServiceCollection services)
