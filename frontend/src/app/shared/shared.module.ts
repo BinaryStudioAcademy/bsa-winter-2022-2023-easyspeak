@@ -7,6 +7,7 @@ import { YouTubePlayerModule } from '@angular/youtube-player';
 
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { UserNotificationComponent } from './components/user-notification/user-notification.component';
 import { YoutubePlayerComponent } from './components/youtube-player/youtube-player.component';
 
 @NgModule({
@@ -19,7 +20,7 @@ import { YoutubePlayerComponent } from './components/youtube-player/youtube-play
         MatDialogModule,
         YouTubePlayerModule,
     ],
-    declarations: [LoadingSpinnerComponent, NotFoundComponent, YoutubePlayerComponent],
+    declarations: [LoadingSpinnerComponent, NotFoundComponent, YoutubePlayerComponent, UserNotificationComponent],
     exports: [
         CommonModule,
         RouterModule,
@@ -28,6 +29,7 @@ import { YoutubePlayerComponent } from './components/youtube-player/youtube-play
         RouterModule,
         LoadingSpinnerComponent,
         NotFoundComponent,
+        UserNotificationComponent,
     ],
 })
 export class SharedModule {}
