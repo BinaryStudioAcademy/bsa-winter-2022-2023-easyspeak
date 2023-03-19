@@ -8,8 +8,11 @@ import { YouTubePlayerModule } from '@angular/youtube-player';
 
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
+import { ModalComponent } from './components/modal/modal.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { YoutubePlayerComponent } from './components/youtube-player/youtube-player.component';
+import { ConfirmComponent } from './components/confirm/confirm.component';
+import {MatButtonModule} from "@angular/material/button";
 
 @NgModule({
     imports: [
@@ -21,8 +24,9 @@ import { YoutubePlayerComponent } from './components/youtube-player/youtube-play
         MatDialogModule,
         MatIconModule,
         YouTubePlayerModule,
+        MatButtonModule,
     ],
-    declarations: [LoadingSpinnerComponent, NotFoundComponent, YoutubePlayerComponent, DropdownComponent],
+    declarations: [LoadingSpinnerComponent, NotFoundComponent, YoutubePlayerComponent, DropdownComponent, ModalComponent, ConfirmComponent],
     exports: [
         CommonModule,
         RouterModule,
@@ -32,6 +36,7 @@ import { YoutubePlayerComponent } from './components/youtube-player/youtube-play
         LoadingSpinnerComponent,
         NotFoundComponent,
         DropdownComponent,
+        ModalComponent,
     ],
 })
 export class SharedModule {}
