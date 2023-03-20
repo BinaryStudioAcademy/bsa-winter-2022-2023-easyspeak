@@ -12,5 +12,6 @@ import { LessonsRoutingModule } from './lessons-routing.module';
         CommonModule,
         LessonsRoutingModule,
     ],
+    exports: [LessonsPageComponent],
 })
 export class LessonsModule { }
