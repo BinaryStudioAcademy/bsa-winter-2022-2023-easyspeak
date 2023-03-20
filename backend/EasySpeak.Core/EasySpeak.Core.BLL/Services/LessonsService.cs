@@ -48,7 +48,6 @@ public class LessonsService : BaseService, ILessonsService
 
     public async Task<ICollection<DayCardDto>?> GetDayCardsOfWeekAsync(RequestDayCardDto requestDto)
     {
-
         var mondayDate = requestDto.Date.AddDays(-(int)requestDto.Date.DayOfWeek).Date;
         var dayCards = await _context.Lessons
             .Where(c => c.StartAt.Date >= mondayDate
@@ -56,7 +55,7 @@ public class LessonsService : BaseService, ILessonsService
                         )
             .GroupBy(c => c.StartAt.Date)
             .Select(t =>
-                new DayCardDto()
+                new DayCardDto
                 {
                     Date = t.Key,
                     MeetingsAmount = t.Count()
