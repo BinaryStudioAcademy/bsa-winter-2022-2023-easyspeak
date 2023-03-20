@@ -1,0 +1,56 @@
+<div class="container">
+    <h2>Create a lesson</h2>
+
+    <form [formGroup]="myForm" autocomplete="off">
+
+        <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input matInput placeholder="Enter a lesson name" formControlName="name">
+
+            <mat-error *ngIf="name?.invalid && name?.touched">
+                Name is Required
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Description</mat-label>
+            <input matInput placeholder="Enter lesson Description" formControlName="description">
+
+            <mat-error *ngIf="description?.invalid && description?.touched">
+                Description is Required
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Date</mat-label>
+            <input matInput type="datetime-local" placeholder="Enter lesson date" formControlName="date">
+
+            <mat-error *ngIf="date?.invalid && date?.touched">
+                Date is Required
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Questions</mat-label>
+            <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" placeholder="Enter lesson questions" formControlName="questions"></textarea>
+
+            <mat-error *ngIf="questions?.invalid && questions?.touched">
+                At least one question is required
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Tags</mat-label>
+            <mat-select placeholder="Select lesson tags" formControlName="tags" multiple>
+                <mat-option *ngFor="let tag of tagsList" [value]="tag">{{ tag }}</mat-option>
+            </mat-select>
+
+            <mat-error *ngIf="tags?.invalid && tags?.touched">
+                At least one tag is required
+            </mat-error>
+        </mat-form-field>
+
+        <button mat-raised-button [disabled]="myForm.invalid" color="primary" (click)="createLesson()">Create a lesson</button>
+
+    </form>
+</div>

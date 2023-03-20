@@ -9,5 +9,6 @@ public class TagForLessonProfile : Profile
     public TagForLessonProfile()
     {
         CreateMap<Tag, TagForLessonDto>();
+        CreateMap<TagForLessonDto, Tag>();
     }
 }
