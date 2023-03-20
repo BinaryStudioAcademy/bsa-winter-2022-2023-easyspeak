@@ -6,11 +6,11 @@ import { INewLesson } from '@shared/models/lesson/INewLesson';
     providedIn: 'root',
 })
 export class LessonsService {
-    public routePrefix = '/api/lessons';
+    public routePrefix = '/lessons';
 
     constructor(private http: HttpService) { }
 
     createLesson(lesson: INewLesson) {
-        this.http.post(this.routePrefix, lesson);
+        this.http.post(this.routePrefix, lesson).subscribe();
     }
 }
