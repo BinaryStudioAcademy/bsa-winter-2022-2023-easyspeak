@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { rawTimeZones } from '@vvo/tzdb';
 import countriesLib from 'iso-3166-1';
 
 @Injectable({
@@ -12,5 +13,14 @@ export class CountriesTzLangProviderService {
         }));
 
         return countries;
+    }
+
+    getTimeZonesList() {
+        const timezones = rawTimeZones.map((timezone) => ({
+            name: timezone.name,
+            offsetInMinutes: timezone.rawOffsetInMinutes, //Subtract this value before saving time to DB, and add it back when displaying
+        }));
+
+        return timezones;
     }
 }
