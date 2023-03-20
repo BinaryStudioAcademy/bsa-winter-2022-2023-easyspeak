@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { INewLesson } from '@shared/models/lesson/INewLesson';
+import { NewQuestion } from '@shared/models/lesson/NewQuestion';
+import { NewTag } from '@shared/models/lesson/NewTag'
 
 import { LessonsService } from 'src/app/services/lessons.service';
 import { NotificationService } from 'src/app/services/notification.service';
@@ -74,14 +76,32 @@ export class LessonsCreateComponent implements OnInit {
     }
 
     createLesson() {
+        const lessonQuestions: NewQuestion[] = [];
+
+        this.questions?.value
+            .split('\n')
+            .filter((entry: string) => entry.trim() !== '')
+            .forEach((element: string) => {
+                lessonQuestions.push(new NewQuestion(element, []));
+            });
+
+        const lessonTags: NewTag[] = [];
+
+        this.tags?.value.forEach((element: string) => {
+            lessonTags.push(new NewTag(element));
+        });
+
         const lessonToCreate: INewLesson = {
             name: this.name?.value,
-            description: '',
+            description: 'Test',
             mediaPath: '',
-            startsAt: this.date?.value,
-            questions: this.questions?.value.split('\n').filter((entry: string) => entry.trim()),
-            tags: this.tags?.value,
+            startAt: new Date(this.date?.value),
+            questions: lessonQuestions,
+            tags: lessonTags,
+            limitOfUsers: 1
         }
+
+        console.log(lessonToCreate);
 
         this.lessonService.createLesson(lessonToCreate);
 
