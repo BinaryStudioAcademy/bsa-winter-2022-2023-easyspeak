@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using EasySpeak.Core.BLL.Interfaces;
+using EasySpeak.Core.Common.DTO;
 using EasySpeak.Core.Common.DTO.Lesson;
 using EasySpeak.Core.DAL.Context;
 using EasySpeak.Core.DAL.Entities;
@@ -11,6 +12,17 @@ public class LessonsService : BaseService, ILessonsService
 {
     public LessonsService(EasySpeakCoreContext context, IMapper mapper) : base(context, mapper)
     {
+    }
+
+    public async Task<ICollection<LessonDto>> GetAllLessonsAsync()
+    {
+        var lessons = await _context.Lessons
+            .Include(l => l.Tags)
+            .Include(l => l.Questions)
+            .ThenInclude(q => q.Subquestions)
+            .ToListAsync();
+
+        return _mapper.Map<ICollection<LessonDto>>(lessons);
     }
 
     public async Task<ICollection<LessonDto>> GetAllLessonsAsync(FiltersRequest filtersRequest)
@@ -44,5 +56,15 @@ public class LessonsService : BaseService, ILessonsService
         lessonDtos.ForEach(t => t.SubscribersCount = subscribersCountDict.Result[t.Id].SbCount);
 
         return lessonDtos;
+    }
+
+    public async Task<LessonDto> CreateLessonAsync(NewLessonDto lessonDto)
+    {
+        var lesson = _mapper.Map<Lesson>(lessonDto);
+
+        var createdLesson = _context.Add(lesson).Entity;
+        await _context.SaveChangesAsync();
+
+        return _mapper.Map<LessonDto>(createdLesson);
     }
 }
