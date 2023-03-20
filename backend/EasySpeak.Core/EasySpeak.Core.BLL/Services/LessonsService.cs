@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using EasySpeak.Core.BLL.Interfaces;
+using EasySpeak.Core.Common.DTO;
 using EasySpeak.Core.Common.DTO.Lesson;
 using EasySpeak.Core.DAL.Context;
 using EasySpeak.Core.DAL.Entities;
@@ -64,5 +65,15 @@ public class LessonsService : BaseService, ILessonsService
             .ToListAsync();
 
         return dayCards;
+    }
+
+    public async Task<LessonDto> CreateLessonAsync(NewLessonDto lessonDto)
+    {
+        var lesson = _mapper.Map<Lesson>(lessonDto);
+
+        var createdLesson = _context.Add(lesson).Entity;
+        await _context.SaveChangesAsync();
+
+        return _mapper.Map<LessonDto>(createdLesson);
     }
 }

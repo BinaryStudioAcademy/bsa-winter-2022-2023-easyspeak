@@ -1,4 +1,5 @@
 ﻿using EasySpeak.Core.BLL.Interfaces;
+using EasySpeak.Core.Common.DTO;
 using EasySpeak.Core.Common.DTO.Lesson;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,6 +29,13 @@ namespace EasySpeak.Core.WebAPI.Controllers
         {
             var lessons = await _lessonsService.GetDayCardsOfWeekAsync(requestDto);
             return Ok(lessons);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<LessonDto>> CreateAsync(NewLessonDto lessonDto)
+        {
+            var lesson = await _lessonsService.CreateLessonAsync(lessonDto);
+            return Ok(lesson);
         }
     }
 }

@@ -9,6 +9,7 @@
     width: 100%
     height: 100%
     border-radius: 50px
+    background: $white
 
 .dropdown-btn:hover
     cursor: pointer
@@ -43,7 +44,7 @@
     position: absolute
     height: 230px
     width: 100%
-    top: 50px
+    top: 60px
     left: 0px
     border-radius: 4px
     padding: 8px 0 12px 0  
@@ -51,13 +52,14 @@
     flex-direction: column
     align-items: flex-start
     gap: 5px
-    overflow: scroll
+    overflow-y: scroll
+    z-index: 1
+    background: white
+    border: solid 1px $inactive-color
 
 .dropdown-item
-    width: 225px
     height: auto
-    top: 10px
-    padding: 7px 13px 0 13px
+    padding: 7px 0 0 13px
 
 .dropdown-item-content
     width: 212px
