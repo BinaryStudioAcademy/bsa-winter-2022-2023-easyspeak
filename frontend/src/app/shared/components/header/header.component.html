@@ -19,15 +19,18 @@
             </p>
         </div>
         <div class="header-content">
+            <div matBadge="1" class="reminding">
+                <img src="/assets/header/mail-icon.svg" />
+            </div>
             <div [matMenuTriggerFor]="notifications" class="remaindings">
-                <div matBadge="1" class="reminding">
-                    <img src="/assets/header/mail-icon.svg" />
-                </div>
-                <div matBadge="3" class="reminding">
+                <div
+                    matBadge="{{ notificationsMenu.count }}"
+                    [matBadgeHidden]="!notificationsMenu.count"
+                    class="reminding">
                     <img src="/assets/header/notification-icon.svg" />
                 </div>
-                <mat-menu #notifications="matMenu" xPosition="before">
-                    <app-user-notification></app-user-notification>
+                <mat-menu #notifications="matMenu" xPosition="after">
+                    <app-user-notification #notificationsMenu> </app-user-notification>
                 </mat-menu>
             </div>
             <div [matMenuTriggerFor]="menu" class="user-area">

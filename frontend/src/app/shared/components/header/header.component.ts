@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+
+import { UserNotificationComponent } from '../user-notification/user-notification.component';
 
 @Component({
     selector: 'app-header',
@@ -6,4 +8,5 @@ import { Component } from '@angular/core';
     styleUrls: ['./header.component.sass'],
 })
 export class HeaderComponent {
+    @ViewChild('notificationsMenu') notificationsMenu: UserNotificationComponent;
 }

@@ -1,5 +1,6 @@
 export interface IUserNotification {
-    id: string;
+    id: number;
+    userId: number;
     name: string;
     imgLink: string;
     isRead: boolean;

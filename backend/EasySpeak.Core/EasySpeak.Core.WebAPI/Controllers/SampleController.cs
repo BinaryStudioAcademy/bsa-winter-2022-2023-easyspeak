@@ -10,12 +10,11 @@ namespace EasySpeak.Core.WebAPI.Controllers
     [Route("[controller]")]
     public class SampleController : ControllerBase
     {
-        public SampleController(ISampleService sampleService, IMessageProducer messageProducer, INotificationsSenderService notificationsSender)
+        public SampleController(ISampleService sampleService, IMessageProducer messageProducer)
         {
             _sampleService = sampleService;
             _messageProducer = messageProducer;
             _messageProducer.Init("notifier", "");
-            _notificationSenderService = notificationsSender;
         }
 
         [HttpGet]
@@ -78,16 +77,7 @@ namespace EasySpeak.Core.WebAPI.Controllers
             return Ok();
         }
 
-        //[Authorize]
-        [HttpPost("send-notification")]
-        public IActionResult SendNotification(NotificationDto notification)
-        {
-            _notificationSenderService.SendNotification(notification);
-            return Ok();
-        }
-
         private readonly ISampleService _sampleService;
         private readonly IMessageProducer _messageProducer;
-        private readonly INotificationsSenderService _notificationSenderService;
     }
 }

@@ -10,6 +10,7 @@ namespace EasySpeak.Core.DAL.Entities
     {
         public long UserId { get; set; }
         public User User { get; set; } = null!;
+        public long SenderId { get; set; }
         public string Text { get; set; } = string.Empty;
         public NotificationType Type { get; set; }
         public bool IsRead { get; set; }
