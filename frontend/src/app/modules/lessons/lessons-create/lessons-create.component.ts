@@ -69,7 +69,7 @@ export class LessonsCreateComponent implements OnInit {
             limitOfUsers: 1,
         };
 
-        this.lessonService.createLesson(lessonToCreate).subscribe(_ => {
+        this.lessonService.createLesson(lessonToCreate).subscribe(() => {
             this.dialogRef.close();
 
             this.notificationService.showSuccess('Successfully created a lesson!', 'Success');
