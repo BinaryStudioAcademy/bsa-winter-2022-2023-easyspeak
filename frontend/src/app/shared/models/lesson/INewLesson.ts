@@ -1,6 +1,6 @@
-import { NewTag } from '@shared/models/lesson/NewTag';
+import { INewTag } from './INewTag';
 
-import { NewQuestion } from './NewQuestion';
+import { INewQuestion } from './INewQuestion';
 
 export interface INewLesson {
     name: string,
@@ -8,6 +8,6 @@ export interface INewLesson {
     mediaPath: string,
     startAt: Date,
     limitOfUsers?: number,
-    questions: NewQuestion[],
-    tags: NewTag[],
+    questions: INewQuestion[],
+    tags: INewTag[],
 }

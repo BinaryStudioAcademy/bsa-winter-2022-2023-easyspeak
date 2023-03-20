@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { INewLesson } from '@shared/models/lesson/INewLesson';
-import { NewQuestion } from '@shared/models/lesson/NewQuestion';
-import { NewTag } from '@shared/models/lesson/NewTag';
+import { INewQuestion } from '@shared/models/lesson/INewQuestion';
+import { INewTag } from '@shared/models/lesson/INewTag';
 import Utils from '@shared/utils/lesson.utils';
 
 import { LessonsService } from 'src/app/services/lessons.service';
@@ -51,13 +51,13 @@ export class LessonsCreateComponent implements OnInit {
     }
 
     createLesson() {
-        const lessonQuestions: NewQuestion[] =
+        const lessonQuestions: INewQuestion[] =
             this.questions?.value
                 .split('\n')
                 .filter((entry: string) => entry.trim() !== '')
-                .map((element: string) => new NewQuestion(element, []));
+                .map((element: string) => ({ topic: element, subquestions: [] }));
 
-        const lessonTags: NewTag[] = this.tags?.value.map((element: string) => new NewTag(element));
+        const lessonTags: INewTag[] = this.tags?.value.map((element: string) => ({ name: element }));
 
         const lessonToCreate: INewLesson = {
             name: this.name?.value,
