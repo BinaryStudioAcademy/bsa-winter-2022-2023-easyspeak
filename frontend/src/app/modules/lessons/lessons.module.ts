@@ -31,5 +31,6 @@ import { LessonsRoutingModule } from './lessons-routing.module';
         MatSelectModule,
         LessonsRoutingModule,
     ],
+    exports: [LessonsPageComponent],
 })
 export class LessonsModule { }
