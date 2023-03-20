@@ -4,6 +4,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { INewLesson } from '@shared/models/lesson/INewLesson';
 import { NewQuestion } from '@shared/models/lesson/NewQuestion';
 import { NewTag } from '@shared/models/lesson/NewTag';
+import Utils from '@shared/utils/lesson.utils';
 
 import { LessonsService } from 'src/app/services/lessons.service';
 import { NotificationService } from 'src/app/services/notification.service';
@@ -14,24 +15,7 @@ import { NotificationService } from 'src/app/services/notification.service';
     styleUrls: ['./lessons-create.component.sass'],
 })
 export class LessonsCreateComponent implements OnInit {
-    tagsList: string[] = [
-        'Architecture',
-        'Arts',
-        'Cars',
-        'Celebrities',
-        'Cooking',
-        'Dancing',
-        'Ecology',
-        'Design',
-        'History',
-        'Fashion',
-        'Medicine',
-        'Technologies',
-        'Pets',
-        'Philosophy',
-        'Photography',
-        'Politics',
-    ];
+    tagsList: string[] = Utils.tagsList;
 
     myForm: FormGroup;
 
@@ -43,23 +27,7 @@ export class LessonsCreateComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.myForm = this.fb.group({
-            name: ['', [
-                Validators.required,
-            ]],
-            description: ['', [
-                Validators.required,
-            ]],
-            date: ['', [
-                Validators.required,
-            ]],
-            questions: ['', [
-                Validators.required,
-            ]],
-            tags: ['', [
-                Validators.required,
-            ]],
-        });
+        this.myForm = Utils.group(this.fb);
     }
 
     get name() {
