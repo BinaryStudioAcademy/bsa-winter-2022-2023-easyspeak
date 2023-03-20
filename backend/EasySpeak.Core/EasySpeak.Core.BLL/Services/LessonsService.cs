@@ -48,16 +48,16 @@ public class LessonsService : BaseService, ILessonsService
 
     public async Task<ICollection<DayCardDto>?> GetDayCardsOfWeekAsync(RequestDayCardDto requestDto)
     {
+
+        var mondayDate = requestDto.Date.AddDays(-(int)requestDto.Date.DayOfWeek).Date;
         var dayCards = await _context.Lessons
-            .Where(c => c.StartAt.Date >= requestDto.Date.Date
-                        && c.StartAt.Date <= requestDto.Date.AddDays(6).Date
+            .Where(c => c.StartAt.Date >= mondayDate
+                        && c.StartAt.Date <= mondayDate.AddDays(6)
                         )
             .GroupBy(c => c.StartAt.Date)
             .Select(t =>
                 new DayCardDto()
                 {
-                    Date = t.Key,
-                    DayOfWeek = t.Key.DayOfWeek,
                     MeetingsAmount = t.Count()
                 }
             )
