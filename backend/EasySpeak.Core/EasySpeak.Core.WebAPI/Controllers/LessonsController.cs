@@ -27,11 +27,6 @@ namespace EasySpeak.Core.WebAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<LessonDto>> CreateAsync(NewLessonDto lessonDto)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest();
-            }
-
             var lesson = await _lessonsService.CreateLessonAsync(lessonDto);
             return Ok(lesson);
         }
