@@ -1,4 +1,4 @@
-import { FormBuilder, Validators } from "@angular/forms";
+import { FormBuilder, Validators } from '@angular/forms';
 
 export default class Utils {
     static tagsList: string[] = [

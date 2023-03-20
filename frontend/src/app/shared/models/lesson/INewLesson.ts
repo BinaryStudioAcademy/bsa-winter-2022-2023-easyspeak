@@ -1,6 +1,5 @@
-import { INewTag } from './INewTag';
-
 import { INewQuestion } from './INewQuestion';
+import { INewTag } from './INewTag';
 
 export interface INewLesson {
     name: string,
