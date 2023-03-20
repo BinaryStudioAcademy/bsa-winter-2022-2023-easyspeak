@@ -2,5 +2,6 @@
 
 public class DayCardDto
 {
+    public DateTime Date { get; set; }
     public int MeetingsAmount { get; set; }
 }

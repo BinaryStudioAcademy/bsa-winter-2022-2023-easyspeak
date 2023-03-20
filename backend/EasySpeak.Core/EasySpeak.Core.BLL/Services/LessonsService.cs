@@ -58,6 +58,7 @@ public class LessonsService : BaseService, ILessonsService
             .Select(t =>
                 new DayCardDto()
                 {
+                    Date = t.Key,
                     MeetingsAmount = t.Count()
                 }
             )
