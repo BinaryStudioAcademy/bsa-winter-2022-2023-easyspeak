@@ -1,21 +1,19 @@
-﻿using EasySpeak.Core.BLL.MappingProfiles;
+﻿using EasySpeak.Core.BLL.Interfaces;
+using EasySpeak.Core.BLL.MappingProfiles;
 using EasySpeak.Core.BLL.Services;
 using EasySpeak.Core.DAL.Context;
-using EasySpeak.Core.BLL.Interfaces;
 using EasySpeak.Core.WebAPI.Validators;
-using FluentValidation.AspNetCore;
-using Microsoft.EntityFrameworkCore;
-using System.Reflection;
-using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Extensions.Configuration;
-using EasySpeak.RabbitMQ.Interfaces;
 using EasySpeak.RabbitMQ;
+using EasySpeak.RabbitMQ.Interfaces;
 using EasySpeak.RabbitMQ.Services;
-using Microsoft.AspNetCore.Builder.Extensions;
 using FirebaseAdmin;
+using FluentValidation.AspNetCore;
 using Google.Apis.Auth.OAuth2;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Reflection;
+
 
 namespace EasySpeak.Core.WebAPI.Extentions
 {
@@ -27,7 +25,7 @@ namespace EasySpeak.Core.WebAPI.Extentions
                 .AddControllers()
                 .AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
-            services.AddTransient<ISampleService, SampleService>();
+            services.AddTransient<ILessonsService, LessonsService>();
             services.AddSingleton<IConnectionProvider>(_ => new ConnectionProvider(configuration.GetValue<string>("Rabbit")));
             services.AddTransient<IMessageProducer, MessageProducer>();
             services.AddScoped<IFirebaseAuthService, FirebaseAuthService>();
@@ -36,7 +34,7 @@ namespace EasySpeak.Core.WebAPI.Extentions
 
         public static void AddAutoMapper(this IServiceCollection services)
         {
-            services.AddAutoMapper(Assembly.GetAssembly(typeof(SampleProfile)));
+            services.AddAutoMapper(Assembly.GetAssembly(typeof(LessonsProfile)));
         }
 
         public static void AddValidation(this IServiceCollection services)

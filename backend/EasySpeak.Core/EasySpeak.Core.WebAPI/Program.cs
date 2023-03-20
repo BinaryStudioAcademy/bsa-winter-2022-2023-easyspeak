@@ -11,16 +11,17 @@ builder.Configuration
     .AddEnvironmentVariables()
     .Build();
 
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddControllers();
 builder.Services.AddEasySpeakCoreContext(builder.Configuration);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.RegisterCustomServices(builder.Configuration);
+
 builder.Services.AddAutoMapper();
 builder.Services.AddSwaggerGen();
 builder.Services.AddValidation();
 builder.Services.AddFirebaseAuthorization(builder.Configuration);
-
 
 builder.Services.AddCors();
 builder.Services.AddHealthChecks();
