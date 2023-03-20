@@ -1,13 +1,19 @@
 /* eslint-disable no-restricted-syntax */
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '@core/services/auth.service';
+import { HttpService } from '@core/services/http.service';
+import { INewUser } from '@shared/models/INewUser';
+import { IUser } from '@shared/models/IUser';
+import { ToastrService } from 'ngx-toastr';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
     selector: 'app-sign-up',
     templateUrl: './sign-up.component.html',
     styleUrls: ['./sign-up.component.sass'],
 })
-export class SignUpComponent {
+export class SignUpComponent implements OnDestroy {
     EnglishLevels = [
         'A1 (Elementary)',
         'A2 (Elementary)',
@@ -29,11 +35,18 @@ export class SignUpComponent {
         pattern: 'Should be at least one small and one capital letter',
     };
 
-    email = '';
+    newUser: INewUser = {
+        firstName: '',
+        lastName: '',
+        email: '',
+        age: 0,
+        sex: '',
+        languageLevel: '',
+        country: '',
+        language: '',
+    };
 
-    firstName: string = '';
-
-    lastName: string = '';
+    private unsubscribe$ = new Subject<void>();
 
     password: string = '';
 
@@ -42,14 +55,33 @@ export class SignUpComponent {
     submitted = false;
 
     form: FormGroup = new FormGroup({
-        firstName: new FormControl(this.firstName),
-        lastName: new FormControl(this.lastName),
-        email: new FormControl(this.email),
+        firstName: new FormControl(this.newUser.firstName),
+        lastName: new FormControl(this.newUser.lastName),
+        email: new FormControl(this.newUser.email),
         password: new FormControl(this.password),
         confirmPassword: new FormControl(this.confirmPassword),
     });
 
-    constructor(private formBuilder: FormBuilder) {}
+    constructor(
+        private formBuilder: FormBuilder,
+        private authService: AuthService,
+        private toastr: ToastrService,
+        private httpService: HttpService,
+    ) {}
+
+    public ngOnDestroy() {
+        this.unsubscribe$.next();
+        this.unsubscribe$.complete();
+    }
+
+    signUp() {
+        this.validation();
+        // this.httpService
+        //     .post<IUser>('/users', this.newUser)
+        //     .subscribe((result) => console.log(result))
+        //     .pipe(takeUntil(this.unsubscribe$));
+        this.authService.signUp(this.newUser, this.password);
+    }
 
     getErrorMessage(field: string) {
         for (const message in this.validationErrorMessage) {
@@ -86,9 +118,12 @@ export class SignUpComponent {
 
     private validateData() {
         this.form = this.formBuilder.group({
-            firstName: [this.firstName, [Validators.required, Validators.minLength(2), Validators.maxLength(25)]],
-            lastName: [this.lastName, [Validators.required, Validators.minLength(2), Validators.maxLength(25)]],
-            email: [this.email, [Validators.required, Validators.email, Validators.maxLength(30)]],
+            firstName: [
+                this.newUser.firstName,
+                [Validators.required, Validators.minLength(2), Validators.maxLength(25)],
+            ],
+            lastName: [this.newUser.lastName, [Validators.required, Validators.minLength(2), Validators.maxLength(25)]],
+            email: [this.newUser.email, [Validators.required, Validators.email, Validators.maxLength(30)]],
             password: [
                 this.password,
                 [

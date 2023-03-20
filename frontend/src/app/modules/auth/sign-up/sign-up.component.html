@@ -2,7 +2,7 @@
 <label>
     <input
         type="text"
-        [(ngModel)]="email"
+        [(ngModel)]="newUser.email"
         matInput
         required
         placeholder="Email"
@@ -14,7 +14,7 @@
     <label>
         <input
             type="text"
-            [(ngModel)]="firstName"
+            [(ngModel)]="newUser.firstName"
             #inFirstName="ngModel"
             matInput
             placeholder="First Name"
@@ -25,7 +25,7 @@
     <label>
         <input
             type="text"
-            [(ngModel)]="lastName"
+            [(ngModel)]="newUser.lastName"
             #LastName="ngModel"
             matInput
             required
@@ -35,25 +35,24 @@
     </label>
 </div>
 <div class="age-sex-section">
-    <select required>
-        <option>Age</option>
+    <select [(ngModel)]="newUser.age" name="Age" required>
+        <option selected style="color: black">Select the role</option>
         <option *ngFor="let age of Ages">{{ age }}</option>
     </select>
-    <select required>
-        <option>Sex</option>
+    <select [(ngModel)]="newUser.sex" required>
         <option>Male</option>
         <option>Female</option>
     </select>
 </div>
-<select required>
-    <option>Country</option>
+<select [(ngModel)]="newUser.country" required>
+    <option selected>Country</option>
     <option *ngFor="let country of Countries">{{ country }}</option>
 </select>
-<select required>
+<select [(ngModel)]="newUser.language" required>
     <option>Native Language</option>
     <option>Ukrainian</option>
 </select>
-<select required>
+<select [(ngModel)]="newUser.languageLevel" required>
     <option>Level in English</option>
     <option *ngFor="let level of EnglishLevels">{{ level }}</option>
 </select>
@@ -77,7 +76,7 @@
         getConfirmPasswordErrorMessage()
     }}</mat-error>
 </label>
-<button mat-button (click)="validation()">Create Account</button>
+<button mat-button (click)="signUp()">Create Account</button>
 <div id="has-account">
     <span>I have an account! </span>
     <a href="auth/sign-in">Sign In</a>
