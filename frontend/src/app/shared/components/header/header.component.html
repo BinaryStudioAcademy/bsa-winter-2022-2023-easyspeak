@@ -3,7 +3,7 @@
         <div class="header-content left-area">
             <div class="header-content title" [routerLink]="['/']">
                 <img src="/assets/header/logo.svg" />
-                Logo
+                EasySpeak
             </div>
         </div>
         <div class="header-content main-area">
@@ -19,19 +19,21 @@
             </p>
         </div>
         <div class="header-content">
-            <div matBadge="1" class="reminding">
-                <img src="/assets/header/mail-icon.svg" />
-            </div>
-            <div [matMenuTriggerFor]="notifications" class="remaindings">
-                <div
-                    matBadge="{{ notificationsMenu.count }}"
-                    [matBadgeHidden]="!notificationsMenu.count"
-                    class="reminding">
-                    <img src="/assets/header/notification-icon.svg" />
+            <div class="remaindings">
+                <div matBadge="1" class="reminding">
+                    <img src="/assets/header/mail-icon.svg" />
                 </div>
-                <mat-menu #notifications="matMenu" xPosition="after">
-                    <app-user-notification #notificationsMenu> </app-user-notification>
-                </mat-menu>
+                <div [matMenuTriggerFor]="notifications" class="remaindings">
+                    <div
+                        matBadge="{{ notificationsMenu.count }}"
+                        [matBadgeHidden]="!notificationsMenu.count"
+                        class="reminding">
+                        <img src="/assets/header/notification-icon.svg" />
+                    </div>
+                    <mat-menu #notifications="matMenu" xPosition="after">
+                        <app-user-notification #notificationsMenu> </app-user-notification>
+                    </mat-menu>
+                </div>
             </div>
             <div [matMenuTriggerFor]="menu" class="user-area">
                 <img class="avatar avatar-size" src="/assets/header/avatar.svg" alt="avatar" />
@@ -39,8 +41,20 @@
                 <img src="/assets/header/chevron-down-icon.svg" />
                 <mat-menu #menu="matMenu" xPosition="before">
                     <button mat-menu-item class="menu-element">
-                        <img class="menu-icon" src="/assets/header/user-profile.svg" alt="profile" />
-                        <span class="menu-text">User profile</span>
+                        <img class="menu-icon" src="/assets/header/following-icon.svg" />
+                        <span class="menu-text">Following</span>
+                    </button>
+                    <button mat-menu-item class="menu-element">
+                        <img class="menu-icon" src="/assets/header/user-profile.svg" />
+                        <span class="menu-text">User details</span>
+                    </button>
+                    <button mat-menu-item class="menu-element">
+                        <img class="menu-icon" src="/assets/header/my-subscription-icon.svg" />
+                        <span class="menu-text">My Subscription</span>
+                    </button>
+                    <button mat-menu-item class="menu-element">
+                        <img class="menu-icon" src="/assets/header/lock-icon.svg" />
+                        <span class="menu-text">Change Password</span>
                     </button>
                     <button mat-menu-item class="menu-element">
                         <img class="menu-icon" src="/assets/header/log-out.svg" alt="logOut" />

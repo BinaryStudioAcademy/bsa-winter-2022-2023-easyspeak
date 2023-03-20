@@ -11,5 +11,6 @@ import { SharedModule } from '@shared/shared.module';
         MatIconModule,
         SharedModule,
     ],
+    exports: [FilterSectionComponent],
 })
 export class FilterSectionRoutingModule { }
