@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { rawTimeZones } from '@vvo/tzdb';
+import languagesLib from 'iso-639-1';
 import countriesLib from 'iso-3166-1';
 
 @Injectable({
@@ -22,5 +23,11 @@ export class CountriesTzLangProviderService {
         }));
 
         return timezones;
+    }
+
+    getLanguagesList() {
+        const languages = languagesLib.getAllNames();
+
+        return languages;
     }
 }
