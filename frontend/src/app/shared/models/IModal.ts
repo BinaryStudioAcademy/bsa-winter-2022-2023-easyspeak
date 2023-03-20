@@ -1,9 +1,12 @@
+import { Type } from '@angular/core';
+
 export interface IModal {
-    header: string,
+    header?: string,
+    content?: string,
     cancelText?: string,
     confirmText?: string
     okText?: string
     /* eslint-disable  @typescript-eslint/no-explicit-any */
-    component?: any
-    hasButtons: boolean
+    component?: Type<any>
+    hasButtons?: boolean
 }

@@ -1,5 +1,6 @@
 export interface IConfirm {
-    header: string,
+    header?: string,
+    content?: string,
     cancelText?: string,
     confirmText?: string
 }
