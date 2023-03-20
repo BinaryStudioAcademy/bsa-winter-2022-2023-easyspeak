@@ -1,9 +1,12 @@
+import { NewTag } from "@shared/models/lesson/NewTag";
+import { NewQuestion } from "./NewQuestion";
+
 export interface INewLesson {
     name: string,
     description: string,
     mediaPath: string,
-    startsAt: Date,
+    startAt: Date,
     limitOfUsers?: number,
-    questions: string[],
-    tags: string[],
+    questions: NewQuestion[],
+    tags: NewTag[],
 }
