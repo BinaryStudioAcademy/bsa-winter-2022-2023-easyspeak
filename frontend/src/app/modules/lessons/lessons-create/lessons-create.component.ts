@@ -51,20 +51,13 @@ export class LessonsCreateComponent implements OnInit {
     }
 
     createLesson() {
-        const lessonQuestions: NewQuestion[] = [];
+        const lessonQuestions: NewQuestion[] =
+            this.questions?.value
+                .split('\n')
+                .filter((entry: string) => entry.trim() !== '')
+                .map((element: string) => new NewQuestion(element, []));
 
-        this.questions?.value
-            .split('\n')
-            .filter((entry: string) => entry.trim() !== '')
-            .forEach((element: string) => {
-                lessonQuestions.push(new NewQuestion(element, []));
-            });
-
-        const lessonTags: NewTag[] = [];
-
-        this.tags?.value.forEach((element: string) => {
-            lessonTags.push(new NewTag(element));
-        });
+        const lessonTags: NewTag[] = this.tags?.value.map((element: string) => new NewTag(element));
 
         const lessonToCreate: INewLesson = {
             name: this.name?.value,
