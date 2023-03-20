@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { INewLesson } from '@shared/models/lesson/INewLesson';
 import { NewQuestion } from '@shared/models/lesson/NewQuestion';
-import { NewTag } from '@shared/models/lesson/NewTag'
+import { NewTag } from '@shared/models/lesson/NewTag';
 
 import { LessonsService } from 'src/app/services/lessons.service';
 import { NotificationService } from 'src/app/services/notification.service';
@@ -59,7 +59,7 @@ export class LessonsCreateComponent implements OnInit {
             tags: ['', [
                 Validators.required,
             ]],
-        })
+        });
     }
 
     get name() {
@@ -105,8 +105,8 @@ export class LessonsCreateComponent implements OnInit {
             startAt: new Date(this.date?.value),
             questions: lessonQuestions,
             tags: lessonTags,
-            limitOfUsers: 1
-        }
+            limitOfUsers: 1,
+        };
 
         this.lessonService.createLesson(lessonToCreate);
 

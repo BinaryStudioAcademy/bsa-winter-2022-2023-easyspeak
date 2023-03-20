@@ -1,5 +1,6 @@
-import { NewTag } from "@shared/models/lesson/NewTag";
-import { NewQuestion } from "./NewQuestion";
+import { NewTag } from '@shared/models/lesson/NewTag';
+
+import { NewQuestion } from './NewQuestion';
 
 export interface INewLesson {
     name: string,

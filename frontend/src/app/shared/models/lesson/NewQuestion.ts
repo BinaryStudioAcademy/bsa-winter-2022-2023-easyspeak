@@ -1,7 +1,8 @@
-import { NewSubquestion } from "./NewSubquestion";
+import { NewSubquestion } from './NewSubquestion';
 
 export class NewQuestion {
     topic: string;
+
     subquestions: NewSubquestion[];
 
     constructor(topic: string, subquestions: NewSubquestion[]) {
