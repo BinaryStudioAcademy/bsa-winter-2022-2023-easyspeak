@@ -13,6 +13,15 @@
         </mat-form-field>
 
         <mat-form-field>
+            <mat-label>Description</mat-label>
+            <input matInput placeholder="Enter lesson Description" formControlName="description">
+
+            <mat-error *ngIf="description?.invalid && description?.touched">
+                Description is Required
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
             <mat-label>Date</mat-label>
             <input matInput type="datetime-local" placeholder="Enter lesson date" formControlName="date">
 

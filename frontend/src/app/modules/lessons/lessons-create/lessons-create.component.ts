@@ -47,6 +47,9 @@ export class LessonsCreateComponent implements OnInit {
             name: ['', [
                 Validators.required,
             ]],
+            description: ['', [
+                Validators.required,
+            ]],
             date: ['', [
                 Validators.required,
             ]],
@@ -61,6 +64,10 @@ export class LessonsCreateComponent implements OnInit {
 
     get name() {
         return this.myForm.get('name');
+    }
+
+    get description() {
+        return this.myForm.get('description');
     }
 
     get date() {
@@ -93,15 +100,13 @@ export class LessonsCreateComponent implements OnInit {
 
         const lessonToCreate: INewLesson = {
             name: this.name?.value,
-            description: 'Test',
+            description: this.description?.value,
             mediaPath: '',
             startAt: new Date(this.date?.value),
             questions: lessonQuestions,
             tags: lessonTags,
             limitOfUsers: 1
         }
-
-        console.log(lessonToCreate);
 
         this.lessonService.createLesson(lessonToCreate);
 
