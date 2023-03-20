@@ -9,5 +9,6 @@ public class QuestionsProfile : Profile
     public QuestionsProfile()
     {
         CreateMap<Question, QuestionForLessonDto>();
+        CreateMap<QuestionForLessonDto, Question>();
     }
 }
