@@ -8,15 +8,14 @@ export class Utils {
 
         language: 'English',
 
-        imagePath: '../../../assets/user-card-icons/Photo.png',
+        imagePath: 'assets/user-card-icons/Photo.png',
 
         languageLevel: 'B1',
 
         tags: ['healthy', 'food', 'diet', 'sport', 'biology'],
 
-        status: 70,
+        status: 45,
 
         flag: '../../../assets/user-card-icons/canada-flag.svg',
-
     };
 }

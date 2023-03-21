@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { RouterModule } from '@angular/router';
 import { YouTubePlayerModule } from '@angular/youtube-player';
 
@@ -12,9 +13,8 @@ import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
-import { YoutubePlayerComponent } from './components/youtube-player/youtube-player.component';
 import { RoundProgressBarComponent } from './components/round-progress-bar/round-progress-bar.component';
-import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import { YoutubePlayerComponent } from './components/youtube-player/youtube-player.component';
 
 @NgModule({
     imports: [
@@ -40,7 +40,7 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
         NotFoundComponent,
         DropdownComponent,
         ModalComponent,
-        RoundProgressBarComponent
+        RoundProgressBarComponent,
     ],
 })
 export class SharedModule {}

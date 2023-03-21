@@ -1,7 +1,7 @@
 <div class="card">
     <div class="up">
-        <div class="up_2">
-            <div class="left">
+        <div class="user-general-info">
+            <div class="left-area">
                 <div class="picture">
                     <span class="picture-placeholder">Photo</span>
                 </div>
@@ -33,11 +33,12 @@
     <div class="bottom">
         <div class="progress-container">
             <div class="progress">
-                <div class="spinner-container">
-                    <div class="spinner-background"></div>
-                    <mat-progress-spinner [value]="user.status" mode="determinate" [diameter]="20">
-                    </mat-progress-spinner>
-                </div>
+                <app-round-progress-bar [status]="user.status"></app-round-progress-bar>
+<!--                <div class="spinner-container">-->
+<!--                    <div class="spinner-background"></div>-->
+<!--                    <mat-progress-spinner [value]="user.status" mode="determinate" [diameter]="20">-->
+<!--                    </mat-progress-spinner>-->
+<!--                </div>-->
                 <div>{{ user.status }}%</div>
             </div>
             <div class="progress">
