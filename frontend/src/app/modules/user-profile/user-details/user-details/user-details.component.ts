@@ -10,6 +10,8 @@ import { Sex } from '@shared/data/sex';
 import { IUserInfo } from '@shared/models/IUserInfo';
 import { ToastrService } from 'ngx-toastr';
 
+import Utils from '../user-details.component.util';
+
 @Component({
     selector: 'app-user-details',
     templateUrl: './user-details.component.html',
@@ -38,7 +40,7 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
         private toastr: ToastrService,
     ) {
         super();
-        this.detailsForm = this.getFormGroup();
+        this.detailsForm = Utils.detailsGroup(this.fb);
         this.sexOptions = Object.values(this.sexEnumeration) as string[];
         this.englishLevelOptions = Object.values(EnglishLevel) as string[];
     }
@@ -63,22 +65,6 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
         this.userService.updateUser(this.detailsForm.value as IUserInfo)
             .pipe(this.untilThis)
             .subscribe(() => this.toastr.success('User info updated successfully.', 'Success!'));
-    }
-
-    getFormGroup() {
-        return this.fb.group({
-            firstName: '',
-            lastName: '',
-            dateOfBirth: '',
-            sex: '',
-            country: '',
-            language: '',
-            englishLevel: '',
-            email: '',
-            instagram: '',
-            facebook: '',
-            other: '',
-        });
     }
 
     get firstName(): FormControl {
