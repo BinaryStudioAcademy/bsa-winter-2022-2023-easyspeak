@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
     selector: 'app-round-progress-bar',
@@ -7,4 +7,6 @@ import {Component, Input} from '@angular/core';
 })
 export class RoundProgressBarComponent {
     @Input() status: number = 0;
+
+    @Input() diameter: number = 20;
 }
