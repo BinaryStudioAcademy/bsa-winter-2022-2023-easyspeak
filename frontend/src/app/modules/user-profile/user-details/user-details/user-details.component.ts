@@ -3,14 +3,14 @@ import { FormBuilder, FormControl } from '@angular/forms';
 import { BaseComponent } from '@core/base/base.component';
 import { UserService } from '@core/services/user.service';
 import { Ages } from '@shared/data/ages.util';
-import { Countires } from '@shared/data/countries';
 import { EnglishLevel } from '@shared/data/englishLevel';
-import { Languages } from '@shared/data/languages';
 import { Sex } from '@shared/data/sex';
 import { IUserInfo } from '@shared/models/IUserInfo';
 import { ToastrService } from 'ngx-toastr';
 
-import Utils from '../user-details.component.util';
+import { CountriesTzLangProviderService } from 'src/app/services/countries-tz-lang-provider.service';
+
+import { detailsGroup, userId } from '../user-details.component.util';
 
 @Component({
     selector: 'app-user-details',
@@ -18,11 +18,11 @@ import Utils from '../user-details.component.util';
     styleUrls: ['./user-details.component.sass'],
 })
 export class UserDetailsComponent extends BaseComponent implements OnInit {
-    public countries = Countires;
+    countries;
 
     ages = Ages;
 
-    languages = Languages;
+    languages;
 
     emglishLevelEnumeration = EnglishLevel;
 
@@ -38,9 +38,12 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
         private fb: FormBuilder,
         private userService: UserService,
         private toastr: ToastrService,
+        private countriesService: CountriesTzLangProviderService,
     ) {
         super();
-        this.detailsForm = Utils.detailsGroup(this.fb);
+        this.countries = this.countriesService.getCountriesList();
+        this.languages = this.countriesService.getLanguagesList();
+        this.detailsForm = detailsGroup(this.fb);
         this.sexOptions = Object.values(this.sexEnumeration) as string[];
         this.englishLevelOptions = Object.values(EnglishLevel) as string[];
     }
@@ -64,7 +67,7 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
     }
 
     onSubmit() {
-        this.userService.updateUser(0, this.detailsForm.value as IUserInfo)
+        this.userService.updateUser(userId, this.detailsForm.value as IUserInfo)
             .pipe(this.untilThis)
             .subscribe(() => this.toastr.success('User info updated successfully.', 'Success!'));
     }

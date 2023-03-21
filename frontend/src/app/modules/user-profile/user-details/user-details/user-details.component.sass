@@ -180,7 +180,7 @@
     right: 10px
     color: $button-color
 
-::ng-deep.ng-select
+::ng-deep.custom
     height: 100%
 
 ::ng-deep.ng-input
@@ -208,7 +208,17 @@
 
 ::ng-deep.ng-option
     padding: 10px
+    .ng-option-label
+        width: 100%
+        display: flex
+        gap: 10px
+        align-items: center
 
 ::ng-deep.ng-select-container
     z-index: 0 !important
+
+.flag
+    width: 20px
+    height: 14px
+
 

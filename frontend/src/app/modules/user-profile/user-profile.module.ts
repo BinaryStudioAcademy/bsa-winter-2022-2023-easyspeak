@@ -1,10 +1,6 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatOptionModule } from '@angular/material/core';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
+import { MaterialModule } from '@modules/time-table/material/material.module';
 import { SharedModule } from '@shared/shared.module';
 
 import { SelectTopicsPageComponent } from './select-topics-page/select-topics-page.component';
@@ -25,12 +21,8 @@ import { UserProfileRoutingModule } from './user-profile-routing.module';
     imports: [
         SharedModule,
         UserProfileRoutingModule,
-        MatIconModule,
-        MatOptionModule,
-        MatFormFieldModule,
-        MatInputModule,
         FormsModule,
-        MatSelectModule,
+        MaterialModule,
     ],
     exports: [
         SelectTopicsPageComponent,

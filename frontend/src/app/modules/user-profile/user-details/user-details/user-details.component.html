@@ -6,42 +6,42 @@
     </div>
     <div class="user-photo-section">
         <div class="avatar-wrp">
-            <img class="avatar" src="../../../../assets/user-profile/avatar.svg" alt="avatar">
+            <img class="avatar" src="/assets/user-profile/avatar.svg" alt="avatar">
             <div class="edit-avatar-icon">
-                <img src="../../../../assets/user-profile//edit-icon.svg" alt="edit">
+                <img src="/assets/user-profile//edit-icon.svg" alt="edit">
             </div>
             <div class="vertical-line"></div>
         </div>
         <div class="avatar-list">
             <div class="avatar-suggestion-wrp">
-                <img src="../../../../assets//user-profile/boy.svg" alt="">
+                <img src="/assets//user-profile/boy.svg" alt="">
             </div>
             <div class="avatar-suggestion-wrp">
-                <img src="../../../../assets//user-profile/man-bald.svg" alt="">
+                <img src="/assets//user-profile/man-bald.svg" alt="">
             </div>
             <div class="avatar-suggestion-wrp">
-                <img src="../../../../assets//user-profile/man-beard.svg" alt="">
+                <img src="/assets//user-profile/man-beard.svg" alt="">
             </div>
             <div class="avatar-suggestion-wrp">
-                <img src="../../../../assets//user-profile/man-curly.svg" alt="">
+                <img src="/assets//user-profile/man-curly.svg" alt="">
             </div>
             <div class="avatar-suggestion-wrp">
-                <img src="../../../../assets//user-profile/man-elf.svg" alt="">
+                <img src="/assets//user-profile/man-elf.svg" alt="">
             </div>
             <div class="avatar-suggestion-wrp">
-                <img src="../../../../assets//user-profile/man-in-tuxedo.svg" alt="">
+                <img src="/assets//user-profile/man-in-tuxedo.svg" alt="">
             </div>
             <div class="avatar-suggestion-wrp">
-                <img src="../../../../assets//user-profile/man-red-hair.svg" alt="">
+                <img src="/assets//user-profile/man-red-hair.svg" alt="">
             </div>
             <div class="avatar-suggestion-wrp">
-                <img src="../../../../assets//user-profile/man-technologist.svg" alt="">
+                <img src="/assets//user-profile/man-technologist.svg" alt="">
             </div>
             <div class="avatar-suggestion-wrp">
-                <img src="../../../../assets//user-profile/man-superhero.svg" alt="">
+                <img src="/assets//user-profile/man-superhero.svg" alt="">
             </div>
             <div class="avatar-suggestion-wrp">
-                <img src="../../../../assets//user-profile/man-white-hair.svg" alt="">
+                <img src="/assets//user-profile/man-white-hair.svg" alt="">
             </div>
         </div>
     </div>
@@ -69,11 +69,11 @@
 
             <div class="errors-wrp" *ngIf="firstName.errors">
                 <mat-error class="error" *ngIf="firstName.errors?.['minlength'] && firstName.touched">
-                    <img src="../../../../../assets/user-profile/alert-triangle.svg" alt="">
+                    <img src="/assets/user-profile/alert-triangle.svg" alt="">
                     Minimal length is 2 characters
                 </mat-error>
                 <mat-error class="error" *ngIf="firstName.errors?.['required'] && firstName.touched">
-                    <img src="../../../../../assets/user-profile/alert-triangle.svg" alt="">
+                    <img src="/assets/user-profile/alert-triangle.svg" alt="">
                     This field is required
                 </mat-error>
             </div>
@@ -87,11 +87,11 @@
 
             <div class="errors-wrp" *ngIf="lastName.errors">
                 <mat-error class="error" *ngIf="lastName.errors?.['minlength'] && lastName.touched">
-                    <img src="../../../../../assets/user-profile/alert-triangle.svg" alt="">
+                    <img src="/assets/user-profile/alert-triangle.svg" alt="">
                     Minimal length is 2 characters
                 </mat-error>
                 <mat-error class="error" *ngIf="lastName.errors?.['required'] && lastName.touched">
-                    <img src="../../../../../assets/user-profile/alert-triangle.svg" alt="">
+                    <img src="/assets/user-profile/alert-triangle.svg" alt="">
                     This field is required
                 </mat-error>
             </div>
@@ -121,7 +121,9 @@
             <div *ngIf="!country.getRawValue()" class="placeholder">Country</div>
             <ng-select class="custom" dropdownPosition="bottom" appearance="underline" #countrySelect labelForId="country"
             formControlName="country" bindLabel="Country">
-                <ng-option class="select-option" *ngFor="let country of countries" value="{{country}}">{{country}}</ng-option>
+                <ng-option class="select-option" *ngFor="let country of countries" value="{{country.name}}">{{country.name}}
+                    <img class="flag" src="{{country.flag}}">
+                </ng-option>
             </ng-select>
             <mat-icon class="expand-icon">expand_more</mat-icon>
         </div>
