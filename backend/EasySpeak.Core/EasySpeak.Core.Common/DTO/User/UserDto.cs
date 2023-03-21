@@ -2,12 +2,13 @@ namespace EasySpeak.Core.Common.DTO;
 
 public class UserDto
 {
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
-    public DateTime? BirthDay { get; set; }
-    public string? Country { get; set; }
-    public string? Sex { get; set; }
-    public string? Language { get; set; }
-    public string? EnglishLevel { get; set; }
-    public string Email { get; set; }
+    public string FirstName { get; set; } = String.Empty;
+    public string LastName { get; set; } = String.Empty;
+    
+    public DateTime BirthDay { get; set; }
+    public string Country { get; set; } = String.Empty;
+    public string Sex { get; set; } = String.Empty;
+    public string Language { get; set; } = String.Empty;
+    public string EnglishLevel { get; set; } = String.Empty;
+    public string Email { get; set; } = String.Empty;
 }
