@@ -14,6 +14,7 @@ import { ModalComponent } from './components/modal/modal.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { YoutubePlayerComponent } from './components/youtube-player/youtube-player.component';
 import { RoundProgressBarComponent } from './components/round-progress-bar/round-progress-bar.component';
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 @NgModule({
     imports: [
@@ -26,6 +27,7 @@ import { RoundProgressBarComponent } from './components/round-progress-bar/round
         MatIconModule,
         YouTubePlayerModule,
         MatButtonModule,
+        MatProgressSpinnerModule,
     ],
     declarations: [LoadingSpinnerComponent, NotFoundComponent, YoutubePlayerComponent, DropdownComponent, ModalComponent, ConfirmComponent, RoundProgressBarComponent],
     exports: [
@@ -38,6 +40,7 @@ import { RoundProgressBarComponent } from './components/round-progress-bar/round
         NotFoundComponent,
         DropdownComponent,
         ModalComponent,
+        RoundProgressBarComponent
     ],
 })
 export class SharedModule {}
