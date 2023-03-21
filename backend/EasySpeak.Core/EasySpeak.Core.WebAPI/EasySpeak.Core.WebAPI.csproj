@@ -23,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\EasySpeak.Emailer\EasySpeak.Emailer.csproj" />
     <ProjectReference Include="..\..\EasySpeak.RabbitMQ\EasySpeak.RabbitMQ.csproj" />
     <ProjectReference Include="..\EasySpeak.Core.BLL\EasySpeak.Core.BLL.csproj" />
     <ProjectReference Include="..\EasySpeak.Core.Common\EasySpeak.Core.Common.csproj" />
