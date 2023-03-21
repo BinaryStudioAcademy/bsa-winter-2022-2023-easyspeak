@@ -20,16 +20,12 @@ namespace EasySpeak.Core.WebAPI.Controllers
         public async Task<ActionResult<ICollection<LessonDto>>> GetAllAsync([FromBody] FiltersRequest filtersRequest)
         {
             var lessons = await _lessonsService.GetAllLessonsAsync(filtersRequest);
-
             return Ok(lessons);
         }
 
         [HttpGet("week")]
-        public async Task<ActionResult<ICollection<DayCardDto>>> GetDayCardAsync([FromQuery] RequestDayCardDto requestDto)
-        {
-            var lessons = await _lessonsService.GetDayCardsOfWeekAsync(requestDto);
-            return Ok(lessons);
-        }
+        public async Task<ICollection<DayCardDto>> GetDayCardAsync([FromQuery] RequestDayCardDto requestDto)
+            => (await _lessonsService.GetDayCardsOfWeekAsync(requestDto))!;
 
         [HttpPost]
         public async Task<ActionResult<LessonDto>> CreateAsync(NewLessonDto lessonDto)

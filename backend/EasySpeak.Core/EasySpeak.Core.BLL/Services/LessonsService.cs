@@ -10,6 +10,8 @@ namespace EasySpeak.Core.BLL.Services;
 
 public class LessonsService : BaseService, ILessonsService
 {
+    public static int DaysInWeek = 7;
+
     public LessonsService(EasySpeakCoreContext context, IMapper mapper) : base(context, mapper)
     {
     }
@@ -52,8 +54,7 @@ public class LessonsService : BaseService, ILessonsService
         var mondayDate = requestDto.Date.AddDays(-(int)requestDto.Date.DayOfWeek).Date;
         var dayCards = await _context.Lessons
             .Where(c => c.StartAt.Date >= mondayDate
-                        && c.StartAt.Date <= mondayDate.AddDays(6)
-                        )
+                        && c.StartAt.Date <= mondayDate.AddDays(DaysInWeek - 1))
             .GroupBy(c => c.StartAt.Date)
             .Select(t =>
                 new DayCardDto
