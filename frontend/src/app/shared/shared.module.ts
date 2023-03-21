@@ -29,6 +29,7 @@ import { YoutubePlayerComponent } from './components/youtube-player/youtube-play
         MatButtonModule,
         MatProgressSpinnerModule,
     ],
+    // eslint-disable-next-line max-len
     declarations: [LoadingSpinnerComponent, NotFoundComponent, YoutubePlayerComponent, DropdownComponent, ModalComponent, ConfirmComponent, RoundProgressBarComponent],
     exports: [
         CommonModule,
