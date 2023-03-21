@@ -7,6 +7,7 @@ import { INewUser } from '@shared/models/INewUser';
 import { IUser } from '@shared/models/IUser';
 import * as auth from 'firebase/auth';
 import firebase from 'firebase/compat';
+import { from } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
@@ -41,7 +42,11 @@ export class AuthService {
     }
 
     signIn(email: string, password: string) {
-        return this.afAuth.signInWithEmailAndPassword(email, password).then(() => {
+        return this.afAuth.signInWithEmailAndPassword(email, password).then((userCredential) => {
+            if (userCredential.user) {
+                from(userCredential.user.getIdToken()).subscribe(token => localStorage.setItem('accessToken', token));
+            }
+
             this.afAuth.authState.subscribe((user) => {
                 if (user) {
                     this.router.navigate(['']);
@@ -51,7 +56,11 @@ export class AuthService {
     }
 
     signUp(user: INewUser, password: string) {
-        return this.afAuth.createUserWithEmailAndPassword(user.email, password);
+        return this.afAuth.createUserWithEmailAndPassword(user.email, password).then((userCredential) => {
+            if (userCredential.user) {
+                from(userCredential.user.getIdToken()).subscribe(token => localStorage.setItem('accessToken', token));
+            }
+        });
     }
 
     get isLoggedIn(): boolean {
