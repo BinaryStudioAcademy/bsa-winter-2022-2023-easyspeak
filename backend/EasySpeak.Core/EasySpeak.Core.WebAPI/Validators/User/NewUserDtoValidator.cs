@@ -1,5 +1,5 @@
 ﻿using EasySpeak.Core.Common.DTO;
-using EasySpeak.Core.DAL.Entities;
+using EasySpeak.Core.Common.Enums;
 using FluentValidation;
 
 namespace EasySpeak.Core.WebAPI.Validators

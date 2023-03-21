@@ -41,6 +41,7 @@ erDiagram
   Users ||--|{ Notifications : userId
   Users }|--|{ Chats : id
   Users }|--|{ Lessons : id
+  Users }|--|{ CreatedLessons : id
 
   Users {
     bigint Id PK
@@ -90,15 +91,18 @@ erDiagram
   Lessons ||--|{ Questions : lessonId
   Lessons {
     bigint id PK
+    bigint createdBy FK
     nvarchar name
     nvarchar description
     nvarchar mediaPath
     datetime startsAt
     int limitOfUsers
+    int languageLevel 
   }
 
   Calls {
     bigint id PK
+	bigint createdBy
     bigint chatId FK
     datetime startedAt
     datetime finishedAt
@@ -113,6 +117,7 @@ erDiagram
 
   Messages {
     bigint id PK
+	bigint createdBy
     bigint chatId FK
     nvarchar text
     datetime createdAt
