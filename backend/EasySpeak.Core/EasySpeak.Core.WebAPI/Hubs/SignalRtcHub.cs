@@ -4,7 +4,7 @@ namespace EasySpeak.Core.WebAPI.Hubs
 {
     public class SignalRtcHub: Hub
     {
-        public static Dictionary<string, List<string>> ConnectedClients = new Dictionary<string, List<string>>();
+        static readonly Dictionary<string, List<string>> ConnectedClients = new Dictionary<string, List<string>>();
 
         public async Task SendMessage(object message, string roomName)
         {
