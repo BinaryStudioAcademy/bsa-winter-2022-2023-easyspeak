@@ -2,8 +2,8 @@ import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/co
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { WebrtcHubService } from '@core/hubs/webrtc-hub.service';
-import { environment } from '@env/environment';
 import { WebrtcUtils } from '@core/services/webrtc-utils.service';
+import { environment } from '@env/environment';
 
 const useWebrtcUtils = true;
 
@@ -45,7 +45,6 @@ export class SessionCallComponent implements OnInit, OnDestroy {
         await this.webrtcHub.start();
         this.webrtcHub.invoke('CreateOrJoinRoom', this.room);
         this.webrtcHub.listenMessages((msg) => {
-            console.log(msg);
             if (msg === 'created') {
                 this.isInitiator = true;
             }
@@ -74,7 +73,6 @@ export class SessionCallComponent implements OnInit, OnDestroy {
     }
 
     async ngOnDestroy() {
-        // this.webrtcHub.stop();
         await this.hangup();
         if (this.localStream && this.localStream.active) {
             this.localStream.getTracks().forEach((track) => { track.stop(); });
@@ -97,12 +95,11 @@ export class SessionCallComponent implements OnInit, OnDestroy {
                 }
             })
             .catch((e) => {
-                alert(`getUserMedia() error: ${e.name}: ${e.message}`);
+                console.error(`getUserMedia() error: ${e.name}: ${e.message}`);
             });
     }
 
     initiateCall(): void {
-        console.log('Initiating a call.');
         if (!this.isStarted && this.localStream && this.isChannelReady) {
             this.createPeerConnection();
 
@@ -115,10 +112,7 @@ export class SessionCallComponent implements OnInit, OnDestroy {
         }
     }
 
-
-
     createPeerConnection(): void {
-        console.log('Creating peer connection.');
         try {
             if (useWebrtcUtils) {
                 this.peerConnection =
@@ -133,8 +127,6 @@ export class SessionCallComponent implements OnInit, OnDestroy {
             this.peerConnection.onicecandidate = (event: RTCPeerConnectionIceEvent) => {
                 if (event.candidate) {
                     this.sendIceCandidate(event);
-                } else {
-                    console.log('End of candidates.');
                 }
             };
 
@@ -154,12 +146,11 @@ export class SessionCallComponent implements OnInit, OnDestroy {
                 };
             }
         } catch (e: unknown) {
-            console.log('Failed to create PeerConnection.');
+            console.error('Failed to create PeerConnection.');
         }
     }
 
     sendOffer(): void {
-        console.log('Sending offer to peer.');
         this.addTransceivers();
         this.peerConnection.createOffer()
             .then((sdp: RTCSessionDescriptionInit) => {
@@ -180,7 +171,6 @@ export class SessionCallComponent implements OnInit, OnDestroy {
     }
 
     sendAnswer(): void {
-        console.log('Sending answer to peer.');
         this.addTransceivers();
         this.peerConnection.createAnswer().then((sdp) => {
             this.peerConnection.setLocalDescription(sdp);
@@ -188,8 +178,7 @@ export class SessionCallComponent implements OnInit, OnDestroy {
         });
     }
 
-    addIceCandidate(message: any): void {
-        console.log('Adding ice candidate.');
+    addIceCandidate(message: { label?: number, candidate?: string }): void {
         const candidate = new RTCIceCandidate({
             sdpMLineIndex: message.label,
             candidate: message.candidate,
@@ -199,7 +188,6 @@ export class SessionCallComponent implements OnInit, OnDestroy {
     }
 
     sendIceCandidate(event: RTCPeerConnectionIceEvent): void {
-        console.log('Sending ice candidate to remote peer.');
         this.sendMessage({
             type: 'candidate',
             label: event.candidate?.sdpMLineIndex,
@@ -208,12 +196,11 @@ export class SessionCallComponent implements OnInit, OnDestroy {
         });
     }
 
-    async sendMessage(message: any): Promise<void> {
+    async sendMessage(message: unknown): Promise<void> {
         await this.webrtcHub.invoke('SendMessage', message, this.room);
     }
 
     addTransceivers(): void {
-        console.log('Adding transceivers.');
         const init = { direction: 'recvonly', streams: [], sendEncodings: [] } as RTCRtpTransceiverInit;
 
         this.peerConnection.addTransceiver('audio', init);
@@ -221,21 +208,18 @@ export class SessionCallComponent implements OnInit, OnDestroy {
     }
 
     addLocalStream(stream: MediaStream): void {
-        console.log('Local stream added.');
         this.localStream = stream;
         this.localVideo.nativeElement.srcObject = this.localStream;
         this.localVideo.nativeElement.muted = 'muted';
     }
 
     addRemoteStream(stream: MediaStream): void {
-        console.log('Remote stream added.');
         this.remoteStream = stream;
         this.remoteVideo.nativeElement.srcObject = this.remoteStream;
         this.remoteVideo.nativeElement.muted = 'muted';
     }
 
     async hangup(): Promise<void> {
-        console.log('Hanging up.');
         this.stopPeerConnection();
         this.sendMessage('bye');
         await this.webrtcHub.invoke('LeaveRoom', this.room);
@@ -245,7 +229,6 @@ export class SessionCallComponent implements OnInit, OnDestroy {
     }
 
     handleRemoteHangup(): void {
-        console.log('Session terminated by remote peer.');
         this.stopPeerConnection();
         this.isInitiator = true;
         this.snack.open('Remote client has left the call.', 'Dismiss', { duration: 5000 });

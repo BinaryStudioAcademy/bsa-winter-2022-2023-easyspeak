@@ -12,7 +12,6 @@ export class BroadcastHubService {
 
     private hubConnection: HubConnection;
 
-
     readonly messages = new Subject<string>();
 
     private subscriptions: Subscription[] = [];

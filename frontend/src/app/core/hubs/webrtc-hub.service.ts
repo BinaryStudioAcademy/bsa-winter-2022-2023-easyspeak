@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HubConnection, HubConnectionState} from '@microsoft/signalr';
+import { HubConnection, HubConnectionState } from '@microsoft/signalr';
 import { Subject, Subscription } from 'rxjs';
 
 import { SignalRHubFactoryService } from './signalr-hub-factory.service';
@@ -23,19 +23,15 @@ export class WebrtcHubService {
         await this.init();
     }
 
-    listenMessages(action: (msg: any) => void) {
+    listenMessages(action: (msg: unknown) => void) {
         this.subscriptions.push(this.messages.subscribe({ next: action }));
-    }
-
-    async stop() {
-        await this.hubConnection?.stop();
-        this.subscriptions.forEach((s) => s.unsubscribe());
     }
 
     disconnect(): void {
         if (this.isConnected()) {
             this.hubConnection.stop();
         }
+        this.subscriptions.forEach(s => s.unsubscribe());
     }
 
     private async init() {
@@ -48,11 +44,11 @@ export class WebrtcHubService {
             this.messages.next(msg);
         });
 
-        this.hubConnection.on('created', (msg: string) => {
+        this.hubConnection.on('created', () => {
             this.messages.next('created');
         });
 
-        this.hubConnection.on('joined', (msg: string) => {
+        this.hubConnection.on('joined', () => {
             this.messages.next('joined');
         });
 
@@ -61,7 +57,7 @@ export class WebrtcHubService {
         });
     }
 
-    async invoke(methodName: string, ...args: any[]): Promise<any> {
+    async invoke(methodName: string, ...args: unknown[]): Promise<unknown> {
         return this.hubConnection.invoke(methodName, ...args);
     }
 

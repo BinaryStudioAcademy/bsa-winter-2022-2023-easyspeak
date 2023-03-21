@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 export interface MessageSender {
-    sendMessage(message: any): void;
+    sendMessage(message: unknown): void;
 }
 
 @Injectable({
@@ -11,8 +11,6 @@ export class WebrtcUtils {
     public static readonly OPUS = 'opus';
 
     public static readonly H264 = 'H264';
-
-    // WebRTC peer connection utils
 
     public static createPeerConnection(
         iceServers: RTCIceServer[],
@@ -29,8 +27,7 @@ export class WebrtcUtils {
         } as RTCConfiguration);
     }
 
-    public static doIceRestart(peerConnection: RTCPeerConnection | any, messageSender: MessageSender): void {
-        console.log('doIceRestart');
+    public static doIceRestart(peerConnection: RTCPeerConnection, messageSender: MessageSender): void {
         try {
             // try using new restartIce method
             peerConnection.restartIce();
@@ -46,32 +43,28 @@ export class WebrtcUtils {
         }
     }
 
-    // WebRTC stats reports
-
     public static logStats(peerConnection: RTCPeerConnection, type: 'inbound' | 'outbound' | 'all'): void {
         peerConnection.getStats().then(stat => {
             stat.forEach(report => {
                 switch (type) {
                     case 'inbound':
                         if (report.type === 'inbound-rtp') {
-                            console.log(report);
+                            console.info(report);
                         }
                         break;
                     case 'outbound':
                         if (report.type === 'outbound-rtp') {
-                            console.log(report);
+                            console.info(report);
                         }
                         break;
                     default:
-                        console.log(report);
+                        console.info(report);
                 }
             });
         });
     }
 
-    // WebRTC bitrate manipulation
-
-    public static changeBitrate(sdp: RTCSessionDescriptionInit, start: string, min: string, max: string): any | RTCSessionDescriptionInit {
+    public static changeBitrate(sdp: RTCSessionDescriptionInit, start: string, min: string, max: string): RTCSessionDescription {
         const sdpLines = sdp.sdp?.split('\r\n');
 
         sdpLines?.forEach((str, i) => {
@@ -87,15 +80,12 @@ export class WebrtcUtils {
                 }
             }
         });
-        sdp = new RTCSessionDescription({
+
+        return new RTCSessionDescription({
             type: sdp.type,
             sdp: sdpLines?.join('\r\n'),
         });
-
-        return sdp;
     }
-
-    // WebRTC codecs manipulation
 
     public static getCodecs(type: 'audio' | 'video'): string[] {
         return RTCRtpSender.getCapabilities(type)?.codecs
@@ -124,26 +114,26 @@ export class WebrtcUtils {
                         lineWords.splice(index, 1);
                     });
                     // add first three default values (M=, #, protocols)
-                    str = `${lineWords[0]} ${lineWords[1]} ${lineWords[2]}`;
+                    let newStr = `${lineWords[0]} ${lineWords[1]} ${lineWords[2]}`;
+
                     // add chosen codecs on the beginning
                     relevantPayloads.forEach(codec => {
-                        str = `${str} ${codec}`;
+                        newStr = `${newStr} ${codec}`;
                     });
                     // add the rest of codecs on the end
                     for (let k = 3; k < lineWords.length; k++) {
-                        str = `${str} ${lineWords[k]}`;
+                        newStr = `${newStr} ${lineWords[k]}`;
                     }
                 }
                 sdpLines[i] = str;
             }
         });
+
         // create new SDP with changed codecs
-        sdp = new RTCSessionDescription({
+        return new RTCSessionDescription({
             type: sdp.type,
             sdp: sdpLines.join('\r\n'),
         });
-
-        return sdp;
     }
 
     private static getPayloads(sdp: string, codec: string): string[] {
