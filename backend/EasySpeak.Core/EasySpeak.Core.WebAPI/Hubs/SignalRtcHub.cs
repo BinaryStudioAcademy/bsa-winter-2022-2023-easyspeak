@@ -1,7 +1,4 @@
-﻿using EasySpeak.Core.BLL.Interfaces;
-using EasySpeak.Core.Common.DTO.User;
-using Microsoft.AspNetCore.SignalR;
-using System.Text.Json;
+﻿using Microsoft.AspNetCore.SignalR;
 
 namespace EasySpeak.Core.WebAPI.Hubs
 {
