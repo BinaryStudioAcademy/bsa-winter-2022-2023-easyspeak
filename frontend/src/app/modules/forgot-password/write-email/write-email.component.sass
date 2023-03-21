@@ -1,0 +1,108 @@
+@import 'src/styles/colors'
+
+textarea:focus, input:focus 
+    outline: none 
+
+.left-elements
+    display: flex
+    flex-direction: column
+
+    h1
+        color: $main-color
+        margin-bottom: 20px
+
+    label
+        position: absolute
+        top: 5px
+        left: 18px
+        font-size: 12px
+        color: $gray-200
+
+.button-back
+    position: relative
+    display: flex
+    align-items: center
+    width: 111px
+    height: 35px
+    background-color: $white
+    border-width: 0
+    border-radius: 35px
+    font-size: 14px
+    margin-bottom: 15px
+    &:hover
+        background-color: $selected-color
+    mat-icon
+        margin-left: 10px
+        padding: 0
+        color: $main-color
+    div
+        position: absolute
+        top: 50%
+        left: 50%
+        transform: translate(-50%, -50%)
+
+.input-email
+    width: 303px
+    height: 37px
+    background-color: $white
+    border-width: 0
+    border-radius: 35px
+    font-size: 14px
+    padding-left: 19px
+    padding-top: 9px
+    margin-bottom: 15px
+
+.button-send
+    display: flex
+    align-items: center
+    justify-content: center
+    width: 322px
+    height: 45px
+    color: $white
+    background-color: $main-color
+    border-width: 0
+    border-radius: 35px
+    font-size: 14px
+
+    &:hover
+        background-color: $selected-color
+
+.right-container
+    background: repeating-linear-gradient(75deg, $accent-color, $accent-color 1px, rgba(1,1 ,1 , 0) 1px, rgba(1,1 ,1 , 0) 190px), repeating-linear-gradient(166deg,$accent-color,$accent-color 1px, rgba(1,1 ,1 , 0) 1px, rgba(1,1 ,1 , 0) 190px)
+    position: relative
+    display: flex
+    justify-content: center
+    align-items: center
+    width: 50%
+    height: 100vh
+    background-color: $main-color
+    color: $white
+    label
+        font-size: 57px
+        text-shadow: -2px 2px 1px $accent-color
+.learn-label
+    display: flex
+    flex-direction: column
+    align-items: center
+    margin: 0
+
+.line-vertical
+    z-index: 5
+    position: absolute
+    width: 1400px
+    height: 0px
+    left: 0px
+    top: 400px
+
+    border: 2px solid $accent-color
+    transform: rotate(75deg)
+
+.line-horizontal
+    z-index: 5
+    position: absolute
+    width: 1158px
+    height: 0px
+    right: -50
+
+    border: 2px solid $accent-color
+    transform: rotate(165deg)

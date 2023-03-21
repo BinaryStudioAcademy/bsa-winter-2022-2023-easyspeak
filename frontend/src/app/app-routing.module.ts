@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -13,6 +14,11 @@ const routes: Routes = [
     {
         path: 'auth',
         loadChildren: () => import('./modules/auth/auth.module').then((m) => m.AuthModule),
+    },
+    {
+        path: 'forgot-password',
+        loadChildren: () =>
+            import('./modules/forgot-password/forgot-password.module').then((m) => m.ForgotPasswordModule),
     },
     { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
