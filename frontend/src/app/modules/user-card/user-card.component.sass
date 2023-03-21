@@ -6,18 +6,12 @@
 .card
     padding: 23px 26px
     max-width: 422px
-    display: flex
-    justify-content: center
-    align-items: center
     background: $white
     border-radius: 10px
-
-.content
     display: flex
     flex-direction: column
     justify-content: space-between
-    width: 100%
-    height: 100%
+
 
 .up
     display: flex
@@ -40,9 +34,23 @@
     justify-content: flex-end
 
 .picture
+    display: flex
+    justify-content: center
+    align-items: center
+    overflow: hidden
     width: 56px
     height: 56px
     border-radius: 5px
+
+.picture-placeholder
+    color: $gray-300
+    width: 100%
+    height: 100%
+    background-color: $gray-100
+    text-align: center
+    display: flex
+    justify-content: center
+    align-items: center
 
 .info
     display: flex
@@ -55,7 +63,7 @@
     font-style: normal
     font-weight: 700
     font-size: 18px
-    color: $black
+    color: $black-100
 
 .country
     font-family: 'Barlow'

@@ -13,6 +13,7 @@ import { LoadingSpinnerComponent } from './components/loading-spinner/loading-sp
 import { ModalComponent } from './components/modal/modal.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { YoutubePlayerComponent } from './components/youtube-player/youtube-player.component';
+import { RoundProgressBarComponent } from './components/round-progress-bar/round-progress-bar.component';
 
 @NgModule({
     imports: [
@@ -26,7 +27,7 @@ import { YoutubePlayerComponent } from './components/youtube-player/youtube-play
         YouTubePlayerModule,
         MatButtonModule,
     ],
-    declarations: [LoadingSpinnerComponent, NotFoundComponent, YoutubePlayerComponent, DropdownComponent, ModalComponent, ConfirmComponent],
+    declarations: [LoadingSpinnerComponent, NotFoundComponent, YoutubePlayerComponent, DropdownComponent, ModalComponent, ConfirmComponent, RoundProgressBarComponent],
     exports: [
         CommonModule,
         RouterModule,
