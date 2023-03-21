@@ -76,10 +76,10 @@ export class SignUpComponent implements OnDestroy {
 
     signUp() {
         this.validation();
-        // this.httpService
-        //     .post<IUser>('/users', this.newUser)
-        //     .subscribe((result) => console.log(result))
-        //     .pipe(takeUntil(this.unsubscribe$));
+        this.httpService
+            .post<INewUser>('/users', this.newUser)
+            .pipe(takeUntil(this.unsubscribe$))
+            .subscribe((result) => console.log(result));
         this.authService.signUp(this.newUser, this.password);
     }
 
