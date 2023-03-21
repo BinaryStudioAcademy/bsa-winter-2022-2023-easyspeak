@@ -41,17 +41,33 @@ export class AuthService {
     }
 
     signIn(email: string, password: string) {
-        return this.afAuth.signInWithEmailAndPassword(email, password).then(() => {
-            this.afAuth.authState.subscribe((user) => {
-                if (user) {
-                    this.router.navigate(['']);
-                }
-            });
-        });
+        const result = this.afAuth.signInWithEmailAndPassword(email, password);
+        // .then(() => {
+        //     this.afAuth.authState.subscribe((user) => {
+        //         if (user) {
+        //             this.router.navigate(['']);
+        //         }
+        //     });
+        // })
+        // .catch((error) => {
+        //     // Handle Errors here.
+        //     const errorCode = error.code;
+        //     const errorMessage = error.message;
+
+        //     if (errorCode === 'auth/wrong-password') {
+        //         alert('Wrong password.');
+        //     } else {
+        //         alert(errorMessage);
+        //     }
+        //     console.log(error);
+        // });
+        console.log(result);
     }
 
     signUp(user: INewUser, password: string) {
-        return this.afAuth.createUserWithEmailAndPassword(user.email, password);
+        const result = this.afAuth
+            .createUserWithEmailAndPassword(user.email, password)
+            .then((result) => this.httpService.post<firebase.User | null>(this.url, result.user));
     }
 
     get isLoggedIn(): boolean {
