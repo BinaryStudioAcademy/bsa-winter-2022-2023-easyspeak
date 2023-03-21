@@ -3,8 +3,6 @@ using EasySpeak.Core.BLL.MappingProfiles;
 using EasySpeak.Core.BLL.Services;
 using EasySpeak.Core.DAL.Context;
 using EasySpeak.Core.WebAPI.Validators;
-using EasySpeak.Emailer.Interfaces;
-using EasySpeak.Emailer.Services;
 using EasySpeak.RabbitMQ;
 using EasySpeak.RabbitMQ.Interfaces;
 using EasySpeak.RabbitMQ.Services;
@@ -31,7 +29,6 @@ namespace EasySpeak.Core.WebAPI.Extentions
             services.AddSingleton<IConnectionProvider>(_ => new ConnectionProvider(configuration.GetValue<string>("Rabbit")));
             services.AddTransient<IMessageProducer, MessageProducer>();
             services.AddScoped<IFirebaseAuthService, FirebaseAuthService>();
-            services.AddTransient<IMailService, SendGridMailService>();
             services.AddFirebaseApp();
         }
 

@@ -1,5 +1,4 @@
 ﻿using EasySpeak.Core.Common.DTO;
-using EasySpeak.Emailer.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,16 +8,17 @@ namespace EasySpeak.Core.WebAPI.Controllers
     [ApiController]
     public class EmailerController : ControllerBase
     {
-        private IMailService _mailService;
-        public EmailerController(IMailService mailService)
+        private HttpClient _httpClient;
+
+        public EmailerController()
         {
-            _mailService = mailService;
+            _httpClient = new HttpClient();
         }
 
         [HttpPost("Send")]
         public async Task<ActionResult<NewMailDto>> SendEmail(NewMailDto mail)
         {
-            //await _mailService.SendEmailAsync(mail.To, mail.Subject, mail.Content);
+            await _httpClient.PostAsync<NewMailDto>(mail);
             return Ok();
         }
     }

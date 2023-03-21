@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasySpeak.Core.BLL", "EasyS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasySpeak.RabbitMQ", "EasySpeak.RabbitMQ\EasySpeak.RabbitMQ.csproj", "{6282A64B-0676-46F0-8A7A-AB1C12DADEFB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasySpeak.Emailer", "EasySpeak.Emailer\EasySpeak.Emailer.csproj", "{218A8C80-EE16-4183-B08A-364D7101484A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasySpek.Emailer", "EasySpek.Emailer\EasySpek.Emailer.csproj", "{9DCB5285-AD9A-44B4-9D03-A6C99506F88E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,10 +47,10 @@ Global
 		{6282A64B-0676-46F0-8A7A-AB1C12DADEFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6282A64B-0676-46F0-8A7A-AB1C12DADEFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6282A64B-0676-46F0-8A7A-AB1C12DADEFB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{218A8C80-EE16-4183-B08A-364D7101484A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{218A8C80-EE16-4183-B08A-364D7101484A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{218A8C80-EE16-4183-B08A-364D7101484A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{218A8C80-EE16-4183-B08A-364D7101484A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DCB5285-AD9A-44B4-9D03-A6C99506F88E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DCB5285-AD9A-44B4-9D03-A6C99506F88E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DCB5285-AD9A-44B4-9D03-A6C99506F88E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DCB5285-AD9A-44B4-9D03-A6C99506F88E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
