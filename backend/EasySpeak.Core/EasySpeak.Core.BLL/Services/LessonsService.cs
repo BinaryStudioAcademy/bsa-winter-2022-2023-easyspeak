@@ -10,7 +10,7 @@ namespace EasySpeak.Core.BLL.Services;
 
 public class LessonsService : BaseService, ILessonsService
 {
-    public static int DaysInWeek = 7;
+    public const int DaysInWeek = 7;
 
     public LessonsService(EasySpeakCoreContext context, IMapper mapper) : base(context, mapper)
     {
