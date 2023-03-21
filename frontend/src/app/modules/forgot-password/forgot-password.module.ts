@@ -10,7 +10,14 @@ import { WriteEmailComponent } from './write-email/write-email.component';
 import { ForgotPasswordRoutingModule } from './forgot-password-routing.module';
 
 @NgModule({
-    declarations: [ForgotPasswordPageComponent, CheckEmailComponent, ChagePasswordComponent, WriteEmailComponent],
-    imports: [MatIconModule, ForgotPasswordRoutingModule, CommonModule, FormsModule],
+    declarations: [ForgotPasswordPageComponent,
+        CheckEmailComponent,
+        ChagePasswordComponent,
+        WriteEmailComponent],
+    imports: [MatIconModule,
+        ForgotPasswordRoutingModule,
+        CommonModule,
+        FormsModule],
+
 })
 export class ForgotPasswordModule {}

@@ -48,6 +48,11 @@ const routes: Routes = [
         pathMatch: 'full',
         canActivate: [AuthGuard],
     },
+    {
+        path: 'forgot-password',
+        loadChildren: () =>
+            import('./modules/forgot-password/forgot-password.module').then((m) => m.ForgotPasswordModule),
+    },
     { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 
