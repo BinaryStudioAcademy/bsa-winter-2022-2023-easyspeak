@@ -3,7 +3,7 @@
     <div class="header-content left-area">
       <div class="header-content title" [routerLink]="['/']">
         <img src="/assets/header/logo.svg">
-          Logo
+          EasySpeak
       </div>
     </div>
     <div class="header-content main-area">
@@ -25,8 +25,20 @@
         <img src="/assets/header/chevron-down-icon.svg"/>
         <mat-menu #menu="matMenu" xPosition="before">
           <button mat-menu-item class="menu-element">
-            <img class="menu-icon" src="/assets/header/user-profile.svg" alt="profile">
-            <span class="menu-text">User profile</span>
+            <img class="menu-icon" src="/assets/header/following-icon.svg">
+            <span class="menu-text">Following</span>
+          </button>
+          <button mat-menu-item class="menu-element">
+            <img class="menu-icon" src="/assets/header/user-profile.svg">
+            <span class="menu-text">User details</span>
+          </button>
+          <button mat-menu-item class="menu-element">
+            <img class="menu-icon" src="/assets/header/my-subscription-icon.svg">
+            <span class="menu-text">My Subscription</span>
+          </button>
+          <button mat-menu-item class="menu-element">
+            <img class="menu-icon" src="/assets/header/lock-icon.svg">
+            <span class="menu-text">Change Password</span>
           </button>
           <button mat-menu-item class="menu-element">
             <img class="menu-icon" src="/assets/header/log-out.svg" alt="logOut">

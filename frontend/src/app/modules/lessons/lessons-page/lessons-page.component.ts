@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { YoutubePlayerComponent } from '@shared/components/youtube-player/youtube-player.component';
 
+import { LessonsCreateComponent } from '../lessons-create/lessons-create.component';
+
 @Component({
     selector: 'app-lessons-page',
     templateUrl: './lessons-page.component.html',
@@ -100,6 +102,15 @@ export class LessonsPageComponent {
             data: {
                 videoId,
             },
+        });
+    }
+
+    openCreate() {
+        this.dialogRef.open(LessonsCreateComponent, {
+            maxWidth: '100vw',
+            maxHeight: '100vh',
+            height: '80%',
+            width: '80%',
         });
     }
 }
