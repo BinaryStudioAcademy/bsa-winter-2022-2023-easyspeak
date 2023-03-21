@@ -1,6 +1,7 @@
 using EasySpeak.Core.Common.DTO;
 using EasySpeak.Core.DAL.Entities;
 using Microsoft.AspNetCore.Mvc;
+using EasySpeak.Core.Common.Enums;
 
 namespace EasySpeak.Core.WebAPI.Controllers;
 
@@ -8,16 +9,14 @@ namespace EasySpeak.Core.WebAPI.Controllers;
 [Route("[controller]")]
 public class UserController : ControllerBase
 {
-    [HttpGet("{userId}")]
-    public ActionResult<User> Get(int userId)
+    [HttpGet]
+    public ActionResult<User> Get()
     {
         var user = new User()
         {
             FirstName = "Test",
             LastName = "User",
             Email = "testuser@gmail.com",
-            Country = Country.Ukraine,
-            Language = Language.Ukrainian,
             LanguageLevel = LanguageLevel.B2,
             Sex = Sex.Male
         };
@@ -34,8 +33,8 @@ public class UserController : ControllerBase
         });
     }
 
-    [HttpPut("{userId}")]
-    public ActionResult<UserDto> Update(int userId, UserDto userDto)
+    [HttpPut]
+    public ActionResult<UserDto> Update(UserDto userDto)
     {
         return Ok(userDto);
     }

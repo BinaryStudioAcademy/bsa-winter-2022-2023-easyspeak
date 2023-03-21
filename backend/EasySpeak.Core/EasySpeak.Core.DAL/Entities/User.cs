@@ -1,6 +1,5 @@
 ﻿using EasySpeak.Core.Common.Enums;
 
-
 namespace EasySpeak.Core.DAL.Entities
 {
     public class User : Entity<long>
@@ -36,45 +35,5 @@ namespace EasySpeak.Core.DAL.Entities
             Notifications = new List<Notification>();
             CreatedLessons = new List<Lesson>();
         }
-
     }
-
-    public enum Country
-    {
-        Ukraine
-    }
-    public enum Language
-    {
-        Ukrainian
-    }
-    public enum Timezone
-    {
-        
-    }
-
-    public enum Sex
-    {
-        Male,
-        Female,
-        NonBinary
-    }
-
-    public enum LanguageLevel
-    {
-        A1,
-        A2,
-        B1,
-        B2,
-        C1,
-        C2
-    }
-
-    public enum UserStatus
-    {
-        Online,
-        Offline,
-        Missed,
-        NotDisturb
-    }
-
 }

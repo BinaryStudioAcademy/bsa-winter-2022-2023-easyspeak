@@ -2,6 +2,7 @@ using Bogus;
 using EasySpeak.Core.Common.Enums;
 using EasySpeak.Core.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
+using EasySpeak.Core.Common.Enums;
 
 namespace EasySpeak.Core.DAL.Context;
 

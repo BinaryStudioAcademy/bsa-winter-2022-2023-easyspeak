@@ -29,7 +29,7 @@ namespace EasySpeak.Core.WebAPI.Extentions
             services.AddSingleton<IConnectionProvider>(_ => new ConnectionProvider(configuration.GetValue<string>("Rabbit")));
             services.AddTransient<IMessageProducer, MessageProducer>();
             services.AddScoped<IFirebaseAuthService, FirebaseAuthService>();
-            services.AddFirebaseApp();
+            // services.AddFirebaseApp();
         }
 
         public static void AddAutoMapper(this IServiceCollection services)

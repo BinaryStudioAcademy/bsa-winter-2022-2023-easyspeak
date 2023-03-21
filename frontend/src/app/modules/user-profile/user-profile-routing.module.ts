@@ -13,7 +13,7 @@ const routes: Routes = [
         component: UserProfilePageComponent,
         children: [
             {
-                path: 'details/:id',
+                path: 'details',
                 component: UserDetailsComponent,
                 pathMatch: 'full',
             },

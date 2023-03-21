@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 import { BaseComponent } from '@core/base/base.component';
-import { HttpService } from '@core/services/http.service';
 import { UserService } from '@core/services/user.service';
 import { Ages } from '@shared/data/ages.util';
 import { Countires } from '@shared/data/countries';
@@ -20,8 +18,6 @@ import { ToastrService } from 'ngx-toastr';
 export class UserDetailsComponent extends BaseComponent implements OnInit {
     public countries = Countires;
 
-    private currentUserId: number;
-
     ages = Ages;
 
     languages = Languages;
@@ -34,53 +30,55 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
 
     sexOptions: string[] = [];
 
-    detailsForm = this.fb.group({
-        firstName: '',
-        lastName: '',
-        dateOfBirth: '',
-        sex: '',
-        country: '',
-        language: '',
-        englishLevel: '',
-        email: '',
-        instagram: '',
-        facebook: '',
-        other: '',
-    });
+    detailsForm;
 
     constructor(
         private fb: FormBuilder,
-        private route: ActivatedRoute,
-        private httpService: HttpService,
         private userService: UserService,
         private toastr: ToastrService,
     ) {
         super();
-        this.currentUserId = parseInt(this.route.snapshot.paramMap.get('id') as string, 10);
+        this.detailsForm = this.getFormGroup();
         this.sexOptions = Object.values(this.sexEnumeration) as string[];
         this.englishLevelOptions = Object.values(EnglishLevel) as string[];
     }
 
     ngOnInit(): void {
-        this.userService.getUserById(this.currentUserId)
+        this.userService.getUser()
             .pipe(this.untilThis)
             .subscribe(
                 (resp) => this.detailsForm.patchValue({
-                    firstName: resp.firstName,
-                    lastName: resp.lastName,
-                    email: resp.email,
-                    country: resp.country,
-                    sex: resp.sex,
-                    language: resp.language,
-                    englishLevel: resp.englishLevel,
+                    firstName: resp[0].firstName,
+                    lastName: resp[0].lastName,
+                    email: resp[0].email,
+                    country: resp[0].country,
+                    sex: resp[0].sex,
+                    language: resp[0].language,
+                    englishLevel: resp[0].englishLevel,
                 }),
             );
     }
 
     onSubmit() {
-        this.userService.updateUser(this.currentUserId, this.detailsForm.value as IUserInfo)
+        this.userService.updateUser(this.detailsForm.value as IUserInfo)
             .pipe(this.untilThis)
             .subscribe(() => this.toastr.success('User info updated successfully.', 'Success!'));
+    }
+
+    getFormGroup() {
+        return this.fb.group({
+            firstName: '',
+            lastName: '',
+            dateOfBirth: '',
+            sex: '',
+            country: '',
+            language: '',
+            englishLevel: '',
+            email: '',
+            instagram: '',
+            facebook: '',
+            other: '',
+        });
     }
 
     get firstName(): FormControl {
