@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '@core/guards/auth.guard';
@@ -41,6 +42,12 @@ const routes: Routes = [
         component: NotFoundComponent,
         pathMatch: 'full',
     },
+    {
+        path: 'forgot-password',
+        loadChildren: () =>
+            import('./modules/forgot-password/forgot-password.module').then((m) => m.ForgotPasswordModule),
+    },
+    { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 
 @NgModule({
