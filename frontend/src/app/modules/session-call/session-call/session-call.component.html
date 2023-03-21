@@ -1,0 +1,10 @@
+
+<div class="content">
+    <div class="videos">
+        <video #localVideo id="localVideo" autoplay controls></video>
+        <video #remoteVideo id="remoteVideo" autoplay controls></video>
+    </div>
+</div>
+<button (click)="toggleTrack('audio')">mute</button>
+<button (click)="toggleTrack('video')">cam</button>
+<button routerLink="..">end call</button>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HubConnection } from '@microsoft/signalr';
+import {HubConnection, HubConnectionState} from '@microsoft/signalr';
 import { Subject, Subscription } from 'rxjs';
 
 import { SignalRHubFactoryService } from './signalr-hub-factory.service';
@@ -7,17 +7,15 @@ import { SignalRHubFactoryService } from './signalr-hub-factory.service';
 @Injectable({
     providedIn: 'root',
 })
-export class BroadcastHubService {
-    readonly hubUrl = 'broadcastHub';
+export class WebrtcHubService {
+    readonly hubUrl = 'signaling';
 
     private hubConnection: HubConnection;
-
 
     readonly messages = new Subject<string>();
 
     private subscriptions: Subscription[] = [];
 
-    // eslint-disable-next-line no-empty-function
     constructor(private hubFactory: SignalRHubFactoryService) {}
 
     async start() {
@@ -25,7 +23,7 @@ export class BroadcastHubService {
         await this.init();
     }
 
-    listenMessages(action: (msg: string) => void) {
+    listenMessages(action: (msg: any) => void) {
         this.subscriptions.push(this.messages.subscribe({ next: action }));
     }
 
@@ -34,14 +32,40 @@ export class BroadcastHubService {
         this.subscriptions.forEach((s) => s.unsubscribe());
     }
 
+    disconnect(): void {
+        if (this.isConnected()) {
+            this.hubConnection.stop();
+        }
+    }
+
     private async init() {
         await this.hubConnection
             .start()
             .then(() => console.info(`"${this.hubFactory}" successfully started.`))
             .catch(() => console.info(`"${this.hubFactory}" failed.`));
 
-        this.hubConnection.on('BroadcastMessage', (msg: string) => {
+        this.hubConnection.on('log', (msg: string) => {
             this.messages.next(msg);
         });
+
+        this.hubConnection.on('created', (msg: string) => {
+            this.messages.next('created');
+        });
+
+        this.hubConnection.on('joined', (msg: string) => {
+            this.messages.next('joined');
+        });
+
+        this.hubConnection.on('message', (msg: string) => {
+            this.messages.next(msg);
+        });
+    }
+
+    async invoke(methodName: string, ...args: any[]): Promise<any> {
+        return this.hubConnection.invoke(methodName, ...args);
+    }
+
+    isConnected(): boolean {
+        return this.hubConnection && this.hubConnection.state === HubConnectionState.Connected;
     }
 }
