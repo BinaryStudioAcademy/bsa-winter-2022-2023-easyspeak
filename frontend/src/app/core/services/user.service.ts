@@ -11,11 +11,11 @@ export class UserService {
 
     constructor(private httpService: HttpService) { }
 
-    public getUser() {
-        return this.httpService.get<IUserInfo>(`${this.routePrefix}`);
+    public getUser(userId: number) {
+        return this.httpService.getById<IUserInfo>(`${this.routePrefix}`, userId);
     }
 
-    public updateUser(updatedUser: IUserInfo) {
-        return this.httpService.put(`${this.routePrefix}`, updatedUser);
+    public updateUser(userId: number, updatedUser: IUserInfo) {
+        return this.httpService.put(`${this.routePrefix}/${userId}`, updatedUser);
     }
 }

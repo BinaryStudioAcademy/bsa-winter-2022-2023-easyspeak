@@ -21,7 +21,7 @@ builder.Services.RegisterCustomServices(builder.Configuration);
 builder.Services.AddAutoMapper();
 builder.Services.AddSwaggerGen();
 builder.Services.AddValidation();
-// builder.Services.AddFirebaseAuthorization(builder.Configuration);
+builder.Services.AddFirebaseAuthorization(builder.Configuration);
 
 builder.Services.AddCors();
 builder.Services.AddHealthChecks();
@@ -52,7 +52,7 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 
-// app.UseMiddleware<FirebaseAuthMiddleware>();
+app.UseMiddleware<FirebaseAuthMiddleware>();
 
 app.UseEndpoints(endpoinds =>
 {

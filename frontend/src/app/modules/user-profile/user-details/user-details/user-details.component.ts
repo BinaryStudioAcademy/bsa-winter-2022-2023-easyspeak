@@ -46,23 +46,25 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.userService.getUser()
+        this.userService.getUser(0)
             .pipe(this.untilThis)
             .subscribe(
-                (resp) => this.detailsForm.patchValue({
-                    firstName: resp[0].firstName,
-                    lastName: resp[0].lastName,
-                    email: resp[0].email,
-                    country: resp[0].country,
-                    sex: resp[0].sex,
-                    language: resp[0].language,
-                    englishLevel: resp[0].englishLevel,
-                }),
+                (resp) => {
+                    this.detailsForm.patchValue({
+                        firstName: resp.firstName,
+                        lastName: resp.lastName,
+                        email: resp.email,
+                        country: resp.country,
+                        sex: resp.sex,
+                        language: resp.language,
+                        englishLevel: resp.englishLevel,
+                    });
+                },
             );
     }
 
     onSubmit() {
-        this.userService.updateUser(this.detailsForm.value as IUserInfo)
+        this.userService.updateUser(0, this.detailsForm.value as IUserInfo)
             .pipe(this.untilThis)
             .subscribe(() => this.toastr.success('User info updated successfully.', 'Success!'));
     }

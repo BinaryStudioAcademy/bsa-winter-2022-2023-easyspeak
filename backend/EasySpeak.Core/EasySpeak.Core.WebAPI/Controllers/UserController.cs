@@ -9,8 +9,8 @@ namespace EasySpeak.Core.WebAPI.Controllers;
 [Route("[controller]")]
 public class UserController : ControllerBase
 {
-    [HttpGet]
-    public ActionResult<User> Get()
+    [HttpGet("{userId}")]
+    public ActionResult<ICollection<User>> Get()
     {
         var user = new User()
         {
@@ -33,8 +33,8 @@ public class UserController : ControllerBase
         });
     }
 
-    [HttpPut]
-    public ActionResult<UserDto> Update(UserDto userDto)
+    [HttpPut("{userId}")]
+    public ActionResult<UserDto> Update(int userId, UserDto userDto)
     {
         return Ok(userDto);
     }
