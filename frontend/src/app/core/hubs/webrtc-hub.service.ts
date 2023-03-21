@@ -23,7 +23,8 @@ export class WebrtcHubService {
         await this.init();
     }
 
-    listenMessages(action: (msg: unknown) => void) {
+    /* eslint-disable  @typescript-eslint/no-explicit-any */
+    listenMessages(action: (msg: any) => void) {
         this.subscriptions.push(this.messages.subscribe({ next: action }));
     }
 
