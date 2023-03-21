@@ -1,4 +1,5 @@
-﻿using EasySpeak.Core.Common.DTO.User;
+﻿using EasySpeak.Core.BLL.Interfaces;
+using EasySpeak.Core.Common.DTO.User;
 using Microsoft.AspNetCore.SignalR;
 using System.Text.Json;
 

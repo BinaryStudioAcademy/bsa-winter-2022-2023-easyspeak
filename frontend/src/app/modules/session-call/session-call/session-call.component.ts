@@ -47,11 +47,9 @@ export class SessionCallComponent implements OnInit, OnDestroy {
         this.webrtcHub.listenMessages((msg) => {
             console.log(msg);
             if (msg === 'created') {
-                console.log("here");
                 this.isInitiator = true;
             }
             if (msg === 'joined') {
-                console.log("here1");
                 this.isChannelReady = true;
             }
             if (msg === 'got user media') {
