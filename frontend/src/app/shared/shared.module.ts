@@ -5,6 +5,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { YouTubePlayerModule } from '@angular/youtube-player';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
@@ -21,6 +22,7 @@ import { YoutubePlayerComponent } from './components/youtube-player/youtube-play
         MatDialogModule,
         MatIconModule,
         YouTubePlayerModule,
+        NgSelectModule,
     ],
     declarations: [LoadingSpinnerComponent, NotFoundComponent, YoutubePlayerComponent, DropdownComponent],
     exports: [
@@ -32,6 +34,7 @@ import { YoutubePlayerComponent } from './components/youtube-player/youtube-play
         LoadingSpinnerComponent,
         NotFoundComponent,
         DropdownComponent,
+        NgSelectModule,
     ],
 })
 export class SharedModule {}

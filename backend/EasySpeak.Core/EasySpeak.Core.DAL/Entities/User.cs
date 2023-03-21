@@ -42,15 +42,15 @@ namespace EasySpeak.Core.DAL.Entities
 
     public enum Country
     {
-
+        Ukraine
     }
     public enum Language
     {
-
+        Ukrainian
     }
     public enum Timezone
     {
-
+        
     }
 
     public enum Sex

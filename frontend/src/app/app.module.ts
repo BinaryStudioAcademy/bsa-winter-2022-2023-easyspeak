@@ -4,6 +4,7 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { MatIconModule } from '@angular/material/icon';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from '@core/core.module';
@@ -31,6 +32,7 @@ import { AppRoutingModule } from './app-routing.module';
         AuthModule,
         BrowserAnimationsModule,
         CoreModule,
+        MatIconModule,
     ],
     providers: [AuthService],
     bootstrap: [AppComponent],
