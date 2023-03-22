@@ -17,7 +17,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\EasySpeak.Core\EasySpeak.Core.Common\EasySpeak.Core.Common.csproj" />
-    <ProjectReference Include="..\EasySpeak.Core\EasySpeak.Core.Common\EasySpeak.Core.Common.csproj" />
   </ItemGroup>
 
 </Project>
