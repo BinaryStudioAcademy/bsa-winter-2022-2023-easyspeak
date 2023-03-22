@@ -18,7 +18,8 @@ public class LessonsService : BaseService, ILessonsService
 
     public async Task<ICollection<QuestionForLessonDto>> GetQuestionsByLessonIdAsync(int id)
     {
-        var lesson = await _context.Lessons.Include(l => l.Questions.Select(q => q.Subquestions))
+        var lesson = await _context.Lessons.Include(l => l.Questions)
+                                           .ThenInclude(q => q.Subquestions)
                                            .Where(l => l.Id == id)
                                            .FirstOrDefaultAsync();
         if (lesson == null)
