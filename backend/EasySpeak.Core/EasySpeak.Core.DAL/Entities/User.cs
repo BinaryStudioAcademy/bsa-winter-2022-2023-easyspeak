@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EasySpeak.Core.Common.Enums;
+
 
 namespace EasySpeak.Core.DAL.Entities
 {
-    public class User: Entity<long>
+    public class User : Entity<long>
     {
         public Country Country { get; set; }
         public Language Language { get; set; }
@@ -14,7 +11,7 @@ namespace EasySpeak.Core.DAL.Entities
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
         public short Age { get; set; }
-        public string Email { get;set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
         public string ImagePath { get; set; } = string.Empty;
         public Sex Sex { get; set; }
         public LanguageLevel LanguageLevel { get; set; }
@@ -24,11 +21,11 @@ namespace EasySpeak.Core.DAL.Entities
 
         public ICollection<Chat> Chats { get; private set; }
         public ICollection<Lesson> Lessons { get; private set; }
+        public ICollection<Lesson> CreatedLessons { get; private set; }
         public ICollection<Tag> Tags { get; private set; }
         public ICollection<Friend> Friends { get; private set; }
         public ICollection<Friend> Users { get; private set; }
         public ICollection<Notification> Notifications { get; private set; }
-
         public User()
         {
             Chats = new List<Chat>();
@@ -53,30 +50,4 @@ namespace EasySpeak.Core.DAL.Entities
     {
 
     }
-
-    public enum Sex
-    {
-        Male,
-        Female,
-        NonBinary
-    }
-
-    public enum LanguageLevel
-    {
-        A1,
-        A2,
-        B1,
-        B2,
-        C1,
-        C2
-    }
-
-    public enum UserStatus
-    {
-        Online,
-        Offline,
-        Missed,
-        NotDisturb
-    }
-    
 }

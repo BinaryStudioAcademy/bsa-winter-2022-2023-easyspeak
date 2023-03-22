@@ -21,6 +21,9 @@ namespace EasySpeak.Core.DAL.Context.EntityConfigurations
                 .WithMany(f => f.Users)
                 .HasForeignKey(f => f.RequesterId)
                 .OnDelete(DeleteBehavior.NoAction);
+
+            builder.Property(f => f.CreatedAt)
+                .HasDefaultValueSql("getutcdate()");
         }
     }
 }
