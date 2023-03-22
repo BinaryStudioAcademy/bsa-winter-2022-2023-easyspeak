@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { YoutubePlayerComponent } from '@shared/components/youtube-player/youtube-player.component';
 
@@ -9,7 +9,9 @@ import { LessonsCreateComponent } from '../lessons-create/lessons-create.compone
     templateUrl: './lessons-page.component.html',
     styleUrls: ['./lessons-page.component.sass'],
 })
-export class LessonsPageComponent {
+export class LessonsPageComponent implements OnInit {
+    todayDate: string;
+
     lessons = [
         {
             imgPath: '../../../../assets/lesson-mocks/Photo-4.png',
@@ -92,6 +94,14 @@ export class LessonsPageComponent {
     ];
 
     constructor(private dialogRef: MatDialog) { }
+
+    ngOnInit(): void {
+        const formatter = new Intl.DateTimeFormat('en-US', { day: 'numeric', month: 'long', year: 'numeric', weekday: 'long' });
+        const parts = formatter.formatToParts(new Date());
+        const formattedDate = `${parts[4].value} ${parts[2].value} ${parts[6].value}, ${parts[0].value}`;
+
+        this.todayDate = formattedDate;
+    }
 
     openDialog(videoId: string) {
         this.dialogRef.open(YoutubePlayerComponent, {
