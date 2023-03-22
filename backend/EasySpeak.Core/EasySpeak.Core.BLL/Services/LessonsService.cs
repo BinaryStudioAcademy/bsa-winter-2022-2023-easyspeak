@@ -26,12 +26,12 @@ public class LessonsService : BaseService, ILessonsService
             .Include(l => l.User)
             .Where(x => x.StartAt.Date == filtersRequest.Date);
 
-        if (tagsName != null)
+        if (tagsName?.Count() != 0)
         {
             lessonsFromContext = lessonsFromContext.Where(x => x.Tags.Any(y => tagsName.Contains(y.Name)));
         }
 
-        if (filtersRequest.LanguageLevels != null)
+        if (filtersRequest.LanguageLevels?.Count() != 0)
         {
             lessonsFromContext = lessonsFromContext.Where(m => filtersRequest.LanguageLevels.Contains(m.LanguageLevel));
         }
