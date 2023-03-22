@@ -12,6 +12,9 @@ export class WebrtcUtils {
 
     public static readonly H264 = 'H264';
 
+    /**
+     * WebRTC peer connection utils
+     */
     public static createPeerConnection(
         iceServers: RTCIceServer[],
         sdpSemantics: 'unified-plan' | 'plan-b',
@@ -27,6 +30,10 @@ export class WebrtcUtils {
         } as RTCConfiguration);
     }
 
+    /**
+     * represents a candidate Interactive Connectivity Establishment (ICE) configuration which may be used to
+     * establish an RTCPeerConnection.
+     */
     public static doIceRestart(peerConnection: RTCPeerConnection, messageSender: MessageSender): void {
         try {
             // try using new restartIce method
@@ -36,45 +43,43 @@ export class WebrtcUtils {
             peerConnection.createOffer({
                 iceRestart: true,
             })
-                .then((sdp: RTCSessionDescriptionInit) => {
-                    peerConnection.setLocalDescription(sdp);
-                    messageSender.sendMessage(sdp);
+                .then((sessionDescription: RTCSessionDescriptionInit) => {
+                    peerConnection.setLocalDescription(sessionDescription);
+                    messageSender.sendMessage(sessionDescription);
                 });
         }
     }
 
-    public static logStats(peerConnection: RTCPeerConnection, type: 'inbound' | 'outbound' | 'all'): void {
+    /**
+     * WebRTC starts reports
+     * @param peerConnection - local and remote user connection
+     */
+    public static logStats(peerConnection: RTCPeerConnection): void {
         peerConnection.getStats().then(stat => {
-            stat.forEach(report => {
-                switch (type) {
-                    case 'inbound':
-                        if (report.type === 'inbound-rtp') {
-                            console.info(report);
-                        }
-                        break;
-                    case 'outbound':
-                        if (report.type === 'outbound-rtp') {
-                            console.info(report);
-                        }
-                        break;
-                    default:
-                        console.info(report);
-                }
-            });
+            stat.forEach(console.info);
         });
     }
 
-    public static changeBitrate(sdp: RTCSessionDescriptionInit, start: string, min: string, max: string): RTCSessionDescription {
-        const sdpLines = sdp.sdp?.split('\r\n');
+    /**
+     * WebRTC bitrate manipulation
+     */
+    public static changeBitrate(
+        sessionDescription: RTCSessionDescriptionInit,
+        start: string,
+        min: string,
+        max: string,
+    ): RTCSessionDescription {
+        const sessionDescriptionLines = sessionDescription.sdp?.split('\r\n');
 
-        sdpLines?.forEach((str, i) => {
+        sessionDescriptionLines?.forEach((str, i) => {
             // use only relevant lines
             if (str.indexOf('a=fmtp') !== -1) {
                 // if bitrates are not yet set, create required lines and set them, otherwise change them to new values
                 if (str.indexOf('x-google-') === -1) {
-                    sdpLines[i] = `${str};x-google-max-bitrate=${max};x-google-min-bitrate=${min};x-google-start-bitrate=${start}`;
+                    sessionDescriptionLines[i] =
+                        `${str};x-google-max-bitrate=${max};x-google-min-bitrate=${min};x-google-start-bitrate=${start}`;
                 } else {
-                    sdpLines[i] = `${str.split(
+                    sessionDescriptionLines[i] = `${str.split(
                         ';x-google-',
                     )[0]};x-google-max-bitrate=${max};x-google-min-bitrate=${min};x-google-start-bitrate=${start}`;
                 }
@@ -82,11 +87,14 @@ export class WebrtcUtils {
         });
 
         return new RTCSessionDescription({
-            type: sdp.type,
-            sdp: sdpLines?.join('\r\n'),
+            type: sessionDescription.type,
+            sdp: sessionDescriptionLines?.join('\r\n'),
         });
     }
 
+    /**
+     * WebRTC's codecs manipulation
+     */
     public static getCodecs(type: 'audio' | 'video'): string[] {
         return RTCRtpSender.getCapabilities(type)?.codecs
             .map(c => c.mimeType)
@@ -94,16 +102,20 @@ export class WebrtcUtils {
             ?? [];
     }
 
-    public static setCodecs(sdp: RTCSessionDescriptionInit, type: 'audio' | 'video', codecMimeType: string): RTCSessionDescriptionInit {
-        const sdpLines = sdp.sdp!.split('\r\n');
+    public static setCodecs(
+        sessionDescription: RTCSessionDescriptionInit,
+        type: 'audio' | 'video',
+        codecMimeType: string,
+    ): RTCSessionDescriptionInit {
+        const sdpLines = sessionDescription.sdp!.split('\r\n');
 
         sdpLines.forEach((str, i) => {
             // use only relevant type SDP lines
             if (str.startsWith(`m=${type}`)) {
                 const lineWords = str.split(' ');
                 // get all lines (payloads) related to given codec
-                const payloads = this.getPayloads(sdp.sdp!, codecMimeType);
-                // proceed only with relavant payloads for this specific sdp line
+                const payloads = this.getPayloads(sessionDescription.sdp!, codecMimeType);
+                // proceed only with relevant payloads for this specific sdp line
                 const relevantPayloads = payloads.filter(p => lineWords.indexOf(p) !== -1);
 
                 if (relevantPayloads.length > 0) {
@@ -131,14 +143,14 @@ export class WebrtcUtils {
 
         // create new SDP with changed codecs
         return new RTCSessionDescription({
-            type: sdp.type,
+            type: sessionDescription.type,
             sdp: sdpLines.join('\r\n'),
         });
     }
 
-    private static getPayloads(sdp: string, codec: string): string[] {
+    private static getPayloads(sessionDescription: string, codec: string): string[] {
         const payloads: string[] = [];
-        const sdpLines = sdp.split('\r\n');
+        const sdpLines = sessionDescription.split('\r\n');
 
         sdpLines.forEach((str) => {
             if (str.indexOf('a=rtpmap:') !== -1 && str.indexOf(codec) !== -1) {
@@ -146,6 +158,6 @@ export class WebrtcUtils {
             }
         });
 
-        return payloads.filter((v, i) => payloads.indexOf(v) === i);
+        return payloads.filter((p, i) => payloads.indexOf(p) === i);
     }
 }

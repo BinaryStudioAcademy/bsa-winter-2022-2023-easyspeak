@@ -17,15 +17,9 @@ namespace EasySpeak.Core.WebAPI.Hubs
         {
             await EmitLog("Received request to create or join room " + roomName + " from a client " + Context.ConnectionId, roomName);
 
-            if (!ConnectedClients.ContainsKey(roomName))
-            {
-                ConnectedClients.Add(roomName, new List<string>());
-            }
+            CreateRoom(roomName);
 
-            if (!ConnectedClients[roomName].Contains(Context.ConnectionId))
-            {
-                ConnectedClients[roomName].Add(Context.ConnectionId);
-            }
+            AddClientToRoom(roomName);
 
             await EmitJoinRoom(roomName);
 
@@ -45,23 +39,48 @@ namespace EasySpeak.Core.WebAPI.Hubs
             await EmitLog("Room " + roomName + " now has " + numberOfClients + " client(s)", roomName);
         }
 
+        private void CreateRoom(string roomName)
+        {
+            if (!ConnectedClients.ContainsKey(roomName))
+            {
+                ConnectedClients.Add(roomName, new List<string>());
+            }
+        }
+
+        private void AddClientToRoom(string roomName)
+        {
+            if (!ConnectedClients[roomName].Contains(Context.ConnectionId))
+            {
+                ConnectedClients[roomName].Add(Context.ConnectionId);
+            }
+        }
+
         public async Task LeaveRoom(string roomName)
         {
             await EmitLog("Received request to leave the room " + roomName + " from a client " + Context.ConnectionId, roomName);
 
+            await DeleteClientFromRoom(roomName);
+
+            await Groups.RemoveFromGroupAsync(Context.ConnectionId, roomName);
+        }
+
+        private async Task DeleteClientFromRoom(string roomName)
+        {
             if (ConnectedClients.ContainsKey(roomName) && ConnectedClients[roomName].Contains(Context.ConnectionId))
             {
                 ConnectedClients[roomName].Remove(Context.ConnectionId);
                 await EmitLog("Client " + Context.ConnectionId + " left the room " + roomName, roomName);
-
-                if (ConnectedClients[roomName].Count == 0)
-                {
-                    ConnectedClients.Remove(roomName);
-                    await EmitLog("Room " + roomName + " is now empty - resetting its state", roomName);
-                }
+                await RemoveRoomIfEmpty(roomName);
             }
+        }
 
-            await Groups.RemoveFromGroupAsync(Context.ConnectionId, roomName);
+        private async Task RemoveRoomIfEmpty(string roomName)
+        {
+            if (ConnectedClients[roomName].Count == 0)
+            {
+                ConnectedClients.Remove(roomName);
+                await EmitLog("Room " + roomName + " is now empty - resetting its state", roomName);
+            }
         }
 
         private async Task EmitJoinRoom(string roomName)

@@ -42,8 +42,16 @@ export class SessionCallComponent implements OnInit, OnDestroy {
     }
 
     async ngOnInit() {
+        // #1 connect to signaling server
         await this.webrtcHub.start();
-        this.webrtcHub.invoke('CreateOrJoinRoom', this.room);
+        // #2 define signaling communication
+        this.callCreateOrJoinRoom();
+        this.setActionsForMessages();
+        // #3 get media from current client
+        this.getUserMedia();
+    }
+
+    private setActionsForMessages() {
         this.webrtcHub.listenMessages((msg) => {
             if (msg === 'created') {
                 this.isInitiator = true;
@@ -67,13 +75,18 @@ export class SessionCallComponent implements OnInit, OnDestroy {
                 this.handleRemoteHangup();
             }
         });
+    }
 
-        // #3 get media from current client
-        this.getUserMedia();
+    private callCreateOrJoinRoom() {
+        this.webrtcHub.invoke('CreateOrJoinRoom', this.room);
     }
 
     async ngOnDestroy() {
         await this.hangup();
+        this.stopAllVideoAndAudioTracks();
+    }
+
+    private stopAllVideoAndAudioTracks() {
         if (this.localStream && this.localStream.active) {
             this.localStream.getTracks().forEach((track) => { track.stop(); });
         }
@@ -116,7 +129,16 @@ export class SessionCallComponent implements OnInit, OnDestroy {
         try {
             if (useWebrtcUtils) {
                 this.peerConnection =
-                    WebrtcUtils.createPeerConnection(environment.iceServers, 'unified-plan', 'balanced', 'all', 'require', null!, [], 0);
+                    WebrtcUtils.createPeerConnection(
+                        environment.iceServers,
+                        'unified-plan',
+                        'balanced',
+                        'all',
+                        'require',
+                        null!,
+                        [],
+                        0,
+                    );
             } else {
                 this.peerConnection = new RTCPeerConnection({
                     iceServers: environment.iceServers,
@@ -139,7 +161,7 @@ export class SessionCallComponent implements OnInit, OnDestroy {
             if (useWebrtcUtils) {
                 this.peerConnection.oniceconnectionstatechange = () => {
                     if (this.peerConnection?.iceConnectionState === 'connected') {
-                        WebrtcUtils.logStats(this.peerConnection, 'all');
+                        WebrtcUtils.logStats(this.peerConnection);
                     } else if (this.peerConnection?.iceConnectionState === 'failed') {
                         WebrtcUtils.doIceRestart(this.peerConnection, this);
                     }
@@ -150,8 +172,14 @@ export class SessionCallComponent implements OnInit, OnDestroy {
         }
     }
 
+    /**
+     * initiates a WebRTC connection between two peers
+     */
     sendOffer(): void {
+        // Add media transceivers to the peer connection object
         this.addTransceivers();
+
+        // Create an offer to establish a WebRTC connection
         this.peerConnection.createOffer()
             .then((sdp: RTCSessionDescriptionInit) => {
                 let finalSdp = sdp;
@@ -165,11 +193,17 @@ export class SessionCallComponent implements OnInit, OnDestroy {
                         finalSdp = WebrtcUtils.setCodecs(finalSdp, 'video', WebrtcUtils.H264);
                     }
                 }
+                // Set the local session description of the peer connection object
                 this.peerConnection.setLocalDescription(finalSdp);
+
+                // Send the session description to the other peer
                 this.sendMessage(sdp);
             });
     }
 
+    /**
+     * Sends answer to offer
+     */
     sendAnswer(): void {
         this.addTransceivers();
         this.peerConnection.createAnswer().then((sdp) => {
@@ -178,6 +212,12 @@ export class SessionCallComponent implements OnInit, OnDestroy {
         });
     }
 
+    /**
+     * ICE is a protocol used to establish
+     * a direct peer-to-peer communication channel between two devices over the Internet.
+     * An ICE candidate represents a potential IP address and port combination
+     * where a device can receive incoming traffic
+     */
     addIceCandidate(message: { label?: number, candidate?: string }): void {
         const candidate = new RTCIceCandidate({
             sdpMLineIndex: message.label,
@@ -200,6 +240,11 @@ export class SessionCallComponent implements OnInit, OnDestroy {
         await this.webrtcHub.invoke('SendMessage', message, this.room);
     }
 
+    /**
+     * transceivers handle the sending and receiving of audio and video streams in the WebRTC session.
+     * `direction` specifies the direction of the transceiver.
+     * 'recvonly', - the transceiver will only receive media and not send it.
+     */
     addTransceivers(): void {
         const init = { direction: 'recvonly', streams: [], sendEncodings: [] } as RTCRtpTransceiverInit;
 
@@ -210,15 +255,18 @@ export class SessionCallComponent implements OnInit, OnDestroy {
     addLocalStream(stream: MediaStream): void {
         this.localStream = stream;
         this.localVideo.nativeElement.srcObject = this.localStream;
-        this.localVideo.nativeElement.muted = 'muted';
+        this.localVideo.nativeElement.muted = true;
     }
 
     addRemoteStream(stream: MediaStream): void {
         this.remoteStream = stream;
         this.remoteVideo.nativeElement.srcObject = this.remoteStream;
-        this.remoteVideo.nativeElement.muted = 'muted';
+        this.remoteVideo.nativeElement.muted = false;
     }
 
+    /**
+     * When local user disconnected
+     */
     async hangup(): Promise<void> {
         this.stopPeerConnection();
         this.sendMessage('bye');
@@ -228,6 +276,9 @@ export class SessionCallComponent implements OnInit, OnDestroy {
         }, 1000);
     }
 
+    /**
+     * When remote user disconnected
+     */
     handleRemoteHangup(): void {
         this.stopPeerConnection();
         this.isInitiator = true;
