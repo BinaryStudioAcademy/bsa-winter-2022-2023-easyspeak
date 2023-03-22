@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { MaterialModule } from '@shared/material/material.module';
 
-import { MaterialModule } from './material/material.module';
 import { SuitableLessonComponent } from './suitable-lesson/suitable-lesson.component';
 import { SuitableLessonDayComponent } from './suitable-lesson-day/suitable-lesson-day.component';
 

@@ -1,11 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { YouTubePlayerModule } from '@angular/youtube-player';
+import { MaterialModule } from '@shared/material/material.module';
 
 import { ConfirmComponent } from './components/confirm/confirm.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
@@ -21,12 +19,17 @@ import { YoutubePlayerComponent } from './components/youtube-player/youtube-play
         FormsModule,
         ReactiveFormsModule,
         RouterModule,
-        MatDialogModule,
-        MatIconModule,
+        MaterialModule,
         YouTubePlayerModule,
-        MatButtonModule,
     ],
-    declarations: [LoadingSpinnerComponent, NotFoundComponent, YoutubePlayerComponent, DropdownComponent, ModalComponent, ConfirmComponent],
+    declarations: [
+        LoadingSpinnerComponent,
+        NotFoundComponent,
+        YoutubePlayerComponent,
+        DropdownComponent,
+        ModalComponent,
+        ConfirmComponent,
+    ],
     exports: [
         CommonModule,
         RouterModule,
