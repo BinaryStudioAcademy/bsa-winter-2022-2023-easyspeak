@@ -21,7 +21,7 @@ namespace EasySpeak.Emailer.Services
         {
             var apiKey = _configuration["SendGridAPIKey"];
             var client = new SendGridClient(apiKey);
-            var from = new EmailAddress("easymeats.service@gmail.com", "EasySpeak");
+            var from = new EmailAddress("easyspeak@demo.com", "EasySpeak");
             var to = new EmailAddress(toEmail);
             var msg = MailHelper.CreateSingleEmail(from, to, subject, content, content);
             var response = await client.SendEmailAsync(msg);

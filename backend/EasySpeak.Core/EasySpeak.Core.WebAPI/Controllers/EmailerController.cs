@@ -18,7 +18,7 @@ namespace EasySpeak.Core.WebAPI.Controllers
         [HttpPost("Send")]
         public async Task<ActionResult<NewMailDto>> SendEmail(NewMailDto mail)
         {
-            await _httpClient.PostAsync<NewMailDto>(mail);
+            //await _httpClient.PostAsync("", null);
             return Ok();
         }
     }
