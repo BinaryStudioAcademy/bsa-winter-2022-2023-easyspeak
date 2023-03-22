@@ -72,11 +72,9 @@
         [(ngModel)]="confirmPassword"
         placeholder="Repeat The Password"
         [ngModelOptions]="{ standalone: true }" />
-    <mat-error *ngIf="submitted && form.controls['confirmPassword'].errors">{{
-        getConfirmPasswordErrorMessage()
-    }}</mat-error>
+    <mat-error *ngIf="submitted">{{ getConfirmPasswordErrorMessage() }}</mat-error>
 </label>
-<button mat-button (click)="signUp()">Create Account</button>
+<button mat-button (click)="validation(); signUp()">Create Account</button>
 <div id="has-account">
     <span>I have an account! </span>
     <a href="auth/sign-in">Sign In</a>

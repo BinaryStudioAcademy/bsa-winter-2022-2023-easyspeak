@@ -14,14 +14,7 @@ import { Subject, takeUntil } from 'rxjs';
     styleUrls: ['./sign-up.component.sass'],
 })
 export class SignUpComponent implements OnDestroy {
-    EnglishLevels = [
-        'A1 (Elementary)',
-        'A2 (Elementary)',
-        'B1 (Intermediate)',
-        'B2 (Intermediate)',
-        'C1 (Advanced)',
-        'C2 (Advanced)',
-    ];
+    EnglishLevels = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
 
     Ages = ['5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18'];
 
@@ -52,6 +45,14 @@ export class SignUpComponent implements OnDestroy {
 
     confirmPassword: string = '';
 
+    currentUser: IUser = {
+        firstName: '',
+        lastName: '',
+        email: '',
+    };
+
+    isValid = true;
+
     submitted = false;
 
     form: FormGroup = new FormGroup({
@@ -75,15 +76,28 @@ export class SignUpComponent implements OnDestroy {
     }
 
     signUp() {
-        //this.validation();
-        // this.httpService
-        //     .post<INewUser>('/users', this.newUser)
-        //     .pipe(takeUntil(this.unsubscribe$))
-        //     .subscribe((result) => console.log(result));
-        this.authService.signUp(this.newUser, this.password);
+        if (!this.form.invalid && this.isValid) {
+            this.authService
+                .signUp(this.newUser.email, this.password)
+                .then(() => {
+                    this.httpService
+                        .post<INewUser>('/users', this.newUser)
+                        .pipe(takeUntil(this.unsubscribe$))
+                        .subscribe((result) => {
+                            this.currentUser = result;
+                        });
+
+                    this.toastr.success('Successfully sign up', 'Sign up');
+                })
+                .catch((error) => {
+                    this.toastr.error(error.message, 'Sign up');
+                });
+        }
     }
 
     getErrorMessage(field: string) {
+        this.validateData();
+
         for (const message in this.validationErrorMessage) {
             if (this.form.controls[field].hasError(message)) {
                 return this.validationErrorMessage[message];
@@ -105,10 +119,18 @@ export class SignUpComponent implements OnDestroy {
 
     getConfirmPasswordErrorMessage() {
         if (this.form.controls['confirmPassword'].hasError('required')) {
+            this.isValid = false;
+
             return this.validationErrorMessage['required'];
         }
 
-        return this.confirmPassword !== this.password ? 'The password does not match' : '';
+        if (this.confirmPassword !== this.password) {
+            this.isValid = false;
+
+            return 'The password does not match';
+        }
+
+        return '';
     }
 
     validation() {

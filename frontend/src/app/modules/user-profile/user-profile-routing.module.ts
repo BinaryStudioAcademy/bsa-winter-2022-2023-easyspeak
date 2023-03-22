@@ -6,7 +6,7 @@ import { SelectTopicsPageComponent } from './select-topics-page/select-topics-pa
 
 const routes: Routes = [
     {
-        path: '',
+        path: 'select-topics',
         component: SelectTopicsPageComponent,
         children: [
             {

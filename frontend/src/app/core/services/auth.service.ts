@@ -7,6 +7,7 @@ import { INewUser } from '@shared/models/INewUser';
 import { IUser } from '@shared/models/IUser';
 import * as auth from 'firebase/auth';
 import firebase from 'firebase/compat';
+import { from } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
@@ -41,33 +42,31 @@ export class AuthService {
     }
 
     signIn(email: string, password: string) {
-        const result = this.afAuth.signInWithEmailAndPassword(email, password);
-        // .then(() => {
-        //     this.afAuth.authState.subscribe((user) => {
-        //         if (user) {
-        //             this.router.navigate(['']);
-        //         }
-        //     });
-        // })
-        // .catch((error) => {
-        //     // Handle Errors here.
-        //     const errorCode = error.code;
-        //     const errorMessage = error.message;
+        return this.afAuth.signInWithEmailAndPassword(email, password).then((userCredential) => {
+            if (userCredential.user) {
+                from(userCredential.user.getIdToken()).subscribe((token) => localStorage.setItem('accessToken', token));
+            }
 
-        //     if (errorCode === 'auth/wrong-password') {
-        //         alert('Wrong password.');
-        //     } else {
-        //         alert(errorMessage);
-        //     }
-        //     console.log(error);
-        // });
-        console.log(result);
+            this.afAuth.authState.subscribe((user) => {
+                if (user) {
+                    this.router.navigate(['main']);
+                }
+            });
+        });
     }
 
-    signUp(user: INewUser, password: string) {
-        const result = this.afAuth
-            .createUserWithEmailAndPassword(user.email, password)
-            .then((result) => this.httpService.post<firebase.User | null>(this.url, result.user));
+    signUp(email: string, password: string) {
+        return this.afAuth.createUserWithEmailAndPassword(email, password).then((userCredential) => {
+            if (userCredential.user) {
+                from(userCredential.user.getIdToken()).subscribe((token) => localStorage.setItem('accessToken', token));
+            }
+
+            this.afAuth.authState.subscribe((user) => {
+                if (user) {
+                    this.router.navigate(['user-profile/select-topics']);
+                }
+            });
+        });
     }
 
     get isLoggedIn(): boolean {
