@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EasySpeak.Emailer.Interfaces
+﻿namespace EasySpeak.Emailer.Interfaces
 {
     public interface IMailService
     {
