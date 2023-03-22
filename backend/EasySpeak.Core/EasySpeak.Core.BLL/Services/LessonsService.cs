@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using EasySpeak.Core.BLL.Interfaces;
+using EasySpeak.Core.Common.DTO;
 using EasySpeak.Core.Common.DTO.Lesson;
 using EasySpeak.Core.DAL.Context;
 using EasySpeak.Core.DAL.Entities;
@@ -9,6 +10,8 @@ namespace EasySpeak.Core.BLL.Services;
 
 public class LessonsService : BaseService, ILessonsService
 {
+    public const int DaysInWeek = 7;
+
     public LessonsService(EasySpeakCoreContext context, IMapper mapper) : base(context, mapper)
     {
     }
@@ -44,5 +47,34 @@ public class LessonsService : BaseService, ILessonsService
         lessonDtos.ForEach(t => t.SubscribersCount = subscribersCountDict.Result[t.Id].SbCount);
 
         return lessonDtos;
+    }
+
+    public async Task<ICollection<DayCardDto>?> GetDayCardsOfWeekAsync(RequestDayCardDto requestDto)
+    {
+        var mondayDate = requestDto.Date.AddDays(-(int)requestDto.Date.DayOfWeek).Date;
+        var dayCards = await _context.Lessons
+            .Where(c => c.StartAt.Date >= mondayDate
+                        && c.StartAt.Date <= mondayDate.AddDays(DaysInWeek - 1))
+            .GroupBy(c => c.StartAt.Date)
+            .Select(t =>
+                new DayCardDto
+                {
+                    Date = t.Key,
+                    MeetingsAmount = t.Count()
+                }
+            )
+            .ToListAsync();
+
+        return dayCards;
+    }
+
+    public async Task<LessonDto> CreateLessonAsync(NewLessonDto lessonDto)
+    {
+        var lesson = _mapper.Map<Lesson>(lessonDto);
+
+        var createdLesson = _context.Add(lesson).Entity;
+        await _context.SaveChangesAsync();
+
+        return _mapper.Map<LessonDto>(createdLesson);
     }
 }

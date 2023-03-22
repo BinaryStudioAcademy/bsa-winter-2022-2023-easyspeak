@@ -9,5 +9,6 @@ public class SubQuestionsProfile : Profile
     public SubQuestionsProfile()
     {
         CreateMap<Subquestion, SubQuestionDto>();
+        CreateMap<SubQuestionDto, Subquestion>();
     }
 }
