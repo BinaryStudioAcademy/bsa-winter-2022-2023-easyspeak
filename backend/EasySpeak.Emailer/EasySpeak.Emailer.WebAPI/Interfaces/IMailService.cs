@@ -1,4 +1,4 @@
-﻿namespace EasySpeak.Emailer.Interfaces
+﻿namespace EasySpeak.Emailer.WebAPI.Interfaces
 {
     public interface IMailService
     {

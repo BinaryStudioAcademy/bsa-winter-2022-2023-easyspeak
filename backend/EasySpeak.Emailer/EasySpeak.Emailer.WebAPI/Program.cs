@@ -1,8 +1,8 @@
-using EasySpeak.Emailer.Interfaces;
-using EasySpeak.Emailer.Services;
+using EasySpeak.Emailer.WebAPI.Interfaces;
+using EasySpeak.Emailer.WebAPI.Services;
 using EasySpeak.Core.Common.DTO;
 using FluentValidation;
-using EasySpek.Emailer.Validators;
+using EasySpek.Emailer.WebAPI.Validators;
 using FluentValidation.Results;
 
 var builder = WebApplication.CreateBuilder(args);

@@ -1,7 +1,7 @@
 ﻿using EasySpeak.Core.Common.DTO;
 using FluentValidation;
 
-namespace EasySpek.Emailer.Validators
+namespace EasySpek.Emailer.WebAPI.Validators
 {
     public class NewMailDtoValidator : AbstractValidator<NewMailDto>
     {

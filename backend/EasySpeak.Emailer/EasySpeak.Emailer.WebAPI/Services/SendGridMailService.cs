@@ -1,8 +1,8 @@
-﻿using EasySpeak.Emailer.Interfaces;
+﻿using EasySpeak.Emailer.WebAPI.Interfaces;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 
-namespace EasySpeak.Emailer.Services
+namespace EasySpeak.Emailer.WebAPI.Services
 {
     public class SendGridMailService : IMailService
     {
