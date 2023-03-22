@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace EasySpeak.Core.WebAPI.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("")]
     public class NotificationController : ControllerBase
     {
         private readonly INotificationService _notificationService;
@@ -20,6 +20,20 @@ namespace EasySpeak.Core.WebAPI.Controllers
         {
             var notifications = await _notificationService.GetNotificationsAsync();
             return Ok(notifications);
+        }
+
+        [HttpPost("notification")]
+        public async Task<IActionResult> CreateNotificationAsync([FromBody] NotificationDto notificationDto) 
+        {
+            var notification = await _notificationService.CreateNotificationAsync(notificationDto);
+            return Ok(notification);
+        }
+
+        [HttpPut("readnotification")]
+        public async Task<IActionResult> ReadNotification([FromBody] long notificationId)
+        {
+            var id = await _notificationService.ReadNotificationAsync(notificationId);
+            return Ok(id);
         }
     }
 }

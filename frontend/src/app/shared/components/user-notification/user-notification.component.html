@@ -1,13 +1,12 @@
-<div *ngIf="count > 0">
+<div *ngIf="notifications.length > 0">
     <div class="notifications" *ngFor="let notification of notifications">
-        <button
-            class="notification-element"
-            *ngIf="!notification.isRead"
-            (click)="notification.isRead = true; this.readNotification(notification)">
-            <span class="notification-text">{{ notification.id }}</span>
+        <button class="notification-element" (click)="readNotification(notification)">
+            <span class="notification-text">{{ notification.text }}</span>
         </button>
     </div>
 </div>
-<div class="notifications" *ngIf="!(count > 0)">
-    <span class="notification-text">Empty</span>
+<div class="notifications" *ngIf="!(notifications.length > 0)">
+    <button class="notification-element">
+        <span class="notification-text">There are no notifications</span>
+    </button>
 </div>

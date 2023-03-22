@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HubConnection } from '@microsoft/signalr';
-import { IUserNotification } from '@shared/models/IUserNotification';
 import { Subject, Subscription } from 'rxjs';
 
 import { SignalRHubFactoryService } from './signalr-hub-factory.service';
@@ -13,7 +12,7 @@ export class NotificationsHubService {
 
     private hubConnection: HubConnection;
 
-    readonly messages = new Subject<IUserNotification>();
+    public readonly messages = new Subject<string>();
 
     private subscriptions: Subscription[] = [];
 
@@ -25,7 +24,7 @@ export class NotificationsHubService {
         await this.init();
     }
 
-    listenMessages(action: (msg: IUserNotification) => void) {
+    listenMessages(action: (msg: string) => void) {
         this.subscriptions.push(this.messages.subscribe({ next: action }));
     }
 
@@ -40,7 +39,7 @@ export class NotificationsHubService {
             .then(() => console.info(`"${this.hubFactory}" successfully started.`))
             .catch(() => console.info(`"${this.hubFactory}" failed.`));
 
-        this.hubConnection.on('BroadcastMessage', (msg: IUserNotification) => {
+        this.hubConnection.on('Notification', (msg: string) => {
             this.messages.next(msg);
         });
     }

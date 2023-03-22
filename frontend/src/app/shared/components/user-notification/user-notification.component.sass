@@ -4,14 +4,25 @@
     width: 250px
     display: flex
     flex-direction: row
+    max-height: 500px
+    overflow-y: hidden
+    overflow-x: hidden
     
 .notification-element
-    width: 100%
     display: flex
     justify-content: flex-start
     align-items: center
+    width: 100%
+    min-height: 28px
+    max-height: 56px
+    border: hidden
+    background-color: $white
+    &:hover
+      cursor: pointer
+      background-color: $gray-100
 
 .notification-icon
+    padding-left: 10px
     padding-right: 10px
 
 .notification-text

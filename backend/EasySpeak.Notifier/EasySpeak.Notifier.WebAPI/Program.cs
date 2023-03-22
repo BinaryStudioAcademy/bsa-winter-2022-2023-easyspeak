@@ -55,7 +55,7 @@ app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();
     endpoints.MapHub<BroadcastHub>("/broadcastHub");
-    endpoints.MapHub<NotificationsHub>("/notificationsHub");
+    endpoints.MapHub<NotificationHub>("/notificationsHub");
     endpoints.MapHealthChecks("/health");
 });
 
