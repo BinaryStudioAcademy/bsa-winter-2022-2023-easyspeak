@@ -24,7 +24,7 @@ public class LessonsService : BaseService, ILessonsService
             .Include(l => l.Tags)
             .Include(l => l.Questions)
             .Include(l => l.User)
-            .Where(x => x.StartAt > filtersRequest.Date);
+            .Where(x => x.StartAt.Date == filtersRequest.Date);
 
         if (tagsName != null)
         {
