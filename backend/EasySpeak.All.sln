@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasySpeak.Core.BLL", "EasyS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasySpeak.RabbitMQ", "EasySpeak.RabbitMQ\EasySpeak.RabbitMQ.csproj", "{6282A64B-0676-46F0-8A7A-AB1C12DADEFB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasySpek.Emailer", "EasySpek.Emailer\EasySpek.Emailer\EasySpek.Emailer.csproj", "{DB753850-CC72-4039-84C8-EA2725CE5710}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasySpeak.Emailer", "EasySpeak.Emailer\EasySpeak.Emailer\EasySpeak.Emailer.csproj", "{6D6A2144-2471-4D0F-B3FD-C5BCD1CEE45E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,10 +47,10 @@ Global
 		{6282A64B-0676-46F0-8A7A-AB1C12DADEFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6282A64B-0676-46F0-8A7A-AB1C12DADEFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6282A64B-0676-46F0-8A7A-AB1C12DADEFB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DB753850-CC72-4039-84C8-EA2725CE5710}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DB753850-CC72-4039-84C8-EA2725CE5710}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DB753850-CC72-4039-84C8-EA2725CE5710}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DB753850-CC72-4039-84C8-EA2725CE5710}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D6A2144-2471-4D0F-B3FD-C5BCD1CEE45E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D6A2144-2471-4D0F-B3FD-C5BCD1CEE45E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D6A2144-2471-4D0F-B3FD-C5BCD1CEE45E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D6A2144-2471-4D0F-B3FD-C5BCD1CEE45E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
