@@ -43,6 +43,7 @@ import { YoutubePlayerComponent } from './components/youtube-player/youtube-play
         DropdownComponent,
         NgSelectModule,
         ModalComponent,
+        MaterialModule,
     ],
 })
 export class SharedModule {}

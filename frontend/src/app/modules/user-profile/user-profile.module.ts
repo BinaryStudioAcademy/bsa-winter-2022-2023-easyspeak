@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MaterialModule } from '@modules/time-table/material/material.module';
 import { SharedModule } from '@shared/shared.module';
 
 import { SelectTopicsPageComponent } from './select-topics-page/select-topics-page.component';
@@ -22,7 +21,6 @@ import { UserProfileRoutingModule } from './user-profile-routing.module';
         SharedModule,
         UserProfileRoutingModule,
         FormsModule,
-        MaterialModule,
     ],
     exports: [
         SelectTopicsPageComponent,
