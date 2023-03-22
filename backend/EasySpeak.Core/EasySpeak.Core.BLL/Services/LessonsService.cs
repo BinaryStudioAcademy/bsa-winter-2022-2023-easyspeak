@@ -16,6 +16,23 @@ public class LessonsService : BaseService, ILessonsService
     {
     }
 
+    public async Task<ICollection<QuestionForLessonDto>> GetQuestionsByLessonIdAsync(int id)
+    {
+        var lesson = await _context.Lessons.Include(l => l.Questions.Select(q => q.Subquestions))
+                                           .Where(l => l.Id == id)
+                                           .FirstOrDefaultAsync();
+        if (lesson == null)
+        {
+            return new List<QuestionForLessonDto>();
+        }
+
+        var questions = lesson.Questions;
+
+        var questionDtos = _mapper.Map<ICollection<Question>, ICollection<QuestionForLessonDto>>(questions);
+
+        return questionDtos;
+    }
+
     public async Task<ICollection<LessonDto>> GetAllLessonsAsync(FiltersRequest filtersRequest)
     {
         var tagsName = filtersRequest.Tags?.Select(x => x.Name);
