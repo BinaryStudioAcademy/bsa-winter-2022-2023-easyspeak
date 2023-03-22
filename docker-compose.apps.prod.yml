@@ -16,6 +16,19 @@ services:
         volumes:
            - ./resources:/app/Resources
 
+    easyspeak_emailer:
+        image: bochka123/easyspeak_emailer:latest
+        container_name: 'easyspeak_emailer'
+        restart: on-failure
+        networks:
+            - back
+        ports:
+            - "7109:7109"
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Production
+        env_file:
+            - /etc/environment
+
     easyspeak_notifier:
         image: tatihutii/easyspeak_notifier:latest
         container_name: 'easyspeak_notifier'
