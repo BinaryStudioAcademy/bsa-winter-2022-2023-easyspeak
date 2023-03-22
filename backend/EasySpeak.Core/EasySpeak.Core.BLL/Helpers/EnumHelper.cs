@@ -1,4 +1,5 @@
-﻿using EasySpeak.Core.DAL.Entities;
+﻿using EasySpeak.Core.Common.Enums;
+using EasySpeak.Core.DAL.Entities;
 
 namespace EasySpeak.Core.BLL.Helpers
 {

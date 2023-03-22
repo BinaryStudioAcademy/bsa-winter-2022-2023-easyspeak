@@ -3,7 +3,6 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { HttpService } from '@core/services/http.service';
-import { INewUser } from '@shared/models/INewUser';
 import { IUser } from '@shared/models/IUser';
 import * as auth from 'firebase/auth';
 import firebase from 'firebase/compat';

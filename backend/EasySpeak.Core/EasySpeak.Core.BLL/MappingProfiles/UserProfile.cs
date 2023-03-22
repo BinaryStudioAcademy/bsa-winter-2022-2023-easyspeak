@@ -3,6 +3,7 @@ using EasySpeak.Core.Common.DTO.Lesson;
 using EasySpeak.Core.BLL.Helpers;
 using EasySpeak.Core.Common.DTO.User;
 using EasySpeak.Core.DAL.Entities;
+using UserDto = EasySpeak.Core.Common.DTO.User.UserDto;
 
 namespace EasySpeak.Core.BLL.MappingProfiles;
 
