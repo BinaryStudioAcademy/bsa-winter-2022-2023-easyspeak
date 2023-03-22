@@ -398,4 +398,4 @@ FodyWeavers.xsd
 *.sln.iml
 
 **/FirebaseServiceAccountKey.json
-**/EasySpeak.Emailer/appsettings.json
+**/EasySpeak.EmailerWebAPI/appsettings.json
