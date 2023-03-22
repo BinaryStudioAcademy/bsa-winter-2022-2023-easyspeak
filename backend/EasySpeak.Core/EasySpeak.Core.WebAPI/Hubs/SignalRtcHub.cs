@@ -39,7 +39,7 @@ namespace EasySpeak.Core.WebAPI.Hubs
             await EmitLog("Room " + roomName + " now has " + numberOfClients + " client(s)", roomName);
         }
 
-        private void CreateRoom(string roomName)
+        private static void CreateRoom(string roomName)
         {
             if (!ConnectedClients.ContainsKey(roomName))
             {
