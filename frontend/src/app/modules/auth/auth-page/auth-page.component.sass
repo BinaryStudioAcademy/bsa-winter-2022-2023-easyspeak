@@ -44,8 +44,8 @@
     display: flex
     justify-content: center
     align-items: center
-    background: repeating-linear-gradient(75deg,$accent-color,$accent-color 1px, rgba(1,1 ,1 , 0) 1px, rgba(1,1 ,1 , 0) 20%), repeating-linear-gradient(166deg,$accent-color,$accent-color 1px, rgba(1,1 ,1 , 0) 1px, rgba(1,1 ,1 , 0) 20%)
-    background-color: $main-color
+    background: repeating-linear-gradient(75deg,$pink-100,$pink-100 1px, rgba(0, 0, 0, 0) 1px, rgba(0, 0, 0, 0) 20%), repeating-linear-gradient(166deg,$pink-100,$pink-100 1px, rgba(0, 0, 0, 0) 1px, rgba(1, 1, 1, 0) 20%)
+    background-color: $blue-200
 
     h1
         color: $white
@@ -121,18 +121,26 @@
 h1
     font-size: 24px
     line-height: 146%
-    color: $main-color
+    color: $blue-200
     margin-bottom: 5%
 
-input, select
+input, select, button
     background: $white
     width: 100%
     border: 0
     outline: 0
     border-radius: 50px
-    margin-top: 3%
-    padding: 4%
+    margin-top: 8px
+    padding: 12px
     text-color: $gray-200
+
+.name-section
+    width: 117%
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+    input
+        width: 70%
 
 .age-sex-section
     width: 110%
@@ -153,12 +161,9 @@ select
         background-color: $white
 
 button
-    width: 110%
-    background: $main-color
+    width: 111%
+    background: $blue-200
     color: $white
-    border-radius: 50px
-    margin-top: 3%
-    padding: 6%
 
 .mat-mdc-form-field-error
     font-size: 10px
