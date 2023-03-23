@@ -48,9 +48,7 @@
         <div class="question" *ngFor="let question of questions">
             <p class="question-text">{{ question.topic }}</p>
             <div class="subquestion" *ngFor="let subquestion of question.subQuestions">
-                <svg class="subquestion-elipse">
-                    <ellipse cx="3" cy="3" rx="3" ry="3" />
-                </svg>
+                <img class="subquestion-elipse" src="assets/lesson-icons/bullet.svg" alt="bullet-icon" />
                 <p class="subquestion-text">{{ subquestion.text }}</p>
             </div>
         </div>
