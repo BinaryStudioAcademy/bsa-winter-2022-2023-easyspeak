@@ -1,5 +1,7 @@
 import { FormBuilder, Validators } from '@angular/forms';
 
+import { Lesson } from 'src/app/models/lessons/lesson';
+
 export default class Utils {
     static tagsList: string[] = [
         'Architecture',
@@ -20,7 +22,7 @@ export default class Utils {
         'Politics',
     ];
 
-    static lessons = [
+    static lessons: Lesson[] = [
         {
             id: 1,
             imgPath: 'assets/lesson-mocks/Photo-4.png',
@@ -109,21 +111,11 @@ export default class Utils {
 
     static group(fb: FormBuilder) {
         return fb.group({
-            name: ['', [
-                Validators.required,
-            ]],
-            description: ['', [
-                Validators.required,
-            ]],
-            date: ['', [
-                Validators.required,
-            ]],
-            questions: ['', [
-                Validators.required,
-            ]],
-            tags: ['', [
-                Validators.required,
-            ]],
+            name: ['', [Validators.required]],
+            description: ['', [Validators.required]],
+            date: ['', [Validators.required]],
+            questions: ['', [Validators.required]],
+            tags: ['', [Validators.required]],
         });
     }
 }
