@@ -2,6 +2,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
+import { CountriesTzLangProviderService } from 'src/app/services/countries-tz-lang-provider.service';
+
 @Component({
     selector: 'app-sign-up',
     templateUrl: './sign-up.component.html',
@@ -19,7 +21,7 @@ export class SignUpComponent {
 
     Ages = ['5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18'];
 
-    Countries = ['Ukraine', 'Austria', 'England', 'Scotland', 'Poland', 'Romania'];
+    Countries;
 
     private validationErrorMessage: { [id: string]: string } = {
         required: 'Enter a value',
@@ -49,7 +51,12 @@ export class SignUpComponent {
         confirmPassword: new FormControl(this.confirmPassword),
     });
 
-    constructor(private formBuilder: FormBuilder) {}
+    constructor(
+        private formBuilder: FormBuilder,
+        private countriesTzLangProvider: CountriesTzLangProviderService,
+    ) {
+        this.Countries = this.countriesTzLangProvider.getCountriesList();
+    }
 
     getErrorMessage(field: string) {
         for (const message in this.validationErrorMessage) {
