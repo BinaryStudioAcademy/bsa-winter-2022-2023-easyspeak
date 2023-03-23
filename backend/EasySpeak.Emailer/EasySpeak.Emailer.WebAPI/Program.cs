@@ -31,15 +31,9 @@ app.UseCors(opt => opt
     .AllowAnyMethod()
     .AllowAnyOrigin());
 
-app.MapPost("/api/emailer/send", async (IValidator<NewMailDto> validator, IMailService mailService, NewMailDto mailDto) =>
+app.MapPost("/api/emailer/send", (IMailService mailService, NewMailDto mailDto) =>
 {
-    ValidationResult validationResult = await validator.ValidateAsync(mailDto);
-    if (!validationResult.IsValid)
-    {
-        return Results.ValidationProblem(validationResult.ToDictionary());
-    }
-    await mailService.SendEmailAsync(mailDto.To, mailDto.Subject, mailDto.Content);
-    return Results.Created($"/{mailDto.To}", mailDto);
+    return mailService.SendWithResulatResult(mailDto);
 });
 
 app.Run();

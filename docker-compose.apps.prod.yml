@@ -17,13 +17,13 @@ services:
            - ./resources:/app/Resources
 
     easyspeak_emailer:
-        image: bochka123/easyspeak_emailer:latest
+        image: tatihutii/easyspeak_emailer:latest
         container_name: 'easyspeak_emailer'
         restart: on-failure
         networks:
             - back
         ports:
-            - "7109:7109"
+            - "5090:5090"
         environment:
             - ASPNETCORE_ENVIRONMENT=Production
         env_file:

@@ -21,11 +21,11 @@ services:
         context: ./backend
         dockerfile: ./EasySpeak.Emailer/Dockerfile
         args:
-          - PROJECT_PORT=7109
+          - PROJECT_PORT=5090
       container_name: 'easyspeak_emailer'
       restart: on-failure
       ports:
-          - "7109:7109"
+          - "5090:5090"
       networks:
           - back
       environment:

@@ -1,7 +1,7 @@
 ﻿using EasySpeak.Core.Common.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using System.Text;
+using EasySpeak.Core.BLL.Interfaces;
 
 namespace EasySpeak.Core.WebAPI.Controllers
 {
@@ -9,18 +9,19 @@ namespace EasySpeak.Core.WebAPI.Controllers
     [ApiController]
     public class EmailerController : ControllerBase
     {
-        private HttpClient _httpClient;
+        private IConfiguration _configuration;
+        private IHttpRequestService _httpRequestService;
 
-        public EmailerController()
+        public EmailerController(IConfiguration configuration, IHttpRequestService httpRequestService)
         {
-            _httpClient = new HttpClient();
-            _httpClient.BaseAddress = new Uri("https://localhost:7109/api/emailer/send");
+            _configuration = configuration;
+            _httpRequestService = httpRequestService;
         }
 
         [HttpPost("Send")]
         public async Task<ActionResult<NewMailDto>> SendEmail(NewMailDto mail)
         {
-            var request = await _httpClient.PostAsync("", new StringContent(JsonConvert.SerializeObject(mail), Encoding.UTF8, "application/json"));
+            var request = await _httpRequestService.PostAsync(_configuration["EmailSendURI"], JsonConvert.SerializeObject(mail));
             return StatusCode((int)request.StatusCode, request);
         }
     }
