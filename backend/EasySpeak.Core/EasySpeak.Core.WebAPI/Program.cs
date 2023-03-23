@@ -1,4 +1,5 @@
 using EasySpeak.Core.WebAPI.Extentions;
+using EasySpeak.Core.WebAPI.Hubs;
 using EasySpeak.Core.WebAPI.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,11 +23,12 @@ builder.Services.AddAutoMapper();
 builder.Services.AddSwaggerGen();
 builder.Services.AddValidation();
 builder.Services.AddFirebaseAuthorization(builder.Configuration);
+builder.Services.AddSignalR();  
 
 builder.Services.AddCors();
 builder.Services.AddHealthChecks();
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
-builder.WebHost.UseUrls("http://*:5050");
+builder.WebHost.UseUrls("https://*:5050");
 
 var app = builder.Build();
 
@@ -57,8 +59,10 @@ app.UseMiddleware<FirebaseAuthMiddleware>();
 app.UseEndpoints(endpoinds =>
 {
     endpoinds.MapHealthChecks("/health");
+    endpoinds.MapHub<SignalRtcHub>("/signaling");
     endpoinds.MapControllers();
 });
+
 
 app.UseCodiCoreContext();
 
