@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IIcon } from '@shared/models/IIcon';
-import { TagsForInterests } from '@shared/utils/tagsForInterests';
+import { getTags } from '@shared/utils/tagsForInterests';
 
 @Component({
     selector: 'app-interests-dropdown',
@@ -10,7 +10,7 @@ import { TagsForInterests } from '@shared/utils/tagsForInterests';
 export class InterestsDropdownComponent {
     toggle: boolean = false;
 
-    @Input() inputList: IIcon[] = TagsForInterests.tags;
+    @Input() inputList: IIcon[] = getTags();
 
     @Output() selectedInterests = new EventEmitter<string[]>();
 
@@ -22,7 +22,7 @@ export class InterestsDropdownComponent {
         const { checked } = ev;
 
         if (checked) {
-            this.outputList.push(this.inputList[numb].icon_name);
+            this.outputList = this.outputList.concat(this.inputList[numb].icon_name);
         } else {
             this.outputList = this.outputList.filter(x => x !== this.inputList[numb].icon_name);
         }
