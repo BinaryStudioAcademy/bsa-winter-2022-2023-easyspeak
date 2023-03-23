@@ -1,4 +1,5 @@
 using EasySpeak.Core.WebAPI.Extentions;
+using EasySpeak.Core.WebAPI.Hubs;
 using EasySpeak.Core.WebAPI.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,19 +12,23 @@ builder.Configuration
     .AddEnvironmentVariables()
     .Build();
 
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddControllers();
 builder.Services.AddEasySpeakCoreContext(builder.Configuration);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.RegisterCustomServices();
+builder.Services.RegisterCustomServices(builder.Configuration);
+
 builder.Services.AddAutoMapper();
 builder.Services.AddSwaggerGen();
 builder.Services.AddValidation();
+builder.Services.AddFirebaseAuthorization(builder.Configuration);
+builder.Services.AddSignalR();  
 
 builder.Services.AddCors();
 builder.Services.AddHealthChecks();
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
-builder.WebHost.UseUrls("http://*:5050");
+builder.WebHost.UseUrls("https://*:5050");
 
 var app = builder.Build();
 
@@ -49,10 +54,16 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 
+app.UseMiddleware<FirebaseAuthMiddleware>();
+
 app.UseEndpoints(endpoinds =>
 {
     endpoinds.MapHealthChecks("/health");
+    endpoinds.MapHub<SignalRtcHub>("/signaling");
     endpoinds.MapControllers();
 });
+
+
+app.UseCodiCoreContext();
 
 app.Run();

@@ -1,0 +1,84 @@
+<h1>Create Account</h1>
+<label>
+    <input
+        type="text"
+        [(ngModel)]="newUser.email"
+        matInput
+        required
+        placeholder="Email"
+        [ngModelOptions]="{ standalone: true }" />
+    <mat-error *ngIf="submitted && form.controls['email'].errors">{{ getErrorMessage('email') }}</mat-error>
+</label>
+
+<div class="name-section">
+    <label>
+        <input
+            type="text"
+            [(ngModel)]="newUser.firstName"
+            #inFirstName="ngModel"
+            matInput
+            placeholder="First Name"
+            [ngModelOptions]="{ standalone: true }" />
+        <mat-error *ngIf="submitted && form.controls['firstName'].errors">{{ getErrorMessage('firstName') }}</mat-error>
+    </label>
+
+    <label>
+        <input
+            type="text"
+            [(ngModel)]="newUser.lastName"
+            #LastName="ngModel"
+            matInput
+            required
+            placeholder="Last Name"
+            [ngModelOptions]="{ standalone: true }" />
+        <mat-error *ngIf="submitted && form.controls['lastName'].errors">{{ getErrorMessage('lastName') }}</mat-error>
+    </label>
+</div>
+<div class="age-sex-section">
+    <select required>
+        <option>Age</option>
+        <option *ngFor="let age of Ages">{{ age }}</option>
+    </select>
+    <select required>
+        <option>Sex</option>
+        <option>Male</option>
+        <option>Female</option>
+    </select>
+</div>
+<select required>
+    <option>Country</option>
+    <option *ngFor="let country of Countries">{{ country }}</option>
+</select>
+<select required>
+    <option>Native Language</option>
+    <option>Ukrainian</option>
+</select>
+<select required>
+    <option>Level in English</option>
+    <option *ngFor="let level of EnglishLevels">{{ level }}</option>
+</select>
+<label>
+    <input
+        type="password"
+        [(ngModel)]="password"
+        #upPassword="ngModel"
+        required
+        placeholder="Password"
+        [ngModelOptions]="{ standalone: true }" />
+    <mat-error *ngIf="submitted && form.controls['password'].errors">{{ getPasswordErrorMessage() }}</mat-error>
+</label>
+<label>
+    <input
+        type="password"
+        [(ngModel)]="confirmPassword"
+        placeholder="Repeat The Password"
+        [ngModelOptions]="{ standalone: true }" />
+    <mat-error *ngIf="submitted && form.controls['confirmPassword'].errors">{{
+        getConfirmPasswordErrorMessage()
+    }}</mat-error>
+</label>
+<button mat-button (click)="validationThenSignUp()">Create Account</button>
+<div id="has-account">
+    <span>I have an account! </span>
+    <a href="auth/sign-in">Sign In</a>
+</div>

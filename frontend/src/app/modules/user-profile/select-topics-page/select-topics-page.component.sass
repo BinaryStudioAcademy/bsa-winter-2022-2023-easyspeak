@@ -1,0 +1,107 @@
+@import 'src/styles/colors'
+
+main
+    width: 50%
+    margin: 30px auto 0 auto
+
+#back
+    background-color: $white
+    padding: 10px
+    border: none
+    width: 15%
+    display: flex
+    justify-content: center
+    align-items: center
+
+#back:hover, button:hover
+    background-color: $gray-200
+    cursor: pointer
+    transition: background-color 0.3s ease-out
+
+#back img
+    padding: 0 10px 0 0
+
+h2
+    color: $blue-200
+    margin: 10px 0 0 0
+
+#topics
+    display: grid
+    grid-template-columns: repeat(5, 1fr)
+    grid-gap: 15px
+    height: 100%
+    margin: 30px 0
+
+.topic
+    height: 100%
+    width: 100%
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+
+.topic img
+    height: 65%
+
+.not-selected
+    color: $gray-300
+
+.not-selected div
+    background-color: $inactive-color
+
+.selected
+    color: $black-100
+
+.selected div
+    background-color: $turquoise-100
+
+.topic div
+    border-radius: 50%
+    height: 120px
+    width: 120px
+    display: flex
+    align-items: center
+    justify-content: center
+
+.topic div:hover
+    cursor: pointer
+    background-color: $gray-200
+    transition: background-color 0.3s ease-out
+
+.topic p
+    text-align: center
+    margin: 0
+
+#next button
+    width: 35%
+    padding: 11px 60px
+    font-size: 16px
+
+#create
+    background-color: $blue-200
+    color: $white
+    margin-right: 15px
+    border: none
+
+button:disabled
+    opacity: 0.5
+    cursor: not-allowed
+
+#skip
+    border: 1px solid $blue-200
+    color: $blue-200
+
+button
+    border-radius: 50px
+
+#has-account
+    margin-top: 20px
+    font-size: 16px
+    text-align: center
+
+#has-account span
+    color: $gray-300
+
+#has-account a
+    text-decoration: none
+    color: $turquoise-100

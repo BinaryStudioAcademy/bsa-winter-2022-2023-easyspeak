@@ -4,8 +4,20 @@
 
 export const environment = {
     production: false,
-    coreUrl: 'http://localhost:5050',
+    coreUrl: 'https://localhost:5050',
     notifierUrl: 'http://localhost:5070',
+    iceServers: [
+        { urls: 'stun:stun.1.google.com:19302' },
+        { urls: 'stun:stun1.l.google.com:19302' },
+    ],
+    firebaseConfig: {
+        apiKey: 'AIzaSyAA-TlYaZVolTEKFa2lXEVHYYH5GvYS9oI',
+        authDomain: 'easy-meets-id-01.firebaseapp.com',
+        projectId: 'easy-meets-id-01',
+        storageBucket: 'easy-meets-id-01.appspot.com',
+        messagingSenderId: '286412559703',
+        appId: '1:286412559703:web:f5b1b617bf593e71959a12',
+    },
 };
 
 /*

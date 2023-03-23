@@ -1,0 +1,28 @@
+<div class="sign-in">
+    <h1>Sign In</h1>
+    <label>
+        <input
+            type="text"
+            [(ngModel)]="email"
+            matInput
+            required
+            placeholder="Email"
+            [ngModelOptions]="{ standalone: true }" />
+        <mat-error *ngIf="submitted && form.controls['email'].errors">{{ getErrorMessage('email') }}</mat-error>
+    </label>
+    <label>
+        <input
+            type="password"
+            [(ngModel)]="password"
+            #upPassword="ngModel"
+            required
+            placeholder="Password"
+            [ngModelOptions]="{ standalone: true }" />
+        <mat-error *ngIf="submitted && form.controls['password'].errors">{{ getErrorMessage('password') }}</mat-error>
+    </label>
+    <button mat-button (click)="validationThenSignIn()">Confirm</button>
+    <div id="has-account">
+        <span>I have not an account! </span>
+        <a href="auth/sign-up">Sign Up</a>
+    </div>
+</div>
