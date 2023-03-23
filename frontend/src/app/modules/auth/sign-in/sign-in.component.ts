@@ -31,13 +31,9 @@ export class SignInComponent {
     constructor(private formBuilder: FormBuilder, private authService: AuthService, private toastr: ToastrService) {}
 
     getErrorMessage(field: string) {
-        for (const message in this.validationErrorMessage) {
-            if (this.form.controls[field].hasError(message)) {
-                return this.validationErrorMessage[message];
-            }
-        }
+        const errorEntry = Object.entries(this.validationErrorMessage).find(([key]) => this.form.controls[field].hasError(key));
 
-        return '';
+        return errorEntry ? errorEntry[1] : '';
     }
 
     validationThenSignIn() {
