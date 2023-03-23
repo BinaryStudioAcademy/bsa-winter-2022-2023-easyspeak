@@ -18,18 +18,10 @@ public class LessonsService : BaseService, ILessonsService
 
     public async Task<ICollection<QuestionForLessonDto>> GetQuestionsByLessonIdAsync(int id)
     {
-        var lesson = await _context.Lessons.Include(l => l.Questions)
-                                           .ThenInclude(q => q.Subquestions)
-                                           .Where(l => l.Id == id)
-                                           .FirstOrDefaultAsync();
-        if (lesson == null)
-        {
-            return new List<QuestionForLessonDto>();
-        }
+        var questions = _context.Questions.Include(q => q.Subquestions)
+                                          .Where(q => q.LessonId == id);
 
-        var questions = lesson.Questions;
-
-        var questionDtos = _mapper.Map<ICollection<Question>, ICollection<QuestionForLessonDto>>(questions);
+        var questionDtos = _mapper.Map<ICollection<Question>, ICollection<QuestionForLessonDto>>(await questions.ToListAsync());
 
         return questionDtos;
     }
@@ -40,7 +32,6 @@ public class LessonsService : BaseService, ILessonsService
 
         var lessonsFromContext = _context.Lessons
             .Include(l => l.Tags)
-            .Include(l => l.Questions)
             .Include(l => l.User)
             .Where(x => x.StartAt > filtersRequest.Date);
 
