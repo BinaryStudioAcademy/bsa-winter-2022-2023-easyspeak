@@ -1,0 +1,199 @@
+@import "src/styles/colors"
+
+
+.all
+    background-color: $white
+
+.header
+    display: flex
+    justify-content: space-around
+    align-items: center
+    background-color: $white
+    height: 8vh
+    z-index: 10000
+    .logo
+        display: flex
+        justify-content: center
+        align-content: center
+        h2
+            margin-left: 6px
+        img
+        height: 30px
+
+    .links
+        display: grid
+        grid-auto-flow: column
+        column-gap: 20px
+        color: $gray-300
+        font-weight: 500
+        font-size: 16px
+        line-height: 24px
+
+    .buttons-header
+        h4
+            font-size: 14px
+            font-weight: 700
+            line-height: 20.5px
+        button
+            width: 116px
+            height: 34px
+            border: 1px solid $blue-200
+            border-radius: 17px
+            &:hover
+                background-color: $turquoise-100
+        .sign-in
+            margin-right: 10px
+            background-color: $white
+            color: $blue-200
+        .sign-up
+            background-color: $blue-200
+            color: $white
+            
+
+.info-block-1-home
+    display: flex
+    justify-content: center
+    align-content: center
+    height: 60vh
+    background: linear-gradient($gray-200 0%, $white 5px)
+
+    .left-block
+        display: flex
+        justify-content: center
+        justify-items: center
+        align-items: center
+        width: 50%
+        h1
+            margin-bottom: 23px
+            font-size: 52px
+        h3
+            font-weight: 500
+            font-size: 16px 
+            line-height: 24px
+        label
+            color: $gray-300
+            font-size: 16px
+        .buttons-home 
+            margin-top: 23px
+
+        .left-content
+            button
+                width: 130px
+                height: 45px
+                border: 1px solid $blue-200
+                border-radius: 23px
+                color: $blue-200
+                &:hover
+                    background-color: $turquoise-100
+            .sign-up    
+                background-color: $blue-200
+                color: $white
+                margin-right: 15px
+                    
+
+    .right-block
+        position: relative
+        width: 50%
+        height: 100%
+        background: repeating-linear-gradient(75deg, $white, $pink-100 2px, rgba($pink-100 , 0%) 4px, rgba($white, 0%) 190px), repeating-linear-gradient(165deg, $white, $pink-100 1px, rgba($pink-100 , 0%) 4px, rgba($white, 0%) 190px)
+        .radius-small
+                position: absolute
+                background-color: $blue-100
+                width: 55px
+                height: 55px
+                border-radius: 75px
+                padding: 16px
+                img
+                    position: absolute
+                    width: 55px
+                    height: 55px
+        .radius-medium
+                position: absolute
+                background-color: $white
+                width: 89px
+                height: 89px
+                border-radius: 75px
+                padding: 20.5px
+                background: rgba(#61d3f6, 40%)
+                img
+                    position: absolute
+                    width: 82px
+                    height: 82px
+        .radius-big
+            position: absolute
+            background-color: $turquoise-100
+            width: 96px
+            height: 96px
+            border-radius: 75px
+            padding: 27px
+            img
+                position: absolute
+                width: 95px
+                height: 95px
+        .leaf
+            top: calc(30% - 75px)
+            left: calc(35% - 75px)
+            border-radius: 500px 500px 500px 0px
+            transform: rotate(-45deg)
+            img
+                transform: rotate(45deg)
+        .dog
+            top: calc(70% - 75px)
+            left: calc(65% - 75px)
+            border-radius: 500px 500px 500px 0px
+            transform: rotate(135deg)
+            img
+                transform: rotate(-135deg)
+        .car
+            top: calc(50% - 65px)
+            left: calc(50% - 65px)
+            padding-bottom: 30px
+            padding-top: 11px
+        .cook
+            top: calc(70% - 65px)
+            left: calc(35% - 65px)
+        .camera
+            top: calc(30% - 65px)
+            left: calc(65% - 65px)      
+        .woman
+            top: calc(50% - 43.5px)
+            left: calc(78% - 43.5px)     
+        .face
+            top: calc(50% - 43.5px)
+            left: calc(22% - 43.5px) 
+            
+    .buttons-home
+        .choose-plan
+            margin-right: 10px
+            background-color: $white
+            color: $blue-200
+            &:hover
+                background-color: $gray-300
+                color: white
+        .sign-up
+            background-color: $blue-200
+            color: $white
+            &:hover
+                background-color: $gray-200
+
+.topics
+    background-color: $blue-200
+    height: 32vh
+
+.info-block-2-ai
+    height: 30vh
+    background-color: $white
+
+.plan
+    height: 60vh
+    background-color: $gray-100
+
+.info-block-3-about
+    height: 48vh
+    background: repeating-linear-gradient(75deg, $white, $pink-100 2px, rgba($pink-100 , 0%) 4px, rgba($white, 0%) 190px), repeating-linear-gradient(165deg, $white, $pink-100 1px, rgba($pink-100 , 0%) 4px, rgba($white, 0%) 190px)
+    background-color: $white
+
+.footer
+    height: 25vh
+    color: $white
+    background-color: #080E39
