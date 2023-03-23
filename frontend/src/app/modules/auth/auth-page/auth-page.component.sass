@@ -2,11 +2,15 @@
 
 @mixin background-icon
     position: absolute
-    width: 87px
-    height: 87px
+    width: 7%
+    height: 14%
     border-radius: 50%
     background: $time-color
     opacity: 0.4
+
+@mixin icon-size
+    width: 9%
+    height: 9%
 
 ::ng-deep *
     margin:0
@@ -27,7 +31,7 @@
 .auth-form
     position: absolute
     left: 15%
-    top: 50px
+    top: 16%
     display: flex
     flex-direction: column
     width: 18%
@@ -40,7 +44,7 @@
     display: flex
     justify-content: center
     align-items: center
-    background: repeating-linear-gradient(75deg,$accent-color,$accent-color 1px, rgba(1,1 ,1 , 0) 1px, rgba(1,1 ,1 , 0) 190px), repeating-linear-gradient(166deg,$accent-color,$accent-color 1px, rgba(1,1 ,1 , 0) 1px, rgba(1,1 ,1 , 0) 190px)
+    background: repeating-linear-gradient(75deg,$accent-color,$accent-color 1px, rgba(1,1 ,1 , 0) 1px, rgba(1,1 ,1 , 0) 20%), repeating-linear-gradient(166deg,$accent-color,$accent-color 1px, rgba(1,1 ,1 , 0) 1px, rgba(1,1 ,1 , 0) 20%)
     background-color: $main-color
     h1
         color: $white
@@ -50,85 +54,93 @@
         text-shadow: -2px 2px 1px $accent-color
     .car-background
         @include background-icon
-        right: 30%
-        top: 46px
+        right: 28%
+        top: 6%
     .car
+        @include icon-size
         position: absolute
-        right: 31.3%
-        top: 50px
+        right: 27%
+        top: 7%
     .camera-background
         @include background-icon
-        left: 1217px
-        top: 101px
+        right: 7%
+        top: 18%
     .camera
+        @include icon-size
         position: absolute
-        left: 1235px
-        top: 118px
+        right: 6%
+        top: 20%
     .clover-background
         @include background-icon
-        left: 1267px
-        top: 315px
+        right: 4%
+        top: 48%
     .clover
+        @include icon-size
         position: absolute
-        left: 1282px
-        top: 333px
+        right: 3%
+        top: 50%
     .cook-background
         @include background-icon
-        left: 1113px
-        top: 441px
+        right: 18%
+        top: 68%
     .cook
+        @include icon-size
         position: absolute
-        left: 1128px
-        top: 455px
+        right: 17%
+        top: 70%
     .dancing-background
         @include background-icon
-        left: 1003px
-        top: 551px
+        right: 26%
+        top: 82%
         opacity: 0.2
     .dancing
+        @include icon-size
         position: absolute
-        left: 1020px
-        top: 569px
+        right: 25%
+        top: 84%
     .dog-background
         @include background-icon
-        right: 39%
-        top: 451px
-    .dog
-        position: absolute
         right: 40%
-        top: 469px
+        top: 62%
+    .dog
+        @include icon-size
+        position: absolute
+        right: 39%
+        top: 64%
     .monocle-face-background
         @include background-icon
-        right: 40%
-        top: 151px
+        right: 38%
+        top: 25%
     .monocle-face
+        @include icon-size
         position: absolute
-        right: 41.2%
-        top: 169px
+        right: 37%
+        top: 27%
 
 h1
     font-size: 24px
     line-height: 146%
     color: $main-color
-    margin-bottom: 10px
+    margin-bottom: 5%
 
-input, select, button
+input, select
     background: $white
     width: 100%
     border: 0
     outline: 0
     border-radius: 50px
-    margin-top: 8px
-    padding: 12px
+    margin-top: 3%
+    padding: 4%
     text-color: $gray-200
 
-.name-section
-    width: 117%
-    display: flex
-    flex-direction: row
-    justify-content: space-between
-    input
-        width: 70%
+// .name-section
+//     width: 100%
+//     display: flex
+//     flex-direction: row
+//     justify-content: space-between
+//     input
+//         padding: 10%
+//         width: 87%
 
 .age-sex-section
     width: 110%
@@ -149,9 +161,12 @@ select
         background-color: $white
 
 button
-    width: 111%
+    width: 110%
     background: $main-color
     color: $white
+    border-radius: 50px
+    margin-top: 3%
+    padding: 6%
 
 .mat-mdc-form-field-error
     font-size: 10px
@@ -159,3 +174,7 @@ button
     margin-right: auto
     margin-bottom: 1%
     margin-bottom: 1px
+
+.mat-mdc-button:not(:disabled)
+    color: $white
+

@@ -1,4 +1,3 @@
-/* eslint-disable no-restricted-syntax */
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '@core/services/auth.service';
@@ -31,19 +30,6 @@ export class SignInComponent {
 
     constructor(private formBuilder: FormBuilder, private authService: AuthService, private toastr: ToastrService) {}
 
-    signIn() {
-        if (!this.form.invalid) {
-            this.authService
-                .signIn(this.email, this.password)
-                .then(() => {
-                    this.toastr.success('Successfully sign in', 'Sign in');
-                })
-                .catch((error) => {
-                    this.toastr.error(error.message, 'Sign up');
-                });
-        }
-    }
-
     getErrorMessage(field: string) {
         for (const message in this.validationErrorMessage) {
             if (this.form.controls[field].hasError(message)) {
@@ -54,9 +40,24 @@ export class SignInComponent {
         return '';
     }
 
-    validation() {
+    validationThenSignIn() {
         this.submitted = true;
         this.validateData();
+
+        if (!this.form.invalid) {
+            this.signIn();
+        }
+    }
+
+    private signIn() {
+        this.authService
+            .signIn(this.email, this.password)
+            .then(() => {
+                this.toastr.success('Successfully sign in', 'Sign in');
+            })
+            .catch((error) => {
+                this.toastr.error(error.message, 'Sign up');
+            });
     }
 
     private validateData() {

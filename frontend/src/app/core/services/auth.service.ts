@@ -43,28 +43,32 @@ export class AuthService {
     signIn(email: string, password: string) {
         return this.afAuth.signInWithEmailAndPassword(email, password).then((userCredential) => {
             if (userCredential.user) {
-                from(userCredential.user.getIdToken()).subscribe((token) => localStorage.setItem('accessToken', token));
+                this.setAccessToken(userCredential.user);
             }
 
-            this.afAuth.authState.subscribe((user) => {
-                if (user) {
-                    this.router.navigate(['main']);
-                }
-            });
+            this.navigateTo('main');
         });
     }
 
     signUp(email: string, password: string) {
         return this.afAuth.createUserWithEmailAndPassword(email, password).then((userCredential) => {
             if (userCredential.user) {
-                from(userCredential.user.getIdToken()).subscribe((token) => localStorage.setItem('accessToken', token));
+                this.setAccessToken(userCredential.user);
             }
 
-            this.afAuth.authState.subscribe((user) => {
-                if (user) {
-                    this.router.navigate(['user-profile/select-topics']);
-                }
-            });
+            this.navigateTo('profile/topics');
+        });
+    }
+
+    private setAccessToken(user: firebase.User) {
+        from(user.getIdToken()).subscribe((token) => localStorage.setItem('accessToken', token));
+    }
+
+    private navigateTo(route: string) {
+        this.afAuth.authState.subscribe((user) => {
+            if (user) {
+                this.router.navigate([route]);
+            }
         });
     }
 

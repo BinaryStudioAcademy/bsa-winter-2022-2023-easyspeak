@@ -35,7 +35,6 @@ namespace EasySpeak.Core.WebAPI.Extentions
 
         public static void AddAutoMapper(this IServiceCollection services)
         {
-            services.AddAutoMapper(Assembly.GetAssembly(typeof(UserProfile)));
             services.AddAutoMapper(Assembly.GetAssembly(typeof(LessonsProfile)));
         }
 

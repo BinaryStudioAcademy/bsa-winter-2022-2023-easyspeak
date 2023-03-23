@@ -10,31 +10,35 @@
     <mat-error *ngIf="submitted && form.controls['email'].errors">{{ getErrorMessage('email') }}</mat-error>
 </label>
 
-<div class="name-section">
-    <label>
-        <input
-            type="text"
-            [(ngModel)]="newUser.firstName"
-            #inFirstName="ngModel"
-            matInput
-            placeholder="First Name"
-            [ngModelOptions]="{ standalone: true }" />
-        <mat-error *ngIf="submitted && form.controls['firstName'].errors">{{ getErrorMessage('firstName') }}</mat-error>
-    </label>
-
-    <label>
-        <input
-            type="text"
-            [(ngModel)]="newUser.lastName"
-            #LastName="ngModel"
-            matInput
-            required
-            placeholder="Last Name"
-            [ngModelOptions]="{ standalone: true }" />
-        <mat-error *ngIf="submitted && form.controls['lastName'].errors">{{ getErrorMessage('lastName') }}</mat-error>
-    </label>
-</div>
 <div class="age-sex-section">
+    <div class="name-section">
+        <label>
+            <input
+                type="text"
+                [(ngModel)]="newUser.firstName"
+                #inFirstName="ngModel"
+                matInput
+                placeholder="First Name"
+                [ngModelOptions]="{ standalone: true }" />
+            <mat-error *ngIf="submitted && form.controls['firstName'].errors">{{
+                getErrorMessage('firstName')
+            }}</mat-error>
+        </label>
+
+        <label>
+            <input
+                type="text"
+                [(ngModel)]="newUser.lastName"
+                #LastName="ngModel"
+                matInput
+                required
+                placeholder="Last Name"
+                [ngModelOptions]="{ standalone: true }" />
+            <mat-error *ngIf="submitted && form.controls['lastName'].errors">{{
+                getErrorMessage('lastName')
+            }}</mat-error>
+        </label>
+    </div>
     <select [(ngModel)]="newUser.age" name="Age" required>
         <option selected style="color: black">Select the role</option>
         <option *ngFor="let age of Ages">{{ age }}</option>
@@ -74,7 +78,7 @@
         [ngModelOptions]="{ standalone: true }" />
     <mat-error *ngIf="submitted">{{ getConfirmPasswordErrorMessage() }}</mat-error>
 </label>
-<button mat-button (click)="validation(); signUp()">Create Account</button>
+<button mat-button (click)="validationThenSignUp()">Create Account</button>
 <div id="has-account">
     <span>I have an account! </span>
     <a href="auth/sign-in">Sign In</a>

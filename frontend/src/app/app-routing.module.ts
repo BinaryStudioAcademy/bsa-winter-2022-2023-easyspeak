@@ -15,7 +15,7 @@ const routes: Routes = [
         loadChildren: () => import('./modules/auth/auth.module').then((m) => m.AuthModule),
     },
     {
-        path: 'user-profile',
+        path: 'profile',
         loadChildren: () => import('./modules/user-profile/user-profile.module').then((m) => m.UserProfileModule),
     },
     { path: '**', redirectTo: '', pathMatch: 'full' },

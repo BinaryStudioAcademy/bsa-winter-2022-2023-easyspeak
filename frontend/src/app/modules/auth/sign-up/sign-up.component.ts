@@ -1,19 +1,17 @@
-/* eslint-disable no-restricted-syntax */
-import { Component, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { BaseComponent } from '@core/base/base.component';
 import { AuthService } from '@core/services/auth.service';
 import { HttpService } from '@core/services/http.service';
 import { INewUser } from '@shared/models/INewUser';
-import { IUser } from '@shared/models/IUser';
 import { ToastrService } from 'ngx-toastr';
-import { Subject, takeUntil } from 'rxjs';
 
 @Component({
     selector: 'app-sign-up',
     templateUrl: './sign-up.component.html',
     styleUrls: ['./sign-up.component.sass'],
 })
-export class SignUpComponent implements OnDestroy {
+export class SignUpComponent extends BaseComponent {
     EnglishLevels = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
 
     Ages = ['5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18'];
@@ -39,17 +37,9 @@ export class SignUpComponent implements OnDestroy {
         language: '',
     };
 
-    private unsubscribe$ = new Subject<void>();
-
     password: string = '';
 
     confirmPassword: string = '';
-
-    currentUser: IUser = {
-        firstName: '',
-        lastName: '',
-        email: '',
-    };
 
     isValid = true;
 
@@ -68,31 +58,8 @@ export class SignUpComponent implements OnDestroy {
         private authService: AuthService,
         private toastr: ToastrService,
         private httpService: HttpService,
-    ) {}
-
-    public ngOnDestroy() {
-        this.unsubscribe$.next();
-        this.unsubscribe$.complete();
-    }
-
-    signUp() {
-        if (!this.form.invalid && this.isValid) {
-            this.authService
-                .signUp(this.newUser.email, this.password)
-                .then(() => {
-                    this.httpService
-                        .post<INewUser>('/users', this.newUser)
-                        .pipe(takeUntil(this.unsubscribe$))
-                        .subscribe((result) => {
-                            this.currentUser = result;
-                        });
-
-                    this.toastr.success('Successfully sign up', 'Sign up');
-                })
-                .catch((error) => {
-                    this.toastr.error(error.message, 'Sign up');
-                });
-        }
+    ) {
+        super();
     }
 
     getErrorMessage(field: string) {
@@ -133,9 +100,25 @@ export class SignUpComponent implements OnDestroy {
         return '';
     }
 
-    validation() {
+    validationThenSignUp() {
         this.submitted = true;
         this.validateData();
+
+        if (!this.form.invalid && this.isValid) {
+            this.signUp();
+        }
+    }
+
+    private signUp() {
+        this.authService
+            .signUp(this.newUser.email, this.password)
+            .then(() => {
+                this.createUser();
+                this.toastr.success('Successfully sign up', 'Sign up');
+            })
+            .catch((error) => {
+                this.toastr.error(error.message, 'Sign up');
+            });
     }
 
     private validateData() {
@@ -157,5 +140,9 @@ export class SignUpComponent implements OnDestroy {
             ],
             confirmPassword: [this.confirmPassword, Validators.required],
         });
+    }
+
+    private createUser() {
+        this.httpService.post<INewUser>('/users', this.newUser).pipe(this.untilThis);
     }
 }

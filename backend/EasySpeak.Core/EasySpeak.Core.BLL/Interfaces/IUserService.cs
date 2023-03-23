@@ -1,9 +1,5 @@
-﻿using EasySpeak.Core.Common.DTO.User;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EasySpeak.Core.Common.DTO.Lesson;
+using EasySpeak.Core.Common.DTO.User;
 
 namespace EasySpeak.Core.BLL.Interfaces
 {
