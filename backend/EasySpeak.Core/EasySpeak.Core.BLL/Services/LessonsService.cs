@@ -18,10 +18,11 @@ public class LessonsService : BaseService, ILessonsService
 
     public async Task<ICollection<QuestionForLessonDto>> GetQuestionsByLessonIdAsync(int id)
     {
-        var questions = _context.Questions.Include(q => q.Subquestions)
-                                          .Where(q => q.LessonId == id);
+        var questions = await _context.Questions.Include(q => q.Subquestions)
+                                                .Where(q => q.LessonId == id)
+                                                .ToListAsync();
 
-        var questionDtos = _mapper.Map<ICollection<Question>, ICollection<QuestionForLessonDto>>(await questions.ToListAsync());
+        var questionDtos = _mapper.Map<ICollection<Question>, ICollection<QuestionForLessonDto>>(questions);
 
         return questionDtos;
     }
