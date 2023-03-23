@@ -9,7 +9,7 @@ import { MaterialModule } from '@shared/material/material.module';
 
 import { ConfirmComponent } from './components/confirm/confirm.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
-import { InterestsDropdownComponentComponent } from './components/interests-dropdown-component/interests-dropdown-component.component';
+import { InterestsDropdownComponent } from './components/interests-dropdown/interests-dropdown.component';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
@@ -34,7 +34,7 @@ import { YoutubePlayerComponent } from './components/youtube-player/youtube-play
         ModalComponent,
         ConfirmComponent,
         RoundProgressBarComponent,
-        InterestsDropdownComponentComponent,
+        InterestsDropdownComponent,
     ],
     exports: [
         CommonModule,
@@ -47,7 +47,7 @@ import { YoutubePlayerComponent } from './components/youtube-player/youtube-play
         DropdownComponent,
         ModalComponent,
         RoundProgressBarComponent,
-        InterestsDropdownComponentComponent,
+        InterestsDropdownComponent,
     ],
 })
 export class SharedModule {}

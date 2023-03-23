@@ -1,16 +1,16 @@
-import { Component, Output } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
 import { IIcon } from '@shared/models/IIcon';
 import { TagsForInterests } from '@shared/utils/tagsForInterests';
 
 @Component({
-    selector: 'app-interests-dropdown-component',
-    templateUrl: './interests-dropdown-component.component.html',
-    styleUrls: ['./interests-dropdown-component.component.sass'],
+    selector: 'app-interests-dropdown',
+    templateUrl: './interests-dropdown.component.html',
+    styleUrls: ['./interests-dropdown.component.sass'],
 })
-export class InterestsDropdownComponentComponent {
+export class InterestsDropdownComponent {
     toggle: boolean = false;
 
-    inputList: IIcon[] = TagsForInterests.tags;
+    @Input() inputList: IIcon[] = TagsForInterests.tags;
 
     @Output() outputList: string[] = [];
 
@@ -27,6 +27,6 @@ export class InterestsDropdownComponentComponent {
     }
 
     clickButton() {
-        this.toggle = (!this.toggle);
+        this.toggle = !this.toggle;
     }
 }

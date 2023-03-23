@@ -6,19 +6,15 @@
             <div class="counter">{{outputList.length}}</div>
             <div>Interests</div>
         </div>
-        <div class="arrow-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                 class="bi bi-chevron-down"
-                 viewBox="0 0 16 16">
-                <path fill-rule="evenodd"
-                      d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
-            </svg>
-        </div>
+
+<img class="arrow-icon" src="assets/interestsDropdown/chevron_down.svg"/>
+
     </div>
 </div>
 <div class="dropdown-content" *ngIf="toggle">
     <div *ngFor="let item of inputList; let i = index" class="dropdown-item">
-        <input type="checkbox" id="{{i}}" class="item-checkbox" (change)="selectInterest($event)"/>
+        <input type="checkbox" id="{{i}}" [checked]=outputList.includes(inputList[i].icon_name) class="item-checkbox"
+               (change)="selectInterest($event)"/>
         <label class="item-checkbox-label" for="{{i}}">
             <div class="icon-wrapper ">
                 <img class="icon" src="{{item.link}}" alt="image"/>
@@ -27,4 +23,3 @@
         </label>
     </div>
 </div>
-
