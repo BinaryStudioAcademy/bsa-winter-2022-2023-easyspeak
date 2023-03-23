@@ -1,6 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
-
-import { UserNotificationComponent } from '../user-notification/user-notification.component';
+import { Component } from '@angular/core';
+import { AuthService } from '@core/services/auth.service';
 
 @Component({
     selector: 'app-header',
@@ -8,5 +7,13 @@ import { UserNotificationComponent } from '../user-notification/user-notificatio
     styleUrls: ['./header.component.sass'],
 })
 export class HeaderComponent {
+<<<<<<< HEAD
     @ViewChild('notificationsMenu') notificationsMenu: UserNotificationComponent;
+=======
+    constructor(private authService: AuthService) {}
+
+    logOut() {
+        this.authService.logout();
+    }
+>>>>>>> development
 }
