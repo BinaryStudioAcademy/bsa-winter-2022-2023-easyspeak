@@ -28,7 +28,9 @@ namespace EasySpeak.Core.WebAPI.Extentions
             services.AddTransient<ILessonsService, LessonsService>();
             services.AddSingleton<IConnectionProvider>(_ => new ConnectionProvider(configuration.GetValue<string>("Rabbit")));
             services.AddTransient<IMessageProducer, MessageProducer>();
+            services.AddTransient<IHttpRequestService, HttpRequestService>();
             services.AddScoped<IFirebaseAuthService, FirebaseAuthService>();
+            services.AddScoped<IUserService, UserService>();
             services.AddFirebaseApp();
         }
 

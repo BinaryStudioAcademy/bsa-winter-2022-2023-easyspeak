@@ -20,5 +20,9 @@
             [ngModelOptions]="{ standalone: true }" />
         <mat-error *ngIf="submitted && form.controls['password'].errors">{{ getErrorMessage('password') }}</mat-error>
     </label>
-    <button mat-button (click)="validation()">Confirm</button>
+    <button mat-button (click)="validationThenSignIn()">Confirm</button>
+    <div id="has-account">
+        <span>I have not an account! </span>
+        <a href="auth/sign-up">Sign Up</a>
+    </div>
 </div>

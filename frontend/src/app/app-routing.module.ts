@@ -18,6 +18,14 @@ const routes: Routes = [
         path: 'profile',
         loadChildren: () => import('./modules/user-profile/user-profile.module').then((m) => m.UserProfileModule),
     },
+    {
+        path: 'chat',
+        loadChildren: () => import('./modules/chat/chat.module').then((m) => m.ChatModule),
+    },
+    {
+        path: 'session-call',
+        loadChildren: () => import('./modules/session-call/session-call.module').then((m) => m.SessionCallModule),
+    },
     { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 

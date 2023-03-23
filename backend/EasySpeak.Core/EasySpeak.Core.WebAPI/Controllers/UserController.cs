@@ -1,41 +1,58 @@
-using EasySpeak.Core.Common.DTO;
-using EasySpeak.Core.DAL.Entities;
+using EasySpeak.Core.BLL.Interfaces;
+using EasySpeak.Core.Common.DTO.Lesson;
+using EasySpeak.Core.Common.DTO.User;
 using Microsoft.AspNetCore.Mvc;
-using EasySpeak.Core.Common.Enums;
 
-namespace EasySpeak.Core.WebAPI.Controllers;
-
-[ApiController]
-[Route("[controller]")]
-public class UserController : ControllerBase
+namespace EasySpeak.Core.WebAPI.Controllers
 {
-    [HttpGet("{userId}")]
-    public ActionResult<ICollection<User>> Get()
+    [ApiController]
+    [Route("[controller]")]
+    public class UsersController : ControllerBase
     {
-        var user = new User()
-        {
-            FirstName = "Test",
-            LastName = "User",
-            Email = "testuser@gmail.com",
-            LanguageLevel = LanguageLevel.B2,
-            Sex = Sex.Male
-        };
+        private readonly IUserService _userService;
 
-        return Ok(new UserDto()
+        public UsersController(IUserService userService)
         {
-            FirstName = user.FirstName,
-            LastName = user.LastName,
-            Email = user.Email,
-            Country = user.Country.ToString(),
-            Language = user.Language.ToString(),
-            EnglishLevel = user.LanguageLevel.ToString(),
-            Sex = user.Sex.ToString()
-        });
-    }
+            _userService = userService;
+        }
 
-    [HttpPut("{userId}")]
-    public ActionResult<UserDto> Update(int userId, UserDto userDto)
-    {
-        return Ok(userDto);
+        [HttpPost]
+        public async Task<ActionResult<UserDto>> Post([FromBody] UserRegisterDto user)
+        {
+            var createdUser = await _userService.CreateUser(user);
+
+            return Ok(createdUser);
+        }
+        
+        [HttpGet("{userId}")]
+        public ActionResult<ICollection<User>> Get()
+        {
+            var user = new User()
+            {
+                FirstName = "Test",
+                LastName = "User",
+                Email = "testuser@gmail.com",
+                LanguageLevel = LanguageLevel.B2,
+                Sex = Sex.Male
+            };
+
+            return Ok(new UserDto()
+            {
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                Country = user.Country.ToString(),
+                Language = user.Language.ToString(),
+                EnglishLevel = user.LanguageLevel.ToString(),
+                Sex = user.Sex.ToString()
+            });
+        }
+
+        [HttpPut("{userId}")]
+        public ActionResult<UserDto> Update(int userId, UserDto userDto)
+        {
+            return Ok(userDto);
+        }
+         
     }
 }

@@ -1,9 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import { YouTubePlayerModule } from '@angular/youtube-player';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { RoundProgressBarComponent } from '@shared/components/round-progress-bar/round-progress-bar.component';
 import { MaterialModule } from '@shared/material/material.module';
 
 import { ConfirmComponent } from './components/confirm/confirm.component';
@@ -23,6 +29,8 @@ import { YoutubePlayerComponent } from './components/youtube-player/youtube-play
         MaterialModule,
         YouTubePlayerModule,
         NgSelectModule,
+        MatProgressSpinnerModule,
+        MatSnackBarModule,
     ],
     declarations: [
         LoadingSpinnerComponent,
@@ -31,6 +39,7 @@ import { YoutubePlayerComponent } from './components/youtube-player/youtube-play
         DropdownComponent,
         ModalComponent,
         ConfirmComponent,
+        RoundProgressBarComponent,
     ],
     exports: [
         CommonModule,
@@ -44,6 +53,7 @@ import { YoutubePlayerComponent } from './components/youtube-player/youtube-play
         NgSelectModule,
         ModalComponent,
         MaterialModule,
+        RoundProgressBarComponent,
     ],
 })
 export class SharedModule {}
