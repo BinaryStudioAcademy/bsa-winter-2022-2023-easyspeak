@@ -1,0 +1,9 @@
+<div class="subheader">
+    <h2>Find a friend to practice English with</h2>
+</div>
+<div class="body">
+    <app-filter-section></app-filter-section>
+    <div class="user-grid">
+        <app-user-card *ngFor="let user of users" [user]="user"></app-user-card>
+    </div>
+</div>

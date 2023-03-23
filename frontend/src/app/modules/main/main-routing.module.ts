@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { NotFoundComponent } from '@shared/components/not-found/not-found.component';
 
 import { MainComponent } from './main-page/main-page.component';
-import { SocialPageComponent } from './social-page/social-page.component';
 import { TimetablePageComponent } from './timetable-page/timetable-page.component';
 
 const routes: Routes = [
@@ -12,9 +11,14 @@ const routes: Routes = [
         component: MainComponent,
         children: [
             {
-                path: 'social',
-                component: SocialPageComponent,
+                path: '',
+                redirectTo: 'social',
                 pathMatch: 'full',
+            },
+            {
+                path: 'social',
+                loadChildren: () => import('../social-page/social-page.module')
+                    .then((m) => m.SocialPageModule),
             },
             {
                 path: 'timetable',

@@ -20,5 +20,8 @@ import { MainRoutingModule } from './main-routing.module';
         LessonsModule,
         TimeTable1Module,
     ],
+    exports: [
+        HeaderComponent
+    ]
 })
 export class MainModule {}

@@ -1,0 +1,27 @@
+@import "src/styles/colors.sass"
+
+.subheader
+    padding-block: 2em
+    text-align: center
+    background-color: $white
+    margin-top: 80px
+
+.body
+    background-color: $gray-100
+
+.user-grid
+    display: grid
+    grid-template-columns: repeat(5, 1fr)
+
+@media screen and (max-width: 1920px)
+    .user-grid
+        grid-template-columns: repeat(4, 1fr)
+
+@media screen and (max-width: 1600px)
+    .user-grid
+        grid-template-columns: repeat(3, 1fr)
+
+@media screen and (max-width: 1280px)
+    .user-grid
+        grid-template-columns: repeat(2, 1fr)
+
