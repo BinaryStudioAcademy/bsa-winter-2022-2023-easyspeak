@@ -1,0 +1,224 @@
+@import "src/styles/colors.sass"
+    
+.container
+    width: 100%
+    height: 100%
+    background-color: $gray-100
+    box-sizing: border-box
+    padding: 30px
+    display: grid
+    grid-template-columns: 1fr 495px 1fr
+    grid-template-rows: 125px 290px 340px 305px
+    gap: 30px
+    border-radius: 0px 10px 10px 10px
+
+.user-photo-section-title
+    grid-row: 1/2
+    grid-column: 1/2
+
+.user-details-section-title
+    grid-row: 2/3
+    grid-column: 1/2
+
+.user-interests-section-title
+    grid-row: 3/4
+    grid-column: 1/2
+
+.user-socials-section-title
+    grid-row: 4/5
+    grid-colmn: 1/2
+
+.title
+    font-weight: 700
+    font-size: 18px
+
+.user-photo-section
+    grig-row: 1/2
+    grid-column: 2/3
+    width: 100%
+    height: 100%
+    position: relative
+    display: flex
+    gap: 30px
+    background-color: $inactive-color
+    box-sizing: border-box
+    padding: 11px 18px
+    border-radius: 5px
+    .vertical-line
+        height: 100px
+        width: 2px
+        background-color: $white
+        position: absolute
+        left: 115px
+        top: 0
+
+.avatar-wrp
+    width: 100px
+    height: 100px
+    position: relative
+    .edit-avatar-icon
+        width: 24px
+        height: 24px
+        position: absolute
+        background-color: $selected-color
+        top: 80px
+        right: 0
+        border-radius: 50%
+        display: flex
+        align-items: center
+        justify-content: center            
+
+.avatar-list
+    display: grid
+    grid-template-rows: repeat(2, 45px)
+    grid-template-columns: repeat(5, 45px)
+    grid-gap: 10px
+
+.avatar-suggestion-wrp
+    width: 100%
+    height: 100%
+    border-radius: 50%
+    background-color: $selected-color
+    display: flex
+    align-items: center
+    justify-content: center
+
+.user-details-section
+    grid-row: 2/3
+    grid-column: 2/3
+    height: 100%
+    display: grid
+    grid-template-rows: repeat(5, 46px)
+    grid-template-columns: repeat(2, 240px)
+    gap: 15px
+    :nth-child(5)
+        grid-row: 3/4
+        grid-column: 1/3
+    :nth-child(6)
+        grid-row: 4/5
+        grid-column: 1/3
+    :nth-child(7)
+        grid-row: 5/6
+        grid-column: 1/3
+
+.user-interests-section
+    grid-row: 3/4
+    grid-column: 2/3
+    height: 100%
+
+.user-socials-section
+    grid-row: 4/5
+    grid-column: 2/3
+    height: 100%
+    display: grid
+    grid-template-rows: repeat(5, 46px)
+    grid-column: 495px
+    gap: 15px
+    button
+        width: 182px
+        background-color: $button-color
+        color: $white
+        font-size: 16px
+        font-weight: 700
+        border-radius: 50px
+        border-width: 0px
+
+.form-input-group
+    width: 100%
+    height: 100%
+    position: relative
+    .error-surface
+        position: absolute
+        width: 100%
+        height: 100%
+        top: 0
+        box-shadow: 0px 1px 4px #EE2A64
+        border-radius: 50px
+    .label
+        position: absolute
+        top: 5px
+        left: 18px
+        font-size: 12px
+        color: $gray-200
+    .errors-wrp
+        position: absolute
+        font-size: 12px
+        color: $error-color
+        width: 100%
+        top: 45px
+        .error
+            display: flex
+            align-items: center
+            height: 100%
+            img
+                filter: invert(31%) sepia(100%) saturate(3362%) hue-rotate(325deg) brightness(94%) contrast(99%)
+                height: 13px
+                width: 11px
+                margin-right: 6px
+
+
+.input
+    box-sizing: border-box
+    width: 100%
+    height: 100%
+    border-radius: 50px
+    border: none
+    padding: 0 18px
+    padding-top: 5px
+
+.placeholder
+    position: absolute
+    color: $gray-200
+    top: 13px
+    left: 18px
+    font-size: 14px
+    z-index: 100
+
+.expand-icon
+    position: absolute
+    top: 10px
+    right: 10px
+    color: $button-color
+
+::ng-deep.custom
+    height: 100%
+
+::ng-deep.ng-input
+    top: 0
+    left: 10px
+    width: auto !important
+    opacity: 0 !important
+
+::ng-deep.ng-clear-wrapper
+    display: none
+
+::ng-deep.ng-select-container
+    height: 100%
+    box-sizing: border-box
+    padding: 13px 18px
+    background-color: $white
+    border-radius: 50px
+    font-size: 14px
+
+::ng-deep.ng-dropdown-panel
+    background-color: $white
+    max-height: 200px
+    overflow: scroll
+    margin-top: 5px
+
+::ng-deep.ng-option
+    padding: 10px
+    .ng-option-label
+        width: 100%
+        display: flex
+        gap: 10px
+        align-items: center
+
+::ng-deep.ng-select-container
+    z-index: 0 !important
+
+.flag
+    width: 20px
+    height: 14px
+
+
