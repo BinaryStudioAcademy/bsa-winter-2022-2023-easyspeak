@@ -9,8 +9,8 @@ namespace EasySpeak.Emailer.WebAPI.Services
 {
     public class SendGridMailService : IMailService
     {
-        private IConfiguration _configuration;
-        private IValidator<NewMailDto> _validator;
+        private readonly IConfiguration _configuration;
+        private readonly IValidator<NewMailDto> _validator;
         public SendGridMailService(IConfiguration configuration, IValidator<NewMailDto> validator)
         {
             _configuration = configuration;
@@ -23,7 +23,7 @@ namespace EasySpeak.Emailer.WebAPI.Services
             var from = new EmailAddress(_configuration["Email"], "EasySpeak");
             var to = new EmailAddress(toEmail);
             var msg = MailHelper.CreateSingleEmail(from, to, subject, content, content);
-            var response = await client.SendEmailAsync(msg);
+            await client.SendEmailAsync(msg);
         }
 
         public async Task<IResult> SendWithResulatResult(NewMailDto mailDto)

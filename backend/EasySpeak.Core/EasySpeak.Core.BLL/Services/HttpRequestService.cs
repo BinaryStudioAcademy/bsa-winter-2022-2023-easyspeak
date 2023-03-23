@@ -5,7 +5,7 @@ namespace EasySpeak.Core.BLL.Services
 {
     public class HttpRequestService : IHttpRequestService
     {
-        private HttpClient _httpClient;
+        private readonly HttpClient _httpClient;
         public HttpRequestService()
         {
             _httpClient = new HttpClient();
