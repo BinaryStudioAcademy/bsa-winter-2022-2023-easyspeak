@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 // import { HttpService } from '@core/services/http.service';
 import { Observable, of } from 'rxjs';
 
@@ -29,6 +30,9 @@ export class ChatPageComponent {
         message: new FormControl('', { nonNullable: true }),
     });
 
+    constructor(private router: Router) {
+    }
+
     sendMessage() {
         const message = this.form.controls.message.value;
 
@@ -42,5 +46,9 @@ export class ChatPageComponent {
         });
         //this.httpService.post('messages',
         // { chatId: this.currentChatId, userId: this.currentUserId, text: message, createdAt: new Date() });
+    }
+
+    startSessionCall(): void {
+        this.router.navigate([`session-call/${this.currentChatId}`]);
     }
 }
