@@ -65,19 +65,27 @@ export class SignUpComponent extends BaseComponent {
     getErrorMessage(field: string) {
         this.validateData();
 
-        const errorEntry = Object.entries(this.validationErrorMessage).find(([key, value]) => {
-            return this.form.controls[field].hasError(key);
-        });
+        const errorEntry = Object.entries(this.validationErrorMessage).find(([key, ]) => this.form.controls[field].hasError(key));
 
-        return errorEntry ? errorEntry[1] : (this.form.controls['email'].hasError('maxlength') ? 'Can not be more than 30 characters' : '');
+        if (errorEntry) {
+            return errorEntry[1];
+        } else if (this.form.controls['email'].hasError('maxlength')) {
+            return 'Can not be more than 30 characters';
+        } else {
+            return '';
+        }
     }
 
     getPasswordErrorMessage() {
-        const errorEntry = Object.entries(this.validationErrorMessage).find(([key, value]) => {
-            return this.form.controls['password'].hasError(key);
-        });
+        const errorEntry = Object.entries(this.validationErrorMessage).find(([key, ]) => this.form.controls['password'].hasError(key));
 
-        return errorEntry ? errorEntry[1] : (this.form.controls['password'].hasError('minlength') ? 'Can not be less than 6 symbols' : '');
+        if (errorEntry) {
+            return errorEntry[1];
+        } else if (this.form.controls['password'].hasError('minlength')) {
+            return 'Can not be less than 6 symbols';
+        } else {
+            return '';
+        }
     }
 
     getConfirmPasswordErrorMessage() {
