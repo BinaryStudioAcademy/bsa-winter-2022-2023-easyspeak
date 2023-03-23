@@ -3,10 +3,10 @@
         <div class="photo" (click)="openDialog(lesson.videoId)">
             <img src="{{ lesson.imgPath }}" alt="thumbnail" />
             <div class="circle">
-                <img src="../../../../assets/lesson-icons/circle.svg" alt="circle-icon" />
+                <img src="assets/lesson-icons/circle.svg" alt="circle-icon" />
             </div>
             <div class="play">
-                <img src="../../../../assets/lesson-icons/play.svg" alt="play-icon" />
+                <img src="assets/lesson-icons/play.svg" alt="play-icon" />
             </div>
         </div>
 
@@ -22,16 +22,16 @@
             </div>
         </div>
 
-        <img class="time-icon" src="../../../../assets/lesson-icons/clock-icon.svg" alt="clock-icon" />
+        <img class="time-icon" src="assets/lesson-icons/clock-icon.svg" alt="clock-icon" />
         <h4 class="lesson-time">{{ lesson.time }}</h4>
 
         <hr class="divider" />
 
         <div class="lesson-level">
-            <img src="../../../../assets/lesson-icons/people-icon.svg" alt="people-icon" />
+            <img src="assets/lesson-icons/people-icon.svg" alt="people-icon" />
             <span class="count">{{ lesson.viewersCount }}</span>
 
-            <img src="../../../../assets/lesson-icons/rocket-icon.svg" alt="rocket-icon" />
+            <img src="assets/lesson-icons/rocket-icon.svg" alt="rocket-icon" />
             <span class="count">{{ lesson.level }}</span>
         </div>
 
@@ -41,7 +41,7 @@
                 [disabled]="lesson.isDisabled"
                 [textContent]="lesson.isDisabled ? 'Expired' : 'Join'"></button>
             <button class="expand" (click)="getQuestions(lesson.id)">See questions</button>
-            <img src="../../../../assets/lesson-icons/expand.svg" alt="expand-icon" />
+            <img src="assets/lesson-icons/expand.svg" alt="expand-icon" />
         </div>
     </div>
     <div class="lesson-card-questions" *ngIf="questions">
