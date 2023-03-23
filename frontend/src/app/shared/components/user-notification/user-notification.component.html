@@ -1,5 +1,5 @@
-<div *ngIf="notifications.length > 0">
-    <div class="notifications" *ngFor="let notification of notifications">
+<div class="notifications" *ngIf="notifications.length > 0">
+    <div class="notification-element" *ngFor="let notification of notifications">
         <button class="notification-element" (click)="readNotification(notification)">
             <span class="notification-text">{{ notification.text }}</span>
         </button>
