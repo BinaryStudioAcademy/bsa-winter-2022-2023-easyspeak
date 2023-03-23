@@ -4,7 +4,7 @@
 
 export const environment = {
     production: false,
-    coreUrl: 'https://localhost:5050',
+    coreUrl: 'http://localhost:5050',
     notifierUrl: 'http://localhost:5070',
     iceServers: [
         { urls: 'stun:stun.1.google.com:19302' },
