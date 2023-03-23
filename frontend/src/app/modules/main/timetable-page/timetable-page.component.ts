@@ -6,4 +6,14 @@ import { Component } from '@angular/core';
     styleUrls: ['./timetable-page.component.sass'],
 })
 export class TimetablePageComponent {
+    selectedTopicsFilters = new Set<string>();
+    selectedLanguageFilters = new Set<string>();
+
+    onSelectedTopicsFiltersChange(selectedTopicsFilters: Set<string>) {
+        this.selectedTopicsFilters = selectedTopicsFilters;
+    }
+
+    onSelectedLanguageFiltersChange(selectedLanguageFilters: Set<string>) {
+        this.selectedLanguageFilters = selectedLanguageFilters;
+    }
 }

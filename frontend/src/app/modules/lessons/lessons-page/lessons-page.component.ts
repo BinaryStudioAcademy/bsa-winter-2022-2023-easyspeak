@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { langLevelsSample } from '@modules/filter-section/filter-section/filter-section.util';
 import { YoutubePlayerComponent } from '@shared/components/youtube-player/youtube-player.component';
 import { ILesson } from '@shared/models/lesson/ILesson';
+import { LanguageLevels } from '@shared/models/lesson/LanguageLevels';
 import { LessonsService } from 'src/app/services/lessons.service';
 
 import { LessonsCreateComponent } from '../lessons-create/lessons-create.component';
@@ -14,6 +15,9 @@ import { LessonsCreateComponent } from '../lessons-create/lessons-create.compone
 })
 export class LessonsPageComponent implements OnInit {
     todayDate: string;
+
+    @Input() selectedTopicsFilters: Set<string>;
+    @Input() selectedLanguageFilters: Set<string>;
 
     lessons = [
         {
@@ -28,71 +32,6 @@ export class LessonsPageComponent implements OnInit {
             viewersCount: 38,
             level: 'B1',
             isDisabled: true,
-        },
-        {
-            imgPath: '../../../../assets/lesson-mocks/Photo-5.png',
-            videoId: 'xqAriI87lFU',
-            title: 'The Diet That Helps Fight Climate Change. How to help?',
-            time: '11.00',
-            tutorAvatarPath: '../../../../assets/lesson-mocks/Photo )Patient).png',
-            tutorFlagPath: '../../../../assets/lesson-icons/canada-test-flag.svg',
-            tutorName: 'Roger Vaccaro',
-            topics: ['healthy', 'food', 'diet'],
-            viewersCount: 38,
-            level: 'B1',
-            isDisabled: false,
-        },
-        {
-            imgPath: '../../../../assets/lesson-mocks/Photo-2.png',
-            videoId: 'xqAriI87lFU',
-            title: 'How to measure extreme distances',
-            time: '11.00',
-            tutorAvatarPath: '../../../../assets/lesson-mocks/Photo )Patient).png',
-            tutorFlagPath: '../../../../assets/lesson-icons/canada-test-flag.svg',
-            tutorName: 'Roger Vaccaro',
-            topics: ['healthy', 'food', 'diet', 'biology'],
-            viewersCount: 38,
-            level: 'B1',
-            isDisabled: false,
-        },
-        {
-            imgPath: '../../../../assets/lesson-mocks/Photo-3.png',
-            videoId: 'xqAriI87lFU',
-            title: 'What’s so great about the Great Lakes?',
-            time: '11.00',
-            tutorAvatarPath: '../../../../assets/lesson-mocks/Photo )Patient).png',
-            tutorFlagPath: '../../../../assets/lesson-icons/canada-test-flag.svg',
-            tutorName: 'Roger Vaccaro',
-            topics: ['healthy', 'food', 'diet', 'biology'],
-            viewersCount: 38,
-            level: 'B1',
-            isDisabled: false,
-        },
-        {
-            imgPath: '../../../../assets/lesson-mocks/Photo.png',
-            videoId: 'xqAriI87lFU',
-            title: 'No That Easy',
-            time: '11.00',
-            tutorAvatarPath: '../../../../assets/lesson-mocks/Photo )Patient).png',
-            tutorFlagPath: '../../../../assets/lesson-icons/canada-test-flag.svg',
-            tutorName: 'Roger Vaccaro',
-            topics: ['healthy', 'food', 'diet', 'sport', 'biology'],
-            viewersCount: 38,
-            level: 'B1',
-            isDisabled: false,
-        },
-        {
-            imgPath: '../../../../assets/lesson-mocks/Photo-1.png',
-            videoId: 'xqAriI87lFU',
-            title: 'Is It Better to Be Polite or Frank?',
-            time: '11.00',
-            tutorAvatarPath: '../../../../assets/lesson-mocks/Photo )Patient).png',
-            tutorFlagPath: '../../../../assets/lesson-icons/canada-test-flag.svg',
-            tutorName: 'Roger Vaccaro',
-            topics: ['healthy', 'food', 'diet', 'sport', 'biology'],
-            viewersCount: 38,
-            level: 'B1',
-            isDisabled: false,
         },
     ];
 
@@ -129,8 +68,8 @@ export class LessonsPageComponent implements OnInit {
 
     getLessons() {
         this.lessonService.getFilteredLessons({
-            languageLevels: [],
-            tags: [],
+            languageLevels: Array.from(this.selectedLanguageFilters).map((level: string) => Object.values(LanguageLevels).indexOf(level)),
+            tags: Array.from(this.selectedTopicsFilters).map((topic) => ({ name: topic })),
             date: new Date('2023-04-03')
         }).subscribe((response: ILesson[]) => {
             response.forEach(lesson => {
@@ -149,5 +88,7 @@ export class LessonsPageComponent implements OnInit {
                 });
             });
          });
+
+         console.log(this.selectedTopicsFilters);
     }
 }

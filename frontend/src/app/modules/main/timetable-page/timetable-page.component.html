@@ -1,11 +1,20 @@
 <div class="container">
-  <div class="suitable-lesson-container">
-    <app-suitable-lesson></app-suitable-lesson>
-  </div>
-  <div class="filter-container">
-    <app-filter-section></app-filter-section>
-  </div>
-  <div class="lessons-container">
-    <app-lessons-page></app-lessons-page>
-  </div>
+    <div class="suitable-lesson-container">
+        <app-suitable-lesson></app-suitable-lesson>
+    </div>
+    <div class="filter-container">
+        <app-filter-section (selectedTopicsFiltersChange)="onSelectedTopicsFiltersChange($event)"
+            (selectedLanguageFiltersChange)="onSelectedLanguageFiltersChange($event)">
+        </app-filter-section>
+    </div>
+    <div class="lessons-container">
+        <app-lessons-page [selectedTopicsFilters]="selectedTopicsFilters"
+            [selectedLanguageFilters]="selectedLanguageFilters">
+        </app-lessons-page>
+    </div>
+
+    <div>
+        <a *ngFor="let item of selectedTopicsFilters">{{ item }}</a>
+        <a *ngFor="let item of selectedLanguageFilters">{{ item }}</a>
+    </div>
 </div>
