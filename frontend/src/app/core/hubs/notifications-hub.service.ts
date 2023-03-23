@@ -16,7 +16,6 @@ export class NotificationsHubService {
 
     private subscriptions: Subscription[] = [];
 
-    // eslint-disable-next-line no-empty-function
     constructor(private hubFactory: SignalRHubFactoryService) {}
 
     async start() {

@@ -33,7 +33,8 @@ namespace EasySpeak.Core.BLL.Services
 
         public async Task<NotificationDto> CreateNotificationAsync(NotificationDto notificationDto)
         {
-            var user = await _context.Users.Where(u => u.Id == _firebaseAuthService.UserId).FirstOrDefaultAsync();
+            var user = await _context.Users
+                .FirstOrDefaultAsync(u => u.Id == _firebaseAuthService.UserId);
 
             var notification = new Notification
             {

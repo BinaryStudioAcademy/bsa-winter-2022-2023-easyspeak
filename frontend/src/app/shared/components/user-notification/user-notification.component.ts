@@ -31,9 +31,16 @@ export class UserNotificationComponent implements OnInit, OnDestroy {
         await this.notificationsHub.start();
 
         this.notificationsHub.listenMessages((msg) => {
-            const broadcastMessage: INotification = JSON.parse(msg.toLowerCase());
+            const broadcastMessage = JSON.parse(msg);
 
-            this.notifications.push(broadcastMessage);
+            const messages = {
+                id: broadcastMessage.Id,
+                text: broadcastMessage.Text,
+                type: broadcastMessage.Type,
+                isRead: broadcastMessage.IsRead,
+            };
+
+            this.notifications.push(messages);
         });
     }
 

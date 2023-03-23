@@ -13,8 +13,8 @@ namespace EasySpeak.Notifier.WebAPI.Services
         private readonly IMessageConsumer _consumer;
         private readonly ILogger<ConsumerHostedService> _logger;
         private readonly IHubContext<NotificationHub> _hubContext;
-        public ConsumerHostedService(IMessageConsumer consumer, ILogger<ConsumerHostedService> logger, IHubContext<NotificationHub> hubContext) 
-        { 
+        public ConsumerHostedService(IMessageConsumer consumer, ILogger<ConsumerHostedService> logger, IHubContext<NotificationHub> hubContext)
+        {
             _consumer = consumer;
             _logger = logger;
             _hubContext = hubContext;
@@ -35,17 +35,20 @@ namespace EasySpeak.Notifier.WebAPI.Services
         {
 
             try
+            {
+                _consumer.Recieve<NewNotificationDto>((data) =>
                 {
-                    _consumer.Recieve<NewNotificationDto>((data) =>
+                    if (data is not null)
                     {
                         _hubContext.Clients.All.SendAsync($"Notification_{data.Email.ToLower()}", JsonConvert.SerializeObject(data));
                         Console.WriteLine(data);
-                    });
-                }
-                catch (Exception ex)
-                {
-                    _logger.LogError(ex, "Exception");
-                }          
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Exception");
+            }
             return Task.CompletedTask;
         }
     }
