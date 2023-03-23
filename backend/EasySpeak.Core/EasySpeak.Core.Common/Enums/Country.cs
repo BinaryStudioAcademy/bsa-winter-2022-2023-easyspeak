@@ -4,7 +4,7 @@ namespace EasySpeak.Core.Common.Enums;
 
 public enum Country: int
 {
-    Af = 1,
+    [Description("Afghanistan")] Af = 1,
     [Description("Åland Islands")] Ax,
     [Description("Albania")] Al,
     [Description("Algeria")] Dz,
@@ -253,4 +253,5 @@ public enum Country: int
     [Description("Yemen")] Ye,
     [Description("Zambia")] Zm,
     [Description("Zimbabwe")] Zw,
+
 }
