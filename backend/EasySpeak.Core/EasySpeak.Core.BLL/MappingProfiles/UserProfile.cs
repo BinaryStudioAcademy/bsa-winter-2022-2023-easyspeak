@@ -13,11 +13,7 @@ public class UserProfile : Profile
             CreateMap<UserRegisterDto, User>()
                 .ForMember(user => user.Sex, src => src.MapFrom(userDto => EnumHelper.MapSex(userDto.Sex)))
                 .ForMember(user => user.LanguageLevel, 
-                src => src.MapFrom(userDto => EnumHelper.MapLanguageLevel(userDto.LanguageLevel)))
-                .ForMember(user => user.Language,
-                src => src.MapFrom(userDto => EnumHelper.MapLanguage(userDto.Language)))
-                .ForMember(user => user.Country,
-                src => src.MapFrom(userDto => EnumHelper.MapCountry(userDto.Country)));
+                src => src.MapFrom(userDto => EnumHelper.MapLanguageLevel(userDto.LanguageLevel)));
 
         CreateMap<User, UserDto>();
     }
