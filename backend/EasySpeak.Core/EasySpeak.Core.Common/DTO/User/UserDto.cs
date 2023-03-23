@@ -1,4 +1,4 @@
-namespace EasySpeak.Core.Common.DTO;
+namespace EasySpeak.Core.Common.DTO.User;
 
 public class UserDto
 {

@@ -9,8 +9,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from '@core/core.module';
 import { AuthService } from '@core/services/auth.service';
 import { environment } from '@env/environment';
-import { MaterialModule } from '@shared/material/material.module';
 import { AuthModule } from '@modules/auth/auth.module';
+import { MaterialModule } from '@shared/material/material.module';
 import { SharedModule } from '@shared/shared.module';
 import { ToastrModule } from 'ngx-toastr';
 

@@ -1,6 +1,7 @@
 using EasySpeak.Core.BLL.Interfaces;
-using EasySpeak.Core.Common.DTO.Lesson;
 using EasySpeak.Core.Common.DTO.User;
+using EasySpeak.Core.Common.Enums;
+using EasySpeak.Core.DAL.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EasySpeak.Core.WebAPI.Controllers
@@ -36,7 +37,7 @@ namespace EasySpeak.Core.WebAPI.Controllers
                 Sex = Sex.Male
             };
 
-            return Ok(new UserDto()
+            return Ok(new UserDto
             {
                 FirstName = user.FirstName,
                 LastName = user.LastName,
@@ -44,7 +45,7 @@ namespace EasySpeak.Core.WebAPI.Controllers
                 Country = user.Country.ToString(),
                 Language = user.Language.ToString(),
                 EnglishLevel = user.LanguageLevel.ToString(),
-                Sex = user.Sex.ToString()
+                Sex = user.Sex.ToString(),
             });
         }
 
