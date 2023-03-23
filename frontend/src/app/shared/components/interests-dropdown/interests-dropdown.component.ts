@@ -1,4 +1,4 @@
-import { Component, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IIcon } from '@shared/models/IIcon';
 import { TagsForInterests } from '@shared/utils/tagsForInterests';
 
@@ -12,7 +12,9 @@ export class InterestsDropdownComponent {
 
     @Input() inputList: IIcon[] = TagsForInterests.tags;
 
-    @Output() outputList: string[] = [];
+    @Output() selectedInterests = new EventEmitter<string[]>();
+
+    outputList: string[] = [];
 
     selectInterest($event: Event) {
         const ev = $event.target as HTMLInputElement;
@@ -24,6 +26,8 @@ export class InterestsDropdownComponent {
         } else {
             this.outputList = this.outputList.filter(x => x !== this.inputList[numb].icon_name);
         }
+
+        this.selectedInterests.emit(this.outputList);
     }
 
     clickButton() {
