@@ -1,0 +1,17 @@
+<div class="container">
+    <div class="header-wrp">
+        <div class="header">
+            User Profile
+        </div>
+    </div>
+    <div class="body-wrp">
+        <div class="tabs">
+            <a #details [routerLink]="['/profile/details']" routerLinkActive="active-link" class="tab">User Details</a>
+            <a #subscription [routerLink]="['/profile/subscription']" class="tab">My Subscription</a>
+            <a #password [routerLink]="['/profile/change-pass']" class="tab">Change Password</a>
+        </div>
+        <div class="body">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

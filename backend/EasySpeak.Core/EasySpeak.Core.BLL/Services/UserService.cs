@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using EasySpeak.Core.BLL.Interfaces;
-using EasySpeak.Core.Common.DTO.Lesson;
 using EasySpeak.Core.Common.DTO.User;
 using EasySpeak.Core.DAL.Context;
 using EasySpeak.Core.DAL.Entities;
