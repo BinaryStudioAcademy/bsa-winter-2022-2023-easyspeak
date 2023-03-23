@@ -15,7 +15,7 @@ public class EnumToStringConverter<T> : ITypeConverter<T, string>
         
         if (!attributes.Any())
         {
-            throw new ArgumentException($"Cannot convert {nameof(source)} because it don't provide" +
+            throw new ArgumentException($"Cannot convert {nameof(source)} because it doesn't provide" +
                                         $" description attribute with friendly name");
         }
         
