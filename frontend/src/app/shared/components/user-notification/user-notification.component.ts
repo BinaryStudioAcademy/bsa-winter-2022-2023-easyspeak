@@ -24,7 +24,7 @@ export class UserNotificationComponent implements OnInit, OnDestroy {
     }
 
     async ngOnInit() {
-        this.notifySubscription = await this.httpService.get<INotification>('/notifications').subscribe((data) => {
+        this.notifySubscription = await this.httpService.get<INotification>('/notification').subscribe((data) => {
             this.notifications = data;
         });
 
@@ -41,7 +41,7 @@ export class UserNotificationComponent implements OnInit, OnDestroy {
         notification.isRead = true;
         this.notifications = this.notifications.filter((n) => !n.isRead);
 
-        this.httpService.put('/readnotification', notification.id).subscribe();
+        this.httpService.put('/notification', notification.id).subscribe();
     }
 
     ngOnDestroy() {
