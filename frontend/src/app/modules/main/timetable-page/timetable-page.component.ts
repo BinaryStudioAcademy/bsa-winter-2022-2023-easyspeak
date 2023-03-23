@@ -8,6 +8,7 @@ import { Component } from '@angular/core';
 export class TimetablePageComponent {
     selectedTopicsFilters = new Set<string>();
     selectedLanguageFilters = new Set<string>();
+    selectedDateFilter: Date;
 
     onSelectedTopicsFiltersChange(selectedTopicsFilters: Set<string>) {
         this.selectedTopicsFilters = selectedTopicsFilters;
@@ -16,4 +17,8 @@ export class TimetablePageComponent {
     onSelectedLanguageFiltersChange(selectedLanguageFilters: Set<string>) {
         this.selectedLanguageFilters = selectedLanguageFilters;
     }
+
+    onDateSelected(dateSelected: Date) {
+        this.selectedDateFilter = dateSelected;
+      }
 }

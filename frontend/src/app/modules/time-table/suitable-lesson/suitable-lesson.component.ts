@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import * as moment from 'moment';
 
 @Component({
@@ -7,6 +7,8 @@ import * as moment from 'moment';
     styleUrls: ['./suitable-lesson.component.sass'],
 })
 export class SuitableLessonComponent {
+    @Output() dateSelected = new EventEmitter<Date>();
+
     readonly amountOfDayInWeek: number = 7;
 
     days: Date[] = [];
@@ -44,4 +46,8 @@ export class SuitableLessonComponent {
                 .toDate();
         }
     }
+
+    onDateSelected(dateSelected: Date) {
+        this.dateSelected.emit(dateSelected);
+      }
 }

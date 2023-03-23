@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { langLevelsSample } from '@modules/filter-section/filter-section/filter-section.util';
 import { YoutubePlayerComponent } from '@shared/components/youtube-player/youtube-player.component';
@@ -13,11 +13,12 @@ import { LessonsCreateComponent } from '../lessons-create/lessons-create.compone
     templateUrl: './lessons-page.component.html',
     styleUrls: ['./lessons-page.component.sass'],
 })
-export class LessonsPageComponent implements OnInit {
+export class LessonsPageComponent implements OnInit, OnChanges {
     todayDate: string;
 
     @Input() selectedTopicsFilters: Set<string>;
     @Input() selectedLanguageFilters: Set<string>;
+    @Input() selectedDateFilter: Date;
 
     lessons = [
         {
@@ -40,6 +41,16 @@ export class LessonsPageComponent implements OnInit {
     ngOnInit(): void {
         const formatter = new Intl.DateTimeFormat('en-US', { day: 'numeric', month: 'long', year: 'numeric', weekday: 'long' });
         const parts = formatter.formatToParts(new Date());
+        const formattedDate = `${parts[4].value} ${parts[2].value} ${parts[6].value}, ${parts[0].value}`;
+
+        this.todayDate = formattedDate;
+    }
+
+    ngOnChanges(): void {
+        this.getLessons();
+
+        const formatter = new Intl.DateTimeFormat('en-US', { day: 'numeric', month: 'long', year: 'numeric', weekday: 'long' });
+        const parts = formatter.formatToParts(new Date(this.selectedDateFilter.toISOString().slice(0, 10)));
         const formattedDate = `${parts[4].value} ${parts[2].value} ${parts[6].value}, ${parts[0].value}`;
 
         this.todayDate = formattedDate;
@@ -70,7 +81,7 @@ export class LessonsPageComponent implements OnInit {
         this.lessonService.getFilteredLessons({
             languageLevels: Array.from(this.selectedLanguageFilters).map((level: string) => Object.values(LanguageLevels).indexOf(level)),
             tags: Array.from(this.selectedTopicsFilters).map((topic) => ({ name: topic })),
-            date: new Date('2023-04-03')
+            date: new Date(this.selectedDateFilter.toISOString().slice(0, 10))
         }).subscribe((response: ILesson[]) => {
             response.forEach(lesson => {
                 this.lessons.push({
