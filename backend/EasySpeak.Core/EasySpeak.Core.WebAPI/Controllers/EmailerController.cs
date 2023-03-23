@@ -9,8 +9,8 @@ namespace EasySpeak.Core.WebAPI.Controllers
     [ApiController]
     public class EmailerController : ControllerBase
     {
-        private IConfiguration _configuration;
-        private IHttpRequestService _httpRequestService;
+        private readonly IConfiguration _configuration;
+        private readonly IHttpRequestService _httpRequestService;
 
         public EmailerController(IConfiguration configuration, IHttpRequestService httpRequestService)
         {
