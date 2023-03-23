@@ -39,7 +39,14 @@ export class NotificationsHubService {
             .then(() => console.info(`"${this.hubFactory}" successfully started.`))
             .catch(() => console.info(`"${this.hubFactory}" failed.`));
 
-        this.hubConnection.on('Notification', (msg: string) => {
+        const storedUserData = localStorage.getItem('user');
+        let userEmail: string = 'Test@test.ua';
+
+        if (storedUserData) {
+            userEmail = JSON.parse(storedUserData).email.toLowerCase();
+        }
+
+        this.hubConnection.on(`Notification_${userEmail}`, (msg: string) => {
             this.messages.next(msg);
         });
     }

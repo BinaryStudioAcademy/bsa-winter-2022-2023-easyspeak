@@ -27,7 +27,7 @@ namespace EasySpeak.Core.BLL.Services
                         {
                             Id = notify.Id,
                             Text = notify.Text,
-                            Type = (int)notify.Type
+                            Type = notify.Type
                         })
                 .ToListAsync();
 
@@ -39,7 +39,7 @@ namespace EasySpeak.Core.BLL.Services
             {
                 UserId = _firebaseAuthService.UserId,
                 Text = notificationDto.Text,
-                Type = (NotificationType)notificationDto.Type
+                Type = notificationDto.Type
             };
 
             await _context.Notifications.AddAsync(notification);
@@ -47,16 +47,7 @@ namespace EasySpeak.Core.BLL.Services
 
             if (user is not null)
             {
-                var newNotification = new NewNotificationDto
-                {
-                    Id = notification.Id,
-                    Text = notification.Text,
-                    Email = user.Email,
-                    Type = (int)notification.Type
-                };
-
-                _messageProducer.Init("notifier", "");
-                _messageProducer.SendMessage<NewNotificationDto>(newNotification);
+                this.SendNotificationToRabbit(user, notification);
             }
 
             return notificationDto;
@@ -74,6 +65,20 @@ namespace EasySpeak.Core.BLL.Services
                 await _context.SaveChangesAsync();
             }
             return id;
+        }
+
+        public void SendNotificationToRabbit(User user, Notification notification)
+        {
+            var newNotification = new NewNotificationDto
+            {
+                Id = notification.Id,
+                Text = notification.Text,
+                Email = user.Email,
+                Type = notification.Type
+            };
+
+            _messageProducer.Init("notifier", "");
+            _messageProducer.SendMessage<NewNotificationDto>(newNotification);
         }
     }
 }

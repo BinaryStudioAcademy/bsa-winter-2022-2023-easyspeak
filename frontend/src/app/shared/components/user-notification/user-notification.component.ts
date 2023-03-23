@@ -30,19 +30,10 @@ export class UserNotificationComponent implements OnInit, OnDestroy {
 
         await this.notificationsHub.start();
 
-        const storedUserData = localStorage.getItem('user');
-        let userEmail: string = 'Test@test.ua';
-
-        if (storedUserData) {
-            userEmail = JSON.parse(storedUserData).email.toLowerCase();
-        }
-
         this.notificationsHub.listenMessages((msg) => {
             const broadcastMessage: INotification = JSON.parse(msg.toLowerCase());
 
-            if (broadcastMessage.email === userEmail.toLowerCase()) {
-                this.notifications.push(broadcastMessage);
-            }
+            this.notifications.push(broadcastMessage);
         });
     }
 

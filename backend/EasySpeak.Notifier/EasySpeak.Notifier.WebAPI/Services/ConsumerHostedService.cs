@@ -38,7 +38,7 @@ namespace EasySpeak.Notifier.WebAPI.Services
                 {
                     _consumer.Recieve<NewNotificationDto>((data) =>
                     {
-                        _hubContext.Clients.All.SendAsync("Notification", JsonConvert.SerializeObject(data));
+                        _hubContext.Clients.All.SendAsync($"Notification_{data.Email.ToLower()}", JsonConvert.SerializeObject(data));
                         Console.WriteLine(data);
                     });
                 }
