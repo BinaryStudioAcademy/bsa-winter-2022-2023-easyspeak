@@ -29,6 +29,7 @@ By default, apps run on the following ports:
 | EasySpeak.**Core**     | 5050 |
 | EasySpeak.**Notifier** | 5070 |
 | RabbitMQ               | 5672 |
+| EasySpeak.**Emailer**  | 5090 |
 
 _Tip: If you want to connect to the specific service outside of docker, then use "localhost" as a service name, but if both services are inside docker, use service_name from a "docker-compose" file instead._
 
