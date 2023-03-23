@@ -13,4 +13,8 @@ export class LessonsService {
     createLesson(lesson: INewLesson) {
         return this.http.post(this.routePrefix, lesson);
     }
+
+    getQuestions(id: number) {
+        return this.http.get(`${this.routePrefix}/${id}/questions`);
+    }
 }

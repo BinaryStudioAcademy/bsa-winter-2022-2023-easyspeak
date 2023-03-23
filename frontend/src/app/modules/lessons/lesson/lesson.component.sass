@@ -1,0 +1,255 @@
+@import '../../../../styles/colors'
+
+.lesson-card
+    position: relative
+    box-sizing: border-box
+
+    min-height: 185px
+    max-height: 625px
+    margin-top: 30px
+    padding: 20px 30px 20px 25px
+
+    background: $white
+    border-radius: 10px
+
+    display: flex
+    flex-direction: column
+    overflow: hidden
+
+.photo
+    position: relative
+    display: inline-block
+
+    width: 125px
+    height: 95px
+
+    margin-right: 15px
+
+.photo img
+    width: 125px
+    height: 95px
+    border-radius: 5px
+
+.circle
+    position: absolute
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+
+.circle img
+    width: 36px
+
+.play
+    position: absolute
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+
+.play img
+    width: 11px
+    height: 13px
+
+.info
+    display: inline-block
+    vertical-align: top
+
+.lesson-theme
+    vertical-align: top
+
+    max-width: 60%
+    overflow: hidden
+    text-overflow: ellipsis
+    display: -webkit-box
+    -webkit-line-clamp: 2
+            line-clamp: 2
+    -webkit-box-orient: vertical
+
+    font-style: normal
+    font-weight: 700
+    font-size: 16px
+    line-height: 135%
+
+    color: $black
+
+.lesson-tutor
+    position: relative
+
+    margin: 5px 0
+
+.avatar
+    display: inline-block
+
+    width: 20px
+    height: 20px
+
+    border-radius: 50%
+
+.origin
+    position: absolute
+
+    background-color: $white
+
+    border-radius: 90%
+
+    left: 10px
+    top: 10px
+
+.tutor-name
+    display: inline-block
+    vertical-align: top
+
+    margin-left: 5px
+
+    font-style: normal
+    font-weight: 400
+    font-size: 14px
+    line-height: 146%
+
+    color: $gray-300
+
+.topic
+    display: inline-block
+
+    padding: 0px 5px
+    margin-right: 5px
+    background: $accent-color
+
+    border-radius: 10px
+    font-style: normal
+    font-weight: 500
+    font-size: 12px
+    line-height: 146%
+
+    color: $main-color
+
+.topic:last-child
+    margin: 0
+
+.time-icon
+    position: absolute
+    right: 66px
+    background-color: $time-color
+    border: 5px solid $time-color
+    border-radius: 50%
+
+.lesson-time
+    display: inline-block
+    position: absolute
+    right: 30px
+    top: 25px
+
+    font-style: normal
+    font-weight: 700
+    font-size: 14px
+    line-height: 146%
+
+    color: $black
+
+.divider
+    margin-top: 10px
+    border: 1px solid $gray-200
+
+.lesson-level
+    display: inline-block
+    vertical-align: top
+    margin-top: 15px
+
+.count
+    vertical-align: top
+
+    margin: 0 15px 0 5px
+
+    font-style: normal
+    font-weight: 500
+    font-size: 12px
+    line-height: 146%
+
+    color: $gray-200
+
+.lesson-actions
+    position: absolute
+    right: 35px
+    display: inline-block
+
+.join
+    display: inline-block
+
+    width: 60px
+    height: 25px
+
+    margin: 8px 10px 25px 395px
+
+    background: $main-color
+    border: none
+    border-radius: 50px
+
+    font-style: normal
+    font-weight: 500
+    font-size: 12px
+    line-height: 146%
+
+    color: $white
+
+.join:disabled, .join[disabled]
+    width: 60px
+    height: 25px
+
+    margin: 8px 10px 25px 395px
+
+    background: $gray-200
+
+.expand
+    display: inline-block
+
+    background: none
+    border: none
+
+    margin-right: 5px
+    padding: 0
+
+    font-style: normal
+    font-weight: 500
+    font-size: 12px
+    line-height: 146%
+
+    text-decoration: none
+    color: $main-color
+
+.lesson-card-questions
+    overflow-y: auto
+
+.question
+    display: flex
+    flex-direction: column
+    padding-top: 10px
+
+.question-text
+    font-style: normal
+    font-weight: 500
+    font-size: 16px
+    line-height: 150%
+
+    color: $black
+
+.subquestion
+    display: flex
+    flex-direction: row
+
+    padding-top: 5px
+
+.subquestion-elipse
+    padding-top: 7px
+    height: 6px
+    width: 6px
+    fill: $main-color
+    overflow: visible
+
+.subquestion-text
+    padding-left: 13px
+
+    font-style: normal
+    font-weight: 400
+    font-size: 12px
+    line-height: 157.5%
+
+    color: $black

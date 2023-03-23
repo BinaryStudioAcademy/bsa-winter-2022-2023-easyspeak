@@ -1,8 +1,4 @@
 import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { YoutubePlayerComponent } from '@shared/components/youtube-player/youtube-player.component';
-
-import { LessonsCreateComponent } from '../lessons-create/lessons-create.component';
 
 @Component({
     selector: 'app-lessons-page',
@@ -12,6 +8,7 @@ import { LessonsCreateComponent } from '../lessons-create/lessons-create.compone
 export class LessonsPageComponent {
     lessons = [
         {
+            id: 1,
             imgPath: '../../../../assets/lesson-mocks/Photo-4.png',
             videoId: 'xqAriI87lFU',
             title: 'The Real New Yorker’s Sandwich',
@@ -25,6 +22,7 @@ export class LessonsPageComponent {
             isDisabled: true,
         },
         {
+            id: 2,
             imgPath: '../../../../assets/lesson-mocks/Photo-5.png',
             videoId: 'xqAriI87lFU',
             title: 'The Diet That Helps Fight Climate Change. How to help?',
@@ -38,6 +36,7 @@ export class LessonsPageComponent {
             isDisabled: false,
         },
         {
+            id: 3,
             imgPath: '../../../../assets/lesson-mocks/Photo-2.png',
             videoId: 'xqAriI87lFU',
             title: 'How to measure extreme distances',
@@ -51,6 +50,7 @@ export class LessonsPageComponent {
             isDisabled: false,
         },
         {
+            id: 4,
             imgPath: '../../../../assets/lesson-mocks/Photo-3.png',
             videoId: 'xqAriI87lFU',
             title: 'What’s so great about the Great Lakes?',
@@ -64,6 +64,7 @@ export class LessonsPageComponent {
             isDisabled: false,
         },
         {
+            id: 5,
             imgPath: '../../../../assets/lesson-mocks/Photo.png',
             videoId: 'xqAriI87lFU',
             title: 'No That Easy',
@@ -77,6 +78,7 @@ export class LessonsPageComponent {
             isDisabled: false,
         },
         {
+            id: 6,
             imgPath: '../../../../assets/lesson-mocks/Photo-1.png',
             videoId: 'xqAriI87lFU',
             title: 'Is It Better to Be Polite or Frank?',
@@ -90,27 +92,4 @@ export class LessonsPageComponent {
             isDisabled: false,
         },
     ];
-
-    constructor(private dialogRef: MatDialog) { }
-
-    openDialog(videoId: string) {
-        this.dialogRef.open(YoutubePlayerComponent, {
-            maxWidth: '100vw',
-            maxHeight: '100vh',
-            height: '80%',
-            width: '80%',
-            data: {
-                videoId,
-            },
-        });
-    }
-
-    openCreate() {
-        this.dialogRef.open(LessonsCreateComponent, {
-            maxWidth: '100vw',
-            maxHeight: '100vh',
-            height: '80%',
-            width: '80%',
-        });
-    }
 }
