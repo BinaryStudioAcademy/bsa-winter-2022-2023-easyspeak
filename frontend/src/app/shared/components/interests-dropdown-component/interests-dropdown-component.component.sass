@@ -1,19 +1,29 @@
+@import "src/styles/colors.sass"
+
 *
     box-sizing: border-box
     margin: 0
     padding: 0
 
 .button-wrapper
+    display: flex
+    justify-content: center
+    align-items: center
     width: 238px
     height: 46px
     border-radius: 50px
     background: white
     border: none
     position: relative
+
+.button-content
     display: flex
     justify-content: space-between
     align-items: center
+    width: 100%
+    height: 100%
     padding: 16px
+    border-radius: 50px
 
 .button-symbols
     display: flex
@@ -27,12 +37,12 @@
     display: flex
     justify-content: center
     align-items: center
-    background-color: #1C2FBA
+    background-color: $turquoise-100
     padding: 3px
-    font-family: 'Barlow'
     font-style: normal
     font-weight: 700
     font-size: 14px
+    color: $blue-200
 
 .dropdown-button
     width: 100%
@@ -46,13 +56,13 @@
     left: 0
 
 .dropdown-button:hover
-    box-shadow: 0px 1px 4px rgba(97, 212, 246, 0.37)
     cursor: pointer
-    background: #7889fb
-    opacity: 50%
+
+.dropdown-button:hover + .button-content
+    box-shadow: 0 1px 4px $turquoise-100
 
 .dropdown-content
-    background: white
+    background: $white
     width: 238px
     position: absolute
     top: 60px
@@ -64,7 +74,7 @@
     border-radius: 4px
     padding: 12px 5px 15px 5px
     justify-content: flex-start
-
+    border: 1px solid $inactive-color
 
 .icon
     width: 12px
@@ -84,38 +94,50 @@
     opacity: 0
 
 .item-checkbox:checked + .item-checkbox-label
-    background: blue
+    background-color:  $turquoise-100
+
+.icon-wrapper
+    background-color: $gray-100
 
 .item-checkbox:checked + .item-checkbox-label > .icon-wrapper
-    background: pink
+    background-color: $white-50
 
 .item-checkbox:checked + .item-checkbox-label > .icon-name
-    color: pink
+    color: $white
+
 .item-checkbox-label
     padding: 5px 11px
-    border: 2px solid gray
+    border: 2px solid  $turquoise-100
     border-radius: 20px
     display: flex
     align-items: center
     gap: 4px
-
-
-//.dropdown-content > *
-//    flex: 1 1 auto
 
 .dropdown-item
     display: flex
     justify-content: center
     align-items: center
 
+.item-checkbox-label:hover
+    box-shadow: 0 1px 4px $turquoise-100
+    cursor: pointer
+
 .icon-name
-    font-family: 'Barlow'
     font-style: normal
     font-weight: 500
     font-size: 12px
 
+.arrow-icon
+    width: 20px
+    height: 20px
+    display: flex
+    justify-content: center
+    align-items: center
 
 
+.bi-chevron-down
+    fill: $blue-200
+    stroke: $blue-200
 
 
 

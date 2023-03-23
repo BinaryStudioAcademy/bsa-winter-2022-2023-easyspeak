@@ -1,29 +1,30 @@
-<!--<div class="dropdown">-->
 <div class="button-wrapper">
     <button class="dropdown-button" (click)="clickButton()">
     </button>
-    <div class="button-symbols">
-        <div class="counter">{{outputList.length}}</div>
-        <div>Interests</div>
+    <div class="button-content">
+        <div class="button-symbols">
+            <div class="counter">{{outputList.length}}</div>
+            <div>Interests</div>
+        </div>
+        <div class="arrow-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                 class="bi bi-chevron-down"
+                 viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                      d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+            </svg>
+        </div>
     </div>
-
-    <div class="arrow-icon">
-        <img scr="/dropdown-symbol/shevron-down.svg"/>
+</div>
+<div class="dropdown-content" *ngIf="toggle">
+    <div *ngFor="let item of inputList; let i = index" class="dropdown-item">
+        <input type="checkbox" id="{{i}}" class="item-checkbox" (change)="selectInterest($event)"/>
+        <label class="item-checkbox-label" for="{{i}}">
+            <div class="icon-wrapper ">
+                <img class="icon" src="{{item.link}}" alt="image"/>
+            </div>
+            <div class="icon-name">{{item.icon_name}}</div>
+        </label>
     </div>
 </div>
 
-    <div class="dropdown-content" *ngIf="toggle">
-
-       <div *ngFor="let item of inputList; let i = index" class="dropdown-item">
-
-               <input type="checkbox" id="{{i}}" class="item-checkbox" (change)="selectInterest($event)" />
-               <label  class="item-checkbox-label" for="{{i}}" >
-                   <div class="icon-wrapper ">
-                       <img class="icon" src="{{item.link}}" alt="image" />
-                   </div>
-                   <div class="icon-name">{{item.icon_name}}</div>
-               </label>
-
-       </div>
-    </div>
-<!--</div>-->

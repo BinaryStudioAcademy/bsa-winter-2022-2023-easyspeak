@@ -11,6 +11,7 @@ export class InterestsDropdownComponentComponent {
     toggle: boolean = false;
 
     inputList: IIcon[] = TagsForInterests.tags;
+
     @Output() outputList: string[] = [];
 
     selectInterest($event: Event) {
