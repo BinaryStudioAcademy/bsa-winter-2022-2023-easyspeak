@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import * as moment from 'moment';
 
 import { LessonsService } from 'src/app/services/lessons.service';
@@ -8,7 +8,7 @@ import { LessonsService } from 'src/app/services/lessons.service';
     templateUrl: './suitable-lesson.component.html',
     styleUrls: ['./suitable-lesson.component.sass'],
 })
-export class SuitableLessonComponent {
+export class SuitableLessonComponent implements OnInit {
     @Output() dateSelected = new EventEmitter<Date>();
 
     readonly amountOfDayInWeek: number = 7;
@@ -19,7 +19,9 @@ export class SuitableLessonComponent {
 
     meetingsCount: number;
 
-    constructor(private lessonService: LessonsService) {
+    constructor(private lessonService: LessonsService) { }
+
+    ngOnInit(): void {
         this.setDays();
     }
 
