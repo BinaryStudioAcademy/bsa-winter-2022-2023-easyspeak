@@ -38,9 +38,14 @@ export class LessonComponent {
 
     getQuestions(id: number) {
         this.spinner.show();
-        this.lessonsService.getQuestions(id).subscribe((questions) => {
-            this.questions = questions as Question[];
-            this.spinner.hide();
-        });
+        this.lessonsService.getQuestions(id).subscribe(
+            (questions) => {
+                this.questions = questions as Question[];
+                this.spinner.hide();
+            },
+            () => {
+                this.spinner.hide();
+            },
+        );
     }
 }

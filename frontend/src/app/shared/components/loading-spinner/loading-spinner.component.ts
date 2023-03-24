@@ -17,7 +17,7 @@ export class LoadingSpinnerComponent {
 
     @Input() left = '49%';
 
-    @Input() position = 'absolute';
+    @Input() position = 'fixed';
 
     @Input() margin = '100px auto';
 
