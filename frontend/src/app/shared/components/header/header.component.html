@@ -1,54 +1,70 @@
 <mat-toolbar class="header-wrp">
-  <div class="header">
-    <div class="header-content left-area">
-      <div class="header-content title" [routerLink]="['/']">
-        <img src="/assets/header/logo.svg">
-          EasySpeak
-      </div>
-    </div>
-    <div class="header-content main-area">
-      <p routerLink="social" routerLinkActive="active" #link="routerLinkActive" [class.disabled]="!link.isActive">Social</p>
-      <p routerLink="timetable" routerLinkActive="active" #linkTimetable="routerLinkActive" [class.disabled]="!linkTimetable.isActive">Timetable</p>
-    </div>
-    <div class="header-content">
-      <div class="remaindings">
-        <div matBadge="1" class="reminding">
-          <img src="/assets/header/mail-icon.svg"/>
+    <div class="header">
+        <div class="header-content left-area">
+            <div class="header-content title" [routerLink]="['/']">
+                <img src="/assets/header/logo.svg" />
+                EasySpeak
+            </div>
         </div>
-        <div matBadge="3" class="reminding">
-          <img src="/assets/header/notification-icon.svg"/>
+        <div class="header-content main-area">
+            <p routerLink="social" routerLinkActive="active" #link="routerLinkActive" [class.disabled]="!link.isActive">
+                Social
+            </p>
+            <p
+                routerLink="timetable"
+                routerLinkActive="active"
+                #linkTimetable="routerLinkActive"
+                [class.disabled]="!linkTimetable.isActive">
+                Timetable
+            </p>
         </div>
-      </div>
-      <div [matMenuTriggerFor]="menu" class="user-area">
-        <img class="avatar avatar-size" src="/assets/header/avatar.svg" alt="avatar">
-        <span>James Workman</span>
-        <img src="/assets/header/chevron-down-icon.svg"/>
-        <mat-menu #menu="matMenu" xPosition="before">
-          <button mat-menu-item class="menu-element">
-            <img class="menu-icon" src="/assets/header/following-icon.svg">
-            <span class="menu-text">Following</span>
-          </button>
-          <button mat-menu-item class="menu-element">
-            <img class="menu-icon" src="/assets/header/user-profile.svg">
-            <span class="menu-text">User details</span>
-          </button>
-          <button mat-menu-item class="menu-element">
-            <img class="menu-icon" src="/assets/header/my-subscription-icon.svg">
-            <span class="menu-text">My Subscription</span>
-          </button>
-          <button mat-menu-item class="menu-element">
-            <img class="menu-icon" src="/assets/header/lock-icon.svg">
-            <span class="menu-text">Change Password</span>
-          </button>
-          <button mat-menu-item class="menu-element"  (click)="logOut()">
-            <img class="menu-icon" src="/assets/header/log-out.svg" alt="logOut">
-            <span class="menu-text log-out">Log Out</span>
-          </button>
-          <div mat-menu-item>
-            <button class="subscription">Subscription</button>
-          </div>
-        </mat-menu>
-      </div>
+        <div class="header-content">
+            <div class="remaindings">
+                <div matBadge="1" class="reminding">
+                    <img src="/assets/header/mail-icon.svg" />
+                </div>
+                <div [matMenuTriggerFor]="notifications" class="remaindings">
+                    <div
+                        matBadge="{{ notificationsMenu.notifications.length }}"
+                        [matBadgeHidden]="!notificationsMenu.notifications.length"
+                        class="reminding">
+                        <img src="/assets/header/notification-icon.svg" />
+                    </div>
+                    <mat-menu #notifications="matMenu" xPosition="after">
+                        <app-user-notification #notificationsMenu> </app-user-notification>
+                    </mat-menu>
+                </div>
+            </div>
+            <div [matMenuTriggerFor]="menu" class="user-area">
+                <img class="avatar avatar-size" src="/assets/header/avatar.svg" alt="avatar" />
+                <span>James Workman</span>
+                <img src="/assets/header/chevron-down-icon.svg" />
+                <mat-menu #menu="matMenu" xPosition="before">
+                    <button mat-menu-item class="menu-element">
+                        <img class="menu-icon" src="/assets/header/following-icon.svg" />
+                        <span class="menu-text">Following</span>
+                    </button>
+                    <button mat-menu-item class="menu-element">
+                        <img class="menu-icon" src="/assets/header/user-profile.svg" />
+                        <span class="menu-text">User details</span>
+                    </button>
+                    <button mat-menu-item class="menu-element">
+                        <img class="menu-icon" src="/assets/header/my-subscription-icon.svg" />
+                        <span class="menu-text">My Subscription</span>
+                    </button>
+                    <button mat-menu-item class="menu-element">
+                        <img class="menu-icon" src="/assets/header/lock-icon.svg" />
+                        <span class="menu-text">Change Password</span>
+                    </button>
+                    <button mat-menu-item class="menu-element" (click)="logOut()">
+                        <img class="menu-icon" src="/assets/header/log-out.svg" alt="logOut" />
+                        <span class="menu-text log-out">Log Out</span>
+                    </button>
+                    <div mat-menu-item>
+                        <button class="subscription">Subscription</button>
+                    </div>
+                </mat-menu>
+            </div>
+        </div>
     </div>
-  </div>
 </mat-toolbar>

@@ -1,5 +1,6 @@
 using EasySpeak.Notifier.Hubs;
 using EasySpeak.Notifier.WebAPI.Extentions;
+using EasySpeak.Notifier.WebAPI.Hubs;
 using EasySpeak.Notifier.WebAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,6 +24,15 @@ builder.Services.AddRouting(options => options.LowercaseUrls = true);
 builder.Services.AddHostedService<ConsumerHostedService>();
 builder.WebHost.UseUrls("http://*:5070");
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CorsPolicy", builder => builder
+        .SetIsOriginAllowed(_ => true)
+        .AllowAnyMethod()
+        .AllowAnyHeader()
+        .AllowCredentials());
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -33,16 +43,19 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseCors("CorsPolicy");
 app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.UseWebSockets();
+
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();
     endpoints.MapHub<BroadcastHub>("/broadcastHub");
+    endpoints.MapHub<NotificationHub>("/notificationsHub");
     endpoints.MapHealthChecks("/health");
 });
 
