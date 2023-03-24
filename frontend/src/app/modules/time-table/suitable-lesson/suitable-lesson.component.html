@@ -18,7 +18,7 @@
                     <mat-calendar #calendar (selectedChange)="select($event)"> </mat-calendar>
                 </mat-menu>
 
-                {{ this.days[0] | date : 'dd MMMM' }} - {{ this.days[6] | date : 'dd MMMM' }}
+                {{ days[0].date.toLocaleDateString() }} - {{ days[6].date.toLocaleDateString() }}
             </div>
 
             <button class="button-week" (click)="weekInc()">
@@ -28,7 +28,7 @@
         </div>
 
         <div class="days">
-            <app-suitable-lesson-day *ngFor="let item of days" [meetingCount]="6" [item]="item" (dateSelected)="onDateSelected($event)">
+            <app-suitable-lesson-day *ngFor="let day of days" [meetingCount]="day.meetingsCount" [item]="day.date" (dateSelected)="onDateSelected($event)">
             </app-suitable-lesson-day>
         </div>
     </div>

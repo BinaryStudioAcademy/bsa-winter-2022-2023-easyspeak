@@ -1,5 +1,8 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { ILesson } from '@shared/models/lesson/ILesson';
 import * as moment from 'moment';
+import { catchError, forkJoin, map, Observable, of, tap } from 'rxjs';
+import { LessonsService } from 'src/app/services/lessons.service';
 
 @Component({
     selector: 'app-suitable-lesson',
@@ -11,11 +14,13 @@ export class SuitableLessonComponent {
 
     readonly amountOfDayInWeek: number = 7;
 
-    days: Date[] = [];
+    days: { date: Date, meetingsCount: number }[];
 
     selectedDate: Date = new Date();
 
-    constructor() {
+    meetingsCount: number
+
+    constructor(private lessonService: LessonsService) {
         this.setDays();
     }
 
@@ -39,12 +44,23 @@ export class SuitableLessonComponent {
         this.setDays();
     }
 
-    setDays(): void {
+    async setDays(): Promise<void> {
+        this.days = [];
         for (let i = 0; i < 7; i++) {
-            this.days[i] = moment(this.selectedDate)
-                .add(i - this.selectedDate.getDay() + 1, 'day')
-                .toDate();
+            const date = moment(this.selectedDate).add(i - this.selectedDate.getDay() + 1, 'day').toDate();
+            const meetingsCount = await this.getMeetingCount(date);
+            this.days.push({ date, meetingsCount });
         }
+    }
+
+    async getMeetingCount(date: Date): Promise<number> {
+        const filteredLessons = await this.lessonService.getFilteredLessons({
+            languageLevels: [],
+            tags: [],
+            date: new Date(date.toISOString().slice(0, 10)),
+        }).toPromise();
+
+        return filteredLessons?.length || 0;
     }
 
     onDateSelected(dateSelected: Date) {
