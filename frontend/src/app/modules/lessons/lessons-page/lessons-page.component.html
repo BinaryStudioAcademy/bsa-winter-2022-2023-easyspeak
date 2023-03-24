@@ -8,5 +8,24 @@
             <app-lesson [lesson]="lesson"></app-lesson>
         </div>
     </div>
+
+    <div class="no-lessons">
+        <p *ngIf="lessons.length === 0 && selectedTopicsFilters.size === 0 && selectedLanguageFilters.size === 0">
+            Oops, there are no lessons for this day. <br> Please consider another date
+        </p>
+
+        <p *ngIf="lessons.length === 0 && (selectedTopicsFilters.size !== 0 && selectedLanguageFilters.size !== 0)">
+            Oops, there are no lessons with such filters for this day. <br> Please consider another date
+        </p>
+
+        <p *ngIf="lessons.length === 0 && (selectedTopicsFilters.size !== 0 && selectedLanguageFilters.size === 0)">
+            Oops, there are no lessons with such topics for this day. <br> Please consider another date
+        </p>
+
+        <p *ngIf="lessons.length === 0 && (selectedTopicsFilters.size === 0 && selectedLanguageFilters.size !== 0)">
+            Oops, there are no lessons with such levels for this day. <br> Please consider another date
+        </p>
+    </div>
+
     <button (click)="openCreate()"></button>
 </div>
