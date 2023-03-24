@@ -8,6 +8,9 @@ import { LandingRoutingModule } from './landing-routing.module';
 
 @NgModule({
     declarations: [LandingPageComponent],
-    imports: [CommonModule, SharedModule, LandingRoutingModule, UserCardModule],
+    imports: [CommonModule,
+        SharedModule,
+        LandingRoutingModule,
+        UserCardModule],
 })
 export class LandingModule {}

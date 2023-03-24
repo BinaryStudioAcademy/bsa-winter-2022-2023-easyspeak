@@ -8,7 +8,7 @@ export class Utils {
 
         language: 'English',
 
-        imagePath: '../../../assets/user-card-icons/Photo.png',
+        imagePath: 'assets/user-card-icons/Photo.png',
 
         languageLevel: 'B1',
 
@@ -16,6 +16,6 @@ export class Utils {
 
         status: 45,
 
-        flag: '../../../assets/user-card-icons/canada-flag.svg',
+        flag: 'assets/user-card-icons/canada-flag.svg',
     };
 }
