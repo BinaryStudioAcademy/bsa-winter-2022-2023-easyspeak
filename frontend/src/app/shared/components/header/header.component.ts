@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from '@core/services/auth.service';
 
 @Component({
     selector: 'app-header',
@@ -6,4 +7,9 @@ import { Component } from '@angular/core';
     styleUrls: ['./header.component.sass'],
 })
 export class HeaderComponent {
+    constructor(private authService: AuthService) {}
+
+    logOut() {
+        this.authService.logout();
+    }
 }

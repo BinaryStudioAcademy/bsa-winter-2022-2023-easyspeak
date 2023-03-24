@@ -16,13 +16,23 @@ public class LessonsService : BaseService, ILessonsService
     {
     }
 
+    public async Task<ICollection<QuestionForLessonDto>> GetQuestionsByLessonIdAsync(int id)
+    {
+        var questions = await _context.Questions.Include(q => q.Subquestions)
+                                                .Where(q => q.LessonId == id)
+                                                .ToListAsync();
+
+        var questionDtos = _mapper.Map<ICollection<Question>, ICollection<QuestionForLessonDto>>(questions);
+
+        return questionDtos;
+    }
+
     public async Task<ICollection<LessonDto>> GetAllLessonsAsync(FiltersRequest filtersRequest)
     {
         var tagsName = filtersRequest.Tags?.Select(x => x.Name);
 
         var lessonsFromContext = _context.Lessons
             .Include(l => l.Tags)
-            .Include(l => l.Questions)
             .Include(l => l.User)
             .Where(x => x.StartAt.Date == filtersRequest.Date);
 

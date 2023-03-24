@@ -19,4 +19,8 @@ export class LessonsService {
     getFilteredLessons(filter: IFilter) {
         return this.http.post<ILesson[]>(`${this.routePrefix}/filters`, filter);
     }
+
+    getQuestions(id: number) {
+        return this.http.get(`${this.routePrefix}/${id}/questions`);
+    }
 }

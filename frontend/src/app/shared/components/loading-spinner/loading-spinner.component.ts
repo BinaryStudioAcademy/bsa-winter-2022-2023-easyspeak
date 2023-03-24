@@ -20,4 +20,6 @@ export class LoadingSpinnerComponent {
     @Input() position = 'absolute';
 
     @Input() margin = '100px auto';
+
+    @Input() zIndex = 1000;
 }
