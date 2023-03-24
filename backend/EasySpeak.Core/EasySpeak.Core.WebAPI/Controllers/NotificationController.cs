@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace EasySpeak.Core.WebAPI.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class NotificationController : ControllerBase
     {
         private readonly INotificationService _notificationService;
