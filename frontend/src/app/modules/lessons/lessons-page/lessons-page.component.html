@@ -1,4 +1,6 @@
 <div class="container">
+    <button class="create-lesson-button" (click)="openCreate()">+ Add Speaking Club</button>
+
     <div class="date-container">
         <h2 class="date">{{ todayDate }}</h2>
     </div>
@@ -26,6 +28,4 @@
             Oops, there are no lessons with such levels for this day. <br> Please consider another date
         </p>
     </div>
-
-    <button (click)="openCreate()"></button>
 </div>
