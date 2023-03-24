@@ -11,6 +11,7 @@ import { Filter } from 'src/app/models/filters/filter';
 })
 export class FilterSectionComponent implements OnInit {
     @Output() selectedTopicsFiltersChange = new EventEmitter<Set<string>>();
+
     @Output() selectedLanguageFiltersChange = new EventEmitter<Set<string>>();
 
     resetFiltersEvent: Subject<void> = new Subject<void>();

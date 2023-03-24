@@ -1,4 +1,4 @@
-import { INewTag } from "./INewTag";
+import { INewTag } from './INewTag';
 
 export interface IFilter {
     languageLevels: number[],

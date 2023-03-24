@@ -20,7 +20,7 @@ export class HttpService {
         return this.httpClient.get<T>(`${this.buildUrl(url)}/${id}`).pipe(catchError(this.handleError));
     }
 
-    post<T>(url: string, resource: any) {
+    post<T>(url: string, resource: unknown) {
         return this.httpClient.post<T>(this.buildUrl(url), resource).pipe(catchError(this.handleError));
     }
 

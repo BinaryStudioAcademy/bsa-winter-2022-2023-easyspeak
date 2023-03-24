@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { ILesson } from '@shared/models/lesson/ILesson';
 import * as moment from 'moment';
-import { catchError, forkJoin, map, Observable, of, tap } from 'rxjs';
+
 import { LessonsService } from 'src/app/services/lessons.service';
 
 @Component({
@@ -18,7 +17,7 @@ export class SuitableLessonComponent {
 
     selectedDate: Date = new Date();
 
-    meetingsCount: number
+    meetingsCount: number;
 
     constructor(private lessonService: LessonsService) {
         this.setDays();
@@ -46,11 +45,18 @@ export class SuitableLessonComponent {
 
     async setDays(): Promise<void> {
         this.days = [];
+        const promises: Promise<{ date: Date, meetingsCount: number }>[] = [];
+
         for (let i = 0; i < 7; i++) {
             const date = moment(this.selectedDate).add(i - this.selectedDate.getDay() + 1, 'day').toDate();
-            const meetingsCount = await this.getMeetingCount(date);
-            this.days.push({ date, meetingsCount });
+            const promise = this.getMeetingCount(date).then(meetingsCount => ({ date, meetingsCount }));
+
+            promises.push(promise);
         }
+
+        const days = await Promise.all(promises);
+
+        this.days = days.sort((a, b) => a.date.getTime() - b.date.getTime());
     }
 
     async getMeetingCount(date: Date): Promise<number> {
@@ -65,5 +71,5 @@ export class SuitableLessonComponent {
 
     onDateSelected(dateSelected: Date) {
         this.dateSelected.emit(dateSelected);
-      }
+    }
 }

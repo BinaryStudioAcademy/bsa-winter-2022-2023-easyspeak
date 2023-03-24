@@ -1,5 +1,5 @@
-import { IQuestion } from "./IQuestion";
-import { ITag } from "./ITag";
+import { IQuestion } from './IQuestion';
+import { ITag } from './ITag';
 
 export interface ILesson {
     description: string,

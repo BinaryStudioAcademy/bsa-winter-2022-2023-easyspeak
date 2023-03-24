@@ -1,11 +1,12 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { langLevelsSample } from '@modules/filter-section/filter-section/filter-section.util';
 import { YoutubePlayerComponent } from '@shared/components/youtube-player/youtube-player.component';
 import { ILesson } from '@shared/models/lesson/ILesson';
 import { LanguageLevels } from '@shared/models/lesson/LanguageLevels';
-import { LessonsService } from 'src/app/services/lessons.service';
 import Utils from '@shared/utils/lesson.utils';
+
+import { LessonsService } from 'src/app/services/lessons.service';
 
 import { LessonsCreateComponent } from '../lessons-create/lessons-create.component';
 
@@ -18,7 +19,9 @@ export class LessonsPageComponent implements OnInit, OnChanges {
     todayDate: string;
 
     @Input() selectedTopicsFilters: Set<string>;
+
     @Input() selectedLanguageFilters: Set<string>;
+
     @Input() selectedDateFilter: Date;
 
     lessons = Utils.lessons;
@@ -68,7 +71,7 @@ export class LessonsPageComponent implements OnInit, OnChanges {
         this.lessonService.getFilteredLessons({
             languageLevels: Array.from(this.selectedLanguageFilters).map((level: string) => Object.values(LanguageLevels).indexOf(level)),
             tags: Array.from(this.selectedTopicsFilters).map((topic) => ({ name: topic })),
-            date: new Date(this.selectedDateFilter.toISOString().slice(0, 10))
+            date: new Date(this.selectedDateFilter.toISOString().slice(0, 10)),
         }).subscribe((response: ILesson[]) => {
             this.lessons = [];
 
@@ -88,8 +91,6 @@ export class LessonsPageComponent implements OnInit, OnChanges {
                     isDisabled: (new Date() > new Date(lesson.startAt)),
                 });
             });
-         });
-
-         console.log(this.selectedTopicsFilters);
+        });
     }
 }
