@@ -14,6 +14,7 @@ import { LessonsService } from 'src/app/services/lessons.service';
 })
 export class LessonComponent {
     @Input() lesson: Lesson;
+
     @Input() userId: number;
 
     questions: Question[] = [];
@@ -46,5 +47,6 @@ export class LessonComponent {
 
     enrollLesson() {
         this.lessonsService.enrollLesson(this.userId, this.lesson.id);
+        this.lesson.isDisabled = true;
     }
 }
