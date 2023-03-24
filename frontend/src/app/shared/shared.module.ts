@@ -55,6 +55,7 @@ import { YoutubePlayerComponent } from './components/youtube-player/youtube-play
         ModalComponent,
         MaterialModule,
         RoundProgressBarComponent,
+        InterestsDropdownComponent,
         UserNotificationComponent,
     ],
 })
