@@ -396,3 +396,4 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+/backend/EasySpeak.Core/EasySpeak.Core.WebAPI/FirebaseServiceAccountKey.json

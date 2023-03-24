@@ -32,6 +32,7 @@ namespace EasySpeak.Core.WebAPI.Extentions
             services.AddScoped<IFirebaseAuthService, FirebaseAuthService>();
             services.AddScoped<IUserService, UserService>();
             services.AddFirebaseApp();
+            services.AddScoped<INotificationService, NotificationService>();
         }
 
         public static void AddAutoMapper(this IServiceCollection services)
