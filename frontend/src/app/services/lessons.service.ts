@@ -23,4 +23,8 @@ export class LessonsService {
     getQuestions(id: number) {
         return this.http.get(`${this.routePrefix}/${id}/questions`);
     }
+
+    enrollLesson(userId: number, lessonId: number) {
+        return this.http.put(`${this.routePrefix}/${userId}:${lessonId}`, null);
+    }
 }
