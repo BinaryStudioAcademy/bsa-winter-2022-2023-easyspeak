@@ -5,5 +5,7 @@ namespace EasySpeak.Core.BLL.Interfaces
     public interface IUserService
     {
         Task<UserDto> CreateUser(UserRegisterDto userDto);
+
+        Task<UserDto> EnrollUserToLesson(int userId, int lessonId);
     }
 }

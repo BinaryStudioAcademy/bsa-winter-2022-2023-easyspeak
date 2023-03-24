@@ -54,6 +54,8 @@ namespace EasySpeak.Core.WebAPI.Controllers
         {
             return Ok(userDto);
         }
-         
+
+        [HttpPut("enroll/{userId}:{lessonId}")]
+        public Task<UserDto> Enroll(int userId, int lessonId) => _userService.EnrollUserToLesson(userId, lessonId);
     }
 }
