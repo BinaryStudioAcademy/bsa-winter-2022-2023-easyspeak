@@ -27,7 +27,7 @@ builder.WebHost.UseUrls("http://*:5070");
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("CorsPolicy", builder => builder
-        .WithOrigins("http://*:4200")
+        .SetIsOriginAllowed(_ => true)
         .AllowAnyMethod()
         .AllowAnyHeader()
         .AllowCredentials());
