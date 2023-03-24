@@ -11,11 +11,11 @@ export class TimetablePageComponent {
     selectedDateFilter: Date;
 
     onSelectedTopicsFiltersChange(selectedTopicsFilters: Set<string>) {
-        this.selectedTopicsFilters = selectedTopicsFilters;
+        this.selectedTopicsFilters = new Set<string>([...selectedTopicsFilters]);
     }
 
     onSelectedLanguageFiltersChange(selectedLanguageFilters: Set<string>) {
-        this.selectedLanguageFilters = selectedLanguageFilters;
+        this.selectedLanguageFilters = new Set<string>([...selectedLanguageFilters]);
     }
 
     onDateSelected(dateSelected: Date) {
