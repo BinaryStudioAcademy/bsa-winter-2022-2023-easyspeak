@@ -5,18 +5,18 @@
             <h2>EasySpeak</h2>
         </div>
         <div class="links">
-            <p>Home</p>
-            <p>AI</p>
-            <p>Plan</p>
-            <p>About Us</p>
+            <p (click)="scrollToElement(home)">Home</p>
+            <p (click)="scrollToElement(ai)">AI</p>
+            <p (click)="scrollToElement(plan)">Plan</p>
+            <p (click)="scrollToElement(about)">About Us</p>
         </div>
         <div class="buttons-header">
-            <button class="sign-in"><h4>Sign In</h4></button>
-            <button class="sign-up"><h4>Sign Up</h4></button>
+            <button class="sign-in" routerLink="/auth/sign-in"><h4>Sign In</h4></button>
+            <button class="sign-up" routerLink="/auth/sign-up"><h4>Sign Up</h4></button>
         </div>
     </div>
 
-    <div class="info-block-1-home">
+    <div #home class="info-block-1-home">
         <div class="left-block">
             <div class="left-content">
                 <h1>
@@ -29,7 +29,7 @@
                     facilisi mauris lorem ut pellentesque in. Laoreet sagittis dui faucibus in mattis.
                 </label>
                 <div class="buttons-home">
-                    <button class="sign-up"><h3>Sign Up</h3></button>
+                    <button class="sign-up" routerLink="/auth/sign-up"><h3>Sign Up</h3></button>
                     <button class="choose-plan"><h3>Choose plan</h3></button>
                 </div>
             </div>
@@ -94,7 +94,7 @@
         </div>
     </div>
 
-    <div class="info-block-2-ai">
+    <div #ai class="info-block-2-ai">
         <div class="ai-left">
             <div class="left-container">
                 <div class="ai-title">
@@ -119,9 +119,9 @@
         </div>
     </div>
 
-    <div class="plan"><h1>This block will be done later</h1></div>
+    <div #plan class="plan"><h1>This block will be done later</h1></div>
 
-    <div class="info-block-3-about">
+    <div #about class="info-block-3-about">
         <div class="info-3-container">
             <h1>Lorem Ipsum Dolor</h1>
 
@@ -130,7 +130,7 @@
                 elementum tincidunt.
             </h3>
 
-            <button class="sign-up">
+            <button class="sign-up" routerLink="/auth/sign-up">
                 <h3>Sign Up</h3>
             </button>
         </div>
@@ -158,17 +158,17 @@
 
         <div class="copyright">
             <div class="links">
-                <p>Home</p>
-                <p>AI</p>
-                <p>Plan</p>
-                <p>About Us</p>
+                <p (click)="scrollToElement(home)">Home</p>
+                <p (click)="scrollToElement(ai)">AI</p>
+                <p (click)="scrollToElement(plan)">Plan</p>
+                <p (click)="scrollToElement(about)">About Us</p>
             </div>
             <div class="copy-label">Copyright © 2023 EasySpeak</div>
         </div>
 
         <div class="buttons">
-            <button class="sign-in"><h4>Sign In</h4></button>
-            <button class="sign-up"><h4>Sign Up</h4></button>
+            <button class="sign-in" routerLink="/auth/sign-in"><h4>Sign In</h4></button>
+            <button class="sign-up" routerLink="/auth/sign-up"><h4>Sign Up</h4></button>
         </div>
     </div>
 </div>

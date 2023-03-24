@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { SpinnerService } from '@core/services/spinner.service';
 import { UserCard } from '@shared/models/user/user-card';
 
 @Component({
@@ -8,7 +7,6 @@ import { UserCard } from '@shared/models/user/user-card';
     styleUrls: ['./landing-page.component.sass'],
 })
 export class LandingPageComponent {
-    // eslint-disable-next-line no-empty-function
     userT: UserCard = {
         name: 'Alfredo Culhane',
 
@@ -27,5 +25,7 @@ export class LandingPageComponent {
         flag: '../../../assets/user-card-icons/canada-flag.svg',
     };
 
-    constructor(private spinnerService: SpinnerService) {}
+    scrollToElement($element: Element): void {
+        $element.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
+    }
 }
