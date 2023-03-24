@@ -30,7 +30,7 @@
                 </label>
                 <div class="buttons-home">
                     <button class="sign-up"><h3>Sign Up</h3></button>
-                    <button><h3>Choose plan</h3></button>
+                    <button class="choose-plan"><h3>Choose plan</h3></button>
                 </div>
             </div>
         </div>
@@ -59,13 +59,116 @@
         </div>
     </div>
 
-    <div class="topics"></div>
+    <div class="topics">
+        <div class="topic-containers">
+            <div class="container">
+                <div class="radius-topic">
+                    <img src="assets/topic-icons/Alarm Clock.svg" />
+                </div>
+                <div class="title">Choose a convenient time</div>
+                <div class="info">Lorem ipsum dolor sit amet consectetur. Nunc sed facilisi enim leo ut quis.</div>
+            </div>
+            <div class="container">
+                <div class="radius-topic">
+                    <img src="assets/topic-icons/Sunglasses.svg" />
+                </div>
+                <div class="title">Talk about your interests</div>
+                <div class="info">Lorem ipsum dolor sit amet consectetur. Nunc sed facilisi enim leo ut quis.</div>
+            </div>
+            <div class="container">
+                <div class="radius-topic">
+                    <img src="assets/topic-icons/Smiling Face With Hearts.svg" />
+                </div>
+                <div class="title">Find friends to chat with</div>
+                <div class="info">Lorem ipsum dolor sit amet consectetur. Nunc sed facilisi enim leo ut quis.</div>
+            </div>
+            <div class="container">
+                <div class="radius-topic">
+                    <img src="assets/topic-icons/Ledger.svg" />
+                </div>
+                <div class="title">From Intermediate</div>
+                <div class="info">
+                    Lorem ipsum dolor sit amet cons. Nunc sed facilisi enim leo ut quis. Sed facilisi enim.
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <div class="info-block-2-ai">We use artificial intelligence to find people for you to chat with.</div>
+    <div class="info-block-2-ai">
+        <div class="ai-left">
+            <div class="left-container">
+                <div class="ai-title">
+                    We Use Artificial Intelligence To Find People For You <br />
+                    To Chat With.
+                </div>
 
-    <div class="plan">Skipped</div>
+                <div class="ai-info">
+                    Lorem ipsum dolor sit amet consectetur. Amet aliquam ipsum purus luctus.<br />
+                    Tellus euismod dictum sed odio elementum tincidunt. Mauris purus commodo <br />
+                    facilisi mauris lorem ut pellentesque in. Laoreet sagittis dui.
+                </div>
+            </div>
+        </div>
+        <div class="ai-right">
+            <div class="ai-card-container">
+                <app-user-card [user]="userT"></app-user-card>
+            </div>
+            <div class="ai-card-container ai-card-over">
+                <app-user-card></app-user-card>
+            </div>
+        </div>
+    </div>
 
-    <div class="info-block-3-about">Lorem</div>
+    <div class="plan"><h1>This block will be done later</h1></div>
 
-    <div class="footer">footer</div>
+    <div class="info-block-3-about">
+        <div class="info-3-container">
+            <h1>Lorem Ipsum Dolor</h1>
+
+            <h3 class="about-text">
+                Lorem ipsum dolor sit amet consectetur. Amet aliquam ipsum purus luctus. Tellus euismod dictum sed odio
+                elementum tincidunt.
+            </h3>
+
+            <button class="sign-up">
+                <h3>Sign Up</h3>
+            </button>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="contacts">
+            <div class="footer-logo">
+                <img class="logo-img" src="assets/logo/logo.svg" />
+                <h2>EasySpeak</h2>
+            </div>
+
+            <div class="contacts-icons">
+                <div class="circle-icon">
+                    <img class="img-a" src="assets/landing-page-icons/instagram.svg" alt="instagram-icon" />
+                </div>
+                <div class="circle-icon">
+                    <img src="assets/landing-page-icons/facebook.svg" alt="facebook-icon" />
+                </div>
+                <div class="circle-icon">
+                    <img src="assets/landing-page-icons/youtube.svg" alt="youtube-icon" />
+                </div>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <div class="links">
+                <p>Home</p>
+                <p>AI</p>
+                <p>Plan</p>
+                <p>About Us</p>
+            </div>
+            <div class="copy-label">Copyright © 2023 EasySpeak</div>
+        </div>
+
+        <div class="buttons">
+            <button class="sign-in"><h4>Sign In</h4></button>
+            <button class="sign-up"><h4>Sign Up</h4></button>
+        </div>
+    </div>
 </div>

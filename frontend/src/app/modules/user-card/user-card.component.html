@@ -3,30 +3,30 @@
         <div class="user-general-info">
             <div class="left-area">
                 <div class="picture">
-                    <span class="picture-placeholder">Photo</span>
+                    <!-- <span class="picture-placeholder">Photo</span> -->
+                    <img class="picture-placeholder" src="{{ user.imagePath }}" />
                 </div>
 
                 <div class="info">
-                    <div class="name">{{user.name}}</div>
+                    <div class="name">{{ user.name }}</div>
                     <div class="country">
-                        <img class="flag" src="assets/user-card-icons/canada-flag.svg">
-                        <div class="culture">{{user.country}}/{{user.language}}</div>
+                        <img class="flag" src="assets/user-card-icons/canada-flag.svg" />
+                        <div class="culture">{{ user.country }}/{{ user.language }}</div>
                     </div>
                 </div>
             </div>
             <div class="networks">
                 <div class="social-icon">
-                    <img src="assets/user-card-icons/facebook.svg" alt="facebook-icon">
+                    <img src="assets/user-card-icons/facebook.svg" alt="facebook-icon" />
                 </div>
                 <div class="social-icon">
-                    <img src="assets/user-card-icons/instagram.svg"
-                         alt="instagram-icon">
+                    <img src="assets/user-card-icons/instagram.svg" alt="instagram-icon" />
                 </div>
             </div>
         </div>
         <div class="tags">
             <div class="tag" *ngFor="let t of user.tags">
-                <span>{{t}}</span>
+                <span>{{ t }}</span>
             </div>
         </div>
     </div>
@@ -37,17 +37,17 @@
                 <div>{{ user.status }}%</div>
             </div>
             <div class="progress">
-                <img src="assets/user-card-icons/rocket-icon.svg" alt="rocket">
+                <img src="assets/user-card-icons/rocket-icon.svg" alt="rocket" />
                 <div>{{ user.languageLevel }}</div>
             </div>
         </div>
         <div class="buttons">
             <button class="button">
-                <img src="assets/user-card-icons/clock-icon.svg" alt="book">
+                <img src="assets/user-card-icons/clock-icon.svg" alt="book" />
                 <span>Book</span>
             </button>
             <button class="button">
-                <img src="assets/user-card-icons/follow-icon.svg" alt="follow">
+                <img src="assets/user-card-icons/follow-icon.svg" alt="follow" />
                 <span>Follow</span>
             </button>
         </div>

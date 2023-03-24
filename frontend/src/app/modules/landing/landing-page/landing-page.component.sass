@@ -1,8 +1,91 @@
 @import "src/styles/colors"
 
+@media screen and (min-width: 2540px)
+  .all
+    button
+        h3
+            font-size: 24px
+
+    .header
+        .links
+            font-size: 25px
+        .buttons-header
+            h4
+                font-size: 20px
+
+    .info-block-1-home
+        .left-block
+            h1
+                font-size: 65px
+            h3
+                font-size: 24px
+            .choose-plan
+                width: 170px
+            label
+                font-size: 24px
+
+    .topics
+        .container
+            width: calc(213px * 1.4)
+            height: calc(131px * 1.4)
+        .title
+            font-size: 26px
+        .info
+            font-size: 20px
+
+    .info-block-2-ai
+        .left-container
+            .ai-title
+                font-size: 35px
+            .ai-info
+                font-size: 24px
+
+    .info-block-3-about
+        height: 600px
+
+        .info-3-container
+            width: 815px
+            height: 340px
+
+        h1
+            font-size: 35px
+        .about-text
+            font-size: 24px
+    
+    .footer
+        .links
+            p
+                font-size: 24px
+
+        .copy-label
+            font-size: 16px
+
+        .buttons
+            h4
+                font-size: 20px
+
 
 .all
     background-color: $white
+
+button
+    width: 130px
+    height: 45px
+    border: 1px solid $blue-200
+    border-radius: 23px
+    color: $blue-200
+
+    h3
+        font-weight: 500
+        font-size: 16px
+        line-height: 150%
+    &:hover
+        background-color: $turquoise-100
+
+.sign-up    
+    background-color: $blue-200
+    color: $white
+    margin-right: 15px
 
 .header
     display: flex
@@ -11,6 +94,7 @@
     background-color: $white
     height: 8vh
     z-index: 10000
+    
     .logo
         display: flex
         justify-content: center
@@ -49,7 +133,6 @@
             background-color: $blue-200
             color: $white
             
-
 .info-block-1-home
     display: flex
     justify-content: center
@@ -76,124 +159,313 @@
         .buttons-home 
             margin-top: 23px
 
-        .left-content
-            button
-                width: 130px
-                height: 45px
-                border: 1px solid $blue-200
-                border-radius: 23px
-                color: $blue-200
-                &:hover
-                    background-color: $turquoise-100
-            .sign-up    
-                background-color: $blue-200
-                color: $white
-                margin-right: 15px
-                    
-
     .right-block
         position: relative
         width: 50%
         height: 100%
         background: repeating-linear-gradient(75deg, $white, $pink-100 2px, rgba($pink-100 , 0%) 4px, rgba($white, 0%) 190px), repeating-linear-gradient(165deg, $white, $pink-100 1px, rgba($pink-100 , 0%) 4px, rgba($white, 0%) 190px)
-        .radius-small
+    
+    .radius-small
+            position: absolute
+            background-color: $blue-100
+            width: 55px
+            height: 55px
+            border-radius: 75px
+            padding: 16px
+            img
                 position: absolute
-                background-color: $blue-100
                 width: 55px
                 height: 55px
-                border-radius: 75px
-                padding: 16px
-                img
-                    position: absolute
-                    width: 55px
-                    height: 55px
-        .radius-medium
-                position: absolute
-                background-color: $white
-                width: 89px
-                height: 89px
-                border-radius: 75px
-                padding: 20.5px
-                background: rgba(#61d3f6, 40%)
-                img
-                    position: absolute
-                    width: 82px
-                    height: 82px
-        .radius-big
+
+    .radius-medium
             position: absolute
-            background-color: $turquoise-100
-            width: 96px
-            height: 96px
+            background-color: $white
+            width: 89px
+            height: 89px
             border-radius: 75px
-            padding: 27px
+            padding: 20.5px
+            background: rgba(#61d3f6, 40%)
             img
                 position: absolute
-                width: 95px
-                height: 95px
-        .leaf
-            top: calc(30% - 75px)
-            left: calc(35% - 75px)
-            border-radius: 500px 500px 500px 0px
-            transform: rotate(-45deg)
-            img
-                transform: rotate(45deg)
-        .dog
-            top: calc(70% - 75px)
-            left: calc(65% - 75px)
-            border-radius: 500px 500px 500px 0px
-            transform: rotate(135deg)
-            img
-                transform: rotate(-135deg)
-        .car
-            top: calc(50% - 65px)
-            left: calc(50% - 65px)
-            padding-bottom: 30px
-            padding-top: 11px
-        .cook
-            top: calc(70% - 65px)
-            left: calc(35% - 65px)
-        .camera
-            top: calc(30% - 65px)
-            left: calc(65% - 65px)      
-        .woman
-            top: calc(50% - 43.5px)
-            left: calc(78% - 43.5px)     
-        .face
-            top: calc(50% - 43.5px)
-            left: calc(22% - 43.5px) 
+                width: 82px
+                height: 82px
+
+    .radius-big
+        position: absolute
+        background-color: $turquoise-100
+        width: 96px
+        height: 96px
+        border-radius: 75px
+        padding: 27px
+        img
+            position: absolute
+            width: 95px
+            height: 95px
+
+    .leaf
+        top: calc(30% - 75px)
+        left: calc(35% - 75px)
+        border-radius: 500px 500px 500px 0px
+        transform: rotate(-45deg)
+        img
+            transform: rotate(45deg)
+
+    .dog
+        top: calc(70% - 75px)
+        left: calc(65% - 75px)
+        border-radius: 500px 500px 500px 0px
+        transform: rotate(135deg)
+        img
+            transform: rotate(-135deg)
+
+    .car
+        top: calc(50% - 65px)
+        left: calc(50% - 65px)
+        padding-bottom: 30px
+        padding-top: 11px
+
+    .cook
+        top: calc(70% - 65px)
+        left: calc(35% - 65px)
+
+    .camera
+        top: calc(30% - 65px)
+        left: calc(65% - 65px)  
+
+    .woman
+        top: calc(50% - 43.5px)
+        left: calc(78% - 43.5px)  
+
+    .face
+        top: calc(50% - 43.5px)
+        left: calc(22% - 43.5px) 
+
             
-    .buttons-home
-        .choose-plan
-            margin-right: 10px
-            background-color: $white
-            color: $blue-200
-            &:hover
-                background-color: $gray-300
-                color: white
-        .sign-up
-            background-color: $blue-200
-            color: $white
-            &:hover
-                background-color: $gray-200
+    .choose-plan
+        margin-right: 10px
+        background-color: $white
+        color: $blue-200
+        &:hover
+            background-color: $turquoise-100
+            color: white
+
+    .sign-up
+        background-color: $blue-200
+        color: $white
+        &:hover
+            background-color: $turquoise-100
 
 .topics
     background-color: $blue-200
-    height: 32vh
+    height: 330px
+    display: flex
+    justify-content: center
+    align-items: center
+
+    .topic-containers
+        display: grid
+        grid-auto-flow: column
+        column-gap: 25px
+
+    .container
+        width: 213px
+        height: 131px
+        padding: 19px
+        padding-left: 23px
+        padding-right: 30px
+        background-color: $white
+        border: solid 1px white
+        border-radius: 7px
+
+    .radius-topic
+        position: relative
+        background: rgba($turquoise-100, 50%)
+        width: 19px
+        height: 19px
+        border-radius: 17px
+        padding: 7.5px
+        img
+            position: absolute
+            width: 18px
+            height: 18px
+
+    .title
+        margin-top: 10px
+        margin-bottom: 2px
+        font-weight: 700
+        font-size: 18px
+        line-height: 146%
+
+    .info
+        color: $gray-300
+        font-weight: 400
+        font-size: 14px
+        line-height: 146%
 
 .info-block-2-ai
-    height: 30vh
+    height: 411px
     background-color: $white
+    display: flex
+    justify-content: center
+    align-items: center
+    .ai-left
+        display: flex
+        flex-direction: column
+        justify-content: center
+        align-items: flex-end
+        width:50%
+    .left-container
+        width: 35vw
+    .ai-title
+        font-weight: 700
+        font-size: 24px
+        line-height: 146%
+        margin-bottom: 17px
+    .ai-info
+        color: $gray-300
+        font-weight: 500
+        font-size: 16px
+        line-height: 150%
+    
+    .ai-right
+        display: flex
+        width: 50%
+        position: relative
+    .ai-card-container
+        width:422px
+        height: 200px
+        border: 1px solid #F6F5FA
+        box-shadow: 0px 0px 3px rgba(89, 104, 133, 0.18)
+        border-radius: 10px
+    .ai-card-over
+        position: absolute
+        top: 52px
+        left: 101px
 
 .plan
-    height: 60vh
+    height: 745px
     background-color: $gray-100
+    display: flex
+    justify-content: center
+    align-items: center
 
 .info-block-3-about
-    height: 48vh
+    height: 400px
     background: repeating-linear-gradient(75deg, $white, $pink-100 2px, rgba($pink-100 , 0%) 4px, rgba($white, 0%) 190px), repeating-linear-gradient(165deg, $white, $pink-100 1px, rgba($pink-100 , 0%) 4px, rgba($white, 0%) 190px)
     background-color: $white
+    display: flex
+    justify-content: center
+    align-items: center
+
+    h1
+        font-weight: 700
+        font-size: 24px
+        line-height: 146%
+        margin-bottom: 9px
+
+    .about-text
+        color: $gray-300
+        font-weight: 500
+        font-size: 16px
+        line-height: 150%
+        text-align: center
+        margin-bottom: 9px
+
+    .info-3-container
+        width: 615px
+        height: 240px
+        display: flex
+        justify-content: center
+        align-items: center
+        flex-direction: column
+        background-color: $white
 
 .footer
-    height: 25vh
+    height: 256px
     color: $white
-    background-color: #080E39
+    background-color: $dark-blue
+    display: flex
+    align-items: center
+    justify-content: space-between
+
+    .contacts
+        width: 350px
+        display: flex
+        flex-direction: column
+        justify-content: center
+        align-content: center
+        margin: 0 100px
+        h2
+            margin-left: 6px
+        .footer-logo
+            display: flex
+            align-items: center
+            margin-bottom: 29px
+        .logo-img
+            width: 35px
+
+        .contacts-icons
+            display: flex
+
+    .circle-icon
+        display: flex
+        justify-content: center
+        align-items: center
+        width: 36px
+        height: 36px
+        border: 1px solid $blue-100
+        border-radius: 100%
+        margin-right: 10px
+
+    .copyright
+        text-align: center
+        
+    .links
+        width: 500px
+        display: grid
+        grid-auto-flow: column
+        column-gap: 20px
+        color: $gray-300
+        font-weight: 500
+        font-size: 16px
+        line-height: 24px
+        margin-bottom: 60px
+        p
+            color: $blue-100
+
+    .copy-label
+        color: $blue-100
+        font-weight: 400
+        font-size: 12px
+        line-height: 135.5%
+        
+    .img-a
+        width: 22px
+        height: 22px
+
+    .buttons
+        width: 350px
+        margin: 0 100px
+        
+        h4
+            font-size: 14px
+            font-weight: 700
+            line-height: 20.5px
+
+        button
+            width: 116px
+            height: 34px
+            border: 1px solid $blue-200
+            border-radius: 17px
+            &:hover
+                background-color: $turquoise-100
+
+        .sign-in
+            margin-right: 10px
+            background-color: $dark-blue
+            border-color: $white
+            color: $white
+
+        .sign-up
+            background-color: $blue-200
+            color: $white
