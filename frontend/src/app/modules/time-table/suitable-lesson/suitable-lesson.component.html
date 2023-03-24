@@ -11,8 +11,8 @@
             </button>
 
             <div class="calendar-block">
-                <button class="button-icon" mat-icon-button [matMenuTriggerFor]="appMenu">
-                    <mat-icon>calendar_today</mat-icon>
+                <button class="button-icon" [matMenuTriggerFor]="appMenu">
+                    <img src="assets\calendar\calendar.svg">
                 </button>
                 <mat-menu #appMenu="matMenu">
                     <mat-calendar #calendar (selectedChange)="select($event)"> </mat-calendar>

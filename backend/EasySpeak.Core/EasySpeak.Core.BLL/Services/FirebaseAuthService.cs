@@ -13,7 +13,6 @@ namespace EasySpeak.Core.BLL.Services
         }
         public long UserId { get; private set; }
         
-        
         public async Task SetUserId(string email)
         {
             var user =  await _context.Users

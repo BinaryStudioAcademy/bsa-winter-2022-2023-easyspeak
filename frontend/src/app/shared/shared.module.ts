@@ -15,6 +15,7 @@ import { InterestsDropdownComponent } from './components/interests-dropdown/inte
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { UserNotificationComponent } from './components/user-notification/user-notification.component';
 import { YoutubePlayerComponent } from './components/youtube-player/youtube-player.component';
 
 @NgModule({
@@ -39,6 +40,7 @@ import { YoutubePlayerComponent } from './components/youtube-player/youtube-play
         ConfirmComponent,
         RoundProgressBarComponent,
         InterestsDropdownComponent,
+        UserNotificationComponent,
     ],
     exports: [
         CommonModule,
@@ -53,7 +55,7 @@ import { YoutubePlayerComponent } from './components/youtube-player/youtube-play
         ModalComponent,
         MaterialModule,
         RoundProgressBarComponent,
-        InterestsDropdownComponent,
+        UserNotificationComponent,
     ],
 })
 export class SharedModule {}
