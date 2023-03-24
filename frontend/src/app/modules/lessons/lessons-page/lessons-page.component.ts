@@ -21,21 +21,7 @@ export class LessonsPageComponent implements OnInit, OnChanges {
     @Input() selectedLanguageFilters: Set<string>;
     @Input() selectedDateFilter: Date;
 
-    lessons = [
-        {
-            imgPath: '../../../../assets/lesson-mocks/Photo-4.png',
-            videoId: 'xqAriI87lFU',
-            title: 'The Real New Yorker’s Sandwich',
-            time: '11.00',
-            tutorAvatarPath: '../../../../assets/lesson-mocks/Photo )Patient).png',
-            tutorFlagPath: '../../../../assets/lesson-icons/canada-test-flag.svg',
-            tutorName: 'Roger Vaccaro',
-            topics: ['healthy', 'food', 'diet', 'biology'],
-            viewersCount: 38,
-            level: 'B1',
-            isDisabled: true,
-        },
-    ];
+    lessons = Utils.lessons;
 
     constructor(private dialogRef: MatDialog, private lessonService: LessonsService) { }
 
@@ -84,8 +70,11 @@ export class LessonsPageComponent implements OnInit, OnChanges {
             tags: Array.from(this.selectedTopicsFilters).map((topic) => ({ name: topic })),
             date: new Date(this.selectedDateFilter.toISOString().slice(0, 10))
         }).subscribe((response: ILesson[]) => {
+            this.lessons = [];
+
             response.forEach(lesson => {
                 this.lessons.push({
+                    id: lesson.id,
                     imgPath: lesson.mediaPath,
                     videoId: 'xqAriI87lFU',
                     title: lesson.name,
