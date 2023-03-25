@@ -36,10 +36,10 @@ const routes: Routes = [
         loadChildren: () => import('./modules/main/main.module').then((m) => m.MainModule),
         canActivate: [AuthGuard],
     },
-    { 
-        path: '**', 
+    {
+        path: '**',
         component: NotFoundComponent,
-        pathMatch: 'full'
+        pathMatch: 'full',
     },
 ];
 
