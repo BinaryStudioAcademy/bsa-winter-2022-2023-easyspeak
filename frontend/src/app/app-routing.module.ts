@@ -26,11 +26,6 @@ const routes: Routes = [
         canActivate: [AuthGuard],
     },
     {
-        path: 'not-found',
-        component: NotFoundComponent,
-        pathMatch: 'full',
-    },
-    {
         path: '',
         pathMatch: 'full',
         loadChildren: () => import('./modules/landing/landing.module').then((m) => m.LandingModule),
@@ -41,7 +36,11 @@ const routes: Routes = [
         loadChildren: () => import('./modules/main/main.module').then((m) => m.MainModule),
         canActivate: [AuthGuard],
     },
-    { path: '**', redirectTo: 'not-found', pathMatch: 'full' },
+    { 
+        path: '**', 
+        component: NotFoundComponent,
+        pathMatch: 'full'
+    },
 ];
 
 @NgModule({
