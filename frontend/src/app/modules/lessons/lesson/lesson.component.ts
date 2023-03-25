@@ -7,6 +7,7 @@ import { YoutubePlayerComponent } from '@shared/components/youtube-player/youtub
 
 import { Lesson } from 'src/app/models/lessons/lesson';
 import { Question } from 'src/app/models/lessons/question';
+import { LessonsService } from 'src/app/services/lessons.service';
 import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
@@ -21,6 +22,7 @@ export class LessonComponent extends BaseComponent {
 
     constructor(
         private dialogRef: MatDialog,
+        private lessonsService: LessonsService,
         private userService: UserService,
         private spinner: SpinnerService,
         private notificationService: NotificationService,
@@ -42,10 +44,10 @@ export class LessonComponent extends BaseComponent {
 
     getQuestions(id: number) {
         this.spinner.show();
-        // this.userService.getQuestions(id).subscribe((questions) => {
-        //     this.questions = questions as Question[];
-        //     this.spinner.hide();
-        // });
+        this.lessonsService.getQuestions(id).subscribe((questions) => {
+            this.questions = questions as Question[];
+            this.spinner.hide();
+        });
     }
 
     enrollLesson() {
