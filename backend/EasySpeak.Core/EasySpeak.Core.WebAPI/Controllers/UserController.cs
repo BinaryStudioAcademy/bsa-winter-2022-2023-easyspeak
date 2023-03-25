@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EasySpeak.Core.WebAPI.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class UsersController : ControllerBase
@@ -28,7 +28,7 @@ namespace EasySpeak.Core.WebAPI.Controllers
 
             return Ok(createdUser);
         }
-        
+
         [HttpGet("{userId}")]
         public ActionResult<ICollection<User>> Get()
         {
@@ -60,7 +60,7 @@ namespace EasySpeak.Core.WebAPI.Controllers
         }
 
         [HttpPut("enroll/{lessonId}")]
-        public Task Enroll(long lessonId) => _userService.EnrollUserToLesson(
+        public Task<int> Enroll(long lessonId) => _userService.EnrollUserToLesson(
             _authService.UserId, lessonId);
     }
 }

@@ -6,6 +6,6 @@ namespace EasySpeak.Core.BLL.Interfaces
     {
         Task<UserDto> CreateUser(UserRegisterDto userDto);
 
-        Task<UserDto> EnrollUserToLesson(long userId, long lessonId);
+        Task<int> EnrollUserToLesson(long userId, long lessonId);
     }
 }
