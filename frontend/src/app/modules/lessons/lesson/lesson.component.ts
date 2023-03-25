@@ -1,31 +1,32 @@
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { BaseComponent } from '@core/base/base.component';
 import { SpinnerService } from '@core/services/spinner.service';
+import { UserService } from '@core/services/user.service';
 import { YoutubePlayerComponent } from '@shared/components/youtube-player/youtube-player.component';
 
 import { Lesson } from 'src/app/models/lessons/lesson';
 import { Question } from 'src/app/models/lessons/question';
-import { LessonsService } from 'src/app/services/lessons.service';
-import {NotificationService} from "../../../services/notification.service";
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
     selector: 'app-lesson',
     templateUrl: './lesson.component.html',
     styleUrls: ['./lesson.component.sass'],
 })
-export class LessonComponent {
+export class LessonComponent extends BaseComponent {
     @Input() lesson: Lesson;
-
-    @Input() userId: number;
 
     questions: Question[] = [];
 
     constructor(
         private dialogRef: MatDialog,
-        private lessonsService: LessonsService,
+        private userService: UserService,
         private spinner: SpinnerService,
         private notificationService: NotificationService,
-    ) {}
+    ) {
+        super();
+    }
 
     openDialog(videoId: string) {
         this.dialogRef.open(YoutubePlayerComponent, {
@@ -41,16 +42,20 @@ export class LessonComponent {
 
     getQuestions(id: number) {
         this.spinner.show();
-        this.lessonsService.getQuestions(id).subscribe((questions) => {
-            this.questions = questions as Question[];
-            this.spinner.hide();
-        });
+        // this.userService.getQuestions(id).subscribe((questions) => {
+        //     this.questions = questions as Question[];
+        //     this.spinner.hide();
+        // });
     }
 
     enrollLesson() {
-        this.lessonsService.enrollLesson(this.userId, this.lesson.id);
-        this.lesson.isDisabled = true;
-        this.lesson.viewersCount++;
-        this.notificationService.showSuccess('f','');
+        this.userService.enrollUserToLesson(this.lesson.id)
+            .pipe(this.untilThis)
+            .subscribe({ next: () => {
+                this.notificationService.showSuccess(`You successfully registered for lesson ${this.lesson.title}`, 'Success!');
+                this.lesson.isDisabled = true;
+                this.lesson.viewersCount++;
+            },
+            error: () => this.notificationService.showError(`Failed to register for lesson ${this.lesson.title}`, 'Failed!') });
     }
 }
