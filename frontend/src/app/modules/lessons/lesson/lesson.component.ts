@@ -10,8 +10,7 @@ import { LessonsService } from 'src/app/services/lessons.service';
 @Component({
     selector: 'app-lesson',
     templateUrl: './lesson.component.html',
-    styleUrls: ['./lesson.component.sass'],
-    template: '<app-loading-spinner></app-loading-spinner>',
+    styleUrls: ['./lesson.component.sass']
 })
 export class LessonComponent {
     @Input() lesson: Lesson;
