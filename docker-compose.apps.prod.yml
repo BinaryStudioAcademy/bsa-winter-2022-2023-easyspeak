@@ -14,7 +14,7 @@ services:
         env_file:
             - /etc/environment
         volumes:
-           - ./resources:/app/Resources
+           - ./Resources:/app/Resources
 
     easyspeak_emailer:
         image: tatihutii/easyspeak_emailer:latest
