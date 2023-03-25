@@ -7,7 +7,7 @@ import { HttpService } from './http.service';
     providedIn: 'root',
 })
 export class UserService {
-    public routePrefix = '/user';
+    public routePrefix = '/users';
 
     constructor(private httpService: HttpService) { }
 
