@@ -2,19 +2,23 @@ using EasySpeak.Core.BLL.Interfaces;
 using EasySpeak.Core.Common.DTO.User;
 using EasySpeak.Core.Common.Enums;
 using EasySpeak.Core.DAL.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EasySpeak.Core.WebAPI.Controllers
 {
+    //[Authorize]
     [ApiController]
     [Route("[controller]")]
     public class UsersController : ControllerBase
     {
         private readonly IUserService _userService;
+        private readonly IFirebaseAuthService _authService;
 
-        public UsersController(IUserService userService)
+        public UsersController(IUserService userService, IFirebaseAuthService authService)
         {
             _userService = userService;
+            _authService = authService;
         }
 
         [HttpPost]
@@ -55,7 +59,8 @@ namespace EasySpeak.Core.WebAPI.Controllers
             return Ok(userDto);
         }
 
-        [HttpPut("enroll/{userId}:{lessonId}")]
-        public Task<UserDto> Enroll(int userId, int lessonId) => _userService.EnrollUserToLesson(userId, lessonId);
+        [HttpPut("enroll/{lessonId}")]
+        public Task Enroll(long lessonId) => _userService.EnrollUserToLesson(
+            _authService.UserId, lessonId);
     }
 }

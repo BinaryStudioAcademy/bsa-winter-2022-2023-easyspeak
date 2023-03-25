@@ -6,6 +6,7 @@ import { YoutubePlayerComponent } from '@shared/components/youtube-player/youtub
 import { Lesson } from 'src/app/models/lessons/lesson';
 import { Question } from 'src/app/models/lessons/question';
 import { LessonsService } from 'src/app/services/lessons.service';
+import {NotificationService} from "../../../services/notification.service";
 
 @Component({
     selector: 'app-lesson',
@@ -23,6 +24,7 @@ export class LessonComponent {
         private dialogRef: MatDialog,
         private lessonsService: LessonsService,
         private spinner: SpinnerService,
+        private notificationService: NotificationService,
     ) {}
 
     openDialog(videoId: string) {
@@ -48,5 +50,7 @@ export class LessonComponent {
     enrollLesson() {
         this.lessonsService.enrollLesson(this.userId, this.lesson.id);
         this.lesson.isDisabled = true;
+        this.lesson.viewersCount++;
+        this.notificationService.showSuccess('f','');
     }
 }

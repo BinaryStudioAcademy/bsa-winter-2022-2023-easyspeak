@@ -23,7 +23,7 @@ namespace EasySpeak.Core.BLL.Services
             return _mapper.Map<UserDto>(userEntity);
         }
 
-        public async Task<UserDto> EnrollUserToLesson(int userId, int lessonId)
+        public async Task<UserDto> EnrollUserToLesson(long userId, long lessonId)
         {
             var user = _context.Users
                 .Include(p => p.Lessons)
