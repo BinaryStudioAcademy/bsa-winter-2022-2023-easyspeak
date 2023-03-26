@@ -3,8 +3,11 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { BaseComponent } from '@core/base/base.component';
 import { AuthService } from '@core/services/auth.service';
 import { HttpService } from '@core/services/http.service';
+import { ICountry } from '@shared/models/ICountry';
 import { INewUser } from '@shared/models/INewUser';
 import { ToastrService } from 'ngx-toastr';
+
+import { CountriesTzLangProviderService } from 'src/app/services/countries-tz-lang-provider.service';
 
 @Component({
     selector: 'app-sign-up',
@@ -16,7 +19,7 @@ export class SignUpComponent extends BaseComponent {
 
     Ages = ['5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18'];
 
-    Countries = ['Ukraine', 'Austria', 'England', 'Scotland', 'Poland', 'Romania'];
+    Countries: ICountry[] = [];
 
     private validationErrorMessage: { [id: string]: string } = {
         required: 'Enter a value',
@@ -55,11 +58,13 @@ export class SignUpComponent extends BaseComponent {
 
     constructor(
         private formBuilder: FormBuilder,
+        private countriesTzLangProvider: CountriesTzLangProviderService,
         private authService: AuthService,
         private toastr: ToastrService,
         private httpService: HttpService,
     ) {
         super();
+        this.Countries = this.countriesTzLangProvider.getCountriesList();
     }
 
     getErrorMessage(field: string) {
