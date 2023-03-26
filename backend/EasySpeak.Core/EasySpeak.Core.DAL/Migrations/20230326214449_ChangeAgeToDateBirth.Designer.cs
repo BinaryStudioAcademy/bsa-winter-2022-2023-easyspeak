@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EasySpeak.Core.DAL.Migrations
 {
     [DbContext(typeof(EasySpeakCoreContext))]
-    [Migration("20230326083338_ChangeUserAgeToBirthDate")]
-    partial class ChangeUserAgeToBirthDate
+    [Migration("20230326214449_ChangeAgeToDateBirth")]
+    partial class ChangeAgeToDateBirth
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -2407,7 +2407,7 @@ namespace EasySpeak.Core.DAL.Migrations
                         new
                         {
                             Id = 1L,
-                            BirthDate = new DateTime(1989, 2, 27, 0, 32, 34, 479, DateTimeKind.Local).AddTicks(4952),
+                            BirthDate = new DateTime(2003, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Country = 0,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "Della.Rosenbaum@yahoo.com",
@@ -2416,82 +2416,82 @@ namespace EasySpeak.Core.DAL.Migrations
                             IsBanned = false,
                             IsSubscribed = true,
                             Language = 0,
-                            LanguageLevel = 4,
+                            LanguageLevel = 3,
                             LastName = "Rosenbaum",
-                            Sex = 1,
+                            Sex = 0,
                             Status = 3,
                             Timezone = 0
                         },
                         new
                         {
                             Id = 2L,
-                            BirthDate = new DateTime(1960, 5, 24, 16, 44, 18, 207, DateTimeKind.Local).AddTicks(9689),
+                            BirthDate = new DateTime(2003, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Country = 0,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "Robert21@yahoo.com",
-                            FirstName = "Robert",
-                            ImagePath = "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/957.jpg",
+                            Email = "Jon.Abshire@gmail.com",
+                            FirstName = "Jon",
+                            ImagePath = "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/949.jpg",
                             IsBanned = false,
                             IsSubscribed = true,
                             Language = 0,
-                            LanguageLevel = 2,
-                            LastName = "O'Hara",
+                            LanguageLevel = 1,
+                            LastName = "Abshire",
+                            Sex = 1,
+                            Status = 3,
+                            Timezone = 0
+                        },
+                        new
+                        {
+                            Id = 3L,
+                            BirthDate = new DateTime(2003, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Country = 0,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "Kurt.Gulgowski93@gmail.com",
+                            FirstName = "Kurt",
+                            ImagePath = "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1117.jpg",
+                            IsBanned = false,
+                            IsSubscribed = true,
+                            Language = 0,
+                            LanguageLevel = 3,
+                            LastName = "Gulgowski",
+                            Sex = 0,
+                            Status = 3,
+                            Timezone = 0
+                        },
+                        new
+                        {
+                            Id = 4L,
+                            BirthDate = new DateTime(2003, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Country = 0,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "Eduardo.Larson@gmail.com",
+                            FirstName = "Eduardo",
+                            ImagePath = "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1114.jpg",
+                            IsBanned = false,
+                            IsSubscribed = true,
+                            Language = 0,
+                            LanguageLevel = 3,
+                            LastName = "Larson",
                             Sex = 2,
                             Status = 0,
                             Timezone = 0
                         },
                         new
                         {
-                            Id = 3L,
-                            BirthDate = new DateTime(2004, 5, 23, 7, 8, 41, 98, DateTimeKind.Local).AddTicks(8605),
-                            Country = 0,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "Rhonda74@gmail.com",
-                            FirstName = "Rhonda",
-                            ImagePath = "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1199.jpg",
-                            IsBanned = true,
-                            IsSubscribed = true,
-                            Language = 0,
-                            LanguageLevel = 4,
-                            LastName = "Kunze",
-                            Sex = 1,
-                            Status = 2,
-                            Timezone = 0
-                        },
-                        new
-                        {
-                            Id = 4L,
-                            BirthDate = new DateTime(1960, 4, 9, 21, 2, 23, 970, DateTimeKind.Local).AddTicks(2708),
-                            Country = 0,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "Myrtle70@yahoo.com",
-                            FirstName = "Myrtle",
-                            ImagePath = "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/37.jpg",
-                            IsBanned = false,
-                            IsSubscribed = true,
-                            Language = 0,
-                            LanguageLevel = 1,
-                            LastName = "Glover",
-                            Sex = 1,
-                            Status = 1,
-                            Timezone = 0
-                        },
-                        new
-                        {
                             Id = 5L,
-                            BirthDate = new DateTime(2002, 8, 14, 16, 33, 15, 278, DateTimeKind.Local).AddTicks(2703),
+                            BirthDate = new DateTime(2003, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Country = 0,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "Ivan11@gmail.com",
-                            FirstName = "Ivan",
-                            ImagePath = "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/610.jpg",
+                            Email = "Francis16@yahoo.com",
+                            FirstName = "Francis",
+                            ImagePath = "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/607.jpg",
                             IsBanned = false,
                             IsSubscribed = true,
                             Language = 0,
-                            LanguageLevel = 0,
-                            LastName = "Heidenreich",
-                            Sex = 1,
-                            Status = 1,
+                            LanguageLevel = 3,
+                            LastName = "Little",
+                            Sex = 0,
+                            Status = 0,
                             Timezone = 0
                         });
                 });
