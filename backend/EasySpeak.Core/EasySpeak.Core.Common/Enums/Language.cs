@@ -2,7 +2,7 @@
 
 namespace EasySpeak.Core.Common.Enums;
 
-public enum Language : int
+public enum Language
 {
     [Description("Afar")] Aa = 1,
     [Description("Abkhaz")] Ab,

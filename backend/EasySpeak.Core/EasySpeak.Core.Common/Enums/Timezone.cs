@@ -2,7 +2,7 @@
 
 namespace EasySpeak.Core.Common.Enums;
 
-public enum Timezone : int
+public enum Timezone
 {
     [Description("acific/Niue")] Niue = 1,
     [Description("Pacific/Midway")] Midway,

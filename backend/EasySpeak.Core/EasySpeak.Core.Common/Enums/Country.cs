@@ -2,7 +2,7 @@
 
 namespace EasySpeak.Core.Common.Enums;
 
-public enum Country: int
+public enum Country
 {
     [Description("Afghanistan")] Af = 1,
     [Description("Åland Islands")] Ax,

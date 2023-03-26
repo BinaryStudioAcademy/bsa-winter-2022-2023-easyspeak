@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { BaseComponent } from '@core/base/base.component';
 import { AuthService } from '@core/services/auth.service';
 import { HttpService } from '@core/services/http.service';
+import { ICountry } from '@shared/models/ICountry';
 import { INewUser } from '@shared/models/INewUser';
 import { ToastrService } from 'ngx-toastr';
 
@@ -18,7 +19,7 @@ export class SignUpComponent extends BaseComponent {
 
     Ages = ['5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18'];
 
-    Countries;
+    Countries: ICountry[] = [];
 
     private validationErrorMessage: { [id: string]: string } = {
         required: 'Enter a value',
