@@ -45,6 +45,9 @@
         </div>
     </div>
     <div class="lesson-card-questions" *ngIf="questions">
+        <div class="spinner-container" *ngIf="isLoading">
+            <app-loading-spinner class="spinner"></app-loading-spinner>'
+        </div>
         <div class="question" *ngFor="let question of questions">
             <p class="question-text">{{ question.topic }}</p>
             <div class="subquestion" *ngFor="let subquestion of question.subQuestions">

@@ -11,12 +11,13 @@ import { LessonsService } from 'src/app/services/lessons.service';
     selector: 'app-lesson',
     templateUrl: './lesson.component.html',
     styleUrls: ['./lesson.component.sass'],
-    template: '<app-loading-spinner></app-loading-spinner>',
 })
 export class LessonComponent {
     @Input() lesson: Lesson;
 
     questions: Question[] = [];
+
+    isLoading = false;
 
     constructor(
         private dialogRef: MatDialog,
@@ -37,14 +38,17 @@ export class LessonComponent {
     }
 
     getQuestions(id: number) {
+        this.isLoading = true;
         this.spinner.show();
         this.lessonsService.getQuestions(id).subscribe(
             (questions) => {
                 this.questions = questions as Question[];
                 this.spinner.hide();
+                this.isLoading = false;
             },
             () => {
                 this.spinner.hide();
+                this.isLoading = false;
             },
         );
     }
