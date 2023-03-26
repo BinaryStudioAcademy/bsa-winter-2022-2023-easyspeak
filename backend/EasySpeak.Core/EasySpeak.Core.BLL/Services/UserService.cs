@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using EasySpeak.Core.BLL.Interfaces;
+using EasySpeak.Core.Common.DTO.Lesson;
 using EasySpeak.Core.Common.DTO.User;
 using EasySpeak.Core.DAL.Context;
 using EasySpeak.Core.DAL.Entities;
-using Microsoft.EntityFrameworkCore;
 
 namespace EasySpeak.Core.BLL.Services
 {
@@ -23,18 +23,21 @@ namespace EasySpeak.Core.BLL.Services
             return _mapper.Map<UserDto>(userEntity);
         }
 
-        public async Task<int> EnrollUserToLesson(long userId, long lessonId)
+        public async Task<LessonDto> EnrollUserToLesson(long userId, long lessonId)
         {
             var user = _context.Users
-                .Include(p => p.Lessons)
                 .Single(p => p.Id == userId);
 
-            var existingLesson = _context.Lessons
+            Lesson existingLesson = _context.Lessons
                 .Single(p => p.Id == lessonId);
 
             user.Lessons.Add(existingLesson);
 
-            return await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
+
+            return _mapper.Map<LessonDto>(existingLesson, options => options.AfterMap((o, dto) =>
+                  dto.SubscribersCount = _context.Lessons.Select(t => new { Id = t.Id, SbCount = t.Subscribers.Count })
+                      .Single(l => l.Id == lessonId).SbCount));
         }
     }
 }

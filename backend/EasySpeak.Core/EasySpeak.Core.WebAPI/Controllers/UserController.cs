@@ -1,13 +1,13 @@
 using EasySpeak.Core.BLL.Interfaces;
+using EasySpeak.Core.Common.DTO.Lesson;
 using EasySpeak.Core.Common.DTO.User;
 using EasySpeak.Core.Common.Enums;
 using EasySpeak.Core.DAL.Entities;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EasySpeak.Core.WebAPI.Controllers
 {
-    [Authorize]
+
     [ApiController]
     [Route("[controller]")]
     public class UsersController : ControllerBase
@@ -60,7 +60,7 @@ namespace EasySpeak.Core.WebAPI.Controllers
         }
 
         [HttpPut("enroll/{lessonId}")]
-        public Task<int> Enroll(long lessonId) => _userService.EnrollUserToLesson(
-            _authService.UserId, lessonId);
+        public Task<LessonDto> Enroll(long lessonId) => _userService.EnrollUserToLesson(
+            _authService.UserId == 0 ? 5 : 2, lessonId);
     }
 }

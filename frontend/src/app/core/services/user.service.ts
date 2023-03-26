@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IUserInfo } from '@shared/models/IUserInfo';
+import { ILesson } from '@shared/models/lesson/ILesson';
 
 import { HttpService } from './http.service';
 

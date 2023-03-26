@@ -4,6 +4,7 @@ import { BaseComponent } from '@core/base/base.component';
 import { SpinnerService } from '@core/services/spinner.service';
 import { UserService } from '@core/services/user.service';
 import { YoutubePlayerComponent } from '@shared/components/youtube-player/youtube-player.component';
+import { ILesson } from '@shared/models/lesson/ILesson';
 
 import { Lesson } from 'src/app/models/lessons/lesson';
 import { Question } from 'src/app/models/lessons/question';
@@ -16,7 +17,7 @@ import { NotificationService } from 'src/app/services/notification.service';
     styleUrls: ['./lesson.component.sass'],
 })
 export class LessonComponent extends BaseComponent {
-    @Input() lesson: Lesson;
+    @Input() lesson;
 
     questions: Question[] = [];
 
@@ -53,10 +54,10 @@ export class LessonComponent extends BaseComponent {
     enrollLesson() {
         this.userService.enrollUserToLesson(this.lesson.id)
             .pipe(this.untilThis)
-            .subscribe({ next: () => {
-                this.notificationService.showSuccess(`You successfully registered for lesson ${this.lesson.title}`, 'Success!');
+            .subscribe({ next: (lesson) => {
                 this.lesson.isDisabled = true;
-                this.lesson.viewersCount++;
+                this.lesson = lesson;
+                this.notificationService.showSuccess(`You successfully registered for lesson ${this.lesson.title}`, 'Success!');
             },
             error: () => this.notificationService.showError(`Failed to register for lesson ${this.lesson.title}`, 'Failed!') });
     }
