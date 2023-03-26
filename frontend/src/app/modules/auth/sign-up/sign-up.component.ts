@@ -17,8 +17,6 @@ export class SignUpComponent {
         'C2 (Advanced)',
     ];
 
-    Ages = ['5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18'];
-
     Countries = ['Ukraine', 'Austria', 'England', 'Scotland', 'Poland', 'Romania'];
 
     private validationErrorMessage: { [id: string]: string } = {
