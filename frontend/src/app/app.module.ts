@@ -10,6 +10,7 @@ import { CoreModule } from '@core/core.module';
 import { AuthService } from '@core/services/auth.service';
 import { environment } from '@env/environment';
 import { AuthModule } from '@modules/auth/auth.module';
+import { SelectTopicsPageComponent } from '@modules/user-profile/select-topics-page/select-topics-page.component';
 import { MaterialModule } from '@shared/material/material.module';
 import { SharedModule } from '@shared/shared.module';
 import { ToastrModule } from 'ngx-toastr';
@@ -18,7 +19,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
-    declarations: [AppComponent],
+    declarations: [AppComponent, SelectTopicsPageComponent],
     imports: [
         BrowserModule,
         SharedModule,
