@@ -30,7 +30,9 @@ namespace EasySpeak.Core.WebAPI.Extentions
             services.AddTransient<IMessageProducer, MessageProducer>();
             services.AddTransient<IHttpRequestService, HttpRequestService>();
             services.AddScoped<IFirebaseAuthService, FirebaseAuthService>();
+            services.AddScoped<IUserService, UserService>();
             services.AddFirebaseApp();
+            services.AddScoped<INotificationService, NotificationService>();
         }
 
         public static void AddAutoMapper(this IServiceCollection services)
@@ -82,7 +84,7 @@ namespace EasySpeak.Core.WebAPI.Extentions
         {
             FirebaseApp.Create(new AppOptions()
             {
-                Credential = GoogleCredential.FromFile($"{Environment.CurrentDirectory}/FirebaseServiceAccountKey.json")
+                Credential = GoogleCredential.FromFile($"{Environment.CurrentDirectory}/Resources/FirebaseServiceAccountKey.json")
             });
         }
     }

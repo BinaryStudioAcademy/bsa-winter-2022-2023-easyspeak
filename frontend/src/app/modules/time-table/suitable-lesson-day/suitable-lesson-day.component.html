@@ -1,4 +1,4 @@
-<div [ngClass]="{ 'day-elem-blue': isToday(), 'day-elem-grey': compareDate() }" class="day-elem">
+<div [ngClass]="{ 'day-elem-blue': isToday(), 'day-elem-grey': compareDate() }" (click)="onDayClick($event)" class="day-elem">
     {{ item | date : 'dd MMMM' }}
 
     <h2>{{ item | date : 'EEEE' }}</h2>

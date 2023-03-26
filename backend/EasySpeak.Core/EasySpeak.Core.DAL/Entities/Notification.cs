@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EasySpeak.Core.Common.Enums;
 
 namespace EasySpeak.Core.DAL.Entities
 {
@@ -13,11 +9,5 @@ namespace EasySpeak.Core.DAL.Entities
         public string Text { get; set; } = string.Empty;
         public NotificationType Type { get; set; }
         public bool IsRead { get; set; }
-    }
-
-    public enum NotificationType
-    {
-        Information,
-        Error
     }
 }

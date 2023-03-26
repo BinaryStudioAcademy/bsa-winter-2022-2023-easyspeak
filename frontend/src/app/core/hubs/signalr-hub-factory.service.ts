@@ -31,6 +31,6 @@ export class SignalRHubFactoryService {
     }
 
     private buildUrl(hubUrl: string) {
-        return `${environment.coreUrl}/${hubUrl}`;
+        return `${environment.notifierUrl}/${hubUrl}`;
     }
 }

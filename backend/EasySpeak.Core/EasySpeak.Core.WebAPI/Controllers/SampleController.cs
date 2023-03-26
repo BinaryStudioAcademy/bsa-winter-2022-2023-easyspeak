@@ -1,6 +1,7 @@
 ﻿using EasySpeak.Core.BLL.Interfaces;
 using EasySpeak.Core.Common.DTO;
 using EasySpeak.RabbitMQ.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EasySpeak.Core.WebAPI.Controllers

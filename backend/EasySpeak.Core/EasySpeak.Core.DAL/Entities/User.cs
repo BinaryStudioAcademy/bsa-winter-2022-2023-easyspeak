@@ -1,6 +1,5 @@
 ﻿using EasySpeak.Core.Common.Enums;
 
-
 namespace EasySpeak.Core.DAL.Entities
 {
     public class User : Entity<long>
@@ -36,6 +35,5 @@ namespace EasySpeak.Core.DAL.Entities
             Notifications = new List<Notification>();
             CreatedLessons = new List<Lesson>();
         }
-
     }
 }

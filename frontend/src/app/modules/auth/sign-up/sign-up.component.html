@@ -2,7 +2,7 @@
 <label>
     <input
         type="text"
-        [(ngModel)]="email"
+        [(ngModel)]="newUser.email"
         matInput
         required
         placeholder="Email"
@@ -14,7 +14,7 @@
     <label>
         <input
             type="text"
-            [(ngModel)]="firstName"
+            [(ngModel)]="newUser.firstName"
             #inFirstName="ngModel"
             matInput
             placeholder="First Name"
@@ -25,7 +25,7 @@
     <label>
         <input
             type="text"
-            [(ngModel)]="lastName"
+            [(ngModel)]="newUser.lastName"
             #LastName="ngModel"
             matInput
             required
@@ -74,7 +74,7 @@
         getConfirmPasswordErrorMessage()
     }}</mat-error>
 </label>
-<button mat-button (click)="validation()">Create Account</button>
+<button mat-button (click)="validationThenSignUp()">Create Account</button>
 <div id="has-account">
     <span>I have an account! </span>
     <a href="auth/sign-in">Sign In</a>

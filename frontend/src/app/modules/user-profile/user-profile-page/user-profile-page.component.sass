@@ -1,0 +1,61 @@
+@import "src/styles/colors.sass"
+
+html
+    padding: 0
+    width: 100%
+    height: 100%
+    background-color: $white
+
+.container
+    margin-top: 80px
+
+.content-wrp
+    width: 100%
+    height: 1460px
+    padding: 0
+    display: flex
+    flex-direction: column
+    align-items: center
+    gap: 40px
+    background-color: $white
+    box-sizing: border-box
+    padding-top: 36px
+
+.header-wrp
+    width: 1320px
+    height: fit-content
+    display: flex
+    justify-content: center
+    .header
+        font-weight: 700
+        font-size: 24px
+
+.body-wrp
+    width: 1326px
+    height: 1253px
+
+.tabs
+    width: 100%
+    height: 43px
+    display: flex
+
+.tab
+    box-sizing: border-box
+    padding: 10px 15px
+    text-decoration: none
+    color: $gray-300
+
+.tab:hover
+    cursor: pointer
+
+.tab:focus
+    background-color: $gray-100
+    border-radius: 10px 10px 0px 0px
+    color: $button-color
+    border: none
+
+.active-link
+    background-color: $gray-100
+    border-radius: 10px 10px 0px 0px
+    color: $button-color
+    border: none

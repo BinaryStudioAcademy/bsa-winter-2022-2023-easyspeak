@@ -98,7 +98,7 @@ erDiagram
     nvarchar mediaPath
     datetime startsAt
     int limitOfUsers
-    int languageLevel 
+    int languageLevel
   }
 
   Calls {
@@ -178,3 +178,5 @@ This is a list of the required environment variables:
 #### MSSQL Server
 
 **SA_PASSWORD** - MSSQL Server "SA" user password
+
+**FirebaseServiceAccountKey.json** - Firebase API key. You can find it in Trello desk - Document reference - Firebase link - Save "privateKey"
