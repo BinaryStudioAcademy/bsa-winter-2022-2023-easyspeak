@@ -2,15 +2,15 @@
 using EasySpeak.Core.Common.Enums;
 using FluentValidation;
 
-namespace EasySpeak.Core.WebAPI.Validators
+namespace EasySpeak.Core.WebAPI.Validators.User
 {
     public class NewUserDtoValidator : AbstractValidator<NewUserDto>
     {
         public NewUserDtoValidator()
         {
-            RuleFor(u => u.Country).NotEmpty().IsEnumName(typeof(Country));
-            RuleFor(u => u.Language).NotEmpty().IsEnumName(typeof(Language));
-            RuleFor(u => u.Timezone).NotEmpty().IsEnumName(typeof(Timezone));
+            RuleFor(u => u.Country).NotEmpty();
+            RuleFor(u => u.Language).NotEmpty();
+            RuleFor(u => u.Timezone).NotEmpty();
             RuleFor(u => u.FirstName).NotEmpty().Matches(@"^[A-Za-z\s]*$").Length(3, 30);
             RuleFor(u => u.LastName).NotEmpty().Matches(@"^[A-Za-z\s]*$").Length(3, 30);
             RuleFor(u => u.Age).InclusiveBetween(6, 99);
