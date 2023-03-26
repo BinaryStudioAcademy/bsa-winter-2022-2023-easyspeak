@@ -37,7 +37,7 @@ export class AuthService {
                 this.setAccessToken(userCredential.user);
             }
 
-            this.navigateTo('profile/topics');
+            this.navigateTo('/profile/topics');
         });
     }
 
