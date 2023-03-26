@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { IUserInfo } from '@shared/models/IUserInfo';
 import { ILesson } from '@shared/models/lesson/ILesson';
 
+import { Lesson } from '../../models/lessons/lesson';
+
 import { HttpService } from './http.service';
 
 @Injectable({
@@ -20,7 +22,7 @@ export class UserService {
         return this.httpService.put(`${this.routePrefix}/${userId}`, updatedUser);
     }
 
-    public enrollUserToLesson(lessonId: number) {
-        return this.httpService.put(`${this.routePrefix}/enroll/${lessonId}`, null);
+    public enrollUserToLesson(lesson: Lesson) {
+        return this.httpService.put<Lesson>(`${this.routePrefix}/enroll/${lesson.id}`, lesson);
     }
 }

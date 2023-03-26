@@ -17,7 +17,7 @@ import { NotificationService } from 'src/app/services/notification.service';
     styleUrls: ['./lesson.component.sass'],
 })
 export class LessonComponent extends BaseComponent {
-    @Input() lesson;
+    @Input() lesson: Lesson;
 
     questions: Question[] = [];
 
@@ -52,11 +52,11 @@ export class LessonComponent extends BaseComponent {
     }
 
     enrollLesson() {
-        this.userService.enrollUserToLesson(this.lesson.id)
+        this.userService.enrollUserToLesson(this.lesson)
             .pipe(this.untilThis)
             .subscribe({ next: (lesson) => {
                 this.lesson.isDisabled = true;
-                this.lesson = lesson;
+                this.lesson.viewersCount = lesson.viewersCount;
                 this.notificationService.showSuccess(`You successfully registered for lesson ${this.lesson.title}`, 'Success!');
             },
             error: () => this.notificationService.showError(`Failed to register for lesson ${this.lesson.title}`, 'Failed!') });
