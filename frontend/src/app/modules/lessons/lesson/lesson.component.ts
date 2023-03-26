@@ -43,8 +43,6 @@ export class LessonComponent {
         this.lessonsService.getQuestions(id).subscribe(
             (questions) => {
                 this.questions = questions as Question[];
-                this.spinner.hide();
-                this.isLoading = false;
             },
             () => {
                 this.spinner.hide();
