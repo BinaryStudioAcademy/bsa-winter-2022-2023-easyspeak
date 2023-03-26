@@ -56,7 +56,7 @@ export class LessonComponent extends BaseComponent {
             .pipe(this.untilThis)
             .subscribe({ next: (lesson) => {
                 this.lesson.isDisabled = true;
-                this.lesson.viewersCount = lesson.viewersCount;
+                this.lesson.subscribersCount = lesson.subscribersCount;
                 this.notificationService.showSuccess(`You successfully registered for lesson ${this.lesson.title}`, 'Success!');
             },
             error: () => this.notificationService.showError(`Failed to register for lesson ${this.lesson.title}`, 'Failed!') });

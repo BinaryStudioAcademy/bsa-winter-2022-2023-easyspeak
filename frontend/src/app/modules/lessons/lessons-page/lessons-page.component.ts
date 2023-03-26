@@ -86,7 +86,7 @@ export class LessonsPageComponent implements OnInit, OnChanges {
                     tutorFlagPath: '../../../../assets/lesson-icons/canada-test-flag.svg',
                     tutorName: 'Roger Vaccaro',
                     topics: lesson.tags.map((tag) => tag.name),
-                    viewersCount: lesson.subscribersCount,
+                    subscribersCount: lesson.subscribersCount,
                     level: langLevelsSample[lesson.languageLevel].title,
                     isDisabled: (new Date() > new Date(lesson.startAt)),
                 });
