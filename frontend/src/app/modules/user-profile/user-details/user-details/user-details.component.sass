@@ -1,5 +1,5 @@
 @import "src/styles/colors.sass"
-    
+
 .container
     width: 100%
     height: 100%
@@ -8,7 +8,7 @@
     padding: 30px
     display: grid
     grid-template-columns: 1fr 495px 1fr
-    grid-template-rows: 125px 290px 340px 305px
+    grid-template-rows: 125px 290px 1fr 305px
     gap: 30px
     border-radius: 0px 10px 10px 10px
 
@@ -66,7 +66,7 @@
         border-radius: 50%
         display: flex
         align-items: center
-        justify-content: center            
+        justify-content: center
 
 .avatar-list
     display: grid
@@ -102,9 +102,31 @@
         grid-column: 1/3
 
 .user-interests-section
-    grid-row: 3/4
-    grid-column: 2/3
+    display: flex
+    gap: 10px
+    flex-wrap: wrap
+    justify-content: space-between
     height: 100%
+
+.user-interest-content
+    display: flex
+    flex-direction: column
+    align-items: center
+
+    gap: 5px
+
+.interest-image-container
+    height: 46px
+    width: 46px
+    border-radius: 50%
+    background-color: blue
+    padding: 10px
+    display: flex
+    justify-content: center
+    align-items: center
+
+.interest-image-text
+
 
 .user-socials-section
     grid-row: 4/5

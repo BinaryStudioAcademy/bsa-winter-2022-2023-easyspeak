@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IUserInfo } from '@shared/models/IUserInfo';
+import { getTags } from '@shared/utils/tagsForInterests';
 
 import { HttpService } from './http.service';
 

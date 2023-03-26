@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { BaseComponent } from '@core/base/base.component';
 import { UserService } from '@core/services/user.service';
 import { Ages } from '@shared/data/ages.util';
 import { EnglishLevel } from '@shared/data/englishLevel';
 import { Sex } from '@shared/data/sex';
+import { IIcon } from '@shared/models/IIcon';
 import { IUserInfo } from '@shared/models/IUserInfo';
+import { getTags } from '@shared/utils/tagsForInterests';
 import { ToastrService } from 'ngx-toastr';
 
 import { CountriesTzLangProviderService } from 'src/app/services/countries-tz-lang-provider.service';
@@ -18,6 +20,8 @@ import { detailsGroup, userId } from '../user-details.component.util';
     styleUrls: ['./user-details.component.sass'],
 })
 export class UserDetailsComponent extends BaseComponent implements OnInit {
+    @Input() tagsList: IIcon[] = getTags();
+
     countries;
 
     ages = Ages;
@@ -33,6 +37,8 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
     sexOptions: string[] = [];
 
     detailsForm;
+
+    selectedTags: string[];
 
     constructor(
         private fb: FormBuilder,
@@ -114,5 +120,9 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
 
     get other(): FormControl {
         return this.detailsForm.get('other') as FormControl;
+    }
+
+    selectInterest($event: Event) {
+
     }
 }

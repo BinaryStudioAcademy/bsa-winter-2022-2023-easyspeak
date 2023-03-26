@@ -20,5 +20,8 @@ import { UserProfileRoutingModule } from './user-profile-routing.module';
         UserProfileRoutingModule,
         FormsModule,
     ],
+    exports: [
+        UserDetailsComponent,
+    ],
 })
 export class UserProfileModule {}
