@@ -7,27 +7,31 @@ import * as moment from 'moment';
     styleUrls: ['./suitable-lesson-day.component.sass'],
 })
 export class SuitableLessonDayComponent {
-    @Output() dateSelected = new EventEmitter<Date>();
-
     @Input() days: Date[] = [new Date()];
 
     @Input() item: Date = new Date();
 
     @Input() meetingCount: number = 0;
 
-    todayDate: Date = new Date();
-
     @Input() selectedDate: Date;
+
+    @Output() dateSelected = new EventEmitter<Date>();
+
+    todayDate: Date = new Date();
 
     isToday(): boolean {
         return moment(this.item).isSame(this.todayDate, 'days');
     }
 
-    compareDate(): boolean {
+    isBeforeToday(): boolean {
         return moment(this.item).isBefore(moment(), 'day');
     }
 
-    isSelected(): boolean {
+    isSelectedDay(): boolean {
+        if (moment(this.item).isSame(this.selectedDate, 'days')) {
+            this.onDayClick();
+        }
+
         return moment(this.item).isSame(this.selectedDate, 'days');
     }
 
