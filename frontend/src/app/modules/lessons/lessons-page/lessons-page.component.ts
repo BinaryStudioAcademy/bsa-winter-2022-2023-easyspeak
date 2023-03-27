@@ -97,4 +97,19 @@ export class LessonsPageComponent implements OnInit, OnChanges {
             });
         });
     }
+
+    getLessonsUnavailableMessage(): string {
+        const noTopics = !this.selectedTopicsFilters.size;
+        const noLanguages = !this.selectedLanguageFilters.size;
+
+        if (noTopics && noLanguages) {
+          return "Oops, there are no lessons for this day. Please consider another date";
+        } else if (!noTopics && !noLanguages) {
+          return "Oops, there are no lessons with such filters for this day. Please consider another date";
+        } else if (!noTopics && noLanguages) {
+          return "Oops, there are no lessons with such topics for this day. Please consider another date";
+        } else {
+          return "Oops, there are no lessons with such levels for this day. Please consider another date";
+        }
+      }
 }
