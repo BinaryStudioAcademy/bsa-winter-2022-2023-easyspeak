@@ -19,23 +19,11 @@ export class SuitableLessonDayComponent {
 
     todayDate: Date = new Date();
 
-    isToday(): boolean {
-        const isSameToday = moment(this.item).isSame(this.todayDate, 'days');
+    isToday = () => moment(this.item).isSame(this.todayDate, 'days');
 
-        return isSameToday;
-    }
+    isBeforeToday = () => moment(this.item).isBefore(moment(), 'day');
 
-    isBeforeToday(): boolean {
-        const isBeforeToday = moment(this.item).isBefore(moment(), 'day');
-
-        return isBeforeToday;
-    }
-
-    isSelectedDay(): boolean {
-        const isSameSeleted = moment(this.item).isSame(this.selectedDate, 'days');
-
-        return isSameSeleted;
-    }
+    isSelectedDay = () => moment(this.item).isSame(this.selectedDate, 'days');
 
     onDayClick(eventData: Event) {
         const target = eventData.target as HTMLElement;
