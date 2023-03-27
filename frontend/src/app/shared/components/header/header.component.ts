@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit {
 
     ngOnInit(): void {
         if (!this.authService.isAuthenticated()) {
-            this.userService.getUser(0).subscribe((resp) => {
+            this.userService.getUser().subscribe((resp) => {
                 localStorage.setItem('user', JSON.stringify(resp));
             });
         }

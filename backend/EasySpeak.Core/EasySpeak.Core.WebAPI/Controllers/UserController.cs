@@ -1,7 +1,5 @@
 using EasySpeak.Core.BLL.Interfaces;
 using EasySpeak.Core.Common.DTO.User;
-using EasySpeak.Core.Common.Enums;
-using EasySpeak.Core.DAL.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EasySpeak.Core.WebAPI.Controllers
@@ -17,11 +15,12 @@ namespace EasySpeak.Core.WebAPI.Controllers
             _userService = userService;
         }
 
-        [HttpGet("{userId}")]
-        public async Task<ActionResult<UserDto>> Get(long userId)
+        [HttpGet]
+        public async Task<ActionResult<UserDto>> Get()
         {
-            var user = await _userService.GetUserAsync(userId);
-            return Ok(user);
+            var userDto = await _userService.GetUserAsync();
+
+            return Ok(userDto);
         }
 
         [HttpPost]

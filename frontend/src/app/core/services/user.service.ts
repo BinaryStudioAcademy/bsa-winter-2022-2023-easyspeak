@@ -11,8 +11,8 @@ export class UserService {
 
     constructor(private httpService: HttpService) {}
 
-    public getUser(userId: number) {
-        return this.httpService.getById<IUserInfo>(`${this.routePrefix}`, userId);
+    public getUser() {
+        return this.httpService.getById<IUserInfo>(`${this.routePrefix}`, '');
     }
 
     public updateUser(userId: number, updatedUser: IUserInfo) {

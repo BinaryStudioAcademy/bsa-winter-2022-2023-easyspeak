@@ -26,16 +26,10 @@ namespace EasySpeak.Core.BLL.Services
             return _mapper.Map<UserDto>(userEntity);
         }
 
-        public async Task<UserDto> GetUserAsync(long userId)
+        public async Task<UserDto> GetUserAsync()
         {
-            if (userId == 0) 
-            {
-                return _mapper.Map<UserDto>(await _context.Users.FirstOrDefaultAsync(u => u.Id == _authService.UserId));
-            }
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == _authService.UserId);
 
-
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
-           
             return _mapper.Map<UserDto>(user);
         }
     }
