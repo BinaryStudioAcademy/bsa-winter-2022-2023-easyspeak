@@ -45,7 +45,7 @@ export class SuitableLessonComponent implements OnInit {
 
         this.setDays();
 
-        if (!(moment(this.selectedDate).isBefore(moment(), 'day'))) {
+        if (moment(this.selectedDate).isSameOrAfter(moment(), 'day')) {
             this.dateSelected.emit(new Date(this.selectedDate));
         }
     }
