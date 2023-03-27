@@ -9,8 +9,13 @@ namespace EasySpeak.Core.BLL.Services
 {
     public class UserService : BaseService, IUserService
     {
-        public UserService(EasySpeakCoreContext context, IMapper mapper) : base(context, mapper)
-        { }
+        private readonly IFirebaseAuthService _firebaseAuthService;
+
+        public UserService(EasySpeakCoreContext context, IMapper mapper, IFirebaseAuthService firebaseAuthService) :
+            base(context, mapper)
+        {
+            _firebaseAuthService = firebaseAuthService;
+        }
 
         public async Task<UserDto> CreateUser(UserRegisterDto userDto)
         {
@@ -23,10 +28,10 @@ namespace EasySpeak.Core.BLL.Services
             return _mapper.Map<UserDto>(userEntity);
         }
 
-        public async Task<LessonDto> EnrollUserToLesson(long userId, long lessonId)
+        public async Task<LessonDto> EnrollUserToLesson(long lessonId)
         {
             var user = _context.Users
-                .Single(p => p.Id == userId);
+                .Single(p => p.Id == _firebaseAuthService.UserId);
 
             Lesson existingLesson = _context.Lessons
                 .Single(p => p.Id == lessonId);

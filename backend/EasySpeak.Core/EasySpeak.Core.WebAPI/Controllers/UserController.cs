@@ -12,12 +12,10 @@ namespace EasySpeak.Core.WebAPI.Controllers
     public class UsersController : ControllerBase
     {
         private readonly IUserService _userService;
-        private readonly IFirebaseAuthService _authService;
 
-        public UsersController(IUserService userService, IFirebaseAuthService authService)
+        public UsersController(IUserService userService)
         {
             _userService = userService;
-            _authService = authService;
         }
 
         [HttpPost]
@@ -59,6 +57,6 @@ namespace EasySpeak.Core.WebAPI.Controllers
         }
 
         [HttpPut("enroll/{lessonId}")]
-        public Task<LessonDto> Enroll(long lessonId) => _userService.EnrollUserToLesson(_authService.UserId, lessonId);
+        public Task<LessonDto> Enroll(long lessonId) => _userService.EnrollUserToLesson(lessonId);
     }
 }
