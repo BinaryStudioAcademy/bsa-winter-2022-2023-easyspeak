@@ -60,4 +60,8 @@ export class FilterSectionComponent implements OnInit {
         this.selectedTopicsFiltersChange.emit(this.selectedTopicsFilters);
         this.selectedLanguageFiltersChange.emit(this.selectedLanguageFilters);
     }
+
+    isVisibilityButton(): boolean {
+        return this.selectedTopicsFilters.size > 0 || this.selectedLanguageFilters.size > 0;
+    }
 }
