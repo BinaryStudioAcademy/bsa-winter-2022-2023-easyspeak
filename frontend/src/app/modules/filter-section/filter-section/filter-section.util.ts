@@ -9,7 +9,7 @@ export const topicsSample = [
         title: 'Cars',
     },
     {
-        title: 'Celebreties',
+        title: 'Celebrities',
     },
     {
         title: 'Cooking',
@@ -52,7 +52,7 @@ export const topicsSample = [
 export const langLevelsSample = [
     {
         title: 'B1',
-        subtitle: 'Intermadiate',
+        subtitle: 'Intermediate',
         description: 'I am beginning to able to express myself clearly',
     },
     {
@@ -62,12 +62,12 @@ export const langLevelsSample = [
     },
     {
         title: 'A2',
-        subtitle: 'Pre-Intermadiate',
+        subtitle: 'Pre-Intermediate',
         description: 'I have some experience, but I still can not express myself properly',
     },
     {
         title: 'B2',
-        subtitle: 'Upper-Intermadiate',
+        subtitle: 'Upper-Intermediate',
         description: 'I feel confident in using English',
     },
     {
@@ -81,3 +81,5 @@ export const langLevelsSample = [
         description: 'I am fluent at English',
     },
 ];
+
+export const compatibilities = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100];

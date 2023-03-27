@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { langLevelsSample, topicsSample } from '@modules/filter-section/filter-section/filter-section.util';
+import {
+    compatibilities,
+    langLevelsSample,
+    topicsSample,
+} from '@modules/filter-section/filter-section/filter-section.util';
 import { Subject } from 'rxjs';
 
 import { Filter } from '../../../models/filters/filter';
@@ -38,15 +42,16 @@ export class FilterSectionComponent implements OnInit {
 
     public languages: Filter[];
 
-    public compatibility: Filter[];
+    public compatibilities: Filter[];
 
     ngOnInit(): void {
         this.topics = topicsSample;
         this.langLevels = langLevelsSample;
-        this.languages = this.languageTimezone.getLanguagesList().map(s => ({ title: s }));
+        this.compatibilities = compatibilities.map(c => ({ title: c.toString() }));
+        this.languages = this.languageTimezone.getLanguagesList().map(language => ({ title: language }));
     }
 
-    remove(param: 'lang' | 'level' | 'topic', title: string) {
+    remove(param: 'compatibility' | 'lang' | 'level' | 'topic', title: string) {
         switch (param) {
             case 'lang':
                 this.selectedLanguagesFilters.delete(title);
@@ -57,13 +62,16 @@ export class FilterSectionComponent implements OnInit {
             case 'topic':
                 this.selectedTopicsFilters.delete(title);
                 break;
+            case 'compatibility':
+                this.selectedCompatibilityFilters.delete(title);
+                break;
             default:
                 console.error('No such filtering parameter');
                 break;
         }
     }
 
-    update(param: 'lang' | 'level' | 'topic', eventData: Set<string>) {
+    update(param: 'compatibility' | 'lang' | 'level' | 'topic', eventData: Set<string>) {
         switch (param) {
             case 'lang':
                 this.selectedLanguagesFilters = eventData;
@@ -73,6 +81,9 @@ export class FilterSectionComponent implements OnInit {
                 break;
             case 'topic':
                 this.selectedTopicsFilters = eventData;
+                break;
+            case 'compatibility':
+                this.selectedCompatibilityFilters = eventData;
                 break;
             default:
                 console.error('No such filtering parameter');
@@ -85,5 +96,6 @@ export class FilterSectionComponent implements OnInit {
         this.selectedLevelFilters = new Set();
         this.selectedTopicsFilters = new Set();
         this.selectedLanguagesFilters = new Set();
+        this.selectedCompatibilityFilters = new Set();
     }
 }

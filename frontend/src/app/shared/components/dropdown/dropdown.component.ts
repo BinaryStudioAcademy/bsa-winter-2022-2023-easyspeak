@@ -12,6 +12,10 @@ import { Filter } from 'src/app/models/filters/filter';
 export class DropdownComponent extends BaseComponent implements OnInit, OnDestroy {
     @Input() data: Filter[];
 
+    @Input() isSingleChoice: boolean;
+
+    type: string;
+
     @Input() btnLabel: string | undefined;
 
     @Output() selectedFilters = new EventEmitter<Set<string>>();
@@ -28,16 +32,27 @@ export class DropdownComponent extends BaseComponent implements OnInit, OnDestro
             .subscribe(() => {
                 this.selectedItems = new Set();
             });
+        this.type = this.isSingleChoice ? 'radio' : 'checkbox';
     }
 
     selectItem(title: string) {
         if (this.selectedItems.has(title)) {
             this.selectedItems.delete(title);
+        } else if (this.isSingleChoice) {
+            this.selectSingle(title);
         } else {
-            this.selectedItems.add(title);
+            this.selectMultiple(title);
         }
-
         this.selectedFilters.emit(this.selectedItems);
+    }
+
+    selectMultiple(title: string) {
+        this.selectedItems.add(title);
+    }
+
+    selectSingle(title: string) {
+        this.selectedItems.clear();
+        this.selectedItems.add(title);
     }
 
     showDropdownMenu() {
