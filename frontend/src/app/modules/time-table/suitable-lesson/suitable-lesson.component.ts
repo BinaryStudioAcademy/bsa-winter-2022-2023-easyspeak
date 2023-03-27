@@ -51,13 +51,11 @@ export class SuitableLessonComponent implements OnInit {
     }
 
     setDays(): void {
-        this.days = [];
-
-        for (let i = 0; i < 7; i++) {
+        this.days = Array(7).fill({}).map((_, i) => {
             const date = moment(this.selectedDate).add(i - this.selectedDate.getDay() + 1, 'day').toDate();
 
-            this.days.push({ date, meetingsAmount: 0 });
-        }
+            return { date, meetingsAmount: 0 };
+        });
 
         const requestDate = this.selectedDate.toISOString().slice(0, 10);
 
