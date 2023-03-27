@@ -79,6 +79,8 @@ export class LessonsPageComponent implements OnInit, OnChanges {
         }).subscribe((response: ILesson[]) => {
             this.lessons = [];
 
+            //TODO: When everything regarding user in the database is finished, update the lesson retrieval code
+
             response.forEach(lesson => {
                 this.lessons.push({
                     id: lesson.id,
