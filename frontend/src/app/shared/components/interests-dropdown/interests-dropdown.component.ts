@@ -8,13 +8,13 @@ import { getTags } from '@shared/utils/tagsForInterests';
     styleUrls: ['./interests-dropdown.component.sass'],
 })
 export class InterestsDropdownComponent {
-    toggle: boolean = false;
+    toggle = false;
 
     @Input() inputList: IIcon[] = getTags();
 
-    @Output() selectedInterests = new EventEmitter<string[]>();
+    @Output() selectedInterests = new EventEmitter<Set<string>>();
 
-    outputList: string[] = [];
+    outputList = new Set<string>();
 
     selectInterest($event: Event) {
         const ev = $event.target as HTMLInputElement;
@@ -22,9 +22,9 @@ export class InterestsDropdownComponent {
         const { checked } = ev;
 
         if (checked) {
-            this.outputList = this.outputList.concat(this.inputList[numb].icon_name);
+            this.outputList.add(this.inputList[numb].icon_name);
         } else {
-            this.outputList = this.outputList.filter(x => x !== this.inputList[numb].icon_name);
+            this.outputList.delete(this.inputList[numb].icon_name);
         }
 
         this.selectedInterests.emit(this.outputList);
