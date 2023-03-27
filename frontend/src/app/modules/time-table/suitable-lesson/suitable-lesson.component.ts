@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { IIDayCard } from '@shared/models/lesson/IDayCard';
 import * as moment from 'moment';
 
 import { LessonsService } from 'src/app/services/lessons.service';
@@ -13,11 +14,9 @@ export class SuitableLessonComponent implements OnInit {
 
     readonly amountOfDayInWeek: number = 7;
 
-    days: { date: Date, meetingsCount: number }[];
+    days: IIDayCard[] = [];
 
     selectedDate: Date = new Date();
-
-    meetingsCount: number;
 
     constructor(private lessonService: LessonsService) { }
 
@@ -51,30 +50,51 @@ export class SuitableLessonComponent implements OnInit {
         }
     }
 
-    async setDays(): Promise<void> {
+    // async setDays(): Promise<void> {
+    //     this.days = [];
+    //     const promises: Promise<{ date: Date, meetingsCount: number }>[] = [];
+
+    //     for (let i = 0; i < 7; i++) {
+    //         const date = moment(this.selectedDate).add(i - this.selectedDate.getDay() + 1, 'day').toDate();
+    //         const promise = this.getMeetingCount(date).then(meetingsCount => ({ date, meetingsCount }));
+
+    //         promises.push(promise);
+    //     }
+
+    //     const days = await Promise.all(promises);
+
+    //     this.days = days.sort((a, b) => a.date.getTime() - b.date.getTime());
+    // }
+
+    // async getMeetingCount(date: Date): Promise<number> {
+    //     const filteredLessons = await this.lessonService.getFilteredLessons({
+    //         languageLevels: [],
+    //         tags: [],
+    //         date: new Date(date.toISOString().slice(0, 10)),
+    //     }).toPromise();
+
+    //     return filteredLessons?.length || 0;
+    // }
+
+    setDays(): void {
         this.days = [];
-        const promises: Promise<{ date: Date, meetingsCount: number }>[] = [];
 
         for (let i = 0; i < 7; i++) {
             const date = moment(this.selectedDate).add(i - this.selectedDate.getDay() + 1, 'day').toDate();
-            const promise = this.getMeetingCount(date).then(meetingsCount => ({ date, meetingsCount }));
-
-            promises.push(promise);
+            this.days.push({ date, meetingsAmount: 0 });
         }
 
-        const days = await Promise.all(promises);
+        const requestDate = this.selectedDate.toISOString().slice(0, 10);
 
-        this.days = days.sort((a, b) => a.date.getTime() - b.date.getTime());
-    }
+        this.lessonService.getLessonsCount(requestDate).subscribe(response => {
+            response.forEach(el => {
+                const day = this.days.find(day => day.date.getDay() === new Date(el.date).getDay());
 
-    async getMeetingCount(date: Date): Promise<number> {
-        const filteredLessons = await this.lessonService.getFilteredLessons({
-            languageLevels: [],
-            tags: [],
-            date: new Date(date.toISOString().slice(0, 10)),
-        }).toPromise();
-
-        return filteredLessons?.length || 0;
+                if (day) {
+                    day.meetingsAmount = el.meetingsAmount;
+                }
+            });
+        });
     }
 
     onDateSelected(dateSelected: Date) {
