@@ -37,7 +37,11 @@ export class SuitableLessonDayComponent {
         return isSameSeleted
     }
 
-    onDayClick() {
-        this.dateSelected.emit(this.item);
+    onDayClick(eventData: Event) {
+        const target = eventData.target as HTMLElement;
+
+        if (!target.classList.contains('day-elem-grey')) {
+            this.dateSelected.emit(this.item);
+        }
     }
 }
