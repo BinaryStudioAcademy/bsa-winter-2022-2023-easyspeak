@@ -1,7 +1,7 @@
 @import "src/styles/colors.sass"
 
 .container
-    width: 248px
+    width: 238px
     height: 46px
     position: relative
 
@@ -14,30 +14,37 @@
 .dropdown-btn:hover
     cursor: pointer
 
+.dropdown-btn:hover
+    cursor: pointer
+
+.dropdown-btn:hover
+    box-shadow: 0 1px 4px $turquoise-100
+
 .dropdown-btn-title
     width: 100px
     height: 20px
     position: absolute
-    top: 1.5rem
-    left: 50px
+    top: 17px
+    left: 42px
     font-size: 1rem
 
 .dropdown-btn-subtitle
     width: 2rem
     height: 16px
-    top: 0.5rem
-    left: 50px
+    top: 6px
+    left: 42px
     position: absolute
     font-size: 12px
     color: $gray-200
 
 .dropdown-btn-icon
     position: absolute
-    width: 1.5rem
-    height: 1.5rem
-    top: 12px
-    right: 1.5rem
+    top: 10px
+    right: 16px
     color: $blue-200
+    img
+        width: 11px
+        height: 6px
 
 
 .dropdown-wrp
@@ -104,16 +111,16 @@ input[type="checkbox"]:checked
 
 .filters-count-group
     position: absolute
-    width: 24px
-    height: 24px
-    top: 12px
-    left: 18px
+    top: 13px
+    left: 16px
+    width: 20px
+    height: 20px
     border-radius: 50%
-    background-color: $turquoise-100
     display: flex
-    align-items: center
     justify-content: center
-
-.ilters-count-val
+    align-items: center
+    background-color: $turquoise-100
+    font-style: normal
     font-weight: 700
+    font-size: 14px
     color: $blue-200

@@ -1,9 +1,7 @@
 <div class="container">
     <div class="dropdown-btn" (click)="showDropdownMenu()">
-        <div *ngIf="this.selectedItems.size" class="filters-count-group">
-            <div class="filters-count-val">
-                {{this.selectedItems.size}}
-            </div>
+        <div class="filters-count-group">
+            {{this.selectedItems.size}}
         </div>
         <div class="dropdown-btn-title">
             {{this.selectedItems.keys().next().value ?? 'None'}}
@@ -12,7 +10,7 @@
             {{this.btnLabel}}
         </div>
         <div class="dropdown-btn-icon">
-            <mat-icon>expand_more</mat-icon>
+            <img class="arrow-icon" src="assets/interestsDropdown/chevron_down.svg"/>
         </div>
     </div>
     <div *ngIf="this.showDropdown" class="dropdown-wrp">
