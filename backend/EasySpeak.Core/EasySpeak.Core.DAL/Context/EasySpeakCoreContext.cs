@@ -19,7 +19,9 @@ namespace EasySpeak.Core.DAL.Context
         public DbSet<Tag> Tags => Set<Tag>();
         public DbSet<Question> Questions => Set<Question>();
         public DbSet<Subquestion> Subquestions => Set<Subquestion>();
-        
+        public DbSet<UploadFile> UploadFiles => Set<UploadFile>();
+
+
         public EasySpeakCoreContext(DbContextOptions<EasySpeakCoreContext> options, IHttpContextAccessor httpContextAccessor) : base(options)
         {
             _httpContextAccessor = httpContextAccessor;

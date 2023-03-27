@@ -1,4 +1,5 @@
-﻿using EasySpeak.Core.BLL.Interfaces;
+﻿using Azure.Storage.Blobs;
+using EasySpeak.Core.BLL.Interfaces;
 using EasySpeak.Core.BLL.MappingProfiles;
 using EasySpeak.Core.BLL.Services;
 using EasySpeak.Core.DAL.Context;
@@ -86,6 +87,17 @@ namespace EasySpeak.Core.WebAPI.Extensions
             {
                 Credential = GoogleCredential.FromFile($"{Environment.CurrentDirectory}/Resources/FirebaseServiceAccountKey.json")
             });
+        }
+
+        public static void AddFileService(this IServiceCollection services, IConfiguration configuration)
+        {
+            var connectionString = configuration.GetSection("AzureBlobStorageSettings")
+                .GetValue<string>("ConnectionString");
+
+            services.AddScoped(_ =>
+                new BlobServiceClient(connectionString));
+
+            services.AddScoped<IAzureBlobStorageService, AzureBlobStorageService>();
         }
     }
 }
