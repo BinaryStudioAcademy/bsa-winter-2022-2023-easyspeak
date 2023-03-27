@@ -17,6 +17,8 @@ export class LessonComponent {
 
     questions: Question[] = [];
 
+    isShowQuestions = true;
+
     constructor(
         private dialogRef: MatDialog,
         private lessonsService: LessonsService,
@@ -41,5 +43,9 @@ export class LessonComponent {
             this.questions = questions as Question[];
             this.spinner.hide();
         });
+
+        if (this.questions.length !== 0) {
+            this.isShowQuestions = !this.isShowQuestions;
+        }
     }
 }
