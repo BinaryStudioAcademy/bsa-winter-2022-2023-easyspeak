@@ -2,65 +2,68 @@ import { Injectable, NgZone } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { HttpService } from '@core/services/http.service';
-import { IUser } from '@shared/models/IUser';
 import * as auth from 'firebase/auth';
 import firebase from 'firebase/compat';
+import { from } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
 })
 export class AuthService {
-    private userData: firebase.User;
-
-    private refreshToken: string;
-
-    private url = '';
-
     constructor(
         private afs: AngularFirestore,
         private afAuth: AngularFireAuth,
         private router: Router,
         private ngZone: NgZone,
         private httpService: HttpService,
-    ) {
-        this.afAuth.authState.subscribe((user) => {
-            if (user) {
-                this.userData = user;
-                localStorage.setItem('user', JSON.stringify(this.userData));
-                localStorage.setItem('refreshToken', JSON.stringify(this.userData.refreshToken));
-            } else {
-                localStorage.removeItem('user');
-                localStorage.removeItem('refreshToken');
-            }
-            this.getUserData();
-        }).unsubscribe();
-    }
+        public jwtHelper: JwtHelperService,
+    ) {}
 
     signIn(email: string, password: string) {
-        return this.afAuth
-            .signInWithEmailAndPassword(email, password)
-            .then(() => {
-                this.afAuth.authState.subscribe((user) => {
-                    if (user) {
-                        this.router.navigate(['']);
-                    }
-                });
-            });
+        return this.afAuth.signInWithEmailAndPassword(email, password).then((userCredential) => {
+            if (userCredential.user) {
+                this.setAccessToken(userCredential.user);
+            }
+
+            this.navigateTo('main');
+        });
     }
 
     signUp(email: string, password: string) {
-        return this.afAuth
-            .createUserWithEmailAndPassword(email, password)
-            .then((result) => {
-                this.httpService.post<firebase.User | null>(this.url, result.user);
-            });
+        return this.afAuth.createUserWithEmailAndPassword(email, password).then((userCredential) => {
+            if (userCredential.user) {
+                this.setAccessToken(userCredential.user);
+            }
+
+            this.navigateTo('/profile/topics');
+        });
     }
 
-    get isLoggedIn(): boolean {
-        const user = this.getUserData();
+    private setAccessToken(user: firebase.User) {
+        from(user.getIdToken()).subscribe((token) => localStorage.setItem('accessToken', token));
+    }
 
-        return !!user;
+    private navigateTo(route: string) {
+        this.afAuth.authState.subscribe((user) => {
+            if (user) {
+                this.router.navigate([route]);
+            }
+        });
+    }
+
+    public isAuthenticated(): boolean {
+        const token = localStorage.getItem('accessToken');
+
+        return !this.jwtHelper.isTokenExpired(token);
+    }
+
+    logout(): Promise<void> {
+        localStorage.removeItem('accessToken');
+        this.router.navigate(['auth/sign-in']);
+
+        return this.afAuth.signOut();
     }
 
     facebookAuth() {
@@ -76,14 +79,8 @@ export class AuthService {
     }
 
     authLogin(provider: auth.AuthProvider) {
-        return this.afAuth
-            .signInWithPopup(provider)
-            .then(() => {
-                this.router.navigate(['']);
-            });
-    }
-
-    getUserData(): IUser {
-        return JSON.parse(localStorage.getItem('user')!);
+        return this.afAuth.signInWithPopup(provider).then(() => {
+            this.router.navigate(['']);
+        });
     }
 }

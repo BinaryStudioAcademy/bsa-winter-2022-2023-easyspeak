@@ -15,7 +15,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Reflection;
 
 
-namespace EasySpeak.Core.WebAPI.Extentions
+namespace EasySpeak.Core.WebAPI.Extensions
 {
     public static class ServiceCollectionExtensions
     {
@@ -28,8 +28,11 @@ namespace EasySpeak.Core.WebAPI.Extentions
             services.AddTransient<ILessonsService, LessonsService>();
             services.AddSingleton<IConnectionProvider>(_ => new ConnectionProvider(configuration.GetValue<string>("Rabbit")));
             services.AddTransient<IMessageProducer, MessageProducer>();
+            services.AddTransient<IHttpRequestService, HttpRequestService>();
             services.AddScoped<IFirebaseAuthService, FirebaseAuthService>();
+            services.AddScoped<IUserService, UserService>();
             services.AddFirebaseApp();
+            services.AddScoped<INotificationService, NotificationService>();
         }
 
         public static void AddAutoMapper(this IServiceCollection services)
@@ -77,11 +80,11 @@ namespace EasySpeak.Core.WebAPI.Extentions
                 });
         }
 
-        public static void AddFirebaseApp(this IServiceCollection services)
+        private static void AddFirebaseApp(this IServiceCollection services)
         {
             FirebaseApp.Create(new AppOptions()
             {
-                Credential = GoogleCredential.FromFile($"{Environment.CurrentDirectory}/FirebaseServiceAccountKey.json")
+                Credential = GoogleCredential.FromFile($"{Environment.CurrentDirectory}/Resources/FirebaseServiceAccountKey.json")
             });
         }
     }

@@ -16,6 +16,6 @@ export class Utils {
 
         status: 45,
 
-        flag: '../../../assets/user-card-icons/canada-flag.svg',
+        flag: 'assets/user-card-icons/canada-flag.svg',
     };
 }

@@ -14,7 +14,20 @@ services:
         env_file:
             - /etc/environment
         volumes:
-           - ./resources:/app/Resources
+           - ./Resources:/app/Resources
+
+    easyspeak_emailer:
+        image: tatihutii/easyspeak_emailer:latest
+        container_name: 'easyspeak_emailer'
+        restart: on-failure
+        networks:
+            - back
+        ports:
+            - "5090:5090"
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Production
+        env_file:
+            - /etc/environment
 
     easyspeak_notifier:
         image: tatihutii/easyspeak_notifier:latest

@@ -1,6 +1,5 @@
 ﻿using EasySpeak.Core.Common.Enums;
 
-
 namespace EasySpeak.Core.DAL.Entities
 {
     public class User : Entity<long>
@@ -10,7 +9,7 @@ namespace EasySpeak.Core.DAL.Entities
         public Timezone Timezone { get; set; }
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
-        public short Age { get; set; }
+        public DateTime BirthDate { get; set; }
         public string Email { get; set; } = string.Empty;
         public string ImagePath { get; set; } = string.Empty;
         public Sex Sex { get; set; }
@@ -36,6 +35,5 @@ namespace EasySpeak.Core.DAL.Entities
             Notifications = new List<Notification>();
             CreatedLessons = new List<Lesson>();
         }
-
     }
 }

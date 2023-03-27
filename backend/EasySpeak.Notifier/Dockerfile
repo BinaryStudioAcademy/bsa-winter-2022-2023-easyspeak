@@ -6,8 +6,8 @@ EXPOSE $PROJECT_PORT
 FROM mcr.microsoft.com/dotnet/sdk:6.0-focal AS build
 WORKDIR /src
 COPY ["EasySpeak.Notifier/EasySpeak.Notifier.WebAPI/EasySpeak.Notifier.WebAPI.csproj", "EasySpeak.Notifier/EasySpeak.Notifier.WebAPI/"]
-COPY ["EasySpeak.Core/EasySpeak.Core.Common/EasySpeak.Core.Common.csproj", "EasySpeak.Core/EasySpeak.Core.Common/"]
 COPY ["EasySpeak.RabbitMQ/EasySpeak.RabbitMQ.csproj", "EasySpeak.RabbitMQ/"]
+COPY ["EasySpeak.Core/EasySpeak.Core.Common/EasySpeak.Core.Common.csproj", "EasySpeak.Core/EasySpeak.Core.Common/"]
 
 RUN dotnet restore "EasySpeak.Notifier/EasySpeak.Notifier.WebAPI/EasySpeak.Notifier.WebAPI.csproj"
 COPY . .

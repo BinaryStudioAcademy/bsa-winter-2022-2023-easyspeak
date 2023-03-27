@@ -189,7 +189,7 @@ public static class Seeder
             .RuleFor(u => u.FirstName, f => f.Person.FirstName)
             .RuleFor(u => u.LastName, f => f.Person.LastName)
             .RuleFor(u => u.Email, f => f.Person.Email)
-            .RuleFor(u => u.Age, f => (short)f.Random.Number(16, 70))
+            .RuleFor(u => u.BirthDate, f => f.Person.DateOfBirth = new DateTime(2003, 6, 5))
             .RuleFor(u => u.Sex, f => f.PickRandom<Sex>())
             .RuleFor(u => u.LanguageLevel, f => f.PickRandom<LanguageLevel>())
             .RuleFor(u => u.Status, f => f.PickRandom<UserStatus>())

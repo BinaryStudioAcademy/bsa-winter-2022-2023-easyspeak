@@ -20,9 +20,13 @@
   <ItemGroup>
     <ProjectReference Include="..\EasySpeak.Core.Common\EasySpeak.Core.Common.csproj" />
   </ItemGroup>
-  
+	
   <ItemGroup>
-    <Folder Include="Migrations\" />
+	<Folder Include="Migrations\" />
+  </ItemGroup>
+	
+  <ItemGroup>
+    <ProjectReference Include="..\EasySpeak.Core.Common\EasySpeak.Core.Common.csproj" />
   </ItemGroup>
 
 </Project>

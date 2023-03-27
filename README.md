@@ -29,6 +29,7 @@ By default, apps run on the following ports:
 | EasySpeak.**Core**     | 5050 |
 | EasySpeak.**Notifier** | 5070 |
 | RabbitMQ               | 5672 |
+| EasySpeak.**Emailer**  | 5090 |
 
 _Tip: If you want to connect to the specific service outside of docker, then use "localhost" as a service name, but if both services are inside docker, use service_name from a "docker-compose" file instead._
 
@@ -97,7 +98,7 @@ erDiagram
     nvarchar mediaPath
     datetime startsAt
     int limitOfUsers
-    int languageLevel 
+    int languageLevel
   }
 
   Calls {
@@ -177,3 +178,5 @@ This is a list of the required environment variables:
 #### MSSQL Server
 
 **SA_PASSWORD** - MSSQL Server "SA" user password
+
+**FirebaseServiceAccountKey.json** - Firebase API key. You can find it in Trello desk - Document reference - Firebase link - Save "privateKey"

@@ -1,4 +1,10 @@
 <div class="container">
+    <p class="main-text">Session Call</p>
+        <div class="buttons">
+            <button class="send-button" mat-raised-button color="primary" (click)="startSessionCall()">
+                Start
+            </button>
+        </div>
     <div class="chat-body" *ngIf="messages">
         <div class="message" *ngFor="let message of messages" [ngClass]="{ sender: message.userId === currentUserId }">
             <p>{{ message.text }}</p>

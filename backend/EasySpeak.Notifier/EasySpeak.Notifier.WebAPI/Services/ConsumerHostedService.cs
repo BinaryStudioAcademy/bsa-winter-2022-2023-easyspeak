@@ -1,6 +1,10 @@
-﻿using EasySpeak.RabbitMQ;
+﻿using EasySpeak.Core.Common.DTO.Notification;
+using EasySpeak.Notifier.WebAPI.Hubs;
+using EasySpeak.RabbitMQ;
 using EasySpeak.RabbitMQ.Interfaces;
 using EasySpeak.RabbitMQ.Services;
+using Microsoft.AspNetCore.SignalR;
+using Newtonsoft.Json;
 
 namespace EasySpeak.Notifier.WebAPI.Services
 {
@@ -8,10 +12,12 @@ namespace EasySpeak.Notifier.WebAPI.Services
     {
         private readonly IMessageConsumer _consumer;
         private readonly ILogger<ConsumerHostedService> _logger;
-        public ConsumerHostedService(IMessageConsumer consumer, ILogger<ConsumerHostedService> logger) 
-        { 
+        private readonly IHubContext<NotificationHub> _hubContext;
+        public ConsumerHostedService(IMessageConsumer consumer, ILogger<ConsumerHostedService> logger, IHubContext<NotificationHub> hubContext)
+        {
             _consumer = consumer;
             _logger = logger;
+            _hubContext = hubContext;
             _consumer.Init("notifier");
         }
 
@@ -27,17 +33,22 @@ namespace EasySpeak.Notifier.WebAPI.Services
 
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
         {
+
             try
+            {
+                _consumer.Recieve<NewNotificationDto>((data) =>
                 {
-                    _consumer.Recieve<string>((data) =>
+                    if (data is not null)
                     {
+                        _hubContext.Clients.All.SendAsync($"Notification_{data.Email.ToLower()}", JsonConvert.SerializeObject(data));
                         Console.WriteLine(data);
-                    });
-                }
-                catch (Exception ex)
-                {
-                    _logger.LogError(ex, "Exception");
-                }          
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Exception");
+            }
             return Task.CompletedTask;
         }
     }
