@@ -79,6 +79,7 @@ button
         font-weight: 500
         font-size: 16px
         line-height: 150%
+        
     &:hover
         background-color: $turquoise-100
 
@@ -171,7 +172,7 @@ button
     
     .radius-small
             position: absolute
-            background-color: $blue-100
+            background-color: $inactive-color
             width: 55px
             height: 55px
             border-radius: 75px
@@ -312,19 +313,23 @@ button
     display: flex
     justify-content: center
     align-items: center
+
     .ai-left
         display: flex
         flex-direction: column
         justify-content: center
         align-items: flex-end
         width:50%
+
     .left-container
         width: 35vw
+
     .ai-title
         font-weight: 700
         font-size: 24px
         line-height: 146%
         margin-bottom: 17px
+
     .ai-info
         color: $gray-300
         font-weight: 500
@@ -335,12 +340,14 @@ button
         display: flex
         width: 50%
         position: relative
+
     .ai-card-container
         width:422px
         height: 200px
         border: 1px solid #F6F5FA
         box-shadow: 0px 0px 3px rgba(89, 104, 133, 0.18)
         border-radius: 10px
+
     .ai-card-over
         position: absolute
         top: 52px
@@ -401,10 +408,12 @@ button
         margin: 0 100px
         h2
             margin-left: 6px
+
         .footer-logo
             display: flex
             align-items: center
             margin-bottom: 29px
+
         .logo-img
             width: 35px
 
@@ -417,9 +426,11 @@ button
         align-items: center
         width: 36px
         height: 36px
-        border: 1px solid $blue-100
+        border: 1px solid $inactive-color
         border-radius: 100%
         margin-right: 10px
+        &:hover
+            filter: invert(66%) sepia(83%) saturate(339%) hue-rotate(158deg) brightness(101%) contrast(93%)
 
     .copyright
         text-align: center
@@ -434,13 +445,13 @@ button
         line-height: 24px
         margin-bottom: 60px
         p
-            color: $blue-100
+            color: $inactive-color
             cursor: pointer
             &:hover
                 color: $turquoise-100
 
     .copy-label
-        color: $blue-100
+        color: $inactive-color
         font-weight: 400
         font-size: 12px
         line-height: 135.5%
