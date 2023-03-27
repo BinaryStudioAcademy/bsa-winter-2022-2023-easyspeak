@@ -51,7 +51,7 @@ export class LessonComponent extends BaseComponent {
     }
 
     enrollLesson() {
-        this.userService.enrollUserToLesson(this.lesson)
+        this.userService.enrollUserToLesson(this.lesson.id)
             .pipe(this.untilThis)
             .subscribe({ next: (lesson) => {
                 this.lesson.isDisabled = true;

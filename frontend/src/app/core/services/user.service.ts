@@ -21,7 +21,7 @@ export class UserService {
         return this.httpService.put(`${this.routePrefix}/${userId}`, updatedUser);
     }
 
-    public enrollUserToLesson(lesson: Lesson) {
-        return this.httpService.put<Lesson>(`${this.routePrefix}/enroll/${lesson.id}`, lesson);
+    public enrollUserToLesson(lessonId: number) {
+        return this.httpService.put<Lesson>(`${this.routePrefix}/enroll/${lessonId}`, {} as Lesson);
     }
 }
