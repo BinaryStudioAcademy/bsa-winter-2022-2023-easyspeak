@@ -60,7 +60,7 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
                     country: resp.country,
                     sex: resp.sex,
                     language: resp.language,
-                    englishLevel: resp.englishLevel,
+                    englishLevel: resp.languageLevel,
                 });
             });
     }

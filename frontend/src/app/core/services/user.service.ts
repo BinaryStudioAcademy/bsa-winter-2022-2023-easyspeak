@@ -12,7 +12,7 @@ export class UserService {
     constructor(private httpService: HttpService) {}
 
     public getUser() {
-        return this.httpService.getById<IUserInfo>(`${this.routePrefix}`, '');
+        return this.httpService.get<IUserInfo>(`${this.routePrefix}`);
     }
 
     public updateUser(userId: number, updatedUser: IUserInfo) {
