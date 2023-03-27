@@ -45,7 +45,7 @@ export class SuitableLessonComponent implements OnInit {
 
         this.setDays();
 
-        if (!(this.selectedDate.getTime() + 10000 < new Date().getTime())) {
+        if (!(moment(this.selectedDate).isBefore(moment(), 'day'))) {
             this.dateSelected.emit(new Date(this.selectedDate));
         }
     }
