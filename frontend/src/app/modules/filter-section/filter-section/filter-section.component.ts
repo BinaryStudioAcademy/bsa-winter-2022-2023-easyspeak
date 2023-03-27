@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { langLevelsSample, topicsSample } from '@modules/filter-section/filter-section/filter-section.util';
+import { langLevelsSample } from '@modules/filter-section/filter-section/filter-section.util';
 import { Subject } from 'rxjs';
 
 import { Filter } from 'src/app/models/filters/filter';
@@ -21,7 +21,6 @@ export class FilterSectionComponent implements OnInit {
     public selectedLanguageFilters = new Set<string>();
 
     public selectedInterestsFilters = new Set<string>();
-
 
     public langLevels: Filter[];
 

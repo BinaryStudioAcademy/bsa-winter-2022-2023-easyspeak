@@ -4,8 +4,8 @@ import { langLevelsSample } from '@modules/filter-section/filter-section/filter-
 import { YoutubePlayerComponent } from '@shared/components/youtube-player/youtube-player.component';
 import { ILesson } from '@shared/models/lesson/ILesson';
 import { LanguageLevels } from '@shared/models/lesson/LanguageLevels';
-import { Lesson } from 'src/app/models/lessons/lesson';
 
+import { Lesson } from 'src/app/models/lessons/lesson';
 import { LessonsService } from 'src/app/services/lessons.service';
 
 import { LessonsCreateComponent } from '../lessons-create/lessons-create.component';
@@ -105,13 +105,13 @@ export class LessonsPageComponent implements OnInit, OnChanges {
         const noLanguages = !this.selectedLanguageFilters.size;
 
         if (noInterests && noLanguages) {
-          return "Oops, there are no lessons for this day. Please consider another date";
-        } else if (!noInterests && !noLanguages) {
-          return "Oops, there are no lessons with such filters for this day. Please consider another date";
-        } else if (!noInterests && noLanguages) {
-          return "Oops, there are no lessons with such interests for this day. Please consider another date";
-        } else {
-          return "Oops, there are no lessons with such levels for this day. Please consider another date";
+            return 'Oops, there are no lessons for this day. Please consider another date';
+        } if (!noInterests && !noLanguages) {
+            return 'Oops, there are no lessons with such filters for this day. Please consider another date';
+        } if (!noInterests && noLanguages) {
+            return 'Oops, there are no lessons with such interests for this day. Please consider another date';
         }
-      }
+
+        return 'Oops, there are no lessons with such levels for this day. Please consider another date';
+    }
 }

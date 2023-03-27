@@ -34,7 +34,7 @@ export class SuitableLessonDayComponent {
     isSelectedDay(): boolean {
         const isSameSeleted = moment(this.item).isSame(this.selectedDate, 'days');
 
-        return isSameSeleted
+        return isSameSeleted;
     }
 
     onDayClick(eventData: Event) {

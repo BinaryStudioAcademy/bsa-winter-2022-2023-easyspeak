@@ -50,37 +50,12 @@ export class SuitableLessonComponent implements OnInit {
         }
     }
 
-    // async setDays(): Promise<void> {
-    //     this.days = [];
-    //     const promises: Promise<{ date: Date, meetingsCount: number }>[] = [];
-
-    //     for (let i = 0; i < 7; i++) {
-    //         const date = moment(this.selectedDate).add(i - this.selectedDate.getDay() + 1, 'day').toDate();
-    //         const promise = this.getMeetingCount(date).then(meetingsCount => ({ date, meetingsCount }));
-
-    //         promises.push(promise);
-    //     }
-
-    //     const days = await Promise.all(promises);
-
-    //     this.days = days.sort((a, b) => a.date.getTime() - b.date.getTime());
-    // }
-
-    // async getMeetingCount(date: Date): Promise<number> {
-    //     const filteredLessons = await this.lessonService.getFilteredLessons({
-    //         languageLevels: [],
-    //         tags: [],
-    //         date: new Date(date.toISOString().slice(0, 10)),
-    //     }).toPromise();
-
-    //     return filteredLessons?.length || 0;
-    // }
-
     setDays(): void {
         this.days = [];
 
         for (let i = 0; i < 7; i++) {
             const date = moment(this.selectedDate).add(i - this.selectedDate.getDay() + 1, 'day').toDate();
+
             this.days.push({ date, meetingsAmount: 0 });
         }
 
@@ -88,10 +63,10 @@ export class SuitableLessonComponent implements OnInit {
 
         this.lessonService.getLessonsCount(requestDate).subscribe(response => {
             response.forEach(el => {
-                const day = this.days.find(day => day.date.getDay() === new Date(el.date).getDay());
+                const matchingDate = this.days.find(day => day.date.getDay() === new Date(el.date).getDay());
 
-                if (day) {
-                    day.meetingsAmount = el.meetingsAmount;
+                if (matchingDate) {
+                    matchingDate.meetingsAmount = el.meetingsAmount;
                 }
             });
         });
