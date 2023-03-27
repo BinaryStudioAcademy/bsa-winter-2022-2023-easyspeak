@@ -35,10 +35,7 @@
     </label>
 </div>
 <div class="age-sex-section">
-    <select required>
-        <option>Age</option>
-        <option *ngFor="let age of Ages">{{ age }}</option>
-    </select>
+    <app-calendar placeholder="Date of birth"></app-calendar>
     <select required>
         <option>Sex</option>
         <option>Male</option>

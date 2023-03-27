@@ -1,4 +1,4 @@
-<form #userDetailsForm="ngForm" [formGroup]="detailsForm" class="container" (ngSubmit)="onSubmit()">
+    <form #userDetailsForm="ngForm" [formGroup]="detailsForm" class="container" (ngSubmit)="onSubmit()">
     <div class="user-photo-section-title">
         <div class="title">
             User Photo
@@ -99,13 +99,8 @@
         </div>
 
         <div class="form-input-group">
-            <div *ngIf="!dateOfBirth.getRawValue()" class="placeholder">Date of Birth</div>
+            <app-calendar *ngIf="!dateOfBirth.getRawValue()" placeholder="Date of birth"></app-calendar>
             <label *ngIf="dateOfBirth.getRawValue()" class="label" for="firstName">First Name</label>
-            <ng-select class="custom" dropdownPosition="bottom" appearance="underline" #sexSelect labelForId="dateOfBirth"
-            formControlName="dateOfBirth" bindLabel="dateOfBirth">
-                <ng-option class="select-option" *ngFor="let age of ages" value="{{age}}">{{age}}</ng-option>
-            </ng-select>
-            <mat-icon class="expand-icon">expand_more</mat-icon>
         </div>
 
         <div class="form-input-group">
@@ -149,7 +144,7 @@
         </div>
     </div>
     <div class="user-interests-section">
-        
+
     </div>
     <div class="user-socials-section">
         <div class="form-input-group">
