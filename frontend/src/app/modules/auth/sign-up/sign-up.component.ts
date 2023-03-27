@@ -17,8 +17,6 @@ import { CountriesTzLangProviderService } from 'src/app/services/countries-tz-la
 export class SignUpComponent extends BaseComponent {
     EnglishLevels = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
 
-    Ages = ['5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18'];
-
     Countries: ICountry[] = [];
 
     private validationErrorMessage: { [id: string]: string } = {
