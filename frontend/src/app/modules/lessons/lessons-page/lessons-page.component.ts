@@ -4,7 +4,7 @@ import { langLevelsSample } from '@modules/filter-section/filter-section/filter-
 import { YoutubePlayerComponent } from '@shared/components/youtube-player/youtube-player.component';
 import { ILesson } from '@shared/models/lesson/ILesson';
 import { LanguageLevels } from '@shared/models/lesson/LanguageLevels';
-import Utils from '@shared/utils/lesson.utils';
+import { Lesson } from 'src/app/models/lessons/lesson';
 
 import { LessonsService } from 'src/app/services/lessons.service';
 
@@ -24,13 +24,17 @@ export class LessonsPageComponent implements OnInit, OnChanges {
 
     @Input() selectedDateFilter: Date;
 
-    lessons = Utils.lessons;
+    lessons: Lesson[];
 
     constructor(private dialogRef: MatDialog, private lessonService: LessonsService) { }
 
     ngOnInit(): void {
+        this.selectedDateFilter = new Date();
+
+        this.getLessons();
+
         const formatter = new Intl.DateTimeFormat('en-US', { day: 'numeric', month: 'long', year: 'numeric', weekday: 'long' });
-        const parts = formatter.formatToParts(new Date());
+        const parts = formatter.formatToParts(this.selectedDateFilter);
         const formattedDate = `${parts[4].value} ${parts[2].value} ${parts[6].value}, ${parts[0].value}`;
 
         this.todayDate = formattedDate;

@@ -37,12 +37,18 @@ export class SuitableLessonComponent implements OnInit {
         this.selectedDate.setDate(this.selectedDate.getDate() + this.amountOfDayInWeek);
 
         this.setDays();
+
+        this.dateSelected.emit(new Date(this.selectedDate));
     }
 
     weekDec(): void {
         this.selectedDate.setDate(this.selectedDate.getDate() - this.amountOfDayInWeek);
 
         this.setDays();
+
+        if (!(this.selectedDate.getTime() + 10000 < new Date().getTime())) {
+            this.dateSelected.emit(new Date(this.selectedDate));
+        }
     }
 
     async setDays(): Promise<void> {
