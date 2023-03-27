@@ -134,7 +134,7 @@
     height: 100%
     display: grid
     grid-template-rows: repeat(5, 46px)
-    grid-column: 495px
+    grid-column: auto
     gap: 15px
     button
         width: 182px
@@ -243,4 +243,27 @@
     width: 20px
     height: 14px
 
+
+.button-icon
+    border-width: 0
+    background: $turquoise-100
+    color: $blue-200
+    border-radius: 15px
+    width: 24px
+    height: 24px
+    display: flex
+    justify-content: center
+    align-items: center
+    margin-right: 5px
+    &:hover
+        cursor: pointer
+
+.calendar-block
+    display: flex
+    align-items: center
+    height: 46px
+    background-color: $white
+    border-radius: 18px
+    padding: 0 15px
+    margin: 15px
 

@@ -28,7 +28,7 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
 
     languages;
 
-    emglishLevelEnumeration = EnglishLevel;
+    englishLevelEnumeration = EnglishLevel;
 
     englishLevelOptions: string[] = [];
 
@@ -38,7 +38,7 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
 
     detailsForm;
 
-    selectedTags: string[];
+    selectedTags: string[] = [];
 
     constructor(
         private fb: FormBuilder,
@@ -52,6 +52,7 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
         this.detailsForm = detailsGroup(this.fb);
         this.sexOptions = Object.values(this.sexEnumeration) as string[];
         this.englishLevelOptions = Object.values(EnglishLevel) as string[];
+        this.tagsList = getTags();
     }
 
     ngOnInit(): void {
@@ -110,7 +111,7 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
         return this.detailsForm.get('email') as FormControl;
     }
 
-    get instagram(): FormControl {
+    get interests(): FormControl {
         return this.detailsForm.get('instagram') as FormControl;
     }
 
@@ -123,6 +124,12 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
     }
 
     selectInterest($event: Event) {
+        const ev = $event.target as HTMLInputElement;
+    }
 
+    select(event: Date | null) {
+        if (event) {
+            const rrr = event;
+        }
     }
 }

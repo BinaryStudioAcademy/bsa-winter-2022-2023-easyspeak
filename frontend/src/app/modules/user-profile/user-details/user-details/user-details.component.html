@@ -101,11 +101,21 @@
         <div class="form-input-group">
             <div *ngIf="!dateOfBirth.getRawValue()" class="placeholder">Date of Birth</div>
             <label *ngIf="dateOfBirth.getRawValue()" class="label" for="firstName">First Name</label>
-            <ng-select class="custom" dropdownPosition="bottom" appearance="underline" #sexSelect labelForId="dateOfBirth"
-            formControlName="dateOfBirth" bindLabel="dateOfBirth">
-                <ng-option class="select-option" *ngFor="let age of ages" value="{{age}}">{{age}}</ng-option>
-            </ng-select>
-            <mat-icon class="expand-icon">expand_more</mat-icon>
+<!--            <ng-select class="custom" dropdownPosition="bottom" appearance="underline" #sexSelect labelForId="dateOfBirth"-->
+<!--            formControlName="dateOfBirth" bindLabel="dateOfBirth">-->
+<!--                <ng-option class="select-option" *ngFor="let age of ages" value="{{age}}">{{age}}</ng-option>-->
+<!--            </ng-select>-->
+<!--            <mat-icon class="expand-icon">expand_more</mat-icon>-->
+
+            <div class="calendar-block">
+                <button class="button-icon" [matMenuTriggerFor]="appMenu">
+                    <img src="assets\calendar\calendar.svg">
+                </button>
+                <mat-menu #appMenu="matMenu">
+                    <mat-calendar #calendar (selectedChange)="select($event)"> </mat-calendar>
+                </mat-menu>
+                dateOfBirth TODO
+            </div>
         </div>
 
         <div class="form-input-group">
@@ -150,16 +160,16 @@
         </div>
     </div>
     <div class="user-interests-section">
-        <div *ngFor="let item of tagsList; let i = index" class="user-interest-content">
+       <div *ngFor="let item of tagsList; let i = index" class="user-interest-content">
             <input type="checkbox" id="{{i}}" [checked]=selectedTags.includes(tagsList[i].icon_name) class="item-checkbox"
                    (change)="selectInterest($event)"/>
             <label class="item-checkbox-label" for="{{i}}">
                 <div class="interest-image-container ">
-                    <img class="icon" src="{{item.link}}" alt="image"/>
+                    <img class="icon" [src]="item.link" alt="image"/>
                 </div>
                 <div class="interest-image-text">{{item.icon_name}}</div>
             </label>
-        </div>
+       </div>
     </div>
     <div class="user-socials-section">
 <!--        <div class="form-input-group">-->
