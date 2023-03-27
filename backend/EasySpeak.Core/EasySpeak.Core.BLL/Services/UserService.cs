@@ -4,6 +4,7 @@ using EasySpeak.Core.Common.DTO.Lesson;
 using EasySpeak.Core.Common.DTO.User;
 using EasySpeak.Core.DAL.Context;
 using EasySpeak.Core.DAL.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace EasySpeak.Core.BLL.Services
 {
@@ -31,14 +32,14 @@ namespace EasySpeak.Core.BLL.Services
         public async Task<LessonDto> EnrollUserToLesson(long lessonId)
         {
             var userId = _firebaseAuthService.UserId;
-            var user = _context.Users.FirstOrDefault(u => u.Id == userId);
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
 
             if (user == null)
             {
                 throw new ArgumentException($"Failed to find the user with id {userId}");
             }
 
-            var lesson = _context.Lessons.FirstOrDefault(l => l.Id == lessonId);
+            var lesson = await _context.Lessons.FirstOrDefaultAsync(l => l.Id == lessonId);
 
             if (lesson == null)
             {
@@ -56,7 +57,14 @@ namespace EasySpeak.Core.BLL.Services
         {
             return options => options.AfterMap((o, dto) =>
                 dto.SubscribersCount = _context.Lessons.Select(t => new { Id = t.Id, SbCount = t.Subscribers.Count })
-                    .Single(l => l.Id == lessonId).SbCount);
+                    .FirstOrDefault(l => l.Id == lessonId)!.SbCount);
+        }
+
+        public async Task<UserDto> GetUserAsync()
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == _firebaseAuthService.UserId);
+
+            return _mapper.Map<UserDto>(user);
         }
     }
 }
