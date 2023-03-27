@@ -106,6 +106,8 @@ export class SignUpComponent extends BaseComponent {
             return 'The password does not match';
         }
 
+        this.isValid = true;
+
         return '';
     }
 
@@ -147,8 +149,32 @@ export class SignUpComponent extends BaseComponent {
                     Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\\d@$!%*?&\\.]{6,}$'),
                 ],
             ],
-            confirmPassword: [this.confirmPassword, Validators.required],
+            confirmPassword: [
+                this.confirmPassword,
+                [
+                    Validators.required,
+                ],
+            ],
+        }, {
+            validators: this.confirmPasswordCheck('password', 'confirmPassword'),
         });
+    }
+
+    confirmPasswordCheck(checkPassword: string, checkConfirmPassword: string) {
+        return (formGroup: FormGroup) => {
+            const pass = formGroup.controls[checkPassword];
+            const confirmPass = formGroup.controls[checkConfirmPassword];
+
+            if (confirmPass.errors && !confirmPass.errors['MustMatch']) {
+                return;
+            }
+
+            if (pass.value !== confirmPass.value) {
+                confirmPass.setErrors({ MustMatch: true });
+            } else {
+                confirmPass.setErrors(null);
+            }
+        };
     }
 
     private createUser() {
