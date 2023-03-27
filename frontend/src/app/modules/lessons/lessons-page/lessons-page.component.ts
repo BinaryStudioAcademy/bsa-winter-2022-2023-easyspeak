@@ -18,9 +18,9 @@ import { LessonsCreateComponent } from '../lessons-create/lessons-create.compone
 export class LessonsPageComponent implements OnInit, OnChanges {
     todayDate: string;
 
-    @Input() selectedTopicsFilters: Set<string>;
-
     @Input() selectedLanguageFilters: Set<string>;
+
+    @Input() selectedInterestsFilters: Set<string>;
 
     @Input() selectedDateFilter: Date;
 
@@ -74,7 +74,7 @@ export class LessonsPageComponent implements OnInit, OnChanges {
     getLessons() {
         this.lessonService.getFilteredLessons({
             languageLevels: Array.from(this.selectedLanguageFilters).map((level: string) => Object.values(LanguageLevels).indexOf(level)),
-            tags: Array.from(this.selectedTopicsFilters).map((topic) => ({ name: topic })),
+            tags: Array.from(this.selectedInterestsFilters).map((topic) => ({ name: topic })),
             date: new Date(this.selectedDateFilter.toISOString().slice(0, 10)),
         }).subscribe((response: ILesson[]) => {
             this.lessons = [];
@@ -101,15 +101,15 @@ export class LessonsPageComponent implements OnInit, OnChanges {
     }
 
     getLessonsUnavailableMessage(): string {
-        const noTopics = !this.selectedTopicsFilters.size;
+        const noInterests = !this.selectedInterestsFilters.size;
         const noLanguages = !this.selectedLanguageFilters.size;
 
-        if (noTopics && noLanguages) {
+        if (noInterests && noLanguages) {
           return "Oops, there are no lessons for this day. Please consider another date";
-        } else if (!noTopics && !noLanguages) {
+        } else if (!noInterests && !noLanguages) {
           return "Oops, there are no lessons with such filters for this day. Please consider another date";
-        } else if (!noTopics && noLanguages) {
-          return "Oops, there are no lessons with such topics for this day. Please consider another date";
+        } else if (!noInterests && noLanguages) {
+          return "Oops, there are no lessons with such interests for this day. Please consider another date";
         } else {
           return "Oops, there are no lessons with such levels for this day. Please consider another date";
         }
