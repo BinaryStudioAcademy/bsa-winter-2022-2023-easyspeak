@@ -72,6 +72,7 @@ export class SuitableLessonComponent implements OnInit {
     }
 
     onDateSelected(dateSelected: Date) {
+        this.selectedDate = dateSelected;
         this.dateSelected.emit(dateSelected);
     }
 }
