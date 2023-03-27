@@ -4,7 +4,6 @@ import { BaseComponent } from '@core/base/base.component';
 import { SpinnerService } from '@core/services/spinner.service';
 import { UserService } from '@core/services/user.service';
 import { YoutubePlayerComponent } from '@shared/components/youtube-player/youtube-player.component';
-import { ILesson } from '@shared/models/lesson/ILesson';
 
 import { Lesson } from 'src/app/models/lessons/lesson';
 import { Question } from 'src/app/models/lessons/question';

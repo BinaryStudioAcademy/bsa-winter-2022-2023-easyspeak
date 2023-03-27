@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { IUserInfo } from '@shared/models/IUserInfo';
-import { ILesson } from '@shared/models/lesson/ILesson';
 
-import { Lesson } from '../../models/lessons/lesson';
+import { Lesson } from 'src/app/models/lessons/lesson';
 
 import { HttpService } from './http.service';
 

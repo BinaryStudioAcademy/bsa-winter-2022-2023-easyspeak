@@ -26,8 +26,5 @@ import { MainRoutingModule } from './main-routing.module';
         TimeTable1Module,
         UserProfileModule,
     ],
-    exports: [
-        TimetablePageComponent
-    ]
 })
 export class MainModule {}

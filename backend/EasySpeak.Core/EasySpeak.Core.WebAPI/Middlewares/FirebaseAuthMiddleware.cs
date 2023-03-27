@@ -1,4 +1,5 @@
 ﻿using EasySpeak.Core.BLL.Interfaces;
+using FirebaseAdmin.Auth;
 
 namespace EasySpeak.Core.WebAPI.Middlewares
 {
@@ -15,19 +16,19 @@ namespace EasySpeak.Core.WebAPI.Middlewares
         {
             var authToken = context.Request.Headers["Authorization"].ToString();
 
-            //if (!string.IsNullOrEmpty(authToken) && authToken.StartsWith("Bearer "))
-            //{
-            //    var idToken = authToken.Split(' ')[1];
+            if (!string.IsNullOrEmpty(authToken) && authToken.StartsWith("Bearer "))
+            {
+                var idToken = authToken.Split(' ')[1];
 
-            //    var decodedToken = await FirebaseAuth.DefaultInstance.VerifyIdTokenAsync(idToken);
+                var decodedToken = await FirebaseAuth.DefaultInstance.VerifyIdTokenAsync(idToken);
 
-            //    var userEmail = decodedToken.Claims["email"].ToString();
+                var userEmail = decodedToken.Claims["email"].ToString();
 
-            //    if (userEmail != null)
-            //    {
-            //        await firebaseAuthService.SetUserId(userEmail);
-            //    }
-            //}
+                if (userEmail != null)
+                {
+                    await firebaseAuthService.SetUserId(userEmail);
+                }
+            }
 
             await next(context);
         }
