@@ -44,7 +44,7 @@ export class LessonComponent {
             this.spinner.hide();
         });
 
-        if (this.questions.length !== 0) {
+        if (this.questions.length) {
             this.isShowQuestions = !this.isShowQuestions;
         }
     }
