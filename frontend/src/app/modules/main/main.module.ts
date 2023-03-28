@@ -27,7 +27,7 @@ import { MainRoutingModule } from './main-routing.module';
         UserProfileModule,
     ],
     exports: [
-        HeaderComponent
-    ]
+        HeaderComponent,
+    ],
 })
 export class MainModule {}
