@@ -17,7 +17,8 @@
             #upPassword="ngModel"
             required
             placeholder="Password"
-            [ngModelOptions]="{ standalone: true }" />
+            [ngModelOptions]="{ standalone: true }" 
+            appPasswordVisibility/>
         <mat-error *ngIf="submitted && form.controls['password'].errors">{{ getErrorMessage('password') }}</mat-error>
     </label>
     <button mat-button (click)="validationThenSignIn()">Confirm</button>
