@@ -40,7 +40,7 @@
                 class="join"
                 [disabled]="lesson.isDisabled"
                 [textContent]="lesson.isDisabled ? 'Expired' : 'Join'"></button>
-            <button class="expand" (click)="getQuestions(lesson.id)">See questions</button>
+            <button class="expand" (click)="showQuestions(lesson.id)">See questions</button>
             <img src="assets/lesson-icons/expand.svg" alt="expand-icon" />
         </div>
     </div>
