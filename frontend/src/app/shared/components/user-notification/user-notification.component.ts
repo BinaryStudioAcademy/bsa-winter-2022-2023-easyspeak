@@ -24,7 +24,7 @@ export class UserNotificationComponent implements OnInit, OnDestroy {
     }
 
     async ngOnInit() {
-        this.notifySubscription = await this.httpService.get<INotification>('/notification').subscribe((data) => {
+        this.notifySubscription = await this.httpService.get<INotification[]>('/notification').subscribe((data) => {
             this.notifications = data;
         });
 

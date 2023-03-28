@@ -18,6 +18,6 @@ public class UserProfile : Profile
                 .ForMember(user => user.Country,
                 src => src.MapFrom(userDto => EnumHelper.MapCountry(userDto.Country)));
 
-        CreateMap<User, UserDto>();
+        CreateMap<User, UserDto>().ReverseMap();
     }
 }

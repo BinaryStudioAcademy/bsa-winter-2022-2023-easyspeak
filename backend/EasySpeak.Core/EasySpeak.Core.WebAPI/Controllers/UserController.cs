@@ -26,7 +26,7 @@ namespace EasySpeak.Core.WebAPI.Controllers
         }
         
         [HttpGet("{userId}")]
-        public ActionResult<ICollection<User>> Get()
+        public ActionResult<ICollection<User>> Get(int id)
         {
             var user = new User()
             {
@@ -49,10 +49,26 @@ namespace EasySpeak.Core.WebAPI.Controllers
             });
         }
 
+        [HttpGet("current")]
+        public async Task<ActionResult<UserDto>> GetCurrentUser()
+        {
+            var user = await _userService.GetCurrentUser();
+
+            return Ok(user);
+        }
+
         [HttpPut("{userId}")]
         public ActionResult<UserDto> Update(int userId, UserDto userDto)
         {
             return Ok(userDto);
+        }
+        
+        [HttpPut("current")]
+        public async Task<ActionResult<UserDto>> UpdateCurrentUser(UserDto userDto)
+        {
+            var user = await _userService.UpdateCurrentUser(userDto);
+            
+            return Ok(user);
         }
          
     }

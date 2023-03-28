@@ -1,10 +1,18 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { BaseComponent } from '@core/base/base.component';
 import { AuthService } from '@core/services/auth.service';
-import { HttpService } from '@core/services/http.service';
+import { UserService } from '@core/services/user.service';
+import { Ages } from '@shared/data/ages.util';
+import { EnglishLevel } from '@shared/data/englishLevel';
+import { Sex } from '@shared/data/sex';
 import { INewUser } from '@shared/models/INewUser';
 import { ToastrService } from 'ngx-toastr';
+
+import { CountriesTzLangProviderService } from 'src/app/services/countries-tz-lang-provider.service';
+
+import { matchpassword } from './matchpassword.validator';
 
 @Component({
     selector: 'app-sign-up',
@@ -12,141 +20,129 @@ import { ToastrService } from 'ngx-toastr';
     styleUrls: ['./sign-up.component.sass'],
 })
 export class SignUpComponent extends BaseComponent {
-    EnglishLevels = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
+    emglishLevelEnumeration = EnglishLevel;
 
-    Ages = ['5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18'];
+    englishLevels;
 
-    Countries = ['Ukraine', 'Austria', 'England', 'Scotland', 'Poland', 'Romania'];
+    ages;
 
-    private validationErrorMessage: { [id: string]: string } = {
-        required: 'Enter a value',
-        maxlength: "Can't be more than 25 characters",
-        email: 'Not a valid email',
-        minlength: "Can't be less 2 symbols",
-        pattern: 'Should be at least one small and one capital letter',
-    };
+    countries;
 
-    newUser: INewUser = {
-        firstName: '',
-        lastName: '',
-        email: '',
-        age: 0,
-        sex: '',
-        languageLevel: '',
-        country: '',
-        language: '',
-    };
+    sexEnumeration = Sex;
 
-    password: string = '';
+    sexOptions;
 
-    confirmPassword: string = '';
+    languages;
 
-    isValid = true;
+    registerForm = new FormGroup({
+        email: new FormControl('', [Validators.required]),
+        firstName: new FormControl('', [Validators.required]),
+        lastName: new FormControl('', [Validators.required]),
+        sex: new FormControl('', [Validators.required]),
+        languageLevel: new FormControl('', [Validators.required]),
+        country: new FormControl('', [Validators.required]),
+        language: new FormControl('', [Validators.required]),
+        dateOfBirth: new FormControl('', [Validators.required]),
+        password: new FormControl('', [Validators.required]),
+        passwordConfirmation: new FormControl('', [Validators.required]),
+    }, { validators: matchpassword });
 
-    submitted = false;
-
-    form: FormGroup = new FormGroup({
-        firstName: new FormControl(this.newUser.firstName),
-        lastName: new FormControl(this.newUser.lastName),
-        email: new FormControl(this.newUser.email),
-        password: new FormControl(this.password),
-        confirmPassword: new FormControl(this.confirmPassword),
-    });
+    user: INewUser;
 
     constructor(
         private formBuilder: FormBuilder,
         private authService: AuthService,
         private toastr: ToastrService,
-        private httpService: HttpService,
+        private userService: UserService,
+        private countriesTzLangProvider: CountriesTzLangProviderService,
+        private router: Router,
     ) {
         super();
+        this.countries = countriesTzLangProvider.getCountriesList().map((x) => x.name);
+        this.languages = countriesTzLangProvider.getLanguagesList();
+        this.englishLevels = Object.values(EnglishLevel) as string[];
+        this.sexOptions = Object.values(this.sexEnumeration) as string[];
+        this.ages = Ages;
     }
 
-    getErrorMessage(field: string) {
-        this.validateData();
-
-        const errorEntry = Object.entries(this.validationErrorMessage).find(([key]) => this.form.controls[field].hasError(key));
-
-        if (errorEntry) {
-            return errorEntry[1];
-        } if (this.form.controls['email'].hasError('maxlength')) {
-            return 'Can not be more than 30 characters';
-        }
-
-        return '';
-    }
-
-    getPasswordErrorMessage() {
-        const errorEntry = Object.entries(this.validationErrorMessage).find(([key]) => this.form.controls['password'].hasError(key));
-
-        if (errorEntry) {
-            return errorEntry[1];
-        } if (this.form.controls['password'].hasError('minlength')) {
-            return 'Can not be less than 6 symbols';
-        }
-
-        return '';
-    }
-
-    getConfirmPasswordErrorMessage() {
-        if (this.form.controls['confirmPassword'].hasError('required')) {
-            this.isValid = false;
-
-            return this.validationErrorMessage['required'];
-        }
-
-        if (this.confirmPassword !== this.password) {
-            this.isValid = false;
-
-            return 'The password does not match';
-        }
-
-        return '';
-    }
-
-    validationThenSignUp() {
-        this.submitted = true;
-        this.validateData();
-
-        if (!this.form.invalid && this.isValid) {
+    submitForm() {
+        if (this.validateForm()) {
             this.signUp();
         }
     }
 
     private signUp() {
         this.authService
-            .signUp(this.newUser.email, this.password)
+            .signUp(this.email.value, this.password.value)
             .then(() => {
                 this.createUser();
                 this.toastr.success('Successfully sign up', 'Sign up');
+                this.router.navigate(['topics']);
             })
             .catch((error) => {
                 this.toastr.error(error.message, 'Sign up');
             });
     }
 
-    private validateData() {
-        this.form = this.formBuilder.group({
-            firstName: [
-                this.newUser.firstName,
-                [Validators.required, Validators.minLength(2), Validators.maxLength(25)],
-            ],
-            lastName: [this.newUser.lastName, [Validators.required, Validators.minLength(2), Validators.maxLength(25)]],
-            email: [this.newUser.email, [Validators.required, Validators.email, Validators.maxLength(30)]],
-            password: [
-                this.password,
-                [
-                    Validators.required,
-                    Validators.minLength(6),
-                    Validators.maxLength(25),
-                    Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\\d@$!%*?&\\.]{6,}$'),
-                ],
-            ],
-            confirmPassword: [this.confirmPassword, Validators.required],
-        });
+    private validateForm() {
+        return this.registerForm.valid;
     }
 
     private createUser() {
-        this.httpService.post<INewUser>('/users', this.newUser).pipe(this.untilThis);
+        this.user = {
+            firstName: this.firstName.value,
+            lastName: this.lastName.value,
+            email: this.email.value,
+            age: this.dateOfBirth.value,
+            sex: this.sex.value,
+            language: this.language.value,
+            languageLevel: this.languageLevel.value,
+            country: this.country.value,
+        };
+
+        this.userService.createUser(this.user).pipe(this.untilThis)
+            .subscribe(() => {
+                this.toastr.success('Profile was successfully registered', 'Registration');
+            });
+    }
+
+    get email(): FormControl {
+        return this.registerForm.get('email') as FormControl;
+    }
+
+    get firstName(): FormControl {
+        return this.registerForm.get('firstName') as FormControl;
+    }
+
+    get lastName(): FormControl {
+        return this.registerForm.get('lastName') as FormControl;
+    }
+
+    get sex(): FormControl {
+        return this.registerForm.get('sex') as FormControl;
+    }
+
+    get country(): FormControl {
+        return this.registerForm.get('country') as FormControl;
+    }
+
+    get languageLevel(): FormControl {
+        return this.registerForm.get('languageLevel') as FormControl;
+    }
+
+    get language(): FormControl {
+        return this.registerForm.get('language') as FormControl;
+    }
+
+    get dateOfBirth(): FormControl {
+        return this.registerForm.get('dateOfBirth') as FormControl;
+    }
+
+    get password(): FormControl {
+        return this.registerForm.get('password') as FormControl;
+    }
+
+    get passwordConfirmation(): FormControl {
+        return this.registerForm.get('passwordConfirmation') as FormControl;
     }
 }

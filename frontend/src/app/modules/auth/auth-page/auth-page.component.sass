@@ -27,18 +27,15 @@
     top:0
     left:0
     font-style: normal
-
-.auth-form
-    position: absolute
-    left: 15%
-    top: 16%
     display: flex
-    flex-direction: column
-    width: 18%
-    height: 80%
+
+
+.router
+    width: 50vw
+    height: 100vh
+
 
 .image-section
-    margin-left: 50%
     height: 100%
     width: 50%
     display: flex
@@ -124,54 +121,152 @@ h1
     color: $blue-200
     margin-bottom: 5%
 
-input, select, button
-    background: $white
+
+.container
+    height: 100%
     width: 100%
-    border: 0
-    outline: 0
-    border-radius: 50px
-    margin-top: 8px
-    padding: 12px
-    text-color: $gray-200
-
-.name-section
-    width: 117%
     display: flex
-    flex-direction: row
-    justify-content: space-between
-    input
-        width: 70%
+    justify-content: center
+    align-items: center
 
+.from-wrp
+    height: fit-content
+    width: fit-content
+
+.form-group-item
+    position: relative
+    .expand-icon
+        position: absolute
+        right: 1vw
+        bottom: 1vh
+        color: $blue-200
+        z-index: 4
+    .placeholder
+        position: absolute
+        left: 1vw
+        top: 1.5vh
+        color: $gray-200
+        font-size: 14px
+        z-index: 4
+    .error-surface
+        position: absolute
+        width: 100%
+        height: 100%
+        top: 0
+        box-shadow: 0px 1px 4px $error-color
+        border-radius: 50px
+        z-index: 1
+    .succes-surface
+        @extend .error-surface
+        box-shadow: 0px 1px 4px $turquoise-100
+    .errors-wrp
+        position: absolute
+        font-size: 12px
+        color: $error-color
+        width: 100%
+        height: 20px
+        overflow: hidden
+        top: 5vh
+        .error
+            display: flex
+            align-items: center
+            height: 100%
+            img
+                filter: invert(31%) sepia(100%) saturate(3362%) hue-rotate(325deg) brightness(94%) contrast(99%)
+                height: 13px
+                width: 11px
+                margin-right: 6px
+
+.name-section,
 .age-sex-section
-    width: 110%
+    display: grid
+    grid-template-columns: repeat(2, calc( 12vw - 7.5px ))
+    gap: 15px
+
+input
+    width: 100%
+    height: 100%
+    box-sizing: border-box
+    border-radius: 50px
+    border: none
+    position: relative
+    padding-left: 18px
+    z-index: 2
+
+input
+    &:focus
+        outline-color: $gray-100
+
+.submit-btn
+    border-radius: 50px
+    background-color: $blue-200
+    height: 100%
+    color: $white !important
+    font-weight: 500
+    font-size: 16px
+
+::ng-deep.custom
+    height: 100%
+
+::ng-deep.ng-input
+    top: 0
+    left: 10px
+    width: auto !important
+    height: 100%
+    opacity: 0 !important
+
+::ng-deep.ng-value-label
+    margin-left: 10px
+
+::ng-deep.ng-arrow-wrapper
+    display: none
+
+::ng-deep.ng-value-container
     display: flex
-    flex-direction: row
-    justify-content: space-between
-    select
-        width: 47%
+    align-items: center
 
+::ng-deep.ng-value-label
+    margin-left: 20px
 
-select
-    width: 110%
-    color: $gray-200
-    outline: 0
-    option
+::ng-deep.ng-dropdown-panel.ng-select-bottom
+    margin-top: 5px
+    border: 1px solid $gray-100
+
+::ng-deep.ng-select.ng-select-single .ng-select-container
+    border-radius: 50px
+    box-sizing: border-box
+    height: 100%
+    margin: 0
+    border: none
+
+::ng-deep.ng-clear-wrapper
+    display: none
+
+::ng-deep.ng-select-container
+    height: 100%
+    box-sizing: border-box
+    background-color: $white
+    border-radius: 50px
+    font-size: 14px
+
+::ng-deep.ng-dropdown-panel
+    background-color: $white
+    max-height: 200px
+    overflow: scroll
+    margin-top: 5px
+    border-radius: 4px
+
+::ng-deep.ng-option
+    padding: 10px
+    .ng-option-label
+        width: 100%
+        display: flex
+        gap: 10px
+        align-items: center
         color: $gray-300
-        font-size: 16px
-        background-color: $white
 
-button
-    width: 111%
-    background: $blue-200
-    color: $white
+::ng-deep.ng-select-container
+    z-index: 3 !important
 
-.mat-mdc-form-field-error
-    font-size: 10px
-    margin-left: 4%
-    margin-right: auto
-    margin-bottom: 1%
-    margin-bottom: 1px
 
-.mat-mdc-button:not(:disabled)
-    color: $white
 

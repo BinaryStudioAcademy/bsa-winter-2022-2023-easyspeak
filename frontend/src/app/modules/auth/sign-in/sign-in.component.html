@@ -1,28 +1,90 @@
-<div class="sign-in">
-    <h1>Sign In</h1>
-    <label>
-        <input
-            type="text"
-            [(ngModel)]="email"
-            matInput
-            required
-            placeholder="Email"
-            [ngModelOptions]="{ standalone: true }" />
-        <mat-error *ngIf="submitted && form.controls['email'].errors">{{ getErrorMessage('email') }}</mat-error>
-    </label>
-    <label>
-        <input
-            type="password"
-            [(ngModel)]="password"
-            #upPassword="ngModel"
-            required
-            placeholder="Password"
-            [ngModelOptions]="{ standalone: true }" />
-        <mat-error *ngIf="submitted && form.controls['password'].errors">{{ getErrorMessage('password') }}</mat-error>
-    </label>
-    <button mat-button (click)="validationThenSignIn()">Confirm</button>
+<div class="container">
+    <div class="form-wrp">
+        <h1>Create Account</h1>
+        <form #userLoginForm="ngForm" [formGroup]="form" class="form-content" (submit)="signIn()">
+            <div class="form-group-item">
+                <input
+                    type="email"
+                    formControlName="email"
+                    placeholder="Email"
+                    required
+                    email="{{this.email}}"/>
+        
+                <div class="errors-wrp">
+                    <mat-error class="error" *ngIf="this.email.errors?.['required'] 
+                    && (this.email.dirty || this.userLoginForm.submitted)">
+                        <img src="/assets/user-profile/alert-triangle.svg" alt="">
+                        Field is required
+                    </mat-error>
+        
+                    <mat-error class="error" *ngIf="this.email.errors?.['email'] 
+                    && (this.email.dirty || this.userLoginForm.submitted)">
+                        <img src="/assets/user-profile/alert-triangle.svg" alt="">
+                        Wrong format
+                    </mat-error>
+                </div>
+        
+                <div class="error-surface" 
+                    *ngIf="this.email.errors  
+                    && (this.email.dirty || this.userLoginForm.submitted)">
+                </div>
+        
+                <div class="succes-surface" 
+                    *ngIf="this.email.valid 
+                    && this.email.value">
+                </div>
+            </div>
+
+            <div class="form-group-item">
+                <input
+                    type="password"
+                    formControlName="password"
+                    placeholder="Password"
+                    required/>
+        
+                <div class="errors-wrp">
+                    <mat-error class="error" *ngIf="this.password.errors?.['required'] 
+                    && (this.password.dirty || this.userLoginForm.submitted)">
+                        <img src="/assets/user-profile/alert-triangle.svg" alt="">
+                        Field is required
+                    </mat-error>
+        
+                    <mat-error class="error" *ngIf="this.password.errors?.['pattern'] 
+                    && (this.password.dirty || this.userLoginForm.submitted)">
+                        <img src="/assets/user-profile/alert-triangle.svg" alt="">
+                        Wrong format
+                    </mat-error>
+
+                    <mat-error class="error" *ngIf="this.password.errors?.['minlength'] 
+                    && (this.password.dirty || this.userLoginForm.submitted)">
+                        <img src="/assets/user-profile/alert-triangle.svg" alt="">
+                        Minimal length is 6 characters
+                    </mat-error>
+
+                    <mat-error class="error" *ngIf="this.password.errors?.['maxlength'] 
+                    && (this.password.dirty || this.userLoginForm.submitted)">
+                        <img src="/assets/user-profile/alert-triangle.svg" alt="">
+                        Maximal length is 25 characters
+                    </mat-error>
+                </div>
+        
+                <div *ngIf="this.password.invalid 
+                    && (this.password.dirty || this.userLoginForm.submitted)" 
+                    class="error-surface">
+                </div>
+        
+                <div class="succes-surface" *ngIf="this.password.valid && this.password.value">
+                </div>
+            </div>
+            <button class="submit-btn" 
+                mat-button type="submit">
+    
+                Sign In
+            </button>
+        </form>
+    </div>
     <div id="has-account">
-        <span>I have not an account! </span>
+        <span>I don't have an account! </span>
         <a href="auth/sign-up">Sign Up</a>
     </div>
 </div>

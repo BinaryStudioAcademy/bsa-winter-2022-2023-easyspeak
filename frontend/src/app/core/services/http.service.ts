@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@env/environment';
-import { Observable, throwError } from 'rxjs';
+import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 @Injectable({
@@ -12,8 +12,8 @@ export class HttpService {
 
     constructor(private httpClient: HttpClient) {}
 
-    get<T>(url: string): Observable<T[]> {
-        return this.httpClient.get<T[]>(this.buildUrl(url)).pipe(catchError(this.handleError));
+    get<T>(url: string) {
+        return this.httpClient.get<T>(this.buildUrl(url)).pipe(catchError(this.handleError));
     }
 
     getById<T>(url: string, id: string | number) {

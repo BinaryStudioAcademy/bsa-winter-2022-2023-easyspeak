@@ -1,3 +1,5 @@
+import { ITopic } from './ITopic';
+
 export interface IUserInfo {
     firstName: string,
     lastName: string,
@@ -6,4 +8,5 @@ export interface IUserInfo {
     language: string,
     sex: string,
     englishLevel: string
+    topics?: ITopic[]
 }

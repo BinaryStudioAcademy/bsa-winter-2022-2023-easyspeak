@@ -26,8 +26,6 @@ export class AuthService {
             if (userCredential.user) {
                 this.setAccessToken(userCredential.user);
             }
-
-            this.navigateTo('main');
         });
     }
 
@@ -36,8 +34,6 @@ export class AuthService {
             if (userCredential.user) {
                 this.setAccessToken(userCredential.user);
             }
-
-            this.navigateTo('/profile/topics');
         });
     }
 
