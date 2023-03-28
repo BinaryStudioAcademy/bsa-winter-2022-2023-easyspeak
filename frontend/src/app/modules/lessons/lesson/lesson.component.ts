@@ -22,6 +22,8 @@ export class LessonComponent extends BaseComponent {
 
     isShowQuestions = true;
 
+    isLoading = false;
+
     constructor(
         private dialogRef: MatDialog,
         private lessonsService: LessonsService,
@@ -45,19 +47,21 @@ export class LessonComponent extends BaseComponent {
     }
 
     showQuestions(id: number) {
-        if (this.isShowQuestions) {
-            this.getQuestions(id);
-        }
-
         if (this.questions.length) {
             this.isShowQuestions = !this.isShowQuestions;
+        }
+
+        if (this.isShowQuestions) {
+            this.getQuestions(id);
         }
     }
 
     private getQuestions(id: number) {
+        this.isLoading = true;
         this.spinner.show();
         this.lessonsService.getQuestions(id).subscribe((questions) => {
             this.questions = questions as Question[];
+            this.isLoading = false;
             this.spinner.hide();
         });
     }
