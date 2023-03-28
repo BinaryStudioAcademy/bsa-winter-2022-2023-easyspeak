@@ -24,4 +24,8 @@ export class UserService {
     public enrollUserToLesson(lessonId: number) {
         return this.httpService.put<Lesson>(`${this.routePrefix}/enroll/${lessonId}`, {} as Lesson);
     }
+
+    public getTagNames() {
+        return this.httpService.get<string[]>(`${this.routePrefix}/tags`);
+    }
 }

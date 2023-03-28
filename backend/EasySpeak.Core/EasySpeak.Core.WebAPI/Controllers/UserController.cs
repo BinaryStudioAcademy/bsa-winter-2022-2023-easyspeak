@@ -1,6 +1,7 @@
 using EasySpeak.Core.BLL.Interfaces;
 using EasySpeak.Core.Common.DTO.Lesson;
 using EasySpeak.Core.Common.DTO.User;
+using EasySpeak.Core.DAL.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -43,5 +44,8 @@ namespace EasySpeak.Core.WebAPI.Controllers
 
         [HttpPut("enroll/{lessonId}")]
         public Task<LessonDto> Enroll(long lessonId) => _userService.EnrollUserToLesson(lessonId);
+
+        [HttpGet("tags")]
+        public Task<string[]> GetTagNames() => _userService.GetUserTags();
     }
 }

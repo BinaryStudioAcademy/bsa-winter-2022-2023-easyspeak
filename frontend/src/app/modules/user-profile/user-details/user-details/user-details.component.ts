@@ -70,6 +70,9 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
                     englishLevel: resp.languageLevel,
                     dateOfBirth: resp.birthDate,
                 });
+
+                this.userService.getTagNames().pipe(this.untilThis)
+                    .subscribe(tags => this.selectedTags = tags);
             });
     }
 

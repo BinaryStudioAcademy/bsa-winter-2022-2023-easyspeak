@@ -10,5 +10,7 @@ namespace EasySpeak.Core.BLL.Interfaces
         Task<LessonDto> EnrollUserToLesson(long lessonId);
 
         Task<UserDto> GetUserAsync();
+
+        Task<string[]> GetUserTags();
     }
 }
