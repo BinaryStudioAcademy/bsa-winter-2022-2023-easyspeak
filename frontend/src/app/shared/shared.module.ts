@@ -19,6 +19,7 @@ import { ModalComponent } from './components/modal/modal.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { UserNotificationComponent } from './components/user-notification/user-notification.component';
 import { YoutubePlayerComponent } from './components/youtube-player/youtube-player.component';
+import { PasswordVisibilityDirective } from './directives/password-visibility.directive';
 
 @NgModule({
     imports: [
@@ -45,6 +46,7 @@ import { YoutubePlayerComponent } from './components/youtube-player/youtube-play
         InterestsDropdownComponent,
         UserNotificationComponent,
         HeaderComponent,
+        PasswordVisibilityDirective,
     ],
     exports: [
         CommonModule,
@@ -63,6 +65,7 @@ import { YoutubePlayerComponent } from './components/youtube-player/youtube-play
         InterestsDropdownComponent,
         UserNotificationComponent,
         HeaderComponent,
+        PasswordVisibilityDirective,
     ],
 })
 export class SharedModule {}

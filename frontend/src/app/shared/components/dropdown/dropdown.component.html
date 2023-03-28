@@ -1,25 +1,23 @@
 <div class="container">
     <div class="dropdown-btn" (click)="showDropdownMenu()">
-        <div *ngIf="this.selectedItems.size" class="filters-count-group">
-            <div class="filters-count-val">
-                {{this.selectedItems.size}}
-            </div>
+        <div class="filters-count-group">
+            {{selectedItems.length}}
         </div>
         <div class="dropdown-btn-title">
-            {{this.selectedItems.keys().next().value ?? 'None'}}
+            {{selectedItems[0] || 'None'}}
         </div>
-        <div *ngIf="this.btnLabel" class="dropdown-btn-subtitle">
-            {{this.btnLabel}}
+        <div *ngIf="btnLabel" class="dropdown-btn-subtitle">
+            {{btnLabel}}
         </div>
         <div class="dropdown-btn-icon">
-            <mat-icon>expand_more</mat-icon>
+            <img class="arrow-icon" src="assets/interestsDropdown/chevron_down.svg"/>
         </div>
     </div>
-    <div *ngIf="this.showDropdown" class="dropdown-wrp">
-        <div *ngFor="let item of this.data">
+    <div *ngIf="showDropdown" class="dropdown-wrp">
+        <div *ngFor="let item of data">
             <div class="dropdown-item">
                 <div class="dropdown-item-content">
-                    <input type="checkbox" [checked]="this.selectedItems.has(item.title)" (click)="selectItem(item.title)">
+                    <input type="checkbox" [checked]="selectedItems.includes(item.title)" (click)="selectItem(item.title)">
                     <div class="dropdown-item-info">
                         <div *ngIf="item.subtitle" class="item-info-title">
                             {{item.title + ' : ' + item.subtitle}}
