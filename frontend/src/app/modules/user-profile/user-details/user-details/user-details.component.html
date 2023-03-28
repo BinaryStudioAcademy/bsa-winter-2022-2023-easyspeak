@@ -99,32 +99,19 @@
         </div>
 
         <div class="form-input-group">
-            <div *ngIf="!dateOfBirth.getRawValue()" class="placeholder">Date of Birth</div>
-            <label *ngIf="dateOfBirth.getRawValue()" class="label" for="firstName">First Name</label>
-<!--            <ng-select class="custom" dropdownPosition="bottom" appearance="underline" #sexSelect labelForId="dateOfBirth"-->
-<!--            formControlName="dateOfBirth" bindLabel="dateOfBirth">-->
-<!--                <ng-option class="select-option" *ngFor="let age of ages" value="{{age}}">{{age}}</ng-option>-->
-<!--            </ng-select>-->
-<!--            <mat-icon class="expand-icon">expand_more</mat-icon>-->
-
-            <div class="calendar-block">
-                <button class="button-icon" [matMenuTriggerFor]="appMenu">
-                    <img src="assets\calendar\calendar.svg">
-                </button>
-                <mat-menu #appMenu="matMenu">
-                    <mat-calendar #calendar (selectedChange)="select($event)"> </mat-calendar>
-                </mat-menu>
-                dateOfBirth TODO
-            </div>
+            <div>Date of Birth</div>
         </div>
 
         <div class="form-input-group">
             <div *ngIf="!sex.getRawValue()" class="placeholder">Sex</div>
-            <ng-select class="custom" dropdownPosition="bottom" appearance="underline" #sexSelect labelForId="sex"
+
+
+            <ng-select class="custom"  dropdownPosition="bottom" appearance="underline" #sexSelect labelForId="sex"
             formControlName="sex" bindLabel="Sex">
                 <ng-option class="select-option" *ngFor="let sexOption of sexOptions" value="{{sexOption}}">{{sexOption}}</ng-option>
             </ng-select>
             <mat-icon class="expand-icon">expand_more</mat-icon>
+
         </div>
 
         <div class="form-input-group">

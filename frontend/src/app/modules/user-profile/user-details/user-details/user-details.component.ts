@@ -1,18 +1,18 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormControl } from '@angular/forms';
-import { BaseComponent } from '@core/base/base.component';
-import { UserService } from '@core/services/user.service';
-import { Ages } from '@shared/data/ages.util';
-import { EnglishLevel } from '@shared/data/englishLevel';
-import { Sex } from '@shared/data/sex';
-import { IIcon } from '@shared/models/IIcon';
-import { IUserInfo } from '@shared/models/IUserInfo';
-import { getTags } from '@shared/utils/tagsForInterests';
-import { ToastrService } from 'ngx-toastr';
+import {Component, Input, OnInit} from '@angular/core';
+import {FormBuilder, FormControl} from '@angular/forms';
+import {BaseComponent} from '@core/base/base.component';
+import {UserService} from '@core/services/user.service';
+import {Ages} from '@shared/data/ages.util';
+import {EnglishLevel} from '@shared/data/englishLevel';
+import {Sex} from '@shared/data/sex';
+import {IIcon} from '@shared/models/IIcon';
+import {IUserInfo} from '@shared/models/IUserInfo';
+import {getTags} from '@shared/utils/tagsForInterests';
+import {ToastrService} from 'ngx-toastr';
 
-import { CountriesTzLangProviderService } from 'src/app/services/countries-tz-lang-provider.service';
+import {CountriesTzLangProviderService} from 'src/app/services/countries-tz-lang-provider.service';
 
-import { detailsGroup, userId } from '../user-details.component.util';
+import {detailsGroup, userId} from '../user-details.component.util';
 
 @Component({
     selector: 'app-user-details',
@@ -23,8 +23,8 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
     @Input() tagsList: IIcon[] = getTags();
 
     countries;
-
-    ages = Ages;
+    coun: string[] = ['1', '2', '3', '4'];
+    ages: Date;
 
     languages;
 
@@ -125,6 +125,13 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
 
     selectInterest($event: Event) {
         const ev = $event.target as HTMLInputElement;
+        const numb = parseInt(ev.id, 10);
+
+        if (ev.checked) {
+            this.selectedTags = this.selectedTags.concat(this.tagsList[numb].icon_name);
+        } else {
+            this.selectedTags = this.selectedTags.filter(x => x !== this.tagsList[numb].icon_name);
+        }
     }
 
     select(event: Date | null) {

@@ -102,30 +102,59 @@
         grid-column: 1/3
 
 .user-interests-section
-    display: flex
+    grid-row: 3/3
+    grid-column: 2/3
+    display: grid
+    grid-template-columns: repeat(7, 1fr)
+    justify-items: center
+    align-items: start
     gap: 10px
-    flex-wrap: wrap
-    justify-content: space-between
-    height: 100%
+
 
 .user-interest-content
     display: flex
     flex-direction: column
     align-items: center
-
     gap: 5px
+
+
 
 .interest-image-container
     height: 46px
     width: 46px
     border-radius: 50%
-    background-color: blue
-    padding: 10px
+    background-color: #E0E2F2
+    padding: 0
     display: flex
     justify-content: center
     align-items: center
 
 .interest-image-text
+    font-weight: 500
+    font-size: 12px
+    color: #6C707A
+
+.icon
+    width: 25px
+    height: 25px
+
+.item-checkbox
+    height: 1px
+    width: 1px
+    opacity: 0
+
+
+.item-checkbox:checked + .item-checkbox-label > .interest-image-container
+    background-color: $turquoise-100
+
+.item-checkbox:checked + .item-checkbox-label > .interest-image-text
+    color: $black-100
+
+.item-checkbox-label
+    display: flex
+    flex-direction: column
+    align-items: center
+    gap: 3px
 
 
 .user-socials-section
@@ -201,9 +230,13 @@
     top: 10px
     right: 10px
     color: $button-color
+    z-index: 0
 
-::ng-deep.custom
+:host::ng-deep.custom
     height: 100%
+
+:host::ng-deep .ng-dropdown-panel
+    overflow: auto
 
 ::ng-deep.ng-input
     top: 0
@@ -222,6 +255,15 @@
     border-radius: 50px
     font-size: 14px
 
+//:host::ng-deep.ng-select-container
+//    opacity: 0
+//    height: 100%
+//    box-sizing: border-box
+//    padding: 13px 18px
+//    border-radius: 50px
+//    font-size: 14px
+//    z-index: 100 !important
+
 ::ng-deep.ng-dropdown-panel
     background-color: $white
     max-height: 200px
@@ -236,8 +278,7 @@
         gap: 10px
         align-items: center
 
-::ng-deep.ng-select-container
-    z-index: 0 !important
+
 
 .flag
     width: 20px
@@ -266,4 +307,31 @@
     border-radius: 18px
     padding: 0 15px
     margin: 15px
+
+:host::ng-deep .mat-mdc-text-field-wrapper
+    border-radius: 25px
+    border: 2px solid   blue
+
+:host::ng-deep .mdc-line-ripple
+    display: none
+    //
+    //border-radius: 20px !important
+    //background-color: #7889fb !important
+    //border: #7a1c55 2px solid !important
+    //padding-bottom: 0 !important
+
+//:host::ng-deep .mat-select-arrow
+//    background-image: url('../../../../../assets/user-profile/alert-triangle.svg')
+
+
+//::ng-deep.ng-select-container
+//    z-index: 0 !important
+
+
+//:host::ng-deep .mat-select-arrow
+//    width: 3px !important
+//    height: 3px !important
+//    background-color: red !important
+//    z-index: 100 !important
+
 
