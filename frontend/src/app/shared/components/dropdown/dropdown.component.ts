@@ -18,9 +18,9 @@ export class DropdownComponent extends BaseComponent implements OnInit, OnDestro
 
     @Input() resetEvent: Observable<void>;
 
-    public showDropdown = false;
+    @Input() selectedItems: string[];
 
-    public selectedItems: string[] = [];
+    public showDropdown = false;
 
     ngOnInit(): void {
         this.resetEvent

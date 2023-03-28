@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { IIcon } from '@shared/models/IIcon';
 import { getTags } from '@shared/utils/tagsForInterests';
 
@@ -7,14 +7,20 @@ import { getTags } from '@shared/utils/tagsForInterests';
     templateUrl: './interests-dropdown.component.html',
     styleUrls: ['./interests-dropdown.component.sass'],
 })
-export class InterestsDropdownComponent {
+export class InterestsDropdownComponent implements OnChanges {
     toggle = false;
 
     @Input() inputList: IIcon[] = getTags();
 
     @Output() selectedInterests = new EventEmitter<string[]>();
 
+    @Input() selectedItems: string[];
+
     outputList: string[] = [];
+
+    ngOnChanges() {
+        this.outputList = this.selectedItems;
+    }
 
     selectInterest($event: Event) {
         const ev = $event.target as HTMLInputElement;

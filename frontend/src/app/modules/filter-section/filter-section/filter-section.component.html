@@ -1,7 +1,7 @@
 <div class="filters-section-container">
     <div class="btns-wrp">
-        <app-dropdown [btnLabel]="this.langBtnLabel" [resetEvent]="this.resetFiltersEvent" [data]="this.langLevels" (selectedFilters)="updateLangFilters($event)"></app-dropdown>
-        <app-interests-dropdown (selectedInterests)="updateInterestFilters($event)"></app-interests-dropdown>
+        <app-dropdown [btnLabel]="this.langBtnLabel" [resetEvent]="this.resetFiltersEvent" [data]="this.langLevels" [selectedItems]="selectedLanguageFilters" (selectedFilters)="updateLangFilters($event)"></app-dropdown>
+        <app-interests-dropdown [selectedItems]="selectedInterestsFilters" (selectedInterests)="updateInterestFilters($event)"></app-interests-dropdown>
     </div>
     <div class="selected-filters-wrp">
         <div class="selected-filters-list">

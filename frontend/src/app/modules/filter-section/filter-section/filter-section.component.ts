@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { langLevelsSample } from '@modules/filter-section/filter-section/filter-section.util';
 import { Subject } from 'rxjs';
 
@@ -18,7 +18,7 @@ export class FilterSectionComponent implements OnInit {
 
     public langBtnLabel = 'Level';
 
-    public selectedLanguageFilters: string[] = [];
+    @Input() selectedLanguageFilters: string[] = [];
 
     public selectedInterestsFilters: string[] = [];
 
