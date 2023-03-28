@@ -15,7 +15,8 @@
                     <img src="assets\calendar\calendar.svg" />
                 </div>
 
-                {{ days[0].date.toLocaleDateString() }} - {{ days[6].date.toLocaleDateString() }}
+                {{ days[0].date.toLocaleDateString('en-GB', { day: '2-digit', month: 'long' }) }} - {{ days[6].date.toLocaleDateString('en-US', { day: '2-digit', month: 'long' }) }} {{ days[0].date.getFullYear() }}
+
             </div>
 
             <button class="button-week" (click)="weekInc()">
