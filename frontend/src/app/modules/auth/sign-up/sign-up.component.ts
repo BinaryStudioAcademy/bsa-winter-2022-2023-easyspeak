@@ -3,8 +3,11 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { BaseComponent } from '@core/base/base.component';
 import { AuthService } from '@core/services/auth.service';
 import { HttpService } from '@core/services/http.service';
+import { ICountry } from '@shared/models/ICountry';
 import { INewUser } from '@shared/models/INewUser';
 import { ToastrService } from 'ngx-toastr';
+
+import { CountriesTzLangProviderService } from 'src/app/services/countries-tz-lang-provider.service';
 
 @Component({
     selector: 'app-sign-up',
@@ -14,9 +17,7 @@ import { ToastrService } from 'ngx-toastr';
 export class SignUpComponent extends BaseComponent {
     EnglishLevels = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
 
-    Ages = ['5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18'];
-
-    Countries = ['Ukraine', 'Austria', 'England', 'Scotland', 'Poland', 'Romania'];
+    Countries: ICountry[] = [];
 
     private validationErrorMessage: { [id: string]: string } = {
         required: 'Enter a value',
@@ -55,11 +56,13 @@ export class SignUpComponent extends BaseComponent {
 
     constructor(
         private formBuilder: FormBuilder,
+        private countriesTzLangProvider: CountriesTzLangProviderService,
         private authService: AuthService,
         private toastr: ToastrService,
         private httpService: HttpService,
     ) {
         super();
+        this.Countries = this.countriesTzLangProvider.getCountriesList();
     }
 
     getErrorMessage(field: string) {
@@ -100,6 +103,8 @@ export class SignUpComponent extends BaseComponent {
 
             return 'The password does not match';
         }
+
+        this.isValid = true;
 
         return '';
     }
@@ -142,8 +147,32 @@ export class SignUpComponent extends BaseComponent {
                     Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\\d@$!%*?&\\.]{6,}$'),
                 ],
             ],
-            confirmPassword: [this.confirmPassword, Validators.required],
+            confirmPassword: [
+                this.confirmPassword,
+                [
+                    Validators.required,
+                ],
+            ],
+        }, {
+            validators: this.confirmPasswordCheck('password', 'confirmPassword'),
         });
+    }
+
+    confirmPasswordCheck(checkPassword: string, checkConfirmPassword: string) {
+        return (formGroup: FormGroup) => {
+            const pass = formGroup.controls[checkPassword];
+            const confirmPass = formGroup.controls[checkConfirmPassword];
+
+            if (confirmPass.errors && !confirmPass.errors['MustMatch']) {
+                return;
+            }
+
+            if (pass.value !== confirmPass.value) {
+                confirmPass.setErrors({ MustMatch: true });
+            } else {
+                confirmPass.setErrors(null);
+            }
+        };
     }
 
     private createUser() {

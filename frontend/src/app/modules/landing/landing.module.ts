@@ -1,13 +1,16 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { UserProfileModule } from '@modules/user-profile/user-profile.module';
+import { UserCardModule } from '@modules/user-card/user-card.module';
 import { SharedModule } from '@shared/shared.module';
 
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { LandingRoutingModule } from './landing-routing.module';
-import {AuthModule} from "@modules/auth/auth.module";
 
 @NgModule({
     declarations: [LandingPageComponent],
-    imports: [SharedModule, LandingRoutingModule, UserProfileModule, AuthModule],
+    imports: [CommonModule,
+        SharedModule,
+        LandingRoutingModule,
+        UserCardModule],
 })
 export class LandingModule {}

@@ -7,12 +7,12 @@ import { HttpService } from './http.service';
     providedIn: 'root',
 })
 export class UserService {
-    public routePrefix = '/user';
+    public routePrefix = '/users';
 
-    constructor(private httpService: HttpService) { }
+    constructor(private httpService: HttpService) {}
 
-    public getUser(userId: number) {
-        return this.httpService.getById<IUserInfo>(`${this.routePrefix}`, userId);
+    public getUser() {
+        return this.httpService.get<IUserInfo>(`${this.routePrefix}`);
     }
 
     public updateUser(userId: number, updatedUser: IUserInfo) {
