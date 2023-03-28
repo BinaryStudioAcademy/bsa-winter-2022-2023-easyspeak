@@ -36,6 +36,10 @@ export class InterestsDropdownComponent implements OnChanges {
         this.selectedInterests.emit(this.outputList);
     }
 
+    iconExistsInOutputList(icon: string): boolean {
+        return this.outputList.some(item => item === icon);
+    }
+
     clickButton() {
         this.toggle = !this.toggle;
     }

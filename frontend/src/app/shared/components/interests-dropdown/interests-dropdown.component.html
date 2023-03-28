@@ -10,7 +10,7 @@
 
     <div class="dropdown-content" *ngIf="toggle">
         <div *ngFor="let item of inputList; let i = index" class="dropdown-item">
-            <input type="checkbox" id="{{i}}" [checked]="outputList.indexOf(item.icon_name) > -1" class="item-checkbox"
+            <input type="checkbox" id="{{i}}" [checked]="iconExistsInOutputList(item.icon_name)" class="item-checkbox"
                    (change)="selectInterest($event)"/>
             <label class="item-checkbox-label" for="{{i}}">
                 <div class="icon-wrapper">
