@@ -28,31 +28,5 @@ namespace EasySpeak.Core.WebAPI.Controllers
             var res = await _easySpeakFileService.AddFileAsync(fileDto);
             return Ok(res);
         }
-
-        [HttpGet]
-        public async Task<IActionResult> GetFile(long fileId)
-        {
-            var res = await _easySpeakFileService.GetFileAsync(fileId);
-            return Ok(res);
-        }
-
-        [HttpPut]
-        public async Task<IActionResult> UpdateFile(long fileId, IFormFile file)
-        {
-            var fileDto = new NewEasySpeakFileDto()
-            {
-                Stream = file.OpenReadStream(),
-                FileName = file.FileName
-            };
-            var res = await _easySpeakFileService.UpdateFileAsync(fileId, fileDto);
-            return Ok(res);
-        }
-
-        [HttpDelete]
-        public async Task<IActionResult> DeleteFile(long fileId)
-        {
-            await _easySpeakFileService.DeleteFileAsync(fileId);
-            return Ok();
-        }
     }
 }
