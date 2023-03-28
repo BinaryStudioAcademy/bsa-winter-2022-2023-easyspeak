@@ -21,14 +21,6 @@ export class FilterSectionComponent implements OnInit {
 
     resetFiltersEvent: Subject<void> = new Subject<void>();
 
-    public levelBtnLabel = 'Level';
-
-    public topicsBtnLabel = 'Interests';
-
-    public langBtnLabel = 'Native Language';
-
-    public compatibilityBtnLabel = 'Compatibility';
-
     public selectedLevelFilters = new Set<string>();
 
     public selectedTopicsFilters = new Set<string>();
@@ -56,30 +48,39 @@ export class FilterSectionComponent implements OnInit {
         this.compatibilities = compatibilities.map(c => ({ title: c.toString() }));
         this.languages = this.languageTimezone.getLanguagesList().map(language => ({ title: language }));
         this.userFilters = {
-            topics: new Set<string>(),
-            langLevels: new Set<string>(),
-            languages: new Set<string>(),
-            compatibilities: new Set<string>(),
+            topics: [],
+            langLevels: [],
+            language: null,
+            compatibility: 0,
         } as UserFilter;
+    }
+
+    get hasFilters(): boolean {
+        return !!this.selectedLanguagesFilters.size
+            || !!this.selectedCompatibilityFilters.size
+            || !!this.selectedLevelFilters.size
+            || !!this.selectedTopicsFilters.size;
     }
 
     remove(param: 'compatibility' | 'lang' | 'level' | 'topic', title: string) {
         switch (param) {
             case 'lang':
                 this.selectedLanguagesFilters.delete(title);
-                this.userFilters.languages = this.selectedLanguagesFilters;
+                // eslint-disable-next-line prefer-destructuring
+                this.userFilters.language = [...this.selectedLanguagesFilters][0];
                 break;
             case 'level':
                 this.selectedLevelFilters.delete(title);
-                this.userFilters.langLevels = this.selectedLevelFilters;
+                this.userFilters.langLevels = [...this.selectedLevelFilters];
                 break;
             case 'topic':
                 this.selectedTopicsFilters.delete(title);
-                this.userFilters.topics = this.selectedTopicsFilters;
+                this.userFilters.topics = [...this.selectedTopicsFilters];
                 break;
             case 'compatibility':
                 this.selectedCompatibilityFilters.delete(title);
-                this.userFilters.compatibilities = this.selectedCompatibilityFilters;
+                this.userFilters.compatibility = this.selectedCompatibilityFilters.size !== 0 ?
+                    +[...this.selectedCompatibilityFilters][0] : null;
                 break;
             default:
                 console.error('No such filtering parameter');
@@ -88,23 +89,26 @@ export class FilterSectionComponent implements OnInit {
         this.filterChange.emit(this.userFilters);
     }
 
-    update(param: 'compatibility' | 'lang' | 'level' | 'topic', eventData: Set<string>) {
+    update(param: 'compatibility' | 'lang' | 'level' | 'topic', eventData: Set<string> | string[]) {
+        const setEventData = new Set(eventData);
         switch (param) {
             case 'lang':
-                this.selectedLanguagesFilters = eventData;
-                this.userFilters.languages = this.selectedLanguagesFilters;
+                this.selectedLanguagesFilters = setEventData;
+                // eslint-disable-next-line prefer-destructuring
+                this.userFilters.language = [...this.selectedLanguagesFilters][0];
                 break;
             case 'level':
-                this.selectedLevelFilters = eventData;
-                this.userFilters.langLevels = this.selectedLevelFilters;
+                this.selectedLevelFilters = setEventData;
+                this.userFilters.langLevels = [...this.selectedLevelFilters];
                 break;
             case 'topic':
-                this.selectedTopicsFilters = eventData;
-                this.userFilters.topics = this.selectedTopicsFilters;
+                this.selectedTopicsFilters = setEventData;
+                this.userFilters.topics = [...this.selectedTopicsFilters];
                 break;
             case 'compatibility':
-                this.selectedCompatibilityFilters = eventData;
-                this.userFilters.compatibilities = this.selectedCompatibilityFilters;
+                this.selectedCompatibilityFilters = setEventData;
+                this.userFilters.compatibility = this.selectedCompatibilityFilters.size !== 0 ?
+                    +[...this.selectedCompatibilityFilters][0] : null;
                 break;
             default:
                 console.error('No such filtering parameter');

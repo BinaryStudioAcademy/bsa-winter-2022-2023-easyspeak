@@ -1,4 +1,5 @@
 using EasySpeak.Core.BLL.Interfaces;
+using EasySpeak.Core.Common.DTO.Filter;
 using EasySpeak.Core.Common.DTO.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -41,15 +42,10 @@ namespace EasySpeak.Core.WebAPI.Controllers
         }
 
 
-        [HttpGet("short")]
-        public async Task<ActionResult<List<UserShortInfoDto>>> GetSuitableUsers(
-            [FromQuery] string? language,
-            [FromQuery] string[]? levels,
-            [FromQuery] string[]? interests,
-            [FromQuery] int? compatibility
-            )
+        [HttpPost("short")]
+        public async Task<ActionResult<List<UserShortInfoDto>>> GetSuitableUsers( [FromBody] UserFilterDto userFilter)
         {
-            return await _userService.GetFilteredUsers(language, levels, interests, compatibility);
+            return await _userService.GetFilteredUsers(userFilter);
         }
 
     }

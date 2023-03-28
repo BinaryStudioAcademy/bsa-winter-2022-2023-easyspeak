@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Router, UrlSerializer } from '@angular/router';
 import { IUserInfo } from '@shared/models/IUserInfo';
 import { UserCard } from '@shared/models/user/user-card';
 import { Observable } from 'rxjs';
+
+import { UserFilter } from '../../models/filters/userFilter';
 
 import { HttpService } from './http.service';
 
@@ -14,8 +15,6 @@ export class UserService {
 
     constructor(
         private httpService: HttpService,
-        private router: Router,
-        private serializer: UrlSerializer,
     ) { }
 
     public getUser() {
@@ -26,20 +25,7 @@ export class UserService {
         return this.httpService.put(`${this.routePrefix}/${userId}`, updatedUser);
     }
 
-    public getUsers(
-        language: string | null,
-        levels: string[] | null,
-        interests: string[] | null,
-        compatibility: number | null,
-    ): Observable<UserCard[]> {
-        const tree = this.router.createUrlTree(
-            ['short'],
-            { queryParams: {
-                language, levels, interests, compatibility,
-            } },
-        );
-        const query = this.serializer.serialize(tree);
-
-        return this.httpService.get<UserCard[]>(`${this.routePrefix}${query}`);
+    public getUsers(userFilter: UserFilter | null): Observable<UserCard[]> {
+        return this.httpService.post<UserCard[]>(`${this.routePrefix}/short`, userFilter);
     }
 }

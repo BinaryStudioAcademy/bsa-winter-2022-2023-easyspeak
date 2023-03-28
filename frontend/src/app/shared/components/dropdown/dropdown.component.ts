@@ -20,18 +20,21 @@ export class DropdownComponent extends BaseComponent implements OnInit, OnDestro
 
     @Output() selectedFilters = new EventEmitter<Set<string>>();
 
-    @Input() resetEvent: Observable<void>;
+    @Input() resetEvent?: Observable<void>;
 
     public showDropdown = false;
 
     public selectedItems = new Set<string>();
 
     ngOnInit(): void {
-        this.resetEvent
-            .pipe(this.untilThis)
-            .subscribe(() => {
-                this.selectedItems = new Set();
-            });
+        if (this.resetEvent) {
+            this.resetEvent
+                .pipe(this.untilThis)
+                .subscribe(() => {
+                    this.selectedItems = new Set();
+                });
+        }
+
         this.type = this.isSingleChoice ? 'radio' : 'checkbox';
     }
 

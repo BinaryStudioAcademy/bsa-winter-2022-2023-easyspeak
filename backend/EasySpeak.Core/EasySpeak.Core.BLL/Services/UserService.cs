@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using EasySpeak.Core.BLL.Interfaces;
+using EasySpeak.Core.Common.DTO.Filter;
 using EasySpeak.Core.Common.DTO.User;
 using EasySpeak.Core.Common.Enums;
 using EasySpeak.Core.DAL.Context;
@@ -36,24 +37,24 @@ namespace EasySpeak.Core.BLL.Services
             return _mapper.Map<UserDto>(user);
         }
 
-        public async Task<List<UserShortInfoDto>> GetFilteredUsers(string? language = null, string[]? levels = null, string[]? interests = null, int? compatibility = null)
+        public async Task<List<UserShortInfoDto>> GetFilteredUsers(UserFilterDto userFilter)
         {
             var users = _context.Users.Include(u => u.Tags);
 
             IQueryable<User> filteredUsers = users;
 
-            if(language is not null)
+            if(userFilter.Language is not null)
             {
-                filteredUsers = filteredUsers.Where(u => _mapper.Map<string>(u.Language) == language);
+                filteredUsers = filteredUsers.Where(u => _mapper.Map<string>(u.Language) == userFilter.Language);
             }
-            if(levels is not null && levels.Length != 0)
+            if(userFilter.LangLevels is not null && userFilter.LangLevels.Length != 0)
             {
-                var eLevels = levels.Select(c => _mapper.Map<LanguageLevel>(c));
+                var eLevels = userFilter.LangLevels.Select(c => _mapper.Map<LanguageLevel>(c));
                 filteredUsers = filteredUsers.Where(u => eLevels.Contains(u.LanguageLevel));
             }
-            if(interests is not null && interests.Length != 0)
+            if(userFilter.Topics is not null && userFilter.Topics.Length != 0)
             {
-                filteredUsers = filteredUsers.Where(u => u.Tags.Select(t=>t.Name).Intersect(interests).Count() > 0);
+                filteredUsers = filteredUsers.Where(u => u.Tags.Select(t=>t.Name).Intersect(userFilter.Topics).Count() > 0);
             }
             return await filteredUsers.ProjectTo<UserShortInfoDto>(_mapper.ConfigurationProvider).ToListAsync();
         }

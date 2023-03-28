@@ -1,6 +1,6 @@
 export interface UserFilter {
-    topics: Set<string>;
-    langLevels: Set<string>;
-    languages: Set<string>;
-    compatibilities: Set<string>;
+    topics: string[] | null;
+    langLevels: string[] | null;
+    language: string | null;
+    compatibility: number | null;
 }
