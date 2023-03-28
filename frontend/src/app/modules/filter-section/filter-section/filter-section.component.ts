@@ -1,5 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { langLevelsSample, topicsSample } from '@modules/filter-section/filter-section/filter-section.util';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { langLevelsSample } from '@modules/filter-section/filter-section/filter-section.util';
 import { Subject } from 'rxjs';
 
 import { Filter } from 'src/app/models/filters/filter';
@@ -10,54 +10,51 @@ import { Filter } from 'src/app/models/filters/filter';
     styleUrls: ['./filter-section.component.sass'],
 })
 export class FilterSectionComponent implements OnInit {
-    @Output() selectedTopicsFiltersChange = new EventEmitter<Set<string>>();
+    @Output() selectedLanguageFiltersChange = new EventEmitter<string[]>();
 
-    @Output() selectedLanguageFiltersChange = new EventEmitter<Set<string>>();
+    @Output() selectedInterestsFiltersChange = new EventEmitter<string[]>();
 
     resetFiltersEvent: Subject<void> = new Subject<void>();
 
     public langBtnLabel = 'Level';
 
-    public topicsBtnLabel = 'Interests';
+    @Input() selectedLanguageFilters: string[] = [];
 
-    public selectedLanguageFilters = new Set<string>();
-
-    public selectedTopicsFilters = new Set<string>();
-
-    public topics: Filter[];
+    public selectedInterestsFilters: string[] = [];
 
     public langLevels: Filter[];
 
     ngOnInit(): void {
-        this.topics = topicsSample;
         this.langLevels = langLevelsSample;
     }
 
     removeLangLevel(title: string) {
-        this.selectedLanguageFilters.delete(title);
+        this.selectedLanguageFilters = this.selectedLanguageFilters.filter(filterTitle => filterTitle !== title);
         this.selectedLanguageFiltersChange.emit(this.selectedLanguageFilters);
     }
 
-    removeTopic(title: string) {
-        this.selectedTopicsFilters.delete(title);
-        this.selectedTopicsFiltersChange.emit(this.selectedTopicsFilters);
+    removeInterest(title: string) {
+        this.selectedInterestsFilters = this.selectedInterestsFilters.filter(filterTitle => filterTitle !== title);
+        this.selectedInterestsFiltersChange.emit(this.selectedInterestsFilters);
     }
 
-    updateLangFilters(eventData: Set<string>) {
+    updateLangFilters(eventData: string[]) {
         this.selectedLanguageFilters = eventData;
         this.selectedLanguageFiltersChange.emit(this.selectedLanguageFilters);
     }
 
-    updateTopicFilters(eventData: Set<string>) {
-        this.selectedTopicsFilters = eventData;
-        this.selectedTopicsFiltersChange.emit(this.selectedTopicsFilters);
+    updateInterestFilters(eventData: string[]) {
+        this.selectedInterestsFilters = eventData;
+        this.selectedInterestsFiltersChange.emit(this.selectedInterestsFilters);
     }
 
     resetFilters() {
         this.resetFiltersEvent.next();
-        this.selectedLanguageFilters = new Set();
-        this.selectedTopicsFilters = new Set();
-        this.selectedTopicsFiltersChange.emit(this.selectedTopicsFilters);
+
+        this.selectedLanguageFilters = [];
+        this.selectedInterestsFilters = [];
+
         this.selectedLanguageFiltersChange.emit(this.selectedLanguageFilters);
+        this.selectedInterestsFiltersChange.emit(this.selectedInterestsFilters);
     }
 }
