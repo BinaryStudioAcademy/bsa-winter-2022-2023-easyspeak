@@ -1,7 +1,7 @@
 <div class="filters-section-container">
     <div class="btns-wrp">
-        <app-dropdown [btnLabel]="this.langBtnLabel" [resetEvent]="this.resetFiltersEvent" [data]="this.langLevels" (selectedFilters)="updateLangFilters($event)"></app-dropdown>
-        <app-dropdown [btnLabel]="this.topicsBtnLabel" [resetEvent]="this.resetFiltersEvent" [data]="this.topics" (selectedFilters)="updateTopicFilters($event)"></app-dropdown>
+        <app-dropdown [btnLabel]="this.langBtnLabel" [resetEvent]="this.resetFiltersEvent" [data]="this.langLevels" [selectedItems]="selectedLanguageFilters" (selectedFilters)="updateLangFilters($event)"></app-dropdown>
+        <app-interests-dropdown [selectedItems]="selectedInterestsFilters" (selectedInterests)="updateInterestFilters($event)"></app-interests-dropdown>
     </div>
     <div class="selected-filters-wrp">
         <div class="selected-filters-list">
@@ -11,10 +11,10 @@
                     <mat-icon (click)="removeLangLevel(selectedTopic)">close</mat-icon>
                 </div>
             </div>
-            <div *ngFor="let selectedTopic of this.selectedTopicsFilters">
-                <div *ngIf="selectedTopic" class="selected-filter-item">
-                    {{selectedTopic}}
-                    <mat-icon (click)="removeTopic(selectedTopic)">close</mat-icon>
+            <div *ngFor="let selectedInterest of this.selectedInterestsFilters">
+                <div *ngIf="selectedInterest" class="selected-filter-item">
+                    {{selectedInterest}}
+                    <mat-icon (click)="removeInterest(selectedInterest)">close</mat-icon>
                 </div>
             </div>
         </div>

@@ -29,7 +29,7 @@
 
         <div class="lesson-level">
             <img src="assets/lesson-icons/people-icon.svg" alt="people-icon" />
-            <span class="count">{{ lesson.viewersCount }}</span>
+            <span class="count">{{ lesson.subscribersCount }}</span>
 
             <img src="assets/lesson-icons/rocket-icon.svg" alt="rocket-icon" />
             <span class="count">{{ lesson.level }}</span>
@@ -39,12 +39,14 @@
             <button
                 class="join"
                 [disabled]="lesson.isDisabled"
-                [textContent]="lesson.isDisabled ? 'Expired' : 'Join'"></button>
-            <button class="expand" (click)="getQuestions(lesson.id)">See questions</button>
+                [textContent]="lesson.isDisabled ? 'Expired' : 'Join'"
+                (click)="enrollLesson()">
+            </button>
+            <button class="expand" (click)="showQuestions(lesson.id)">See questions</button>
             <img src="assets/lesson-icons/expand.svg" alt="expand-icon" />
         </div>
     </div>
-    <div class="lesson-card-questions" *ngIf="questions">
+    <div class="lesson-card-questions" *ngIf="isShowQuestions">
         <div class="question" *ngFor="let question of questions">
             <p class="question-text">{{ question.topic }}</p>
             <div class="subquestion" *ngFor="let subquestion of question.subQuestions">

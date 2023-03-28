@@ -8,7 +8,7 @@ export interface Lesson {
     tutorFlagPath: string;
     tutorName: string;
     topics: string[];
-    viewersCount: number;
+    subscribersCount: number;
     level: string;
     isDisabled: boolean;
 }

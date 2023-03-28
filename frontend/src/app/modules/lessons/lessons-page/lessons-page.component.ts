@@ -4,7 +4,6 @@ import { langLevelsSample } from '@modules/filter-section/filter-section/filter-
 import { YoutubePlayerComponent } from '@shared/components/youtube-player/youtube-player.component';
 import { ILesson } from '@shared/models/lesson/ILesson';
 import { LanguageLevels } from '@shared/models/lesson/LanguageLevels';
-import Utils from '@shared/utils/lesson.utils';
 import * as moment from 'moment';
 
 import { Lesson } from 'src/app/models/lessons/lesson';
@@ -20,19 +19,23 @@ import { LessonsCreateComponent } from '../lessons-create/lessons-create.compone
 export class LessonsPageComponent implements OnInit, OnChanges {
     todayDate: string;
 
-    @Input() selectedTopicsFilters: Set<string>;
+    @Input() selectedLanguageFilters: string[] = [];
 
-    @Input() selectedLanguageFilters: Set<string>;
+    @Input() selectedInterestsFilters: string[] = [];
 
     @Input() selectedDateFilter: Date;
 
-    lessons = Utils.lessons;
+    lessons: Lesson[];
 
-    readonly formatString = 'D MMMM YYYY, dddd';
+    readonly formatString = 'DD MMMM YYYY, dddd';
 
-    constructor(private dialogRef: MatDialog, private lessonService: LessonsService) {}
+    constructor(private dialogRef: MatDialog, private lessonService: LessonsService) { }
 
     ngOnInit(): void {
+        this.selectedDateFilter = new Date();
+
+        this.getLessons();
+
         this.todayDate = moment().format(this.formatString);
     }
 
@@ -64,13 +67,11 @@ export class LessonsPageComponent implements OnInit, OnChanges {
     }
 
     getLessons() {
-        this.lessonService
-            .getFilteredLessons({
-                languageLevels: Array.from(this.selectedLanguageFilters).map((level: string) =>
-                    Object.values(LanguageLevels).indexOf(level)),
-                tags: Array.from(this.selectedTopicsFilters).map((topic) => ({ name: topic })),
-                date: new Date(this.selectedDateFilter?.toISOString().slice(0, 1)),
-            })
+        this.lessonService.getFilteredLessons({
+            languageLevels: this.selectedLanguageFilters.map((level: string) => Object.values(LanguageLevels).indexOf(level)),
+            tags: this.selectedInterestsFilters.map((topic) => ({ name: topic })),
+            date: new Date(this.selectedDateFilter.toISOString().slice(0, 10)),
+        })
             .subscribe((response: ILesson[]) => {
                 this.lessons = [...this.mapLesson(response)];
             });
@@ -82,14 +83,30 @@ export class LessonsPageComponent implements OnInit, OnChanges {
             imgPath: lesson.mediaPath,
             videoId: 'xqAriI87lFU',
             title: lesson.name,
-            time: moment(lesson.startAt).format(this.formatString),
+            time: lesson.startAt.split('T')[1].substring(0, 5).replace(':', '.'),
             tutorAvatarPath: 'assets/lesson-mocks/Photo )Patient).png',
             tutorFlagPath: 'assets/lesson-icons/canada-test-flag.svg',
             tutorName: 'Roger Vaccaro',
             topics: lesson.tags.map((tag) => tag.name),
-            viewersCount: lesson.subscribersCount,
+            subscribersCount: lesson.subscribersCount,
             level: langLevelsSample[lesson.languageLevel].title,
-            isDisabled: new Date() > new Date(lesson.startAt),
+            isDisabled: (new Date() > new Date(lesson.startAt)),
         }));
+    }
+
+    getLessonsUnavailableMessage(): string {
+        const noInterests = !this.selectedInterestsFilters.length;
+        const noLanguages = !this.selectedLanguageFilters.length;
+
+        switch (true) {
+            case noInterests && noLanguages:
+                return 'Oops, there are no lessons for this day. Please consider another date';
+            case !noInterests && !noLanguages:
+                return 'Oops, there are no lessons with such filters for this day. Please consider another date';
+            case !noInterests && noLanguages:
+                return 'Oops, there are no lessons with such interests for this day. Please consider another date';
+            default:
+                return 'Oops, there are no lessons with such levels for this day. Please consider another date';
+        }
     }
 }

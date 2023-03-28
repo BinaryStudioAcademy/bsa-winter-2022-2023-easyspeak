@@ -3,14 +3,13 @@
         <app-suitable-lesson (dateSelected)="onDateSelected($event)"></app-suitable-lesson>
     </div>
     <div class="filter-container">
-        <app-filter-section (selectedTopicsFiltersChange)="onSelectedTopicsFiltersChange($event)"
-            (selectedLanguageFiltersChange)="onSelectedLanguageFiltersChange($event)">
+        <app-filter-section (selectedLanguageFiltersChange)="onSelectedLanguageFiltersChange($event)"
+            (selectedInterestsFiltersChange)="onSelectedInterestsFiltersChange($event)">
         </app-filter-section>
     </div>
     <div class="lessons-container">
-        <app-lessons-page [selectedTopicsFilters]="selectedTopicsFilters"
-            [selectedLanguageFilters]="selectedLanguageFilters"
-            [selectedDateFilter]="selectedDateFilter">
+        <app-lessons-page [selectedLanguageFilters]="selectedLanguageFilters"
+            [selectedInterestsFilters]="selectedInterestsFilters" [selectedDateFilter]="selectedDateFilter">
         </app-lessons-page>
     </div>
 </div>

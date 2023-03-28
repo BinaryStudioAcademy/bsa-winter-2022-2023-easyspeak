@@ -1,4 +1,4 @@
-<div [ngClass]="{ 'day-elem-blue': isToday(), 'day-elem-grey': compareDate() }" (click)="onDayClick($event)" class="day-elem">
+<div [ngClass]="{ 'day-elem-blue': isSelectedDay(), 'day-elem-grey': isBeforeToday(), 'day-elem' : true }" (click)="onDayClick($event)">
     {{ item | date : 'dd MMMM' }}
 
     <h2>{{ item | date : 'EEEE' }}</h2>
@@ -6,6 +6,6 @@
     <div class="labels">
         <div *ngIf="isToday()" class="meetings today-label">today</div>
 
-        <div [ngClass]="{ 'meetings-grey': compareDate() }" class="meetings">{{ meetingCount }} meetings</div>
+        <div [ngClass]="{ 'meetings-grey': isBeforeToday() }" class="meetings">{{ meetingCount }} meetings</div>
     </div>
 </div>

@@ -1,21 +1,27 @@
 import { Injectable } from '@angular/core';
 import { IUserInfo } from '@shared/models/IUserInfo';
 
+import { Lesson } from 'src/app/models/lessons/lesson';
+
 import { HttpService } from './http.service';
 
 @Injectable({
     providedIn: 'root',
 })
 export class UserService {
-    public routePrefix = '/user';
+    public routePrefix = '/users';
 
-    constructor(private httpService: HttpService) { }
+    constructor(private httpService: HttpService) {}
 
-    public getUser(userId: number) {
-        return this.httpService.getById<IUserInfo>(`${this.routePrefix}`, userId);
+    public getUser() {
+        return this.httpService.get<IUserInfo>(`${this.routePrefix}`);
     }
 
     public updateUser(userId: number, updatedUser: IUserInfo) {
         return this.httpService.put(`${this.routePrefix}/${userId}`, updatedUser);
+    }
+
+    public enrollUserToLesson(lessonId: number) {
+        return this.httpService.put<Lesson>(`${this.routePrefix}/enroll/${lessonId}`, {} as Lesson);
     }
 }
