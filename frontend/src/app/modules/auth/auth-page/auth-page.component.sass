@@ -1,4 +1,4 @@
-@import src\styles\colors.sass
+@import "src/styles/colors"
 
 @mixin background-icon
     position: absolute
@@ -13,7 +13,7 @@
     height: 9%
 
 ::ng-deep *
-    margin:0
+    margin: 0
 
 ::placeholder
     color: $gray-200
@@ -24,8 +24,8 @@
     height: 100vh
     width: 100vw
     position: fixed
-    top:0
-    left:0
+    top: 0
+    left: 0
     font-style: normal
 
 .auth-form
@@ -35,7 +35,7 @@
     display: flex
     flex-direction: column
     width: 18%
-    height: 95%
+    height: 80%
 
 .image-section
     margin-left: 50%
@@ -147,8 +147,10 @@ input, select, button
     display: flex
     flex-direction: row
     justify-content: space-between
-    select
+    select, app-calendar
         width: 47%
+    app-calendar
+        margin-top: 8px
 
 
 select

@@ -26,19 +26,5 @@ namespace EasySpeak.Core.BLL.Helpers
 
             return dict[level];
         }
-
-        public static Language MapLanguage(string language)
-        {
-            //TODO: Improve the method when the enam is completely done
-
-            return Language.Ukrainian;
-        }
-
-        public static Country MapCountry(string language)
-        {
-            //TODO: Improve the method when the enam is completely done
-
-            return Country.Ukraine;
-        }
     }
 }

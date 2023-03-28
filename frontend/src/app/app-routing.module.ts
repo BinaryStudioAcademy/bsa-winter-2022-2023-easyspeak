@@ -2,26 +2,18 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '@core/guards/auth.guard';
 import { AuthorizedUsersGuard } from '@core/guards/authorized-users.guard';
+import { SelectTopicsPageComponent } from '@modules/user-profile/select-topics-page/select-topics-page.component';
+import { NotFoundComponent } from '@shared/components/not-found/not-found.component';
 
 const routes: Routes = [
-    {
-        path: '',
-        loadChildren: () => import('./modules/landing/landing.module').then((m) => m.LandingModule),
-    },
-    {
-        path: 'main',
-        loadChildren: () => import('./modules/main/main.module').then((m) => m.MainModule),
-        canActivate: [AuthGuard],
-    },
     {
         path: 'auth',
         loadChildren: () => import('./modules/auth/auth.module').then((m) => m.AuthModule),
         canActivate: [AuthorizedUsersGuard],
     },
     {
-        path: 'profile',
-        loadChildren: () => import('./modules/user-profile/user-profile.module').then((m) => m.UserProfileModule),
-        canActivate: [AuthGuard],
+        path: 'topics',
+        component: SelectTopicsPageComponent,
     },
     {
         path: 'chat',
@@ -33,7 +25,22 @@ const routes: Routes = [
         loadChildren: () => import('./modules/session-call/session-call.module').then((m) => m.SessionCallModule),
         canActivate: [AuthGuard],
     },
-    { path: '**', redirectTo: '', pathMatch: 'full' },
+    {
+        path: '',
+        pathMatch: 'full',
+        loadChildren: () => import('./modules/landing/landing.module').then((m) => m.LandingModule),
+    },
+    {
+        path: '',
+        pathMatch: 'prefix',
+        loadChildren: () => import('./modules/main/main.module').then((m) => m.MainModule),
+        canActivate: [AuthGuard],
+    },
+    {
+        path: '**',
+        component: NotFoundComponent,
+        pathMatch: 'full',
+    },
 ];
 
 @NgModule({

@@ -17,6 +17,8 @@ export class LessonComponent {
 
     questions: Question[] = [];
 
+    isShowQuestions = true;
+
     isLoading = false;
 
     constructor(
@@ -37,7 +39,17 @@ export class LessonComponent {
         });
     }
 
-    getQuestions(id: number) {
+    showQuestions(id: number) {
+        if (this.isShowQuestions) {
+            this.getQuestions(id);
+        }
+
+        if (this.questions.length) {
+            this.isShowQuestions = !this.isShowQuestions;
+        }
+    }
+
+    private getQuestions(id: number) {
         this.isLoading = true;
         this.spinner.show();
         this.lessonsService.getQuestions(id).subscribe(

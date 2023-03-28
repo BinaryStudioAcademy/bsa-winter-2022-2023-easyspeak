@@ -1,1 +1,179 @@
-<p>landing-page works!</p>
+<div class="all">
+    <div class="header">
+        <div class="logo">
+            <img class="camera" src="assets/logo/logo.svg" />
+            <h2>EasySpeak</h2>
+        </div>
+        <div class="links">
+            <p (click)="scrollToElement(home)">Home</p>
+            <p (click)="scrollToElement(ai)">AI</p>
+            <p (click)="scrollToElement(plan)">Plan</p>
+            <p (click)="scrollToElement(about)">About Us</p>
+        </div>
+        <div class="buttons-header">
+            <button class="sign-in" routerLink="/auth/sign-in"><h4>Sign In</h4></button>
+            <button class="sign-up" routerLink="/auth/sign-up"><h4>Sign Up</h4></button>
+        </div>
+    </div>
+
+    <div #home class="info-block-1-home">
+        <div class="left-block">
+            <div class="left-content">
+                <h1>
+                    What Will We Talk About <br />
+                    In English?
+                </h1>
+                <label>
+                    Lorem ipsum dolor sit amet consectetur. Amet aliquam ipsum purus luctus. <br />
+                    Tellus euismod dictum sed odio elementum tincidunt. Mauris purus commodo <br />
+                    facilisi mauris lorem ut pellentesque in. Laoreet sagittis dui faucibus in mattis.
+                </label>
+                <div class="buttons-home">
+                    <button class="sign-up" routerLink="/auth/sign-up"><h3>Sign Up</h3></button>
+                    <button class="choose-plan"><h3>Choose plan</h3></button>
+                </div>
+            </div>
+        </div>
+        <div class="right-block">
+            <div class="radius-big leaf">
+                <img src="assets/topic-icons/FourLeafClover.svg" />
+            </div>
+            <div class="radius-big dog">
+                <img src="assets/topic-icons/DogFace.svg" />
+            </div>
+            <div class="radius-medium car">
+                <img src="assets/topic-icons/RacingCar.svg" />
+            </div>
+            <div class="radius-medium cook">
+                <img src="assets/topic-icons/Cook.svg" />
+            </div>
+            <div class="radius-medium camera">
+                <img src="assets/topic-icons/Camera.svg" />
+            </div>
+            <div class="radius-small woman">
+                <img src="assets/topic-icons/WomanDancing.svg" />
+            </div>
+            <div class="radius-small face">
+                <img src="assets/topic-icons/FaceWithMonocle.svg" />
+            </div>
+        </div>
+    </div>
+
+    <div class="topics">
+        <div class="topic-containers">
+            <div class="container">
+                <div class="radius-topic">
+                    <img src="assets/topic-icons/AlarmClock.svg" />
+                </div>
+                <div class="title">Choose a convenient time</div>
+                <div class="info">Lorem ipsum dolor sit amet consectetur. Nunc sed facilisi enim leo ut quis.</div>
+            </div>
+            <div class="container">
+                <div class="radius-topic">
+                    <img src="assets/topic-icons/Sunglasses.svg" />
+                </div>
+                <div class="title">Talk about your interests</div>
+                <div class="info">Lorem ipsum dolor sit amet consectetur. Nunc sed facilisi enim leo ut quis.</div>
+            </div>
+            <div class="container">
+                <div class="radius-topic">
+                    <img src="assets/topic-icons/SmilingFaceWithHearts.svg" />
+                </div>
+                <div class="title">Find friends to chat with</div>
+                <div class="info">Lorem ipsum dolor sit amet consectetur. Nunc sed facilisi enim leo ut quis.</div>
+            </div>
+            <div class="container">
+                <div class="radius-topic">
+                    <img src="assets/topic-icons/Ledger.svg" />
+                </div>
+                <div class="title">From Intermediate</div>
+                <div class="info">
+                    Lorem ipsum dolor sit amet cons. Nunc sed facilisi enim leo ut quis. Sed facilisi enim.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div #ai class="info-block-2-ai">
+        <div class="ai-left">
+            <div class="left-container">
+                <div class="ai-title">
+                    We Use Artificial Intelligence To Find People For You <br />
+                    To Chat With.
+                </div>
+
+                <div class="ai-info">
+                    Lorem ipsum dolor sit amet consectetur. Amet aliquam ipsum purus luctus.<br />
+                    Tellus euismod dictum sed odio elementum tincidunt. Mauris purus commodo <br />
+                    facilisi mauris lorem ut pellentesque in. Laoreet sagittis dui.
+                </div>
+            </div>
+        </div>
+        <div class="ai-right">
+            <div class="ai-card-container">
+                <app-user-card [user]="userT"></app-user-card>
+            </div>
+            <div class="ai-card-container ai-card-over">
+                <app-user-card></app-user-card>
+            </div>
+        </div>
+    </div>
+
+    <div #plan class="plan">
+        <h1>
+            Plan...<br />
+            This block will be done later
+        </h1>
+    </div>
+
+    <div #about class="info-block-3-about">
+        <div class="info-3-container">
+            <h1>Lorem Ipsum Dolor</h1>
+
+            <h3 class="about-text">
+                Lorem ipsum dolor sit amet consectetur. Amet aliquam ipsum purus luctus. Tellus euismod dictum sed odio
+                elementum tincidunt.
+            </h3>
+
+            <button class="sign-up" routerLink="/auth/sign-up">
+                <h3>Sign Up</h3>
+            </button>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="contacts">
+            <div class="footer-logo">
+                <img class="logo-img" src="assets/logo/logo.svg" />
+                <h2>EasySpeak</h2>
+            </div>
+
+            <div class="contacts-icons">
+                <div class="circle-icon">
+                    <img src="assets/landing-page-icons/instagram.svg" alt="instagram-icon" />
+                </div>
+                <div class="circle-icon">
+                    <img src="assets/landing-page-icons/facebook.svg" alt="facebook-icon" />
+                </div>
+                <div class="circle-icon">
+                    <img src="assets/landing-page-icons/youtube.svg" alt="youtube-icon" />
+                </div>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <div class="links">
+                <p (click)="scrollToElement(home)">Home</p>
+                <p (click)="scrollToElement(ai)">AI</p>
+                <p (click)="scrollToElement(plan)">Plan</p>
+                <p (click)="scrollToElement(about)">About Us</p>
+            </div>
+            <div class="copy-label">Copyright © 2023 EasySpeak</div>
+        </div>
+
+        <div class="buttons">
+            <button class="sign-in" routerLink="/auth/sign-in"><h4>Sign In</h4></button>
+            <button class="sign-up" routerLink="/auth/sign-up"><h4>Sign Up</h4></button>
+        </div>
+    </div>
+</div>

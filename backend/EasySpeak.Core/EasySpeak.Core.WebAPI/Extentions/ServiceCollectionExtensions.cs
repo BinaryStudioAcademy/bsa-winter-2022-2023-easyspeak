@@ -15,7 +15,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Reflection;
 
 
-namespace EasySpeak.Core.WebAPI.Extentions
+namespace EasySpeak.Core.WebAPI.Extensions
 {
     public static class ServiceCollectionExtensions
     {
@@ -80,11 +80,11 @@ namespace EasySpeak.Core.WebAPI.Extentions
                 });
         }
 
-        public static void AddFirebaseApp(this IServiceCollection services)
+        private static void AddFirebaseApp(this IServiceCollection services)
         {
             FirebaseApp.Create(new AppOptions()
             {
-                Credential = GoogleCredential.FromFile($"{Environment.CurrentDirectory}/FirebaseServiceAccountKey.json")
+                Credential = GoogleCredential.FromFile($"{Environment.CurrentDirectory}/Resources/FirebaseServiceAccountKey.json")
             });
         }
     }

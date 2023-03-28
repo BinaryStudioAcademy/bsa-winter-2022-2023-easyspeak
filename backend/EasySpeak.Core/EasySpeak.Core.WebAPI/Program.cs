@@ -1,3 +1,4 @@
+using EasySpeak.Core.WebAPI.Extensions;
 using EasySpeak.Core.WebAPI.Extentions;
 using EasySpeak.Core.WebAPI.Hubs;
 using EasySpeak.Core.WebAPI.Middlewares;
@@ -28,7 +29,7 @@ builder.Services.AddSignalR();
 builder.Services.AddCors();
 builder.Services.AddHealthChecks();
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
-builder.WebHost.UseUrls("https://*:5050");
+builder.WebHost.UseUrls("http://*:5050");
 
 var app = builder.Build();
 

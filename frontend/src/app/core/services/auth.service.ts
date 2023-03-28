@@ -37,7 +37,7 @@ export class AuthService {
                 this.setAccessToken(userCredential.user);
             }
 
-            this.navigateTo('profile/topics');
+            this.navigateTo('/profile/topics');
         });
     }
 
@@ -61,6 +61,8 @@ export class AuthService {
 
     logout(): Promise<void> {
         localStorage.removeItem('accessToken');
+        localStorage.removeItem('user');
+
         this.router.navigate(['auth/sign-in']);
 
         return this.afAuth.signOut();

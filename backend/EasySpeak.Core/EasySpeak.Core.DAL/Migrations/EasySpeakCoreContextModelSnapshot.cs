@@ -34,7 +34,7 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.HasIndex("UsersId");
 
-                    b.ToTable("ChatUser");
+                    b.ToTable("ChatUser", (string)null);
 
                     b.HasData(
                         new
@@ -166,7 +166,7 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.HasIndex("ChatId");
 
-                    b.ToTable("Calls");
+                    b.ToTable("Calls", (string)null);
 
                     b.HasData(
                         new
@@ -503,7 +503,7 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Chats");
+                    b.ToTable("Chats", (string)null);
 
                     b.HasData(
                         new
@@ -656,7 +656,7 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Friends");
+                    b.ToTable("Friends", (string)null);
 
                     b.HasData(
                         new
@@ -862,7 +862,7 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.HasIndex("CreatedBy");
 
-                    b.ToTable("Lessons");
+                    b.ToTable("Lessons", (string)null);
 
                     b.HasData(
                         new
@@ -1003,7 +1003,7 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.HasIndex("ChatId");
 
-                    b.ToTable("Messages");
+                    b.ToTable("Messages", (string)null);
 
                     b.HasData(
                         new
@@ -1356,7 +1356,7 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Notifications");
+                    b.ToTable("Notifications", (string)null);
 
                     b.HasData(
                         new
@@ -1745,7 +1745,7 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.HasIndex("LessonId");
 
-                    b.ToTable("Questions");
+                    b.ToTable("Questions", (string)null);
 
                     b.HasData(
                         new
@@ -1912,7 +1912,7 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.HasIndex("QuestionId");
 
-                    b.ToTable("Subquestions");
+                    b.ToTable("Subquestions", (string)null);
 
                     b.HasData(
                         new
@@ -2216,7 +2216,7 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tags");
+                    b.ToTable("Tags", (string)null);
 
                     b.HasData(
                         new
@@ -2349,8 +2349,8 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
-                    b.Property<short>("Age")
-                        .HasColumnType("smallint");
+                    b.Property<DateTime>("BirthDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("Country")
                         .HasColumnType("int");
@@ -2399,13 +2399,13 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
 
                     b.HasData(
                         new
                         {
                             Id = 1L,
-                            Age = (short)30,
+                            BirthDate = new DateTime(2003, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Country = 0,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "Della.Rosenbaum@yahoo.com",
@@ -2414,82 +2414,82 @@ namespace EasySpeak.Core.DAL.Migrations
                             IsBanned = false,
                             IsSubscribed = true,
                             Language = 0,
-                            LanguageLevel = 4,
+                            LanguageLevel = 3,
                             LastName = "Rosenbaum",
-                            Sex = 1,
+                            Sex = 0,
                             Status = 3,
                             Timezone = 0
                         },
                         new
                         {
                             Id = 2L,
-                            Age = (short)57,
+                            BirthDate = new DateTime(2003, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Country = 0,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "Robert21@yahoo.com",
-                            FirstName = "Robert",
-                            ImagePath = "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/957.jpg",
+                            Email = "Jon.Abshire@gmail.com",
+                            FirstName = "Jon",
+                            ImagePath = "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/949.jpg",
                             IsBanned = false,
                             IsSubscribed = true,
                             Language = 0,
-                            LanguageLevel = 2,
-                            LastName = "O'Hara",
+                            LanguageLevel = 1,
+                            LastName = "Abshire",
+                            Sex = 1,
+                            Status = 3,
+                            Timezone = 0
+                        },
+                        new
+                        {
+                            Id = 3L,
+                            BirthDate = new DateTime(2003, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Country = 0,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "Kurt.Gulgowski93@gmail.com",
+                            FirstName = "Kurt",
+                            ImagePath = "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1117.jpg",
+                            IsBanned = false,
+                            IsSubscribed = true,
+                            Language = 0,
+                            LanguageLevel = 3,
+                            LastName = "Gulgowski",
+                            Sex = 0,
+                            Status = 3,
+                            Timezone = 0
+                        },
+                        new
+                        {
+                            Id = 4L,
+                            BirthDate = new DateTime(2003, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Country = 0,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "Eduardo.Larson@gmail.com",
+                            FirstName = "Eduardo",
+                            ImagePath = "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1114.jpg",
+                            IsBanned = false,
+                            IsSubscribed = true,
+                            Language = 0,
+                            LanguageLevel = 3,
+                            LastName = "Larson",
                             Sex = 2,
                             Status = 0,
                             Timezone = 0
                         },
                         new
                         {
-                            Id = 3L,
-                            Age = (short)16,
-                            Country = 0,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "Rhonda74@gmail.com",
-                            FirstName = "Rhonda",
-                            ImagePath = "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1199.jpg",
-                            IsBanned = true,
-                            IsSubscribed = true,
-                            Language = 0,
-                            LanguageLevel = 4,
-                            LastName = "Kunze",
-                            Sex = 1,
-                            Status = 2,
-                            Timezone = 0
-                        },
-                        new
-                        {
-                            Id = 4L,
-                            Age = (short)57,
-                            Country = 0,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "Myrtle70@yahoo.com",
-                            FirstName = "Myrtle",
-                            ImagePath = "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/37.jpg",
-                            IsBanned = false,
-                            IsSubscribed = true,
-                            Language = 0,
-                            LanguageLevel = 1,
-                            LastName = "Glover",
-                            Sex = 1,
-                            Status = 1,
-                            Timezone = 0
-                        },
-                        new
-                        {
                             Id = 5L,
-                            Age = (short)18,
+                            BirthDate = new DateTime(2003, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Country = 0,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "Ivan11@gmail.com",
-                            FirstName = "Ivan",
-                            ImagePath = "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/610.jpg",
+                            Email = "Francis16@yahoo.com",
+                            FirstName = "Francis",
+                            ImagePath = "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/607.jpg",
                             IsBanned = false,
                             IsSubscribed = true,
                             Language = 0,
-                            LanguageLevel = 0,
-                            LastName = "Heidenreich",
-                            Sex = 1,
-                            Status = 1,
+                            LanguageLevel = 3,
+                            LastName = "Little",
+                            Sex = 0,
+                            Status = 0,
                             Timezone = 0
                         });
                 });
@@ -2506,7 +2506,7 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.HasIndex("TagsId");
 
-                    b.ToTable("LessonTag");
+                    b.ToTable("LessonTag", (string)null);
 
                     b.HasData(
                         new
@@ -2623,7 +2623,7 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.HasIndex("SubscribersId");
 
-                    b.ToTable("LessonUser");
+                    b.ToTable("LessonUser", (string)null);
 
                     b.HasData(
                         new
@@ -2690,7 +2690,7 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.HasIndex("UsersId");
 
-                    b.ToTable("TagUser");
+                    b.ToTable("TagUser", (string)null);
 
                     b.HasData(
                         new

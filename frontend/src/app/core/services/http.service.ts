@@ -12,15 +12,15 @@ export class HttpService {
 
     constructor(private httpClient: HttpClient) {}
 
-    get<T>(url: string): Observable<T[]> {
-        return this.httpClient.get<T[]>(this.buildUrl(url)).pipe(catchError(this.handleError));
+    get<T>(url: string): Observable<T> {
+        return this.httpClient.get<T>(this.buildUrl(url)).pipe(catchError(this.handleError));
     }
 
     getById<T>(url: string, id: string | number) {
         return this.httpClient.get<T>(`${this.buildUrl(url)}/${id}`).pipe(catchError(this.handleError));
     }
 
-    post<T>(url: string, resource: T) {
+    post<T>(url: string, resource: unknown) {
         return this.httpClient.post<T>(this.buildUrl(url), resource).pipe(catchError(this.handleError));
     }
 

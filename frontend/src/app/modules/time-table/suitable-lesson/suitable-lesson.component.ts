@@ -1,19 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import * as moment from 'moment';
+
+import { LessonsService } from 'src/app/services/lessons.service';
 
 @Component({
     selector: 'app-suitable-lesson',
     templateUrl: './suitable-lesson.component.html',
     styleUrls: ['./suitable-lesson.component.sass'],
 })
-export class SuitableLessonComponent {
+export class SuitableLessonComponent implements OnInit {
+    @Output() dateSelected = new EventEmitter<Date>();
+
     readonly amountOfDayInWeek: number = 7;
 
-    days: Date[] = [];
+    days: { date: Date, meetingsCount: number }[];
 
     selectedDate: Date = new Date();
 
-    constructor() {
+    meetingsCount: number;
+
+    constructor(private lessonService: LessonsService) { }
+
+    ngOnInit(): void {
         this.setDays();
     }
 
@@ -37,11 +45,33 @@ export class SuitableLessonComponent {
         this.setDays();
     }
 
-    setDays(): void {
+    async setDays(): Promise<void> {
+        this.days = [];
+        const promises: Promise<{ date: Date, meetingsCount: number }>[] = [];
+
         for (let i = 0; i < 7; i++) {
-            this.days[i] = moment(this.selectedDate)
-                .add(i - this.selectedDate.getDay() + 1, 'day')
-                .toDate();
+            const date = moment(this.selectedDate).add(i - this.selectedDate.getDay() + 1, 'day').toDate();
+            const promise = this.getMeetingCount(date).then(meetingsCount => ({ date, meetingsCount }));
+
+            promises.push(promise);
         }
+
+        const days = await Promise.all(promises);
+
+        this.days = days.sort((a, b) => a.date.getTime() - b.date.getTime());
+    }
+
+    async getMeetingCount(date: Date): Promise<number> {
+        const filteredLessons = await this.lessonService.getFilteredLessons({
+            languageLevels: [],
+            tags: [],
+            date: new Date(date.toISOString().slice(0, 10)),
+        }).toPromise();
+
+        return filteredLessons?.length || 0;
+    }
+
+    onDateSelected(dateSelected: Date) {
+        this.dateSelected.emit(dateSelected);
     }
 }

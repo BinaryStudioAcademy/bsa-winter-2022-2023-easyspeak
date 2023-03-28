@@ -9,6 +9,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { RoundProgressBarComponent } from '@shared/components/round-progress-bar/round-progress-bar.component';
 import { MaterialModule } from '@shared/material/material.module';
 
+import { CalendarComponent } from './components/calendar/calendar.component';
 import { ConfirmComponent } from './components/confirm/confirm.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { InterestsDropdownComponent } from './components/interests-dropdown/interests-dropdown.component';
@@ -39,6 +40,7 @@ import { YoutubePlayerComponent } from './components/youtube-player/youtube-play
         ModalComponent,
         ConfirmComponent,
         RoundProgressBarComponent,
+        CalendarComponent,
         InterestsDropdownComponent,
         UserNotificationComponent,
     ],
@@ -55,6 +57,8 @@ import { YoutubePlayerComponent } from './components/youtube-player/youtube-play
         ModalComponent,
         MaterialModule,
         RoundProgressBarComponent,
+        CalendarComponent,
+        InterestsDropdownComponent,
         UserNotificationComponent,
     ],
 })
