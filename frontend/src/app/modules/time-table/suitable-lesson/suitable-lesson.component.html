@@ -11,12 +11,9 @@
             </button>
 
             <div class="calendar-block">
-                <button class="button-icon" [matMenuTriggerFor]="appMenu">
-                    <img src="assets\calendar\calendar.svg">
-                </button>
-                <mat-menu #appMenu="matMenu">
-                    <mat-calendar #calendar (selectedChange)="select($event)"> </mat-calendar>
-                </mat-menu>
+                <div class="button-icon">
+                    <img src="assets\calendar\calendar.svg" />
+                </div>
 
                 {{ days[0].date.toLocaleDateString() }} - {{ days[6].date.toLocaleDateString() }}
             </div>
@@ -28,7 +25,11 @@
         </div>
 
         <div class="days">
-            <app-suitable-lesson-day *ngFor="let day of days" [meetingCount]="day.meetingsAmount" [item]="day.date" [selectedDate]="selectedDate" (dateSelected)="onDateSelected($event)">
+            <app-suitable-lesson-day
+                *ngFor="let day of days"
+                [meetingCount]="day.meetingsAmount"
+                [item]="day.date"
+                (dateSelected)="onDateSelected($event)">
             </app-suitable-lesson-day>
         </div>
     </div>
