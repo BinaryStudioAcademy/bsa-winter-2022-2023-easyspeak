@@ -33,15 +33,6 @@ namespace EasySpeak.Core.WebAPI.Controllers
             return Ok(createdUser);
         }
 
-        [Authorize]
-        [HttpGet("current")]
-        public async Task<ActionResult<UserDto>> GetCurrentUser()
-        {
-            var user = await _userService.GetCurrentUser();
-
-            return Ok(user);
-        }
-
         [HttpPut("{userId}")]
         public ActionResult<UserDto> Update(int userId, UserDto userDto)
         {

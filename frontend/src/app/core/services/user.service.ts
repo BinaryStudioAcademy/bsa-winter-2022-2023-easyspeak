@@ -11,7 +11,7 @@ export class UserService {
     public routePrefix = '/users';
 
     constructor(private httpService: HttpService) {}
-    
+
     public getUser() {
         return this.httpService.get<IUserInfo>(`${this.routePrefix}`);
     }
