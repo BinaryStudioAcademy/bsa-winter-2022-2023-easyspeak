@@ -6,6 +6,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { RouterModule } from '@angular/router';
 import { YouTubePlayerModule } from '@angular/youtube-player';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { HeaderComponent } from '@shared/components/header/header.component';
 import { RoundProgressBarComponent } from '@shared/components/round-progress-bar/round-progress-bar.component';
 import { MaterialModule } from '@shared/material/material.module';
 
@@ -43,6 +44,7 @@ import { YoutubePlayerComponent } from './components/youtube-player/youtube-play
         CalendarComponent,
         InterestsDropdownComponent,
         UserNotificationComponent,
+        HeaderComponent,
     ],
     exports: [
         CommonModule,
@@ -60,6 +62,7 @@ import { YoutubePlayerComponent } from './components/youtube-player/youtube-play
         CalendarComponent,
         InterestsDropdownComponent,
         UserNotificationComponent,
+        HeaderComponent,
     ],
 })
 export class SharedModule {}
