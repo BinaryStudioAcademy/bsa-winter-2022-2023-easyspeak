@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-write-email',
@@ -12,8 +13,13 @@ export class WriteEmailComponent {
 
     isMatch: boolean = true;
 
+    constructor(private router: Router) {}
+
     checkMail(): void {
         this.isMatch = this.emailPattern.test(this.email);
+        if (this.isMatch) {
+            this.router.navigate(['forgot-password/check-email']);
+        }
     }
 
     changedMail(): void {
