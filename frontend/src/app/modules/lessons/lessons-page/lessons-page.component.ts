@@ -18,9 +18,9 @@ import { LessonsCreateComponent } from '../lessons-create/lessons-create.compone
 export class LessonsPageComponent implements OnInit, OnChanges {
     todayDate: string;
 
-    @Input() selectedLanguageFilters: Set<string>;
+    @Input() selectedLanguageFilters: string[] = [];
 
-    @Input() selectedInterestsFilters: Set<string>;
+    @Input() selectedInterestsFilters: string[] = [];
 
     @Input() selectedDateFilter: Date;
 
@@ -73,8 +73,8 @@ export class LessonsPageComponent implements OnInit, OnChanges {
 
     getLessons() {
         this.lessonService.getFilteredLessons({
-            languageLevels: Array.from(this.selectedLanguageFilters).map((level: string) => Object.values(LanguageLevels).indexOf(level)),
-            tags: Array.from(this.selectedInterestsFilters).map((topic) => ({ name: topic })),
+            languageLevels: this.selectedLanguageFilters.map((level: string) => Object.values(LanguageLevels).indexOf(level)),
+            tags: this.selectedInterestsFilters.map((topic) => ({ name: topic })),
             date: new Date(this.selectedDateFilter.toISOString().slice(0, 10)),
         }).subscribe((response: ILesson[]) => {
             this.lessons = [];
@@ -101,8 +101,8 @@ export class LessonsPageComponent implements OnInit, OnChanges {
     }
 
     getLessonsUnavailableMessage(): string {
-        const noInterests = !this.selectedInterestsFilters.size;
-        const noLanguages = !this.selectedLanguageFilters.size;
+        const noInterests = !this.selectedInterestsFilters.length;
+        const noLanguages = !this.selectedLanguageFilters.length;
 
         if (noInterests && noLanguages) {
             return 'Oops, there are no lessons for this day. Please consider another date';

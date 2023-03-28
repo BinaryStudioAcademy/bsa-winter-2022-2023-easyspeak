@@ -2,7 +2,7 @@
     <button class="dropdown-button" (click)="clickButton()"></button>
     <div class="button-content">
         <div class="button-symbols">
-            <div class="counter">{{outputList.size}}</div>
+            <div class="counter">{{outputList.length}}</div>
             <div>Interests</div>
         </div>
         <img class="arrow-icon" src="assets/interestsDropdown/chevron_down.svg"/>
@@ -10,7 +10,7 @@
 
     <div class="dropdown-content" *ngIf="toggle">
         <div *ngFor="let item of inputList; let i = index" class="dropdown-item">
-            <input type="checkbox" id="{{i}}" [checked]="outputList.has(item.icon_name)" class="item-checkbox"
+            <input type="checkbox" id="{{i}}" [checked]="outputList.indexOf(item.icon_name) > -1" class="item-checkbox"
                    (change)="selectInterest($event)"/>
             <label class="item-checkbox-label" for="{{i}}">
                 <div class="icon-wrapper">

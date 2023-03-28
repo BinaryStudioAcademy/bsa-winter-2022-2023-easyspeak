@@ -6,18 +6,18 @@ import { Component } from '@angular/core';
     styleUrls: ['./timetable-page.component.sass'],
 })
 export class TimetablePageComponent {
-    selectedLanguageFilters = new Set<string>();
+    selectedLanguageFilters: string[] = [];
 
-    selectedInterestsFilters = new Set<string>();
+    selectedInterestsFilters: string[] = [];
 
     selectedDateFilter: Date;
 
-    onSelectedLanguageFiltersChange(selectedLanguageFilters: Set<string>) {
-        this.selectedLanguageFilters = new Set<string>([...selectedLanguageFilters]);
+    onSelectedLanguageFiltersChange(selectedLanguageFilters: string[]) {
+        this.selectedLanguageFilters = [...selectedLanguageFilters];
     }
 
-    onSelectedInterestsFiltersChange(selectedInterestsFilters: Set<string>) {
-        this.selectedInterestsFilters = new Set<string>([...selectedInterestsFilters]);
+    onSelectedInterestsFiltersChange(selectedInterestsFilters: string[]) {
+        this.selectedInterestsFilters = [...selectedInterestsFilters];
     }
 
     onDateSelected(dateSelected: Date) {

@@ -12,9 +12,9 @@ export class InterestsDropdownComponent {
 
     @Input() inputList: IIcon[] = getTags();
 
-    @Output() selectedInterests = new EventEmitter<Set<string>>();
+    @Output() selectedInterests = new EventEmitter<string[]>();
 
-    outputList = new Set<string>();
+    outputList: string[] = [];
 
     selectInterest($event: Event) {
         const ev = $event.target as HTMLInputElement;
@@ -22,9 +22,9 @@ export class InterestsDropdownComponent {
         const { checked } = ev;
 
         if (checked) {
-            this.outputList.add(this.inputList[numb].icon_name);
+            this.outputList.push(this.inputList[numb].icon_name);
         } else {
-            this.outputList.delete(this.inputList[numb].icon_name);
+            this.outputList = this.outputList.filter((interest) => interest !== this.inputList[numb].icon_name);
         }
 
         this.selectedInterests.emit(this.outputList);

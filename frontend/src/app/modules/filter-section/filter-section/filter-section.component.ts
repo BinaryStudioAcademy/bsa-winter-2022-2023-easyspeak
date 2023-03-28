@@ -10,17 +10,17 @@ import { Filter } from 'src/app/models/filters/filter';
     styleUrls: ['./filter-section.component.sass'],
 })
 export class FilterSectionComponent implements OnInit {
-    @Output() selectedLanguageFiltersChange = new EventEmitter<Set<string>>();
+    @Output() selectedLanguageFiltersChange = new EventEmitter<string[]>();
 
-    @Output() selectedInterestsFiltersChange = new EventEmitter<Set<string>>();
+    @Output() selectedInterestsFiltersChange = new EventEmitter<string[]>();
 
     resetFiltersEvent: Subject<void> = new Subject<void>();
 
     public langBtnLabel = 'Level';
 
-    public selectedLanguageFilters = new Set<string>();
+    public selectedLanguageFilters: string[] = [];
 
-    public selectedInterestsFilters = new Set<string>();
+    public selectedInterestsFilters: string[] = [];
 
     public langLevels: Filter[];
 
@@ -29,21 +29,21 @@ export class FilterSectionComponent implements OnInit {
     }
 
     removeLangLevel(title: string) {
-        this.selectedLanguageFilters.delete(title);
+        this.selectedLanguageFilters = this.selectedLanguageFilters.filter(filterTitle => filterTitle !== title);
         this.selectedLanguageFiltersChange.emit(this.selectedLanguageFilters);
     }
 
     removeInterest(title: string) {
-        this.selectedInterestsFilters.delete(title);
+        this.selectedInterestsFilters = this.selectedInterestsFilters.filter(filterTitle => filterTitle !== title);
         this.selectedInterestsFiltersChange.emit(this.selectedInterestsFilters);
     }
 
-    updateLangFilters(eventData: Set<string>) {
+    updateLangFilters(eventData: string[]) {
         this.selectedLanguageFilters = eventData;
         this.selectedLanguageFiltersChange.emit(this.selectedLanguageFilters);
     }
 
-    updateInterestFilters(eventData: Set<string>) {
+    updateInterestFilters(eventData: string[]) {
         this.selectedInterestsFilters = eventData;
         this.selectedInterestsFiltersChange.emit(this.selectedInterestsFilters);
     }
@@ -51,8 +51,8 @@ export class FilterSectionComponent implements OnInit {
     resetFilters() {
         this.resetFiltersEvent.next();
 
-        this.selectedLanguageFilters.clear();
-        this.selectedInterestsFilters.clear();
+        this.selectedLanguageFilters = [];
+        this.selectedInterestsFilters = [];
 
         this.selectedLanguageFiltersChange.emit(this.selectedLanguageFilters);
         this.selectedInterestsFiltersChange.emit(this.selectedInterestsFilters);
