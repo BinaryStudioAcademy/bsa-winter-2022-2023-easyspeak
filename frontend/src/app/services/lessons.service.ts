@@ -22,7 +22,7 @@ export class LessonsService {
     }
 
     getLessonsCount(date: string) {
-        return this.http.get<IIDayCard>(`${this.routePrefix}/week/?Date=${date}`);
+        return this.http.get<IIDayCard[]>(`${this.routePrefix}/week/?Date=${date}`);
     }
 
     getQuestions(id: number) {
