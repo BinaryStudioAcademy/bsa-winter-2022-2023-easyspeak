@@ -25,6 +25,10 @@ export class SelectTopicsPageComponent extends BaseComponent {
         private router: Router,
     ) {
         super();
+        this.setCurrentUser();
+    }
+
+    setCurrentUser() {
         this.userService.getUser()
             .pipe(this.untilThis)
             .subscribe((resp) => {

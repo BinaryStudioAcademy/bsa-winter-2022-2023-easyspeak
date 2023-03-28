@@ -231,8 +231,7 @@
             <input type="password" 
                 formControlName="password" 
                 placeholder="Password" 
-                required 
-                pattern="^(?=.*[a-z])(?=.*[A-Z]).{6,25}$"/>
+                required/>
             <div class="errors-wrp">
                 <mat-error class="error" *ngIf="this.password.errors?.['pattern']">
                     <img src="/assets/user-profile/alert-triangle.svg" alt="">

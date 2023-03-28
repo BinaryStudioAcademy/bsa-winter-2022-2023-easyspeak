@@ -42,7 +42,7 @@ namespace EasySpeak.Core.WebAPI.Controllers
         [HttpPut("current")]
         public async Task<ActionResult<UserDto>> UpdateCurrentUser(UserDto userDto)
         {
-            var user = await _userService.UpdateCurrentUser(userDto);
+            var user = await _userService.UpdateCurrentUserAsync(userDto);
             
             return Ok(user);
         }

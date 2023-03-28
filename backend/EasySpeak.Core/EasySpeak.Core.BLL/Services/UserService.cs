@@ -35,7 +35,7 @@ public class UserService : BaseService, IUserService
         return _mapper.Map<UserDto>(user);
     }
 
-    public async Task<UserDto> UpdateCurrentUser(UserDto userDto)
+    public async Task<UserDto> UpdateCurrentUserAsync(UserDto userDto)
     {
         var user = _mapper.Map<User>(userDto);
         user.Id = _authService.UserId;
@@ -43,7 +43,7 @@ public class UserService : BaseService, IUserService
         if (userDto.Tags != null)
         {
             var tagsNames = userDto.Tags.Select(x => x.Name).ToList();
-            user.Tags = _context.Tags.Where(t => tagsNames.Contains(t.Name)).ToList();
+            user.Tags = await _context.Tags.Where(t => tagsNames.Contains(t.Name)).ToListAsync();
         }
 
         _context.Entry(user).State = EntityState.Modified;

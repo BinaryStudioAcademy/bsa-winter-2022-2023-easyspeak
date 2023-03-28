@@ -6,6 +6,7 @@ import { AuthService } from '@core/services/auth.service';
 import { UserService } from '@core/services/user.service';
 import { Ages } from '@shared/data/ages.util';
 import { EnglishLevel } from '@shared/data/englishLevel';
+import { passFormatRegex } from '@shared/data/regex.util';
 import { Sex } from '@shared/data/sex';
 import { INewUser } from '@shared/models/INewUser';
 import { ToastrService } from 'ngx-toastr';
@@ -22,17 +23,17 @@ import { matchpassword } from './matchpassword.validator';
 export class SignUpComponent extends BaseComponent {
     emglishLevelEnumeration = EnglishLevel;
 
-    englishLevels;
-
-    ages;
-
-    countries;
-
     sexEnumeration = Sex;
 
-    sexOptions;
+    englishLevels: string[];
 
-    languages;
+    ages: string[];
+
+    countries: string[];
+
+    sexOptions: string[];
+
+    languages: string[];
 
     registerForm = new FormGroup({
         email: new FormControl('', [Validators.required]),
@@ -44,7 +45,7 @@ export class SignUpComponent extends BaseComponent {
         language: new FormControl('', [Validators.required]),
         dateOfBirth: new FormControl('', [Validators.required]),
         password: new FormControl('', [Validators.required]),
-        passwordConfirmation: new FormControl('', [Validators.required]),
+        passwordConfirmation: new FormControl('', [Validators.required, Validators.pattern(passFormatRegex)]),
     }, { validators: matchpassword });
 
     user: INewUser;
@@ -58,11 +59,7 @@ export class SignUpComponent extends BaseComponent {
         private router: Router,
     ) {
         super();
-        this.countries = countriesTzLangProvider.getCountriesList().map((x) => x.name);
-        this.languages = countriesTzLangProvider.getLanguagesList();
-        this.englishLevels = Object.values(EnglishLevel) as string[];
-        this.sexOptions = Object.values(this.sexEnumeration) as string[];
-        this.ages = Ages;
+        this.setUpData();
     }
 
     submitForm() {
@@ -71,11 +68,24 @@ export class SignUpComponent extends BaseComponent {
         }
     }
 
+    private setUpData() {
+        this.countries = this.countriesTzLangProvider.getCountriesList().map((x) => x.name);
+        this.languages = this.countriesTzLangProvider.getLanguagesList();
+        this.englishLevels = Object.values(EnglishLevel) as string[];
+        this.sexOptions = Object.values(this.sexEnumeration) as string[];
+        this.ages = Ages;
+    }
+
     private signUp() {
+        this.createUser()
+            .pipe(this.untilThis)
+            .subscribe(() => {
+                this.toastr.success('Account successfully registered', 'Succes!');
+            });
+
         this.authService
             .signUp(this.email.value, this.password.value)
             .then(() => {
-                this.createUser();
                 this.toastr.success('Successfully sign up', 'Sign up');
                 this.router.navigate(['topics']);
             })
@@ -100,10 +110,7 @@ export class SignUpComponent extends BaseComponent {
             country: this.country.value,
         };
 
-        this.userService.createUser(this.user).pipe(this.untilThis)
-            .subscribe(() => {
-                this.toastr.success('Profile was successfully registered', 'Registration');
-            });
+        return this.userService.createUser(this.user);
     }
 
     get email(): FormControl {

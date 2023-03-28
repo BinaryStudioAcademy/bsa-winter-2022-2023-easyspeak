@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '@core/services/auth.service';
+import { passFormatRegex } from '@shared/data/regex.util';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -28,7 +29,7 @@ export class SignInComponent {
                 Validators.required,
                 Validators.minLength(6),
                 Validators.maxLength(25),
-                Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\\d@$!%*?&\\.]{6,}$'),
+                Validators.pattern(passFormatRegex),
             ],
         ),
     });
