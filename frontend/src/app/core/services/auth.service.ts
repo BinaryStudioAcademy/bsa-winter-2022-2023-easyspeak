@@ -27,7 +27,7 @@ export class AuthService {
                 this.setAccessToken(userCredential.user);
             }
 
-            this.navigateTo('main');
+            this.navigateTo('/timetable');
         });
     }
 
