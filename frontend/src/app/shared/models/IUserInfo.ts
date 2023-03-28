@@ -5,5 +5,5 @@ export interface IUserInfo {
     country: string,
     language: string,
     sex: string,
-    englishLevel: string
+    languageLevel: string
 }

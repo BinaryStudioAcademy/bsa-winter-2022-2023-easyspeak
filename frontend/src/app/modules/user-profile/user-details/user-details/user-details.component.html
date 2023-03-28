@@ -133,10 +133,10 @@
         </div>
 
         <div class="form-input-group">
-            <div *ngIf="!englishLevel.getRawValue()" class="placeholder">Level in English</div>
+            <div *ngIf="!languageLevel.getRawValue()" class="placeholder">Level in English</div>
             <ng-select class="custom" dropdownPosition="bottom" appearance="underline" #englishLevelSelect
             formControlName="englishLevel">
-                <ng-option class="select-option" *ngFor="let level of englishLevelOptions" value="{{level}}">
+                <ng-option class="select-option" *ngFor="let level of languageLevelOptions" value="{{level}}">
                     {{level}}
                 </ng-option>
             </ng-select>

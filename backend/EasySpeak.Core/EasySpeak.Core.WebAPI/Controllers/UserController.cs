@@ -54,6 +54,17 @@ namespace EasySpeak.Core.WebAPI.Controllers
         {
             return Ok(userDto);
         }
+
+        [HttpGet("short")]
+        public async Task<ActionResult<List<UserShortInfoDto>>> GetSuitableUsers(
+            [FromQuery] string? language,
+            [FromQuery] string[]? levels,
+            [FromQuery] string[]? interests,
+            [FromQuery] int? compatibility
+            )
+        {
+            return await _userService.GetFilteredUsers(language, levels, interests, compatibility);
+        }
          
     }
 }

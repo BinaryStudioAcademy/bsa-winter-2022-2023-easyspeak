@@ -23,3 +23,23 @@ public class EnumToStringConverter<T> : ITypeConverter<T, string>
         return ((DescriptionAttribute)attributes.ElementAt(0)).Description;
     }
 }
+public class EnumToStringValueConverter<T> : IValueConverter<T, string>
+    where T : System.Enum
+{
+    public string Convert(T source, ResolutionContext context)
+    {
+        var type = source.GetType();
+        var member = type.GetMember(source.ToString());
+
+        var attributes = member[0].GetCustomAttributes(typeof(DescriptionAttribute), false);
+
+        if (!attributes.Any())
+        {
+            throw new ArgumentException($"Cannot convert {nameof(source)} because it doesn't provide" +
+                                        $" description attribute with friendly name");
+        }
+
+
+        return ((DescriptionAttribute)attributes.ElementAt(0)).Description;
+    }
+}

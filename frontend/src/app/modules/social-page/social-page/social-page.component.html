@@ -3,9 +3,13 @@
 </div>
 <div class="body">
     <div class="filters">
-        <app-filter-section></app-filter-section>
+        <app-filter-section (filterChange)="onFilterChanges($event)"></app-filter-section>
     </div>
-    <div class="user-grid">
-        <app-user-card *ngFor="let user of users" [user]="user"></app-user-card>
+    <div class="user-grid" *ngIf="users | async; else noUsers">
+        <app-user-card *ngFor="let user of users | async" [user]="user"></app-user-card>
     </div>
 </div>
+
+<ng-template #noUsers>
+    <p>No users!</p>
+</ng-template>

@@ -34,7 +34,7 @@
         <div class="progress-container">
             <div class="progress">
                 <app-round-progress-bar [status]="user.status"></app-round-progress-bar>
-                <div>{{ user.status }}%</div>
+                <div>{{ user.status ?? 0 }}%</div>
             </div>
             <div class="progress">
                 <img src="assets/user-card-icons/rocket-icon.svg" alt="rocket">
