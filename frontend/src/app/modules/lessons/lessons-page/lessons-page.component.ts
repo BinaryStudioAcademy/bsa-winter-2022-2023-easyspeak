@@ -104,14 +104,15 @@ export class LessonsPageComponent implements OnInit, OnChanges {
         const noInterests = !this.selectedInterestsFilters.length;
         const noLanguages = !this.selectedLanguageFilters.length;
 
-        if (noInterests && noLanguages) {
-            return 'Oops, there are no lessons for this day. Please consider another date';
-        } if (!noInterests && !noLanguages) {
-            return 'Oops, there are no lessons with such filters for this day. Please consider another date';
-        } if (!noInterests && noLanguages) {
-            return 'Oops, there are no lessons with such interests for this day. Please consider another date';
+        switch (true) {
+            case noInterests && noLanguages:
+                return 'Oops, there are no lessons for this day. Please consider another date';
+            case !noInterests && !noLanguages:
+                return 'Oops, there are no lessons with such filters for this day. Please consider another date';
+            case !noInterests && noLanguages:
+                return 'Oops, there are no lessons with such interests for this day. Please consider another date';
+            default:
+                return 'Oops, there are no lessons with such levels for this day. Please consider another date';
         }
-
-        return 'Oops, there are no lessons with such levels for this day. Please consider another date';
     }
 }
