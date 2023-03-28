@@ -32,19 +32,9 @@ namespace EasySpeak.Core.BLL.Services
         public async Task<LessonDto> EnrollUserToLesson(long lessonId)
         {
             var userId = _firebaseAuthService.UserId;
-            var user = _context.Users.SingleOrDefault(u => u.Id == userId);
 
-            if (user == null)
-            {
-                throw new ArgumentException($"Failed to find the user with id {userId}");
-            }
-
-            var lesson = _context.Lessons.SingleOrDefault(l => l.Id == lessonId);
-
-            if (lesson == null)
-            {
-                throw new ArgumentException($"Failed to find the lesson with id {lessonId}");
-            }
+            var user = _context.Users.SingleOrDefault(u => u.Id == userId) ?? throw new ArgumentException($"Failed to find the user with id {userId}");
+            var lesson = _context.Lessons.SingleOrDefault(l => l.Id == lessonId) ?? throw new ArgumentException($"Failed to find the lesson with id {lessonId}");
 
             user.Lessons.Add(lesson);
 
