@@ -10,14 +10,10 @@ import { HttpService } from './http.service';
 export class UserService {
     public routePrefix = '/users';
 
-    constructor(private httpService: HttpService) { }
-
-    public getCurrentUser() {
-        return this.httpService.get<IUserInfo>(`${this.routePrefix}/current`);
-    }
-
-    public getUser(userId: number) {
-        return this.httpService.getById<IUserInfo>(`${this.routePrefix}`, userId);
+    constructor(private httpService: HttpService) {}
+    
+    public getUser() {
+        return this.httpService.get<IUserInfo>(`${this.routePrefix}`);
     }
 
     public updateCurrentUser(updatedUser: IUserInfo) {

@@ -7,6 +7,8 @@ import { UserService } from '@core/services/user.service';
 import { Ages } from '@shared/data/ages.util';
 import { EnglishLevel } from '@shared/data/englishLevel';
 import { Sex } from '@shared/data/sex';
+
+import { ICountry } from '@shared/models/ICountry';
 import { INewUser } from '@shared/models/INewUser';
 import { ToastrService } from 'ngx-toastr';
 
@@ -51,6 +53,7 @@ export class SignUpComponent extends BaseComponent {
 
     constructor(
         private formBuilder: FormBuilder,
+        private countriesTzLangProvider: CountriesTzLangProviderService,
         private authService: AuthService,
         private toastr: ToastrService,
         private userService: UserService,
@@ -63,6 +66,7 @@ export class SignUpComponent extends BaseComponent {
         this.englishLevels = Object.values(EnglishLevel) as string[];
         this.sexOptions = Object.values(this.sexEnumeration) as string[];
         this.ages = Ages;
+        this.Countries = this.countriesTzLangProvider.getCountriesList();
     }
 
     submitForm() {

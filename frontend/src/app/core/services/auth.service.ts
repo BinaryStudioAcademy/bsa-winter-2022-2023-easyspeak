@@ -57,6 +57,8 @@ export class AuthService {
 
     logout(): Promise<void> {
         localStorage.removeItem('accessToken');
+        localStorage.removeItem('user');
+
         this.router.navigate(['auth/sign-in']);
 
         return this.afAuth.signOut();

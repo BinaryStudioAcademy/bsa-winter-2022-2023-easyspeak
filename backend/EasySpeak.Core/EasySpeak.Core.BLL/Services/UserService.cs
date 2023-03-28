@@ -27,6 +27,13 @@ public class UserService : BaseService, IUserService
 
         return _mapper.Map<UserDto>(userEntity);
     }
+    
+    public async Task<UserDto> GetUserAsync()
+    {
+        var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == _authService.UserId);
+
+        return _mapper.Map<UserDto>(user);
+    }
 
     public async Task<UserDto> GetCurrentUser()
     {

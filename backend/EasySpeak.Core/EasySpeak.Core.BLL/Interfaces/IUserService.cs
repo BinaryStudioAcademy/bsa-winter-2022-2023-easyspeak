@@ -6,7 +6,7 @@ namespace EasySpeak.Core.BLL.Interfaces
     {
         Task<UserDto> CreateUser(UserRegisterDto userDto);
         Task<UserDto> GetCurrentUser();
-
         Task<UserDto> UpdateCurrentUser(UserDto userDto);
+        Task<UserDto> GetUserAsync();
     }
 }
