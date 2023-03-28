@@ -1,33 +1,25 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { BaseComponent } from '@core/base/base.component';
+import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { IIcon } from '@shared/models/IIcon';
 import { getTags } from '@shared/utils/tagsForInterests';
-import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-interests-dropdown',
     templateUrl: './interests-dropdown.component.html',
     styleUrls: ['./interests-dropdown.component.sass'],
 })
-export class InterestsDropdownComponent extends BaseComponent implements OnInit {
-    toggle: boolean = false;
+export class InterestsDropdownComponent implements OnChanges {
+    toggle = false;
 
     @Input() inputList: IIcon[] = getTags();
 
-    @Input() resetEvent?: Observable<void>;
-
     @Output() selectedInterests = new EventEmitter<string[]>();
+
+    @Input() selectedItems: string[];
 
     outputList: string[] = [];
 
-    ngOnInit() {
-        if (this.resetEvent) {
-            this.resetEvent
-                .pipe(this.untilThis)
-                .subscribe(() => {
-                    this.outputList = [];
-                });
-        }
+    ngOnChanges() {
+        this.outputList = this.selectedItems;
     }
 
     selectInterest($event: Event) {
@@ -36,12 +28,16 @@ export class InterestsDropdownComponent extends BaseComponent implements OnInit 
         const { checked } = ev;
 
         if (checked) {
-            this.outputList = this.outputList.concat(this.inputList[numb].icon_name);
+            this.outputList = [...this.outputList, this.inputList[numb].icon_name];
         } else {
-            this.outputList = this.outputList.filter(x => x !== this.inputList[numb].icon_name);
+            this.outputList = this.outputList.filter((interest) => interest !== this.inputList[numb].icon_name);
         }
 
         this.selectedInterests.emit(this.outputList);
+    }
+
+    iconExistsInOutputList(icon: string): boolean {
+        return this.outputList.some(item => item === icon);
     }
 
     clickButton() {

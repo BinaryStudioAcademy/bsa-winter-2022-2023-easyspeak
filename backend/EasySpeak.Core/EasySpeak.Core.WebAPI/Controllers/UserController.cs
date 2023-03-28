@@ -1,5 +1,6 @@
 using EasySpeak.Core.BLL.Interfaces;
 using EasySpeak.Core.Common.DTO.Filter;
+using EasySpeak.Core.Common.DTO.Lesson;
 using EasySpeak.Core.Common.DTO.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -41,6 +42,8 @@ namespace EasySpeak.Core.WebAPI.Controllers
             return Ok(userDto);
         }
 
+        [HttpPut("enroll/{lessonId}")]
+        public Task<LessonDto> Enroll(long lessonId) => _userService.EnrollUserToLesson(lessonId);
 
         [HttpPost("short")]
         public async Task<ActionResult<List<UserShortInfoDto>>> GetSuitableUsers( [FromBody] UserFilterDto userFilter)

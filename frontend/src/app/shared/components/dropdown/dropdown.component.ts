@@ -18,44 +18,34 @@ export class DropdownComponent extends BaseComponent implements OnInit, OnDestro
 
     @Input() btnLabel: string | undefined;
 
-    @Output() selectedFilters = new EventEmitter<Set<string>>();
+    @Output() selectedFilters = new EventEmitter<string[]>();
 
-    @Input() resetEvent?: Observable<void>;
+    @Input() resetEvent: Observable<void>;
+
+    @Input() selectedItems: string[];
 
     public showDropdown = false;
 
-    public selectedItems = new Set<string>();
-
     ngOnInit(): void {
-        if (this.resetEvent) {
-            this.resetEvent
-                .pipe(this.untilThis)
-                .subscribe(() => {
-                    this.selectedItems = new Set();
-                });
-        }
+        this.resetEvent
+            .pipe(this.untilThis)
+            .subscribe(() => {
+                this.selectedItems = [];
+            });
 
         this.type = this.isSingleChoice ? 'radio' : 'checkbox';
     }
 
     selectItem(title: string) {
-        if (this.selectedItems.has(title)) {
-            this.selectedItems.delete(title);
+        if (this.selectedItems.includes(title)) {
+            this.selectedItems = this.selectedItems.filter(item => item !== title);
         } else if (this.isSingleChoice) {
-            this.selectSingle(title);
+            this.selectedItems = [title];
         } else {
-            this.selectMultiple(title);
+            this.selectedItems = [...this.selectedItems, title];
         }
+
         this.selectedFilters.emit(this.selectedItems);
-    }
-
-    selectMultiple(title: string) {
-        this.selectedItems.add(title);
-    }
-
-    selectSingle(title: string) {
-        this.selectedItems.clear();
-        this.selectedItems.add(title);
     }
 
     showDropdownMenu() {

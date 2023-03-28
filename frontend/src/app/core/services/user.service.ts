@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 
 import { UserFilter } from '../../models/filters/userFilter';
 
+import { Lesson } from 'src/app/models/lessons/lesson';
+
 import { HttpService } from './http.service';
 
 @Injectable({
@@ -23,6 +25,10 @@ export class UserService {
 
     public updateUser(userId: number, updatedUser: IUserInfo) {
         return this.httpService.put(`${this.routePrefix}/${userId}`, updatedUser);
+    }
+
+    public enrollUserToLesson(lessonId: number) {
+        return this.httpService.put<Lesson>(`${this.routePrefix}/enroll/${lessonId}`, {} as Lesson);
     }
 
     public getUsers(userFilter: UserFilter | null): Observable<UserCard[]> {
