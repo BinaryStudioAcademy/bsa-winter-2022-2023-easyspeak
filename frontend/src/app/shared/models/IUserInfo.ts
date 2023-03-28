@@ -6,4 +6,5 @@ export interface IUserInfo {
     language: string;
     sex: string;
     languageLevel: string;
+    birthDate: string;
 }

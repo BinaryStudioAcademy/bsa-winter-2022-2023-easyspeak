@@ -1,18 +1,18 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {FormBuilder, FormControl} from '@angular/forms';
-import {BaseComponent} from '@core/base/base.component';
-import {UserService} from '@core/services/user.service';
-import {Ages} from '@shared/data/ages.util';
-import {EnglishLevel} from '@shared/data/englishLevel';
-import {Sex} from '@shared/data/sex';
-import {IIcon} from '@shared/models/IIcon';
-import {IUserInfo} from '@shared/models/IUserInfo';
-import {getTags} from '@shared/utils/tagsForInterests';
-import {ToastrService} from 'ngx-toastr';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormControl } from '@angular/forms';
+import { BaseComponent } from '@core/base/base.component';
+import { UserService } from '@core/services/user.service';
+import { Ages } from '@shared/data/ages.util';
+import { EnglishLevel } from '@shared/data/englishLevel';
+import { Sex } from '@shared/data/sex';
+import { IIcon } from '@shared/models/IIcon';
+import { IUserInfo } from '@shared/models/IUserInfo';
+import { getTags } from '@shared/utils/tagsForInterests';
+import { ToastrService } from 'ngx-toastr';
 
-import {CountriesTzLangProviderService} from 'src/app/services/countries-tz-lang-provider.service';
+import { CountriesTzLangProviderService } from 'src/app/services/countries-tz-lang-provider.service';
 
-import {detailsGroup, userId} from '../user-details.component.util';
+import { detailsGroup, userId } from '../user-details.component.util';
 
 @Component({
     selector: 'app-user-details',
@@ -23,6 +23,7 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
     @Input() tagsList: IIcon[] = getTags();
 
     countries;
+
     ages: Date;
 
     languages;
@@ -67,6 +68,7 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
                     sex: resp.sex,
                     language: resp.language,
                     englishLevel: resp.languageLevel,
+                    dateOfBirth: resp.birthDate,
                 });
             });
     }
