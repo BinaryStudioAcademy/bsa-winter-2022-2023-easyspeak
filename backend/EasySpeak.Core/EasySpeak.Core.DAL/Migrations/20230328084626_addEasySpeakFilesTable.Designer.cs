@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EasySpeak.Core.DAL.Migrations
 {
     [DbContext(typeof(EasySpeakCoreContext))]
-    [Migration("20230327115952_addUploadFilesTable")]
-    partial class addUploadFilesTable
+    [Migration("20230328084626_addEasySpeakFilesTable")]
+    partial class addEasySpeakFilesTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -628,6 +628,25 @@ namespace EasySpeak.Core.DAL.Migrations
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "strategy"
                         });
+                });
+
+            modelBuilder.Entity("EasySpeak.Core.DAL.Entities.EasySpeakFile", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("EasySpeakFiles");
                 });
 
             modelBuilder.Entity("EasySpeak.Core.DAL.Entities.Friend", b =>
@@ -2341,28 +2360,6 @@ namespace EasySpeak.Core.DAL.Migrations
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "plum"
                         });
-                });
-
-            modelBuilder.Entity("EasySpeak.Core.DAL.Entities.UploadFile", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Url")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("UploadFiles");
                 });
 
             modelBuilder.Entity("EasySpeak.Core.DAL.Entities.User", b =>

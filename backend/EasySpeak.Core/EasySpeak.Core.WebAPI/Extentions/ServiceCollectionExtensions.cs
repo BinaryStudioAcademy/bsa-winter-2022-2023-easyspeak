@@ -98,6 +98,7 @@ namespace EasySpeak.Core.WebAPI.Extensions
                 new BlobServiceClient(connectionString));
 
             services.AddScoped<IAzureBlobStorageService, AzureBlobStorageService>();
+            services.AddScoped<IEasySpeakFileService, EasySpeakFileService>();
         }
     }
 }

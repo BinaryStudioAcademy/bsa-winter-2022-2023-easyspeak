@@ -8,8 +8,8 @@ namespace EasySpeak.Core.BLL.MappingProfiles
     {
         public UploadFileProfile()
         {
-            CreateMap<UploadFile, UploadFileDto>();
-            CreateMap<UploadFileDto, UploadFile>();
+            CreateMap<EasySpeakFile, EasySpeakFileDto>();
+            CreateMap<EasySpeakFileDto, EasySpeakFile>();
         }
     }
 }

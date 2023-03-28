@@ -628,6 +628,25 @@ namespace EasySpeak.Core.DAL.Migrations
                         });
                 });
 
+            modelBuilder.Entity("EasySpeak.Core.DAL.Entities.EasySpeakFile", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("EasySpeakFiles");
+                });
+
             modelBuilder.Entity("EasySpeak.Core.DAL.Entities.Friend", b =>
                 {
                     b.Property<long>("Id")
@@ -2339,28 +2358,6 @@ namespace EasySpeak.Core.DAL.Migrations
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "plum"
                         });
-                });
-
-            modelBuilder.Entity("EasySpeak.Core.DAL.Entities.UploadFile", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Url")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("UploadFiles");
                 });
 
             modelBuilder.Entity("EasySpeak.Core.DAL.Entities.User", b =>

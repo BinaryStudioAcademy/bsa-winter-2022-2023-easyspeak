@@ -1,12 +1,11 @@
 ﻿using EasySpeak.Core.Common.DTO.UploadFile;
+using EasySpeak.Core.DAL.Entities;
 
 namespace EasySpeak.Core.BLL.Interfaces
 {
     public interface IAzureBlobStorageService
     {
-        Task<UploadFileDto> AddFileAsync(NewFileDto newFileDto);
-        Task<UploadFileDto> GetFileAsync(long fileId);
-        Task<UploadFileDto> UpdateFileAsync(long fileId, NewFileDto newFileDto);
-        Task DeleteFileAsync(long fileId, string folderPath);
+        Task<string> UploadFileAsync(NewEasySpeakFileDto newFileDto);
+        Task DeleteFromBlobAsync(EasySpeakFile file);
     }
 }
