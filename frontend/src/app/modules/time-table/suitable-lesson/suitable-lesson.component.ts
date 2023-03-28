@@ -60,12 +60,10 @@ export class SuitableLessonComponent implements OnInit {
         const requestDate = this.selectedDate.toISOString().slice(0, 10);
 
         this.lessonService.getLessonsCount(requestDate).subscribe(response => {
-            response.forEach(el => {
-                const matchingDate = this.days.find(day => day.date.getDay() === new Date(el.date).getDay());
+            this.days = this.days.map(day => {
+                const matchingDate = response.find(el => new Date(el.date).getDay() === day.date.getDay());
 
-                if (matchingDate) {
-                    matchingDate.meetingsAmount = el.meetingsAmount;
-                }
+                return matchingDate ? { date: day.date, meetingsAmount: matchingDate.meetingsAmount } : day;
             });
         });
     }
