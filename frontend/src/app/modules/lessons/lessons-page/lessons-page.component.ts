@@ -4,6 +4,7 @@ import { langLevelsSample } from '@modules/filter-section/filter-section/filter-
 import { YoutubePlayerComponent } from '@shared/components/youtube-player/youtube-player.component';
 import { ILesson } from '@shared/models/lesson/ILesson';
 import { LanguageLevels } from '@shared/models/lesson/LanguageLevels';
+import * as moment from 'moment';
 
 import { Lesson } from 'src/app/models/lessons/lesson';
 import { LessonsService } from 'src/app/services/lessons.service';
@@ -33,21 +34,13 @@ export class LessonsPageComponent implements OnInit, OnChanges {
 
         this.getLessons();
 
-        const formatter = new Intl.DateTimeFormat('en-US', { day: 'numeric', month: 'long', year: 'numeric', weekday: 'long' });
-        const parts = formatter.formatToParts(this.selectedDateFilter);
-        const formattedDate = `${parts[4].value} ${parts[2].value} ${parts[6].value}, ${parts[0].value}`;
-
-        this.todayDate = formattedDate;
+        this.todayDate = moment().format('DD MMMM YYYY, dddd');
     }
 
     ngOnChanges(): void {
         this.getLessons();
 
-        const formatter = new Intl.DateTimeFormat('en-US', { day: 'numeric', month: 'long', year: 'numeric', weekday: 'long' });
-        const parts = formatter.formatToParts(new Date(this.selectedDateFilter.toISOString().slice(0, 10)));
-        const formattedDate = `${parts[4].value} ${parts[2].value} ${parts[6].value}, ${parts[0].value}`;
-
-        this.todayDate = formattedDate;
+        this.todayDate = moment(this.selectedDateFilter).format('DD MMMM YYYY, dddd');
     }
 
     openDialog(videoId: string) {
