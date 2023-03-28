@@ -99,14 +99,12 @@
         </div>
 
         <div class="form-input-group">
-            <div>Date of Birth</div>
+            <app-calendar placeholder="Date of birth"></app-calendar>
         </div>
 
         <div class="form-input-group">
             <div *ngIf="!sex.getRawValue()" class="placeholder">Sex</div>
-
-
-            <ng-select class="custom"  dropdownPosition="bottom" appearance="underline" #sexSelect labelForId="sex"
+             <ng-select class="custom"  dropdownPosition="bottom" appearance="underline" #sexSelect labelForId="sex"
             formControlName="sex" bindLabel="Sex">
                 <ng-option class="select-option" *ngFor="let sexOption of sexOptions" value="{{sexOption}}">{{sexOption}}</ng-option>
             </ng-select>
@@ -162,3 +160,4 @@
         <button type="submit">Save</button>
     </div>
 </form>
+

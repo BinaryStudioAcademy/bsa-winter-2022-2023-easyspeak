@@ -1,5 +1,8 @@
 @import "src/styles/colors.sass"
 
+*
+    box-sizing: border-box
+
 .container
     width: 100%
     height: 100%
@@ -178,6 +181,9 @@
     width: 100%
     height: 100%
     position: relative
+    background-color: $white
+    border-radius: 25px
+
     .error-surface
         position: absolute
         width: 100%
@@ -217,6 +223,9 @@
     padding: 0 18px
     padding-top: 5px
 
+.input:focus
+    outline: none
+
 .placeholder
     position: absolute
     color: $gray-200
@@ -247,13 +256,18 @@
 ::ng-deep.ng-clear-wrapper
     display: none
 
-::ng-deep.ng-select-container
+:host::ng-deep.ng-select-container
     height: 100%
-    box-sizing: border-box
     padding: 13px 18px
-    background-color: $white
+    background-color: transparent
     border-radius: 50px
     font-size: 14px
+    z-index: 10
+
+
+:host::ng-deep.ng-select-container:hover
+    cursor: pointer
+
 
 //:host::ng-deep.ng-select-container
 //    opacity: 0
@@ -264,6 +278,8 @@
 //    font-size: 14px
 //    z-index: 100 !important
 
+.expand-icon
+    z-index: 1
 ::ng-deep.ng-dropdown-panel
     background-color: $white
     max-height: 200px
@@ -277,8 +293,6 @@
         display: flex
         gap: 10px
         align-items: center
-
-
 
 .flag
     width: 20px
@@ -310,11 +324,17 @@
 
 :host::ng-deep .mat-mdc-text-field-wrapper
     border-radius: 25px
-    border: 2px solid   blue
+
+    //border: 2px solid   blue
 
 :host::ng-deep .mdc-line-ripple
     display: none
-    //
+
+
+:host::ng-deep .ng-tns-c117-2
+    display: flex
+    align-items: center
+    //mdc-floating-label mat-mdc-floating-label ng-tns-c117-2 ng-star-inserted
     //border-radius: 20px !important
     //background-color: #7889fb !important
     //border: #7a1c55 2px solid !important

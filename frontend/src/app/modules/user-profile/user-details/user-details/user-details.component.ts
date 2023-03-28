@@ -23,7 +23,6 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
     @Input() tagsList: IIcon[] = getTags();
 
     countries;
-    coun: string[] = ['1', '2', '3', '4'];
     ages: Date;
 
     languages;
