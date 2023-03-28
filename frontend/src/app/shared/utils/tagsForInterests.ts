@@ -12,7 +12,7 @@ export const getTags = () =>
         },
         {
             id: 2,
-            icon_name: 'Car',
+            icon_name: 'Cars',
             link: 'assets/topic-icons/Racing Car.svg',
         },
         {
