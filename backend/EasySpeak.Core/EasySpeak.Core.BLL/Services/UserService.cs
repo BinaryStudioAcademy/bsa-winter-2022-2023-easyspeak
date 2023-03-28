@@ -32,14 +32,14 @@ namespace EasySpeak.Core.BLL.Services
         public async Task<LessonDto> EnrollUserToLesson(long lessonId)
         {
             var userId = _firebaseAuthService.UserId;
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            var user = _context.Users.SingleOrDefault(u => u.Id == userId);
 
             if (user == null)
             {
                 throw new ArgumentException($"Failed to find the user with id {userId}");
             }
 
-            var lesson = await _context.Lessons.FirstOrDefaultAsync(l => l.Id == lessonId);
+            var lesson = _context.Lessons.SingleOrDefault(l => l.Id == lessonId);
 
             if (lesson == null)
             {
@@ -50,14 +50,11 @@ namespace EasySpeak.Core.BLL.Services
 
             await _context.SaveChangesAsync();
 
-            return _mapper.Map<LessonDto>(lesson, SetSubscriptionsCount(lessonId));
-        }
+            void AfterMapAction(Lesson o, LessonDto dto) => dto.SubscribersCount = _context.Lessons
+                .Select(t => new { Id = t.Id, SbCount = t.Subscribers.Count })
+                .FirstOrDefault(l => l.Id == lessonId)!.SbCount;
 
-        private Action<IMappingOperationOptions<object, LessonDto>> SetSubscriptionsCount(long lessonId)
-        {
-            return options => options.AfterMap((o, dto) =>
-                dto.SubscribersCount = _context.Lessons.Select(t => new { Id = t.Id, SbCount = t.Subscribers.Count })
-                    .FirstOrDefault(l => l.Id == lessonId)!.SbCount);
+            return _mapper.Map<Lesson, LessonDto>(lesson, options => options.AfterMap(AfterMapAction));
         }
 
         public async Task<UserDto> GetUserAsync()
