@@ -5,7 +5,9 @@ import { YoutubePlayerComponent } from '@shared/components/youtube-player/youtub
 import { ILesson } from '@shared/models/lesson/ILesson';
 import { LanguageLevels } from '@shared/models/lesson/LanguageLevels';
 import Utils from '@shared/utils/lesson.utils';
+import * as moment from 'moment';
 
+import { Lesson } from 'src/app/models/lessons/lesson';
 import { LessonsService } from 'src/app/services/lessons.service';
 
 import { LessonsCreateComponent } from '../lessons-create/lessons-create.component';
@@ -26,34 +28,18 @@ export class LessonsPageComponent implements OnInit, OnChanges {
 
     lessons = Utils.lessons;
 
+    readonly formatString = 'D MMMM YYYY, dddd';
+
     constructor(private dialogRef: MatDialog, private lessonService: LessonsService) {}
 
     ngOnInit(): void {
-        const formatter = new Intl.DateTimeFormat('en-US', {
-            day: 'numeric',
-            month: 'long',
-            year: 'numeric',
-            weekday: 'long',
-        });
-        const parts = formatter.formatToParts(new Date());
-        const formattedDate = `${parts[4].value} ${parts[2].value} ${parts[6].value}, ${parts[0].value}`;
-
-        this.todayDate = formattedDate;
+        this.todayDate = moment().format(this.formatString);
     }
 
     ngOnChanges(): void {
         this.getLessons();
 
-        const formatter = new Intl.DateTimeFormat('en-US', {
-            day: 'numeric',
-            month: 'long',
-            year: 'numeric',
-            weekday: 'long',
-        });
-        const parts = formatter.formatToParts(new Date(this.selectedDateFilter.toISOString().slice(0, 10)));
-        const formattedDate = `${parts[4].value} ${parts[2].value} ${parts[6].value}, ${parts[0].value}`;
-
-        this.todayDate = formattedDate;
+        this.todayDate = moment(this.selectedDateFilter).format(this.formatString);
     }
 
     openDialog(videoId: string) {
@@ -83,27 +69,27 @@ export class LessonsPageComponent implements OnInit, OnChanges {
                 languageLevels: Array.from(this.selectedLanguageFilters).map((level: string) =>
                     Object.values(LanguageLevels).indexOf(level)),
                 tags: Array.from(this.selectedTopicsFilters).map((topic) => ({ name: topic })),
-                date: new Date(this.selectedDateFilter?.toISOString().slice(0, 10)),
+                date: new Date(this.selectedDateFilter?.toISOString().slice(0, 1)),
             })
             .subscribe((response: ILesson[]) => {
-                this.lessons = [];
-
-                response.forEach((lesson) => {
-                    this.lessons.push({
-                        id: lesson.id,
-                        imgPath: lesson.mediaPath,
-                        videoId: 'xqAriI87lFU',
-                        title: lesson.name,
-                        time: lesson.startAt.split('T')[1].substring(0, 5).replace(':', '.'),
-                        tutorAvatarPath: '../../../../assets/lesson-mocks/Photo )Patient).png',
-                        tutorFlagPath: '../../../../assets/lesson-icons/canada-test-flag.svg',
-                        tutorName: 'Roger Vaccaro',
-                        topics: lesson.tags.map((tag) => tag.name),
-                        viewersCount: lesson.subscribersCount,
-                        level: langLevelsSample[lesson.languageLevel].title,
-                        isDisabled: new Date() > new Date(lesson.startAt),
-                    });
-                });
+                this.lessons = [...this.mapLesson(response)];
             });
+    }
+
+    private mapLesson(response: ILesson[]): Lesson[] {
+        return response.map(lesson => ({
+            id: lesson.id,
+            imgPath: lesson.mediaPath,
+            videoId: 'xqAriI87lFU',
+            title: lesson.name,
+            time: moment(lesson.startAt).format(this.formatString),
+            tutorAvatarPath: 'assets/lesson-mocks/Photo )Patient).png',
+            tutorFlagPath: 'assets/lesson-icons/canada-test-flag.svg',
+            tutorName: 'Roger Vaccaro',
+            topics: lesson.tags.map((tag) => tag.name),
+            viewersCount: lesson.subscribersCount,
+            level: langLevelsSample[lesson.languageLevel].title,
+            isDisabled: new Date() > new Date(lesson.startAt),
+        }));
     }
 }
