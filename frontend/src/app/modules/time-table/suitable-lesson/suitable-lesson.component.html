@@ -29,6 +29,7 @@
                 *ngFor="let day of days"
                 [meetingCount]="day.meetingsAmount"
                 [item]="day.date"
+                [selectedDate]="selectedDate"
                 (dateSelected)="onDateSelected($event)">
             </app-suitable-lesson-day>
         </div>
