@@ -51,7 +51,7 @@ export class SuitableLessonComponent implements OnInit {
     }
 
     setDays(): void {
-        this.days = Array(7).fill({}).map((_, i) => {
+        this.days = Array(this.amountOfDayInWeek).fill({}).map((_, i) => {
             const date = moment(this.selectedDate).add(i - this.selectedDate.getDay() + 1, 'day').toDate();
 
             return { date, meetingsAmount: 0 };
