@@ -15,7 +15,7 @@
                     <img src="assets\calendar\calendar.svg" />
                 </div>
 
-                {{ days[0].date.toLocaleDateString('en-GB', { day: '2-digit', month: 'long' }) }} - {{ days[6].date.toLocaleDateString('en-US', { day: '2-digit', month: 'long' }) }} {{ days[0].date.getFullYear() }}
+                {{ days[0].date | date: 'dd MMMM' }} - {{ days[6].date | date: 'dd MMMM yyyy' }}
 
             </div>
 
