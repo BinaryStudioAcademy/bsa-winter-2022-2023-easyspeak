@@ -1,15 +1,21 @@
 ﻿using AutoMapper;
 using EasySpeak.Core.BLL.Interfaces;
+using EasySpeak.Core.Common.DTO.UploadFile;
 using EasySpeak.Core.Common.DTO.User;
 using EasySpeak.Core.DAL.Context;
 using EasySpeak.Core.DAL.Entities;
+using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 
 namespace EasySpeak.Core.BLL.Services
 {
     public class UserService : BaseService, IUserService
     {
-        public UserService(EasySpeakCoreContext context, IMapper mapper) : base(context, mapper)
-        { }
+        private readonly IEasySpeakFileService _fileService;
+        public UserService(EasySpeakCoreContext context, IMapper mapper, IEasySpeakFileService fileService) : base(context, mapper)
+        {
+            _fileService = fileService;
+        }
 
         public async Task<UserDto> CreateUser(UserRegisterDto userDto)
         {
@@ -20,6 +26,25 @@ namespace EasySpeak.Core.BLL.Services
             await _context.SaveChangesAsync();
 
             return _mapper.Map<UserDto>(userEntity);
+        }
+
+        public async Task UploadProfilePhoto(IFormFile file, long userId)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+
+            if (user == null)
+            {
+                throw new Exception("This user not found");
+            }
+
+            var fileDto = new NewEasySpeakFileDto()
+            {
+                Stream = file.OpenReadStream(),
+                FileName = file.FileName
+            };
+
+            var uploadFileDto = await _fileService.AddFileAsync(fileDto);
+            //user
         }
     }
 }

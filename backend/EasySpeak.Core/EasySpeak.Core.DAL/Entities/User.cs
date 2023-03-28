@@ -11,7 +11,7 @@ namespace EasySpeak.Core.DAL.Entities
         public string LastName { get; set; } = string.Empty;
         public DateTime BirthDate { get; set; }
         public string Email { get; set; } = string.Empty;
-        public string ImagePath { get; set; } = string.Empty;
+        public EasySpeakFile Image { get; set; }
         public Sex Sex { get; set; }
         public LanguageLevel LanguageLevel { get; set; }
         public UserStatus Status { get; set; }

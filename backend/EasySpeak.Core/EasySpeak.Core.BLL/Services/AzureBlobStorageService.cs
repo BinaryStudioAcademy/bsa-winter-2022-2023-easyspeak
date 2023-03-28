@@ -2,6 +2,7 @@
 using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
 using EasySpeak.Core.BLL.Interfaces;
+using EasySpeak.Core.BLL.Options;
 using EasySpeak.Core.Common.DTO.UploadFile;
 using EasySpeak.Core.DAL.Context;
 using EasySpeak.Core.DAL.Entities;
@@ -12,11 +13,15 @@ namespace EasySpeak.Core.BLL.Services
     public class AzureBlobStorageService : BaseService, IAzureBlobStorageService
     {
         private readonly BlobServiceClient _blobServiceClient;
-        private readonly string folderPath = "easyspeak-files";
+        private readonly BlobContainerOptions _blobContainerOptions;
 
-        public AzureBlobStorageService(BlobServiceClient blobServiceClient, EasySpeakCoreContext context, IMapper mapper) : base(context, mapper)
+        public AzureBlobStorageService(BlobContainerOptions blobContainerOptions, 
+            BlobServiceClient blobServiceClient, 
+            EasySpeakCoreContext context, 
+            IMapper mapper) : base(context, mapper)
         {
             _blobServiceClient = blobServiceClient;
+            _blobContainerOptions = blobContainerOptions;
         }
 
         public async Task<string> UploadFileAsync(NewEasySpeakFileDto newFileDto)
@@ -26,8 +31,8 @@ namespace EasySpeak.Core.BLL.Services
                 throw new Exception($"{newFileDto.FileName} is empty");
             }
 
-            await CreateDirectoryAsync(folderPath);
-            string uniqueFileName = CreateName(newFileDto.FileName, folderPath);
+            await CreateDirectoryAsync(_blobContainerOptions.BlobContainerName);
+            string uniqueFileName = CreateName(newFileDto.FileName, _blobContainerOptions.BlobContainerName);
 
             var provider = new FileExtensionContentTypeProvider();
 
@@ -36,7 +41,7 @@ namespace EasySpeak.Core.BLL.Services
                 throw new Exception($"{newFileDto.FileName} can not get content type");
             }
 
-            var blob = _blobServiceClient.GetBlobContainerClient(folderPath)
+            var blob = _blobServiceClient.GetBlobContainerClient(_blobContainerOptions.BlobContainerName)
                 .GetBlobClient(uniqueFileName);
 
             BlobHttpHeaders blobHttpHeaders = new BlobHttpHeaders();
@@ -49,7 +54,7 @@ namespace EasySpeak.Core.BLL.Services
         public async Task DeleteFromBlobAsync(EasySpeakFile file)
         {
             var fileName = Path.GetFileName(file.Url);
-            var blob = _blobServiceClient.GetBlobContainerClient(folderPath)
+            var blob = _blobServiceClient.GetBlobContainerClient(_blobContainerOptions.BlobContainerName)
                 .GetBlobClient(fileName);
             await blob.DeleteIfExistsAsync();
         }

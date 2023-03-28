@@ -8,25 +8,20 @@ namespace EasySpeak.Core.WebAPI.Controllers
     [ApiController]
     public class UserProfileController : ControllerBase
     {
-        private readonly IEasySpeakFileService _easySpeakFileService;
+        private readonly IUserService _userService;
         private readonly IFirebaseAuthService _firebaseAuthService;
 
-        public UserProfileController(IEasySpeakFileService easySpeakFileService, IFirebaseAuthService firebaseAuthService)
+        public UserProfileController(IUserService userService, IFirebaseAuthService firebaseAuthService)
         {
-            _easySpeakFileService = easySpeakFileService;
+            _userService = userService;
             _firebaseAuthService = firebaseAuthService;
         }
 
         [HttpPost]
         public async Task<IActionResult> UploadAvatar(IFormFile file)
         {
-            var fileDto = new NewEasySpeakFileDto()
-            {
-                Stream = file.OpenReadStream(),
-                FileName = file.FileName
-            };
-            var res = await _easySpeakFileService.AddFileAsync(fileDto);
-            return Ok(res);
+            await _userService.UploadProfilePhoto(file, _firebaseAuthService.UserId);
+            return Ok();
         }
     }
 }

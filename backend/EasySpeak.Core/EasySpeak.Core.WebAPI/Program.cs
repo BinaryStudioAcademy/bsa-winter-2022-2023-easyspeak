@@ -2,6 +2,7 @@ using EasySpeak.Core.WebAPI.Extensions;
 using EasySpeak.Core.WebAPI.Extentions;
 using EasySpeak.Core.WebAPI.Hubs;
 using EasySpeak.Core.WebAPI.Middlewares;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,7 @@ builder.Configuration
     .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
     .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", reloadOnChange: true, optional: true)
     .AddEnvironmentVariables()
+    .AddUserSecrets(Assembly.GetExecutingAssembly(),true)
     .Build();
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();

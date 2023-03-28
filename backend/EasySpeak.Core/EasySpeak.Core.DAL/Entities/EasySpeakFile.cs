@@ -3,5 +3,7 @@
     public class EasySpeakFile : Entity<long>
     {
         public string? Url { get; set; }
+
+        public User? User { get; set; }
     }
 }
