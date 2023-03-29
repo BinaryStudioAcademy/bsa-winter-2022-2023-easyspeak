@@ -13,7 +13,6 @@ using FluentValidation.AspNetCore;
 using Google.Apis.Auth.OAuth2;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.Reflection;
 
@@ -36,6 +35,7 @@ namespace EasySpeak.Core.WebAPI.Extensions
             services.AddScoped<IUserService, UserService>();
             services.AddFirebaseApp();
             services.AddScoped<INotificationService, NotificationService>();
+            services.AddTransient<ITagService, TagService>();
         }
 
         public static void AddAutoMapper(this IServiceCollection services)

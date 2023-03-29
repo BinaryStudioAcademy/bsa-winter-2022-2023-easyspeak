@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { BaseComponent } from '@core/base/base.component';
+import { TagService } from '@core/services/tag.service';
 import { UserService } from '@core/services/user.service';
 import { Ages } from '@shared/data/ages.util';
 import { EnglishLevel } from '@shared/data/englishLevel';
@@ -21,6 +22,8 @@ import { detailsGroup, userId } from '../user-details.component.util';
 })
 export class UserDetailsComponent extends BaseComponent implements OnInit {
     @Input() tagsList: IIcon[] = getTags();
+
+    allTags: string[];
 
     countries;
 
@@ -45,6 +48,7 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
         private userService: UserService,
         private toastr: ToastrService,
         private countriesService: CountriesTzLangProviderService,
+        private tagService: TagService,
     ) {
         super();
         this.countries = this.countriesService.getCountriesList();
@@ -74,6 +78,10 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
                 this.userService.getTagNames().pipe(this.untilThis)
                     .subscribe(tags => this.selectedTags = tags);
             });
+
+        this.tagService.getAllTags().pipe(this.untilThis).subscribe(
+            tags => this.allTags = tags,
+        );
     }
 
     onSubmit() {
