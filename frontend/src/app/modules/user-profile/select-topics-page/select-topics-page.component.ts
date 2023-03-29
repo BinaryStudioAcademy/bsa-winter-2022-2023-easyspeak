@@ -44,8 +44,7 @@ export class SelectTopicsPageComponent extends BaseComponent {
     }
 
     saveTopics() {
-        this.currentUser.topics = this.selectedTopics;
-        this.userService.updateCurrentUser(this.currentUser)
+        this.userService.addTags(this.selectedTopics)
             .pipe(this.untilThis)
             .subscribe(() => {
                 this.toastr.success('Interests successfully added', 'Success!');

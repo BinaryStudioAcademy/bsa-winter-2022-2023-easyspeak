@@ -5,22 +5,14 @@ import { AuthService } from '@core/services/auth.service';
 import { passFormatRegex } from '@shared/data/regex.util';
 import { ToastrService } from 'ngx-toastr';
 
+import { validationErrorMessage } from '../sign-up/error-helper';
+
 @Component({
     selector: 'app-sign-in',
     templateUrl: './sign-in.component.html',
     styleUrls: ['./sign-in.component.sass'],
 })
 export class SignInComponent {
-    submitted = false;
-
-    private validationErrorMessage: { [id: string]: string } = {
-        required: 'Enter a value',
-        maxlength: 'Can not be more than 30 characters',
-        email: 'Not a valid email',
-        minlength: "Can't be less 6 symbols",
-        pattern: 'Should be at least one small and one capital letter',
-    };
-
     form: FormGroup = new FormGroup({
         email: new FormControl('', [Validators.required, Validators.email, Validators.maxLength(30)]),
         password: new FormControl(
@@ -41,12 +33,6 @@ export class SignInComponent {
         private router: Router,
     ) {}
 
-    getErrorMessage(field: string) {
-        const errorEntry = Object.entries(this.validationErrorMessage).find(([key]) => this.form.controls[field].hasError(key));
-
-        return errorEntry ? errorEntry[1] : '';
-    }
-
     public signIn() {
         this.authService
             .signIn(this.email.value, this.password.value)
@@ -57,6 +43,17 @@ export class SignInComponent {
             .catch((error) => {
                 this.toastr.error(error.message, 'Sign up');
             });
+    }
+
+    getErrorMessage(control: FormControl): string {
+        const errorEntry = Object.entries(validationErrorMessage)
+            .find(([key]) => control.hasError(key));
+
+        if (errorEntry) {
+            return errorEntry[1];
+        }
+
+        return '';
     }
 
     get email(): FormControl {

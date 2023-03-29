@@ -11,27 +11,16 @@
                     email="{{this.email}}"/>
         
                 <div class="errors-wrp">
-                    <mat-error class="error" *ngIf="this.email.errors?.['required'] 
+                    <mat-error class="error" *ngIf="this.email.invalid 
                     && (this.email.dirty || this.userLoginForm.submitted)">
                         <img src="/assets/user-profile/alert-triangle.svg" alt="">
-                        Field is required
-                    </mat-error>
-        
-                    <mat-error class="error" *ngIf="this.email.errors?.['email'] 
-                    && (this.email.dirty || this.userLoginForm.submitted)">
-                        <img src="/assets/user-profile/alert-triangle.svg" alt="">
-                        Wrong format
+                        {{getErrorMessage(email)}}
                     </mat-error>
                 </div>
         
                 <div class="error-surface" 
                     *ngIf="this.email.errors  
                     && (this.email.dirty || this.userLoginForm.submitted)">
-                </div>
-        
-                <div class="succes-surface" 
-                    *ngIf="this.email.valid 
-                    && this.email.value">
                 </div>
             </div>
 
@@ -43,28 +32,10 @@
                     required/>
         
                 <div class="errors-wrp">
-                    <mat-error class="error" *ngIf="this.password.errors?.['required'] 
+                    <mat-error class="error" *ngIf="this.password.invalid 
                     && (this.password.dirty || this.userLoginForm.submitted)">
                         <img src="/assets/user-profile/alert-triangle.svg" alt="">
-                        Field is required
-                    </mat-error>
-        
-                    <mat-error class="error" *ngIf="this.password.errors?.['pattern'] 
-                    && (this.password.dirty || this.userLoginForm.submitted)">
-                        <img src="/assets/user-profile/alert-triangle.svg" alt="">
-                        Wrong format
-                    </mat-error>
-
-                    <mat-error class="error" *ngIf="this.password.errors?.['minlength'] 
-                    && (this.password.dirty || this.userLoginForm.submitted)">
-                        <img src="/assets/user-profile/alert-triangle.svg" alt="">
-                        Minimal length is 6 characters
-                    </mat-error>
-
-                    <mat-error class="error" *ngIf="this.password.errors?.['maxlength'] 
-                    && (this.password.dirty || this.userLoginForm.submitted)">
-                        <img src="/assets/user-profile/alert-triangle.svg" alt="">
-                        Maximal length is 25 characters
+                        {{getErrorMessage(password)}}
                     </mat-error>
                 </div>
         
@@ -72,19 +43,15 @@
                     && (this.password.dirty || this.userLoginForm.submitted)" 
                     class="error-surface">
                 </div>
-        
-                <div class="succes-surface" *ngIf="this.password.valid && this.password.value">
-                </div>
             </div>
             <button class="submit-btn" 
                 mat-button type="submit">
-    
                 Sign In
             </button>
         </form>
     </div>
     <div id="has-account">
         <span>I don't have an account! </span>
-        <a href="auth/sign-up">Sign Up</a>
+        <a href="auth/sign-up"> Sign Up</a>
     </div>
 </div>

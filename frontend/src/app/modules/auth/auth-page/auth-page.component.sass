@@ -8,6 +8,25 @@
     background: $turquoise-100
     opacity: 0.4
 
+@mixin icon-background
+    width: 5vw
+    height: 5vw
+    border-radius: 50%
+    background-color: rgba(128, 209, 242, 0.5)
+    position: absolute
+    top: 20px
+    display: flex
+    justify-content: center
+    align-items: center
+
+@mixin icon
+    width: 70%
+    height: 70%
+    opacity: 1
+    position: absolute
+    
+    
+
 @mixin icon-size
     width: 9%
     height: 9%
@@ -33,7 +52,7 @@
 .router
     width: 50vw
     height: 100vh
-
+        
 
 .image-section
     height: 100%
@@ -43,77 +62,72 @@
     align-items: center
     background: repeating-linear-gradient(75deg,$pink-100,$pink-100 1px, rgba(0, 0, 0, 0) 1px, rgba(0, 0, 0, 0) 20%), repeating-linear-gradient(166deg,$pink-100,$pink-100 1px, rgba(0, 0, 0, 0) 1px, rgba(1, 1, 1, 0) 20%)
     background-color: $blue-200
-
+    .race-wrp
+        @include icon-background
+        top: 8vh
+        right: 26vw
+    .camera-wrp
+        @include icon-background
+        top: 16vh
+        right: 10vw
+    .clover-wrp
+        @include icon-background
+        top: 43vh
+        right: 5vw
+    .cook-wrp
+        @include icon-background
+        top: 65vh
+        right: 17vw
+    .woman-wrp
+        @include icon-background
+        top: 84vh
+        right: 22vw
+    .dog-wrp
+        @include icon-background
+        top: 70vh
+        right: 34vw
+    .face-wrp
+        @include icon-background
+        top: 30vh
+        right: 36vw
     h1
         color: $white
         font-size: 330%
         line-height: 127.5%
         text-align: center
         text-shadow: -2px 2px 1px $pink-100
-    .car-background
-        @include background-icon
-        right: 28%
-        top: 6%
-    .car
-        @include icon-size
-        position: absolute
-        right: 27%
-        top: 7%
-    .camera-background
-        @include background-icon
-        right: 7%
-        top: 18%
+
+.inner-wrp
+    width: 100%
+    height: 100%
+    position: relative
+    .race
+        @include icon
+        right: 1vw
     .camera
-        @include icon-size
-        position: absolute
-        right: 6%
-        top: 20%
-    .clover-background
-        @include background-icon
-        right: 4%
-        top: 48%
+        @include icon
+        right: 0.7vw
+        top: 0.5vw
     .clover
-        @include icon-size
-        position: absolute
-        right: 3%
-        top: 50%
-    .cook-background
-        @include background-icon
-        right: 18%
-        top: 68%
+        @include icon
+        right: 0.7vw
+        top: 0.8vw
     .cook
-        @include icon-size
-        position: absolute
-        right: 17%
-        top: 70%
-    .dancing-background
-        @include background-icon
-        right: 26%
-        top: 82%
-        opacity: 0.2
-    .dancing
-        @include icon-size
-        position: absolute
-        right: 25%
-        top: 84%
-    .dog-background
-        @include background-icon
-        right: 40%
-        top: 62%
+        @include icon
+        right: 0.8vw
+        top: 0.6vw
+    .woman
+        @include icon
+        right: 0.7vw
+        top: 0.7vw
     .dog
-        @include icon-size
-        position: absolute
-        right: 39%
-        top: 64%
-    .monocle-face-background
-        @include background-icon
-        right: 38%
-        top: 25%
-    .monocle-face
-        @include icon-size
-        position: absolute
-        right: 37%
-        top: 27%
+        @include icon
+        right: 0.7vw
+        top: 0.6vw
+    .face
+        @include icon
+        right: 0.7vw
+        top: 0.8vw
 
 h1
     font-size: 24px
@@ -133,18 +147,20 @@ h1
     height: fit-content
     width: fit-content
 
+
 .form-group-item
     position: relative
     .expand-icon
         position: absolute
-        right: 1vw
-        bottom: 1vh
+        right: 1.5vw
+        top: 1.6vh
         color: $blue-200
         z-index: 4
     .placeholder
         position: absolute
         left: 1vw
-        top: 1.5vh
+        top: 1.8vh
+        align-self: center
         color: $gray-200
         font-size: 14px
         z-index: 4
@@ -153,12 +169,10 @@ h1
         width: 100%
         height: 100%
         top: 0
+        box-sizing: border-box
         box-shadow: 0px 1px 4px $error-color
         border-radius: 50px
         z-index: 1
-    .succes-surface
-        @extend .error-surface
-        box-shadow: 0px 1px 4px $turquoise-100
     .errors-wrp
         position: absolute
         font-size: 12px
@@ -190,12 +204,13 @@ input
     border-radius: 50px
     border: none
     position: relative
-    padding-left: 18px
+    padding-left: 1vw
     z-index: 2
 
 input
     &:focus
-        outline-color: $gray-100
+        box-shadow: 0px 2px 6px $turquoise-100
+        outline-width: 0
 
 .submit-btn
     border-radius: 50px
@@ -210,13 +225,13 @@ input
 
 ::ng-deep.ng-input
     top: 0
-    left: 10px
+    // left: 10px
     width: auto !important
     height: 100%
     opacity: 0 !important
 
-::ng-deep.ng-value-label
-    margin-left: 10px
+// ::ng-deep.ng-value-label
+//     margin-left: 10px
 
 ::ng-deep.ng-arrow-wrapper
     display: none
@@ -226,7 +241,7 @@ input
     align-items: center
 
 ::ng-deep.ng-value-label
-    margin-left: 20px
+    margin-left: 1vw
 
 ::ng-deep.ng-dropdown-panel.ng-select-bottom
     margin-top: 5px
@@ -267,6 +282,12 @@ input
 
 ::ng-deep.ng-select-container
     z-index: 3 !important
+
+::ng-deep.ng-select.ng-select-focused
+    box-shadow: 0px 2px 6px $turquoise-100
+    outline-color: $gray-100
+    outline-width: 2px
+    border-radius: 50px
 
 
 

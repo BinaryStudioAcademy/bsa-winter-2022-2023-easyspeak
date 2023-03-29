@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BaseComponent } from '@core/base/base.component';
@@ -13,6 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 
 import { CountriesTzLangProviderService } from 'src/app/services/countries-tz-lang-provider.service';
 
+import { validationErrorMessage } from './error-helper';
 import { matchpassword } from './matchpassword.validator';
 
 @Component({
@@ -20,7 +21,7 @@ import { matchpassword } from './matchpassword.validator';
     templateUrl: './sign-up.component.html',
     styleUrls: ['./sign-up.component.sass'],
 })
-export class SignUpComponent extends BaseComponent {
+export class SignUpComponent extends BaseComponent implements OnInit {
     emglishLevelEnumeration = EnglishLevel;
 
     sexEnumeration = Sex;
@@ -35,8 +36,10 @@ export class SignUpComponent extends BaseComponent {
 
     languages: string[];
 
+    placeholder = 'sex';
+
     registerForm = new FormGroup({
-        email: new FormControl('', [Validators.required]),
+        email: new FormControl('', [Validators.required, Validators.maxLength(30)]),
         firstName: new FormControl('', [Validators.required]),
         lastName: new FormControl('', [Validators.required]),
         sex: new FormControl('', [Validators.required]),
@@ -44,8 +47,9 @@ export class SignUpComponent extends BaseComponent {
         country: new FormControl('', [Validators.required]),
         language: new FormControl('', [Validators.required]),
         dateOfBirth: new FormControl('', [Validators.required]),
-        password: new FormControl('', [Validators.required]),
-        passwordConfirmation: new FormControl('', [Validators.required, Validators.pattern(passFormatRegex)]),
+        password: new FormControl('', [Validators.required, Validators.pattern(passFormatRegex),
+            Validators.minLength(6), Validators.maxLength(25)]),
+        passwordConfirmation: new FormControl('', [Validators.required]),
     }, { validators: matchpassword });
 
     user: INewUser;
@@ -59,6 +63,9 @@ export class SignUpComponent extends BaseComponent {
         private router: Router,
     ) {
         super();
+    }
+
+    ngOnInit(): void {
         this.setUpData();
     }
 
@@ -111,6 +118,17 @@ export class SignUpComponent extends BaseComponent {
         };
 
         return this.userService.createUser(this.user);
+    }
+
+    getErrorMessage(control: FormControl): string {
+        const errorEntry = Object.entries(validationErrorMessage)
+            .find(([key]) => control.hasError(key));
+
+        if (errorEntry) {
+            return errorEntry[1];
+        }
+
+        return '';
     }
 
     get email(): FormControl {

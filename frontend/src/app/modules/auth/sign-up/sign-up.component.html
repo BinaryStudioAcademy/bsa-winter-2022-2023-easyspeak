@@ -11,24 +11,16 @@
                 email="{{this.email}}"/>
     
             <div class="errors-wrp">
-                <mat-error class="error" *ngIf="this.email.errors?.['required'] 
+                <mat-error class="error" *ngIf="this.email.invalid 
                 && (this.email.dirty || this.userRegisterForm.submitted)">
                     <img src="/assets/user-profile/alert-triangle.svg" alt="">
-                    Field is required
-                </mat-error>
-    
-                <mat-error class="error" *ngIf="this.email.errors?.['email'] 
-                && (this.email.dirty || this.userRegisterForm.submitted)">
-                    <img src="/assets/user-profile/alert-triangle.svg" alt="">
-                    Wrong format
+                    {{getErrorMessage(email)}}
                 </mat-error>
             </div>
     
-            <div class="error-surface" *ngIf="this.email.errors?.['required'] 
+            <div class="error-surface" *ngIf="this.email.invalid 
                 && (this.email.dirty || this.userRegisterForm.submitted)" >
             </div>
-    
-            <div class="succes-surface" *ngIf="this.email.valid && this.email.value"></div>
         </div>
         
         <div class="name-section">
@@ -49,8 +41,6 @@
                 <div class="error-surface" *ngIf="this.firstName.errors?.['required'] 
                     && (this.firstName.dirty || this.userRegisterForm.submitted)">
                 </div>
-        
-                <div class="succes-surface" *ngIf="this.firstName.valid && this.firstName.value"></div>
             </div>
         
             <div class="form-group-item">
@@ -62,17 +52,16 @@
                     required/>
                 
                 <div class="errors-wrp">
-                    <mat-error class="error" *ngIf="this.lastName.errors?.['required'] 
+                    <mat-error class="error" *ngIf="this.lastName.invalid 
                     && (this.lastName.dirty || this.userRegisterForm.submitted)">
                         <img src="/assets/user-profile/alert-triangle.svg" alt="">
-                        Field is required
+                        {{getErrorMessage(lastName)}}
                     </mat-error>
                 </div>
         
                 <div class="error-surface" 
                     *ngIf="this.lastName.errors?.['required'] && (this.lastName.dirty || this.userRegisterForm.submitted)" >
                 </div>
-                <div class="succes-surface" *ngIf="this.lastName.valid && this.lastName.value"></div>
             </div>
         </div>
         <div class="age-sex-section">
@@ -94,17 +83,16 @@
     
                 <div class="errors-wrp">
                     <mat-error class="error" 
-                        *ngIf="this.dateOfBirth.errors?.['required'] 
+                        *ngIf="this.dateOfBirth.invalid 
                         && (this.dateOfBirth.dirty
                         || this.userRegisterForm.submitted)">
         
                         <img src="/assets/user-profile/alert-triangle.svg" alt="">
-                        Field is required
+                        {{getErrorMessage(dateOfBirth)}}
                     </mat-error>
                 </div>
         
                 <div class="error-surface" *ngIf="this.dateOfBirth.invalid && this.userRegisterForm.submitted"></div>
-                <div class="succes-surface" *ngIf="this.dateOfBirth.valid"></div>
             </div>
             <div class="form-group-item">
                 <ng-select [items]="sexOptions" 
@@ -124,17 +112,16 @@
     
                 <div class="errors-wrp">
                     <mat-error class="error" 
-                        *ngIf="this.sex.errors?.['required'] 
+                        *ngIf="this.sex.invalid 
                         && (this.sex.dirty
                         || this.userRegisterForm.submitted)">
         
                         <img src="/assets/user-profile/alert-triangle.svg" alt="">
-                        Field is required
+                        {{getErrorMessage(sex)}}
                     </mat-error>
                 </div>
         
                 <div class="error-surface" *ngIf="this.sex.invalid && this.userRegisterForm.submitted"></div>
-                <div class="succes-surface" *ngIf="this.sex.valid"></div>
             </div>
         </div>
         <div class="form-group-item">
@@ -155,17 +142,16 @@
     
             <div class="errors-wrp">
                 <mat-error class="error" 
-                    *ngIf="this.country.errors?.['required'] 
+                    *ngIf="this.country.invalid 
                     && (this.country.dirty
                     || this.userRegisterForm.submitted)">
     
                     <img src="/assets/user-profile/alert-triangle.svg" alt="">
-                    Field is required
+                    {{getErrorMessage(country)}}
                 </mat-error>
             </div>
     
             <div class="error-surface" *ngIf="this.country.invalid && this.userRegisterForm.submitted"></div>
-            <div class="succes-surface" *ngIf="this.country.valid"></div>
         </div>
         <div class="form-group-item">
             <ng-select [items]="languages" 
@@ -185,17 +171,16 @@
     
             <div class="errors-wrp">
                 <mat-error class="error" 
-                    *ngIf="this.language.errors?.['required'] 
+                    *ngIf="this.language.invalid 
                     && (this.language.dirty
                     || this.userRegisterForm.submitted)">
     
                     <img src="/assets/user-profile/alert-triangle.svg" alt="">
-                    Field is required
+                    {{getErrorMessage(language)}}
                 </mat-error>
             </div>
     
             <div class="error-surface" *ngIf="this.language.invalid && this.userRegisterForm.submitted"></div>
-            <div class="succes-surface" *ngIf="this.language.valid"></div>
         </div>
         <div class="form-group-item">
             <ng-select [items]="englishLevels" 
@@ -211,17 +196,16 @@
             
             <div class="errors-wrp">
                 <mat-error class="error" 
-                    *ngIf="this.languageLevel.errors?.['required'] 
+                    *ngIf="this.languageLevel.invalid 
                     && (this.languageLevel.dirty
                     || this.userRegisterForm.submitted)">
     
                     <img src="/assets/user-profile/alert-triangle.svg" alt="">
-                    Field is required
+                    {{getErrorMessage(languageLevel)}}
                 </mat-error>
             </div>
     
             <div class="error-surface" *ngIf="this.languageLevel.invalid && this.userRegisterForm.submitted"></div>
-            <div class="succes-surface" *ngIf="this.languageLevel.valid"></div>
     
             <div class="placeholder" *ngIf="!this.languageLevel.value">
                 Level of English
@@ -233,24 +217,15 @@
                 placeholder="Password" 
                 required/>
             <div class="errors-wrp">
-                <mat-error class="error" *ngIf="this.password.errors?.['pattern']">
-                    <img src="/assets/user-profile/alert-triangle.svg" alt="">
-                    Should have at least one capital and one small letter
-                </mat-error>
-    
-                <mat-error class="error" *ngIf="this.password.errors?.['required'] && this.password.touched">
+
+            <mat-error class="error" *ngIf="this.password.invalid">
                 <img src="/assets/user-profile/alert-triangle.svg" alt="">
-                Password field is required
+                {{getErrorMessage(password)}}
             </mat-error>
             </div>
     
-            <div *ngIf="this.password.errors?.['pattern']" 
+            <div *ngIf="this.password.invalid" 
                 class="error-surface">
-            </div>
-    
-            <div class="succes-surface" 
-                *ngIf="!this.password.errors?.['pattern'] 
-                && this.password.value">
             </div>
         </div>
         <div class="form-group-item">
@@ -259,21 +234,15 @@
                 formControlName="passwordConfirmation" />
     
             <div class="errors-wrp">
-                <mat-error class="error" *ngIf="this.registerForm.errors?.['matchError'] 
+                <mat-error class="error" *ngIf="this.registerForm.invalid 
                 && (this.passwordConfirmation.dirty || this.userRegisterForm.submitted)">
                 <img src="/assets/user-profile/alert-triangle.svg" alt="">
-                    Not match
+                    {{getErrorMessage(passwordConfirmation)}}
                 </mat-error>
             </div>
     
-            <div *ngIf="this.registerForm.invalid 
-                && (this.passwordConfirmation.dirty || this.userRegisterForm.submitted)" 
-                class="error-surface">
-            </div>
-    
-            <div class="succes-surface" 
-                *ngIf="this.registerForm.valid 
-                && this.passwordConfirmation.value">
+            <div class="error-surface" *ngIf="this.registerForm.errors?.['matchError'] 
+            && (this.passwordConfirmation.dirty || this.userRegisterForm.submitted)">
             </div>
         </div>
         <button class="submit-btn" 
@@ -282,5 +251,9 @@
                 Create Account
         </button>
     </form>
+    </div>
+    <div id="has-account">
+        <span>I don't have an account! </span>
+        <a href="auth/sign-in">Sign In</a>
     </div>
 </div>

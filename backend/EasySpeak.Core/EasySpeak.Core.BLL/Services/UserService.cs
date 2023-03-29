@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using EasySpeak.Core.BLL.Interfaces;
+using EasySpeak.Core.Common.DTO.Tag;
 using EasySpeak.Core.Common.DTO.User;
 using EasySpeak.Core.DAL.Context;
 using EasySpeak.Core.DAL.Entities;
@@ -35,18 +36,16 @@ public class UserService : BaseService, IUserService
         return _mapper.Map<UserDto>(user);
     }
 
-    public async Task<UserDto> UpdateCurrentUserAsync(UserDto userDto)
+    public async Task<UserDto> AddTagsAsync(List<TagDto> tags)
     {
-        var user = _mapper.Map<User>(userDto);
-        user.Id = _authService.UserId;
+        var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == _authService.UserId);
 
-        if (userDto.Tags != null)
-        {
-            var tagsNames = userDto.Tags.Select(x => x.Name).ToList();
-            user.Tags = await _context.Tags.Where(t => tagsNames.Contains(t.Name)).ToListAsync();
-        }
+        var tagsNames = tags.Select(x => x.Name).ToList();
+        
+        user!.Tags = await _context.Tags.Where(t => tagsNames.Contains(t.Name)).ToListAsync();
 
         _context.Entry(user).State = EntityState.Modified;
+        
         await _context.SaveChangesAsync();
 
         return _mapper.Map<UserDto>(user);

@@ -1,4 +1,5 @@
 using EasySpeak.Core.BLL.Interfaces;
+using EasySpeak.Core.Common.DTO.Tag;
 using EasySpeak.Core.Common.DTO.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -39,10 +40,10 @@ namespace EasySpeak.Core.WebAPI.Controllers
             return Ok(userDto);
         }
 
-        [HttpPut("current")]
-        public async Task<ActionResult<UserDto>> UpdateCurrentUser(UserDto userDto)
+        [HttpPost]
+        public async Task<ActionResult<UserDto>> UpdateCurrentUser([FromBody]List<TagDto> tags)
         {
-            var user = await _userService.UpdateCurrentUserAsync(userDto);
+            var user = await _userService.AddTagsAsync(tags);
             
             return Ok(user);
         }

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { INewUser } from '@shared/models/INewUser';
+import { ITopic } from '@shared/models/ITopic';
 import { IUserInfo } from '@shared/models/IUserInfo';
 
 import { HttpService } from './http.service';
@@ -16,8 +17,8 @@ export class UserService {
         return this.httpService.get<IUserInfo>(`${this.routePrefix}`);
     }
 
-    public updateCurrentUser(updatedUser: IUserInfo) {
-        return this.httpService.put(`${this.routePrefix}/current}`, updatedUser);
+    public addTags(topics: ITopic[]) {
+        return this.httpService.post<ITopic[]>(`${this.routePrefix}`, topics);
     }
 
     public updateUser(userId: number, updatedUser: IUserInfo) {
