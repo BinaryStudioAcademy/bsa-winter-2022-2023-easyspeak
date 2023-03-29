@@ -85,4 +85,12 @@ export class AuthService {
             this.router.navigate(['']);
         });
     }
+
+    resetPassword(email: string) {
+        this.afAuth.sendPasswordResetEmail(email);
+    }
+
+    confirmResetPassword(code: string, newPassword: string) {
+        this.afAuth.confirmPasswordReset(code, newPassword);
+    }
 }
