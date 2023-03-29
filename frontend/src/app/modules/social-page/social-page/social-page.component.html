@@ -5,11 +5,15 @@
     <div class="filters">
         <app-filter-section (filterChange)="onFilterChanges($event)"></app-filter-section>
     </div>
-    <div class="user-grid" *ngIf="users | async; else noUsers">
-        <app-user-card *ngFor="let user of users | async" [user]="user"></app-user-card>
-    </div>
+    <ng-container *ngIf="users$ | async as users">
+        <div class="user-grid" *ngIf="users.length; else noUsers">
+            <app-user-card *ngFor="let user of users" [user]="user"></app-user-card>
+        </div>
+    </ng-container>
 </div>
 
 <ng-template #noUsers>
-    <p>No users!</p>
+    <div class="no-users">
+        <p>Oops, there are no users matching your filters</p>
+    </div>
 </ng-template>

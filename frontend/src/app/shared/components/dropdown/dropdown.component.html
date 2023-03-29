@@ -19,7 +19,7 @@
         <div *ngFor="let item of data">
             <div class="dropdown-item">
                 <div class="dropdown-item-content">
-                    <input type="checkbox" [checked]="selectedItems.includes(item.title)" (click)="selectItem(item.title)">
+                    <input [type]="type" [checked]="selectedItems.includes(item.title)" (click)="selectItem(item.title)">
                     <div class="dropdown-item-info">
                         <div *ngIf="item.subtitle" class="item-info-title">
                             {{item.title + ' : ' + item.subtitle}}

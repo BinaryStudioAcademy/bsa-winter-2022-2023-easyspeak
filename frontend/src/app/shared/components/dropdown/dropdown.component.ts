@@ -22,7 +22,7 @@ export class DropdownComponent extends BaseComponent implements OnInit, OnDestro
 
     @Input() resetEvent: Observable<void>;
 
-    @Input() selectedItems: string[];
+    @Input() selectedItems: string[] = [];
 
     public showDropdown = false;
 

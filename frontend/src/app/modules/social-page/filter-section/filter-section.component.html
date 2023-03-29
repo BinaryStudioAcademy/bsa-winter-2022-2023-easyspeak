@@ -1,9 +1,26 @@
 <div class="filters-section-container">
     <div class="btns-wrp">
-        <app-dropdown [isSingleChoice]="true" btnLabel='Compatibility' [resetEvent]="this.resetFiltersEvent" [data]="this.compatibilities" (selectedFilters)="update('compatibility', $event)"></app-dropdown>
-        <app-dropdown [isSingleChoice]="true" btnLabel='Native Language' [resetEvent]="this.resetFiltersEvent" [data]="this.languages" (selectedFilters)="update('lang', $event)"></app-dropdown>
-        <app-dropdown btnLabel='Level' [resetEvent]="this.resetFiltersEvent" [data]="this.langLevels" (selectedFilters)="update('level', $event)"></app-dropdown>
-        <app-interests-dropdown [resetEvent]="this.resetFiltersEvent" (selectedInterests)="update('topic', $event)"></app-interests-dropdown>
+        <app-dropdown
+            [isSingleChoice]="true"
+            btnLabel='Compatibility'
+            [resetEvent]="this.resetFiltersEvent"
+            [data]="this.compatibilities"
+            (selectedFilters)="update('compatibility', $event)"
+        ></app-dropdown>
+        <app-dropdown
+            [isSingleChoice]="true"
+            btnLabel='Native Language'
+            [resetEvent]="this.resetFiltersEvent"
+            [data]="this.languages"
+            (selectedFilters)="update('lang', $event)"
+        ></app-dropdown>
+        <app-dropdown
+            btnLabel='Level'
+            [resetEvent]="this.resetFiltersEvent"
+            [data]="this.langLevels"
+            (selectedFilters)="update('level', $event)"
+        ></app-dropdown>
+        <app-interests-dropdown (selectedInterests)="update('topic', $event)"></app-interests-dropdown>
     </div>
     <div class="selected-filters-wrp" *ngIf="hasFilters">
         <div class="selected-filters-list">

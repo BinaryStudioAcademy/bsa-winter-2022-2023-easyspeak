@@ -24,8 +24,5 @@ import { MainRoutingModule } from './main-routing.module';
         TimeTable1Module,
         UserProfileModule,
     ],
-    exports: [
-        HeaderComponent,
-    ],
 })
 export class MainModule {}

@@ -11,16 +11,16 @@ import { UserFilter } from '../../../models/filters/userFilter';
     styleUrls: ['./social-page.component.sass'],
 })
 export class SocialPageComponent implements OnInit {
-    public users: Observable<UserCard[]>;
+    public users$: Observable<UserCard[]>;
 
     public constructor(private userService: UserService) {
     }
 
     ngOnInit(): void {
-        this.users = this.userService.getUsers({} as UserFilter);
+        this.users$ = this.userService.getUsers({} as UserFilter);
     }
 
     onFilterChanges(filters: UserFilter) {
-        this.users = this.userService.getUsers(filters);
+        this.users$ = this.userService.getUsers(filters);
     }
 }

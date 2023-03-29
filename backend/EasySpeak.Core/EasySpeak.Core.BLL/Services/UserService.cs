@@ -67,7 +67,8 @@ namespace EasySpeak.Core.BLL.Services
 
             if(userFilter.Language is not null)
             {
-                filteredUsers = filteredUsers.Where(u => _mapper.Map<string>(u.Language) == userFilter.Language);
+                var enumLanguage = _mapper.Map<Language>(userFilter.Language);
+                filteredUsers = filteredUsers.Where(u => u.Language == enumLanguage);
             }
             if(userFilter.LangLevels is not null && userFilter.LangLevels.Length != 0)
             {
@@ -76,7 +77,7 @@ namespace EasySpeak.Core.BLL.Services
             }
             if(userFilter.Topics is not null && userFilter.Topics.Length != 0)
             {
-                filteredUsers = filteredUsers.Where(u => u.Tags.Select(t=>t.Name).Intersect(userFilter.Topics).Count() > 0);
+                filteredUsers = filteredUsers.Where(u => u.Tags.Any(t => userFilter.Topics.Contains(t.Name)));
             }
             return await filteredUsers.ProjectTo<UserShortInfoDto>(_mapper.ConfigurationProvider).ToListAsync();
         }
