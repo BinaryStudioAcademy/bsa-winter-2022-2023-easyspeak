@@ -44,9 +44,15 @@
     color: $blue-200
 
 .lessons-section
-    display: grid
-    grid-template-columns: repeat(2, 1fr)
-    gap: 0 55px
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+    gap: 55px
+
+.lessons-column
+    display: flex
+    flex-direction: column
+    width: calc( (100% - 55px) / 2 )
 
 .no-lessons
     display: flex

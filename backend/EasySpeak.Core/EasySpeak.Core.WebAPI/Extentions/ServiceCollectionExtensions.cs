@@ -1,5 +1,7 @@
-﻿using EasySpeak.Core.BLL.Interfaces;
+﻿using Azure.Storage.Blobs;
+using EasySpeak.Core.BLL.Interfaces;
 using EasySpeak.Core.BLL.MappingProfiles;
+using EasySpeak.Core.BLL.Options;
 using EasySpeak.Core.BLL.Services;
 using EasySpeak.Core.DAL.Context;
 using EasySpeak.Core.WebAPI.Validators;
@@ -11,6 +13,7 @@ using FluentValidation.AspNetCore;
 using Google.Apis.Auth.OAuth2;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.Reflection;
 
@@ -86,6 +89,19 @@ namespace EasySpeak.Core.WebAPI.Extensions
             {
                 Credential = GoogleCredential.FromFile($"{Environment.CurrentDirectory}/Resources/FirebaseServiceAccountKey.json")
             });
+        }
+
+        public static void AddFileService(this IServiceCollection services, IConfiguration configuration)
+        {
+            var connectionString = configuration.GetSection("AzureBlobStorageSettings")
+                .GetValue<string>("ConnectionString");
+
+            services.AddScoped(_ =>
+                new BlobServiceClient(connectionString));
+
+            services.AddSingleton(configuration.GetSection("AzureBlobStorageSettings").Get<BlobContainerOptions>());
+            services.AddScoped<IAzureBlobStorageService, AzureBlobStorageService>();
+            services.AddScoped<IEasySpeakFileService, EasySpeakFileService>();
         }
     }
 }
