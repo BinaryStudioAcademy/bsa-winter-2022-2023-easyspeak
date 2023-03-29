@@ -1,8 +1,4 @@
-<div
-    class="avatar-wrap"
-    [style.width.px]="size"
-    [style.height.px]="size"
-    [style.background-color]="getAvatarBackground()">
+<div class="avatar" [style.width.px]="size" [style.height.px]="size" [style.background-color]="getAvatarBackground()">
     <img *ngIf="getAvatarSrc()" [src]="getAvatarSrc()" [style.width.px]="size" [style.height.px]="size" />
     <span *ngIf="!getAvatarSrc()">
         {{ getInitials().toUpperCase() }}
