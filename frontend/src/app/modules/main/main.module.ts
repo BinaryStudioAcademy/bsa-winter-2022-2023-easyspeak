@@ -3,7 +3,6 @@ import { FilterSectionRoutingModule } from '@modules/filter-section/filter-secti
 import { LessonsModule } from '@modules/lessons/lessons.module';
 import { TimeTable1Module } from '@modules/time-table/time-table.module';
 import { UserProfileModule } from '@modules/user-profile/user-profile.module';
-import { HeaderComponent } from '@shared/components/header/header.component';
 import { MaterialModule } from '@shared/material/material.module';
 import { SharedModule } from '@shared/shared.module';
 
@@ -14,7 +13,6 @@ import { MainRoutingModule } from './main-routing.module';
 @NgModule({
     declarations: [
         MainComponent,
-        HeaderComponent,
         TimetablePageComponent,
     ],
     imports: [

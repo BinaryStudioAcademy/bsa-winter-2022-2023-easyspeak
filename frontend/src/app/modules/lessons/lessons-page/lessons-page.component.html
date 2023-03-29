@@ -6,26 +6,19 @@
     </div>
 
     <div class="lessons-section" *ngIf="lessons">
-        <div class="lesson" *ngFor="let lesson of lessons">
-            <app-lesson [lesson]="lesson"></app-lesson>
+        <div class="lessons-column">
+            <div class="lesson" *ngFor="let lesson of lessonsColumn1">
+                <app-lesson [lesson]="lesson"></app-lesson>
+            </div>
+        </div>
+        <div class="lessons-column">
+            <div class="lesson" *ngFor="let lesson of lessonsColumn2">
+                <app-lesson [lesson]="lesson"></app-lesson>
+            </div>
         </div>
     </div>
 
-    <div class="no-lessons" *ngIf="lessons.length === 0">
-        <p *ngIf="selectedTopicsFilters.size === 0 && selectedLanguageFilters.size === 0">
-            Oops, there are no lessons for this day. <br> Please consider another date
-        </p>
-
-        <p *ngIf="selectedTopicsFilters.size !== 0 && selectedLanguageFilters.size !== 0">
-            Oops, there are no lessons with such filters for this day. <br> Please consider another date
-        </p>
-
-        <p *ngIf="selectedTopicsFilters.size !== 0 && selectedLanguageFilters.size === 0">
-            Oops, there are no lessons with such topics for this day. <br> Please consider another date
-        </p>
-
-        <p *ngIf="selectedTopicsFilters.size === 0 && selectedLanguageFilters.size !== 0">
-            Oops, there are no lessons with such levels for this day. <br> Please consider another date
-        </p>
+    <div class="no-lessons" *ngIf="!lessons.length">
+        <p>{{ getLessonsUnavailableMessage() }}</p>
     </div>
 </div>

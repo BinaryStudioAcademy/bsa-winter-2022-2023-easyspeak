@@ -14,27 +14,27 @@ export class DropdownComponent extends BaseComponent implements OnInit, OnDestro
 
     @Input() btnLabel: string | undefined;
 
-    @Output() selectedFilters = new EventEmitter<Set<string>>();
+    @Output() selectedFilters = new EventEmitter<string[]>();
 
     @Input() resetEvent: Observable<void>;
 
-    public showDropdown = false;
+    @Input() selectedItems: string[];
 
-    public selectedItems = new Set<string>();
+    public showDropdown = false;
 
     ngOnInit(): void {
         this.resetEvent
             .pipe(this.untilThis)
             .subscribe(() => {
-                this.selectedItems = new Set();
+                this.selectedItems = [];
             });
     }
 
     selectItem(title: string) {
-        if (this.selectedItems.has(title)) {
-            this.selectedItems.delete(title);
+        if (this.selectedItems.includes(title)) {
+            this.selectedItems = this.selectedItems.filter(item => item !== title);
         } else {
-            this.selectedItems.add(title);
+            this.selectedItems = [...this.selectedItems, title];
         }
 
         this.selectedFilters.emit(this.selectedItems);
@@ -42,5 +42,9 @@ export class DropdownComponent extends BaseComponent implements OnInit, OnDestro
 
     showDropdownMenu() {
         this.showDropdown = !this.showDropdown;
+    }
+
+    clickedOutside() {
+        this.showDropdown = false;
     }
 }

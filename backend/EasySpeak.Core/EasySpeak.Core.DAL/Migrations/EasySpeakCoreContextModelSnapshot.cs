@@ -34,7 +34,7 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.HasIndex("UsersId");
 
-                    b.ToTable("ChatUser", (string)null);
+                    b.ToTable("ChatUser");
 
                     b.HasData(
                         new
@@ -166,7 +166,7 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.HasIndex("ChatId");
 
-                    b.ToTable("Calls", (string)null);
+                    b.ToTable("Calls");
 
                     b.HasData(
                         new
@@ -503,7 +503,7 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Chats", (string)null);
+                    b.ToTable("Chats");
 
                     b.HasData(
                         new
@@ -628,6 +628,28 @@ namespace EasySpeak.Core.DAL.Migrations
                         });
                 });
 
+            modelBuilder.Entity("EasySpeak.Core.DAL.Entities.EasySpeakFile", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("UserId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("EasySpeakFiles");
+                });
+
             modelBuilder.Entity("EasySpeak.Core.DAL.Entities.Friend", b =>
                 {
                     b.Property<long>("Id")
@@ -656,7 +678,7 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Friends", (string)null);
+                    b.ToTable("Friends");
 
                     b.HasData(
                         new
@@ -862,7 +884,7 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.HasIndex("CreatedBy");
 
-                    b.ToTable("Lessons", (string)null);
+                    b.ToTable("Lessons");
 
                     b.HasData(
                         new
@@ -1003,7 +1025,7 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.HasIndex("ChatId");
 
-                    b.ToTable("Messages", (string)null);
+                    b.ToTable("Messages");
 
                     b.HasData(
                         new
@@ -1356,7 +1378,7 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Notifications", (string)null);
+                    b.ToTable("Notifications");
 
                     b.HasData(
                         new
@@ -1745,7 +1767,7 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.HasIndex("LessonId");
 
-                    b.ToTable("Questions", (string)null);
+                    b.ToTable("Questions");
 
                     b.HasData(
                         new
@@ -1912,7 +1934,7 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.HasIndex("QuestionId");
 
-                    b.ToTable("Subquestions", (string)null);
+                    b.ToTable("Subquestions");
 
                     b.HasData(
                         new
@@ -2216,7 +2238,7 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tags", (string)null);
+                    b.ToTable("Tags");
 
                     b.HasData(
                         new
@@ -2368,9 +2390,8 @@ namespace EasySpeak.Core.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ImagePath")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<long?>("ImageId")
+                        .HasColumnType("bigint");
 
                     b.Property<bool>("IsBanned")
                         .HasColumnType("bit");
@@ -2399,7 +2420,11 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users", (string)null);
+                    b.HasIndex("ImageId")
+                        .IsUnique()
+                        .HasFilter("[ImageId] IS NOT NULL");
+
+                    b.ToTable("Users");
 
                     b.HasData(
                         new
@@ -2410,11 +2435,10 @@ namespace EasySpeak.Core.DAL.Migrations
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "Della.Rosenbaum@yahoo.com",
                             FirstName = "Della",
-                            ImagePath = "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/343.jpg",
                             IsBanned = false,
                             IsSubscribed = true,
                             Language = 0,
-                            LanguageLevel = 3,
+                            LanguageLevel = 2,
                             LastName = "Rosenbaum",
                             Sex = 0,
                             Status = 3,
@@ -2428,11 +2452,10 @@ namespace EasySpeak.Core.DAL.Migrations
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "Jon.Abshire@gmail.com",
                             FirstName = "Jon",
-                            ImagePath = "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/949.jpg",
                             IsBanned = false,
                             IsSubscribed = true,
                             Language = 0,
-                            LanguageLevel = 1,
+                            LanguageLevel = 0,
                             LastName = "Abshire",
                             Sex = 1,
                             Status = 3,
@@ -2446,11 +2469,10 @@ namespace EasySpeak.Core.DAL.Migrations
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "Kurt.Gulgowski93@gmail.com",
                             FirstName = "Kurt",
-                            ImagePath = "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1117.jpg",
                             IsBanned = false,
                             IsSubscribed = true,
                             Language = 0,
-                            LanguageLevel = 3,
+                            LanguageLevel = 2,
                             LastName = "Gulgowski",
                             Sex = 0,
                             Status = 3,
@@ -2464,11 +2486,10 @@ namespace EasySpeak.Core.DAL.Migrations
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "Eduardo.Larson@gmail.com",
                             FirstName = "Eduardo",
-                            ImagePath = "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1114.jpg",
                             IsBanned = false,
                             IsSubscribed = true,
                             Language = 0,
-                            LanguageLevel = 3,
+                            LanguageLevel = 2,
                             LastName = "Larson",
                             Sex = 2,
                             Status = 0,
@@ -2482,11 +2503,10 @@ namespace EasySpeak.Core.DAL.Migrations
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "Francis16@yahoo.com",
                             FirstName = "Francis",
-                            ImagePath = "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/607.jpg",
                             IsBanned = false,
                             IsSubscribed = true,
                             Language = 0,
-                            LanguageLevel = 3,
+                            LanguageLevel = 2,
                             LastName = "Little",
                             Sex = 0,
                             Status = 0,
@@ -2506,7 +2526,7 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.HasIndex("TagsId");
 
-                    b.ToTable("LessonTag", (string)null);
+                    b.ToTable("LessonTag");
 
                     b.HasData(
                         new
@@ -2623,7 +2643,7 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.HasIndex("SubscribersId");
 
-                    b.ToTable("LessonUser", (string)null);
+                    b.ToTable("LessonUser");
 
                     b.HasData(
                         new
@@ -2690,7 +2710,7 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.HasIndex("UsersId");
 
-                    b.ToTable("TagUser", (string)null);
+                    b.ToTable("TagUser");
 
                     b.HasData(
                         new
@@ -2894,6 +2914,15 @@ namespace EasySpeak.Core.DAL.Migrations
                     b.Navigation("Question");
                 });
 
+            modelBuilder.Entity("EasySpeak.Core.DAL.Entities.User", b =>
+                {
+                    b.HasOne("EasySpeak.Core.DAL.Entities.EasySpeakFile", "Image")
+                        .WithOne("User")
+                        .HasForeignKey("EasySpeak.Core.DAL.Entities.User", "ImageId");
+
+                    b.Navigation("Image");
+                });
+
             modelBuilder.Entity("LessonTag", b =>
                 {
                     b.HasOne("EasySpeak.Core.DAL.Entities.Lesson", null)
@@ -2944,6 +2973,12 @@ namespace EasySpeak.Core.DAL.Migrations
                     b.Navigation("Calls");
 
                     b.Navigation("Messages");
+                });
+
+            modelBuilder.Entity("EasySpeak.Core.DAL.Entities.EasySpeakFile", b =>
+                {
+                    b.Navigation("User")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("EasySpeak.Core.DAL.Entities.Lesson", b =>
