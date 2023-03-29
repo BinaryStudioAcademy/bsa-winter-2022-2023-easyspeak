@@ -3,6 +3,8 @@ import { INewUser } from '@shared/models/INewUser';
 import { ITopic } from '@shared/models/ITopic';
 import { IUserInfo } from '@shared/models/IUserInfo';
 
+import { Lesson } from 'src/app/models/lessons/lesson';
+
 import { HttpService } from './http.service';
 
 @Injectable({
@@ -27,5 +29,9 @@ export class UserService {
 
     public createUser(user: INewUser) {
         return this.httpService.post<INewUser>(`${this.routePrefix}`, user);
+    }
+
+    public enrollUserToLesson(lessonId: number) {
+        return this.httpService.put<Lesson>(`${this.routePrefix}/enroll/${lessonId}`, {} as Lesson);
     }
 }

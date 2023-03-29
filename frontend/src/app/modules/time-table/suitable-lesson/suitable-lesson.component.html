@@ -15,7 +15,8 @@
                     <img src="assets\calendar\calendar.svg" />
                 </div>
 
-                {{ days[0].date.toLocaleDateString() }} - {{ days[6].date.toLocaleDateString() }}
+                {{ days[0].date | date: 'dd MMMM' }} - {{ days[6].date | date: 'dd MMMM yyyy' }}
+
             </div>
 
             <button class="button-week" (click)="weekInc()">
@@ -27,8 +28,9 @@
         <div class="days">
             <app-suitable-lesson-day
                 *ngFor="let day of days"
-                [meetingCount]="day.meetingsCount"
+                [meetingCount]="day.meetingsAmount"
                 [item]="day.date"
+                [selectedDate]="selectedDate"
                 (dateSelected)="onDateSelected($event)">
             </app-suitable-lesson-day>
         </div>

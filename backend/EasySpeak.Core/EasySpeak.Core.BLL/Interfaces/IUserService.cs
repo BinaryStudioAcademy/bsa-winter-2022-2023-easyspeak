@@ -1,4 +1,6 @@
 ﻿using EasySpeak.Core.Common.DTO.Tag;
+﻿using EasySpeak.Core.Common.DTO.Lesson;
+
 using EasySpeak.Core.Common.DTO.User;
 
 namespace EasySpeak.Core.BLL.Interfaces
@@ -7,6 +9,7 @@ namespace EasySpeak.Core.BLL.Interfaces
     {
         Task<UserDto> CreateUser(UserRegisterDto userDto);
         Task<UserDto> AddTagsAsync(List<TagDto> tags);
+        Task<LessonDto> EnrollUserToLesson(long lessonId);
         Task<UserDto> GetUserAsync();
     }
 }

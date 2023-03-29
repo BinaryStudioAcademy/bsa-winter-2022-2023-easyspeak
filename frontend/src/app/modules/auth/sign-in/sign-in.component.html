@@ -1,6 +1,6 @@
 <div class="container">
     <div class="form-wrp">
-        <h1>Create Account</h1>
+        <h1>Sign In</h1>
         <form #userLoginForm="ngForm" [formGroup]="form" class="form-content" (submit)="signIn()">
             <div class="form-group-item">
                 <input
@@ -49,9 +49,5 @@
                 Sign In
             </button>
         </form>
-    </div>
-    <div id="has-account">
-        <span>I don't have an account! </span>
-        <a href="auth/sign-up"> Sign Up</a>
     </div>
 </div>
