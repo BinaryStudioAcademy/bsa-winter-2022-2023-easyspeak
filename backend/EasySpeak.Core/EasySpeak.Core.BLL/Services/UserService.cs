@@ -15,7 +15,7 @@ namespace EasySpeak.Core.BLL.Services
         private readonly IFirebaseAuthService _firebaseAuthService;
         private readonly IEasySpeakFileService _fileService;
 
-        public UserService(EasySpeakCoreContext context, IMapper mapper, IFirebaseAuthService firebaseAuthService) :
+        public UserService(IEasySpeakFileService fileService, EasySpeakCoreContext context, IMapper mapper, IFirebaseAuthService firebaseAuthService) :
             base(context, mapper)
         {
             _firebaseAuthService = firebaseAuthService;

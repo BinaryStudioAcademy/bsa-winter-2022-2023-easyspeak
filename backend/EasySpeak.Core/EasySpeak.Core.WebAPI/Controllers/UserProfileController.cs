@@ -20,7 +20,7 @@ namespace EasySpeak.Core.WebAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> UploadAvatar(IFormFile file)
         {
-            return Ok(await _userService.UploadProfilePhoto(file, 1));
+            return Ok(await _userService.UploadProfilePhoto(file, _firebaseAuthService.UserId));
         }
     }
 }
