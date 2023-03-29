@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { IIDayCard } from '@shared/models/lesson/IDayCard';
 import * as moment from 'moment';
 
 import { LessonsService } from 'src/app/services/lessons.service';
@@ -13,11 +14,9 @@ export class SuitableLessonComponent implements OnInit {
 
     readonly amountOfDayInWeek: number = 7;
 
-    days: { date: Date, meetingsCount: number }[];
+    days: IIDayCard[] = [];
 
     selectedDate: Date = new Date();
-
-    meetingsCount: number;
 
     constructor(private lessonService: LessonsService) { }
 
@@ -37,41 +36,40 @@ export class SuitableLessonComponent implements OnInit {
         this.selectedDate.setDate(this.selectedDate.getDate() + this.amountOfDayInWeek);
 
         this.setDays();
+
+        this.dateSelected.emit(new Date(this.selectedDate));
     }
 
     weekDec(): void {
         this.selectedDate.setDate(this.selectedDate.getDate() - this.amountOfDayInWeek);
 
         this.setDays();
-    }
 
-    async setDays(): Promise<void> {
-        this.days = [];
-        const promises: Promise<{ date: Date, meetingsCount: number }>[] = [];
-
-        for (let i = 0; i < 7; i++) {
-            const date = moment(this.selectedDate).add(i - this.selectedDate.getDay() + 1, 'day').toDate();
-            const promise = this.getMeetingCount(date).then(meetingsCount => ({ date, meetingsCount }));
-
-            promises.push(promise);
+        if (moment(this.selectedDate).isSameOrAfter(moment(), 'day')) {
+            this.dateSelected.emit(new Date(this.selectedDate));
         }
-
-        const days = await Promise.all(promises);
-
-        this.days = days.sort((a, b) => a.date.getTime() - b.date.getTime());
     }
 
-    async getMeetingCount(date: Date): Promise<number> {
-        const filteredLessons = await this.lessonService.getFilteredLessons({
-            languageLevels: [],
-            tags: [],
-            date: new Date(date.toISOString().slice(0, 10)),
-        }).toPromise();
+    setDays(): void {
+        this.days = Array(this.amountOfDayInWeek).fill({}).map((_, i) => {
+            const date = moment(this.selectedDate).add(i - this.selectedDate.getDay() + 1, 'day').toDate();
 
-        return filteredLessons?.length || 0;
+            return { date, meetingsAmount: 0 };
+        });
+
+        const requestDate = this.selectedDate.toISOString().slice(0, 10);
+
+        this.lessonService.getLessonsCount(requestDate).subscribe(response => {
+            this.days = this.days.map(day => {
+                const matchingDate = response.find(el => new Date(el.date).getDay() === day.date.getDay());
+
+                return matchingDate ? { date: day.date, meetingsAmount: matchingDate.meetingsAmount } : day;
+            });
+        });
     }
 
     onDateSelected(dateSelected: Date) {
+        this.selectedDate = dateSelected;
         this.dateSelected.emit(dateSelected);
     }
 }

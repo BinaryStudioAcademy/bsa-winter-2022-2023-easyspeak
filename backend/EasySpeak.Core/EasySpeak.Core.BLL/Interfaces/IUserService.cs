@@ -1,4 +1,5 @@
-﻿using EasySpeak.Core.Common.DTO.User;
+﻿using EasySpeak.Core.Common.DTO.Lesson;
+using EasySpeak.Core.Common.DTO.User;
 using Microsoft.AspNetCore.Http;
 
 namespace EasySpeak.Core.BLL.Interfaces
@@ -6,6 +7,8 @@ namespace EasySpeak.Core.BLL.Interfaces
     public interface IUserService
     {
         Task<UserDto> CreateUser(UserRegisterDto userDto);
+        Task<LessonDto> EnrollUserToLesson(long lessonId);
+        Task<UserDto> GetUserAsync();
         Task<UserProfilePhotoDto> UploadProfilePhoto(IFormFile file, long userId);
     }
 }

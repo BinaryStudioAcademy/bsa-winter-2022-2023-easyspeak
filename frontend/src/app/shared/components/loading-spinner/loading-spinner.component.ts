@@ -11,15 +11,13 @@ export class LoadingSpinnerComponent {
 
     @Input() overlay: boolean;
 
-    @Input() size = '20px';
-
-    @Input() top = '30%';
+    @Input() top = '40%';
 
     @Input() left = '49%';
 
     @Input() position = 'absolute';
 
-    @Input() margin = '100px auto';
+    @Input() margin = '40px auto';
 
-    @Input() zIndex = 1000;
+    @Input() zIndex = 99;
 }

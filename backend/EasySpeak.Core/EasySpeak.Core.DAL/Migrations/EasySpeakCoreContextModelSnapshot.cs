@@ -34,7 +34,7 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.HasIndex("UsersId");
 
-                    b.ToTable("ChatUser", (string)null);
+                    b.ToTable("ChatUser");
 
                     b.HasData(
                         new
@@ -166,7 +166,7 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.HasIndex("ChatId");
 
-                    b.ToTable("Calls", (string)null);
+                    b.ToTable("Calls");
 
                     b.HasData(
                         new
@@ -503,7 +503,7 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Chats", (string)null);
+                    b.ToTable("Chats");
 
                     b.HasData(
                         new
@@ -656,7 +656,7 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Friends", (string)null);
+                    b.ToTable("Friends");
 
                     b.HasData(
                         new
@@ -862,7 +862,7 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.HasIndex("CreatedBy");
 
-                    b.ToTable("Lessons", (string)null);
+                    b.ToTable("Lessons");
 
                     b.HasData(
                         new
@@ -1003,7 +1003,7 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.HasIndex("ChatId");
 
-                    b.ToTable("Messages", (string)null);
+                    b.ToTable("Messages");
 
                     b.HasData(
                         new
@@ -1356,7 +1356,7 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Notifications", (string)null);
+                    b.ToTable("Notifications");
 
                     b.HasData(
                         new
@@ -1745,7 +1745,7 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.HasIndex("LessonId");
 
-                    b.ToTable("Questions", (string)null);
+                    b.ToTable("Questions");
 
                     b.HasData(
                         new
@@ -1912,7 +1912,7 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.HasIndex("QuestionId");
 
-                    b.ToTable("Subquestions", (string)null);
+                    b.ToTable("Subquestions");
 
                     b.HasData(
                         new
@@ -2216,7 +2216,7 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tags", (string)null);
+                    b.ToTable("Tags");
 
                     b.HasData(
                         new
@@ -2399,7 +2399,7 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
 
                     b.HasData(
                         new
@@ -2414,7 +2414,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             IsBanned = false,
                             IsSubscribed = true,
                             Language = 0,
-                            LanguageLevel = 3,
+                            LanguageLevel = 2,
                             LastName = "Rosenbaum",
                             Sex = 0,
                             Status = 3,
@@ -2432,7 +2432,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             IsBanned = false,
                             IsSubscribed = true,
                             Language = 0,
-                            LanguageLevel = 1,
+                            LanguageLevel = 0,
                             LastName = "Abshire",
                             Sex = 1,
                             Status = 3,
@@ -2450,7 +2450,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             IsBanned = false,
                             IsSubscribed = true,
                             Language = 0,
-                            LanguageLevel = 3,
+                            LanguageLevel = 2,
                             LastName = "Gulgowski",
                             Sex = 0,
                             Status = 3,
@@ -2468,7 +2468,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             IsBanned = false,
                             IsSubscribed = true,
                             Language = 0,
-                            LanguageLevel = 3,
+                            LanguageLevel = 2,
                             LastName = "Larson",
                             Sex = 2,
                             Status = 0,
@@ -2486,7 +2486,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             IsBanned = false,
                             IsSubscribed = true,
                             Language = 0,
-                            LanguageLevel = 3,
+                            LanguageLevel = 2,
                             LastName = "Little",
                             Sex = 0,
                             Status = 0,
@@ -2506,7 +2506,7 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.HasIndex("TagsId");
 
-                    b.ToTable("LessonTag", (string)null);
+                    b.ToTable("LessonTag");
 
                     b.HasData(
                         new
@@ -2623,7 +2623,7 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.HasIndex("SubscribersId");
 
-                    b.ToTable("LessonUser", (string)null);
+                    b.ToTable("LessonUser");
 
                     b.HasData(
                         new
@@ -2690,7 +2690,7 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.HasIndex("UsersId");
 
-                    b.ToTable("TagUser", (string)null);
+                    b.ToTable("TagUser");
 
                     b.HasData(
                         new

@@ -61,7 +61,8 @@
         #upPassword="ngModel"
         required
         placeholder="Password"
-        [ngModelOptions]="{ standalone: true }" />
+        [ngModelOptions]="{ standalone: true }" 
+        appPasswordVisibility/>
     <mat-error *ngIf="submitted && form.controls['password'].errors">{{ getPasswordErrorMessage() }}</mat-error>
 </label>
 <label>
@@ -69,7 +70,8 @@
         type="password"
         [(ngModel)]="confirmPassword"
         placeholder="Repeat The Password"
-        [ngModelOptions]="{ standalone: true }" />
+        [ngModelOptions]="{ standalone: true }" 
+        appPasswordVisibility/>
     <mat-error *ngIf="submitted && form.controls['confirmPassword'].errors">{{
         getConfirmPasswordErrorMessage()
     }}</mat-error>

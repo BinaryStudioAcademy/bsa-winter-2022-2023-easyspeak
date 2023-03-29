@@ -3,17 +3,17 @@ export const getTags = () =>
         {
             id: 0,
             icon_name: 'Architecture',
-            link: 'assets/topic-icons/Classical Building.svg',
+            link: 'assets/topic-icons/ClassicalBuilding.svg',
         },
         {
             id: 1,
             icon_name: 'Arts',
-            link: 'assets/topic-icons/Artist Palette.svg',
+            link: 'assets/topic-icons/ArtistPalette.svg',
         },
         {
             id: 2,
-            icon_name: 'Car',
-            link: 'assets/topic-icons/Racing Car.svg',
+            icon_name: 'Cars',
+            link: 'assets/topic-icons/RacingCar.svg',
         },
         {
             id: 3,
@@ -29,12 +29,12 @@ export const getTags = () =>
         {
             id: 5,
             icon_name: 'Dancing',
-            link: 'assets/topic-icons/Woman Dancing.svg',
+            link: 'assets/topic-icons/WomanDancing.svg',
         },
         {
             id: 6,
             icon_name: 'Ecology',
-            link: 'assets/topic-icons/Four Leaf Clover.svg',
+            link: 'assets/topic-icons/FourLeafClover.svg',
         },
         {
             id: 7,
@@ -45,7 +45,7 @@ export const getTags = () =>
         {
             id: 8,
             icon_name: 'History',
-            link: 'assets/topic-icons/Crossed Swords.svg',
+            link: 'assets/topic-icons/CrossedSwords.svg',
         },
         {
             id: 9,
@@ -66,12 +66,12 @@ export const getTags = () =>
         {
             id: 12,
             icon_name: 'Pets',
-            link: 'assets/topic-icons/Dog Face.svg',
+            link: 'assets/topic-icons/DogFace.svg',
         },
         {
             id: 13,
             icon_name: 'Philosophy',
-            link: 'assets/topic-icons/Face With Monocle.svg',
+            link: 'assets/topic-icons/FaceWithMonocle.svg',
         },
         {
             id: 14,
@@ -81,6 +81,6 @@ export const getTags = () =>
         {
             id: 15,
             icon_name: 'Politics',
-            link: 'assets/topic-icons/Top Hat.svg',
+            link: 'assets/topic-icons/TopHat.svg',
         },
     ];
