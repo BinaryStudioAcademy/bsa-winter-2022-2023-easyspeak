@@ -9,6 +9,6 @@ namespace EasySpeak.Core.BLL.Interfaces
         Task<UserDto> CreateUser(UserRegisterDto userDto);
         Task<LessonDto> EnrollUserToLesson(long lessonId);
         Task<UserDto> GetUserAsync();
-        Task<UserProfilePhotoDto> UploadProfilePhoto(IFormFile file, long userId);
+        Task<string> UploadProfilePhoto(IFormFile file);
     }
 }

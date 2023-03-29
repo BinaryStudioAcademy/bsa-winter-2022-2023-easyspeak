@@ -74,7 +74,7 @@ namespace EasySpeak.Core.BLL.Services
             if (blob.Exists())
             {
                 return $"{Path.GetFileNameWithoutExtension(fileName)}_" +
-                    $"{DateTime.Now.ToString("yyyyMMddTHHmmssfff")}" +
+                    $"{Guid.NewGuid()}" +
                     $"{Path.GetExtension(fileName)}";
             }
 

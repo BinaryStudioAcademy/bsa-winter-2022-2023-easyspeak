@@ -58,9 +58,9 @@ namespace EasySpeak.Core.BLL.Services
             return _mapper.Map<UserDto>(user);
         }
 
-        public async Task<UserProfilePhotoDto> UploadProfilePhoto(IFormFile file, long userId)
+        public async Task<string> UploadProfilePhoto(IFormFile file)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == _firebaseAuthService.UserId);
 
             if (user == null)
             {
@@ -76,19 +76,16 @@ namespace EasySpeak.Core.BLL.Services
             var uploadFileDto = await _fileService.AddFileAsync(fileDto);
             var profilePhoto = await _context.EasySpeakFiles.FirstOrDefaultAsync(f => f.Id == uploadFileDto.Id);
 
-            if (profilePhoto == null)
+            if (profilePhoto == null || profilePhoto.Url == null)
             {
                 throw new Exception("This file not found");
             }
 
             user.ImageId = uploadFileDto.Id;
-            profilePhoto.UserId = userId;
+            profilePhoto.UserId = user.Id;
             await _context.SaveChangesAsync();
 
-            var photoDto = _mapper.Map<UserProfilePhotoDto>(user);
-            photoDto.PhotoUrl = uploadFileDto.Url;
-
-            return photoDto;
+            return profilePhoto.Url;
         }
     }
 }
