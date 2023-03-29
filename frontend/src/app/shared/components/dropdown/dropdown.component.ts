@@ -43,4 +43,8 @@ export class DropdownComponent extends BaseComponent implements OnInit, OnDestro
     showDropdownMenu() {
         this.showDropdown = !this.showDropdown;
     }
+
+    clickedOutside() {
+        this.showDropdown = false;
+    }
 }

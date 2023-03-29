@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
 using EasySpeak.Core.BLL.Interfaces;
 using EasySpeak.Core.Common.DTO.Lesson;
+using EasySpeak.Core.Common.DTO.UploadFile;
 using EasySpeak.Core.Common.DTO.User;
 using EasySpeak.Core.Common.Enums;
 using EasySpeak.Core.DAL.Context;
 using EasySpeak.Core.DAL.Entities;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
 namespace EasySpeak.Core.BLL.Services
@@ -12,11 +14,13 @@ namespace EasySpeak.Core.BLL.Services
     public class UserService : BaseService, IUserService
     {
         private readonly IFirebaseAuthService _firebaseAuthService;
+        private readonly IEasySpeakFileService _fileService;
 
-        public UserService(EasySpeakCoreContext context, IMapper mapper, IFirebaseAuthService firebaseAuthService) :
+        public UserService(IEasySpeakFileService fileService, EasySpeakCoreContext context, IMapper mapper, IFirebaseAuthService firebaseAuthService) :
             base(context, mapper)
         {
             _firebaseAuthService = firebaseAuthService;
+            _fileService = fileService;
         }
 
         public async Task<UserDto> CreateUser(UserRegisterDto userDto)
@@ -65,6 +69,36 @@ namespace EasySpeak.Core.BLL.Services
             var user = await _context.Users.Include(u => u.Tags).FirstOrDefaultAsync(u => u.Id == userId) ?? throw new ArgumentException($"Failed to find the user with id {userId}");
 
             return user.Tags.Select(t => t.Name).ToArray();
+        }
+
+        public async Task<string> UploadProfilePhoto(IFormFile file)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == _firebaseAuthService.UserId);
+
+            if (user == null)
+            {
+                throw new ArgumentNullException("This user not found");
+            }
+
+            var fileDto = new NewEasySpeakFileDto()
+            {
+                Stream = file.OpenReadStream(),
+                FileName = file.FileName
+            };
+
+            var uploadFileDto = await _fileService.AddFileAsync(fileDto);
+            var profilePhoto = await _context.EasySpeakFiles.FirstOrDefaultAsync(f => f.Id == uploadFileDto.Id);
+
+            if (profilePhoto == null || profilePhoto.Url == null)
+            {
+                throw new ArgumentNullException("This file not found");
+            }
+
+            user.ImageId = uploadFileDto.Id;
+            profilePhoto.UserId = user.Id;
+            await _context.SaveChangesAsync();
+
+            return profilePhoto.Url;
         }
     }
 }
