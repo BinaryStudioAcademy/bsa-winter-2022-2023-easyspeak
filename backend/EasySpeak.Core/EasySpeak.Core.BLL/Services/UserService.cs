@@ -64,7 +64,7 @@ namespace EasySpeak.Core.BLL.Services
 
             if (user == null)
             {
-                throw new Exception("This user not found");
+                throw new ArgumentNullException("This user not found");
             }
 
             var fileDto = new NewEasySpeakFileDto()
@@ -78,7 +78,7 @@ namespace EasySpeak.Core.BLL.Services
 
             if (profilePhoto == null || profilePhoto.Url == null)
             {
-                throw new Exception("This file not found");
+                throw new ArgumentNullException("This file not found");
             }
 
             user.ImageId = uploadFileDto.Id;

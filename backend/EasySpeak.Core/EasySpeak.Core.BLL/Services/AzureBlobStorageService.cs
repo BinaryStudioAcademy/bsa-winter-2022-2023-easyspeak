@@ -28,7 +28,7 @@ namespace EasySpeak.Core.BLL.Services
         {
             if (newFileDto.Stream == null)
             {
-                throw new Exception($"{newFileDto.FileName} is empty");
+                throw new ArgumentNullException($"{newFileDto.FileName} is empty");
             }
 
             await CreateDirectoryAsync(_blobContainerOptions.BlobContainerName);
@@ -38,7 +38,7 @@ namespace EasySpeak.Core.BLL.Services
 
             if (!provider.TryGetContentType(newFileDto.FileName, out string contentType))
             {
-                throw new Exception($"{newFileDto.FileName} can not get content type");
+                throw new ArgumentNullException($"{newFileDto.FileName} can not get content type");
             }
 
             var blob = _blobServiceClient.GetBlobContainerClient(_blobContainerOptions.BlobContainerName)

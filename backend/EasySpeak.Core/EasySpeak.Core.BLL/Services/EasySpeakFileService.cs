@@ -36,7 +36,7 @@ namespace EasySpeak.Core.BLL.Services
             var file = await _context.EasySpeakFiles.FirstOrDefaultAsync((x) => x.Id == fileId);
             if (file == null)
             {
-                throw new Exception("File not found");
+                throw new ArgumentNullException("File not found");
             }
 
             return _mapper.Map<EasySpeakFileDto>(file);
@@ -55,7 +55,7 @@ namespace EasySpeak.Core.BLL.Services
             var file = await _context.EasySpeakFiles.FirstOrDefaultAsync((x) => x.Id == fileId);
             if (file == null)
             {
-                throw new Exception("File not found");
+                throw new ArgumentNullException("File not found");
             }
 
             await _azureService.DeleteFromBlobAsync(file);
