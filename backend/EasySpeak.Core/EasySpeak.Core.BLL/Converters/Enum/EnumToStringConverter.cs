@@ -6,7 +6,7 @@ namespace EasySpeak.Core.BLL.Converters.Enum;
 public class EnumToStringConverter<T> : ITypeConverter<T, string>, IValueConverter<T, string>
     where T : System.Enum
 {
-    private string Convert(T source)
+    private static string Convert(T source)
     {
         var type = source.GetType();
         var member = type.GetMember(source.ToString());
