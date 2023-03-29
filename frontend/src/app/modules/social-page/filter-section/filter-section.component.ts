@@ -4,7 +4,7 @@ import {
     langLevelsSample,
     topicsSample,
 } from '@modules/filter-section/filter-section/filter-section.util';
-import { debounceTime, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 
 import { Filter } from '../../../models/filters/filter';
 import { UserFilter } from '../../../models/filters/userFilter';

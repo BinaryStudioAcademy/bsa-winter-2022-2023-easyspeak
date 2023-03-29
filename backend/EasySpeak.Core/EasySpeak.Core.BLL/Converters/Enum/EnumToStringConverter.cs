@@ -3,43 +3,32 @@ using AutoMapper;
 
 namespace EasySpeak.Core.BLL.Converters.Enum;
 
-public class EnumToStringConverter<T> : ITypeConverter<T, string> 
+public class EnumToStringConverter<T> : ITypeConverter<T, string>, IValueConverter<T, string>
     where T : System.Enum
 {
-    public string Convert(T source, string destination, ResolutionContext context)
+    private string Convert(T source)
     {
         var type = source.GetType();
         var member = type.GetMember(source.ToString());
 
         var attributes = member[0].GetCustomAttributes(typeof(DescriptionAttribute), false);
-        
+
         if (!attributes.Any())
         {
             throw new ArgumentException($"Cannot convert {nameof(source)} because it doesn't provide" +
                                         $" description attribute with friendly name");
         }
-        
+
 
         return ((DescriptionAttribute)attributes.ElementAt(0)).Description;
     }
-}
-public class EnumToStringValueConverter<T> : IValueConverter<T, string>
-    where T : System.Enum
-{
-    public string Convert(T source, ResolutionContext context)
+    public string Convert(T source, string destination, ResolutionContext context)
     {
-        var type = source.GetType();
-        var member = type.GetMember(source.ToString());
+        return Convert(source);
+    }
 
-        var attributes = member[0].GetCustomAttributes(typeof(DescriptionAttribute), false);
-
-        if (!attributes.Any())
-        {
-            throw new ArgumentException($"Cannot convert {nameof(source)} because it doesn't provide" +
-                                        $" description attribute with friendly name");
-        }
-
-
-        return ((DescriptionAttribute)attributes.ElementAt(0)).Description;
+    public string Convert(T sourceMember, ResolutionContext context)
+    {
+        return Convert(sourceMember);
     }
 }

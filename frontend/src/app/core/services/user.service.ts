@@ -3,9 +3,9 @@ import { IUserInfo } from '@shared/models/IUserInfo';
 import { UserCard } from '@shared/models/user/user-card';
 import { Observable } from 'rxjs';
 
-import { UserFilter } from '../../models/filters/userFilter';
-
 import { Lesson } from 'src/app/models/lessons/lesson';
+
+import { UserFilter } from '../../models/filters/userFilter';
 
 import { HttpService } from './http.service';
 
