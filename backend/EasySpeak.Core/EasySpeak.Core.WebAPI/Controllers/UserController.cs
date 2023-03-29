@@ -41,8 +41,8 @@ namespace EasySpeak.Core.WebAPI.Controllers
             return Ok(userDto);
         }
 
-        [HttpPost]
-        public async Task<ActionResult<UserDto>> UpdateCurrentUser([FromBody]List<TagDto> tags)
+        [HttpPost("tags")]
+        public async Task<ActionResult<UserDto>> AddTagsToUser([FromBody]List<TagDto> tags)
         {
             var user = await _userService.AddTagsAsync(tags);
             

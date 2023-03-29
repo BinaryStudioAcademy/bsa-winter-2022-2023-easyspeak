@@ -20,7 +20,7 @@ export class UserService {
     }
 
     public addTags(topics: ITopic[]) {
-        return this.httpService.post<ITopic[]>(`${this.routePrefix}`, topics);
+        return this.httpService.post<ITopic[]>(`${this.routePrefix}/tags`, topics);
     }
 
     public updateUser(userId: number, updatedUser: IUserInfo) {
