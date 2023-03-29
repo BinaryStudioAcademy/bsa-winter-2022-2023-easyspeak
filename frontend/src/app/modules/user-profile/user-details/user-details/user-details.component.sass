@@ -11,33 +11,41 @@
     padding: 30px
     display: grid
     grid-template-columns: 1fr 495px 1fr
-    grid-template-rows: 125px 290px 1fr 305px
+    grid-template-rows: 125px 26px 290px 1fr 305px
     gap: 30px
     border-radius: 0px 10px 10px 10px
 
 .user-photo-section-title
-    grid-row: 1/2
-    grid-column: 1/2
+    grid-row: 1
+    grid-column: 1
+
+.who-can-message-section-title
+    grid-row: 2
+    grid-column: 1
+    display: flex
+    align-items: center
+
+
 
 .user-details-section-title
-    grid-row: 2/3
-    grid-column: 1/2
+    grid-row: 3
+    grid-column: 1
 
 .user-interests-section-title
-    grid-row: 3/4
-    grid-column: 1/2
+    grid-row: 4
+    grid-column: 1
 
-.user-socials-section-title
-    grid-row: 4/5
-    grid-column: 1/2
+//.user-socials-section-title
+//    grid-row: 5
+//    grid-column: 1
 
 .title
     font-weight: 700
     font-size: 18px
 
 .user-photo-section
-    grid-row: 1/2
-    grid-column: 2/3
+    grid-row: 1
+    grid-column: 2
     width: 100%
     height: 100%
     position: relative
@@ -63,7 +71,7 @@
         width: 24px
         height: 24px
         position: absolute
-        background-color: $selected-color
+        background-color: $turquoise-100
         top: 80px
         right: 0
         border-radius: 50%
@@ -81,14 +89,94 @@
     width: 100%
     height: 100%
     border-radius: 50%
-    background-color: $selected-color
+    background-color: $turquoise-100
     display: flex
     align-items: center
     justify-content: center
 
+
+.who-can-message-section
+    grid-row: 2
+    grid-column: 2
+    height: 100%
+    display: flex
+    align-items: center
+    gap: 15px
+
+
+.container-message-me
+    display: flex
+    flex-direction: row-reverse
+    gap: 8px
+    font-size: 14px
+
+.checkbox-message
+    height: 1px
+    width: 1px
+    visibility: hidden
+//
+//.checkbox-message+ label:before
+//    content: ''
+//    width: 16px
+//    height: 16px
+//    background-color: $gray-100
+//    border: 1px solid $blue-200
+//    border-radius: 2px
+
+//checkbox custom
+//.checkbox-message
+//    position: absolute
+//    opacity: 0
+//
+//.checkbox-message + label
+//        position: relative
+//        cursor: pointer
+//        padding: 0
+//
+//.checkbox-message + label:before
+//        content: ''
+//        margin-right: 10px
+//        display: inline-block
+//        vertical-align: text-top
+//        width: 20px
+//        height: 20px
+//        background: yellow
+//
+//.checkbox-message:hover + label:before
+//        background: #f35429
+//
+//.checkbox-message:focus + label:before
+//        box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.12)
+//
+//.checkbox-message:checked + label:before
+//        background: #f35429
+//
+//.checkbox-message:disabled + label
+//        color: #b8b8b8
+//        cursor: auto
+//
+//
+//.checkbox-message:disabled + label:before
+//        box-shadow: none
+//        background: #ddd
+//
+//.checkbox-message:checked + label:after
+//        content: ''
+//        position: absolute
+//        left: 5px
+//        top: 9px
+//        background: white
+//        width: 2px
+//        height: 2px
+//        box-shadow: 2px 0 0 white, 4px 0 0 white, 4px -2px 0 white, 4px -4px 0 white, 4px -6px 0 white, 4px -8px 0 white
+//        transform: rotate(45deg)
+//
+////end
+
+
 .user-details-section
-    grid-row: 2/3
-    grid-column: 2/3
+    grid-row: 3
+    grid-column: 2
     height: 100%
     display: grid
     grid-template-rows: repeat(5, 46px)
@@ -105,8 +193,8 @@
         grid-column: 1/3
 
 .user-interests-section
-    grid-row: 3/3
-    grid-column: 2/3
+    grid-row: 4
+    grid-column: 2
     display: grid
     grid-template-columns: repeat(7, 1fr)
     justify-items: center
@@ -161,16 +249,16 @@
 
 
 .user-socials-section
-    grid-row: 4/5
-    grid-column: 2/3
+    grid-row: 5
+    grid-column: 2
     height: 100%
     display: grid
     grid-template-rows: repeat(5, 46px)
-    grid-column: auto
+    //grid-column: auto
     gap: 15px
     button
         width: 182px
-        background-color: $button-color
+        background-color: $blue-200
         color: $white
         font-size: 16px
         font-weight: 700
@@ -184,13 +272,13 @@
     background-color: $white
     border-radius: 25px
 
-    .error-surface
-        position: absolute
-        width: 100%
-        height: 100%
-        top: 0
-        box-shadow: 0px 1px 4px #EE2A64
-        border-radius: 50px
+    //.error-surface
+    //    position: absolute
+    //    width: 100%
+    //    height: 100%
+    //    top: 0
+    //    box-shadow: 0px 1px 4px #EE2A64
+    //    border-radius: 50px
     .label
         position: absolute
         top: 5px
@@ -220,8 +308,7 @@
     height: 100%
     border-radius: 50px
     border: none
-    padding: 0 18px
-    padding-top: 5px
+    padding: 5px 18px 0
 
 .input:focus
     outline: none
@@ -232,13 +319,14 @@
     top: 13px
     left: 18px
     font-size: 14px
-    z-index: 100
+    z-index: 1
+
 
 .expand-icon
     position: absolute
     top: 10px
     right: 10px
-    color: $button-color
+    color: $blue-200
     z-index: 0
 
 :host::ng-deep.custom
@@ -258,7 +346,7 @@
 
 :host::ng-deep.ng-select-container
     height: 100%
-    padding: 13px 18px
+    padding: 10px 18px
     background-color: transparent
     border-radius: 50px
     font-size: 14px
@@ -268,6 +356,16 @@
 :host::ng-deep.ng-select-container:hover
     cursor: pointer
 
+:host::ng-deep.ng-value
+    margin-top: 8px
+
+:host::ng-deep.ng-value> .ng-value-label> .flag
+    margin-bottom: -3px
+    margin-left: 10px
+
+
+    //display: flex
+    //align-items: center
 
 //:host::ng-deep.ng-select-container
 //    opacity: 0
@@ -278,13 +376,19 @@
 //    font-size: 14px
 //    z-index: 100 !important
 
+.ng-invalid
+    border: 1px solid red
+
 .expand-icon
     z-index: 1
 ::ng-deep.ng-dropdown-panel
     background-color: $white
     max-height: 200px
-    overflow: scroll
+    overflow: auto
     margin-top: 5px
+
+:host::ng-deep.ng-dropdown-panel .ng-dropdown-panel-items
+    max-height: 200px
 
 ::ng-deep.ng-option
     padding: 10px
@@ -296,8 +400,7 @@
 
 .flag
     width: 20px
-    height: 14px
-
+    border: 1px solid $gray-100
 
 .button-icon
     border-width: 0
@@ -334,24 +437,4 @@
 :host::ng-deep .ng-tns-c117-2
     display: flex
     align-items: center
-    //mdc-floating-label mat-mdc-floating-label ng-tns-c117-2 ng-star-inserted
-    //border-radius: 20px !important
-    //background-color: #7889fb !important
-    //border: #7a1c55 2px solid !important
-    //padding-bottom: 0 !important
-
-//:host::ng-deep .mat-select-arrow
-//    background-image: url('../../../../../assets/user-profile/alert-triangle.svg')
-
-
-//::ng-deep.ng-select-container
-//    z-index: 0 !important
-
-
-//:host::ng-deep .mat-select-arrow
-//    width: 3px !important
-//    height: 3px !important
-//    background-color: red !important
-//    z-index: 100 !important
-
 

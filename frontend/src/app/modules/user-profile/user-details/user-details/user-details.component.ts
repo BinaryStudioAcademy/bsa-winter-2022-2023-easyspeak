@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { BaseComponent } from '@core/base/base.component';
 import { UserService } from '@core/services/user.service';
-import { Ages } from '@shared/data/ages.util';
 import { EnglishLevel } from '@shared/data/englishLevel';
 import { Sex } from '@shared/data/sex';
 import { IIcon } from '@shared/models/IIcon';
@@ -56,24 +55,24 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.userService
-            .getUser()
-            .pipe(this.untilThis)
-            .subscribe((resp) => {
-                this.detailsForm.patchValue({
-                    firstName: resp.firstName,
-                    lastName: resp.lastName,
-                    email: resp.email,
-                    country: resp.country,
-                    sex: resp.sex,
-                    language: resp.language,
-                    englishLevel: resp.languageLevel,
-                    dateOfBirth: resp.birthDate,
-                });
-
-                this.userService.getTagNames().pipe(this.untilThis)
-                    .subscribe(tags => this.selectedTags = tags);
-            });
+        // this.userService
+        //     .getUser()
+        //     .pipe(this.untilThis)
+        //     .subscribe((resp) => {
+        //         this.detailsForm.patchValue({
+        //             firstName: resp.firstName,
+        //             lastName: resp.lastName,
+        //             email: resp.email,
+        //             country: resp.country,
+        //             sex: resp.sex,
+        //             language: resp.language,
+        //             englishLevel: resp.languageLevel,
+        //             dateOfBirth: resp.birthDate,
+        //         });
+        //
+        //         // this.userService.getTagNames().pipe(this.untilThis)
+        //         //     .subscribe(tags => this.selectedTags = tags);
+        //     });
     }
 
     onSubmit() {
@@ -90,6 +89,10 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
     get lastName(): FormControl {
         return this.detailsForm.get('lastName') as FormControl;
     }
+
+    // get everyoneCheckbox(): FormControl {
+    //     return this.detailsForm.get('everyoneCheckbox') as FormControl;
+    // }
 
     get dateOfBirth(): FormControl {
         return this.detailsForm.get('dateOfBirth') as FormControl;
@@ -135,12 +138,6 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
             this.selectedTags = this.selectedTags.concat(this.tagsList[numb].icon_name);
         } else {
             this.selectedTags = this.selectedTags.filter(x => x !== this.tagsList[numb].icon_name);
-        }
-    }
-
-    select(event: Date | null) {
-        if (event) {
-            const rrr = event;
         }
     }
 }

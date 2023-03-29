@@ -7,4 +7,5 @@ export interface IUserInfo {
     sex: string;
     languageLevel: string;
     birthDate: string;
+    everyoneCheckbox: boolean;
 }

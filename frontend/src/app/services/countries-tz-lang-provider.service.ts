@@ -11,6 +11,7 @@ export class CountriesTzLangProviderService {
         const countries = countriesLib.all().map((country) => ({
             name: country.country,
             flag: `https://flagicons.lipis.dev/flags/1x1/${country.alpha2.toLowerCase()}.svg`,
+            flag_rectangular: `https://flagicons.lipis.dev/flags/4x3/${country.alpha2.toLowerCase()}.svg`,
         }));
 
         return countries;
