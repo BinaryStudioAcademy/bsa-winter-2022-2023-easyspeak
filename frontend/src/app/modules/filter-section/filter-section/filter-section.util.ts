@@ -51,16 +51,6 @@ export const topicsSample = [
 
 export const langLevelsSample = [
     {
-        title: 'A1',
-        subtitle: 'Beginner',
-        description: 'I am complete beginner',
-    },
-    {
-        title: 'A2',
-        subtitle: 'Pre-Intermediate',
-        description: 'I have some experience, but I still can not express myself properly',
-    },
-    {
         title: 'B1',
         subtitle: 'Intermediate',
         description: 'I am beginning to able to express myself clearly',
