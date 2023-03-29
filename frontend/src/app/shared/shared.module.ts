@@ -20,6 +20,7 @@ import { ModalComponent } from './components/modal/modal.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { UserNotificationComponent } from './components/user-notification/user-notification.component';
 import { YoutubePlayerComponent } from './components/youtube-player/youtube-player.component';
+import { ClickOutsideDirective } from './directives/click-outside.directive';
 import { PasswordVisibilityDirective } from './directives/password-visibility.directive';
 
 @NgModule({
@@ -48,6 +49,7 @@ import { PasswordVisibilityDirective } from './directives/password-visibility.di
         UserNotificationComponent,
         HeaderComponent,
         PasswordVisibilityDirective,
+        ClickOutsideDirective,
         AvatarComponent,
     ],
     exports: [
