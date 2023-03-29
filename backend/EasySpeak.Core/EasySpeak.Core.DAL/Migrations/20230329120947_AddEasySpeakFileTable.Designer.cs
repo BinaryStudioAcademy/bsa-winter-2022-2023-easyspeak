@@ -4,6 +4,7 @@ using EasySpeak.Core.DAL.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EasySpeak.Core.DAL.Migrations
 {
     [DbContext(typeof(EasySpeakCoreContext))]
-    partial class EasySpeakCoreContextModelSnapshot : ModelSnapshot
+    [Migration("20230329120947_AddEasySpeakFileTable")]
+    partial class AddEasySpeakFileTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -2244,122 +2246,122 @@ namespace EasySpeak.Core.DAL.Migrations
                         new
                         {
                             Id = 1L,
-                            CreatedAt = new DateTime(2023, 3, 29, 21, 31, 15, 323, DateTimeKind.Local).AddTicks(2136),
-                            Name = "Architecture"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Mobility"
                         },
                         new
                         {
                             Id = 2L,
-                            CreatedAt = new DateTime(2023, 3, 29, 21, 31, 15, 323, DateTimeKind.Local).AddTicks(2152),
-                            Name = "Arts"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "synthesize"
                         },
                         new
                         {
                             Id = 3L,
-                            CreatedAt = new DateTime(2023, 3, 29, 21, 31, 15, 323, DateTimeKind.Local).AddTicks(2155),
-                            Name = "Cars"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "card"
                         },
                         new
                         {
                             Id = 4L,
-                            CreatedAt = new DateTime(2023, 3, 29, 21, 31, 15, 323, DateTimeKind.Local).AddTicks(2157),
-                            Name = "Celebrities"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "brand"
                         },
                         new
                         {
                             Id = 5L,
-                            CreatedAt = new DateTime(2023, 3, 29, 21, 31, 15, 323, DateTimeKind.Local).AddTicks(2159),
-                            Name = "Cooking"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Versatile"
                         },
                         new
                         {
                             Id = 6L,
-                            CreatedAt = new DateTime(2023, 3, 29, 21, 31, 15, 323, DateTimeKind.Local).AddTicks(2163),
-                            Name = "Dancing"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "withdrawal"
                         },
                         new
                         {
                             Id = 7L,
-                            CreatedAt = new DateTime(2023, 3, 29, 21, 31, 15, 323, DateTimeKind.Local).AddTicks(2165),
-                            Name = "Ecology"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Oman"
                         },
                         new
                         {
                             Id = 8L,
-                            CreatedAt = new DateTime(2023, 3, 29, 21, 31, 15, 323, DateTimeKind.Local).AddTicks(2167),
-                            Name = "Design"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Engineer"
                         },
                         new
                         {
                             Id = 9L,
-                            CreatedAt = new DateTime(2023, 3, 29, 21, 31, 15, 323, DateTimeKind.Local).AddTicks(2169),
-                            Name = "History"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Intelligent Frozen Mouse"
                         },
                         new
                         {
                             Id = 10L,
-                            CreatedAt = new DateTime(2023, 3, 29, 21, 31, 15, 323, DateTimeKind.Local).AddTicks(2171),
-                            Name = "Fashion"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Incredible Metal Hat"
                         },
                         new
                         {
                             Id = 11L,
-                            CreatedAt = new DateTime(2023, 3, 29, 21, 31, 15, 323, DateTimeKind.Local).AddTicks(2173),
-                            Name = "Medicine"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Platinum"
                         },
                         new
                         {
                             Id = 12L,
-                            CreatedAt = new DateTime(2023, 3, 29, 21, 31, 15, 323, DateTimeKind.Local).AddTicks(2175),
-                            Name = "Technologies"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Thailand"
                         },
                         new
                         {
                             Id = 13L,
-                            CreatedAt = new DateTime(2023, 3, 29, 21, 31, 15, 323, DateTimeKind.Local).AddTicks(2177),
-                            Name = "Pets"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "budgetary management"
                         },
                         new
                         {
                             Id = 14L,
-                            CreatedAt = new DateTime(2023, 3, 29, 21, 31, 15, 323, DateTimeKind.Local).AddTicks(2179),
-                            Name = "Philosophy"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "SDD"
                         },
                         new
                         {
                             Id = 15L,
-                            CreatedAt = new DateTime(2023, 3, 29, 21, 31, 15, 323, DateTimeKind.Local).AddTicks(2181),
-                            Name = "Photography"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "core"
                         },
                         new
                         {
                             Id = 16L,
-                            CreatedAt = new DateTime(2023, 3, 29, 21, 31, 15, 323, DateTimeKind.Local).AddTicks(2182),
-                            Name = "Politics"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Concrete"
                         },
                         new
                         {
                             Id = 17L,
-                            CreatedAt = new DateTime(2023, 3, 29, 21, 31, 15, 323, DateTimeKind.Local).AddTicks(2184),
-                            Name = "Cats"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "complexity"
                         },
                         new
                         {
                             Id = 18L,
-                            CreatedAt = new DateTime(2023, 3, 29, 21, 31, 15, 323, DateTimeKind.Local).AddTicks(2220),
-                            Name = "Birds"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Generic Concrete Shoes"
                         },
                         new
                         {
                             Id = 19L,
-                            CreatedAt = new DateTime(2023, 3, 29, 21, 31, 15, 323, DateTimeKind.Local).AddTicks(2223),
-                            Name = "Soccer"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "navigating"
                         },
                         new
                         {
                             Id = 20L,
-                            CreatedAt = new DateTime(2023, 3, 29, 21, 31, 15, 323, DateTimeKind.Local).AddTicks(2224),
-                            Name = "Basketball"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "plum"
                         });
                 });
 

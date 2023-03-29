@@ -4,6 +4,7 @@ using EasySpeak.Core.DAL.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EasySpeak.Core.DAL.Migrations
 {
     [DbContext(typeof(EasySpeakCoreContext))]
-    partial class EasySpeakCoreContextModelSnapshot : ModelSnapshot
+    [Migration("20230328222103_RemovedA1A2LanguageLevels")]
+    partial class RemovedA1A2LanguageLevels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -626,28 +628,6 @@ namespace EasySpeak.Core.DAL.Migrations
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "strategy"
                         });
-                });
-
-            modelBuilder.Entity("EasySpeak.Core.DAL.Entities.EasySpeakFile", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Url")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("EasySpeakFiles");
                 });
 
             modelBuilder.Entity("EasySpeak.Core.DAL.Entities.Friend", b =>
@@ -2244,122 +2224,122 @@ namespace EasySpeak.Core.DAL.Migrations
                         new
                         {
                             Id = 1L,
-                            CreatedAt = new DateTime(2023, 3, 29, 21, 31, 15, 323, DateTimeKind.Local).AddTicks(2136),
-                            Name = "Architecture"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Mobility"
                         },
                         new
                         {
                             Id = 2L,
-                            CreatedAt = new DateTime(2023, 3, 29, 21, 31, 15, 323, DateTimeKind.Local).AddTicks(2152),
-                            Name = "Arts"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "synthesize"
                         },
                         new
                         {
                             Id = 3L,
-                            CreatedAt = new DateTime(2023, 3, 29, 21, 31, 15, 323, DateTimeKind.Local).AddTicks(2155),
-                            Name = "Cars"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "card"
                         },
                         new
                         {
                             Id = 4L,
-                            CreatedAt = new DateTime(2023, 3, 29, 21, 31, 15, 323, DateTimeKind.Local).AddTicks(2157),
-                            Name = "Celebrities"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "brand"
                         },
                         new
                         {
                             Id = 5L,
-                            CreatedAt = new DateTime(2023, 3, 29, 21, 31, 15, 323, DateTimeKind.Local).AddTicks(2159),
-                            Name = "Cooking"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Versatile"
                         },
                         new
                         {
                             Id = 6L,
-                            CreatedAt = new DateTime(2023, 3, 29, 21, 31, 15, 323, DateTimeKind.Local).AddTicks(2163),
-                            Name = "Dancing"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "withdrawal"
                         },
                         new
                         {
                             Id = 7L,
-                            CreatedAt = new DateTime(2023, 3, 29, 21, 31, 15, 323, DateTimeKind.Local).AddTicks(2165),
-                            Name = "Ecology"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Oman"
                         },
                         new
                         {
                             Id = 8L,
-                            CreatedAt = new DateTime(2023, 3, 29, 21, 31, 15, 323, DateTimeKind.Local).AddTicks(2167),
-                            Name = "Design"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Engineer"
                         },
                         new
                         {
                             Id = 9L,
-                            CreatedAt = new DateTime(2023, 3, 29, 21, 31, 15, 323, DateTimeKind.Local).AddTicks(2169),
-                            Name = "History"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Intelligent Frozen Mouse"
                         },
                         new
                         {
                             Id = 10L,
-                            CreatedAt = new DateTime(2023, 3, 29, 21, 31, 15, 323, DateTimeKind.Local).AddTicks(2171),
-                            Name = "Fashion"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Incredible Metal Hat"
                         },
                         new
                         {
                             Id = 11L,
-                            CreatedAt = new DateTime(2023, 3, 29, 21, 31, 15, 323, DateTimeKind.Local).AddTicks(2173),
-                            Name = "Medicine"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Platinum"
                         },
                         new
                         {
                             Id = 12L,
-                            CreatedAt = new DateTime(2023, 3, 29, 21, 31, 15, 323, DateTimeKind.Local).AddTicks(2175),
-                            Name = "Technologies"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Thailand"
                         },
                         new
                         {
                             Id = 13L,
-                            CreatedAt = new DateTime(2023, 3, 29, 21, 31, 15, 323, DateTimeKind.Local).AddTicks(2177),
-                            Name = "Pets"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "budgetary management"
                         },
                         new
                         {
                             Id = 14L,
-                            CreatedAt = new DateTime(2023, 3, 29, 21, 31, 15, 323, DateTimeKind.Local).AddTicks(2179),
-                            Name = "Philosophy"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "SDD"
                         },
                         new
                         {
                             Id = 15L,
-                            CreatedAt = new DateTime(2023, 3, 29, 21, 31, 15, 323, DateTimeKind.Local).AddTicks(2181),
-                            Name = "Photography"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "core"
                         },
                         new
                         {
                             Id = 16L,
-                            CreatedAt = new DateTime(2023, 3, 29, 21, 31, 15, 323, DateTimeKind.Local).AddTicks(2182),
-                            Name = "Politics"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Concrete"
                         },
                         new
                         {
                             Id = 17L,
-                            CreatedAt = new DateTime(2023, 3, 29, 21, 31, 15, 323, DateTimeKind.Local).AddTicks(2184),
-                            Name = "Cats"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "complexity"
                         },
                         new
                         {
                             Id = 18L,
-                            CreatedAt = new DateTime(2023, 3, 29, 21, 31, 15, 323, DateTimeKind.Local).AddTicks(2220),
-                            Name = "Birds"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Generic Concrete Shoes"
                         },
                         new
                         {
                             Id = 19L,
-                            CreatedAt = new DateTime(2023, 3, 29, 21, 31, 15, 323, DateTimeKind.Local).AddTicks(2223),
-                            Name = "Soccer"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "navigating"
                         },
                         new
                         {
                             Id = 20L,
-                            CreatedAt = new DateTime(2023, 3, 29, 21, 31, 15, 323, DateTimeKind.Local).AddTicks(2224),
-                            Name = "Basketball"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "plum"
                         });
                 });
 
@@ -2390,8 +2370,9 @@ namespace EasySpeak.Core.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long?>("ImageId")
-                        .HasColumnType("bigint");
+                    b.Property<string>("ImagePath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsBanned")
                         .HasColumnType("bit");
@@ -2420,10 +2401,6 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ImageId")
-                        .IsUnique()
-                        .HasFilter("[ImageId] IS NOT NULL");
-
                     b.ToTable("Users");
 
                     b.HasData(
@@ -2435,6 +2412,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "Della.Rosenbaum@yahoo.com",
                             FirstName = "Della",
+                            ImagePath = "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/343.jpg",
                             IsBanned = false,
                             IsSubscribed = true,
                             Language = 0,
@@ -2452,6 +2430,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "Jon.Abshire@gmail.com",
                             FirstName = "Jon",
+                            ImagePath = "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/949.jpg",
                             IsBanned = false,
                             IsSubscribed = true,
                             Language = 0,
@@ -2469,6 +2448,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "Kurt.Gulgowski93@gmail.com",
                             FirstName = "Kurt",
+                            ImagePath = "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1117.jpg",
                             IsBanned = false,
                             IsSubscribed = true,
                             Language = 0,
@@ -2486,6 +2466,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "Eduardo.Larson@gmail.com",
                             FirstName = "Eduardo",
+                            ImagePath = "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1114.jpg",
                             IsBanned = false,
                             IsSubscribed = true,
                             Language = 0,
@@ -2503,6 +2484,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "Francis16@yahoo.com",
                             FirstName = "Francis",
+                            ImagePath = "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/607.jpg",
                             IsBanned = false,
                             IsSubscribed = true,
                             Language = 0,
@@ -2914,15 +2896,6 @@ namespace EasySpeak.Core.DAL.Migrations
                     b.Navigation("Question");
                 });
 
-            modelBuilder.Entity("EasySpeak.Core.DAL.Entities.User", b =>
-                {
-                    b.HasOne("EasySpeak.Core.DAL.Entities.EasySpeakFile", "Image")
-                        .WithOne("User")
-                        .HasForeignKey("EasySpeak.Core.DAL.Entities.User", "ImageId");
-
-                    b.Navigation("Image");
-                });
-
             modelBuilder.Entity("LessonTag", b =>
                 {
                     b.HasOne("EasySpeak.Core.DAL.Entities.Lesson", null)
@@ -2973,12 +2946,6 @@ namespace EasySpeak.Core.DAL.Migrations
                     b.Navigation("Calls");
 
                     b.Navigation("Messages");
-                });
-
-            modelBuilder.Entity("EasySpeak.Core.DAL.Entities.EasySpeakFile", b =>
-                {
-                    b.Navigation("User")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("EasySpeak.Core.DAL.Entities.Lesson", b =>

@@ -9,6 +9,9 @@ public static class Seeder
 {
     private static readonly DateTime DefaultDate = new DateTime(2023, 3, 30, 11, 0, 0, DateTimeKind.Utc);
     private static readonly Random Rnd = new Random(42);
+    private static readonly string[] AllTags = {
+        "Architecture", "Arts", "Cars", "Celebrities", "Cooking", "Dancing", "Ecology", "Design", "History", "Fashion",
+        "Medicine", "Technologies", "Pets", "Philosophy", "Photography", "Politics", "Cats", "Birds", "Soccer", "Basketball"};
 
     public static void Seed(ModelBuilder modelBuilder)
     {
@@ -168,15 +171,14 @@ public static class Seeder
             .Generate(count);
     }
 
-    private static IList<Tag> GenerateTags(int count = 20)
+    private static IList<Tag> GenerateTags()
     {
-        Faker.GlobalUniqueIndex = 0;
-
-        return new Faker<Tag>()
-            .UseSeed(10)
-            .RuleFor(t => t.Id, f => f.IndexGlobal)
-            .RuleFor(t => t.Name, f => f.Random.Word())
-            .Generate(count);
+        return AllTags.Select((t, i) => new Tag
+        {
+            Id = ++i,
+            Name = t,
+            CreatedAt = DateTime.Now
+        }).ToList();
     }
 
     private static IList<User> GenerateUsers(int count = 5)
@@ -193,7 +195,6 @@ public static class Seeder
             .RuleFor(u => u.Sex, f => f.PickRandom<Sex>())
             .RuleFor(u => u.LanguageLevel, f => f.PickRandom<LanguageLevel>())
             .RuleFor(u => u.Status, f => f.PickRandom<UserStatus>())
-            .RuleFor(u => u.ImagePath, f => f.Person.Avatar)
             .RuleFor(u => u.IsBanned, f => f.Random.Bool(.1f))
             .RuleFor(u => u.IsSubscribed, f => f.Random.Bool(.9f))
             .Generate(count);
