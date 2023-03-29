@@ -45,8 +45,8 @@ namespace EasySpeak.Core.WebAPI.Controllers
         [HttpPut("enroll/{lessonId}")]
         public Task<LessonDto> Enroll(long lessonId) => _userService.EnrollUserToLesson(lessonId);
 
-        [HttpPost("short")]
-        public async Task<ActionResult<List<UserShortInfoDto>>> GetSuitableUsers( [FromBody] UserFilterDto userFilter)
+        [HttpPost("recommended")]
+        public async Task<ActionResult<List<UserShortInfoDto>>> GetSuitableUsers([FromBody] UserFilterDto userFilter)
         {
             return await _userService.GetFilteredUsers(userFilter);
         }
