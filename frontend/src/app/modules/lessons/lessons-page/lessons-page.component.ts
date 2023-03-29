@@ -97,23 +97,9 @@ export class LessonsPageComponent implements OnInit, OnChanges {
                         isDisabled: new Date() > new Date(lesson.startAt),
                     });
                 });
-                this.splitLessons();
+                this.lessonsColumn1 = this.lessons.filter((el, index) => index % 2 === 0);
+                this.lessonsColumn2 = this.lessons.filter((el, index) => index % 2 === 1);
             });
-    }
-
-    splitLessons() {
-        this.lessonsColumn1 = [];
-        this.lessonsColumn2 = [];
-        let index = 0;
-
-        this.lessons.forEach((lesson) => {
-            if (index % 2 === 0) {
-                this.lessonsColumn1.push(lesson);
-            } else {
-                this.lessonsColumn2.push(lesson);
-            }
-            index++;
-        });
     }
 
     getLessonsUnavailableMessage(): string {
