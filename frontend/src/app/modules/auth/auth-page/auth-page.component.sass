@@ -10,6 +10,7 @@
     display: flex
     justify-content: center
     align-items: center
+    
 
 @mixin icon
     width: 70%
@@ -17,8 +18,10 @@
     opacity: 1
     position: absolute
 
+
 ::ng-deep *
     margin: 0
+
 
 ::placeholder
     color: $gray-200
@@ -211,13 +214,9 @@ input
 
 ::ng-deep.ng-input
     top: 0
-    // left: 10px
     width: auto !important
     height: 100%
     opacity: 0 !important
-
-// ::ng-deep.ng-value-label
-//     margin-left: 10px
 
 ::ng-deep.ng-arrow-wrapper
     display: none
@@ -249,6 +248,7 @@ input
     background-color: $white
     border-radius: 50px
     font-size: 14px
+    z-index: 3 !important
 
 ::ng-deep.ng-dropdown-panel
     background-color: $white
@@ -265,9 +265,6 @@ input
         gap: 10px
         align-items: center
         color: $gray-300
-
-::ng-deep.ng-select-container
-    z-index: 3 !important
 
 ::ng-deep.ng-select.ng-select-focused
     box-shadow: 0px 2px 6px $turquoise-100
