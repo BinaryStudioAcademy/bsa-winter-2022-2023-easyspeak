@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '@core/services/auth.service';
 
 @Component({
@@ -8,6 +8,8 @@ import { AuthService } from '@core/services/auth.service';
     styleUrls: ['./chage-password.component.sass'],
 })
 export class ChagePasswordComponent implements OnInit {
+    passwordPattern: RegExp = /^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\\d@$!%*?&\\.]{6,}$/;
+
     password: string = '';
 
     repeatPassword: string = '';
@@ -20,10 +22,15 @@ export class ChagePasswordComponent implements OnInit {
 
     token: string;
 
-    constructor(private route: ActivatedRoute, private authService: AuthService) {}
+    email: string;
+
+    responseIsOk: boolean = true;
+
+    constructor(private router: Router, private route: ActivatedRoute, private authService: AuthService) {}
 
     ngOnInit(): void {
-        this.route.queryParams.subscribe(params => { this.token = params['oobCode']; console.log(this.token); });
+        this.route.queryParams.subscribe(params => { this.token = params['oobCode']; });
+        this.route.queryParams.subscribe(params => { this.email = params['email']; });
     }
 
     togglePassword(inShow: boolean) {
@@ -34,14 +41,25 @@ export class ChagePasswordComponent implements OnInit {
         this.showRepeatPassword = inShow;
     }
 
-    isSame() {
+    async isSame() {
         if (this.repeatPassword.length === 0) {
             this.passwordIsMatch = true;
         } else {
             this.passwordIsMatch = this.password === this.repeatPassword;
         }
-        if (this.passwordIsMatch) {
-            this.authService.confirmResetPassword(this.token, this.password);
+
+        if (this.passwordIsMatch &&
+            this.passwordPattern.test(this.password)) {
+            const response = this.authService.confirmResetPassword(this.token, this.password);
+
+            if (await response === true) {
+                this.authService.signIn(this.email, this.password);
+                this.router.navigate(['main']);
+
+                this.responseIsOk = true;
+            } else {
+                this.responseIsOk = false;
+            }
         }
     }
 }

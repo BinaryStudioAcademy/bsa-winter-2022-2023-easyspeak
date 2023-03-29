@@ -104,11 +104,23 @@ export class AuthService {
         });
     }
 
-    resetPassword(email: string) {
-        this.afAuth.sendPasswordResetEmail(email);
+    async resetPassword(email: string): Promise<boolean> {
+        try {
+            await this.afAuth.sendPasswordResetEmail(email);
+
+            return true;
+        } catch (error) {
+            return false;
+        }
     }
 
-    confirmResetPassword(code: string, newPassword: string) {
-        this.afAuth.confirmPasswordReset(code, newPassword);
+    async confirmResetPassword(code: string, newPassword: string) {
+        try {
+            await this.afAuth.confirmPasswordReset(code, newPassword);
+
+            return true;
+        } catch (error) {
+            return false;
+        }
     }
 }
