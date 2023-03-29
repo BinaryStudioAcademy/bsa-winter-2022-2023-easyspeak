@@ -65,7 +65,9 @@ namespace EasySpeak.Core.BLL.Services
 
         public async Task<List<UserShortInfoDto>> GetFilteredUsers(UserFilterDto userFilter)
         {
-            var users = _context.Users.Include(u => u.Tags);
+            var users = _context.Users
+                .Include(u => u.Tags)
+                .Include(u => u.Image);
             var filter = _mapper.Map<UserFilter>(userFilter);
 
             IQueryable<User> filteredUsers = users;

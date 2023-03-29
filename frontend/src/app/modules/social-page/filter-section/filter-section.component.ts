@@ -10,6 +10,8 @@ import { Filter } from '../../../models/filters/filter';
 import { UserFilter } from '../../../models/filters/userFilter';
 import { CountriesTzLangProviderService } from '../../../services/countries-tz-lang-provider.service';
 
+type FilterOption = 'compatibility' | 'lang' | 'level' | 'topic';
+
 @Component({
     selector: 'app-filter-section',
     templateUrl: './filter-section.component.html',
@@ -57,7 +59,7 @@ export class FilterSectionComponent implements OnInit {
             || !!this.selectedTopicsFilters.length;
     }
 
-    remove(param: 'compatibility' | 'lang' | 'level' | 'topic', title: string) {
+    remove(param: FilterOption, title: string) {
         switch (param) {
             case 'lang':
                 this.selectedLanguagesFilters = this.selectedLanguagesFilters.filter(s => s !== title);
@@ -73,17 +75,16 @@ export class FilterSectionComponent implements OnInit {
                 break;
             case 'compatibility':
                 this.selectedCompatibilityFilters = this.selectedCompatibilityFilters.filter(s => s !== title);
-                this.userFilters.compatibility = this.selectedCompatibilityFilters.length !== 0 ?
+                this.userFilters.compatibility = this.selectedCompatibilityFilters.length ?
                     +this.selectedCompatibilityFilters[0] : null;
                 break;
             default:
-                console.error('No such filtering parameter');
                 break;
         }
         this.filterChange.emit(this.userFilters);
     }
 
-    update(param: 'compatibility' | 'lang' | 'level' | 'topic', eventData: string[]) {
+    update(param: FilterOption, eventData: string[]) {
         switch (param) {
             case 'lang':
                 this.selectedLanguagesFilters = eventData;
@@ -99,11 +100,10 @@ export class FilterSectionComponent implements OnInit {
                 break;
             case 'compatibility':
                 this.selectedCompatibilityFilters = eventData;
-                this.userFilters.compatibility = this.selectedCompatibilityFilters.length !== 0 ?
+                this.userFilters.compatibility = this.selectedCompatibilityFilters.length ?
                     +this.selectedCompatibilityFilters[0] : null;
                 break;
             default:
-                console.error('No such filtering parameter');
                 break;
         }
         this.filterChange.emit(this.userFilters);

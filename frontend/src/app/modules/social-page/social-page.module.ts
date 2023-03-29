@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { MatIconModule } from '@angular/material/icon';
 import { MainModule } from '@modules/main/main.module';
 import { UserCardModule } from '@modules/user-card/user-card.module';
 import { SharedModule } from '@shared/shared.module';
@@ -19,7 +18,6 @@ import { SocialPageRoutingModule } from './social-page-routing.module';
         SocialPageRoutingModule,
         MainModule,
         UserCardModule,
-        MatIconModule,
         SharedModule,
     ],
 })

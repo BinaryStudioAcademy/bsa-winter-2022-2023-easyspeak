@@ -19,7 +19,7 @@ public class UserProfile : Profile
         CreateMap<User, UserDto>();
         CreateMap<User, UserShortInfoDto>()
             .ForMember(user => user.Name, src => src.MapFrom(user => $"{user.FirstName} {user.LastName}"))
-            .ForMember(user => user.LanguageLevel, src => src.MapFrom(user => user.LanguageLevel.ToString()))
+            .ForMember(user => user.ImagePath, src=>src.MapFrom(user => user.Image.Url))
             .ForMember(user => user.Tags, src => src.MapFrom(user => user.Tags.Select(t => t.Name)));
     }
 }
