@@ -8,6 +8,8 @@ import * as auth from 'firebase/auth';
 import firebase from 'firebase/compat';
 import { from } from 'rxjs';
 
+import { UserService } from './user.service';
+
 @Injectable({
     providedIn: 'root',
 })
@@ -19,6 +21,7 @@ export class AuthService {
         private ngZone: NgZone,
         private httpService: HttpService,
         public jwtHelper: JwtHelperService,
+        private userService: UserService,
     ) {}
 
     signIn(email: string, password: string) {
@@ -43,6 +46,22 @@ export class AuthService {
 
     private setAccessToken(user: firebase.User) {
         from(user.getIdToken()).subscribe((token) => localStorage.setItem('accessToken', token));
+    }
+
+    public setUserSection() {
+        this.userService.getUser().subscribe((resp) => {
+            localStorage.setItem('user', JSON.stringify(resp));
+        });
+    }
+
+    public getUserSection(): string {
+        const userSection = localStorage.getItem('user');
+
+        if (!userSection) {
+            return '';
+        }
+
+        return userSection;
     }
 
     private navigateTo(route: string) {

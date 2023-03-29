@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { AuthService } from '@core/services/auth.service';
 import { IUserInfo } from '@shared/models/IUserInfo';
 
 @Component({
@@ -11,8 +12,10 @@ export class AvatarComponent implements OnInit {
 
     userInfo: IUserInfo;
 
+    constructor(private authService: AuthService) {}
+
     ngOnInit(): void {
-        const userSection = localStorage.getItem('user');
+        const userSection = this.authService.getUserSection();
 
         if (userSection) {
             this.userInfo = JSON.parse(userSection);
@@ -20,16 +23,42 @@ export class AvatarComponent implements OnInit {
     }
 
     getInitials(): string {
-        return this.userInfo.firstName[0] + this.userInfo.lastName[0];
+        return (this.userInfo.firstName[0] + this.userInfo.lastName[0]).toUpperCase();
     }
 
     getAvatarBackground(): string {
-        const initials = this.getInitials().toUpperCase();
-        const color1 = (initials.charCodeAt(0) % 8).toString();
-        const color2 = (initials.charCodeAt(1) % 8).toString();
-        const color3 = ((initials.charCodeAt(0) + initials.charCodeAt(1)) % 8).toString();
+        const HSL = this.generateHsl(this.getInitials());
 
-        return `#${color1}${color3}${color2}`;
+        return this.hslToString(HSL);
+    }
+
+    getHashOfString(fullName: string): number {
+        let hash = 0;
+
+        for (let i = 0; i < fullName.length; i++) {
+            hash = fullName.charCodeAt(i) + ((hash << 5) - hash);
+        }
+        hash = Math.abs(hash);
+
+        return hash;
+    }
+
+    normalizeHash(hash: number, min: number, max: number): number {
+        return Math.floor((hash % (max - min)) + min);
+    }
+
+    generateHsl(name: string): number[] {
+        const hash = this.getHashOfString(name);
+
+        const h = this.normalizeHash(hash, 0, 360);
+        const s = this.normalizeHash(hash, 50, 75);
+        const l = this.normalizeHash(hash, 25, 60);
+
+        return [h, s, l];
+    }
+
+    hslToString(hsl: number[]): string {
+        return `hsl(${hsl[0]}, ${hsl[1]}%, ${hsl[2]}%)`;
     }
 
     getAvatarImage(): string {
