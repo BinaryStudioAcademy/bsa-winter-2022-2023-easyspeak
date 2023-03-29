@@ -196,7 +196,6 @@ public static class Seeder
             .RuleFor(u => u.Language, f => f.PickRandom<Language>())
             .RuleFor(u => u.Timezone, f => f.PickRandom<Timezone>())
             .RuleFor(u => u.Status, f => f.PickRandom<UserStatus>())
-            .RuleFor(u => u.ImagePath, f => f.Person.Avatar)
             .RuleFor(u => u.IsBanned, f => f.Random.Bool(.1f))
             .RuleFor(u => u.IsSubscribed, f => f.Random.Bool(.9f))
             .Generate(count);
