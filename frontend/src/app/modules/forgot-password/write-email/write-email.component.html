@@ -14,4 +14,6 @@
     <button class="button-send" (click)="checkMail()"><h3>Send Recovery Code</h3></button>
 
     <div class="wrong-format" *ngIf="!isMatch">Email is not valid format!</div>
+    <div class="email-doesnt-exist" *ngIf="wrongEmail">This email doesn't exist!</div>
+    
 </div>

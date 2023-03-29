@@ -54,7 +54,6 @@ textarea:focus, input:focus
         font-size: 12px
         color: $gray-200
 
-
 .button-send
     display: flex
     align-items: center
@@ -66,12 +65,17 @@ textarea:focus, input:focus
     border-width: 0
     border-radius: 35px
     font-size: 14px
-    margin-bottom: 30px
+    margin-bottom: 40px
     &:hover
         background-color: $selected-color
 
-
 .wrong-format
+    position: absolute
+    bottom: 20px
+    left: 20%
+    color: red
+
+.email-doesnt-exist
     position: absolute
     bottom: 0
     left: 20%

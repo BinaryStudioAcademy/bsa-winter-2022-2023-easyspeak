@@ -14,13 +14,20 @@ export class WriteEmailComponent {
 
     isMatch: boolean = true;
 
+    wrongEmail: boolean = false;
+
     constructor(private router: Router, private authService: AuthService) {}
 
-    checkMail(): void {
+    async checkMail(): Promise<void> {
         this.isMatch = this.emailPattern.test(this.email);
         if (this.isMatch) {
-            this.authService.resetPassword(this.email);
-            this.router.navigate(['forgot-password/check-email']);
+            const goNextPage: Promise<boolean> = this.authService.resetPassword(this.email);
+
+            if (await goNextPage === true) {
+                this.router.navigate(['forgot-password/check-email']);
+            } else {
+                this.wrongEmail = true;
+            }
         }
     }
 
