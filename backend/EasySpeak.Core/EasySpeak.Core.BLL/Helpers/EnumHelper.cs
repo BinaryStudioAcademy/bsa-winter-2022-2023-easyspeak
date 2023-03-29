@@ -17,8 +17,6 @@ namespace EasySpeak.Core.BLL.Helpers
         public static LanguageLevel MapLanguageLevel(string level)
         {
             var dict = new Dictionary<string, LanguageLevel>{
-                        { "A1", LanguageLevel.A1 },
-                        { "A2", LanguageLevel.A2 },
                         { "B1", LanguageLevel.B1 },
                         { "B2", LanguageLevel.B2 } ,
                         { "C1", LanguageLevel.C1 },
