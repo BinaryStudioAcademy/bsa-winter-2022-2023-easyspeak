@@ -6,6 +6,6 @@ namespace EasySpeak.Core.BLL.Interfaces
     public interface IUserService
     {
         Task<UserDto> CreateUser(UserRegisterDto userDto);
-        Task UploadProfilePhoto(IFormFile file, long userId);
+        Task<UserProfilePhotoDto> UploadProfilePhoto(IFormFile file, long userId);
     }
 }

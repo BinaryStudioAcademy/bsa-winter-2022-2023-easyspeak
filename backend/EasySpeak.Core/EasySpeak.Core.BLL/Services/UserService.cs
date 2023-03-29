@@ -28,7 +28,7 @@ namespace EasySpeak.Core.BLL.Services
             return _mapper.Map<UserDto>(userEntity);
         }
 
-        public async Task UploadProfilePhoto(IFormFile file, long userId)
+        public async Task<UserProfilePhotoDto> UploadProfilePhoto(IFormFile file, long userId)
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
 
@@ -44,7 +44,21 @@ namespace EasySpeak.Core.BLL.Services
             };
 
             var uploadFileDto = await _fileService.AddFileAsync(fileDto);
-            //user
+            var profilePhoto = await _context.EasySpeakFiles.FirstOrDefaultAsync(f => f.Id == uploadFileDto.Id);
+
+            if (profilePhoto == null)
+            {
+                throw new Exception("This file not found");
+            }
+
+            user.ImageId = uploadFileDto.Id;
+            profilePhoto.UserId = userId;
+            await _context.SaveChangesAsync();
+
+            var photoDto = _mapper.Map<UserProfilePhotoDto>(user);
+            photoDto.PhotoUrl = uploadFileDto.Url;
+
+            return photoDto;
         }
     }
 }

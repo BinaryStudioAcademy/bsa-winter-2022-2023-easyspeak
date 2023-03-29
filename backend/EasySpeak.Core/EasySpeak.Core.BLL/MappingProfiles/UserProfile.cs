@@ -15,5 +15,9 @@ public class UserProfile : Profile
                 src => src.MapFrom(userDto => EnumHelper.MapLanguageLevel(userDto.LanguageLevel)));
 
         CreateMap<User, UserDto>();
+
+        CreateMap<User, UserProfilePhotoDto>()
+            .ForMember(userDto => userDto.UserId, src => src.MapFrom(user => user.Id))
+            .ForMember(userDto => userDto.PhotoId, src => src.MapFrom(user => user.ImageId));
     }
 }

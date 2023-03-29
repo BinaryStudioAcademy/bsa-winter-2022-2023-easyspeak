@@ -29,7 +29,6 @@ namespace EasySpeak.Core.DAL.Context.EntityConfigurations
             builder.HasOne(u => u.Image)
                 .WithOne(f => f.User)
                 .HasForeignKey<User>(u => u.ImageId);
-                //.OnDelete(DeleteBehavior.Cascade);
 
             builder.Property(u => u.CreatedAt)
                 .HasDefaultValueSql("getutcdate()");
