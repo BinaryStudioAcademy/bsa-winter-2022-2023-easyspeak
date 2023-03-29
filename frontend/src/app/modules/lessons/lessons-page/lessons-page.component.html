@@ -6,8 +6,15 @@
     </div>
 
     <div class="lessons-section" *ngIf="lessons">
-        <div class="lesson" *ngFor="let lesson of lessons">
-            <app-lesson [lesson]="lesson"></app-lesson>
+        <div class="lessons-column">
+            <div class="lesson" *ngFor="let lesson of lessonsColumn1">
+                <app-lesson [lesson]="lesson"></app-lesson>
+            </div>
+        </div>
+        <div class="lessons-column">
+            <div class="lesson" *ngFor="let lesson of lessonsColumn2">
+                <app-lesson [lesson]="lesson"></app-lesson>
+            </div>
         </div>
     </div>
 
