@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
 using EasySpeak.Core.BLL.Interfaces;
 using EasySpeak.Core.Common.DTO.Tag;
+using EasySpeak.Core.Common.DTO.UploadFile;
 using EasySpeak.Core.Common.DTO.Lesson;
 using EasySpeak.Core.Common.DTO.User;
 using EasySpeak.Core.DAL.Context;
 using EasySpeak.Core.DAL.Entities;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
 namespace EasySpeak.Core.BLL.Services;
@@ -12,16 +14,17 @@ namespace EasySpeak.Core.BLL.Services;
 public class UserService : BaseService, IUserService
 {
     private readonly IFirebaseAuthService _authService;
+    private readonly IEasySpeakFileService _fileService;
 
-    public UserService(EasySpeakCoreContext context, IMapper mapper, IFirebaseAuthService authService) 
+    public UserService(IEasySpeakFileService fileService, EasySpeakCoreContext context, IMapper mapper, IFirebaseAuthService authService) 
         : base(context, mapper)
     {
         _authService = authService;
+        _fileService = fileService;
     }
 
     public async Task<UserDto> CreateUser(UserRegisterDto userDto)
     {
-        var userEntity = _mapper.Map<User>(userDto);
 
         _context.Users.Add(userEntity);
 
@@ -67,4 +70,35 @@ public class UserService : BaseService, IUserService
 
          return _mapper.Map<Lesson, LessonDto>(lesson, options => options.AfterMap(AfterMapAction));
      }
+
+     public async Task<string> UploadProfilePhoto(IFormFile file)
+     {
+         var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == _authService.UserId);
+
+         if (user == null)
+         {
+             throw new ArgumentNullException("This user not found");
+         }
+
+         var fileDto = new NewEasySpeakFileDto()
+         {
+             Stream = file.OpenReadStream(),
+             FileName = file.FileName
+         };
+
+         var uploadFileDto = await _fileService.AddFileAsync(fileDto);
+         var profilePhoto = await _context.EasySpeakFiles.FirstOrDefaultAsync(f => f.Id == uploadFileDto.Id);
+
+         if (profilePhoto == null || profilePhoto.Url == null)
+         {
+             throw new ArgumentNullException("This file not found");
+         }
+
+         user.ImageId = uploadFileDto.Id;
+         profilePhoto.UserId = user.Id;
+         await _context.SaveChangesAsync();
+
+         return profilePhoto.Url;
+     }
+        
 }

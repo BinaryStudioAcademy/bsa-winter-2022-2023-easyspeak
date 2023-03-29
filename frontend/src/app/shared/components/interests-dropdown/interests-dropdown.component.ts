@@ -43,4 +43,8 @@ export class InterestsDropdownComponent implements OnChanges {
     clickButton() {
         this.toggle = !this.toggle;
     }
+
+    clickedOutside() {
+        this.toggle = false;
+    }
 }
