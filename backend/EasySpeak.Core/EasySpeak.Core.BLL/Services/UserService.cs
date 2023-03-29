@@ -78,7 +78,8 @@ namespace EasySpeak.Core.BLL.Services
             {
                 filteredUsers = filteredUsers.Where(u => u.Tags.Any(t => filter.Topics.Contains(t.Name)));
             }
-            return await filteredUsers.ProjectTo<UserShortInfoDto>(_mapper.ConfigurationProvider).ToListAsync();
+            var filteredUsersList =  await filteredUsers.ToListAsync();
+            return _mapper.Map<List<UserShortInfoDto>>(filteredUsersList);
         }
     }
 }

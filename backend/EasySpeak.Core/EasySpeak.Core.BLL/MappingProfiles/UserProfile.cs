@@ -19,8 +19,6 @@ public class UserProfile : Profile
         CreateMap<User, UserDto>();
         CreateMap<User, UserShortInfoDto>()
             .ForMember(user => user.Name, src => src.MapFrom(user => $"{user.FirstName} {user.LastName}"))
-            .ForMember(user => user.Country, src => src.ConvertUsing<EnumToStringConverter<Country>, Country>((user) => user.Country))
-            .ForMember(user => user.Language, src => src.ConvertUsing<EnumToStringConverter<Language>, Language>((user) => user.Language))
             .ForMember(user => user.LanguageLevel, src => src.MapFrom(user => user.LanguageLevel.ToString()))
             .ForMember(user => user.Tags, src => src.MapFrom(user => user.Tags.Select(t => t.Name)));
     }
