@@ -10,11 +10,6 @@ const routes: Routes = [
         component: MainComponent,
         children: [
             {
-                path: '',
-                redirectTo: 'social',
-                pathMatch: 'full',
-            },
-            {
                 path: 'social',
                 loadChildren: () => import('../social-page/social-page.module')
                     .then((m) => m.SocialPageModule),
