@@ -61,8 +61,7 @@ export class FilterSectionComponent implements OnInit {
         switch (param) {
             case 'lang':
                 this.selectedLanguagesFilters = this.selectedLanguagesFilters.filter(s => s !== title);
-                // eslint-disable-next-line prefer-destructuring
-                this.userFilters.language = this.selectedLanguagesFilters[0];
+                this.userFilters.language = null;
                 break;
             case 'level':
                 this.selectedLevelFilters = this.selectedLevelFilters.filter(s => s !== title);
@@ -88,8 +87,7 @@ export class FilterSectionComponent implements OnInit {
         switch (param) {
             case 'lang':
                 this.selectedLanguagesFilters = eventData;
-                // eslint-disable-next-line prefer-destructuring
-                this.userFilters.language = this.selectedLanguagesFilters[0];
+                [this.userFilters.language] = eventData;
                 break;
             case 'level':
                 this.selectedLevelFilters = eventData;

@@ -32,6 +32,6 @@ export class UserService {
     }
 
     public getUsers(userFilter: UserFilter | null): Observable<UserCard[]> {
-        return this.httpService.post<UserCard[]>(`${this.routePrefix}/short`, userFilter);
+        return this.httpService.post<UserCard[]>(`${this.routePrefix}/recommended`, userFilter);
     }
 }

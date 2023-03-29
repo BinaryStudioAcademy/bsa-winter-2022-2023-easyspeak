@@ -62,22 +62,21 @@ namespace EasySpeak.Core.BLL.Services
         public async Task<List<UserShortInfoDto>> GetFilteredUsers(UserFilterDto userFilter)
         {
             var users = _context.Users.Include(u => u.Tags);
+            var filter = _mapper.Map<UserFilter>(userFilter);
 
             IQueryable<User> filteredUsers = users;
 
-            if(userFilter.Language is not null)
+            if(filter.Language is not null)
             {
-                var enumLanguage = _mapper.Map<Language>(userFilter.Language);
-                filteredUsers = filteredUsers.Where(u => u.Language == enumLanguage);
+                filteredUsers = filteredUsers.Where(u => u.Language == filter.Language);
             }
-            if(userFilter.LangLevels is not null && userFilter.LangLevels.Length != 0)
+            if(filter.LangLevels is not null && filter.LangLevels.Any())
             {
-                var eLevels = userFilter.LangLevels.Select(c => _mapper.Map<LanguageLevel>(c));
-                filteredUsers = filteredUsers.Where(u => eLevels.Contains(u.LanguageLevel));
+                filteredUsers = filteredUsers.Where(u => filter.LangLevels.Contains(u.LanguageLevel));
             }
-            if(userFilter.Topics is not null && userFilter.Topics.Length != 0)
+            if(filter.Topics is not null && filter.Topics.Any())
             {
-                filteredUsers = filteredUsers.Where(u => u.Tags.Any(t => userFilter.Topics.Contains(t.Name)));
+                filteredUsers = filteredUsers.Where(u => u.Tags.Any(t => filter.Topics.Contains(t.Name)));
             }
             return await filteredUsers.ProjectTo<UserShortInfoDto>(_mapper.ConfigurationProvider).ToListAsync();
         }
