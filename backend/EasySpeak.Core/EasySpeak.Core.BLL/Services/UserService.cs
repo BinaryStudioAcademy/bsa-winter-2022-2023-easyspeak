@@ -56,7 +56,7 @@ namespace EasySpeak.Core.BLL.Services
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == 2);
             user.Country = Country.Co;
-            user.LanguageLevel = LanguageLevel.A1;
+            user.LanguageLevel = LanguageLevel.B1;
             user.Language = Language.Aa;
 
             var res = _mapper.Map<User, UserDto>(user);
