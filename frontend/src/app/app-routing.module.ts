@@ -27,6 +27,11 @@ const routes: Routes = [
         canActivate: [AuthGuard],
     },
     {
+        path: 'forgot-password',
+        loadChildren: () =>
+            import('./modules/forgot-password/forgot-password.module').then((m) => m.ForgotPasswordModule),
+    },
+    {
         path: '',
         pathMatch: 'full',
         loadChildren: () => import('./modules/landing/landing.module').then((m) => m.LandingModule),
@@ -41,11 +46,6 @@ const routes: Routes = [
         path: '**',
         component: NotFoundComponent,
         pathMatch: 'full',
-    },
-    {
-        path: 'forgot-password',
-        loadChildren: () =>
-            import('./modules/forgot-password/forgot-password.module').then((m) => m.ForgotPasswordModule),
     },
     { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
