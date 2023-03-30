@@ -24,13 +24,8 @@ export class ChatPageComponent {
         { name: 'Giana Levin', isOnline: true, lastMessage: 'Lorem ipsum dolor sit amet consectetur?', numberOfUnreadMessages: 0 },
     ];
 
-    today = new Date();
-
     totalMessage = this.people.reduce((sum, person) => sum + person.numberOfUnreadMessages, 0);
 
-    lastDate: Date;
-
-    //This values are temporary, they will be received from the server
     currentChatId = 1;
 
     currentUserId = 1;
@@ -71,6 +66,10 @@ export class ChatPageComponent {
         }, []);
     }
 
+    lotsOfMessages(value: number): string {
+        return value < 100 ? `${value}` : '99+';
+    }
+
     form = new FormGroup({
         message: new FormControl('', { nonNullable: true }),
         file: new FormControl(''),
@@ -85,15 +84,13 @@ export class ChatPageComponent {
 
         if (message) {
             this.form.reset();
-            this.messages.push({
+            this.messages = [...this.messages, {
                 chatId: this.currentChatId,
                 userId: this.currentUserId,
                 text: message,
                 createdAt: new Date(Date.now()),
-            });
+            }];
             this.groupedMessages = this.groupByDate(this.messages);
-        //this.httpService.post('messages',
-        // { chatId: this.currentChatId, userId: this.currentUserId, text: message-group, createdAt: new Date() });
         }
     }
 

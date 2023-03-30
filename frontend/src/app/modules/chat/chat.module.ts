@@ -5,8 +5,8 @@ import { MatInputModule } from '@angular/material/input';
 import { SharedModule } from '@shared/shared.module';
 
 import { ChatPageComponent } from './chat-page/chat-page.component';
-import { ChatRoutingModule } from './chat-routing.module';
 import { MessageGroupComponent } from './message-group/message-group.component';
+import { ChatRoutingModule } from './chat-routing.module';
 
 @NgModule({
     declarations: [ChatPageComponent, MessageGroupComponent],

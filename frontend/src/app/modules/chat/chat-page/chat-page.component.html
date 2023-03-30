@@ -4,7 +4,7 @@
         <div class="message-header">
             <span class="message-span">Messages</span>
             <div class="total-number-of-messages">
-                <span>{{totalMessage < 100 ? totalMessage : '99+'}}</span>
+                <span>{{lotsOfMessages(totalMessage)}}</span>
             </div>
         </div>
         <mat-form-field appearance="fill">
@@ -17,8 +17,8 @@
                   'person': true,
                   'onlinePerson': person.isOnline,
                   'offlinePerson': !person.isOnline,
-                  'unread': person.numberOfUnreadMessages > 0,
-                  'read': person.numberOfUnreadMessages === 0
+                  'unread': person.numberOfUnreadMessages,
+                  'read': !person.numberOfUnreadMessages
                 }"
                  *ngFor="let person of people"
                 (click)="changeChat(person)">
@@ -41,7 +41,7 @@
                 <div class="last-message-total">
                     <span class="last-message">{{person.lastMessage}}</span>
                     <div class="total-number-of-messages" *ngIf="person.numberOfUnreadMessages > 0">
-                        {{person.numberOfUnreadMessages < 100 ? person.numberOfUnreadMessages : '99+'}}
+                        {{lotsOfMessages(person.numberOfUnreadMessages)}}
                     </div>
                 </div>
             </div>
@@ -78,7 +78,6 @@
                         <img src="assets/chat/More-input.svg" alt="img">
                     </label>
                 </div>
-<!--                <emoji-mart title="Pick your emoji…" emoji="point_up"></emoji-mart>-->
                 <div class="vertical-line"></div>
                 <button type="submit" class="send-message">Send</button>
             </form>

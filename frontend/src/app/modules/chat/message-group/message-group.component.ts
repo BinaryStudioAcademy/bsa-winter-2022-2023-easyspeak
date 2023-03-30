@@ -25,7 +25,6 @@ export class MessageGroupComponent {
     showDate: boolean;
 
     getDateText(date: Date): string {
-
         if (moment(date).isSame(moment().startOf('day'))) {
             return 'Today';
         }
