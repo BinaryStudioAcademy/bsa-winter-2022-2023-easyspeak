@@ -152,6 +152,7 @@ export default class Utils {
             questions: ['', [Validators.required]],
             tags: ['', [Validators.required]],
             videoLink: ['', [Validators.required]],
+            studentsCount: ['', [Validators.required]],
         });
     }
 }

@@ -66,5 +66,19 @@
                 </div>
             </div>
         </div>
+
+        <div class="form-field">
+            <div class="input">
+                <img src="assets/lesson-icons/people-icon.svg" alt="people-icon" class="icon">
+                <input type="number" [min]="1" placeholder="Number of students" formControlName="studentsCount">
+            </div>
+
+            <mat-error *ngIf="!studentsCount?.value && studentsCount?.touched ">
+                Number of students is Required
+            </mat-error>
+            <mat-error *ngIf="studentsCount?.value && studentsCount?.value < 1 && studentsCount?.touched ">
+                Number of students cannot be less than 1
+            </mat-error>
+        </div>
     </form>
 </div>
