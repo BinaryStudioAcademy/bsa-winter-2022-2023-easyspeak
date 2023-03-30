@@ -32,4 +32,6 @@ export class SuitableLessonDayComponent {
             this.dateSelected.emit(this.item);
         }
     }
+
+    meetingNumber = () => (this.meetingCount === 1 ? 'meeting' : 'meetings');
 }
