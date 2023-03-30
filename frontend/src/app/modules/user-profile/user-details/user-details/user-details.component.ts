@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ApplicationRef, Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { BaseComponent } from '@core/base/base.component';
 import { TagService } from '@core/services/tag.service';
@@ -42,6 +42,7 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
     detailsForm;
 
     selectedTags: string[] = [];
+    Birth: Date;
 
     constructor(
         private fb: FormBuilder,
@@ -64,6 +65,7 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
             .getUser()
             .pipe(this.untilThis)
             .subscribe((resp) => {
+                console.log(resp.birthDate);
                 this.detailsForm.patchValue({
                     firstName: resp.firstName,
                     lastName: resp.lastName,
@@ -74,10 +76,10 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
                     englishLevel: resp.languageLevel,
                     dateOfBirth: resp.birthDate,
                 });
-
-                this.userService.getTagNames().pipe(this.untilThis)
-                    .subscribe(tags => this.selectedTags = tags);
             });
+
+        this.userService.getTagNames().pipe(this.untilThis)
+            .subscribe(tags => this.selectedTags = tags);
 
         this.tagService.getAllTags().pipe(this.untilThis).subscribe(
             tags => this.allTags = tags,
@@ -150,5 +152,11 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
         if (event) {
             const rrr = event;
         }
+    }
+
+    getIconByName(name: string) {
+        const link = this.tagsList.find(t => t.icon_name === name)?.link;
+
+        return link == null ? this.tagsList[0].link : link;
     }
 }

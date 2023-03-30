@@ -25,8 +25,6 @@
     display: flex
     align-items: center
 
-
-
 .user-details-section-title
     grid-row: 3
     grid-column: 1
@@ -34,10 +32,6 @@
 .user-interests-section-title
     grid-row: 4
     grid-column: 1
-
-//.user-socials-section-title
-//    grid-row: 5
-//    grid-column: 1
 
 .title
     font-weight: 700
@@ -94,7 +88,6 @@
     align-items: center
     justify-content: center
 
-
 .who-can-message-section
     grid-row: 2
     grid-column: 2
@@ -102,7 +95,6 @@
     display: flex
     align-items: center
     gap: 15px
-
 
 .container-message-me
     display: flex
@@ -114,65 +106,36 @@
     height: 1px
     width: 1px
     visibility: hidden
-//
-//.checkbox-message+ label:before
-//    content: ''
-//    width: 16px
-//    height: 16px
-//    background-color: $gray-100
-//    border: 1px solid $blue-200
-//    border-radius: 2px
 
-//checkbox custom
-//.checkbox-message
-//    position: absolute
-//    opacity: 0
-//
-//.checkbox-message + label
-//        position: relative
-//        cursor: pointer
-//        padding: 0
-//
-//.checkbox-message + label:before
-//        content: ''
-//        margin-right: 10px
-//        display: inline-block
-//        vertical-align: text-top
-//        width: 20px
-//        height: 20px
-//        background: yellow
-//
-//.checkbox-message:hover + label:before
-//        background: #f35429
-//
-//.checkbox-message:focus + label:before
-//        box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.12)
-//
-//.checkbox-message:checked + label:before
-//        background: #f35429
-//
-//.checkbox-message:disabled + label
-//        color: #b8b8b8
-//        cursor: auto
-//
-//
-//.checkbox-message:disabled + label:before
-//        box-shadow: none
-//        background: #ddd
-//
-//.checkbox-message:checked + label:after
-//        content: ''
-//        position: absolute
-//        left: 5px
-//        top: 9px
-//        background: white
-//        width: 2px
-//        height: 2px
-//        box-shadow: 2px 0 0 white, 4px 0 0 white, 4px -2px 0 white, 4px -4px 0 white, 4px -6px 0 white, 4px -8px 0 white
-//        transform: rotate(45deg)
-//
-////end
+.styled-checkbox
+    position: absolute
+    opacity: 0
 
+    & + label
+        position: relative
+        cursor: pointer
+        padding: 0
+        color: $gray-300
+
+    & + label:before
+        content: ''
+        margin-right: 10px
+        display: inline-block
+        vertical-align: text-top
+        width: 16px
+        height: 16px
+        background: $gray-100
+        border: 1px solid $blue-200
+        border-radius: 2px
+
+    &:checked + label:before
+        background: $blue-200
+        background-repeat: no-repeat
+        background-image: url("Path.svg")
+        background-position: center
+
+    &:checked + label
+        color: $black-100
 
 .user-details-section
     grid-row: 3
@@ -207,7 +170,6 @@
     flex-direction: column
     align-items: center
     gap: 5px
-
 
 
 .interest-image-container
@@ -254,7 +216,6 @@
     height: 100%
     display: grid
     grid-template-rows: repeat(5, 46px)
-    //grid-column: auto
     gap: 15px
     button
         width: 182px
@@ -272,13 +233,6 @@
     background-color: $white
     border-radius: 25px
 
-    //.error-surface
-    //    position: absolute
-    //    width: 100%
-    //    height: 100%
-    //    top: 0
-    //    box-shadow: 0px 1px 4px #EE2A64
-    //    border-radius: 50px
     .label
         position: absolute
         top: 5px
@@ -321,7 +275,6 @@
     font-size: 14px
     z-index: 1
 
-
 .expand-icon
     position: absolute
     top: 10px
@@ -352,7 +305,6 @@
     font-size: 14px
     z-index: 10
 
-
 :host::ng-deep.ng-select-container:hover
     cursor: pointer
 
@@ -362,19 +314,6 @@
 :host::ng-deep.ng-value> .ng-value-label> .flag
     margin-bottom: -3px
     margin-left: 10px
-
-
-    //display: flex
-    //align-items: center
-
-//:host::ng-deep.ng-select-container
-//    opacity: 0
-//    height: 100%
-//    box-sizing: border-box
-//    padding: 13px 18px
-//    border-radius: 50px
-//    font-size: 14px
-//    z-index: 100 !important
 
 .ng-invalid
     border: 1px solid red
@@ -428,13 +367,9 @@
 :host::ng-deep .mat-mdc-text-field-wrapper
     border-radius: 25px
 
-    //border: 2px solid   blue
-
 :host::ng-deep .mdc-line-ripple
     display: none
-
 
 :host::ng-deep .ng-tns-c117-2
     display: flex
     align-items: center
-

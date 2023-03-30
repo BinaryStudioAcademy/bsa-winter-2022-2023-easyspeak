@@ -63,14 +63,14 @@
     </div>
 
     <div class="who-can-message-section">
-        <label class="container-message-me">Everyone
-            <input class="checkbox-message" type="checkbox" id="everyoneCheckbox" formControlName="everyoneCheckbox" >
-            <div class="checkbox-unchecked" style="height: 16px; width: 16px; border: 1px solid blue; border-radius: 2px;"></div>
-            <div class="checkbox-checked" style="height: 16px; width: 16px; border: 1px solid red; border-radius: 2px;" > </div>
-        </label>
-        <label class="container-message-me">Only my Friends
-            <input class="checkbox-message" type="checkbox" id="friendsCheckbox" formControlName="friendsCheckbox" >
-        </label>
+        <div>
+            <input class="styled-checkbox" id="everyone" type="checkbox" value="everyone" formControlName="everyone">
+            <label for="everyone">Everyone</label>
+        </div>
+        <div>
+            <input class="styled-checkbox" id="friendsCheckbox" type="checkbox" value="friendsCheckbox" formControlName="">
+            <label for="friendsCheckbox">Only my Friends</label>
+        </div>
     </div>
 
     <div class="user-details-section">
@@ -79,7 +79,6 @@
                    required="">
             <div *ngIf="!firstName.getRawValue()" class="placeholder">First Name</div>
             <label *ngIf="firstName.getRawValue()" class="label" for="firstName">First Name</label>
-
             <div class="errors-wrp" *ngIf="firstName.errors">
                 <mat-error class="error" *ngIf="firstName.errors?.['minlength'] && firstName.touched">
                     <img src="/assets/user-profile/alert-triangle.svg" alt="">
@@ -95,7 +94,8 @@
         <div class="form-input-group">
             <label class="label" *ngIf="lastName.getRawValue()">Last Name</label>
             <div *ngIf="!lastName.getRawValue()" class="placeholder">Last Name</div>
-            <input class="input" type="text" id="lastName" formControlName="lastName" required minlength="2" maxlength="25">
+            <input class="input" type="text" id="lastName" formControlName="lastName" required minlength="2"
+                   maxlength="25">
             <div class="errors-wrp" *ngIf="lastName.errors">
                 <mat-error class="error" *ngIf="lastName.errors?.['minlength'] && lastName.touched">
                     <img src="/assets/user-profile/alert-triangle.svg" alt="">
@@ -109,7 +109,8 @@
         </div>
 
         <div class="form-input-group">
-            <app-calendar id="dateOfBirth" formControlName="dateOfBirth" placeholder="Date of birth"></app-calendar>
+            <app-calendar id="dateOfBirth" name="dateOfBirth" formControlName="dateOfBirth"
+                          placeholder="Date of Birth"></app-calendar>
         </div>
 
         <div class="form-input-group">
@@ -161,15 +162,15 @@
         </div>
     </div>
     <div class="user-interests-section">
-        <div *ngFor="let item of tagsList; let i = index" class="user-interest-content">
-            <input type="checkbox" id="{{i}}" [checked]=selectedTags.includes(tagsList[i].icon_name)
+        <div *ngFor="let item of allTags; let i = index" class="user-interest-content">
+            <input type="checkbox" id="{{i}}" [checked]=selectedTags.includes(item)
                    class="item-checkbox"
                    (change)="selectInterest($event)" formControlName="tags"/>
             <label class="item-checkbox-label" for="{{i}}">
                 <div class="interest-image-container ">
-                    <img class="icon" [src]="item.link" alt="image"/>
+                    <img class="icon" [src]="getIconByName(item)" alt="image"/>
                 </div>
-                <div class="interest-image-text">{{item.icon_name}}</div>
+                <div class="interest-image-text">{{item}}</div>
             </label>
         </div>
     </div>
@@ -177,4 +178,6 @@
         <button type="submit">Save</button>
     </div>
 </form>
+
+
 
