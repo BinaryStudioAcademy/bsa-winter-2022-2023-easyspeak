@@ -78,7 +78,7 @@ export class LessonsPageComponent implements OnInit, OnChanges {
     }
 
     private mapLesson(response: ILesson[]): Lesson[] {
-        return response.map(lesson => (<Lesson>{
+        return response.map(lesson => ({
             id: lesson.id,
             imgPath: lesson.mediaPath,
             videoId: 'xqAriI87lFU',
