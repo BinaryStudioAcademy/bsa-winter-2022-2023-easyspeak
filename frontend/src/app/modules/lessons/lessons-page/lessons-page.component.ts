@@ -1,7 +1,9 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { langLevelsSample } from '@modules/filter-section/filter-section/filter-section.util';
+import { ModalComponent } from '@shared/components/modal/modal.component';
 import { YoutubePlayerComponent } from '@shared/components/youtube-player/youtube-player.component';
+import { IModal } from '@shared/models/IModal';
 import { ILesson } from '@shared/models/lesson/ILesson';
 import { LanguageLevels } from '@shared/models/lesson/LanguageLevels';
 import * as moment from 'moment';
@@ -60,9 +62,15 @@ export class LessonsPageComponent implements OnInit, OnChanges {
     }
 
     openCreate() {
-        this.dialogRef.open(LessonsCreateComponent, {
-            width: '40%',
-        });
+        const config: MatDialogConfig<IModal> = {
+            data: {
+                header: 'Add Group Class',
+                hasButtons: false,
+                component: LessonsCreateComponent,
+            }
+        }
+
+        this.dialogRef.open(ModalComponent, config);
     }
 
     getLessons() {
