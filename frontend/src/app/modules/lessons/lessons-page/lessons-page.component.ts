@@ -31,6 +31,10 @@ export class LessonsPageComponent implements OnInit, OnChanges {
 
     constructor(private dialogRef: MatDialog, private lessonService: LessonsService) { }
 
+    lessonsColumn1: Lesson[];
+
+    lessonsColumn2: Lesson[];
+
     ngOnInit(): void {
         this.selectedDateFilter = new Date();
 
@@ -73,7 +77,7 @@ export class LessonsPageComponent implements OnInit, OnChanges {
             date: new Date(this.selectedDateFilter.toISOString().slice(0, 10)),
         })
             .subscribe((response: ILesson[]) => {
-                this.lessons = [...this.mapLesson(response)];
+                this.lessons = this.mapLesson(response);
             });
     }
 
