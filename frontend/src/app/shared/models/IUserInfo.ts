@@ -9,4 +9,5 @@ export interface IUserInfo {
     sex: string,
     languageLevel: string
     topics?: ITopic[]
+    imagePath: string;
 }

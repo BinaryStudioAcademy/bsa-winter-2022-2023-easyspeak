@@ -12,7 +12,7 @@ namespace EasySpeak.Core.DAL.Entities
         public DateTime BirthDate { get; set; }
         public string Email { get; set; } = string.Empty;
         public long? ImageId { get; set; }
-        public EasySpeakFile Image { get; set; }
+        public EasySpeakFile Image { get; set; } = null!;
         public Sex Sex { get; set; }
         public LanguageLevel LanguageLevel { get; set; }
         public UserStatus Status { get; set; }
