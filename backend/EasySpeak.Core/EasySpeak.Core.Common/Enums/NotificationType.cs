@@ -1,8 +1,10 @@
-﻿namespace EasySpeak.Core.Common.Enums
+﻿using System.ComponentModel;
+
+namespace EasySpeak.Core.Common.Enums
 {
     public enum NotificationType
     {
-        Information,
-        Error
+        [Description("Text notification")] Information = 1,
+        [Description("Action notification")] WithAction
     }
 }

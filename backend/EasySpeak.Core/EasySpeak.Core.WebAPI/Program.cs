@@ -57,11 +57,11 @@ app.UseAuthorization();
 
 app.UseMiddleware<FirebaseAuthMiddleware>();
 
-app.UseEndpoints(endpoinds =>
+app.UseEndpoints(endpoints =>
 {
-    endpoinds.MapHealthChecks("/health");
-    endpoinds.MapHub<SignalRtcHub>("/signaling");
-    endpoinds.MapControllers();
+    endpoints.MapHealthChecks("/health");
+    endpoints.MapHub<SignalRtcHub>("/signaling");
+    endpoints.MapControllers();
 });
 
 

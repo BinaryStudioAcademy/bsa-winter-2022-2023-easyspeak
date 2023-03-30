@@ -1,8 +1,6 @@
 ﻿using EasySpeak.Core.Common.DTO.Notification;
 using EasySpeak.Notifier.WebAPI.Hubs;
-using EasySpeak.RabbitMQ;
 using EasySpeak.RabbitMQ.Interfaces;
-using EasySpeak.RabbitMQ.Services;
 using Microsoft.AspNetCore.SignalR;
 using Newtonsoft.Json;
 

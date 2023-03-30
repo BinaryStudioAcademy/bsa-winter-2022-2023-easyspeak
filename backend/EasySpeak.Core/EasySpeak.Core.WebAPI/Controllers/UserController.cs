@@ -33,8 +33,8 @@ namespace EasySpeak.Core.WebAPI.Controllers
 
             return Ok(createdUser);
         }
-
-
+        
+        
         [HttpPut("{userId}")]
         public ActionResult<UserDto> Update(int userId, UserDto userDto)
         {

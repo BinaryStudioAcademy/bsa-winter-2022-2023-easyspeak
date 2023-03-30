@@ -1,4 +1,5 @@
-﻿using EasySpeak.Core.BLL.Interfaces;
+﻿using AutoMapper;
+using EasySpeak.Core.BLL.Interfaces;
 using EasySpeak.Core.Common.DTO.Notification;
 using EasySpeak.Core.DAL.Context;
 using EasySpeak.Core.DAL.Entities;
@@ -7,12 +8,18 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EasySpeak.Core.BLL.Services
 {
-    public class NotificationService : INotificationService
+    public class NotificationService : BaseService, INotificationService
     {
         private readonly EasySpeakCoreContext _context;
         private readonly IFirebaseAuthService _firebaseAuthService;
         private readonly IMessageProducer _messageProducer;
-        public NotificationService(IFirebaseAuthService firebaseAuthService, EasySpeakCoreContext context, IMessageProducer messageProducer)
+        public NotificationService(
+            IFirebaseAuthService firebaseAuthService, 
+            EasySpeakCoreContext context, 
+            IMessageProducer messageProducer,
+            IMapper mapper
+            )
+            :base(context, mapper)
         {
             _firebaseAuthService = firebaseAuthService;
             _context = context;
@@ -31,27 +38,20 @@ namespace EasySpeak.Core.BLL.Services
                         })
                 .ToListAsync();
 
-        public async Task<NotificationDto> CreateNotificationAsync(NotificationDto notificationDto)
+        public async Task<NotificationDto> CreateNotificationAsync(NewNotificationDto notificationDto)
         {
             var user = await _context.Users
                 .FirstOrDefaultAsync(u => u.Id == _firebaseAuthService.UserId);
 
-            var notification = new Notification
-            {
-                UserId = _firebaseAuthService.UserId,
-                Text = notificationDto.Text,
-                Type = notificationDto.Type
-            };
+            var notification = _mapper.Map<Notification>(notificationDto);
+            notification.UserId = user!.Id;
 
             await _context.Notifications.AddAsync(notification);
             await _context.SaveChangesAsync();
 
-            if (user is not null)
-            {
-                this.SendNotificationToRabbit(user, notification);
-            }
+            this.SendNotificationToRabbit(user, notificationDto);
 
-            return notificationDto;
+            return _mapper.Map<NotificationDto>(notification);
         }
 
         public async Task<long> ReadNotificationAsync(long id)
@@ -68,18 +68,10 @@ namespace EasySpeak.Core.BLL.Services
             return id;
         }
 
-        public void SendNotificationToRabbit(User user, Notification notification)
+        public void SendNotificationToRabbit(User user, NewNotificationDto notification)
         {
-            var newNotification = new NewNotificationDto
-            {
-                Id = notification.Id,
-                Text = notification.Text,
-                Email = user.Email,
-                Type = notification.Type
-            };
-
             _messageProducer.Init("notifier", "");
-            _messageProducer.SendMessage<NewNotificationDto>(newNotification);
+            _messageProducer.SendMessage<NewNotificationDto>(notification);
         }
     }
 }

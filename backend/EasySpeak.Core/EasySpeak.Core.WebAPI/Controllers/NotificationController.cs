@@ -23,7 +23,7 @@ namespace EasySpeak.Core.WebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateNotificationAsync([FromBody] NotificationDto NotificationDto) 
+        public async Task<IActionResult> CreateNotificationAsync([FromBody] NewNotificationDto NotificationDto) 
         {
             var notification = await _notificationService.CreateNotificationAsync(NotificationDto);
             return Ok(notification);
