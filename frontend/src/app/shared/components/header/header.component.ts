@@ -12,23 +12,22 @@ import { UserNotificationComponent } from '../user-notification/user-notificatio
 export class HeaderComponent implements OnInit {
     @ViewChild('notificationsMenu') notificationsMenu: UserNotificationComponent;
 
-    userInfo: IUserInfo;
+    currentUser: IUserInfo;
 
     constructor(private authService: AuthService) {}
 
     ngOnInit(): void {
         if (this.authService.isAuthenticated()) {
             this.authService.setUserSection();
-        }
+            const userSection = this.authService.getUserSection();
 
-        const userSection = this.authService.getUserSection();
-
-        if (userSection) {
-            this.userInfo = userSection;
+            if (userSection) {
+                this.currentUser = userSection;
+            }
         }
     }
 
-    getFullName = () => `${this.userInfo.firstName} ${this.userInfo.lastName}`;
+    getFullName = () => `${this.currentUser.firstName} ${this.currentUser.lastName}`;
 
     logOut() {
         this.authService.logout();
