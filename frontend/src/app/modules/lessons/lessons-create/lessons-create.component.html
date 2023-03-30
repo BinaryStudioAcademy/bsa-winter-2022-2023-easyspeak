@@ -29,7 +29,7 @@
         <div class="form-field">
             <div class="input">
                 <div class="label">
-                    <img src="assets/lesson-icons/clock-icon.svg" alt="clock-icon" class="clockIcon">
+                    <img src="assets/lesson-icons/clock-icon.svg" alt="clock-icon" class="icon">
                     <span *ngIf="!time" class="noTime">Time</span>
                     <span *ngIf="time" class="time">{{time}}</span>
                 </div>
@@ -41,5 +41,15 @@
             </div>
         </div>
 
+        <div class="form-field">
+            <div class="input">
+                <img src="assets/lesson-icons/chains.svg" alt="chains-icon" class="icon">
+                <input type="text" placeholder="Link to the Video for the Lesson" formControlName="videoLink">
+            </div>
+
+            <mat-error *ngIf="videoLink?.invalid && videoLink?.touched">
+                Video Link is Required
+            </mat-error>
+        </div>
     </form>
 </div>

@@ -54,6 +54,10 @@ export class LessonsCreateComponent implements OnInit {
         return this.myForm.get('tags');
     }
 
+    get videoLink() {
+        return this.myForm.get('videoLink');
+    }
+
     createLesson() {
         const lessonQuestions: INewQuestion[] =
             this.questions?.value
