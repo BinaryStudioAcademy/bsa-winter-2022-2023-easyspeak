@@ -1,9 +1,8 @@
-import { ApplicationRef, Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { BaseComponent } from '@core/base/base.component';
 import { TagService } from '@core/services/tag.service';
 import { UserService } from '@core/services/user.service';
-import { Ages } from '@shared/data/ages.util';
 import { EnglishLevel } from '@shared/data/englishLevel';
 import { Sex } from '@shared/data/sex';
 import { IIcon } from '@shared/models/IIcon';
@@ -27,11 +26,7 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
 
     countries;
 
-    ages: Date;
-
     languages;
-
-    englishLevelEnumeration = EnglishLevel;
 
     englishLevelOptions: string[] = [];
 
@@ -42,7 +37,6 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
     detailsForm;
 
     selectedTags: string[] = [];
-    Birth: Date;
 
     constructor(
         private fb: FormBuilder,
@@ -125,17 +119,9 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
         return this.detailsForm.get('email') as FormControl;
     }
 
-    get interests(): FormControl {
-        return this.detailsForm.get('instagram') as FormControl;
-    }
-
-    get facebook(): FormControl {
-        return this.detailsForm.get('facebook') as FormControl;
-    }
-
-    get other(): FormControl {
-        return this.detailsForm.get('other') as FormControl;
-    }
+    // get interests(): FormControl {
+    //     return this.detailsForm.get('') as FormControl;
+    // }
 
     selectInterest($event: Event) {
         const ev = $event.target as HTMLInputElement;
@@ -148,15 +134,7 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
         }
     }
 
-    select(event: Date | null) {
-        if (event) {
-            const rrr = event;
-        }
-    }
-
     getIconByName(name: string) {
-        const link = this.tagsList.find(t => t.icon_name === name)?.link;
-
-        return link == null ? this.tagsList[0].link : link;
+        return this.tagsList.find(t => t.icon_name === name)?.link;
     }
 }
