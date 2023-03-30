@@ -59,7 +59,6 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
             .getUser()
             .pipe(this.untilThis)
             .subscribe((resp) => {
-                console.log(resp.birthDate);
                 this.detailsForm.patchValue({
                     firstName: resp.firstName,
                     lastName: resp.lastName,
@@ -82,7 +81,7 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
 
     onSubmit() {
         this.userService
-            .updateUser(userId, this.detailsForm.value as IUserInfo)
+            .updateUser(this.detailsForm.value as IUserInfo)
             .pipe(this.untilThis)
             .subscribe(() => this.toastr.success('User info updated successfully.', 'Success!'));
     }

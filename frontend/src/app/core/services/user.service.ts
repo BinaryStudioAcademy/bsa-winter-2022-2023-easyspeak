@@ -17,8 +17,8 @@ export class UserService {
         return this.httpService.get<IUserInfo>(`${this.routePrefix}`);
     }
 
-    public updateUser(userId: number, updatedUser: IUserInfo) {
-        return this.httpService.put(`${this.routePrefix}/${userId}`, updatedUser);
+    public updateUser(updatedUser: IUserInfo) {
+        return this.httpService.put(`${this.routePrefix}`, updatedUser);
     }
 
     public enrollUserToLesson(lessonId: number) {
