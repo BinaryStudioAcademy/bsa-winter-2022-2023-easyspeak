@@ -61,10 +61,7 @@ export class LessonsPageComponent implements OnInit, OnChanges {
 
     openCreate() {
         this.dialogRef.open(LessonsCreateComponent, {
-            maxWidth: '100vw',
-            maxHeight: '100vh',
-            height: '80%',
-            width: '80%',
+            width: '40%',
         });
     }
 
@@ -85,7 +82,8 @@ export class LessonsPageComponent implements OnInit, OnChanges {
                     this.lessons.push({
                         id: lesson.id,
                         imgPath: lesson.mediaPath,
-                        videoId: 'xqAriI87lFU',
+                        videoId: lesson.youtubeVideoId,
+                        zoomLink: lesson.zoomMeetingLink,
                         title: lesson.name,
                         time: lesson.startAt.split('T')[1].substring(0, 5).replace(':', '.'),
                         tutorAvatarPath: '../../../../assets/lesson-mocks/Photo )Patient).png',
