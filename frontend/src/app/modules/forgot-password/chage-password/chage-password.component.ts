@@ -29,16 +29,20 @@ export class ChagePasswordComponent implements OnInit {
     constructor(private router: Router, private route: ActivatedRoute, private authService: AuthService) {}
 
     ngOnInit(): void {
-        this.route.queryParams.subscribe(params => { this.token = params['oobCode']; });
-        this.route.queryParams.subscribe(params => { this.email = params['email']; });
+        this.route.queryParams.subscribe((params) => {
+            this.token = params['oobCode'];
+        });
+        this.route.queryParams.subscribe((params) => {
+            this.email = params['email'];
+        });
     }
 
-    togglePassword(inShow: boolean) {
-        this.showPassword = inShow;
+    togglePassword(isShow: boolean) {
+        this.showPassword = isShow;
     }
 
-    toggleRepeatPassword(inShow: boolean) {
-        this.showRepeatPassword = inShow;
+    toggleRepeatPassword(isShow: boolean) {
+        this.showRepeatPassword = isShow;
     }
 
     async isSame() {
@@ -48,15 +52,12 @@ export class ChagePasswordComponent implements OnInit {
             this.passwordIsMatch = this.password === this.repeatPassword;
         }
 
-        if (this.passwordIsMatch &&
-            this.passwordPattern.test(this.password)) {
+        if (this.passwordIsMatch && this.passwordPattern.test(this.password)) {
             const response = this.authService.confirmResetPassword(this.token, this.password);
 
-            if (await response === true) {
+            if ((await response) === true) {
                 this.authService.signIn(this.email, this.password);
                 this.router.navigate(['main']);
-
-                this.responseIsOk = true;
             } else {
                 this.responseIsOk = false;
             }
