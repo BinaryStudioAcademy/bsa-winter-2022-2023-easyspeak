@@ -55,7 +55,20 @@ namespace EasySpeak.Core.BLL.Services
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == _firebaseAuthService.UserId);
 
-            return _mapper.Map<UserDto>(user);
+            var userDto = _mapper.Map<UserDto>(user);
+
+
+            if (user is not null)
+            {
+                var profilePhoto = await _context.EasySpeakFiles.FirstOrDefaultAsync(f => f.Id == user.ImageId);
+
+                if (profilePhoto is not null && profilePhoto.Url is not null) 
+                {
+                    userDto.ImagePath = profilePhoto.Url;
+                }
+            }
+
+            return userDto;
         }
 
         public async Task<string> UploadProfilePhoto(IFormFile file)

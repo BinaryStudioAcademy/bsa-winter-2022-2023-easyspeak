@@ -4,6 +4,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { HttpService } from '@core/services/http.service';
+import { IUserInfo } from '@shared/models/IUserInfo';
 import * as auth from 'firebase/auth';
 import firebase from 'firebase/compat';
 import { from } from 'rxjs';
@@ -54,14 +55,16 @@ export class AuthService {
         });
     }
 
-    public getUserSection(): string {
+    public getUserSection() {
         const userSection = localStorage.getItem('user');
 
         if (!userSection) {
-            return '';
+            return null;
         }
 
-        return userSection;
+        const userInfo: IUserInfo = JSON.parse(userSection);
+
+        return userInfo;
     }
 
     private navigateTo(route: string) {
