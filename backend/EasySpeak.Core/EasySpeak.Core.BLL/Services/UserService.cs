@@ -118,5 +118,12 @@ namespace EasySpeak.Core.BLL.Services
 
             return _mapper.Map<User, UserDto>(user);
         }
+
+        private async Task<string> GetProfileImageUrl(long? imageId)
+        {
+            var profileImage = await _context.EasySpeakFiles.FirstOrDefaultAsync(f => f.Id == imageId);
+
+            return profileImage!.Url!;
+        }
     }
 }

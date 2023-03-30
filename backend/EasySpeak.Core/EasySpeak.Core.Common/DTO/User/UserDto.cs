@@ -12,4 +12,6 @@ public class UserDto
     public string Email { get; set; } = String.Empty;
 
     public ICollection<string>? Tags { set; get; }
+
+    public string ImagePath { get; set; } = String.Empty;
 }

@@ -10,6 +10,7 @@ import { HeaderComponent } from '@shared/components/header/header.component';
 import { RoundProgressBarComponent } from '@shared/components/round-progress-bar/round-progress-bar.component';
 import { MaterialModule } from '@shared/material/material.module';
 
+import { AvatarComponent } from './components/avatar/avatar.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { ConfirmComponent } from './components/confirm/confirm.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
@@ -49,6 +50,7 @@ import { PasswordVisibilityDirective } from './directives/password-visibility.di
         HeaderComponent,
         PasswordVisibilityDirective,
         ClickOutsideDirective,
+        AvatarComponent,
     ],
     exports: [
         CommonModule,
@@ -68,6 +70,7 @@ import { PasswordVisibilityDirective } from './directives/password-visibility.di
         UserNotificationComponent,
         HeaderComponent,
         PasswordVisibilityDirective,
+        AvatarComponent,
     ],
 })
 export class SharedModule {}

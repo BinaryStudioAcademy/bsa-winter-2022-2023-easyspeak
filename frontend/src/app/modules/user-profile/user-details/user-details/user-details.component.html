@@ -1,47 +1,45 @@
 <form #userDetailsForm="ngForm" [formGroup]="detailsForm" class="container" (ngSubmit)="onSubmit()">
     <div class="user-photo-section-title">
-        <div class="title">
-            User Photo
-        </div>
+        <div class="title">User Photo</div>
     </div>
     <div class="user-photo-section">
         <div class="avatar-wrp">
-            <img class="avatar" src="/assets/user-profile/avatar.svg" alt="avatar">
+            <app-avatar [size]="103"></app-avatar>
             <div class="edit-avatar-icon">
-                <img src="/assets/user-profile//edit-icon.svg" alt="edit">
+                <img src="/assets/user-profile//edit-icon.svg" alt="edit" />
             </div>
             <div class="vertical-line"></div>
         </div>
         <div class="avatar-list">
             <div class="avatar-suggestion-wrp">
-                <img src="/assets//user-profile/boy.svg" alt="">
+                <img src="/assets//user-profile/boy.svg" alt="" />
             </div>
             <div class="avatar-suggestion-wrp">
-                <img src="/assets//user-profile/man-bald.svg" alt="">
+                <img src="/assets//user-profile/man-bald.svg" alt="" />
             </div>
             <div class="avatar-suggestion-wrp">
-                <img src="/assets//user-profile/man-beard.svg" alt="">
+                <img src="/assets//user-profile/man-beard.svg" alt="" />
             </div>
             <div class="avatar-suggestion-wrp">
-                <img src="/assets//user-profile/man-curly.svg" alt="">
+                <img src="/assets//user-profile/man-curly.svg" alt="" />
             </div>
             <div class="avatar-suggestion-wrp">
-                <img src="/assets//user-profile/man-elf.svg" alt="">
+                <img src="/assets//user-profile/man-elf.svg" alt="" />
             </div>
             <div class="avatar-suggestion-wrp">
-                <img src="/assets//user-profile/man-in-tuxedo.svg" alt="">
+                <img src="/assets//user-profile/man-in-tuxedo.svg" alt="" />
             </div>
             <div class="avatar-suggestion-wrp">
-                <img src="/assets//user-profile/man-red-hair.svg" alt="">
+                <img src="/assets//user-profile/man-red-hair.svg" alt="" />
             </div>
             <div class="avatar-suggestion-wrp">
-                <img src="/assets//user-profile/man-technologist.svg" alt="">
+                <img src="/assets//user-profile/man-technologist.svg" alt="" />
             </div>
             <div class="avatar-suggestion-wrp">
-                <img src="/assets//user-profile/man-superhero.svg" alt="">
+                <img src="/assets//user-profile/man-superhero.svg" alt="" />
             </div>
             <div class="avatar-suggestion-wrp">
-                <img src="/assets//user-profile/man-white-hair.svg" alt="">
+                <img src="/assets//user-profile/man-white-hair.svg" alt="" />
             </div>
         </div>
     </div>
@@ -52,16 +50,11 @@
     </div>
 
     <div class="user-details-section-title">
-        <div class="title">
-            User Details
-        </div>
+        <div class="title">User Details</div>
     </div>
     <div class="user-interests-section-title">
-        <div class="title">
-            Interests
-        </div>
+        <div class="title">Interests</div>
     </div>
-
     <div class="who-can-message-section">
         <div>
             <input class="styled-checkbox" id="everyone" type="checkbox" value="everyone" formControlName="everyone">
@@ -77,15 +70,16 @@
         <div class="form-input-group">
             <input class="input" type="text" id="firstName" formControlName="firstName" minlength="2" maxlength="25"
                    required="">
+
             <div *ngIf="!firstName.getRawValue()" class="placeholder">First Name</div>
             <label *ngIf="firstName.getRawValue()" class="label" for="firstName">First Name</label>
             <div class="errors-wrp" *ngIf="firstName.errors">
                 <mat-error class="error" *ngIf="firstName.errors?.['minlength'] && firstName.touched">
-                    <img src="/assets/user-profile/alert-triangle.svg" alt="">
+                    <img src="/assets/user-profile/alert-triangle.svg" alt="" />
                     Minimal length is 2 characters
                 </mat-error>
                 <mat-error class="error" *ngIf="firstName.errors?.['required'] && firstName.touched">
-                    <img src="/assets/user-profile/alert-triangle.svg" alt="">
+                    <img src="/assets/user-profile/alert-triangle.svg" alt="" />
                     This field is required
                 </mat-error>
             </div>
@@ -96,13 +90,14 @@
             <div *ngIf="!lastName.getRawValue()" class="placeholder">Last Name</div>
             <input class="input" type="text" id="lastName" formControlName="lastName" required minlength="2"
                    maxlength="25">
+
             <div class="errors-wrp" *ngIf="lastName.errors">
                 <mat-error class="error" *ngIf="lastName.errors?.['minlength'] && lastName.touched">
-                    <img src="/assets/user-profile/alert-triangle.svg" alt="">
+                    <img src="/assets/user-profile/alert-triangle.svg" alt="" />
                     Minimal length is 2 characters
                 </mat-error>
                 <mat-error class="error" *ngIf="lastName.errors?.['required'] && lastName.touched">
-                    <img src="/assets/user-profile/alert-triangle.svg" alt="">
+                    <img src="/assets/user-profile/alert-triangle.svg" alt="" />
                     This field is required
                 </mat-error>
             </div>

@@ -8,4 +8,5 @@ export interface IUserInfo {
     languageLevel: string;
     birthDate: string;
     everyoneCheckbox: boolean;
+    imagePath: string;
 }

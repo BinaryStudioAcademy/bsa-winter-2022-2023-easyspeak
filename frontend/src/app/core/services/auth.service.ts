@@ -4,9 +4,12 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { HttpService } from '@core/services/http.service';
+import { IUserInfo } from '@shared/models/IUserInfo';
 import * as auth from 'firebase/auth';
 import firebase from 'firebase/compat';
 import { from } from 'rxjs';
+
+import { UserService } from './user.service';
 
 @Injectable({
     providedIn: 'root',
@@ -19,6 +22,7 @@ export class AuthService {
         private ngZone: NgZone,
         private httpService: HttpService,
         public jwtHelper: JwtHelperService,
+        private userService: UserService,
     ) {}
 
     signIn(email: string, password: string) {
@@ -43,6 +47,24 @@ export class AuthService {
 
     private setAccessToken(user: firebase.User) {
         from(user.getIdToken()).subscribe((token) => localStorage.setItem('accessToken', token));
+    }
+
+    public setUserSection() {
+        this.userService.getUser().subscribe((resp) => {
+            localStorage.setItem('user', JSON.stringify(resp));
+        });
+    }
+
+    public getUserSection() {
+        const userSection = localStorage.getItem('user');
+
+        if (!userSection) {
+            return null;
+        }
+
+        const userInfo: IUserInfo = JSON.parse(userSection);
+
+        return userInfo;
     }
 
     private navigateTo(route: string) {
