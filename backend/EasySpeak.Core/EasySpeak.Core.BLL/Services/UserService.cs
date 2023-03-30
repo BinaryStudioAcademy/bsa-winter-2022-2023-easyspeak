@@ -60,7 +60,10 @@ namespace EasySpeak.Core.BLL.Services
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == _firebaseAuthService.UserId);
 
-            return _mapper.Map<UserDto>(user);
+            var userDto = _mapper.Map<UserDto>(user);
+            userDto.ImagePath = await GetProfileImageUrl(user!.ImageId);
+
+            return userDto;
         }
 
         public async Task<List<UserShortInfoDto>> GetFilteredUsers(UserFilterDto userFilter)
@@ -116,6 +119,13 @@ namespace EasySpeak.Core.BLL.Services
             await _context.SaveChangesAsync();
 
             return profilePhoto.Url;
+        }
+
+        private async Task<string> GetProfileImageUrl(long? imageId)
+        {
+            var profileImage = await _context.EasySpeakFiles.FirstOrDefaultAsync(f => f.Id == imageId);
+            
+            return profileImage!.Url!; 
         }
     }
 }
