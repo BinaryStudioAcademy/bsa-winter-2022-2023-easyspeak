@@ -194,6 +194,8 @@ public static class Seeder
             .RuleFor(u => u.BirthDate, f => f.Person.DateOfBirth = new DateTime(2003, 6, 5))
             .RuleFor(u => u.Sex, f => f.PickRandom<Sex>())
             .RuleFor(u => u.LanguageLevel, f => f.PickRandom<LanguageLevel>())
+            .RuleFor(u => u.Country, f => f.PickRandom<Country>())
+            .RuleFor(u => u.Language, f => f.PickRandom<Language>())
             .RuleFor(u => u.Status, f => f.PickRandom<UserStatus>())
             .RuleFor(u => u.IsBanned, f => f.Random.Bool(.1f))
             .RuleFor(u => u.IsSubscribed, f => f.Random.Bool(.9f))
