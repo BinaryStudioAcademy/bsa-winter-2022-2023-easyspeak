@@ -7,6 +7,8 @@ export interface INewLesson {
     mediaPath: string,
     startAt: Date,
     limitOfUsers?: number,
+    youtubeVideoId: string,
+    zoomMeetingLink: string,
     questions: INewQuestion[],
     tags: INewTag[],
 }
