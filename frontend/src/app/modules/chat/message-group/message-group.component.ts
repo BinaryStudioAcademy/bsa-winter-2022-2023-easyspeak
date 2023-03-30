@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { IMessage } from '@shared/models/IMessage';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-message-group',
@@ -29,10 +30,10 @@ export class MessageGroupComponent {
 
         yesterday.setDate(today.getDate() - 1);
 
-        if (date.toDateString() === today.toDateString()) {
+        if (moment(date).isSame(moment(today).startOf('day'))) {
             return 'Today';
         }
-        if (date.toDateString() === yesterday.toDateString()) {
+        if (moment(date).isSame(moment(yesterday).startOf('day'))) {
             return 'Yesterday';
         }
 

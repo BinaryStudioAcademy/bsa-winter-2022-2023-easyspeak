@@ -5,6 +5,7 @@ import { IChatPerson } from '@shared/models/IChatPerson';
 import { IMessage } from '@shared/models/IMessage';
 // import { HttpService } from '@core/services/http.service';
 import { Observable, of } from 'rxjs';
+import * as moment from "moment";
 
 interface IMessageGroup {
     date: Date;
@@ -52,24 +53,22 @@ export class ChatPageComponent {
     }
 
     groupByDate(messages: IMessage[]): IMessageGroup[] {
-        const result: IMessageGroup[] = [];
-
-        messages.forEach((message) => {
+        return messages.reduce((acc: IMessageGroup[], message: IMessage) => {
             const messageDate = new Date(message.createdAt.toDateString());
-            const messageGroupIndex = result.findIndex((group) => {
+            const messageGroupIndex = acc.findIndex((group) => {
                 const groupDate = new Date(group.date.toDateString());
 
-                return groupDate.getTime() === messageDate.getTime();
+                return moment(groupDate.getTime()).isSame(moment(messageDate.getTime()));
             });
 
             if (messageGroupIndex === -1) {
-                result.push({ date: messageDate, messages: [message] });
+                acc.push({ date: messageDate, messages: [message] });
             } else {
-                result[messageGroupIndex].messages.push(message);
+                acc[messageGroupIndex].messages.push(message);
             }
-        });
 
-        return result;
+            return acc;
+        }, []);
     }
 
     form = new FormGroup({
