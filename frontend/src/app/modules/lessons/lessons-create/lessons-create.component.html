@@ -37,6 +37,10 @@
                     <p *ngFor="let time of timesList" (click)="updateTime($event)">{{time}}</p>
                 </div>
             </div>
+
+            <mat-error *ngIf="!time && submitted">
+                Time is Required
+            </mat-error>
         </div>
 
         <div class="form-field">
@@ -63,10 +67,18 @@
                     <p *ngFor="let level of levelsList" (click)="updateLevel($event)">{{level}}</p>
                 </div>
             </div>
+
+            <mat-error *ngIf="!level && submitted">
+                Level is Required
+            </mat-error>
         </div>
 
         <div class="form-field">
             <app-interests-dropdown [usedInModal]="true" (selectedInterests)="updateTags($event)"></app-interests-dropdown>
+
+            <mat-error *ngIf="!tagsList.length && submitted">
+                At least 1 Interest is Required
+            </mat-error>
         </div>
 
         <div class="form-field">

@@ -16,7 +16,7 @@ import { NotificationService } from 'src/app/services/notification.service';
     styleUrls: ['./lessons-create.component.sass'],
 })
 export class LessonsCreateComponent implements OnInit {
-    tagsList: string[];
+    tagsList: string[] = [];
 
     timesList: string[] = Utils.timesList;
 
@@ -29,6 +29,8 @@ export class LessonsCreateComponent implements OnInit {
     timeDropdownVisible = false;
 
     levelDropdownVisible = false;
+
+    submitted: boolean;
 
     myForm: FormGroup;
 
@@ -95,6 +97,12 @@ export class LessonsCreateComponent implements OnInit {
     }
 
     createLesson() {
+        this.submitted = true;
+
+        if (this.myForm.invalid || !this.time || !this.level || !this.tagsList.length) {
+            return;
+        }
+
         const timeHours = parseInt(this.time.split('.')[0]);
         const timeMinutes = parseInt(this.time.split('.')[1]);
         const startAt = new Date(new Date(this.date?.value).setHours(timeHours, timeMinutes));
