@@ -3,11 +3,11 @@ import { FormBuilder } from '@angular/forms';
 export const detailsGroup = (fb: FormBuilder) => fb.group({
     firstName: '',
     lastName: '',
-    dateOfBirth: '',
+    birthDate: '',
     sex: '',
     country: '',
     language: '',
-    englishLevel: '',
+    languageLevel: '',
     email: '',
     tags: '',
 });

@@ -37,6 +37,10 @@ namespace EasySpeak.Core.BLL.Services
         {
             var userId = _firebaseAuthService.UserId;
 
+#if DEBUG
+            userId = 2;
+#endif
+
             var user = _context.Users.SingleOrDefault(u => u.Id == userId) ?? throw new ArgumentException($"Failed to find the user with id {userId}");
             var lesson = _context.Lessons.SingleOrDefault(l => l.Id == lessonId) ?? throw new ArgumentException($"Failed to find the lesson with id {lessonId}");
 
@@ -54,6 +58,10 @@ namespace EasySpeak.Core.BLL.Services
         public async Task<UserDto> GetUserAsync()
         {
             var userId = _firebaseAuthService.UserId;
+
+#if DEBUG
+            userId = 2;
+#endif
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId) ?? throw new ArgumentException($"Failed to find the user with id {userId}");
             return _mapper.Map<User, UserDto>(user);
         }
@@ -61,6 +69,9 @@ namespace EasySpeak.Core.BLL.Services
         public async Task<string[]> GetUserTags()
         {
             var userId = _firebaseAuthService.UserId;
+#if DEBUG
+            userId = 2;
+#endif
             var user = await _context.Users.Include(u => u.Tags).FirstOrDefaultAsync(u => u.Id == userId) ?? throw new ArgumentException($"Failed to find the user with id {userId}");
 
             return user.Tags.Select(t => t.Name).ToArray();

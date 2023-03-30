@@ -3,7 +3,7 @@ import { FormBuilder, FormControl } from '@angular/forms';
 import { BaseComponent } from '@core/base/base.component';
 import { TagService } from '@core/services/tag.service';
 import { UserService } from '@core/services/user.service';
-import { EnglishLevel } from '@shared/data/englishLevel';
+import { LanguageLevel } from '@shared/data/languageLevel';
 import { Sex } from '@shared/data/sex';
 import { IIcon } from '@shared/models/IIcon';
 import { IUserInfo } from '@shared/models/IUserInfo';
@@ -28,7 +28,7 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
 
     languages;
 
-    englishLevelOptions: string[] = [];
+    languageLevelOptions: string[] = [];
 
     sexEnumeration = Sex;
 
@@ -50,7 +50,7 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
         this.languages = this.countriesService.getLanguagesList();
         this.detailsForm = detailsGroup(this.fb);
         this.sexOptions = Object.values(this.sexEnumeration) as string[];
-        this.englishLevelOptions = Object.values(EnglishLevel) as string[];
+        this.languageLevelOptions = Object.values(LanguageLevel) as string[];
         this.tagsList = getTags();
     }
 
@@ -66,13 +66,13 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
                     country: resp.country,
                     sex: resp.sex,
                     language: resp.language,
-                    englishLevel: resp.languageLevel,
-                    dateOfBirth: resp.birthDate,
+                    languageLevel: resp.languageLevel,
+                    birthDate: resp.birthDate,
                 });
-            });
 
-        this.userService.getTagNames().pipe(this.untilThis)
-            .subscribe(tags => this.selectedTags = tags);
+                this.userService.getTagNames().pipe(this.untilThis)
+                    .subscribe(tags => this.selectedTags = tags);
+            });
 
         this.tagService.getAllTags().pipe(this.untilThis).subscribe(
             tags => this.allTags = tags,
@@ -98,8 +98,8 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
         return this.detailsForm.get('lastName') as FormControl;
     }
 
-    get dateOfBirth(): FormControl {
-        return this.detailsForm.get('dateOfBirth') as FormControl;
+    get birthDate(): FormControl {
+        return this.detailsForm.get('birthDate') as FormControl;
     }
 
     get sex(): FormControl {
@@ -114,8 +114,8 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
         return this.detailsForm.get('language') as FormControl;
     }
 
-    get englishLevel(): FormControl {
-        return this.detailsForm.get('englishLevel') as FormControl;
+    get languageLevel(): FormControl {
+        return this.detailsForm.get('languageLevel') as FormControl;
     }
 
     get email(): FormControl {
