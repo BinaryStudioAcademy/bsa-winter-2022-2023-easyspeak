@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IChatPerson } from '@shared/models/IChatPerson';
+import * as moment from 'moment';
 // import { HttpService } from '@core/services/http.service';
 import { Observable, of } from 'rxjs';
 
@@ -20,14 +21,28 @@ export class ChatPageComponent {
 
     today = new Date();
 
-    getMonthName(monthNumber: number) {
-        const date = new Date();
+    totalMessage = this.people.reduce((sum, person) => sum + person.numberOfUnreadMessages, 0);
 
-        date.setMonth(monthNumber);
+    lastDate: Date;
 
-        return date.toLocaleString('en-US', {
-            month: 'long',
-        });
+    setLastDate(date: Date) {
+        this.lastDate = date;
+    }
+
+    getDateText(date: Date): string {
+        const today = new Date();
+        const yesterday = new Date(today);
+
+        yesterday.setDate(today.getDate() - 1);
+
+        if (date.toDateString() === today.toDateString()) {
+            return 'Today';
+        }
+        if (date.toDateString() === yesterday.toDateString()) {
+            return 'Yesterday';
+        }
+
+        return date.toLocaleDateString('en-US', { day: 'numeric', month: 'short' });
     }
 
     //This values are temporary, they will be received from the server
@@ -43,7 +58,7 @@ export class ChatPageComponent {
         { chatId: 1, userId: 2, text: 'Hi', createdAt: new Date(2023, 2, 3, 1, 3) },
         { chatId: 1, userId: 1, text: 'How are you?', createdAt: new Date(2023, 2, 3, 1, 3) },
         { chatId: 1, userId: 2, text: 'I am fine, thanks', createdAt: new Date(2023, 2, 3, 1, 3) },
-        { chatId: 1, userId: 1, text: 'Awesome :)', createdAt: new Date(2023, 2, 3, 1, 3) },
+        { chatId: 1, userId: 1, text: 'Awesome :)', createdAt: new Date(2023, 2, 29, 1, 3) },
     ];
 
     form = new FormGroup({

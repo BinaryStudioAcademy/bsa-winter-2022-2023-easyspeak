@@ -10,9 +10,10 @@
 
 .chat-body
     overflow: auto
-    width: 100%
+    width: 96%
     background-color: $gray-50
     flex-grow: 1
+    padding: 2%
 
 .chat-input
     height: 70px
@@ -24,8 +25,7 @@
 
 .message-photo
     display: flex
-    width: 96%
-    margin: 0 20px
+    width: 100%
 
 .message
     width: 50%
@@ -41,10 +41,13 @@
     width: 100%
     display: flex
     justify-content: flex-end
+    position: relative
     span
+        bottom: -2px
+        right: 16px
+        position: absolute
         color: $blue-200
         font-size: 12px
-        margin: 0 6px
 
 .sender
     background-color: $message-color
@@ -68,7 +71,7 @@
     text-align: center
     z-index: 1
     background-color: $inactive-color
-    padding: 5px 10px
+    padding: 5px 20px
     border-radius: 50px
     color: $blue-200
     font-weight: 500
@@ -76,8 +79,11 @@
 .own-message
     justify-content: flex-end
 
-.not-own-message .message-time span
-    color: $gray-300
+.not-own-message
+    .message-time span
+        color: $gray-300
+    span
+        right: 0
 
 main
     display: flex
@@ -289,7 +295,5 @@ label[for=file-upload]:hover, label[for=input-more]:hover
     cursor: pointer
     filter: brightness(50%)
 
-.input-more
-    color: $white
-    background-color: $white
-    border: none
+input::placeholder
+    color: $gray-200

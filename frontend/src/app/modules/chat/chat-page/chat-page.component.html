@@ -4,7 +4,7 @@
         <div class="message-header">
             <span class="message-span">Messages</span>
             <div class="total-number-of-messages">
-                <span>3</span>
+                <span>{{totalMessage < 100 ? totalMessage : '99+'}}</span>
             </div>
         </div>
         <mat-form-field appearance="fill">
@@ -13,18 +13,23 @@
         </mat-form-field>
         <div class="line"></div>
         <div class="people">
-            <div [className]="'person '
-                + (person.isOnline ? 'onlinePerson ' : 'offlinePerson ')
-                + (person.numberOfUnreadMessages > 0 ? 'unread ' : 'read ')
-                "
+            <div [ngClass]="{
+                  'person': true,
+                  'onlinePerson': person.isOnline,
+                  'offlinePerson': !person.isOnline,
+                  'unread': person.numberOfUnreadMessages > 0,
+                  'read': person.numberOfUnreadMessages === 0
+                }"
                  *ngFor="let person of people"
-                (click)="changeChat(person)"
-            >
+                (click)="changeChat(person)">
                 <div class="img-name-status-time">
                     <div class="img-name-status">
                         <div class="img-online">
-                            <img src="assets/header/avatar.svg">
-                            <div [className]="person.isOnline ? 'online' : 'offline'"></div>
+                            <img src="assets/header/avatar.svg" alt="img">
+                            <div [ngClass]="{
+                                'online' : person.isOnline,
+                                'offline' : !person.isOnline
+                             }"></div>
                         </div>
                         <div class="name-status">
                             <span class="person-name">{{person.name}}</span>
@@ -59,35 +64,33 @@
         </header>
         <div class="chat-body" *ngIf="messages">
             <div *ngFor="let message of messages; index as i">
-                <div class="date" *ngIf="
-                i+1 !== messages.length &&
-                !(messages[i+1].createdAt.getFullYear() !== messages[i].createdAt.getFullYear() ||
-                messages[i+1].createdAt.getMonth() !== messages[i].createdAt.getMonth() ||
-                messages[i+1].createdAt.getDate() !== messages[i].createdAt.getDate()
-                )
-                ">
-                    <div class="date-line"></div>
-                    <div class="day">
-                        {{message.createdAt.getUTCDate()}}
-                        {{getMonthName(message.createdAt.getMonth()).slice(0, 3)}}
-                        <span *ngIf="message.createdAt.getFullYear() !== today.getUTCFullYear()">{{message.createdAt.getFullYear()}}</span>
+                    <div class="date"
+                         *ngIf="!i || message.createdAt.toDateString() !== lastDate.toDateString()"
+                         >
+                        <div class="date-line"></div>
+                        <div class="day">
+                                {{
+                                    message.createdAt.getFullYear() === today.getFullYear() ?
+                                        (getDateText(message.createdAt)) :
+                                        (message.createdAt | date:'dd MMM, YYYY')
+                                }}
+                        </div>
+                        <ng-container *ngIf="!i || message.createdAt.toDateString() !== lastDate.toDateString()">
+                            {{ setLastDate(message.createdAt) }}
+                        </ng-container>
                     </div>
-                </div>
-                <div class="message-photo"
-                     [className]="'message-photo ' + (message.userId === currentUserId ? 'own-message' : 'not-own-message')">
-                    <img src="assets/header/avatar.svg" *ngIf="message.userId !== currentUserId">
+                <div [ngClass]="{'message-photo': true, 'own-message': message.userId === currentUserId, 'not-own-message': message.userId !== currentUserId}">
+                    <img src="assets/header/avatar.svg" *ngIf="message.userId !== currentUserId" alt="img">
                     <div class="message" [ngClass]="{ sender: message.userId === currentUserId }">
                         <p>{{ message.text }}</p>
                         <div class="message-time">
                             <span>
-                                {{message.createdAt.getHours() < 10 ? '0'+message.createdAt.getHours() : message.createdAt.getHours()}}
-                                :
-                                {{message.createdAt.getMinutes() < 10 ? '0'+message.createdAt.getMinutes() : message.createdAt.getMinutes()}}
+                                {{message.createdAt | date: 'HH:mm'}}
                             </span>
                             <img src="assets/chat/ReadMessage.svg" alt="img" *ngIf="message.userId === currentUserId">
                         </div>
                     </div>
-                    <img src="assets/header/avatar.svg" *ngIf="message.userId === currentUserId">
+                    <img src="assets/header/avatar.svg" *ngIf="message.userId === currentUserId" alt="img">
                 </div>
             </div>
         </div>
@@ -101,7 +104,7 @@
                     <input placeholder="Type a message..." formControlName="message">
                     <label for="input-more" class="custom-file-upload">
                         <button class="input-more" id="input-more" type="button"></button>
-                        <img src="assets/chat/More-input.svg">
+                        <img src="assets/chat/More-input.svg" alt="img">
                     </label>
                 </div>
 <!--                <emoji-mart title="Pick your emoji…" emoji="point_up"></emoji-mart>-->
