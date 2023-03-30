@@ -18,6 +18,8 @@ namespace EasySpeak.Core.BLL.Services;
 
 public class UserService : BaseService, IUserService
 {
+    private readonly IEasySpeakFileService _fileService;
+    private readonly IFirebaseAuthService _authService;
 
     public UserService(IEasySpeakFileService fileService, EasySpeakCoreContext context, IMapper mapper, IFirebaseAuthService authService) 
         : base(context, mapper)

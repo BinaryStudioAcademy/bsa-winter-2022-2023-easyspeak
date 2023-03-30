@@ -10,6 +10,7 @@ import { passFormatRegex } from '@shared/data/regex.util';
 import { Sex } from '@shared/data/sex';
 import { INewUser } from '@shared/models/INewUser';
 import { ToastrService } from 'ngx-toastr';
+import { switchMap } from 'rxjs';
 
 import { CountriesTzLangProviderService } from 'src/app/services/countries-tz-lang-provider.service';
 
@@ -85,20 +86,20 @@ export class SignUpComponent extends BaseComponent implements OnInit {
 
     private signUp() {
         this.createUser()
-            .pipe(this.untilThis)
-            .subscribe(() => {
-                this.toastr.success('Account successfully registered', 'Succes!');
-            });
-
-        this.authService
-            .signUp(this.email.value, this.password.value)
-            .then(() => {
-                this.toastr.success('Successfully sign up', 'Sign up');
-                this.router.navigate(['topics']);
-            })
-            .catch((error) => {
-                this.toastr.error(error.message, 'Sign up');
-            });
+            .pipe(
+                switchMap(() => this.authService.signUp(this.email.value, this.password.value)),
+                this.untilThis,
+            )
+            .subscribe(
+                () => {
+                    this.toastr.success('Account successfully registered', 'Succes!');
+                    this.toastr.success('Successfully sign up', 'Sign up');
+                    this.router.navigate(['topics']);
+                },
+                (error) => {
+                    this.toastr.error(error.message, 'Sign up');
+                },
+            );
     }
 
     private validateForm() {

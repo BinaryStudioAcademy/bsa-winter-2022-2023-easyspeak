@@ -4,7 +4,6 @@ import { BaseComponent } from '@core/base/base.component';
 import { UserService } from '@core/services/user.service';
 import { topics as data } from '@shared/data/topics';
 import { ITopic } from '@shared/models/ITopic';
-import { IUserInfo } from '@shared/models/IUserInfo';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -17,23 +16,12 @@ export class SelectTopicsPageComponent extends BaseComponent {
 
     selectedTopics: ITopic[] = [];
 
-    currentUser: IUserInfo;
-
     constructor(
         private userService: UserService,
         private toastr: ToastrService,
         private router: Router,
     ) {
         super();
-        this.setCurrentUser();
-    }
-
-    setCurrentUser() {
-        this.userService.getUser()
-            .pipe(this.untilThis)
-            .subscribe((resp) => {
-                this.currentUser = resp;
-            });
     }
 
     topicClick(topic: ITopic) {
