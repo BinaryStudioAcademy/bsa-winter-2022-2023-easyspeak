@@ -25,7 +25,8 @@ public class UserService : BaseService, IUserService
 
     public async Task<UserDto> CreateUser(UserRegisterDto userDto)
     {
-
+        var userEntity = _mapper.Map<User>(userDto);
+        
         _context.Users.Add(userEntity);
 
         await _context.SaveChangesAsync();
