@@ -26,12 +26,14 @@ public class UserService : BaseService, IUserService
         _fileService = fileService;
     }
 
-
     public async Task<UserDto> GetUserAsync()
     {
-        var userId = _authService.UserId;
-        var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId) ?? throw new ArgumentException($"Failed to find the user with id {userId}");
-        return _mapper.Map<User, UserDto>(user);
+        var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == _authService.UserId);
+
+        var userDto = _mapper.Map<UserDto>(user);
+        userDto.ImagePath = await GetProfileImageUrl(user!.ImageId);
+
+        return userDto;
     }
 
     public async Task<string[]> GetUserTags()
@@ -79,13 +81,6 @@ public class UserService : BaseService, IUserService
         await _context.SaveChangesAsync();
 
         return _mapper.Map<User, UserDto>(user);
-    }
-
-    private async Task<string> GetProfileImageUrl(long? imageId)
-    {
-        var profileImage = await _context.EasySpeakFiles.FirstOrDefaultAsync(f => f.Id == imageId);
-
-        return profileImage!.Url!;
     }
 
     public async Task<UserDto> AddTagsAsync(List<TagDto> tags)
@@ -167,10 +162,16 @@ public class UserService : BaseService, IUserService
             throw new ArgumentNullException("This file not found");
         }
 
-        user.ImageId = uploadFileDto.Id;
-        profilePhoto.UserId = user.Id;
-        await _context.SaveChangesAsync();
-
         return profilePhoto.Url;
+    }
+
+    private async Task<string> GetProfileImageUrl(long? imageId)
+    {
+        var profileImage = await _context.EasySpeakFiles.FirstOrDefaultAsync(f => f.Id == imageId);
+
+        if (profileImage is null || profileImage.Url is null)
+            return "";
+
+        return profileImage.Url;
     }
 }
