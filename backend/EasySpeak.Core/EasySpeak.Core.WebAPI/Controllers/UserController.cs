@@ -1,7 +1,6 @@
 using EasySpeak.Core.BLL.Interfaces;
 using EasySpeak.Core.Common.DTO.Lesson;
 using EasySpeak.Core.Common.DTO.User;
-using EasySpeak.Core.DAL.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -36,10 +35,10 @@ namespace EasySpeak.Core.WebAPI.Controllers
         }
 
 
-        [HttpPut("{userId}")]
-        public ActionResult<UserDto> Update(int userId, UserDto userDto)
+        [HttpPut]
+        public Task<UserDto> Update([FromBody] UserDto userDto)
         {
-            return Ok(userDto);
+            return _userService.UpdateUser(userDto);
         }
 
         [HttpPut("enroll/{lessonId}")]

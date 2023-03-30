@@ -95,5 +95,28 @@ namespace EasySpeak.Core.BLL.Services
 
             return profilePhoto.Url;
         }
+
+        public async Task<UserDto> UpdateUser(UserDto userDto)
+        {
+            var userId = _firebaseAuthService.UserId;
+            var user = await _context.Users.Include(u => u.Tags).FirstOrDefaultAsync(a => a.Id == userId) ?? throw new ArgumentException($"Failed to find the user with id {userId}");
+
+            _mapper.Map(userDto, user);
+
+            user.Tags.Clear();
+
+            foreach (var userDtoTag in userDto.Tags ?? Enumerable.Empty<string>())
+            {
+                var tagFromDb = await _context.Tags.FirstOrDefaultAsync(t => t.Name == userDtoTag);
+                if (tagFromDb != null)
+                {
+                    user.Tags.Add(tagFromDb);
+                }
+            }
+
+            await _context.SaveChangesAsync();
+
+            return _mapper.Map<User, UserDto>(user);
+        }
     }
 }

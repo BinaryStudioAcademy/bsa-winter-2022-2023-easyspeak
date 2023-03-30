@@ -10,4 +10,6 @@ public class UserDto
     public string Language { get; set; } = String.Empty;
     public string LanguageLevel { get; set; } = String.Empty;
     public string Email { get; set; } = String.Empty;
+
+    public ICollection<string>? Tags { set; get; }
 }

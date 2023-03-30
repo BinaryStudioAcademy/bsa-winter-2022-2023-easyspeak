@@ -13,5 +13,7 @@ namespace EasySpeak.Core.BLL.Interfaces
         Task<string[]> GetUserTags();
 
         Task<string> UploadProfilePhoto(IFormFile file);
+
+        Task<UserDto> UpdateUser(UserDto userDto);
     }
 }
