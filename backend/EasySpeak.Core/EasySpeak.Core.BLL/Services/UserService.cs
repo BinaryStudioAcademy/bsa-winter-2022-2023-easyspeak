@@ -55,19 +55,17 @@ namespace EasySpeak.Core.BLL.Services
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == _firebaseAuthService.UserId);
 
-            var userDto = _mapper.Map<UserDto>(user);
-
-
-            if (user is not null)
+            if (user is null)
             {
-                var profilePhoto = await _context.EasySpeakFiles.FirstOrDefaultAsync(f => f.Id == user.ImageId);
-
-                if (profilePhoto is not null && profilePhoto.Url is not null) 
-                {
-                    userDto.ImagePath = profilePhoto.Url;
-                }
+                throw new ArgumentNullException("This user not found");
             }
 
+            var userDto = _mapper.Map<UserDto>(user);
+
+            if (user.ImageId is not null)
+            {
+                userDto.ImagePath = await GetProfileImageUrl(user.ImageId);
+            }
             return userDto;
         }
 
@@ -99,6 +97,19 @@ namespace EasySpeak.Core.BLL.Services
             await _context.SaveChangesAsync();
 
             return profilePhoto.Url;
+        }
+
+        private async Task<string> GetProfileImageUrl(long? imageId)
+        {
+            var profileImage = await _context.EasySpeakFiles.FirstOrDefaultAsync(f => f.Id == imageId);
+            
+            if (profileImage is null || profileImage.Url is null)
+            {
+                throw new ArgumentNullException("This file not found");
+            }
+            var imageUrl = profileImage.Url;
+
+            return imageUrl;
         }
     }
 }
