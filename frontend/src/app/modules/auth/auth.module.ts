@@ -17,9 +17,6 @@ import { AuthRoutingModule } from './auth-routing.module';
     declarations: [SignUpComponent, SignInComponent, AuthPageComponent],
     imports: [CommonModule, AuthRoutingModule, MaterialModule, FormsModule, ReactiveFormsModule, SharedModule],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    providers: [AuthGuard, AuthorizedUsersGuard, {provide: JWT_OPTIONS, useValue: JWT_OPTIONS}, JwtHelperService],
-    exports: [
-        SignUpComponent
-    ]
+    providers: [AuthGuard, AuthorizedUsersGuard, { provide: JWT_OPTIONS, useValue: JWT_OPTIONS }, JwtHelperService],
 })
 export class AuthModule {}
