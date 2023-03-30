@@ -12,7 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 
 import { CountriesTzLangProviderService } from 'src/app/services/countries-tz-lang-provider.service';
 
-import { detailsGroup, userId } from '../user-details.component.util';
+import { detailsGroup } from '../user-details.component.util';
 
 @Component({
     selector: 'app-user-details',
@@ -28,7 +28,7 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
 
     languages;
 
-    englishLevelOptions: string[] = [];
+    languageLevelOptions: string[] = [];
 
     sexEnumeration = Sex;
 
@@ -50,8 +50,8 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
         this.languages = this.countriesService.getLanguagesList();
         this.detailsForm = detailsGroup(this.fb);
         this.sexOptions = Object.values(this.sexEnumeration) as string[];
-        this.englishLevelOptions = Object.values(EnglishLevel) as string[];
         this.tagsList = getTags();
+        this.languageLevelOptions = Object.values(EnglishLevel) as string[];
     }
 
     ngOnInit(): void {
@@ -66,8 +66,8 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
                     country: resp.country,
                     sex: resp.sex,
                     language: resp.language,
-                    englishLevel: resp.languageLevel,
                     dateOfBirth: resp.birthDate,
+                    languageLevel: resp.languageLevel,
                 });
             });
 
@@ -114,8 +114,8 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
         return this.detailsForm.get('language') as FormControl;
     }
 
-    get englishLevel(): FormControl {
-        return this.detailsForm.get('englishLevel') as FormControl;
+    get languageLevel(): FormControl {
+        return this.detailsForm.get('languageLevel') as FormControl;
     }
 
     get email(): FormControl {
