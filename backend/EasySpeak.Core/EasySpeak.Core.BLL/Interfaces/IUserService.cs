@@ -1,7 +1,6 @@
 using EasySpeak.Core.Common.DTO.Tag;
 using EasySpeak.Core.Common.DTO.Lesson;
 using EasySpeak.Core.Common.DTO.Filter;
-using EasySpeak.Core.Common.DTO.Lesson;
 using EasySpeak.Core.Common.DTO.User;
 using Microsoft.AspNetCore.Http;
 
