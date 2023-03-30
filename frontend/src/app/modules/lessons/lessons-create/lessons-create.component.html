@@ -51,5 +51,20 @@
                 Video Link is Required
             </mat-error>
         </div>
+
+        <div class="form-field">
+            <div class="input">
+                <div class="label">
+                    <img src="assets/user-card-icons/rocket-icon.svg" alt="rocket-icon" class="icon">
+                    <span *ngIf="!level" class="noTime">Level</span>
+                    <span *ngIf="level" class="time">{{level}}</span>
+                </div>
+
+                <img src="assets/interestsDropdown/chevron_down.svg" alt="chevron_down-icon" class="timeDropdown">
+                <div class="timeDropdownContent">
+                    <p *ngFor="let level of levelsList" (click)="updateLevel($event)">{{level}}</p>
+                </div>
+            </div>
+        </div>
     </form>
 </div>

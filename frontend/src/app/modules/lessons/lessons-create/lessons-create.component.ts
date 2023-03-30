@@ -19,7 +19,11 @@ export class LessonsCreateComponent implements OnInit {
 
     timesList: string[] = Utils.timesList;
 
+    levelsList: string[] = Utils.levelsList;
+
     time: string;
+
+    level: string;
 
     myForm: FormGroup;
 
@@ -87,5 +91,10 @@ export class LessonsCreateComponent implements OnInit {
     updateTime(evendData: MouseEvent) {
         const target = evendData.target as HTMLElement;
         this.time = target.textContent || "Time";
+    }
+
+    updateLevel(evendData: MouseEvent) {
+        const target = evendData.target as HTMLElement;
+        this.level = target.textContent || "Level";
     }
 }

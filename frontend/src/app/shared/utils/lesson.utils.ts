@@ -50,6 +50,13 @@ export default class Utils {
         '20.00',
     ]
 
+    static levelsList: string[] = [
+        'B1',
+        'B2',
+        'C1',
+        'C2',
+    ]
+
     static lessons: Lesson[] = [
         {
             id: 1,
