@@ -52,18 +52,19 @@
 .info
     display: inline-block
     vertical-align: top
+    max-width: 85%
+    height: 105px
 
 .lesson-theme
+    margin-right: 10px
     vertical-align: top
 
-    max-width: 60%
     overflow: hidden
     text-overflow: ellipsis
     display: -webkit-box
     -webkit-line-clamp: 2
             line-clamp: 2
     -webkit-box-orient: vertical
-
     font-style: normal
     font-weight: 700
     font-size: 16px
@@ -125,19 +126,16 @@
 .topic:last-child
     margin: 0
 
+.lesson-topics
+    height: 25px
+    overflow-y: auto
+
 .time-icon
-    position: absolute
-    right: 66px
     background-color: $turquoise-100
     border: 5px solid $turquoise-100
     border-radius: 50%
 
 .lesson-time
-    display: inline-block
-    position: absolute
-    right: 30px
-    top: 25px
-
     font-style: normal
     font-weight: 700
     font-size: 14px
@@ -166,10 +164,21 @@
 
     color: $gray-200
 
-.lesson-actions
-    position: absolute
-    right: 35px
-    display: inline-block
+.up
+    display: flex
+    justify-content: space-between
+    align-items: flex-start
+
+.bottom
+    display: flex
+    justify-content: space-between
+
+.time
+    display: flex
+    align-items: center
+
+.lesson-preview
+    display: flex
 
 .join
     display: inline-block
@@ -177,7 +186,7 @@
     width: 60px
     height: 25px
 
-    margin: 8px 10px 25px 395px
+    margin: 8px 10px
 
     background: $blue-200
     border: none
@@ -194,7 +203,7 @@
     width: 60px
     height: 25px
 
-    margin: 8px 10px 25px 395px
+    margin: 8px 10px
 
     background: $gray-200
 
