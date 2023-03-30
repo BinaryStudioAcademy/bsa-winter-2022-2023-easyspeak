@@ -39,16 +39,10 @@ export class DropdownComponent extends BaseComponent implements OnInit, OnDestro
     }
 
     selectItem(title: string) {
-        switch (true) {
-            case this.selectedItems.includes(title):
-                this.selectedItems = this.selectedItems.filter(item => item !== title);
-                break;
-            case this.isSingleChoice:
-                this.selectedItems = [title];
-                break;
-            default:
-                this.selectedItems = [...this.selectedItems, title];
-                break;
+        if (this.selectedItems.includes(title)) {
+            this.selectedItems = this.selectedItems.filter(item => item !== title);
+        } else {
+            this.selectedItems = [...this.selectedItems, title];
         }
 
         this.selectedFilters.emit(this.selectedItems);
