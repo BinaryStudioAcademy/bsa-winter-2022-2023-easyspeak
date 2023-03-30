@@ -8,7 +8,7 @@ import { AuthService } from '@core/services/auth.service';
     styleUrls: ['./write-email.component.sass'],
 })
 export class WriteEmailComponent {
-    emailPattern: RegExp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    emailPattern: RegExp = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 
     email: string = '';
 
