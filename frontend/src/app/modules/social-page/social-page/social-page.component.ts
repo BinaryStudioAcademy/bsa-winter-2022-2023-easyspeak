@@ -17,7 +17,7 @@ export class SocialPageComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.users$ = this.userService.getUsers({} as UserFilter);
+        this.users$ = this.userService.getUsers();
     }
 
     onFilterChanges(filters: UserFilter) {

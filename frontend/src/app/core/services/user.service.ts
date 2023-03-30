@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { user } from '@angular/fire/auth';
 import { IUserInfo } from '@shared/models/IUserInfo';
 import { UserCard } from '@shared/models/user/user-card';
 import { Observable } from 'rxjs';
@@ -31,7 +32,10 @@ export class UserService {
         return this.httpService.put<Lesson>(`${this.routePrefix}/enroll/${lessonId}`, {} as Lesson);
     }
 
-    public getUsers(userFilter: UserFilter | null): Observable<UserCard[]> {
-        return this.httpService.post<UserCard[]>(`${this.routePrefix}/recommended`, userFilter);
+    public getUsers(userFilter?: UserFilter): Observable<UserCard[]> {
+        return this.httpService.post<UserCard[]>(
+            `${this.routePrefix}/recommended`,
+            userFilter ?? {} as UserFilter,
+        );
     }
 }

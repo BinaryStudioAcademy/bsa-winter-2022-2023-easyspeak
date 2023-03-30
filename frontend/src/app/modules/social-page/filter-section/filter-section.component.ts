@@ -75,8 +75,7 @@ export class FilterSectionComponent implements OnInit {
                 break;
             case 'compatibility':
                 this.selectedCompatibilityFilters = this.selectedCompatibilityFilters.filter(s => s !== title);
-                this.userFilters.compatibility = this.selectedCompatibilityFilters.length ?
-                    +this.selectedCompatibilityFilters[0] : null;
+                this.userFilters.compatibility = null;
                 break;
             default:
                 break;
@@ -100,8 +99,7 @@ export class FilterSectionComponent implements OnInit {
                 break;
             case 'compatibility':
                 this.selectedCompatibilityFilters = eventData;
-                this.userFilters.compatibility = this.selectedCompatibilityFilters.length ?
-                    +this.selectedCompatibilityFilters[0] : null;
+                this.userFilters.compatibility = Number(this.selectedCompatibilityFilters[0]) ?? null;
                 break;
             default:
                 break;
