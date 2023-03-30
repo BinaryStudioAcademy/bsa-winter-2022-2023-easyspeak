@@ -24,9 +24,7 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
 
     languages;
 
-    emglishLevelEnumeration = EnglishLevel;
-
-    englishLevelOptions: string[] = [];
+    languageLevelOptions: string[] = [];
 
     sexEnumeration = Sex;
 
@@ -45,7 +43,7 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
         this.languages = this.countriesService.getLanguagesList();
         this.detailsForm = detailsGroup(this.fb);
         this.sexOptions = Object.values(this.sexEnumeration) as string[];
-        this.englishLevelOptions = Object.values(EnglishLevel) as string[];
+        this.languageLevelOptions = Object.values(EnglishLevel) as string[];
     }
 
     ngOnInit(): void {
@@ -60,7 +58,7 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
                     country: resp.country,
                     sex: resp.sex,
                     language: resp.language,
-                    englishLevel: resp.languageLevel,
+                    languageLevel: resp.languageLevel,
                 });
             });
     }
@@ -96,8 +94,8 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
         return this.detailsForm.get('language') as FormControl;
     }
 
-    get englishLevel(): FormControl {
-        return this.detailsForm.get('englishLevel') as FormControl;
+    get languageLevel(): FormControl {
+        return this.detailsForm.get('languageLevel') as FormControl;
     }
 
     get email(): FormControl {

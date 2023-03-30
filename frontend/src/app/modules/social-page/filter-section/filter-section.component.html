@@ -1,0 +1,59 @@
+<div class="filters-section-container">
+    <div class="btns-wrp">
+        <app-dropdown
+            [isSingleChoice]="true"
+            btnLabel='Compatibility'
+            [selectedItems]="selectedCompatibilityFilters"
+            [data]="compatibilities"
+            (selectedFilters)="update('compatibility', $event)"
+        ></app-dropdown>
+        <app-dropdown
+            [isSingleChoice]="true"
+            btnLabel='Native Language'
+            [selectedItems]="selectedLanguagesFilters"
+            [data]="languages"
+            (selectedFilters)="update('lang', $event)"
+        ></app-dropdown>
+        <app-dropdown
+            btnLabel='Level'
+            [selectedItems]="selectedLevelFilters"
+            [data]="langLevels"
+            (selectedFilters)="update('level', $event)"
+        ></app-dropdown>
+        <app-interests-dropdown
+            [selectedItems]="selectedTopicsFilters"
+            (selectedInterests)="update('topic', $event)"
+        ></app-interests-dropdown>
+    </div>
+    <div class="selected-filters-wrp" *ngIf="hasFilters">
+        <div class="selected-filters-list">
+            <div *ngFor="let selectedCompatibility of selectedCompatibilityFilters">
+                <div *ngIf="selectedCompatibility" class="selected-filter-item">
+                    {{selectedCompatibility}}
+                    <mat-icon (click)="remove('compatibility', selectedCompatibility)">close</mat-icon>
+                </div>
+            </div>
+            <div *ngFor="let selectedLang of selectedLanguagesFilters">
+                <div *ngIf="selectedLang" class="selected-filter-item">
+                    {{selectedLang}}
+                    <mat-icon (click)="remove('lang', selectedLang)">close</mat-icon>
+                </div>
+            </div>
+            <div *ngFor="let selectedLevel of selectedLevelFilters">
+                <div *ngIf="selectedLevel" class="selected-filter-item">
+                    {{selectedLevel}}
+                    <mat-icon (click)="remove('level', selectedLevel)">close</mat-icon>
+                </div>
+            </div>
+            <div *ngFor="let selectedTopic of selectedTopicsFilters">
+                <div *ngIf="selectedTopic" class="selected-filter-item">
+                    {{selectedTopic}}
+                    <mat-icon (click)="remove('topic', selectedTopic)">close</mat-icon>
+                </div>
+            </div>
+        </div>
+        <button class="close-filters-btn" (click)="resetFilters()">
+            Close all
+        </button>
+    </div>
+</div>

@@ -1,20 +1,23 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using EasySpeak.Core.BLL.Interfaces;
 using EasySpeak.Core.Common.DTO.Tag;
+using EasySpeak.Core.Common.DTO.Filter;
 using EasySpeak.Core.Common.DTO.UploadFile;
 using EasySpeak.Core.Common.DTO.Lesson;
 using EasySpeak.Core.Common.DTO.User;
+using EasySpeak.Core.Common.Enums;
 using EasySpeak.Core.DAL.Context;
 using EasySpeak.Core.DAL.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.ComponentModel;
 
 namespace EasySpeak.Core.BLL.Services;
 
 public class UserService : BaseService, IUserService
 {
-    private readonly IFirebaseAuthService _authService;
-    private readonly IEasySpeakFileService _fileService;
 
     public UserService(IEasySpeakFileService fileService, EasySpeakCoreContext context, IMapper mapper, IFirebaseAuthService authService) 
         : base(context, mapper)
@@ -36,7 +39,7 @@ public class UserService : BaseService, IUserService
     
     public async Task<UserDto> GetUserAsync()
     {
-         var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == _firebaseAuthService.UserId);
+         var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == _authService.UserId);
 
          var userDto = _mapper.Map<UserDto>(user);
          userDto.ImagePath = await GetProfileImageUrl(user!.ImageId);
@@ -55,6 +58,31 @@ public class UserService : BaseService, IUserService
         await _context.SaveChangesAsync();
         
         return _mapper.Map<UserDto>(user);
+     }
+     
+     public async Task<List<UserShortInfoDto>> GetFilteredUsers(UserFilterDto userFilter)
+     {
+         var users = _context.Users
+             .Include(u => u.Tags)
+             .Include(u => u.Image);
+         var filter = _mapper.Map<UserFilter>(userFilter);
+
+         IQueryable<User> filteredUsers = users;
+
+         if(filter.Language is not null)
+         {
+             filteredUsers = filteredUsers.Where(u => u.Language == filter.Language);
+         }
+         if(filter.LangLevels is not null && filter.LangLevels.Any())
+         {
+             filteredUsers = filteredUsers.Where(u => filter.LangLevels.Contains(u.LanguageLevel));
+         }
+         if(filter.Topics is not null && filter.Topics.Any())
+         {
+             filteredUsers = filteredUsers.Where(u => u.Tags.Any(t => filter.Topics.Contains(t.Name)));
+         }
+         var filteredUsersList =  await filteredUsers.ToListAsync();
+         return _mapper.Map<List<UserShortInfoDto>>(filteredUsersList);
      }
 
      public async Task<LessonDto> EnrollUserToLesson(long lessonId)
