@@ -153,6 +153,7 @@ export default class Utils {
             tags: ['', [Validators.required]],
             videoLink: ['', [Validators.required]],
             studentsCount: ['', [Validators.required]],
+            meetLink: ['', [Validators.required]],
         });
     }
 }

@@ -66,6 +66,10 @@ export class LessonsCreateComponent implements OnInit {
         return this.myForm.get('studentsCount');
     }
 
+    get meetLink() {
+        return this.myForm.get('meetLink');
+    }
+
     createLesson() {
         const lessonQuestions: INewQuestion[] =
             this.questions?.value

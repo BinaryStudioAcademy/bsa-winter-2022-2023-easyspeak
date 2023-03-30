@@ -80,5 +80,16 @@
                 Number of students cannot be less than 1
             </mat-error>
         </div>
+
+        <div class="form-field">
+            <div class="input">
+                <img src="assets/lesson-icons/chains.svg" alt="chains-icon" class="icon">
+                <input type="text" placeholder="Zoom Link to the Lesson" formControlName="meetLink">
+            </div>
+
+            <mat-error *ngIf="meetLink?.invalid && meetLink?.touched">
+                Meet Link is Required
+            </mat-error>
+        </div>
     </form>
 </div>
