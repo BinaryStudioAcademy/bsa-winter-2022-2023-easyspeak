@@ -2,9 +2,14 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IChatPerson } from '@shared/models/IChatPerson';
+import { IMessage } from '@shared/models/IMessage';
 // import { HttpService } from '@core/services/http.service';
 import { Observable, of } from 'rxjs';
 
+interface IMessageGroup {
+    date: Date;
+    messages: IMessage[];
+}
 @Component({
     selector: 'app-chat-page',
     templateUrl: './chat-page.component.html',
@@ -24,26 +29,6 @@ export class ChatPageComponent {
 
     lastDate: Date;
 
-    setLastDate(date: Date) {
-        this.lastDate = date;
-    }
-
-    getDateText(date: Date): string {
-        const today = new Date();
-        const yesterday = new Date(today);
-
-        yesterday.setDate(today.getDate() - 1);
-
-        if (date.toDateString() === today.toDateString()) {
-            return 'Today';
-        }
-        if (date.toDateString() === yesterday.toDateString()) {
-            return 'Yesterday';
-        }
-
-        return date.toLocaleDateString('en-US', { day: 'numeric', month: 'short' });
-    }
-
     //This values are temporary, they will be received from the server
     currentChatId = 1;
 
@@ -51,22 +36,46 @@ export class ChatPageComponent {
 
     messages$: Observable<[]> = of([]);
 
-    messages = [
+    messages: IMessage[] = [
         { chatId: 1, userId: 1, text: 'Hello', createdAt: new Date(2022, 11, 17, 17, 3) },
         { chatId: 1, userId: 1, text: 'Anyone here?', createdAt: new Date(2022, 11, 17, 17, 4) },
         { chatId: 1, userId: 2, text: 'Hi', createdAt: new Date(2023, 2, 3, 1, 3) },
         { chatId: 1, userId: 1, text: 'How are you?', createdAt: new Date(2023, 2, 3, 1, 3) },
         { chatId: 1, userId: 2, text: 'I am fine, thanks', createdAt: new Date(2023, 2, 3, 1, 3) },
-        { chatId: 1, userId: 1, text: 'Awesome :)', createdAt: new Date(2023, 2, 29, 1, 3) },
+        { chatId: 1, userId: 1, text: 'Awesome :)', createdAt: new Date(2023, 2, 30, 1, 3) },
     ];
+
+    groupedMessages: { date: Date; messages: IMessage[] }[] = [];
+
+    constructor(private router: Router) {
+        this.groupedMessages = this.groupByDate(this.messages);
+    }
+
+    groupByDate(messages: IMessage[]): IMessageGroup[] {
+        const result: IMessageGroup[] = [];
+
+        messages.forEach((message) => {
+            const messageDate = new Date(message.createdAt.toDateString());
+            const messageGroupIndex = result.findIndex((group) => {
+                const groupDate = new Date(group.date.toDateString());
+
+                return groupDate.getTime() === messageDate.getTime();
+            });
+
+            if (messageGroupIndex === -1) {
+                result.push({ date: messageDate, messages: [message] });
+            } else {
+                result[messageGroupIndex].messages.push(message);
+            }
+        });
+
+        return result;
+    }
 
     form = new FormGroup({
         message: new FormControl('', { nonNullable: true }),
         file: new FormControl(''),
     });
-
-    constructor(private router: Router) {
-    }
 
     changeChat(person: IChatPerson) {
 
@@ -83,8 +92,9 @@ export class ChatPageComponent {
                 text: message,
                 createdAt: new Date(Date.now()),
             });
+            this.groupedMessages = this.groupByDate(this.messages);
         //this.httpService.post('messages',
-        // { chatId: this.currentChatId, userId: this.currentUserId, text: message, createdAt: new Date() });
+        // { chatId: this.currentChatId, userId: this.currentUserId, text: message-group, createdAt: new Date() });
         }
     }
 

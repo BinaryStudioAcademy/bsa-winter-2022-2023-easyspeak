@@ -6,9 +6,10 @@ import { SharedModule } from '@shared/shared.module';
 
 import { ChatPageComponent } from './chat-page/chat-page.component';
 import { ChatRoutingModule } from './chat-routing.module';
+import { MessageGroupComponent } from './message-group/message-group.component';
 
 @NgModule({
-    declarations: [ChatPageComponent],
+    declarations: [ChatPageComponent, MessageGroupComponent],
     imports: [CommonModule, ChatRoutingModule, ReactiveFormsModule, MatInputModule, SharedModule],
 })
 export class ChatModule {}

@@ -63,36 +63,7 @@
             </div>
         </header>
         <div class="chat-body" *ngIf="messages">
-            <div *ngFor="let message of messages; index as i">
-                    <div class="date"
-                         *ngIf="!i || message.createdAt.toDateString() !== lastDate.toDateString()"
-                         >
-                        <div class="date-line"></div>
-                        <div class="day">
-                                {{
-                                    message.createdAt.getFullYear() === today.getFullYear() ?
-                                        (getDateText(message.createdAt)) :
-                                        (message.createdAt | date:'dd MMM, YYYY')
-                                }}
-                        </div>
-                        <ng-container *ngIf="!i || message.createdAt.toDateString() !== lastDate.toDateString()">
-                            {{ setLastDate(message.createdAt) }}
-                        </ng-container>
-                    </div>
-                <div [ngClass]="{'message-photo': true, 'own-message': message.userId === currentUserId, 'not-own-message': message.userId !== currentUserId}">
-                    <img src="assets/header/avatar.svg" *ngIf="message.userId !== currentUserId" alt="img">
-                    <div class="message" [ngClass]="{ sender: message.userId === currentUserId }">
-                        <p>{{ message.text }}</p>
-                        <div class="message-time">
-                            <span>
-                                {{message.createdAt | date: 'HH:mm'}}
-                            </span>
-                            <img src="assets/chat/ReadMessage.svg" alt="img" *ngIf="message.userId === currentUserId">
-                        </div>
-                    </div>
-                    <img src="assets/header/avatar.svg" *ngIf="message.userId === currentUserId" alt="img">
-                </div>
-            </div>
+            <app-message-group *ngFor="let message of groupedMessages; index as i" [message]="message" [i]="i" [messages]="groupedMessages"></app-message-group>
         </div>
         <div class="chat-input">
             <form [formGroup]="form" (ngSubmit)="sendMessage()">
