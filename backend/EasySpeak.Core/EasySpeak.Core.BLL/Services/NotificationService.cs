@@ -41,15 +41,22 @@ namespace EasySpeak.Core.BLL.Services
         public async Task<NotificationDto> CreateNotificationAsync(NewNotificationDto notificationDto)
         {
             var user = await _context.Users
-                .FirstOrDefaultAsync(u => u.Id == _firebaseAuthService.UserId);
+                .FirstOrDefaultAsync(u => u.Email == notificationDto.Email);
 
             var notification = _mapper.Map<Notification>(notificationDto);
-            notification.UserId = user!.Id;
+            
+            if (user is null)
+            {
+                throw new ArgumentException($"User not found");
+            }
+            
+            notification.UserId = user.Id;
 
             await _context.Notifications.AddAsync(notification);
+                
             await _context.SaveChangesAsync();
 
-            this.SendNotificationToRabbit(user, notificationDto);
+            SendNotificationToRabbit(user, notificationDto);
 
             return _mapper.Map<NotificationDto>(notification);
         }
@@ -68,7 +75,7 @@ namespace EasySpeak.Core.BLL.Services
             return id;
         }
 
-        public void SendNotificationToRabbit(User user, NewNotificationDto notification)
+        private void SendNotificationToRabbit(User user, NewNotificationDto notification)
         {
             _messageProducer.Init("notifier", "");
             _messageProducer.SendMessage<NewNotificationDto>(notification);

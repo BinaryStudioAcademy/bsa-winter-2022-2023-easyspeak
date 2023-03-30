@@ -4,4 +4,5 @@ export interface INotification {
     email?: string;
     type: string;
     isRead: boolean;
+    link?: string
 }

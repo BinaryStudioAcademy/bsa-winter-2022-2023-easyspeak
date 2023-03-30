@@ -6,8 +6,5 @@ namespace EasySpeak.Notifier.WebAPI.Hubs
 
     public class NotificationHub : Hub
     {
-        public async Task SendAsync(NotificationDto notification)
-        {
-        }
     }
 }
