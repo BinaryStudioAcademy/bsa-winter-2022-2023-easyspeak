@@ -27,26 +27,24 @@ export class LessonsPageComponent implements OnInit, OnChanges {
 
     lessons: Lesson[];
 
-    readonly formatString = 'DD MMMM YYYY, dddd';
-
-    constructor(private dialogRef: MatDialog, private lessonService: LessonsService) { }
-
     lessonsColumn1: Lesson[];
 
     lessonsColumn2: Lesson[];
+
+    constructor(private dialogRef: MatDialog, private lessonService: LessonsService) {}
 
     ngOnInit(): void {
         this.selectedDateFilter = new Date();
 
         this.getLessons();
 
-        this.todayDate = moment().format(this.formatString);
+        this.todayDate = moment().format('DD MMMM YYYY, dddd');
     }
 
     ngOnChanges(): void {
         this.getLessons();
 
-        this.todayDate = moment(this.selectedDateFilter).format(this.formatString);
+        this.todayDate = moment(this.selectedDateFilter).format('DD MMMM YYYY, dddd');
     }
 
     openDialog(videoId: string) {
@@ -71,31 +69,30 @@ export class LessonsPageComponent implements OnInit, OnChanges {
     }
 
     getLessons() {
-        this.lessonService.getFilteredLessons({
-            languageLevels: this.selectedLanguageFilters.map((level: string) => Object.values(LanguageLevels).indexOf(level)),
-            tags: this.selectedInterestsFilters.map((topic) => ({ name: topic })),
-            date: new Date(this.selectedDateFilter.toISOString().slice(0, 10)),
-        })
-            .subscribe((response: ILesson[]) => {
-                this.lessons = this.mapLesson(response);
+        this.lessonService
+            .getFilteredLessons({
+                languageLevels: this.selectedLanguageFilters.map((level: string) =>
+                    Object.values(LanguageLevels).indexOf(level)),
+                tags: this.selectedInterestsFilters.map((topic) => ({ name: topic })),
+                date: new Date(this.selectedDateFilter?.toISOString().slice(0, 10)),
+            })
+            .subscribe((response) => {
+                this.lessons = this.mapLessons(response);
+
+                this.lessonsColumn1 = this.lessons.filter((el, index) => index % 2 === 0);
+                this.lessonsColumn2 = this.lessons.filter((el, index) => index % 2 === 1);
             });
     }
 
-    private mapLesson(response: ILesson[]): Lesson[] {
-        return response.map(lesson => ({
-            id: lesson.id,
-            imgPath: lesson.mediaPath,
-            videoId: 'xqAriI87lFU',
-            title: lesson.name,
-            time: moment(lesson.startAt).format('hh.mm'),
-            tutorAvatarPath: 'assets/lesson-mocks/test-user.png',
-            tutorFlagPath: 'assets/lesson-icons/canada-test-flag.svg',
-            tutorName: 'Roger Vaccaro',
-            topics: lesson.tags.map((tag) => tag.name),
-            subscribersCount: lesson.subscribersCount,
-            level: langLevelsSample[lesson.languageLevel].title,
-            isDisabled: (new Date() > new Date(lesson.startAt)),
-        }));
+    private mapLessons(response: ILesson[]): Lesson[] {
+        return response.map((lessons) => <Lesson><unknown>{
+            ...lessons,
+            level: langLevelsSample[lessons.languageLevel].title,
+            isDisabled: new Date() > new Date(lessons.startAt),
+            imgPath: lessons.mediaPath,
+            time: moment(lessons.startAt).format('hh.mm'),
+            topics: lessons.tags.map((tag) => tag.name),
+        });
     }
 
     getLessonsUnavailableMessage(): string {
