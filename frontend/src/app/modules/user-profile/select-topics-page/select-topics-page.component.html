@@ -13,7 +13,7 @@
         </div>
     </div>
     <div id="next">
-        <button id="create" [disabled]="!selectedTopics.length">Create account</button>
+        <button id="create" (click)="saveTopics()" [disabled]="!selectedTopics.length">Save interests</button>
         <button id="skip" routerLink="/">Skip</button>
     </div>
     <div id="has-account">

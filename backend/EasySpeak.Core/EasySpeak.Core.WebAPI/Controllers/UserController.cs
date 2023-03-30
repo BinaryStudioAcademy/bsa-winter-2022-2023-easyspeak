@@ -1,5 +1,7 @@
 using EasySpeak.Core.BLL.Interfaces;
+using EasySpeak.Core.Common.DTO.Filter;
 using EasySpeak.Core.Common.DTO.Lesson;
+using EasySpeak.Core.Common.DTO.Tag;
 using EasySpeak.Core.Common.DTO.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -34,17 +36,29 @@ namespace EasySpeak.Core.WebAPI.Controllers
             return Ok(createdUser);
         }
 
-
         [HttpPut]
-        public Task<UserDto> Update([FromBody] UserDto userDto)
+        public Task<UserDto> Update([FromBody] UserDto userDto) => _userService.UpdateUser(userDto);
+
+
+        [HttpPost("tags")]
+        public async Task<ActionResult<UserDto>> AddTagsToUser([FromBody] List<TagDto> tags)
         {
-            return _userService.UpdateUser(userDto);
+            var user = await _userService.AddTagsAsync(tags);
+
+            return Ok(user);
         }
 
         [HttpPut("enroll/{lessonId}")]
         public Task<LessonDto> Enroll(long lessonId) => _userService.EnrollUserToLesson(lessonId);
 
+
         [HttpGet("tags")]
         public Task<string[]> GetTagNames() => _userService.GetUserTags();
+
+        [HttpPost("recommended")]
+        public async Task<ActionResult<List<UserShortInfoDto>>> GetSuitableUsers([FromBody] UserFilterDto userFilter)
+        {
+            return await _userService.GetFilteredUsers(userFilter);
+        }
     }
 }

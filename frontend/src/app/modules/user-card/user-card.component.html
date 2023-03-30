@@ -3,13 +3,13 @@
         <div class="user-general-info">
             <div class="left-area">
                 <div class="picture">
-                    <img class="picture-placeholder" src="{{ user.imagePath }}" />
+                    <img alt="Image" class="picture-placeholder" src="{{ user.imagePath }}" />
                 </div>
 
                 <div class="info">
                     <div class="name">{{ user.name }}</div>
                     <div class="country">
-                        <img class="flag" src="assets/user-card-icons/canada-flag.svg" />
+                        <img alt="Image" class="flag" src="assets/user-card-icons/canada-flag.svg" />
                         <div class="culture">{{ user.country }}/{{ user.language }}</div>
                     </div>
                 </div>
@@ -32,8 +32,8 @@
     <div class="bottom">
         <div class="progress-container">
             <div class="progress">
-                <app-round-progress-bar [status]="user.status"></app-round-progress-bar>
-                <div>{{ user.status }}%</div>
+                <app-round-progress-bar [status]="user.status ?? 0"></app-round-progress-bar>
+                <div>{{ user.status ?? 0 }}%</div>
             </div>
             <div class="progress">
                 <img src="assets/user-card-icons/rocket-icon.svg" alt="rocket" />

@@ -1,3 +1,5 @@
+import { ITopic } from './ITopic';
+
 export interface IUserInfo {
     firstName: string;
     lastName: string;
@@ -7,6 +9,7 @@ export interface IUserInfo {
     sex: string;
     languageLevel: string;
     birthDate: string;
+    topics?: ITopic[]
     imagePath: string;
     canOnlyFriendMessage: boolean;
     tags: string[];

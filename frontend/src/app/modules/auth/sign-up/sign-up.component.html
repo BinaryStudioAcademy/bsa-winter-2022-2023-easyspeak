@@ -1,83 +1,259 @@
-<h1>Create Account</h1>
-<label>
-    <input
-        type="text"
-        [(ngModel)]="newUser.email"
-        matInput
-        required
-        placeholder="Email"
-        [ngModelOptions]="{ standalone: true }" />
-    <mat-error *ngIf="submitted && form.controls['email'].errors">{{ getErrorMessage('email') }}</mat-error>
-</label>
+<div class="container">
+    <div class="form-wrp">
+        <h1>Create Account</h1>
+    <form #userRegisterForm="ngForm" [formGroup]="registerForm" class="form-content" (submit)="submitForm()">
+        <div class="form-group-item">
+            <input
+                type="email"
+                formControlName="email"
+                placeholder="Email"
+                required
+                email="{{this.email}}"/>
 
-<div class="name-section">
-    <label>
-        <input
-            type="text"
-            [(ngModel)]="newUser.firstName"
-            #inFirstName="ngModel"
-            matInput
-            placeholder="First Name"
-            [ngModelOptions]="{ standalone: true }" />
-        <mat-error *ngIf="submitted && form.controls['firstName'].errors">{{ getErrorMessage('firstName') }}</mat-error>
-    </label>
+            <div class="errors-wrp">
+                <mat-error class="error" *ngIf="this.email.invalid
+                && (this.email.dirty || this.userRegisterForm.submitted)">
+                    <img src="/assets/user-profile/alert-triangle.svg">
+                    {{getErrorMessage(email)}}
+                </mat-error>
+            </div>
 
-    <label>
-        <input
-            type="text"
-            [(ngModel)]="newUser.lastName"
-            #LastName="ngModel"
-            matInput
-            required
-            placeholder="Last Name"
-            [ngModelOptions]="{ standalone: true }" />
-        <mat-error *ngIf="submitted && form.controls['lastName'].errors">{{ getErrorMessage('lastName') }}</mat-error>
-    </label>
-</div>
-<div class="age-sex-section">
-    <app-calendar placeholder="Date of birth"></app-calendar>
-    <select required>
-        <option>Sex</option>
-        <option>Male</option>
-        <option>Female</option>
-    </select>
-</div>
-<select required>
-    <option>Country</option>
-    <option *ngFor="let country of Countries">{{ country }}</option>
-</select>
-<select required>
-    <option>Native Language</option>
-    <option>Ukrainian</option>
-</select>
-<select required>
-    <option>Level in English</option>
-    <option *ngFor="let level of EnglishLevels">{{ level }}</option>
-</select>
-<label>
-    <input
-        type="password"
-        [(ngModel)]="password"
-        #upPassword="ngModel"
-        required
-        placeholder="Password"
-        [ngModelOptions]="{ standalone: true }" 
-        appPasswordVisibility/>
-    <mat-error *ngIf="submitted && form.controls['password'].errors">{{ getPasswordErrorMessage() }}</mat-error>
-</label>
-<label>
-    <input
-        type="password"
-        [(ngModel)]="confirmPassword"
-        placeholder="Repeat The Password"
-        [ngModelOptions]="{ standalone: true }" 
-        appPasswordVisibility/>
-    <mat-error *ngIf="submitted && form.controls['confirmPassword'].errors">{{
-        getConfirmPasswordErrorMessage()
-    }}</mat-error>
-</label>
-<button mat-button (click)="validationThenSignUp()">Create Account</button>
-<div id="has-account">
-    <span>I have an account! </span>
-    <a href="auth/sign-in">Sign In</a>
+            <div class="error-surface" *ngIf="this.email.invalid
+                && (this.email.dirty || this.userRegisterForm.submitted)" >
+            </div>
+        </div>
+
+        <div class="name-section">
+            <div class="form-group-item">
+                <input
+                    type="text"
+                    formControlName="firstName"
+                    placeholder="First Name"/>
+
+                <div class="errors-wrp">
+                    <mat-error class="error" *ngIf="this.firstName.errors?.['required']
+                    && (this.firstName.dirty || this.userRegisterForm.submitted)">
+                        <img src="/assets/user-profile/alert-triangle.svg">
+                        Field is required
+                    </mat-error>
+                </div>
+
+                <div class="error-surface" *ngIf="this.firstName.errors?.['required']
+                    && (this.firstName.dirty || this.userRegisterForm.submitted)">
+                </div>
+            </div>
+
+            <div class="form-group-item">
+                <input
+                    type="text"
+                    formControlName="lastName"
+                    placeholder="Last Name"
+                    matInput
+                    required/>
+
+                <div class="errors-wrp">
+                    <mat-error class="error" *ngIf="this.lastName.invalid
+                    && (this.lastName.dirty || this.userRegisterForm.submitted)">
+                        <img src="/assets/user-profile/alert-triangle.svg">
+                        {{getErrorMessage(lastName)}}
+                    </mat-error>
+                </div>
+
+                <div class="error-surface"
+                    *ngIf="this.lastName.errors?.['required'] && (this.lastName.dirty || this.userRegisterForm.submitted)" >
+                </div>
+            </div>
+        </div>
+        <div class="age-sex-section">
+            <div class="form-group-item">
+                <ng-select [items]="ages"
+                            class="custom"
+                            dropdownPosition="bottom"
+                            appearance="underline"
+                            formControlName="dateOfBirth">
+                </ng-select>
+
+                <div class="placeholder" *ngIf="!this.dateOfBirth.value">
+                    Age
+                </div>
+
+                <mat-icon class="expand-icon">
+                    expand_more
+                </mat-icon>
+
+                <div class="errors-wrp">
+                    <mat-error class="error"
+                        *ngIf="this.dateOfBirth.invalid
+                        && (this.dateOfBirth.dirty
+                        || this.userRegisterForm.submitted)">
+
+                        <img src="/assets/user-profile/alert-triangle.svg">
+                        {{getErrorMessage(dateOfBirth)}}
+                    </mat-error>
+                </div>
+
+                <div class="error-surface" *ngIf="this.dateOfBirth.invalid && this.userRegisterForm.submitted"></div>
+            </div>
+            <div class="form-group-item">
+                <ng-select [items]="sexOptions"
+                            class="custom"
+                            dropdownPosition="bottom"
+                            appearance="underline"
+                            formControlName="sex">
+                </ng-select>
+
+                <div class="placeholder" *ngIf="!this.sex.value">
+                    Sex
+                </div>
+
+                <mat-icon class="expand-icon">
+                    expand_more
+                </mat-icon>
+
+                <div class="errors-wrp">
+                    <mat-error class="error"
+                        *ngIf="this.sex.invalid
+                        && (this.sex.dirty
+                        || this.userRegisterForm.submitted)">
+
+                        <img src="/assets/user-profile/alert-triangle.svg">
+                        {{getErrorMessage(sex)}}
+                    </mat-error>
+                </div>
+
+                <div class="error-surface" *ngIf="this.sex.invalid && this.userRegisterForm.submitted"></div>
+            </div>
+        </div>
+        <div class="form-group-item">
+            <ng-select [items]="countries"
+                        class="custom"
+                        dropdownPosition="bottom"
+                        appearance="underline"
+                        formControlName="country">
+            </ng-select>
+
+            <div class="placeholder" *ngIf="!this.country.value">
+                Country
+            </div>
+
+            <mat-icon class="expand-icon">
+                expand_more
+            </mat-icon>
+
+            <div class="errors-wrp">
+                <mat-error class="error"
+                    *ngIf="this.country.invalid
+                    && (this.country.dirty
+                    || this.userRegisterForm.submitted)">
+
+                    <img src="/assets/user-profile/alert-triangle.svg">
+                    {{getErrorMessage(country)}}
+                </mat-error>
+            </div>
+
+            <div class="error-surface" *ngIf="this.country.invalid && this.userRegisterForm.submitted"></div>
+        </div>
+        <div class="form-group-item">
+            <ng-select [items]="languages"
+                        class="custom"
+                        dropdownPosition="bottom"
+                        appearance="underline"
+                        formControlName="language">
+            </ng-select>
+
+            <div class="placeholder" *ngIf="!this.language.value">
+                Language
+            </div>
+
+            <mat-icon class="expand-icon">
+                expand_more
+            </mat-icon>
+
+            <div class="errors-wrp">
+                <mat-error class="error"
+                    *ngIf="this.language.invalid
+                    && (this.language.dirty
+                    || this.userRegisterForm.submitted)">
+
+                    <img src="/assets/user-profile/alert-triangle.svg">
+                    {{getErrorMessage(language)}}
+                </mat-error>
+            </div>
+
+            <div class="error-surface" *ngIf="this.language.invalid && this.userRegisterForm.submitted"></div>
+        </div>
+        <div class="form-group-item">
+            <ng-select [items]="languageLevels"
+                        class="custom"
+                        dropdownPosition="bottom"
+                        appearance="underline"
+                        formControlName="languageLevel">
+            </ng-select>
+
+            <mat-icon class="expand-icon">
+                expand_more
+            </mat-icon>
+
+            <div class="errors-wrp">
+                <mat-error class="error"
+                    *ngIf="this.languageLevel.invalid
+                    && (this.languageLevel.dirty
+                    || this.userRegisterForm.submitted)">
+
+                    <img src="/assets/user-profile/alert-triangle.svg">
+                    {{getErrorMessage(languageLevel)}}
+                </mat-error>
+            </div>
+
+            <div class="error-surface" *ngIf="this.languageLevel.invalid && this.userRegisterForm.submitted"></div>
+
+            <div class="placeholder" *ngIf="!this.languageLevel.value">
+                Level of English
+            </div>
+        </div>
+        <div class="form-group-item">
+            <input type="password"
+                formControlName="password"
+                placeholder="Password"
+                required/>
+            <div class="errors-wrp">
+
+            <mat-error class="error" *ngIf="this.password.invalid">
+                <img src="/assets/user-profile/alert-triangle.svg" alt="">
+                {{getErrorMessage(password)}}
+            </mat-error>
+            </div>
+
+            <div *ngIf="this.password.invalid"
+                class="error-surface">
+            </div>
+        </div>
+        <div class="form-group-item">
+            <input type="password"
+                placeholder="Repeat Password"
+                formControlName="passwordConfirmation" />
+
+            <div class="errors-wrp">
+                <mat-error class="error" *ngIf="this.registerForm.invalid
+                && (this.passwordConfirmation.dirty || this.userRegisterForm.submitted)">
+                <img src="/assets/user-profile/alert-triangle.svg" alt="">
+                    {{getErrorMessage(passwordConfirmation)}}
+                </mat-error>
+            </div>
+
+            <div class="error-surface" *ngIf="this.registerForm.errors?.['matchError']
+            && (this.passwordConfirmation.dirty || this.userRegisterForm.submitted)">
+            </div>
+        </div>
+        <button class="submit-btn"
+                mat-button type="submit">
+
+                Create Account
+        </button>
+    </form>
+    </div>
+    <div id="has-account">
+        <span>I don't have an account! </span>
+        <a href="auth/sign-in">Sign In</a>
+    </div>
 </div>

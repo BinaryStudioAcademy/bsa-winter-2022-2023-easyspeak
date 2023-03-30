@@ -2244,97 +2244,97 @@ namespace EasySpeak.Core.DAL.Migrations
                         new
                         {
                             Id = 1L,
-                            CreatedAt = new DateTime(2023, 3, 30, 15, 43, 11, 769, DateTimeKind.Local).AddTicks(1947),
+                            CreatedAt = new DateTime(2023, 3, 30, 22, 46, 38, 684, DateTimeKind.Local).AddTicks(4737),
                             Name = "Architecture"
                         },
                         new
                         {
                             Id = 2L,
-                            CreatedAt = new DateTime(2023, 3, 30, 15, 43, 11, 769, DateTimeKind.Local).AddTicks(1977),
+                            CreatedAt = new DateTime(2023, 3, 30, 22, 46, 38, 684, DateTimeKind.Local).AddTicks(4783),
                             Name = "Arts"
                         },
                         new
                         {
                             Id = 3L,
-                            CreatedAt = new DateTime(2023, 3, 30, 15, 43, 11, 769, DateTimeKind.Local).AddTicks(1980),
+                            CreatedAt = new DateTime(2023, 3, 30, 22, 46, 38, 684, DateTimeKind.Local).AddTicks(4787),
                             Name = "Cars"
                         },
                         new
                         {
                             Id = 4L,
-                            CreatedAt = new DateTime(2023, 3, 30, 15, 43, 11, 769, DateTimeKind.Local).AddTicks(1982),
+                            CreatedAt = new DateTime(2023, 3, 30, 22, 46, 38, 684, DateTimeKind.Local).AddTicks(4790),
                             Name = "Celebrities"
                         },
                         new
                         {
                             Id = 5L,
-                            CreatedAt = new DateTime(2023, 3, 30, 15, 43, 11, 769, DateTimeKind.Local).AddTicks(1984),
+                            CreatedAt = new DateTime(2023, 3, 30, 22, 46, 38, 684, DateTimeKind.Local).AddTicks(4793),
                             Name = "Cooking"
                         },
                         new
                         {
                             Id = 6L,
-                            CreatedAt = new DateTime(2023, 3, 30, 15, 43, 11, 769, DateTimeKind.Local).AddTicks(1987),
+                            CreatedAt = new DateTime(2023, 3, 30, 22, 46, 38, 684, DateTimeKind.Local).AddTicks(4799),
                             Name = "Dancing"
                         },
                         new
                         {
                             Id = 7L,
-                            CreatedAt = new DateTime(2023, 3, 30, 15, 43, 11, 769, DateTimeKind.Local).AddTicks(1989),
+                            CreatedAt = new DateTime(2023, 3, 30, 22, 46, 38, 684, DateTimeKind.Local).AddTicks(4804),
                             Name = "Ecology"
                         },
                         new
                         {
                             Id = 8L,
-                            CreatedAt = new DateTime(2023, 3, 30, 15, 43, 11, 769, DateTimeKind.Local).AddTicks(1991),
+                            CreatedAt = new DateTime(2023, 3, 30, 22, 46, 38, 684, DateTimeKind.Local).AddTicks(4806),
                             Name = "Design"
                         },
                         new
                         {
                             Id = 9L,
-                            CreatedAt = new DateTime(2023, 3, 30, 15, 43, 11, 769, DateTimeKind.Local).AddTicks(1993),
+                            CreatedAt = new DateTime(2023, 3, 30, 22, 46, 38, 684, DateTimeKind.Local).AddTicks(4810),
                             Name = "History"
                         },
                         new
                         {
                             Id = 10L,
-                            CreatedAt = new DateTime(2023, 3, 30, 15, 43, 11, 769, DateTimeKind.Local).AddTicks(1995),
+                            CreatedAt = new DateTime(2023, 3, 30, 22, 46, 38, 684, DateTimeKind.Local).AddTicks(4814),
                             Name = "Fashion"
                         },
                         new
                         {
                             Id = 11L,
-                            CreatedAt = new DateTime(2023, 3, 30, 15, 43, 11, 769, DateTimeKind.Local).AddTicks(1997),
+                            CreatedAt = new DateTime(2023, 3, 30, 22, 46, 38, 684, DateTimeKind.Local).AddTicks(4818),
                             Name = "Medicine"
                         },
                         new
                         {
                             Id = 12L,
-                            CreatedAt = new DateTime(2023, 3, 30, 15, 43, 11, 769, DateTimeKind.Local).AddTicks(1999),
+                            CreatedAt = new DateTime(2023, 3, 30, 22, 46, 38, 684, DateTimeKind.Local).AddTicks(4821),
                             Name = "Technologies"
                         },
                         new
                         {
                             Id = 13L,
-                            CreatedAt = new DateTime(2023, 3, 30, 15, 43, 11, 769, DateTimeKind.Local).AddTicks(2001),
+                            CreatedAt = new DateTime(2023, 3, 30, 22, 46, 38, 684, DateTimeKind.Local).AddTicks(4825),
                             Name = "Pets"
                         },
                         new
                         {
                             Id = 14L,
-                            CreatedAt = new DateTime(2023, 3, 30, 15, 43, 11, 769, DateTimeKind.Local).AddTicks(2006),
+                            CreatedAt = new DateTime(2023, 3, 30, 22, 46, 38, 684, DateTimeKind.Local).AddTicks(4828),
                             Name = "Philosophy"
                         },
                         new
                         {
                             Id = 15L,
-                            CreatedAt = new DateTime(2023, 3, 30, 15, 43, 11, 769, DateTimeKind.Local).AddTicks(2008),
+                            CreatedAt = new DateTime(2023, 3, 30, 22, 46, 38, 684, DateTimeKind.Local).AddTicks(4831),
                             Name = "Photography"
                         },
                         new
                         {
                             Id = 16L,
-                            CreatedAt = new DateTime(2023, 3, 30, 15, 43, 11, 769, DateTimeKind.Local).AddTicks(2010),
+                            CreatedAt = new DateTime(2023, 3, 30, 22, 46, 38, 684, DateTimeKind.Local).AddTicks(4834),
                             Name = "Politics"
                         });
                 });
@@ -2417,8 +2417,8 @@ namespace EasySpeak.Core.DAL.Migrations
                             LanguageLevel = 2,
                             LastName = "Rosenbaum",
                             Sex = 0,
-                            Status = 3,
-                            Timezone = 0
+                            Status = 0,
+                            Timezone = 275
                         },
                         new
                         {
@@ -2426,67 +2426,67 @@ namespace EasySpeak.Core.DAL.Migrations
                             BirthDate = new DateTime(2003, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Country = 215,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "Angelo91@gmail.com",
-                            FirstName = "Angelo",
+                            Email = "Georgia_Gorczany76@gmail.com",
+                            FirstName = "Georgia",
                             IsBanned = false,
                             IsSubscribed = true,
                             Language = 103,
                             LanguageLevel = 0,
-                            LastName = "Koepp",
+                            LastName = "Gorczany",
                             Sex = 1,
-                            Status = 2,
-                            Timezone = 0
+                            Status = 1,
+                            Timezone = 197
                         },
                         new
                         {
                             Id = 3L,
                             BirthDate = new DateTime(2003, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Country = 4,
+                            Country = 68,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "Leo_Donnelly24@gmail.com",
-                            FirstName = "Leo",
+                            Email = "Jimmy89@hotmail.com",
+                            FirstName = "Jimmy",
                             IsBanned = false,
                             IsSubscribed = true,
-                            Language = 112,
-                            LanguageLevel = 3,
-                            LastName = "Donnelly",
-                            Sex = 2,
-                            Status = 3,
-                            Timezone = 0
+                            Language = 65,
+                            LanguageLevel = 2,
+                            LastName = "Fritsch",
+                            Sex = 1,
+                            Status = 2,
+                            Timezone = 6
                         },
                         new
                         {
                             Id = 4L,
                             BirthDate = new DateTime(2003, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Country = 48,
+                            Country = 42,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "Eduardo.Larson@gmail.com",
-                            FirstName = "Eduardo",
+                            Email = "Raquel57@gmail.com",
+                            FirstName = "Raquel",
                             IsBanned = false,
                             IsSubscribed = true,
-                            Language = 56,
-                            LanguageLevel = 2,
-                            LastName = "Larson",
-                            Sex = 2,
-                            Status = 2,
-                            Timezone = 0
+                            Language = 21,
+                            LanguageLevel = 0,
+                            LastName = "Bartell",
+                            Sex = 1,
+                            Status = 1,
+                            Timezone = 71
                         },
                         new
                         {
                             Id = 5L,
                             BirthDate = new DateTime(2003, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Country = 36,
+                            Country = 86,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "Yvonne22@gmail.com",
-                            FirstName = "Yvonne",
+                            Email = "Kay.Botsford86@yahoo.com",
+                            FirstName = "Kay",
                             IsBanned = false,
-                            IsSubscribed = true,
-                            Language = 81,
-                            LanguageLevel = 2,
-                            LastName = "Kovacek",
-                            Sex = 0,
+                            IsSubscribed = false,
+                            Language = 1,
+                            LanguageLevel = 0,
+                            LastName = "Botsford",
+                            Sex = 1,
                             Status = 1,
-                            Timezone = 0
+                            Timezone = 21
                         });
                 });
 

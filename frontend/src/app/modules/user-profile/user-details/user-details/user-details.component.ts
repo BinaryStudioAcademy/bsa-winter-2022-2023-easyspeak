@@ -12,7 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 
 import { CountriesTzLangProviderService } from 'src/app/services/countries-tz-lang-provider.service';
 
-import { detailsGroup, userId } from '../user-details.component.util';
+import { detailsGroup } from '../user-details.component.util';
 
 @Component({
     selector: 'app-user-details',

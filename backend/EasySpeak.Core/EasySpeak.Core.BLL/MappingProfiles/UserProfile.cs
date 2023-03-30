@@ -23,5 +23,9 @@ public class UserProfile : Profile
                 src => src.MapFrom(userDto => EnumHelper.MapLanguageLevel(userDto.LanguageLevel)))
             .ForMember(user => user.Tags, src => src.Ignore());
 
+        CreateMap<User, UserShortInfoDto>()
+            .ForMember(user => user.Name, src => src.MapFrom(user => $"{user.FirstName} {user.LastName}"))
+            .ForMember(user => user.ImagePath, src => src.MapFrom(user => user.Image.Url))
+            .ForMember(user => user.Tags, src => src.MapFrom(user => user.Tags.Select(t => t.Name)));
     }
 }

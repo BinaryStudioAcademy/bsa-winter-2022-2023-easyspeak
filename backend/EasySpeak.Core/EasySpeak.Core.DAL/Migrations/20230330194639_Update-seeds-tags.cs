@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EasySpeak.Core.DAL.Migrations
 {
-    public partial class UpdatedSeedsParams : Migration
+    public partial class Updateseedstags : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -230,113 +230,113 @@ namespace EasySpeak.Core.DAL.Migrations
                 table: "Tags",
                 keyColumn: "Id",
                 keyValue: 1L,
-                column: "CreatedAt",
-                value: new DateTime(2023, 3, 30, 15, 43, 11, 769, DateTimeKind.Local).AddTicks(1947));
+                columns: new[] { "CreatedAt", "Name" },
+                values: new object[] { new DateTime(2023, 3, 30, 22, 46, 38, 684, DateTimeKind.Local).AddTicks(4737), "Architecture" });
 
             migrationBuilder.UpdateData(
                 table: "Tags",
                 keyColumn: "Id",
                 keyValue: 2L,
-                column: "CreatedAt",
-                value: new DateTime(2023, 3, 30, 15, 43, 11, 769, DateTimeKind.Local).AddTicks(1977));
+                columns: new[] { "CreatedAt", "Name" },
+                values: new object[] { new DateTime(2023, 3, 30, 22, 46, 38, 684, DateTimeKind.Local).AddTicks(4783), "Arts" });
 
             migrationBuilder.UpdateData(
                 table: "Tags",
                 keyColumn: "Id",
                 keyValue: 3L,
-                column: "CreatedAt",
-                value: new DateTime(2023, 3, 30, 15, 43, 11, 769, DateTimeKind.Local).AddTicks(1980));
+                columns: new[] { "CreatedAt", "Name" },
+                values: new object[] { new DateTime(2023, 3, 30, 22, 46, 38, 684, DateTimeKind.Local).AddTicks(4787), "Cars" });
 
             migrationBuilder.UpdateData(
                 table: "Tags",
                 keyColumn: "Id",
                 keyValue: 4L,
-                column: "CreatedAt",
-                value: new DateTime(2023, 3, 30, 15, 43, 11, 769, DateTimeKind.Local).AddTicks(1982));
+                columns: new[] { "CreatedAt", "Name" },
+                values: new object[] { new DateTime(2023, 3, 30, 22, 46, 38, 684, DateTimeKind.Local).AddTicks(4790), "Celebrities" });
 
             migrationBuilder.UpdateData(
                 table: "Tags",
                 keyColumn: "Id",
                 keyValue: 5L,
-                column: "CreatedAt",
-                value: new DateTime(2023, 3, 30, 15, 43, 11, 769, DateTimeKind.Local).AddTicks(1984));
+                columns: new[] { "CreatedAt", "Name" },
+                values: new object[] { new DateTime(2023, 3, 30, 22, 46, 38, 684, DateTimeKind.Local).AddTicks(4793), "Cooking" });
 
             migrationBuilder.UpdateData(
                 table: "Tags",
                 keyColumn: "Id",
                 keyValue: 6L,
-                column: "CreatedAt",
-                value: new DateTime(2023, 3, 30, 15, 43, 11, 769, DateTimeKind.Local).AddTicks(1987));
+                columns: new[] { "CreatedAt", "Name" },
+                values: new object[] { new DateTime(2023, 3, 30, 22, 46, 38, 684, DateTimeKind.Local).AddTicks(4799), "Dancing" });
 
             migrationBuilder.UpdateData(
                 table: "Tags",
                 keyColumn: "Id",
                 keyValue: 7L,
-                column: "CreatedAt",
-                value: new DateTime(2023, 3, 30, 15, 43, 11, 769, DateTimeKind.Local).AddTicks(1989));
+                columns: new[] { "CreatedAt", "Name" },
+                values: new object[] { new DateTime(2023, 3, 30, 22, 46, 38, 684, DateTimeKind.Local).AddTicks(4804), "Ecology" });
 
             migrationBuilder.UpdateData(
                 table: "Tags",
                 keyColumn: "Id",
                 keyValue: 8L,
-                column: "CreatedAt",
-                value: new DateTime(2023, 3, 30, 15, 43, 11, 769, DateTimeKind.Local).AddTicks(1991));
+                columns: new[] { "CreatedAt", "Name" },
+                values: new object[] { new DateTime(2023, 3, 30, 22, 46, 38, 684, DateTimeKind.Local).AddTicks(4806), "Design" });
 
             migrationBuilder.UpdateData(
                 table: "Tags",
                 keyColumn: "Id",
                 keyValue: 9L,
-                column: "CreatedAt",
-                value: new DateTime(2023, 3, 30, 15, 43, 11, 769, DateTimeKind.Local).AddTicks(1993));
+                columns: new[] { "CreatedAt", "Name" },
+                values: new object[] { new DateTime(2023, 3, 30, 22, 46, 38, 684, DateTimeKind.Local).AddTicks(4810), "History" });
 
             migrationBuilder.UpdateData(
                 table: "Tags",
                 keyColumn: "Id",
                 keyValue: 10L,
-                column: "CreatedAt",
-                value: new DateTime(2023, 3, 30, 15, 43, 11, 769, DateTimeKind.Local).AddTicks(1995));
+                columns: new[] { "CreatedAt", "Name" },
+                values: new object[] { new DateTime(2023, 3, 30, 22, 46, 38, 684, DateTimeKind.Local).AddTicks(4814), "Fashion" });
 
             migrationBuilder.UpdateData(
                 table: "Tags",
                 keyColumn: "Id",
                 keyValue: 11L,
-                column: "CreatedAt",
-                value: new DateTime(2023, 3, 30, 15, 43, 11, 769, DateTimeKind.Local).AddTicks(1997));
+                columns: new[] { "CreatedAt", "Name" },
+                values: new object[] { new DateTime(2023, 3, 30, 22, 46, 38, 684, DateTimeKind.Local).AddTicks(4818), "Medicine" });
 
             migrationBuilder.UpdateData(
                 table: "Tags",
                 keyColumn: "Id",
                 keyValue: 12L,
-                column: "CreatedAt",
-                value: new DateTime(2023, 3, 30, 15, 43, 11, 769, DateTimeKind.Local).AddTicks(1999));
+                columns: new[] { "CreatedAt", "Name" },
+                values: new object[] { new DateTime(2023, 3, 30, 22, 46, 38, 684, DateTimeKind.Local).AddTicks(4821), "Technologies" });
 
             migrationBuilder.UpdateData(
                 table: "Tags",
                 keyColumn: "Id",
                 keyValue: 13L,
-                column: "CreatedAt",
-                value: new DateTime(2023, 3, 30, 15, 43, 11, 769, DateTimeKind.Local).AddTicks(2001));
+                columns: new[] { "CreatedAt", "Name" },
+                values: new object[] { new DateTime(2023, 3, 30, 22, 46, 38, 684, DateTimeKind.Local).AddTicks(4825), "Pets" });
 
             migrationBuilder.UpdateData(
                 table: "Tags",
                 keyColumn: "Id",
                 keyValue: 14L,
-                column: "CreatedAt",
-                value: new DateTime(2023, 3, 30, 15, 43, 11, 769, DateTimeKind.Local).AddTicks(2006));
+                columns: new[] { "CreatedAt", "Name" },
+                values: new object[] { new DateTime(2023, 3, 30, 22, 46, 38, 684, DateTimeKind.Local).AddTicks(4828), "Philosophy" });
 
             migrationBuilder.UpdateData(
                 table: "Tags",
                 keyColumn: "Id",
                 keyValue: 15L,
-                column: "CreatedAt",
-                value: new DateTime(2023, 3, 30, 15, 43, 11, 769, DateTimeKind.Local).AddTicks(2008));
+                columns: new[] { "CreatedAt", "Name" },
+                values: new object[] { new DateTime(2023, 3, 30, 22, 46, 38, 684, DateTimeKind.Local).AddTicks(4831), "Photography" });
 
             migrationBuilder.UpdateData(
                 table: "Tags",
                 keyColumn: "Id",
                 keyValue: 16L,
-                column: "CreatedAt",
-                value: new DateTime(2023, 3, 30, 15, 43, 11, 769, DateTimeKind.Local).AddTicks(2010));
+                columns: new[] { "CreatedAt", "Name" },
+                values: new object[] { new DateTime(2023, 3, 30, 22, 46, 38, 684, DateTimeKind.Local).AddTicks(4834), "Politics" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -474,133 +474,133 @@ namespace EasySpeak.Core.DAL.Migrations
                 table: "Tags",
                 keyColumn: "Id",
                 keyValue: 1L,
-                column: "CreatedAt",
-                value: new DateTime(2023, 3, 30, 15, 23, 55, 994, DateTimeKind.Local).AddTicks(1968));
+                columns: new[] { "CreatedAt", "Name" },
+                values: new object[] { new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Mobility" });
 
             migrationBuilder.UpdateData(
                 table: "Tags",
                 keyColumn: "Id",
                 keyValue: 2L,
-                column: "CreatedAt",
-                value: new DateTime(2023, 3, 30, 15, 23, 55, 994, DateTimeKind.Local).AddTicks(1995));
+                columns: new[] { "CreatedAt", "Name" },
+                values: new object[] { new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "synthesize" });
 
             migrationBuilder.UpdateData(
                 table: "Tags",
                 keyColumn: "Id",
                 keyValue: 3L,
-                column: "CreatedAt",
-                value: new DateTime(2023, 3, 30, 15, 23, 55, 994, DateTimeKind.Local).AddTicks(1997));
+                columns: new[] { "CreatedAt", "Name" },
+                values: new object[] { new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "card" });
 
             migrationBuilder.UpdateData(
                 table: "Tags",
                 keyColumn: "Id",
                 keyValue: 4L,
-                column: "CreatedAt",
-                value: new DateTime(2023, 3, 30, 15, 23, 55, 994, DateTimeKind.Local).AddTicks(1999));
+                columns: new[] { "CreatedAt", "Name" },
+                values: new object[] { new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "brand" });
 
             migrationBuilder.UpdateData(
                 table: "Tags",
                 keyColumn: "Id",
                 keyValue: 5L,
-                column: "CreatedAt",
-                value: new DateTime(2023, 3, 30, 15, 23, 55, 994, DateTimeKind.Local).AddTicks(2001));
+                columns: new[] { "CreatedAt", "Name" },
+                values: new object[] { new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Versatile" });
 
             migrationBuilder.UpdateData(
                 table: "Tags",
                 keyColumn: "Id",
                 keyValue: 6L,
-                column: "CreatedAt",
-                value: new DateTime(2023, 3, 30, 15, 23, 55, 994, DateTimeKind.Local).AddTicks(2005));
+                columns: new[] { "CreatedAt", "Name" },
+                values: new object[] { new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "withdrawal" });
 
             migrationBuilder.UpdateData(
                 table: "Tags",
                 keyColumn: "Id",
                 keyValue: 7L,
-                column: "CreatedAt",
-                value: new DateTime(2023, 3, 30, 15, 23, 55, 994, DateTimeKind.Local).AddTicks(2007));
+                columns: new[] { "CreatedAt", "Name" },
+                values: new object[] { new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Oman" });
 
             migrationBuilder.UpdateData(
                 table: "Tags",
                 keyColumn: "Id",
                 keyValue: 8L,
-                column: "CreatedAt",
-                value: new DateTime(2023, 3, 30, 15, 23, 55, 994, DateTimeKind.Local).AddTicks(2009));
+                columns: new[] { "CreatedAt", "Name" },
+                values: new object[] { new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Engineer" });
 
             migrationBuilder.UpdateData(
                 table: "Tags",
                 keyColumn: "Id",
                 keyValue: 9L,
-                column: "CreatedAt",
-                value: new DateTime(2023, 3, 30, 15, 23, 55, 994, DateTimeKind.Local).AddTicks(2011));
+                columns: new[] { "CreatedAt", "Name" },
+                values: new object[] { new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Intelligent Frozen Mouse" });
 
             migrationBuilder.UpdateData(
                 table: "Tags",
                 keyColumn: "Id",
                 keyValue: 10L,
-                column: "CreatedAt",
-                value: new DateTime(2023, 3, 30, 15, 23, 55, 994, DateTimeKind.Local).AddTicks(2043));
+                columns: new[] { "CreatedAt", "Name" },
+                values: new object[] { new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Incredible Metal Hat" });
 
             migrationBuilder.UpdateData(
                 table: "Tags",
                 keyColumn: "Id",
                 keyValue: 11L,
-                column: "CreatedAt",
-                value: new DateTime(2023, 3, 30, 15, 23, 55, 994, DateTimeKind.Local).AddTicks(2045));
+                columns: new[] { "CreatedAt", "Name" },
+                values: new object[] { new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Platinum" });
 
             migrationBuilder.UpdateData(
                 table: "Tags",
                 keyColumn: "Id",
                 keyValue: 12L,
-                column: "CreatedAt",
-                value: new DateTime(2023, 3, 30, 15, 23, 55, 994, DateTimeKind.Local).AddTicks(2047));
+                columns: new[] { "CreatedAt", "Name" },
+                values: new object[] { new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Thailand" });
 
             migrationBuilder.UpdateData(
                 table: "Tags",
                 keyColumn: "Id",
                 keyValue: 13L,
-                column: "CreatedAt",
-                value: new DateTime(2023, 3, 30, 15, 23, 55, 994, DateTimeKind.Local).AddTicks(2049));
+                columns: new[] { "CreatedAt", "Name" },
+                values: new object[] { new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "budgetary management" });
 
             migrationBuilder.UpdateData(
                 table: "Tags",
                 keyColumn: "Id",
                 keyValue: 14L,
-                column: "CreatedAt",
-                value: new DateTime(2023, 3, 30, 15, 23, 55, 994, DateTimeKind.Local).AddTicks(2051));
+                columns: new[] { "CreatedAt", "Name" },
+                values: new object[] { new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "SDD" });
 
             migrationBuilder.UpdateData(
                 table: "Tags",
                 keyColumn: "Id",
                 keyValue: 15L,
-                column: "CreatedAt",
-                value: new DateTime(2023, 3, 30, 15, 23, 55, 994, DateTimeKind.Local).AddTicks(2053));
+                columns: new[] { "CreatedAt", "Name" },
+                values: new object[] { new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "core" });
 
             migrationBuilder.UpdateData(
                 table: "Tags",
                 keyColumn: "Id",
                 keyValue: 16L,
-                column: "CreatedAt",
-                value: new DateTime(2023, 3, 30, 15, 23, 55, 994, DateTimeKind.Local).AddTicks(2055));
+                columns: new[] { "CreatedAt", "Name" },
+                values: new object[] { new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Concrete" });
 
             migrationBuilder.InsertData(
                 table: "Tags",
                 columns: new[] { "Id", "CreatedAt", "Name" },
-                values: new object[] { 17L, new DateTime(2023, 3, 30, 15, 23, 55, 994, DateTimeKind.Local).AddTicks(2057), "Cats" });
+                values: new object[] { 17L, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "complexity" });
 
             migrationBuilder.InsertData(
                 table: "Tags",
                 columns: new[] { "Id", "CreatedAt", "Name" },
-                values: new object[] { 18L, new DateTime(2023, 3, 30, 15, 23, 55, 994, DateTimeKind.Local).AddTicks(2061), "Birds" });
+                values: new object[] { 18L, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Generic Concrete Shoes" });
 
             migrationBuilder.InsertData(
                 table: "Tags",
                 columns: new[] { "Id", "CreatedAt", "Name" },
-                values: new object[] { 19L, new DateTime(2023, 3, 30, 15, 23, 55, 994, DateTimeKind.Local).AddTicks(2062), "Soccer" });
+                values: new object[] { 19L, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "navigating" });
 
             migrationBuilder.InsertData(
                 table: "Tags",
                 columns: new[] { "Id", "CreatedAt", "Name" },
-                values: new object[] { 20L, new DateTime(2023, 3, 30, 15, 23, 55, 994, DateTimeKind.Local).AddTicks(2064), "Basketball" });
+                values: new object[] { 20L, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "plum" });
 
             migrationBuilder.InsertData(
                 table: "LessonTag",
