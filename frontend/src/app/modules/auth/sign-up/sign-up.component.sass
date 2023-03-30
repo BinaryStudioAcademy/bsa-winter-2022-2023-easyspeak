@@ -2,12 +2,10 @@
 
 #has-account
     position: absolute
-    bottom: 1%
-    top: auto
-    left: 17%
-    right: auto
-    font-size: 14px
-    text-align: center
+    width: 100%
+    display: flex
+    justify-content: center
+    bottom: 30px
 
 #has-account span
     color: $gray-300
@@ -15,4 +13,10 @@
 #has-account a
     text-decoration: none
     color: $turquoise-100
+    margin-left: 10px
 
+.form-content
+    display: grid
+    grid-template-rows: repeat(9, 5vh)
+    grid-template-columns: 24vw
+    gap: 2vh
