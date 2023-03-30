@@ -17,6 +17,10 @@ import { NotificationService } from 'src/app/services/notification.service';
 export class LessonsCreateComponent implements OnInit {
     tagsList: string[] = Utils.tagsList;
 
+    timesList: string[] = Utils.timesList;
+
+    time: string;
+
     myForm: FormGroup;
 
     constructor(
@@ -74,5 +78,10 @@ export class LessonsCreateComponent implements OnInit {
 
             this.notificationService.showSuccess('Successfully created a lesson!', 'Success');
         });
+    }
+
+    updateTime(evendData: MouseEvent) {
+        const target = evendData.target as HTMLElement;
+        this.time = target.textContent || "Time";
     }
 }

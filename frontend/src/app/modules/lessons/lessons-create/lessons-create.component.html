@@ -25,5 +25,21 @@
                 Date is Required
             </mat-error>
         </div>
+
+        <div class="form-field">
+            <div class="input">
+                <div class="label">
+                    <img src="assets/lesson-icons/clock-icon.svg" alt="clock-icon" class="clockIcon">
+                    <span *ngIf="!time" class="noTime">Time</span>
+                    <span *ngIf="time" class="time">{{time}}</span>
+                </div>
+
+                <img src="assets/interestsDropdown/chevron_down.svg" alt="chevron_down-icon" class="timeDropdown">
+                <div class="timeDropdownContent">
+                    <p *ngFor="let time of timesList" (click)="updateTime($event)">{{time}}</p>
+                </div>
+            </div>
+        </div>
+
     </form>
 </div>
