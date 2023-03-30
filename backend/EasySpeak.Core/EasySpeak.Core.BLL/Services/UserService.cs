@@ -3,7 +3,6 @@ using EasySpeak.Core.BLL.Interfaces;
 using EasySpeak.Core.Common.DTO.Lesson;
 using EasySpeak.Core.Common.DTO.UploadFile;
 using EasySpeak.Core.Common.DTO.User;
-using EasySpeak.Core.Common.Enums;
 using EasySpeak.Core.DAL.Context;
 using EasySpeak.Core.DAL.Entities;
 using Microsoft.AspNetCore.Http;
@@ -54,18 +53,14 @@ namespace EasySpeak.Core.BLL.Services
 
         public async Task<UserDto> GetUserAsync()
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == 2);
-            user.Country = Country.Co;
-            user.LanguageLevel = LanguageLevel.B1;
-            user.Language = Language.Aa;
-
-            var res = _mapper.Map<User, UserDto>(user);
-            return res;
+            var userId = _firebaseAuthService.UserId;
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId) ?? throw new ArgumentException($"Failed to find the user with id {userId}");
+            return _mapper.Map<User, UserDto>(user);
         }
 
         public async Task<string[]> GetUserTags()
         {
-            var userId = _firebaseAuthService.UserId == 0 ? 2 : 3;
+            var userId = _firebaseAuthService.UserId;
             var user = await _context.Users.Include(u => u.Tags).FirstOrDefaultAsync(u => u.Id == userId) ?? throw new ArgumentException($"Failed to find the user with id {userId}");
 
             return user.Tags.Select(t => t.Name).ToArray();
