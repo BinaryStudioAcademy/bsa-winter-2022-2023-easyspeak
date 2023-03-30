@@ -144,6 +144,7 @@ export default class Utils {
             date: ['', [Validators.required]],
             questions: ['', [Validators.required]],
             tags: ['', [Validators.required]],
+            videoLink: ['', [Validators.required]],
         });
     }
 }
