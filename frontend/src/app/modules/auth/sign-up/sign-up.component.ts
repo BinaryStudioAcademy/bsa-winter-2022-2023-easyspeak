@@ -85,21 +85,20 @@ export class SignUpComponent extends BaseComponent implements OnInit {
     }
 
     private signUp() {
-        this.createUser()
-            .pipe(
-                switchMap(() => this.authService.signUp(this.email.value, this.password.value)),
-                this.untilThis,
-            )
-            .subscribe(
-                () => {
-                    this.toastr.success('Account successfully registered', 'Succes!');
-                    this.toastr.success('Successfully sign up', 'Sign up');
-                    this.router.navigate(['topics']);
-                },
-                (error) => {
-                    this.toastr.error(error.message, 'Sign up');
-                },
-            );
+        this.authService.signUp(this.email.value, this.password.value)
+            .then(() => {
+                this.createUser()
+                    .pipe(this.untilThis)
+                    .subscribe(
+                        () => {
+                            this.toastr.success('Account successfully created', 'Success!');
+                            this.router.navigate(['topics']);
+                        },
+                        (error) => {
+                            this.toastr.error(error.message, 'Sign up');
+                        },
+                    );
+            });
     }
 
     private validateForm() {
