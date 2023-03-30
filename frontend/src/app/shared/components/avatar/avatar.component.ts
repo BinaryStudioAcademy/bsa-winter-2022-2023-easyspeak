@@ -13,8 +13,6 @@ export class AvatarComponent implements OnInit {
 
     userInfo: IUserInfo;
 
-    isPredefine: boolean;
-
     constructor(private authService: AuthService) {}
 
     ngOnInit(): void {
@@ -37,8 +35,6 @@ export class AvatarComponent implements OnInit {
 
     getAvatarImage(): string {
         if (this.userInfo.imagePath && this.userInfo.imagePath.match(/^predefinedavatar-\d+/)) {
-            this.isPredefine = true;
-
             return `assets/avatars/${this.userInfo.imagePath}`;
         }
 
