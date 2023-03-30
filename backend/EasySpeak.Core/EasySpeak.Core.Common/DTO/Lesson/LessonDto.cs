@@ -12,6 +12,8 @@ public class LessonDto
     public DateTime StartAt { get; set; }
     public LanguageLevel LanguageLevel { get; set; }
     public int SubscribersCount { get; set; }
+    public string YoutubeVideoId { get; set; } 
+    public string ZoomMeetingLink { get; set; }
 
     public ICollection<TagForLessonDto>? Tags { get; set; }
     public ICollection<QuestionForLessonDto>? Questions { get; set; }
