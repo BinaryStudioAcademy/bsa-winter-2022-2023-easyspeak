@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { MainComponent } from './main-page/main-page.component';
-import { SocialPageComponent } from './social-page/social-page.component';
 import { TimetablePageComponent } from './timetable-page/timetable-page.component';
 
 const routes: Routes = [
@@ -12,8 +11,8 @@ const routes: Routes = [
         children: [
             {
                 path: 'social',
-                component: SocialPageComponent,
-                pathMatch: 'full',
+                loadChildren: () => import('../social-page/social-page.module')
+                    .then((m) => m.SocialPageModule),
             },
             {
                 path: 'timetable',

@@ -7,7 +7,7 @@ export const detailsGroup = (fb: FormBuilder) => fb.group({
     sex: '',
     country: '',
     language: '',
-    englishLevel: '',
+    languageLevel: '',
     email: '',
     instagram: '',
     facebook: '',

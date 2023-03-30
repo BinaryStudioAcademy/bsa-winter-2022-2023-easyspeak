@@ -10,6 +10,7 @@ import { HeaderComponent } from '@shared/components/header/header.component';
 import { RoundProgressBarComponent } from '@shared/components/round-progress-bar/round-progress-bar.component';
 import { MaterialModule } from '@shared/material/material.module';
 
+import { AvatarComponent } from './components/avatar/avatar.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { ConfirmComponent } from './components/confirm/confirm.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
@@ -51,6 +52,7 @@ import { TooltipWhenOverflowDirective } from './directives/tooltip-when-overflow
         PasswordVisibilityDirective,
         ClickOutsideDirective,
         TooltipWhenOverflowDirective,
+        AvatarComponent,
     ],
     exports: [
         CommonModule,
@@ -70,7 +72,8 @@ import { TooltipWhenOverflowDirective } from './directives/tooltip-when-overflow
         UserNotificationComponent,
         HeaderComponent,
         PasswordVisibilityDirective,
-        TooltipWhenOverflowDirective
+        TooltipWhenOverflowDirective,
+        AvatarComponent,
     ],
 })
 export class SharedModule {}

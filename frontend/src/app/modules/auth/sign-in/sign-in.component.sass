@@ -1,23 +1,20 @@
 @import src/app/modules/auth/auth-page/auth-page.component
 
-.sign-in
-    margin-top: 70%
-
-.auth-form
-    top: 250px
-
 #has-account
     position: absolute
-    bottom: 1%
-    top: auto
-    left: 17%
-    right: auto
-    font-size: 14px
-    text-align: center
+    width: 100%
+    display: flex
+    justify-content: center
+    bottom: 30px
+    span
+        color: $gray-300
+    a
+        text-decoration: none
+        color: $turquoise-100
+        margin-left: 10px
 
-#has-account span
-    color: $gray-300
-
-#has-account a
-    text-decoration: none
-    color: $turquoise-100
+.form-content
+    display: grid
+    grid-template-rows: repeat(3, 5vh)
+    grid-template-columns: 24vw
+    gap: 2vh
