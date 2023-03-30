@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IChatPerson } from '@shared/models/IChatPerson';
-import * as moment from 'moment';
 // import { HttpService } from '@core/services/http.service';
 import { Observable, of } from 'rxjs';
 
