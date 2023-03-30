@@ -95,9 +95,7 @@ namespace EasySpeak.Core.BLL.Services
         {
             var profileImage = await _context.EasySpeakFiles.FirstOrDefaultAsync(f => f.Id == imageId);
             
-            var imageUrl = profileImage!.Url;
-
-            return imageUrl!;
+            return profileImage!.Url!; 
         }
     }
 }
