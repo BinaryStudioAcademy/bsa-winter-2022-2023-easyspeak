@@ -8,6 +8,6 @@ export interface IUserInfo {
     languageLevel: string;
     birthDate: string;
     imagePath: string;
-    whoCanMessage: boolean;
+    canOnlyFriendMessage: boolean;
 
 }
