@@ -78,13 +78,13 @@ export class LessonsPageComponent implements OnInit, OnChanges {
     }
 
     private mapLesson(response: ILesson[]): Lesson[] {
-        return response.map(lesson => ({
+        return response.map(lesson => (<Lesson>{
             id: lesson.id,
             imgPath: lesson.mediaPath,
             videoId: 'xqAriI87lFU',
             title: lesson.name,
-            time: lesson.startAt.split('T')[1].substring(0, 5).replace(':', '.'),
-            tutorAvatarPath: 'assets/lesson-mocks/Photo )Patient).png',
+            time: moment(lesson.startAt).format('hh.mm'),
+            tutorAvatarPath: 'assets/lesson-mocks/test-user.png',
             tutorFlagPath: 'assets/lesson-icons/canada-test-flag.svg',
             tutorName: 'Roger Vaccaro',
             topics: lesson.tags.map((tag) => tag.name),
