@@ -80,8 +80,12 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
     }
 
     onSubmit() {
+        const userDetails = this.detailsForm.value as unknown as IUserInfo;
+
+        userDetails.tags = this.selectedTags;
+
         this.userService
-            .updateUser(this.detailsForm.value as IUserInfo)
+            .updateUser(userDetails)
             .pipe(this.untilThis)
             .subscribe(() => this.toastr.success('User info updated successfully.', 'Success!'));
     }

@@ -9,5 +9,5 @@ export interface IUserInfo {
     birthDate: string;
     imagePath: string;
     canOnlyFriendMessage: boolean;
-
+    tags: string[];
 }

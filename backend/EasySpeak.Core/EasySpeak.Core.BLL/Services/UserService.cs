@@ -99,6 +99,10 @@ namespace EasySpeak.Core.BLL.Services
         public async Task<UserDto> UpdateUser(UserDto userDto)
         {
             var userId = _firebaseAuthService.UserId;
+
+#if DEBUG
+            userId = 2;
+#endif
             var user = await _context.Users.Include(u => u.Tags).FirstOrDefaultAsync(a => a.Id == userId) ?? throw new ArgumentException($"Failed to find the user with id {userId}");
 
             _mapper.Map(userDto, user);
