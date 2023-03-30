@@ -25,15 +25,11 @@ export class MessageGroupComponent {
     showDate: boolean;
 
     getDateText(date: Date): string {
-        const today = new Date();
-        const yesterday = new Date(today);
 
-        yesterday.setDate(today.getDate() - 1);
-
-        if (moment(date).isSame(moment(today).startOf('day'))) {
+        if (moment(date).isSame(moment().startOf('day'))) {
             return 'Today';
         }
-        if (moment(date).isSame(moment(yesterday).startOf('day'))) {
+        if (moment(date).isSame(moment().add('days', -1).startOf('day'))) {
             return 'Yesterday';
         }
 
