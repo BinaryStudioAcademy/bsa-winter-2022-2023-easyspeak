@@ -18,12 +18,13 @@ export class WriteEmailComponent {
 
     constructor(private router: Router, private authService: AuthService) {}
 
-    async checkMail(): Promise<void> {
+    async sendMail(): Promise<void> {
         this.isMatch = this.emailPattern.test(this.email);
+
         if (this.isMatch) {
             const goNextPage: Promise<boolean> = this.authService.resetPassword(this.email);
 
-            if (await goNextPage === true) {
+            if ((await goNextPage) === true) {
                 this.router.navigate(['forgot-password/check-email']);
             } else {
                 this.wrongEmail = true;
