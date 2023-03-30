@@ -11,10 +11,12 @@ public class UserProfile : Profile
 {
     public UserProfile()
     {
-            CreateMap<UserRegisterDto, User>()
-                .ForMember(user => user.Sex, src => src.MapFrom(userDto => EnumHelper.MapSex(userDto.Sex)))
-                .ForMember(user => user.LanguageLevel, 
-                src => src.MapFrom(userDto => EnumHelper.MapLanguageLevel(userDto.LanguageLevel)));
+        CreateMap<UserRegisterDto, User>()
+            .ForMember(user => user.Sex, src => src.MapFrom(userDto => EnumHelper.MapSex(userDto.Sex)))
+            .ForMember(user => user.LanguageLevel, 
+            src => src.MapFrom(userDto => EnumHelper.MapLanguageLevel(userDto.LanguageLevel)));
+
+        CreateMap<User, UserDto>().ReverseMap();
 
         CreateMap<User, UserDto>();
         CreateMap<User, UserShortInfoDto>()

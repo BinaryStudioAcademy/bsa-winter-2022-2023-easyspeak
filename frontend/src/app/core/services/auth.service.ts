@@ -30,8 +30,6 @@ export class AuthService {
             if (userCredential.user) {
                 this.setAccessToken(userCredential.user);
             }
-
-            this.navigateTo('/timetable');
         });
     }
 
@@ -40,8 +38,6 @@ export class AuthService {
             if (userCredential.user) {
                 this.setAccessToken(userCredential.user);
             }
-
-            this.navigateTo('/profile/topics');
         });
     }
 

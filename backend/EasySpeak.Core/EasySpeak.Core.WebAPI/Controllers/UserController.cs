@@ -1,4 +1,5 @@
 using EasySpeak.Core.BLL.Interfaces;
+using EasySpeak.Core.Common.DTO.Tag;
 using EasySpeak.Core.Common.DTO.Filter;
 using EasySpeak.Core.Common.DTO.Lesson;
 using EasySpeak.Core.Common.DTO.User;
@@ -35,11 +36,18 @@ namespace EasySpeak.Core.WebAPI.Controllers
             return Ok(createdUser);
         }
 
-
         [HttpPut("{userId}")]
         public ActionResult<UserDto> Update(int userId, UserDto userDto)
         {
             return Ok(userDto);
+        }
+
+        [HttpPost("tags")]
+        public async Task<ActionResult<UserDto>> AddTagsToUser([FromBody]List<TagDto> tags)
+        {
+            var user = await _userService.AddTagsAsync(tags);
+            
+            return Ok(user);
         }
 
         [HttpPut("enroll/{lessonId}")]
