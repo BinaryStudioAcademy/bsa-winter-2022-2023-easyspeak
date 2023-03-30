@@ -90,7 +90,7 @@ export class LessonsCreateComponent implements OnInit {
     }
 
     getYoutubeVideoId(link: string): string {
-        const regex = /(?:youtube(?:-nocookie)?\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|vi|user)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+        const regex = /(?:youtube(?:-nocookie)?\.com\/(?:[^/\n\s]+\/\S+\/|(?:v|vi|user)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
         const videoId = link.match(regex);
 
         return videoId ? videoId[1] : '';
@@ -103,8 +103,8 @@ export class LessonsCreateComponent implements OnInit {
             return;
         }
 
-        const timeHours = parseInt(this.time.split('.')[0]);
-        const timeMinutes = parseInt(this.time.split('.')[1]);
+        const timeHours = parseInt(this.time.split('.')[0], 10);
+        const timeMinutes = parseInt(this.time.split('.')[1], 10);
         const startAt = new Date(new Date(this.date?.value).setHours(timeHours, timeMinutes));
 
         const lessonQuestions: INewQuestion[] =
@@ -120,10 +120,10 @@ export class LessonsCreateComponent implements OnInit {
             description: 'Description',
             mediaPath: '',
             languageLevel: Object.values(LanguageLevels).indexOf(this.level),
-            startAt: startAt,
+            startAt,
             questions: lessonQuestions,
             tags: lessonTags,
-            limitOfUsers: parseInt(this.studentsCount?.value),
+            limitOfUsers: parseInt(this.studentsCount?.value, 10),
             youtubeVideoId: this.getYoutubeVideoId(this.videoLink?.value),
             zoomMeetingLink: this.meetLink?.value,
         };
@@ -137,11 +137,13 @@ export class LessonsCreateComponent implements OnInit {
 
     updateTime(evendData: MouseEvent) {
         const target = evendData.target as HTMLElement;
-        this.time = target.textContent || "Time";
+
+        this.time = target.textContent || 'Time';
     }
 
     updateLevel(evendData: MouseEvent) {
         const target = evendData.target as HTMLElement;
-        this.level = target.textContent || "Level";
+
+        this.level = target.textContent || 'Level';
     }
 }

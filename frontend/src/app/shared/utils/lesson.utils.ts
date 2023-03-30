@@ -1,7 +1,5 @@
 import { FormBuilder, Validators } from '@angular/forms';
 
-import { Lesson } from 'src/app/models/lessons/lesson';
-
 export default class Utils {
     static tagsList: string[] = [
         'Architecture',
@@ -48,14 +46,14 @@ export default class Utils {
         '19.00',
         '19.30',
         '20.00',
-    ]
+    ];
 
     static levelsList: string[] = [
         'B1',
         'B2',
         'C1',
         'C2',
-    ]
+    ];
 
     static group(fb: FormBuilder) {
         return fb.group({

@@ -67,8 +67,8 @@ export class LessonsPageComponent implements OnInit, OnChanges {
                 header: 'Add Group Class',
                 hasButtons: false,
                 component: LessonsCreateComponent,
-            }
-        }
+            },
+        };
 
         this.dialogRef.open(ModalComponent, config);
     }
