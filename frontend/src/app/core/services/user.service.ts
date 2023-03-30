@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { user } from '@angular/fire/auth';
 import { IUserInfo } from '@shared/models/IUserInfo';
 import { UserCard } from '@shared/models/user/user-card';
 import { Observable } from 'rxjs';
