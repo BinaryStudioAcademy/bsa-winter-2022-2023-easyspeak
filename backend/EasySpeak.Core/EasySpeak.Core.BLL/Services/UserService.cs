@@ -57,7 +57,7 @@ namespace EasySpeak.Core.BLL.Services
 
             if (user is null)
             {
-                throw new ArgumentNullException("This user not found");
+                throw new ArgumentNullException("user","User not found");
             }
 
             var userDto = _mapper.Map<UserDto>(user);
@@ -105,7 +105,7 @@ namespace EasySpeak.Core.BLL.Services
             
             if (profileImage is null || profileImage.Url is null)
             {
-                throw new ArgumentNullException("This file not found");
+                throw new ArgumentNullException("profileImage", "File not found");
             }
             var imageUrl = profileImage.Url;
 
