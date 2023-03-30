@@ -71,22 +71,21 @@ input, select
 .time
     color: $black-100
 
-.timeDropdownContent
-    display: none
+.dropdownContent
+    display: block
     position: absolute
     background-color: $gray-100
     width: 100%
     left: 0
     top: 60px
+    border-radius: 10px
+    border: 1px solid $gray-200
     padding: 10px 20px
-    z-index: 1
+    z-index: 100
     box-sizing: border-box
     p
         cursor: pointer
         margin-top: 5px
-
-.input:hover .timeDropdownContent
-    display: block
 
 ::placeholder
     color: $gray-200

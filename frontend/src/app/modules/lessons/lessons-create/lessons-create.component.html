@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" >
     <form [formGroup]="myForm" autocomplete="off">
         <div class="form-field">
             <div id="floatContainer" class="float-container">
@@ -25,7 +25,7 @@
         </div>
 
         <div class="form-field">
-            <div class="input">
+            <div class="input" (click)="expandTimeDropdown()">
                 <div class="label">
                     <img src="assets/lesson-icons/clock-icon.svg" alt="clock-icon" class="icon">
                     <span *ngIf="!time" class="noTime">Time</span>
@@ -33,7 +33,7 @@
                 </div>
 
                 <img src="assets/interestsDropdown/chevron_down.svg" alt="chevron_down-icon" class="timeDropdown">
-                <div class="timeDropdownContent">
+                <div *ngIf="timeDropdownVisible" class="dropdownContent">
                     <p *ngFor="let time of timesList" (click)="updateTime($event)">{{time}}</p>
                 </div>
             </div>
@@ -51,7 +51,7 @@
         </div>
 
         <div class="form-field">
-            <div class="input">
+            <div class="input" (click)="expandLevelDropdown()">
                 <div class="label">
                     <img src="assets/user-card-icons/rocket-icon.svg" alt="rocket-icon" class="icon">
                     <span *ngIf="!level" class="noTime">Level</span>
@@ -59,7 +59,7 @@
                 </div>
 
                 <img src="assets/interestsDropdown/chevron_down.svg" alt="chevron_down-icon" class="timeDropdown">
-                <div class="timeDropdownContent">
+                <div *ngIf="levelDropdownVisible" class="dropdownContent">
                     <p *ngFor="let level of levelsList" (click)="updateLevel($event)">{{level}}</p>
                 </div>
             </div>
@@ -104,6 +104,6 @@
 
         <!-- TODO: Update create button when design is finished -->
 
-        <button mat-raised-button color="primary" (click)="createLesson()">SAMPLE CREATE BUTTON</button>
+        <button mat-flat-button color="primary" (click)="createLesson()">SAMPLE CREATE BUTTON</button>
     </form>
 </div>

@@ -26,6 +26,10 @@ export class LessonsCreateComponent implements OnInit {
 
     level: string;
 
+    timeDropdownVisible = false;
+
+    levelDropdownVisible = false;
+
     myForm: FormGroup;
 
     constructor(
@@ -69,6 +73,14 @@ export class LessonsCreateComponent implements OnInit {
 
     get meetLink() {
         return this.myForm.get('meetLink');
+    }
+
+    expandTimeDropdown() {
+        this.timeDropdownVisible = !this.timeDropdownVisible;
+    }
+
+    expandLevelDropdown() {
+        this.levelDropdownVisible = !this.levelDropdownVisible;
     }
 
     updateTags(evendData: string[]) {
