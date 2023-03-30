@@ -47,7 +47,7 @@ public class LessonsService : BaseService, ILessonsService
         }
 
         var subscribersCountDict = await lessonsFromContext.Select(t => new { Id = t.Id, SbCount = t.Subscribers.Count }).ToDictionaryAsync(t => t.Id);
-        var lessons = await lessonsFromContext.ToListAsync();
+        var lessons = await lessonsFromContext.OrderBy(l => l.StartAt).ToListAsync();
 
         var lessonDtos = _mapper.Map<List<Lesson>, List<LessonDto>>(lessons);
 
