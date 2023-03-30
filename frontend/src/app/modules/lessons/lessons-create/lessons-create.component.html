@@ -91,5 +91,14 @@
                 Meet Link is Required
             </mat-error>
         </div>
+
+        <div class="form-field">
+
+                <textarea placeholder="Questions for the Group Class" formControlName="questions"></textarea>
+
+            <mat-error *ngIf="questions?.invalid && questions?.touched">
+                At least one question is required
+            </mat-error>
+        </div>
     </form>
 </div>
