@@ -3,9 +3,9 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IChatPerson } from '@shared/models/IChatPerson';
 import { IMessage } from '@shared/models/IMessage';
+import * as moment from 'moment';
 // import { HttpService } from '@core/services/http.service';
 import { Observable, of } from 'rxjs';
-import * as moment from "moment";
 
 interface IMessageGroup {
     date: Date;
