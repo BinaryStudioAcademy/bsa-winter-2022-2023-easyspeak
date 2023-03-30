@@ -1,12 +1,17 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using EasySpeak.Core.BLL.Interfaces;
+using EasySpeak.Core.Common.DTO.Filter;
 using EasySpeak.Core.Common.DTO.UploadFile;
 using EasySpeak.Core.Common.DTO.Lesson;
 using EasySpeak.Core.Common.DTO.User;
+using EasySpeak.Core.Common.Enums;
 using EasySpeak.Core.DAL.Context;
 using EasySpeak.Core.DAL.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.ComponentModel;
 
 namespace EasySpeak.Core.BLL.Services
 {
@@ -59,6 +64,31 @@ namespace EasySpeak.Core.BLL.Services
             userDto.ImagePath = await GetProfileImageUrl(user!.ImageId);
 
             return userDto;
+        }
+
+        public async Task<List<UserShortInfoDto>> GetFilteredUsers(UserFilterDto userFilter)
+        {
+            var users = _context.Users
+                .Include(u => u.Tags)
+                .Include(u => u.Image);
+            var filter = _mapper.Map<UserFilter>(userFilter);
+
+            IQueryable<User> filteredUsers = users;
+
+            if(filter.Language is not null)
+            {
+                filteredUsers = filteredUsers.Where(u => u.Language == filter.Language);
+            }
+            if(filter.LangLevels is not null && filter.LangLevels.Any())
+            {
+                filteredUsers = filteredUsers.Where(u => filter.LangLevels.Contains(u.LanguageLevel));
+            }
+            if(filter.Topics is not null && filter.Topics.Any())
+            {
+                filteredUsers = filteredUsers.Where(u => u.Tags.Any(t => filter.Topics.Contains(t.Name)));
+            }
+            var filteredUsersList =  await filteredUsers.ToListAsync();
+            return _mapper.Map<List<UserShortInfoDto>>(filteredUsersList);
         }
 
         public async Task<string> UploadProfilePhoto(IFormFile file)

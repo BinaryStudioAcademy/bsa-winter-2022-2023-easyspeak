@@ -4,7 +4,7 @@ export interface UserCard {
     language?: string,
     imagePath: string,
     languageLevel: string
-    status: number;
+    status: number | null;
     tags: string[]
     flag: string;
 }

@@ -1,0 +1,47 @@
+@import "src/styles/colors.sass"
+
+.subheader
+    padding-block: 2em
+    text-align: center
+    background-color: $white
+    margin-top: 80px
+
+.body
+    background-color: $gray-100
+    padding-inline: 3em
+
+.user-grid
+    display: grid
+    grid-template-columns: repeat(5, 1fr)
+    gap: 2em
+
+.filters
+    margin-block: 3em
+
+.no-users
+    display: flex
+    justify-content: center
+    align-items: center
+    margin-top: 30px
+
+    font-weight: 700
+    font-size: 24px
+    color: $blue-200
+
+@media screen and (max-width: 2200px)
+    .user-grid
+        grid-template-columns: repeat(4, 1fr)
+
+@media screen and (max-width: 1600px)
+    .user-grid
+        grid-template-columns: repeat(3, 1fr)
+
+@media screen and (max-width: 1280px)
+    .user-grid
+        grid-template-columns: repeat(2, 1fr)
+
+@media screen and (max-width: 950px)
+    .user-grid
+        grid-template-columns: repeat(1, 1fr)
+
+
