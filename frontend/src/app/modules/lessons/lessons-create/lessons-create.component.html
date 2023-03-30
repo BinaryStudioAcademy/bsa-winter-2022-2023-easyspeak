@@ -1,7 +1,5 @@
 <div class="container">
     <form [formGroup]="myForm" autocomplete="off">
-        {{ myForm.value | json }}
-
         <div class="form-field">
             <div id="floatContainer" class="float-container">
                 <label for="groupClassName">The Name of the Group Class</label>
@@ -68,7 +66,7 @@
         </div>
 
         <div class="form-field">
-            <app-interests-dropdown [usedInModal]="true"></app-interests-dropdown>
+            <app-interests-dropdown [usedInModal]="true" (selectedInterests)="updateTags($event)"></app-interests-dropdown>
         </div>
 
         <div class="form-field">
@@ -97,12 +95,15 @@
         </div>
 
         <div class="form-field">
-
-                <textarea placeholder="Questions for the Group Class" formControlName="questions"></textarea>
+            <textarea placeholder="Questions for the Group Class" formControlName="questions"></textarea>
 
             <mat-error *ngIf="questions?.invalid && questions?.touched">
                 At least one question is required
             </mat-error>
         </div>
+
+        <!-- TODO: Update create button when design is finished -->
+
+        <button mat-raised-button color="primary" (click)="createLesson()">SAMPLE CREATE BUTTON</button>
     </form>
 </div>

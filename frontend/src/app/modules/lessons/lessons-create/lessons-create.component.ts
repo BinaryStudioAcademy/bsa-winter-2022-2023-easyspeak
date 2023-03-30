@@ -4,6 +4,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { INewLesson } from '@shared/models/lesson/INewLesson';
 import { INewQuestion } from '@shared/models/lesson/INewQuestion';
 import { INewTag } from '@shared/models/lesson/INewTag';
+import { LanguageLevels } from '@shared/models/lesson/LanguageLevels';
 import Utils from '@shared/utils/lesson.utils';
 
 import { LessonsService } from 'src/app/services/lessons.service';
@@ -15,7 +16,7 @@ import { NotificationService } from 'src/app/services/notification.service';
     styleUrls: ['./lessons-create.component.sass'],
 })
 export class LessonsCreateComponent implements OnInit {
-    tagsList: string[] = Utils.tagsList;
+    tagsList: string[];
 
     timesList: string[] = Utils.timesList;
 
@@ -70,23 +71,41 @@ export class LessonsCreateComponent implements OnInit {
         return this.myForm.get('meetLink');
     }
 
+    updateTags(evendData: string[]) {
+        this.tagsList = evendData;
+    }
+
+    getYoutubeVideoId(link: string): string {
+        const regex = /(?:youtube(?:-nocookie)?\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|vi|user)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+        const videoId = link.match(regex);
+
+        return videoId ? videoId[1] : '';
+    }
+
     createLesson() {
+        const timeHours = parseInt(this.time.split('.')[0]);
+        const timeMinutes = parseInt(this.time.split('.')[1]);
+        const startAt = new Date(new Date(this.date?.value).setHours(timeHours, timeMinutes));
+
         const lessonQuestions: INewQuestion[] =
             this.questions?.value
                 .split('\n')
                 .filter((entry: string) => entry.trim() !== '')
                 .map((element: string) => ({ topic: element, subquestions: [] }));
 
-        const lessonTags: INewTag[] = this.tags?.value.map((element: string) => ({ name: element }));
+        const lessonTags: INewTag[] = this.tagsList.map((element: string) => ({ name: element }));
 
         const lessonToCreate: INewLesson = {
             name: this.name?.value,
-            description: this.description?.value,
+            description: 'Description',
             mediaPath: '',
-            startAt: new Date(this.date?.value),
+            languageLevel: Object.values(LanguageLevels).indexOf(this.level),
+            startAt: startAt,
             questions: lessonQuestions,
             tags: lessonTags,
-            limitOfUsers: 1,
+            limitOfUsers: parseInt(this.studentsCount?.value),
+            youtubeVideoId: this.getYoutubeVideoId(this.videoLink?.value),
+            zoomMeetingLink: this.meetLink?.value,
         };
 
         this.lessonService.createLesson(lessonToCreate).subscribe(() => {
