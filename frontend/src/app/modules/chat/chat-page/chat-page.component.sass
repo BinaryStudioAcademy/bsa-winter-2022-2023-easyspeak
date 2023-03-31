@@ -1,31 +1,237 @@
+@import "src/styles/colors"
+
 .container
-    height: 95vh
+    height: 89vh
     display: flex
     flex-direction: column
     align-items: center
     justify-content: space-between
+    width: 80%
 
 .chat-body
     overflow: auto
-    width: 50%
-    background-color: #aaaaaa
+    width: 96%
+    background-color: $gray-50
     flex-grow: 1
+    padding: 2%
 
 .chat-input
-    width: 50%
-    background-color: #7a1c55
+    height: 70px
+    width: 100%
+    background-color: $white
+    border-top: 2px solid $inactive-color
+    display: flex
+    align-items: center
 
-.message
-    width: 50%
-    float: left
+main
+    display: flex
+    margin-top: 11vh
+
+aside
+    width: 20%
+    padding: 57px
+
+.message-header
+    display: flex
+    align-items: center
+
+.message-span
+    font-size: 18px
+    font-weight: 700
+
+.total-number-of-messages
+    background-color: $turquoise-100
+    margin: 0 7px
+    height: 30px
+    width: 30px
+    border-radius: 50%
+    color: $white
+    display: flex
+    justify-content: center
+    align-items: center
+
+::ng-deep .mat-mdc-text-field-wrapper
+    background-color: $white !important
+    border-radius: 50px !important
+
+::ng-deep .mdc-line-ripple
+    display: none !important
+
+::ng-deep mat-icon
+    color: $gray-200
+    cursor: pointer
+    height: 40px !important
+    padding: 0 5px !important
+    display: flex !important
+    justify-content: center
+    align-items: center
+
+::ng-deep mat-form-field
+    width: 100% !important
+    height: 40px !important
+
+::ng-deep .mat-mdc-form-field-subscript-wrapper
+    display: none !important
+
+::ng-deep .mat-mdc-form-field-infix
+    padding: 0 !important
+    height: 10px !important
+
+::ng-deep .mat-mdc-form-field-flex
+    height: 40px !important
+
+input
+    padding: 9px
+
+mat-form-field
+    margin: 21px 0 15px
+
+.line
+    background-color: $inactive-color
+    width: 100%
+    height: 2px
+
+.people
+    overflow-y: auto
+    height: 58vh
+
+.person
+    background-color: $gray-100
+    margin: 15px 0
+    padding: 15px
+    border-radius: 10px
+    &:hover
+        cursor: pointer
+        filter: brightness(85%)
+
+.unread
+    background-color: $white
+
+.img-name-status-time
+    display: flex
+    justify-content: space-between
+    align-items: center
+
+.name-status
     display: flex
     flex-direction: column
-    align-items: flex-start
-    margin: 10px
-    padding: 10px
-    border-radius: 10px
-    background-color: #ffffff
 
-.sender
-    background-color: #7889fb
-    float: right
+.img-name-status
+    display: flex
+
+.person-online
+    margin: 0 10px
+
+.img-online
+    position: relative
+
+.img-online div
+    position: absolute
+    bottom: 1px
+    left: 25px
+    border: 2px solid $gray-100
+
+.last-message-total
+    display: flex
+    justify-content: space-between
+    align-items: center
+
+.last-message
+    width: 80%
+    text-overflow: ellipsis
+    white-space: nowrap
+    overflow: hidden
+
+header
+    height: 60px
+    display: flex
+    justify-content: space-between
+    align-items: center
+    width: 100%
+    background-color: $white
+    border-bottom: 2px solid $inactive-color
+
+.buttons
+    display: flex
+    justify-content: space-around
+    align-items: center
+    margin: 0 30px
+    button
+        background-color: $white
+        border: none
+        border-radius: 50%
+        padding: 15px 5px
+        width: 50px
+        height: 50px
+        &:hover
+            filter: brightness(85%)
+            cursor: pointer
+
+.interlocutor
+    margin: 0 30px
+    display: flex
+    align-items: center
+
+.online
+    height: 10px
+    width: 11px
+    border-radius: 50px
+    background-color: $online-color
+
+.offline
+    height: 10px
+    width: 11px
+    border-radius: 50px
+    background-color: $inactive-color
+
+.person-name
+    font-weight: 700
+    margin: 0 10px
+
+.send-message
+    background-color: $blue-200
+    color: $white
+    width: 116px
+    font-weight: 700
+    text-align: center
+    border-radius: 50px
+    height: 34px
+    border: none
+    margin-right: 57px
+    &:hover
+        cursor: pointer
+        filter: brightness(85%)
+
+.vertical-line
+    height: 40px
+    width: 2px
+    background-color: $inactive-color
+    margin: 0 15px
+
+form
+    display: flex
+    align-items: center
+    width: 100%
+
+.message-input input
+    border: none
+    padding: 15px
+    width: 100%
+    &:focus
+        outline: none
+
+.message-input
+    width: 80%
+    display: flex
+    align-items: center
+    margin: 0 15px 0 60px
+
+input[type="file"], .input-more
+    display: none
+
+label[for=file-upload]:hover, label[for=input-more]:hover
+    cursor: pointer
+    filter: brightness(50%)
+
+input::placeholder
+    color: $gray-200
