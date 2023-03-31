@@ -29,6 +29,7 @@ export class AuthService {
         return this.afAuth.signInWithEmailAndPassword(email, password).then((userCredential) => {
             if (userCredential.user) {
                 this.setAccessToken(userCredential.user);
+                this.navigateTo('/timetable');
             }
         });
     }
@@ -37,6 +38,7 @@ export class AuthService {
         return this.afAuth.createUserWithEmailAndPassword(email, password).then((userCredential) => {
             if (userCredential.user) {
                 this.setAccessToken(userCredential.user);
+                this.navigateTo('/timetable');
             }
         });
     }
