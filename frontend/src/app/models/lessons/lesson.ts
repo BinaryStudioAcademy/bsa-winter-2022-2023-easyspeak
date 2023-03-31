@@ -2,6 +2,7 @@ export interface Lesson {
     id: number;
     imgPath: string;
     videoId: string;
+    zoomLink: string;
     title: string;
     time: string;
     tutorAvatarPath: string;

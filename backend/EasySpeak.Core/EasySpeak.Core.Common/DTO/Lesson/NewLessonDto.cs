@@ -1,4 +1,5 @@
 ﻿using EasySpeak.Core.Common.DTO.Lesson;
+using EasySpeak.Core.Common.Enums;
 
 namespace EasySpeak.Core.Common.DTO
 {
@@ -8,7 +9,10 @@ namespace EasySpeak.Core.Common.DTO
         public string Description { get; set; } = string.Empty;
         public string MediaPath { get; set; } = string.Empty;
         public DateTime StartAt { get; set; }
+        public LanguageLevel LanguageLevel { get; set; }
         public int? LimitOfUsers { get; set; }
+        public string YoutubeVideoId { get; set; } = string.Empty;
+        public string ZoomMeetingLink { get; set; } = string.Empty;
         public ICollection<TagForLessonDto>? Tags { get; set; }
         public ICollection<QuestionForLessonDto>? Questions { get; set; }
     }
