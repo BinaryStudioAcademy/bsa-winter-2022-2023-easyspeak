@@ -3,11 +3,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '@core/services/auth.service';
 
 @Component({
-    selector: 'app-chage-password',
-    templateUrl: './chage-password.component.html',
-    styleUrls: ['./chage-password.component.sass'],
+    selector: 'app-change-password',
+    templateUrl: './change-password.component.html',
+    styleUrls: ['./change-password.component.sass'],
 })
-export class ChagePasswordComponent implements OnInit {
+export class ChangePasswordComponent implements OnInit {
     passwordPattern: RegExp = /^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\\d@$!%*?&\\.]{6,}$/;
 
     password: string = '';

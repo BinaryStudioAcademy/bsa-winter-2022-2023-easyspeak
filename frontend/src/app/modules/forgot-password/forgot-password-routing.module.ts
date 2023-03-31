@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ChagePasswordComponent } from './chage-password/chage-password.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 import { CheckEmailComponent } from './check-email/check-email.component';
 import { ForgotPasswordPageComponent } from './forgot-password-page/forgot-password-page.component';
 import { WriteEmailComponent } from './write-email/write-email.component';
@@ -21,7 +21,7 @@ const routes: Routes = [
             },
             {
                 path: 'change-password',
-                component: ChagePasswordComponent,
+                component: ChangePasswordComponent,
                 pathMatch: 'prefix',
             },
         ],
