@@ -22,6 +22,7 @@ import { UserNotificationComponent } from './components/user-notification/user-n
 import { YoutubePlayerComponent } from './components/youtube-player/youtube-player.component';
 import { ClickOutsideDirective } from './directives/click-outside.directive';
 import { PasswordVisibilityDirective } from './directives/password-visibility.directive';
+import { TooltipWhenOverflowDirective } from './directives/tooltip-when-overflow.directive';
 
 @NgModule({
     imports: [
@@ -50,6 +51,7 @@ import { PasswordVisibilityDirective } from './directives/password-visibility.di
         HeaderComponent,
         PasswordVisibilityDirective,
         ClickOutsideDirective,
+        TooltipWhenOverflowDirective,
         AvatarComponent,
     ],
     exports: [
@@ -70,6 +72,7 @@ import { PasswordVisibilityDirective } from './directives/password-visibility.di
         UserNotificationComponent,
         HeaderComponent,
         PasswordVisibilityDirective,
+        TooltipWhenOverflowDirective,
         AvatarComponent,
     ],
 })
