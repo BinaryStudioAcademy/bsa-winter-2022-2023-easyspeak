@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '@core/services/auth.service';
+import { passFormatRegex } from '@shared/data/regex.util';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -9,7 +10,7 @@ import { ToastrService } from 'ngx-toastr';
     styleUrls: ['./change-password.component.sass'],
 })
 export class ChangePasswordComponent implements OnInit {
-    passwordPattern: RegExp = /^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\\d@$!%*?&\\.]{6,}$/;
+    passwordPattern: RegExp = new RegExp(passFormatRegex);
 
     password: string = '';
 
@@ -47,11 +48,11 @@ export class ChangePasswordComponent implements OnInit {
     }
 
     async isSame() {
-        if (this.repeatPassword.length === 0) {
-            this.passwordIsMatch = true;
-        } else {
-            this.passwordIsMatch = this.password === this.repeatPassword;
-        }
+        this.passwordIsMatch = this.password === this.repeatPassword;
+    }
+
+    async resetPassword() {
+        this.isSame();
 
         if (this.passwordIsMatch && this.passwordPattern.test(this.password)) {
             const response = this.authService.confirmResetPassword(this.token, this.password);

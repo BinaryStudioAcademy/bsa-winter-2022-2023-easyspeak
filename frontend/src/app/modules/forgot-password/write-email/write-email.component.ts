@@ -1,6 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '@core/services/auth.service';
+import { emailFormatRegex } from '@shared/data/regex.util';
 import { ToastrService } from 'ngx-toastr';
 import { Observable, Subscription } from 'rxjs';
 
@@ -12,8 +13,6 @@ import { Observable, Subscription } from 'rxjs';
 export class WriteEmailComponent implements OnDestroy {
     private resetPassSub: Subscription;
 
-    emailPattern: RegExp = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
-
     email: string = '';
 
     isMatch: boolean = true;
@@ -23,7 +22,7 @@ export class WriteEmailComponent implements OnDestroy {
     constructor(private router: Router, private authService: AuthService, private toastr: ToastrService) {}
 
     async sendMail(): Promise<void> {
-        this.isMatch = this.emailPattern.test(this.email);
+        this.isMatch = emailFormatRegex.test(this.email);
 
         if (this.isMatch) {
             const goNextPage: Promise<Observable<boolean>> = this.authService.resetPassword(this.email);
@@ -43,8 +42,11 @@ export class WriteEmailComponent implements OnDestroy {
     }
 
     changedMail(): void {
+        if (this.email.length === 0) {
+            this.isMatch = true;
+        } else
         if (!this.isMatch) {
-            this.isMatch = this.emailPattern.test(this.email);
+            this.isMatch = emailFormatRegex.test(this.email);
         }
         if (this.wrongEmail) {
             this.wrongEmail = false;
