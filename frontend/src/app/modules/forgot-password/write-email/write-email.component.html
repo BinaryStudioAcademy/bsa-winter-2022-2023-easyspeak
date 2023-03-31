@@ -7,12 +7,18 @@
     <h1>Forgot Password</h1>
 
     <div class="input-container">
-        <input class="input-email" [(ngModel)]="email" (ngModelChange)="changedMail()" />
+        <input class="input-email" [ngClass]="{'red': !isMatch || wrongEmail}" [(ngModel)]="email" (ngModelChange)="changedMail()" />
         <label>Email</label>
     </div>
-
+    <div class="wrong-format" *ngIf="!isMatch">
+        <img src="assets/forgot-password-icons/alert-triangle.svg"/>
+        Email is not in valid format!
+    </div>
+    <div class="wrong-format" *ngIf="wrongEmail">
+        <img src="assets/forgot-password-icons/alert-triangle.svg"/>
+        User with this email doesn't exist!
+    </div>
     <button class="button-send" (click)="sendMail()"><h3>Send Recovery Code</h3></button>
+    
 
-    <div class="wrong-format" *ngIf="!isMatch">Email is not valid format!</div>
-    <div class="email-doesnt-exist" *ngIf="wrongEmail">User with this email doesn't registered!</div>
 </div>

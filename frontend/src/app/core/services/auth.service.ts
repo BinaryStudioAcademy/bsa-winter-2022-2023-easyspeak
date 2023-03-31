@@ -6,6 +6,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { HttpService } from '@core/services/http.service';
 import * as auth from 'firebase/auth';
 import firebase from 'firebase/compat';
+import { ToastrService } from 'ngx-toastr';
 import { from } from 'rxjs';
 
 @Injectable({
@@ -18,6 +19,7 @@ export class AuthService {
         private router: Router,
         private ngZone: NgZone,
         private httpService: HttpService,
+        private toastrService: ToastrService,
         public jwtHelper: JwtHelperService,
     ) {}
 
@@ -91,7 +93,11 @@ export class AuthService {
             await this.afAuth.sendPasswordResetEmail(email);
 
             return true;
-        } catch (error) {
+        } catch (errorReset: unknown) {
+            const errorMessage = (errorReset as Error).message;
+
+            this.toastrService.error(errorMessage, 'Error');
+
             return false;
         }
     }
@@ -101,7 +107,11 @@ export class AuthService {
             await this.afAuth.confirmPasswordReset(code, newPassword);
 
             return true;
-        } catch (error) {
+        } catch (errorConfirm: unknown) {
+            const errorMessage = (errorConfirm as Error).message;
+
+            this.toastrService.error(errorMessage, 'Error');
+
             return false;
         }
     }
