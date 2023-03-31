@@ -83,20 +83,29 @@ export class LessonsPageComponent implements OnInit, OnChanges {
             })
             .subscribe((response) => {
                 this.lessons = this.mapLessons(response);
-
+                console.log(this.lessons)
                 this.lessonsColumn1 = this.lessons.filter((el, index) => index % 2 === 0);
                 this.lessonsColumn2 = this.lessons.filter((el, index) => index % 2 === 1);
             });
     }
 
     private mapLessons(response: ILesson[]): Lesson[] {
-        return response.map((lessons) => <Lesson><unknown>{
-            ...lessons,
-            level: langLevelsSample[lessons.languageLevel].title,
-            isDisabled: new Date() > new Date(lessons.startAt),
-            imgPath: lessons.mediaPath,
-            time: moment(lessons.startAt).format('hh.mm'),
-            topics: lessons.tags.map((tag) => tag.name),
+        return response.map((lesson) => {
+            return {
+                id: lesson.id,
+                imgPath: lesson.mediaPath,
+                videoId: lesson.youtubeVideoId,
+                zoomLink: lesson.zoomMeetingLink,
+                title: lesson.name,
+                time: moment(lesson.startAt).format('hh.mm'),
+                tutorAvatarPath: 'assets/lesson-mocks/Photo )Patient).png',
+                tutorFlagPath: 'assets/lesson-icons/canada-test-flag.svg',
+                tutorName: 'Roger Vaccaro',
+                topics: lesson.tags.map((tag) => tag.name),
+                subscribersCount: lesson.subscribersCount,
+                level: langLevelsSample[lesson.languageLevel].title,
+                isDisabled: new Date() > new Date(lesson.startAt),
+            };
         });
     }
 
