@@ -10,7 +10,7 @@
     display: flex
     justify-content: center
     align-items: center
-    
+
 
 @mixin icon
     width: 70%
@@ -41,7 +41,7 @@
 .router
     width: 50vw
     height: 100vh
-        
+
 
 .image-section
     height: 100%
@@ -143,14 +143,15 @@ h1
     .expand-icon
         position: absolute
         right: 1.5vw
-        top: 1.6vh
+        top: 50%
+        transform: translateY(-50%)
         color: $blue-200
         z-index: 4
     .placeholder
         position: absolute
         left: 1vw
-        top: 1.8vh
-        align-self: center
+        top: 50%
+        transform: translateY(-50%)
         color: $gray-200
         font-size: 14px
         z-index: 4
@@ -186,6 +187,7 @@ h1
     display: grid
     grid-template-columns: repeat(2, calc( 12vw - 7.5px ))
     gap: 15px
+    position: relative
 
 
 input
@@ -281,7 +283,7 @@ input
         align-items: center
         color: $gray-300
 
-    
+
 ::ng-deep.ng-select.ng-select-focused
     box-shadow: 0px 2px 6px $turquoise-100
     outline-color: $gray-100
