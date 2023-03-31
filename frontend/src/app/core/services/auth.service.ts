@@ -7,7 +7,7 @@ import { HttpService } from '@core/services/http.service';
 import { IUserInfo } from '@shared/models/IUserInfo';
 import * as auth from 'firebase/auth';
 import firebase from 'firebase/compat';
-import { firstValueFrom, from } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 
 import { UserService } from './user.service';
 
