@@ -89,23 +89,21 @@ export class LessonsPageComponent implements OnInit, OnChanges {
     }
 
     private mapLessons(response: ILesson[]): Lesson[] {
-        return response.map((lesson) => {
-            return {
-                id: lesson.id,
-                imgPath: lesson.mediaPath,
-                videoId: lesson.youtubeVideoId,
-                zoomLink: lesson.zoomMeetingLink,
-                title: lesson.name,
-                time: moment(lesson.startAt).format('hh.mm'),
-                tutorAvatarPath: 'assets/lesson-mocks/Photo )Patient).png',
-                tutorFlagPath: 'assets/lesson-icons/canada-test-flag.svg',
-                tutorName: 'Roger Vaccaro',
-                topics: lesson.tags.map((tag) => tag.name),
-                subscribersCount: lesson.subscribersCount,
-                level: langLevelsSample[lesson.languageLevel].title,
-                isDisabled: new Date() > new Date(lesson.startAt),
-            };
-        });
+        return response.map((lesson) => ({
+            id: lesson.id,
+            imgPath: lesson.mediaPath,
+            videoId: lesson.youtubeVideoId,
+            zoomLink: lesson.zoomMeetingLink,
+            title: lesson.name,
+            time: moment(lesson.startAt).format('hh.mm'),
+            tutorAvatarPath: 'assets/lesson-mocks/Photo )Patient).png',
+            tutorFlagPath: 'assets/lesson-icons/canada-test-flag.svg',
+            tutorName: 'Roger Vaccaro',
+            topics: lesson.tags.map((tag) => tag.name),
+            subscribersCount: lesson.subscribersCount,
+            level: langLevelsSample[lesson.languageLevel].title,
+            isDisabled: new Date() > new Date(lesson.startAt),
+        }));
     }
 
     getLessonsUnavailableMessage(): string {

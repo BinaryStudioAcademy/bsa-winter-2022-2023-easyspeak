@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { youtubeVideoLinkRegex } from '@shared/data/regex.util';
 import { INewLesson } from '@shared/models/lesson/INewLesson';
 import { INewQuestion } from '@shared/models/lesson/INewQuestion';
 import { INewTag } from '@shared/models/lesson/INewTag';
 import { LanguageLevels } from '@shared/models/lesson/LanguageLevels';
 import Utils from '@shared/utils/lesson.utils';
-import { youtubeVideoLinkRegex } from '@shared/data/regex.util';
+import * as moment from 'moment';
+
 import { LessonsService } from 'src/app/services/lessons.service';
 import { NotificationService } from 'src/app/services/notification.service';
 
@@ -102,9 +104,8 @@ export class LessonsCreateComponent implements OnInit {
             return;
         }
 
-        const moment = require('moment');
         const [hours, minutes] = this.time.split('.');
-        const startAt = moment(this.date?.value).set({hour: parseInt(hours, 10), minute: parseInt(minutes, 10)}).toDate();
+        const startAt = moment(this.date?.value, 'YYYY-MM-DD').set({ hour: parseInt(hours, 10), minute: parseInt(minutes, 10) }).toDate();
 
         const lessonQuestions: INewQuestion[] =
             this.questions?.value
