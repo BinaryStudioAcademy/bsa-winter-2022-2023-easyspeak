@@ -8,7 +8,6 @@ import { IUserInfo } from '@shared/models/IUserInfo';
 import * as auth from 'firebase/auth';
 import firebase from 'firebase/compat';
 import { firstValueFrom, from } from 'rxjs';
-import { catchError } from 'rxjs/operators';
 
 import { UserService } from './user.service';
 
@@ -26,19 +25,19 @@ export class AuthService {
         private userService: UserService,
     ) {}
 
-    signIn(email: string, password: string) {
-        const firebasePromise = this.afAuth.signInWithEmailAndPassword(email, password);
+    async signIn(email: string, password: string): Promise<void> {
+        const userCredential = await this.afAuth.signInWithEmailAndPassword(email, password);
 
-        const corePromise = firstValueFrom(this.userService.getUser().pipe(catchError(() => {
+        if (userCredential.user) {
+            this.setAccessToken(userCredential.user);
+        }
+
+        try {
+            await firstValueFrom(this.userService.getUser());
+        } catch {
+            await this.logout();
             throw new Error('User was incorrectly registered, please try another one');
-        })));
-
-        return Promise.all([firebasePromise, corePromise])
-            .then(([userCredential]) => {
-                if (userCredential.user) {
-                    this.setAccessToken(userCredential.user);
-                }
-            });
+        }
     }
 
     signUp(email: string, password: string) {

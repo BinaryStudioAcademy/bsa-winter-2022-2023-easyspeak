@@ -23,7 +23,7 @@ namespace EasySpeak.Core.WebAPI.Controllers
         public async Task<ActionResult<UserDto>> Get()
         {
             var userDto = await _userService.GetUserAsync();
-            return userDto is null ? NotFound("User was incorrectly registered, please try another one") : Ok(userDto);
+            return userDto is null ? NotFound() : Ok(userDto);
         }
 
         [HttpPost]
