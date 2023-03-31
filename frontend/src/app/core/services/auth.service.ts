@@ -7,7 +7,7 @@ import { HttpService } from '@core/services/http.service';
 import { IUserInfo } from '@shared/models/IUserInfo';
 import * as auth from 'firebase/auth';
 import firebase from 'firebase/compat';
-import { from } from 'rxjs';
+import { firstValueFrom, from } from 'rxjs';
 
 import { UserService } from './user.service';
 
@@ -25,12 +25,19 @@ export class AuthService {
         private userService: UserService,
     ) {}
 
-    signIn(email: string, password: string) {
-        return this.afAuth.signInWithEmailAndPassword(email, password).then((userCredential) => {
-            if (userCredential.user) {
-                this.setAccessToken(userCredential.user);
-            }
-        });
+    async signIn(email: string, password: string): Promise<void> {
+        const userCredential = await this.afAuth.signInWithEmailAndPassword(email, password);
+
+        if (userCredential.user) {
+            this.setAccessToken(userCredential.user);
+        }
+
+        try {
+            await firstValueFrom(this.userService.getUser());
+        } catch {
+            await this.logout();
+            throw new Error('User was incorrectly registered, please try another one');
+        }
     }
 
     signUp(email: string, password: string) {
