@@ -157,8 +157,8 @@
         </div>
     </div>
     <div class="user-interests-section">
-        <div *ngFor="let item of allTags; let i = index" class="user-interest-content">
-            <input type="checkbox" id="{{i}}" [checked]=selectedTags.includes(item)
+        <div *ngFor="let item of getStringTags(); let i = index" class="user-interest-content">
+            <input type="checkbox" id="{{i}}" [checked]=includesTags(item)
                    class="item-checkbox"
                    (change)="selectInterest($event)" formControlName="tags"/>
             <label class="item-checkbox-label" for="{{i}}">

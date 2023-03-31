@@ -7,6 +7,7 @@ import { LanguageLevel } from '@shared/data/languageLevel';
 import { Sex } from '@shared/data/sex';
 import { IIcon } from '@shared/models/IIcon';
 import { IUserInfo } from '@shared/models/IUserInfo';
+import { ITag } from '@shared/models/user/ITag';
 import { getTags } from '@shared/utils/tagsForInterests';
 import { ToastrService } from 'ngx-toastr';
 
@@ -22,7 +23,9 @@ import { detailsGroup } from '../user-details.component.util';
 export class UserDetailsComponent extends BaseComponent implements OnInit {
     @Input() tagsList: IIcon[] = getTags();
 
-    allTags: string[];
+    allTags: ITag[];
+
+    allStringTags: string[];
 
     countries;
 
@@ -36,7 +39,7 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
 
     detailsForm;
 
-    selectedTags: string[] = [];
+    selectedTags: ITag[] = [];
 
     constructor(
         private fb: FormBuilder,
@@ -122,22 +125,26 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
         return this.detailsForm.get('email') as FormControl;
     }
 
-    // get interests(): FormControl {
-    //     return this.detailsForm.get('') as FormControl;
-    // }
-
     selectInterest($event: Event) {
         const ev = $event.target as HTMLInputElement;
         const numb = parseInt(ev.id, 10);
 
         if (ev.checked) {
-            this.selectedTags = this.selectedTags.concat(this.tagsList[numb].icon_name);
+            this.selectedTags = this.selectedTags.concat({ name: this.tagsList[numb].icon_name });
         } else {
-            this.selectedTags = this.selectedTags.filter(x => x !== this.tagsList[numb].icon_name);
+            this.selectedTags = this.selectedTags.filter(x => x.name !== this.tagsList[numb].icon_name);
         }
     }
 
     getIconByName(name: string) {
         return this.tagsList.find(t => t.icon_name === name)?.link;
+    }
+
+    getStringTags() {
+        return Array.from(this.allTags, t => t.name);
+    }
+
+    includesTags(item: string) {
+        return this.selectedTags.map(t => t.name === item);
     }
 }

@@ -19,7 +19,7 @@ namespace EasySpeak.Core.WebAPI.Controllers
             _userService = userService;
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpGet]
         public async Task<ActionResult<UserDto>> Get()
         {
@@ -53,7 +53,7 @@ namespace EasySpeak.Core.WebAPI.Controllers
 
 
         [HttpGet("tags")]
-        public Task<string[]> GetTagNames() => _userService.GetUserTags();
+        public Task<TagDto[]> GetTagNames() => _userService.GetUserTags();
 
         [HttpPost("recommended")]
         public async Task<ActionResult<List<UserShortInfoDto>>> GetSuitableUsers([FromBody] UserFilterDto userFilter)

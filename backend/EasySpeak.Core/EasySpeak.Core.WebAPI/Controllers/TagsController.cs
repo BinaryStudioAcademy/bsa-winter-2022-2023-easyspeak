@@ -1,4 +1,5 @@
 ﻿using EasySpeak.Core.BLL.Interfaces;
+using EasySpeak.Core.Common.DTO.Tag;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -16,7 +17,7 @@ namespace EasySpeak.Core.WebAPI.Controllers
         }
 
         [HttpGet]
-        public Task<string[]> Get() => _tagService.GetAllTagNames();
+        public Task<TagDto[]> Get() => _tagService.GetAllTags();
 
     }
 }

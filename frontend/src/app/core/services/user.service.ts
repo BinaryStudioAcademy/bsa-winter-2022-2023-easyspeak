@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { INewUser } from '@shared/models/INewUser';
 import { ITopic } from '@shared/models/ITopic';
 import { IUserInfo } from '@shared/models/IUserInfo';
+import { ITag } from '@shared/models/user/ITag';
 import { UserCard } from '@shared/models/user/user-card';
 import { Observable } from 'rxjs';
 
@@ -42,7 +43,7 @@ export class UserService {
     }
 
     public getTagNames() {
-        return this.httpService.get<string[]>(`${this.routePrefix}/tags`);
+        return this.httpService.get<ITag[]>(`${this.routePrefix}/tags`);
     }
 
     public getUsers(userFilter?: UserFilter): Observable<UserCard[]> {

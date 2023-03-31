@@ -29,19 +29,18 @@ public class UserService : BaseService, IUserService
     public async Task<UserDto> GetUserAsync()
     {
         var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == _authService.UserId);
-
         var userDto = _mapper.Map<UserDto>(user);
         userDto.ImagePath = await GetProfileImageUrl(user!.ImageId);
 
         return userDto;
     }
 
-    public async Task<string[]> GetUserTags()
+    public async Task<TagDto[]> GetUserTags()
     {
         var userId = _authService.UserId;
         var user = await _context.Users.Include(u => u.Tags).FirstOrDefaultAsync(u => u.Id == userId) ?? throw new ArgumentException($"Failed to find the user with id {userId}");
 
-        return user.Tags.Select(t => t.Name).ToArray();
+        return user.Tags.Select(t => _mapper.Map<TagDto>(t)).ToArray();
     }
 
     public async Task<UserDto> CreateUser(UserRegisterDto userDto)

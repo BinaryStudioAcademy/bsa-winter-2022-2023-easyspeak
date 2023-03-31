@@ -1,3 +1,5 @@
+import { ITag } from '@shared/models/user/ITag';
+
 import { ITopic } from './ITopic';
 
 export interface IUserInfo {
@@ -12,5 +14,5 @@ export interface IUserInfo {
     topics?: ITopic[]
     imagePath: string;
     canOnlyFriendMessage: boolean;
-    tags: string[];
+    tags: ITag[];
 }

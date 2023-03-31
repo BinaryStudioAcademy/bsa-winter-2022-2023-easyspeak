@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using EasySpeak.Core.BLL.Interfaces;
+using EasySpeak.Core.Common.DTO.Tag;
 using EasySpeak.Core.DAL.Context;
+using EasySpeak.Core.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace EasySpeak.Core.BLL.Services;
@@ -11,6 +13,6 @@ public class TagService : BaseService, ITagService
     {
     }
 
-    public Task<string[]> GetAllTagNames() => _context.Tags.Select(t => t.Name).ToArrayAsync();
+    public async Task<TagDto[]> GetAllTags() => _mapper.Map<TagDto[]>(await _context.Tags.ToArrayAsync());
 
 }
