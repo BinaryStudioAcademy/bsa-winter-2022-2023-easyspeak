@@ -8,7 +8,7 @@ import { IUserInfo } from '@shared/models/IUserInfo';
 import * as auth from 'firebase/auth';
 import firebase from 'firebase/compat';
 import { ToastrService } from 'ngx-toastr';
-import { from } from 'rxjs';
+import { from, Observable, of } from 'rxjs';
 
 import { UserService } from './user.service';
 
@@ -106,17 +106,21 @@ export class AuthService {
         });
     }
 
-    async resetPassword(email: string): Promise<boolean> {
+    async resetPassword(email: string): Promise<Observable<boolean>> {
         try {
             await this.afAuth.sendPasswordResetEmail(email);
 
-            return true;
-        } catch (errorReset: unknown) {
+            return await new Promise((resolve) => {
+                resolve(of(true));
+            });
+        } catch (errorReset) {
             const errorMessage = (errorReset as Error).message;
 
             this.toastrService.error(errorMessage, 'Error');
 
-            return false;
+            return new Promise((resolve) => {
+                resolve(of(false));
+            });
         }
     }
 

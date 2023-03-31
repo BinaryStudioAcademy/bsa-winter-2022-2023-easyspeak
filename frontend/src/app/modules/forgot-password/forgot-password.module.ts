@@ -14,6 +14,7 @@ import { ForgotPasswordRoutingModule } from './forgot-password-routing.module';
         CheckEmailComponent,
         ChangePasswordComponent,
         WriteEmailComponent],
+
     imports: [MatIconModule,
         ForgotPasswordRoutingModule,
         CommonModule,
