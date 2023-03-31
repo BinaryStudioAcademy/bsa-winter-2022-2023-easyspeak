@@ -6,40 +6,40 @@
         <div class="avatar-wrp">
             <app-avatar [size]="103"></app-avatar>
             <div class="edit-avatar-icon">
-                <img src="/assets/user-profile//edit-icon.svg" alt="edit" />
+                <img src="/assets/user-profile//edit-icon.svg" alt="edit"/>
             </div>
             <div class="vertical-line"></div>
         </div>
         <div class="avatar-list">
             <div class="avatar-suggestion-wrp">
-                <img src="/assets//user-profile/boy.svg" alt="" />
+                <img src="/assets//user-profile/boy.svg" alt=""/>
             </div>
             <div class="avatar-suggestion-wrp">
-                <img src="/assets//user-profile/man-bald.svg" alt="" />
+                <img src="/assets//user-profile/man-bald.svg" alt=""/>
             </div>
             <div class="avatar-suggestion-wrp">
-                <img src="/assets//user-profile/man-beard.svg" alt="" />
+                <img src="/assets//user-profile/man-beard.svg" alt=""/>
             </div>
             <div class="avatar-suggestion-wrp">
-                <img src="/assets//user-profile/man-curly.svg" alt="" />
+                <img src="/assets//user-profile/man-curly.svg" alt=""/>
             </div>
             <div class="avatar-suggestion-wrp">
-                <img src="/assets//user-profile/man-elf.svg" alt="" />
+                <img src="/assets//user-profile/man-elf.svg" alt=""/>
             </div>
             <div class="avatar-suggestion-wrp">
-                <img src="/assets//user-profile/man-in-tuxedo.svg" alt="" />
+                <img src="/assets//user-profile/man-in-tuxedo.svg" alt=""/>
             </div>
             <div class="avatar-suggestion-wrp">
-                <img src="/assets//user-profile/man-red-hair.svg" alt="" />
+                <img src="/assets//user-profile/man-red-hair.svg" alt=""/>
             </div>
             <div class="avatar-suggestion-wrp">
-                <img src="/assets//user-profile/man-technologist.svg" alt="" />
+                <img src="/assets//user-profile/man-technologist.svg" alt=""/>
             </div>
             <div class="avatar-suggestion-wrp">
-                <img src="/assets//user-profile/man-superhero.svg" alt="" />
+                <img src="/assets//user-profile/man-superhero.svg" alt=""/>
             </div>
             <div class="avatar-suggestion-wrp">
-                <img src="/assets//user-profile/man-white-hair.svg" alt="" />
+                <img src="/assets//user-profile/man-white-hair.svg" alt=""/>
             </div>
         </div>
     </div>
@@ -57,11 +57,13 @@
     </div>
     <div class="who-can-message-section">
         <div>
-            <input class="styled-checkbox" id="everyone" type="radio" name="whoCanMessage" Formcontrol="whoCanMessage" checked="true" >
+            <input class="styled-checkbox" id="everyone" type="radio" name="whoCanMessage" Formcontrol="whoCanMessage"
+                   checked="true">
             <label for="everyone">Everyone</label>
         </div>
         <div>
-            <input class="styled-checkbox" id="friendsCheckbox" type="radio" name="whoCanMessage" Formcontrol="whoCanMessage">
+            <input class="styled-checkbox" id="friendsCheckbox" type="radio" name="whoCanMessage"
+                   Formcontrol="whoCanMessage">
             <label for="friendsCheckbox">Only my Friends</label>
         </div>
     </div>
@@ -75,11 +77,11 @@
             <label *ngIf="firstName.getRawValue()" class="label" for="firstName">First Name</label>
             <div class="errors-wrp" *ngIf="firstName.errors">
                 <mat-error class="error" *ngIf="firstName.errors?.['minlength'] && firstName.touched">
-                    <img src="/assets/user-profile/alert-triangle.svg" alt="" />
+                    <img src="/assets/user-profile/alert-triangle.svg" alt=""/>
                     Minimal length is 2 characters
                 </mat-error>
                 <mat-error class="error" *ngIf="firstName.errors?.['required'] && firstName.touched">
-                    <img src="/assets/user-profile/alert-triangle.svg" alt="" />
+                    <img src="/assets/user-profile/alert-triangle.svg" alt=""/>
                     This field is required
                 </mat-error>
             </div>
@@ -93,11 +95,11 @@
 
             <div class="errors-wrp" *ngIf="lastName.errors">
                 <mat-error class="error" *ngIf="lastName.errors?.['minlength'] && lastName.touched">
-                    <img src="/assets/user-profile/alert-triangle.svg" alt="" />
+                    <img src="/assets/user-profile/alert-triangle.svg" alt=""/>
                     Minimal length is 2 characters
                 </mat-error>
                 <mat-error class="error" *ngIf="lastName.errors?.['required'] && lastName.touched">
-                    <img src="/assets/user-profile/alert-triangle.svg" alt="" />
+                    <img src="/assets/user-profile/alert-triangle.svg" alt=""/>
                     This field is required
                 </mat-error>
             </div>
@@ -173,6 +175,3 @@
         <button type="submit">Save</button>
     </div>
 </form>
-
-
-

@@ -12,7 +12,6 @@ public class UserDto
     public string Language { get; set; } = String.Empty;
     public string LanguageLevel { get; set; } = String.Empty;
     public string Email { get; set; } = String.Empty;
-
     public string ImagePath { get; set; } = String.Empty;
     public ICollection<TagDto>? Tags { get; set; }
 

@@ -8,6 +8,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
+            // eslint-disable-next-line no-use-before-define
             useExisting: forwardRef(() => CalendarComponent),
             multi: true,
         },
@@ -23,13 +24,13 @@ export class CalendarComponent implements ControlValueAccessor {
 
     _value: Date = new Date();
 
+    // eslint-disable-next-line no-unused-vars,no-empty-function
     onChange = (_: unknown) => {};
 
+    // eslint-disable-next-line no-unused-vars,no-empty-function
     onTouch = (_: unknown) => {};
 
-    val = ''; // this is the updated value that the class accesses
-
-    set value(val: Date) { // this value is updated by programmatic changes if( val !== undefined && this.val !== val){
+    set value(val: Date) {
         this._value = val;
         const hours = new Date().getHours();
 

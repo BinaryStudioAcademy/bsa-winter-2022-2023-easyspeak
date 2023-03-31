@@ -13,11 +13,8 @@ namespace EasySpeak.Core.BLL.Interfaces
         Task<LessonDto> EnrollUserToLesson(long lessonId);
         Task<List<UserShortInfoDto>> GetFilteredUsers(UserFilterDto userFilter);
         Task<UserDto?> GetUserAsync();
-
-        Task<TagDto[]> GetUserTags();
-
         Task<string> UploadProfilePhoto(IFormFile file);
-
+        Task<TagDto[]> GetUserTags();
         Task<UserDto> UpdateUser(UserDto userDto);
     }
 }

@@ -1,41 +1,31 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using EasySpeak.Core.BLL.Interfaces;
-using EasySpeak.Core.Common.DTO.Filter;
-using EasySpeak.Core.Common.DTO.Lesson;
 using EasySpeak.Core.Common.DTO.Tag;
+using EasySpeak.Core.Common.DTO.Filter;
 using EasySpeak.Core.Common.DTO.UploadFile;
+using EasySpeak.Core.Common.DTO.Lesson;
 using EasySpeak.Core.Common.DTO.User;
+using EasySpeak.Core.Common.Enums;
 using EasySpeak.Core.DAL.Context;
 using EasySpeak.Core.DAL.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.ComponentModel;
 
 namespace EasySpeak.Core.BLL.Services;
-
 
 public class UserService : BaseService, IUserService
 {
     private readonly IEasySpeakFileService _fileService;
     private readonly IFirebaseAuthService _authService;
 
-
     public UserService(IEasySpeakFileService fileService, EasySpeakCoreContext context, IMapper mapper, IFirebaseAuthService authService)
         : base(context, mapper)
     {
         _authService = authService;
         _fileService = fileService;
-    }
-
-    public async Task<TagDto[]> GetUserTags()
-    {
-        var userId = _authService.UserId;
-#if DEBUG
-        userId = 2;
-#endif
-
-        var user = await _context.Users.Include(u => u.Tags).FirstOrDefaultAsync(u => u.Id == userId) ?? throw new ArgumentException($"Failed to find the user with id {userId}");
-
-        return user.Tags.Select(t => _mapper.Map<TagDto>(t)).ToArray();
     }
 
     public async Task<UserDto> CreateUser(UserRegisterDto userDto)
@@ -49,41 +39,9 @@ public class UserService : BaseService, IUserService
         return _mapper.Map<UserDto>(userEntity);
     }
 
-    public async Task<UserDto> UpdateUser(UserDto userDto)
-    {
-        var userId = _authService.UserId;
-
-#if DEBUG
-        userId = 2;
-#endif
-        var user = await _context.Users.Include(u => u.Tags).FirstOrDefaultAsync(a => a.Id == userId) ?? throw new ArgumentException($"Failed to find the user with id {userId}");
-
-        _mapper.Map(userDto, user);
-
-        user.Tags.Clear();
-
-        if (userDto.Tags != null)
-            foreach (var userDtoTag in userDto.Tags)
-            {
-                var tagFromDb = await _context.Tags.FirstOrDefaultAsync(t => t.Name == userDtoTag.Name);
-                if (tagFromDb != null)
-                {
-                    user.Tags.Add(tagFromDb);
-                }
-            }
-
-        await _context.SaveChangesAsync();
-
-        return _mapper.Map<User, UserDto>(user);
-    }
-
     public async Task<UserDto?> GetUserAsync()
     {
-        var userId = _authService.UserId;
-#if DEBUG
-        userId = 2;
-#endif
-        var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+        var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == _authService.UserId);
         var userDto = _mapper.Map<UserDto>(user);
 
         if (userDto is null)
@@ -175,16 +133,47 @@ public class UserService : BaseService, IUserService
             throw new ArgumentNullException("This file not found");
         }
 
+        user.ImageId = uploadFileDto.Id;
+        profilePhoto.UserId = user.Id;
+        await _context.SaveChangesAsync();
+
         return profilePhoto.Url;
     }
 
     private async Task<string> GetProfileImageUrl(long? imageId)
     {
         var profileImage = await _context.EasySpeakFiles.FirstOrDefaultAsync(f => f.Id == imageId);
+        return profileImage?.Url ?? "";
+    }
 
-        if (profileImage is null || profileImage.Url is null)
-            return "";
+    public async Task<TagDto[]> GetUserTags()
+    {
+        var userId = _authService.UserId;
+        var user = await _context.Users.Include(u => u.Tags).FirstOrDefaultAsync(u => u.Id == userId) ?? throw new ArgumentException($"Failed to find the user with id {userId}");
+        return user.Tags.Select(t => _mapper.Map<TagDto>(t)).ToArray();
+    }
 
-        return profileImage.Url;
+    public async Task<UserDto> UpdateUser(UserDto userDto)
+    {
+        var userId = _authService.UserId;
+        var user = await _context.Users.Include(u => u.Tags).FirstOrDefaultAsync(a => a.Id == userId) ?? throw new ArgumentException($"Failed to find the user with id {userId}");
+
+        _mapper.Map(userDto, user);
+
+        user.Tags.Clear();
+
+        if (userDto.Tags != null)
+            foreach (var userDtoTag in userDto.Tags)
+            {
+                var tagFromDb = await _context.Tags.FirstOrDefaultAsync(t => t.Name == userDtoTag.Name);
+                if (tagFromDb != null)
+                {
+                    user.Tags.Add(tagFromDb);
+                }
+            }
+
+        await _context.SaveChangesAsync();
+
+        return _mapper.Map<User, UserDto>(user);
     }
 }
