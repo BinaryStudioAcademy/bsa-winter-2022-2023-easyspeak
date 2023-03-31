@@ -47,7 +47,7 @@ export class SignUpComponent extends BaseComponent implements OnInit {
         country: new FormControl('', [Validators.required]),
         language: new FormControl('', [Validators.required]),
         dateOfBirth: new FormControl('', [Validators.required]),
-        password: new FormControl('', [Validators.required, Validators.pattern(passFormatRegex),
+        pass: new FormControl('', [Validators.required, Validators.pattern(passFormatRegex),
             Validators.minLength(6), Validators.maxLength(25)]),
         passwordConfirmation: new FormControl('', [Validators.required]),
     }, { validators: matchpassword });
@@ -163,7 +163,7 @@ export class SignUpComponent extends BaseComponent implements OnInit {
     }
 
     get password(): FormControl {
-        return this.registerForm.get('password') as FormControl;
+        return this.registerForm.get('pass') as FormControl;
     }
 
     get passwordConfirmation(): FormControl {
