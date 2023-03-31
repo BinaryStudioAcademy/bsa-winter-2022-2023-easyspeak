@@ -1,10 +1,31 @@
 @import "src/styles/colors"
 
-.notifications 
+.container
     width: 280px
+    max-height: 500px
     display: flex
     flex-direction: column
-    max-height: 500px
+    gap: 5px
+
+
+.header-section
+    display: flex
+    justify-content: space-between
+    align-items: center
+    box-sizing: border-box
+    padding: 12px 13px
+    .title
+        font-size: 16px
+        font-weight: 500
+    .clear-button
+        color: $blue-200
+        text-decoration: none
+
+
+
+.notifications 
+    display: flex
+    flex-direction: column
     overflow-y: scroll
     overflow-x: hidden
     scrollbar-width: none
@@ -12,24 +33,51 @@
         width: 0px
  
 
+
 .notification-element
     display: flex
-    justify-content: flex-start
-    align-items: center
-    width: 100%
-    height: 44px
-    max-height: 88px
+    justify-content: space-between
+    // align-items: center
     border: hidden
     background-color: $white
+    box-sizing: border-box
+    width: 100%
+    height: 100%
+    gap: 10px
+    padding: 6px 12px
     &:hover
       cursor: pointer
       background-color: $gray-100
+
+
+.notification-element-content
+    display: flex
+    gap: 10px
+
+
+.unread-indicator-wrp
+    display: flex
+    align-items: center
+
+.unread-indicator
+    width: 6px
+    background-color: $blue-200
+    height: 6px
+    border-radius: 50%
 
 .notification-icon
     padding-left: 10px
     padding-right: 10px
 
-.notification-text
+.notification-text-wrp
+    display: flex
+    flex-direction: column
+    text-align: start
+    gap: 4px
+    width: 80%
     font-weight: 400
     font-size: 14px
     line-height: 120%
+    height: max-content
+    .notification-timespan
+        color: $blue-200

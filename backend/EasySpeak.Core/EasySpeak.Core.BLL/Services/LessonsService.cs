@@ -29,7 +29,7 @@ public class LessonsService : BaseService, ILessonsService
 
     public async Task<ICollection<LessonDto>> GetAllLessonsAsync(FiltersRequest filtersRequest)
     {
-        var tagsName = filtersRequest.Tags?.Select(x => x.Name);
+        var tagsName = filtersRequest.Tags?.Select(x => x.Name).ToList();
 
         var lessonsFromContext = _context.Lessons
             .Include(l => l.Tags)
@@ -38,12 +38,12 @@ public class LessonsService : BaseService, ILessonsService
 
         if (tagsName?.Count() != 0)
         {
-            lessonsFromContext = lessonsFromContext.Where(x => x.Tags.Any(y => tagsName.Contains(y.Name)));
+            lessonsFromContext = lessonsFromContext.Where(x => x.Tags.Any(y => tagsName != null && tagsName.Contains(y.Name)));
         }
 
         if (filtersRequest.LanguageLevels?.Count() != 0)
         {
-            lessonsFromContext = lessonsFromContext.Where(m => filtersRequest.LanguageLevels.Contains(m.LanguageLevel));
+            lessonsFromContext = lessonsFromContext.Where(m => filtersRequest.LanguageLevels != null && filtersRequest.LanguageLevels.Contains(m.LanguageLevel));
         }
 
         var subscribersCountDict = await lessonsFromContext.Select(t => new { Id = t.Id, SbCount = t.Subscribers.Count }).ToDictionaryAsync(t => t.Id);

@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NotificationsHubService } from '@core/hubs/notifications-hub.service';
 import { HttpService } from '@core/services/http.service';
 import { INotification } from '@shared/models/INotification';
+import * as moment from 'moment';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -16,31 +17,92 @@ export class UserNotificationComponent implements OnInit, OnDestroy {
 
     notifications: INotification[] = [];
 
+    timespan: string;
+
+    created: Date;
+
     notifySubscription: Subscription;
 
     constructor(notificationsHub: NotificationsHubService, httpService: HttpService) {
         this.notificationsHub = notificationsHub;
         this.httpService = httpService;
+
+        this.created = new Date();
+        this.timespan = moment(this.created).fromNow();
     }
 
     async ngOnInit() {
-        this.notifySubscription = await this.httpService.get<INotification[]>('/notification').subscribe((data) => {
-            this.notifications = data;
+        // this.notifySubscription = await this.httpService.get<INotification[]>('/notification').subscribe((data) => {
+        //     this.notifications = data;
+        // });
+
+        // await this.notificationsHub.start();
+
+        // this.notificationsHub.listenMessages((msg) => {
+        //     const broadcastMessage = JSON.parse(msg);
+
+        //     const messages = {
+        //         id: broadcastMessage.Id,
+        //         text: broadcastMessage.Text,
+        //         type: broadcastMessage.Type,
+        //         isRead: broadcastMessage.IsRead,
+        //     };
+
+        //     this.notifications.push(messages);
+        // });
+
+        this.notifications.push({
+            id: 2,
+            text: 'You recieved new message. You have added someone',
+            email: undefined,
+            type: 'Action',
+            isRead: false,
+            link: '/lessons/2',
         });
 
-        await this.notificationsHub.start();
+        this.notifications.push({
+            id: 2,
+            text: 'You recieved new message. You have added someone You have added someone. You have added someone',
+            email: undefined,
+            type: 'Action',
+            isRead: false,
+            link: '/lessons/2',
+        });
 
-        this.notificationsHub.listenMessages((msg) => {
-            const broadcastMessage = JSON.parse(msg);
+        this.notifications.push({
+            id: 2,
+            text: 'You recieved new message. You have added someone',
+            email: undefined,
+            type: 'Action',
+            isRead: false,
+            link: '/lessons/2',
+        });
 
-            const messages = {
-                id: broadcastMessage.Id,
-                text: broadcastMessage.Text,
-                type: broadcastMessage.Type,
-                isRead: broadcastMessage.IsRead,
-            };
+        this.notifications.push({
+            id: 2,
+            text: 'You recieved new message. You have added someone You have added someone. You have added someone',
+            email: undefined,
+            type: 'Action',
+            isRead: false,
+            link: '/lessons/2',
+        });
 
-            this.notifications.push(messages);
+        this.notifications.push({
+            id: 2,
+            text: 'You recieved new message. You have added someone',
+            email: undefined,
+            type: 'Action',
+            isRead: false,
+            link: '/lessons/2',
+        });
+
+        this.notifications.push({
+            id: 2,
+            text: 'You recieved new message. You have added someone You have added someone. You have added someone',
+            email: undefined,
+            type: 'Action',
+            isRead: false,
+            link: '/lessons/2',
         });
     }
 
