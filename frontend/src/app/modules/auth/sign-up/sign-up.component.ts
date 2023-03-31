@@ -47,7 +47,7 @@ export class SignUpComponent extends BaseComponent implements OnInit {
         country: new FormControl('', [Validators.required]),
         language: new FormControl('', [Validators.required]),
         dateOfBirth: new FormControl('', [Validators.required]),
-        pass: new FormControl('', [Validators.required, Validators.pattern(passFormatRegex),
+        password: new FormControl('', [Validators.required, Validators.pattern(passFormatRegex),
             Validators.minLength(6), Validators.maxLength(25)]),
         passwordConfirmation: new FormControl('', [Validators.required]),
     }, { validators: matchpassword });
@@ -130,6 +130,17 @@ export class SignUpComponent extends BaseComponent implements OnInit {
         return '';
     }
 
+    getFormErrorMessage(formGroup: FormGroup): string {
+        const errorEntry = Object.entries(validationErrorMessage)
+            .find(([key]) => formGroup.hasError(key));
+
+        if (errorEntry) {
+            return errorEntry[1];
+        }
+
+        return '';
+    }
+
     get email(): FormControl {
         return this.registerForm.get('email') as FormControl;
     }
@@ -163,7 +174,7 @@ export class SignUpComponent extends BaseComponent implements OnInit {
     }
 
     get password(): FormControl {
-        return this.registerForm.get('pass') as FormControl;
+        return this.registerForm.get('password') as FormControl;
     }
 
     get passwordConfirmation(): FormControl {
