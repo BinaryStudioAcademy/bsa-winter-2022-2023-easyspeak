@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '@core/services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-write-email',
@@ -16,7 +17,7 @@ export class WriteEmailComponent {
 
     wrongEmail: boolean = false;
 
-    constructor(private router: Router, private authService: AuthService) {}
+    constructor(private router: Router, private authService: AuthService, private toastr: ToastrService) {}
 
     async sendMail(): Promise<void> {
         this.isMatch = this.emailPattern.test(this.email);
@@ -25,8 +26,10 @@ export class WriteEmailComponent {
             const goNextPage: Promise<boolean> = this.authService.resetPassword(this.email);
 
             if ((await goNextPage) === true) {
-                this.router.navigate(['forgot-password/check-email']);
+                this.toastr.success('Recovery link has been send to your email', 'Success');
+                this.router.navigate(['auth/forgot-password/check-email']);
             } else {
+                this.toastr.error('User with this email doesnt exist', 'Error');
                 this.wrongEmail = true;
             }
         }
