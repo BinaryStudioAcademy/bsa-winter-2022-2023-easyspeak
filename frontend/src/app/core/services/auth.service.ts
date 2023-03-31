@@ -110,17 +110,13 @@ export class AuthService {
         try {
             await this.afAuth.sendPasswordResetEmail(email);
 
-            return await new Promise((resolve) => {
-                resolve(of(true));
-            });
+            return of(true);
         } catch (errorReset) {
             const errorMessage = (errorReset as Error).message;
 
             this.toastrService.error(errorMessage, 'Error');
 
-            return new Promise((resolve) => {
-                resolve(of(false));
-            });
+            return of(false);
         }
     }
 
