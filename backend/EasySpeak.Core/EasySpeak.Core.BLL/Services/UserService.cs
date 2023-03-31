@@ -26,15 +26,6 @@ public class UserService : BaseService, IUserService
         _fileService = fileService;
     }
 
-    public async Task<UserDto> GetUserAsync()
-    {
-        var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == _authService.UserId);
-        var userDto = _mapper.Map<UserDto>(user);
-        userDto.ImagePath = await GetProfileImageUrl(user!.ImageId);
-
-        return userDto;
-    }
-
     public async Task<TagDto[]> GetUserTags()
     {
         var userId = _authService.UserId;
@@ -80,6 +71,21 @@ public class UserService : BaseService, IUserService
         await _context.SaveChangesAsync();
 
         return _mapper.Map<User, UserDto>(user);
+    }
+
+    public async Task<UserDto?> GetUserAsync()
+    {
+        var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == _authService.UserId);
+        var userDto = _mapper.Map<UserDto>(user);
+
+        if (userDto is null)
+        {
+            return userDto;
+        }
+
+        userDto.ImagePath = await GetProfileImageUrl(user!.ImageId);
+
+        return userDto;
     }
 
     public async Task<UserDto> AddTagsAsync(List<TagDto> tags)

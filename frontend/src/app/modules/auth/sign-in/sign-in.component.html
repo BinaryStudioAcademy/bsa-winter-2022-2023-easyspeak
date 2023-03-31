@@ -11,16 +11,14 @@
                     email="{{this.email}}"/>
         
                 <div class="errors-wrp">
-                    <mat-error class="error" *ngIf="this.email.invalid 
-                    && (this.email.dirty || this.userLoginForm.submitted)">
+                    <mat-error class="error" *ngIf="this.email.invalid && this.userLoginForm.submitted">
                         <img src="/assets/user-profile/alert-triangle.svg" alt="">
                         {{getErrorMessage(email)}}
                     </mat-error>
                 </div>
         
                 <div class="error-surface" 
-                    *ngIf="this.email.errors  
-                    && (this.email.dirty || this.userLoginForm.submitted)">
+                    *ngIf="this.email.errors && this.userLoginForm.submitted">
                 </div>
             </div>
 
@@ -29,18 +27,17 @@
                     type="password"
                     formControlName="password"
                     placeholder="Password"
-                    required/>
+                    required
+                    appPasswordVisibility/>
         
                 <div class="errors-wrp">
-                    <mat-error class="error" *ngIf="this.password.invalid 
-                    && (this.password.dirty || this.userLoginForm.submitted)">
+                    <mat-error class="error" *ngIf="this.password.invalid && this.userLoginForm.submitted">
                         <img src="/assets/user-profile/alert-triangle.svg" alt="">
                         {{getErrorMessage(password)}}
                     </mat-error>
                 </div>
         
-                <div *ngIf="this.password.invalid 
-                    && (this.password.dirty || this.userLoginForm.submitted)" 
+                <div *ngIf="this.password.invalid && this.userLoginForm.submitted" 
                     class="error-surface">
                 </div>
             </div>
@@ -49,5 +46,9 @@
                 Sign In
             </button>
         </form>
+    </div>
+    <div id="has-account">
+        <span>I don't have an account! </span>
+        <a href="auth/sign-up">Sign Up</a>
     </div>
 </div>

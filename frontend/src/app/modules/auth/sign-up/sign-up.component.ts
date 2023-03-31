@@ -130,6 +130,17 @@ export class SignUpComponent extends BaseComponent implements OnInit {
         return '';
     }
 
+    getFormErrorMessage(formGroup: FormGroup): string {
+        const errorEntry = Object.entries(validationErrorMessage)
+            .find(([key]) => formGroup.hasError(key));
+
+        if (errorEntry) {
+            return errorEntry[1];
+        }
+
+        return '';
+    }
+
     get email(): FormControl {
         return this.registerForm.get('email') as FormControl;
     }

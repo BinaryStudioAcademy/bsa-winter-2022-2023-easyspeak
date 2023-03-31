@@ -1,15 +1,15 @@
 <div (appClickOutside)="clickedOutside()">
-    <div class="button-wrapper">
+    <div [ngClass]="{'button-wrapper-modal': usedInModal}" class="button-wrapper">
         <button class="dropdown-button" (click)="clickButton()"></button>
-        <div class="button-content">
+        <div [ngClass]="{'button-content-modal': usedInModal}" class="button-content">
             <div class="button-symbols">
-                <div class="counter">{{outputList.length}}</div>
+                <div [ngClass]="{'counter-modal': usedInModal}" class="counter">{{outputList.length}}</div>
                 <div>Interests</div>
             </div>
-            <img class="arrow-icon" src="assets/interestsDropdown/chevron_down.svg"/>
+            <img [ngClass]="{'arrow-icon-modal': usedInModal}" class="arrow-icon" src="assets/interestsDropdown/chevron_down.svg"/>
         </div>
-    
-        <div class="dropdown-content" *ngIf="toggle">
+
+        <div [ngClass]="{'dropdown-content-modal': usedInModal}" class="dropdown-content" *ngIf="toggle">
             <div *ngFor="let item of inputList; let i = index" class="dropdown-item">
                 <input type="checkbox" id="{{i}}" [checked]="iconExistsInOutputList(item.icon_name)" class="item-checkbox"
                        (change)="selectInterest($event)"/>
