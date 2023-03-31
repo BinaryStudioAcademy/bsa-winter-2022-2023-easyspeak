@@ -29,13 +29,19 @@ export class WriteEmailComponent {
                 this.toastr.success('Recovery link has been send to your email', 'Success');
                 this.router.navigate(['auth/forgot-password/check-email']);
             } else {
-                this.toastr.error('User with this email doesnt exist', 'Error');
                 this.wrongEmail = true;
             }
+        } else if (this.email.length === 0) {
+            this.isMatch = true;
         }
     }
 
     changedMail(): void {
-        this.isMatch = true;
+        if (!this.isMatch) {
+            this.isMatch = this.emailPattern.test(this.email);
+        }
+        if (this.wrongEmail) {
+            this.wrongEmail = false;
+        }
     }
 }

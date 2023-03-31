@@ -63,8 +63,6 @@ export class ChangePasswordComponent implements OnInit {
 
                 this.router.navigate(['main']);
             } else {
-                this.toastr.error('This link time has expired!', 'Error');
-
                 this.responseIsOk = false;
             }
         }
