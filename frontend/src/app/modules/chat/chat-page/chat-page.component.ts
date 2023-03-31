@@ -75,10 +75,6 @@ export class ChatPageComponent {
         file: new FormControl(''),
     });
 
-    changeChat(person: IChatPerson) {
-
-    }
-
     sendMessage() {
         const message = this.form.controls.message.value;
 
