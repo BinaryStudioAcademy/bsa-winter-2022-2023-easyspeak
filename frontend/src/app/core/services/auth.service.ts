@@ -7,7 +7,7 @@ import { HttpService } from '@core/services/http.service';
 import { IUserInfo } from '@shared/models/IUserInfo';
 import * as auth from 'firebase/auth';
 import firebase from 'firebase/compat';
-import { firstValueFrom, from } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 
 import { UserService } from './user.service';
 
@@ -29,7 +29,7 @@ export class AuthService {
         const userCredential = await this.afAuth.signInWithEmailAndPassword(email, password);
 
         if (userCredential.user) {
-            this.setAccessToken(userCredential.user);
+            await this.setAccessToken(userCredential.user);
         }
 
         try {
@@ -48,8 +48,10 @@ export class AuthService {
         });
     }
 
-    private setAccessToken(user: firebase.User) {
-        from(user.getIdToken()).subscribe((token) => localStorage.setItem('accessToken', token));
+    private async setAccessToken(user: firebase.User): Promise<void> {
+        const userIdToken = await user.getIdToken();
+
+        localStorage.setItem('accessToken', userIdToken);
     }
 
     public setUserSection() {
