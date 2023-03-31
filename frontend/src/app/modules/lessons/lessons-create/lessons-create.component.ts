@@ -51,20 +51,12 @@ export class LessonsCreateComponent implements OnInit {
         return this.myForm.get('name');
     }
 
-    get description() {
-        return this.myForm.get('description');
-    }
-
     get date() {
         return this.myForm.get('date');
     }
 
     get questions() {
         return this.myForm.get('questions');
-    }
-
-    get tags() {
-        return this.myForm.get('tags');
     }
 
     get videoLink() {

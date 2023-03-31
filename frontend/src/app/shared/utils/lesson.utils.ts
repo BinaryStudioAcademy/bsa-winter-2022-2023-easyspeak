@@ -58,10 +58,8 @@ export default class Utils {
     static group(fb: FormBuilder) {
         return fb.group({
             name: ['', [Validators.required]],
-            description: ['', [Validators.required]],
             date: ['', [Validators.required]],
             questions: ['', [Validators.required]],
-            tags: ['', [Validators.required]],
             videoLink: ['', [Validators.required]],
             studentsCount: ['', [Validators.required]],
             meetLink: ['', [Validators.required]],
