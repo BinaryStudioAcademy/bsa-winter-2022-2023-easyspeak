@@ -6,7 +6,7 @@ import { INewQuestion } from '@shared/models/lesson/INewQuestion';
 import { INewTag } from '@shared/models/lesson/INewTag';
 import { LanguageLevels } from '@shared/models/lesson/LanguageLevels';
 import Utils from '@shared/utils/lesson.utils';
-
+import { youtubeVideoLinkRegex } from '@shared/data/regex.util';
 import { LessonsService } from 'src/app/services/lessons.service';
 import { NotificationService } from 'src/app/services/notification.service';
 
@@ -90,8 +90,7 @@ export class LessonsCreateComponent implements OnInit {
     }
 
     getYoutubeVideoId(link: string): string {
-        const regex = /(?:youtube(?:-nocookie)?\.com\/(?:[^/\n\s]+\/\S+\/|(?:v|vi|user)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
-        const videoId = link.match(regex);
+        const videoId = link.match(youtubeVideoLinkRegex);
 
         return videoId ? videoId[1] : '';
     }
