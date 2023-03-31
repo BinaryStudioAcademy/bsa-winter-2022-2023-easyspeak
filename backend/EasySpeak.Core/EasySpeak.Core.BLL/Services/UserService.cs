@@ -29,6 +29,10 @@ public class UserService : BaseService, IUserService
     public async Task<TagDto[]> GetUserTags()
     {
         var userId = _authService.UserId;
+#if DEBUG
+        userId = 2;
+#endif
+
         var user = await _context.Users.Include(u => u.Tags).FirstOrDefaultAsync(u => u.Id == userId) ?? throw new ArgumentException($"Failed to find the user with id {userId}");
 
         return user.Tags.Select(t => _mapper.Map<TagDto>(t)).ToArray();
@@ -75,7 +79,11 @@ public class UserService : BaseService, IUserService
 
     public async Task<UserDto?> GetUserAsync()
     {
-        var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == _authService.UserId);
+        var userId = _authService.UserId;
+#if DEBUG
+        userId = 2;
+#endif
+        var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
         var userDto = _mapper.Map<UserDto>(user);
 
         if (userDto is null)

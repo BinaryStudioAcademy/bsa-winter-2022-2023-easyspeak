@@ -145,6 +145,6 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
     }
 
     includesTags(item: string) {
-        return this.selectedTags.map(t => t.name === item);
+        return this.selectedTags.find(t => t.name === item);
     }
 }
