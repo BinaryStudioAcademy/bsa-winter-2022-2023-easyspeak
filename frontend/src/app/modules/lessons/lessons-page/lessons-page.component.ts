@@ -83,7 +83,6 @@ export class LessonsPageComponent implements OnInit, OnChanges {
             })
             .subscribe((response) => {
                 this.lessons = this.mapLessons(response);
-                console.log(this.lessons)
                 this.lessonsColumn1 = this.lessons.filter((el, index) => index % 2 === 0);
                 this.lessonsColumn2 = this.lessons.filter((el, index) => index % 2 === 1);
             });
