@@ -46,7 +46,7 @@ public class LessonsService : BaseService, ILessonsService
             lessonsFromContext = lessonsFromContext.Where(m => filtersRequest.LanguageLevels.Contains(m.LanguageLevel));
         }
 
-        var subscribersCountDict = await lessonsFromContext.Select(t => new { Id = t.Id, SbCount = t.LimitOfUsers ?? 0 }).ToDictionaryAsync(t => t.Id);
+        var subscribersCountDict = await lessonsFromContext.Select(t => new { t.Id, SbCount = t.Subscribers.Count }).ToDictionaryAsync(t => t.Id);
         var lessons = await lessonsFromContext.OrderBy(l => l.StartAt).ToListAsync();
 
         var lessonDtos = _mapper.Map<List<Lesson>, List<LessonDto>>(lessons);
