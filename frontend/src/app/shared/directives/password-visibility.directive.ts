@@ -31,6 +31,7 @@ export class PasswordVisibilityDirective {
         span.style.top = '50%';
         span.style.transform = 'translateY(-50%)';
         span.style.zIndex = '10';
+        span.style.cursor = 'pointer';
         span.addEventListener('click', () => {
             this.toggle(span);
         });
