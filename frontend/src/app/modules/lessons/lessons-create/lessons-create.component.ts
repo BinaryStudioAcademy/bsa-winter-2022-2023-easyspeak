@@ -102,9 +102,9 @@ export class LessonsCreateComponent implements OnInit {
             return;
         }
 
-        const timeHours = parseInt(this.time.split('.')[0], 10);
-        const timeMinutes = parseInt(this.time.split('.')[1], 10);
-        const startAt = new Date(new Date(this.date?.value).setHours(timeHours, timeMinutes));
+        const moment = require('moment');
+        const [hours, minutes] = this.time.split('.');
+        const startAt = moment(this.date?.value).set({hour: parseInt(hours, 10), minute: parseInt(minutes, 10)}).toDate();
 
         const lessonQuestions: INewQuestion[] =
             this.questions?.value
