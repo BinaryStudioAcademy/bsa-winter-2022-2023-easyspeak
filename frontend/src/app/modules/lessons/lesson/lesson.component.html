@@ -11,23 +11,25 @@
                         <img src="assets/lesson-icons/play.svg" alt="play-icon" />
                     </div>
                 </div>
-        
-                <div class="info">
-                    <h3 appTooltipWhenOverflow class="lesson-theme">{{ lesson.title }}</h3>
-                    <div class="lesson-tutor">
-                        <img class="avatar" src="{{ lesson.tutorAvatarPath }}" alt="tutor-avatar" />
-                        <img class="origin" src="{{ lesson.tutorFlagPath }}" alt="tutor-origin" />
-                        <p class="tutor-name">{{ lesson.tutorName }}</p>
+                <div class="main-info">
+                    <div class="title-time">
+                        <div class="info">
+                            <h3 appTooltipWhenOverflow class="lesson-theme">{{ lesson.title }}</h3>
+                            <div class="lesson-tutor">
+                                <img class="avatar" src="{{ lesson.tutorAvatarPath }}" alt="tutor-avatar" />
+                                <img class="origin" src="{{ lesson.tutorFlagPath }}" alt="tutor-origin" />
+                                <p class="tutor-name">{{ lesson.tutorName }}</p>
+                            </div>
+                        </div>
+                        <div class="time">
+                            <img class="time-icon" src="assets/lesson-icons/clock-icon.svg" alt="clock-icon" />
+                            <h4 class="lesson-time">{{ lesson.time }}</h4>
+                        </div>
                     </div>
                     <div class="lesson-topics">
                         <div class="topic" *ngFor="let topic of lesson.topics">{{ topic }}</div>
                     </div>
                 </div>
-            </div>
-    
-            <div class="time">
-                <img class="time-icon" src="assets/lesson-icons/clock-icon.svg" alt="clock-icon" />
-                <h4 class="lesson-time">{{ lesson.time }}</h4>
             </div>
         </div>
 
