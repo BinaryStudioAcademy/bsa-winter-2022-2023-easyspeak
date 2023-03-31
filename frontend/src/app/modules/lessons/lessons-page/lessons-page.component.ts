@@ -74,32 +74,25 @@ export class LessonsPageComponent implements OnInit, OnChanges {
                 languageLevels: this.selectedLanguageFilters.map((level: string) =>
                     Object.values(LanguageLevels).indexOf(level)),
                 tags: this.selectedInterestsFilters.map((topic) => ({ name: topic })),
-                date: new Date(this.selectedDateFilter.toISOString().slice(0, 10)),
+                date: new Date(this.selectedDateFilter?.toISOString().slice(0, 10)),
             })
-            .subscribe((response: ILesson[]) => {
-                this.lessons = [];
+            .subscribe((response) => {
+                this.lessons = this.mapLessons(response);
 
-                //TODO: When everything regarding user in the database is finished, update the lesson retrieval code
-
-                response.forEach((lesson) => {
-                    this.lessons.push({
-                        id: lesson.id,
-                        imgPath: lesson.mediaPath,
-                        videoId: 'xqAriI87lFU',
-                        title: lesson.name,
-                        time: lesson.startAt.split('T')[1].substring(0, 5).replace(':', '.'),
-                        tutorAvatarPath: '../../../../assets/lesson-mocks/Photo )Patient).png',
-                        tutorFlagPath: '../../../../assets/lesson-icons/canada-test-flag.svg',
-                        tutorName: 'Roger Vaccaro',
-                        topics: lesson.tags.map((tag) => tag.name),
-                        subscribersCount: lesson.subscribersCount,
-                        level: langLevelsSample[lesson.languageLevel].title,
-                        isDisabled: new Date() > new Date(lesson.startAt),
-                    });
-                });
                 this.lessonsColumn1 = this.lessons.filter((el, index) => index % 2 === 0);
                 this.lessonsColumn2 = this.lessons.filter((el, index) => index % 2 === 1);
             });
+    }
+
+    private mapLessons(response: ILesson[]): Lesson[] {
+        return response.map((lessons) => <Lesson><unknown>{
+            ...lessons,
+            level: langLevelsSample[lessons.languageLevel].title,
+            isDisabled: new Date() > new Date(lessons.startAt),
+            imgPath: lessons.mediaPath,
+            time: moment(lessons.startAt).format('hh.mm'),
+            topics: lessons.tags.map((tag) => tag.name),
+        });
     }
 
     getLessonsUnavailableMessage(): string {
