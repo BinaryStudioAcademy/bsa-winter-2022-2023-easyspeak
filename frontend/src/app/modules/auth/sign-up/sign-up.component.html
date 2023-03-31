@@ -215,7 +215,8 @@
             <input type="password" 
                 formControlName="password" 
                 placeholder="Password" 
-                required/>
+                required
+                appPasswordVisibility/>
             <div class="errors-wrp">
 
             <mat-error class="error" *ngIf="this.password.invalid">
@@ -231,7 +232,8 @@
         <div class="form-group-item">
             <input type="password" 
                 placeholder="Repeat Password" 
-                formControlName="passwordConfirmation" />
+                formControlName="passwordConfirmation" 
+                appPasswordVisibility/>
     
             <div class="errors-wrp">
                 <mat-error class="error" *ngIf="this.registerForm.invalid 
