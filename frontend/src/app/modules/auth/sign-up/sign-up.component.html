@@ -1,7 +1,7 @@
 <div class="container">
     <div class="form-wrp">
         <h1>Create Account</h1>
-        <form #userRegisterForm="ngForm" [formGroup]="registerForm" class="form-content" (submit)="submitForm()">
+        <form #userRegisterForm="ngForm" [formGroup]="registerForm" class="form-content" autocomplete="off" (submit)="submitForm()">
             <div class="form-group-item">
                 <input type="email" formControlName="email" placeholder="Email" required email="{{this.email}}" />
 
@@ -165,7 +165,7 @@
                 </div>
             </div>
             <div class="form-group-item">
-                <input type="password" formControlName="password" placeholder="Password" required
+                <input type="password" formControlName="password" placeholder="Password" autocomplete="new-password" required
                     appPasswordVisibility />
                 <div class="errors-wrp">
 
@@ -179,7 +179,7 @@
                 </div>
             </div>
             <div class="form-group-item">
-                <input type="password" placeholder="Repeat Password" formControlName="passwordConfirmation"
+                <input type="password"  formControlName="passwordConfirmation" placeholder="Repeat Password" autocomplete="new-password"
                     appPasswordVisibility />
 
                 <div class="errors-wrp">
