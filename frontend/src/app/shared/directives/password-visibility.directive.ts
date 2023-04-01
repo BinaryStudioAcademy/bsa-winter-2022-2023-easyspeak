@@ -28,7 +28,8 @@ export class PasswordVisibilityDirective {
         span.innerHTML = '<img src="assets/password-visibility/closed-eye.svg" alt="closed-eye"/>';
         span.style.position = 'absolute';
         span.style.right = '1.6vw';
-        span.style.top = '50%';
+        span.style.top = '52%';
+        span.style.height = '17px';
         span.style.transform = 'translateY(-50%)';
         span.style.zIndex = '10';
         span.style.cursor = 'pointer';
