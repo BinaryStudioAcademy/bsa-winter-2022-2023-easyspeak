@@ -83,6 +83,6 @@ export class LessonComponent extends BaseComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.previewImage = this.lesson.videoId ? `//img.youtube.com/vi/${this.lesson.videoId}/0.jpg` : '';
+        this.previewImage = this.lesson.videoId ? `//img.youtube.com/vi/${this.lesson.videoId}/maxresdefault.jpg` : '';
     }
 }
