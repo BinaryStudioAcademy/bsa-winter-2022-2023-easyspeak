@@ -128,15 +128,15 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
     selectInterest($event: Event, i: number) {
         const ev = $event.target as HTMLInputElement;
 
-        if (ev.checked) {
-            this.selectedTags = this.selectedTags.concat({ name: this.tagsList[i].icon_name });
-        } else {
-            this.selectedTags = this.selectedTags.filter(x => x.name !== this.tagsList[i].icon_name);
-        }
+        // if (ev.checked) {
+        //     this.selectedTags = this.selectedTags.concat({ name: this.tagsList[i].icon_name });
+        // } else {
+        //     this.selectedTags = this.selectedTags.filter(x => x.name !== this.tagsList[i].icon_name);
+        // }
 
-        // this.selectedTags=(ev.checked)
-        //     ?this.selectedTags.concat({ name: this.tagsList[i].icon_name })
-        //     :this.selectedTags.filter(x => x.name !== this.tagsList[i].icon_name);
+        this.selectedTags = (ev.checked)
+            ? this.selectedTags.concat({ name: this.tagsList[i].icon_name })
+            : this.selectedTags.filter(x => x.name !== this.tagsList[i].icon_name);
     }
 
     getIconByName(name: string) {

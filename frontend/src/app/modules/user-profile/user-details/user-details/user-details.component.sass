@@ -217,7 +217,7 @@ input:focus
     gap: 3px
 
 
-.user-socials-section
+.submit-button-section
     grid-row: 5
     grid-column: 2
     height: 100%
@@ -232,6 +232,15 @@ input:focus
         font-weight: 700
         border-radius: 50px
         border-width: 0
+
+.submit:disabled,
+submit[disabled]
+    background: $gray-200
+    color: $white
+    font-size: 16px
+    font-weight: 700
+    border-radius: 50px
+    border-width: 0
 
 .form-input-group
     width: 100%

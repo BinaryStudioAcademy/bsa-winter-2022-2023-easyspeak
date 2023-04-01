@@ -71,7 +71,7 @@
     <div class="user-details-section">
         <div class="form-input-group">
             <input class="input" type="text" id="firstName" formControlName="firstName" minlength="2" maxlength="25"
-                   required="">
+                   required>
 
             <div *ngIf="!firstName.getRawValue()" class="placeholder">First Name</div>
             <label *ngIf="firstName.getRawValue()" class="label" for="firstName">First Name</label>
@@ -162,7 +162,7 @@
         <div *ngFor="let item of getStringTags(); let i = index" class="user-interest-content">
             <input type="checkbox" id="{{i}}" [checked]=includesTags(item)
                    class="item-checkbox"
-                   (change)="selectInterest($event,i)" formControlName="tags"/>
+                   (change)="selectInterest($event,i)" />
             <label class="item-checkbox-label" for="{{i}}">
                 <div class="interest-image-container ">
                     <img class="icon" [src]="getIconByName(item)" alt="image"/>
@@ -171,7 +171,7 @@
             </label>
         </div>
     </div>
-    <div class="user-socials-section">
-        <button type="submit">Save</button>
+    <div class="submit-button-section">
+        <button type="submit" [disabled]="firstName.invalid && lastName.invalid" class="submit">Save</button>
     </div>
 </form>
