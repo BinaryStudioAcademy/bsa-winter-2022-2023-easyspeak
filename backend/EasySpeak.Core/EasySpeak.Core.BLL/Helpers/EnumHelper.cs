@@ -10,8 +10,8 @@ namespace EasySpeak.Core.BLL.Helpers
             var dict = new Dictionary<string, Sex>{
                         { "Female", Sex.Female },
                         { "Male", Sex.Male },
-                        {"Non Binary", Sex.NonBinary },
-                        {"Do not want to specify", Sex.DoNotWantToSpecify } };
+                        { "Non Binary", Sex.NonBinary },
+                        { "Do not want to specify", Sex.DoNotWantToSpecify } };
 
             return dict[sex];
         }
