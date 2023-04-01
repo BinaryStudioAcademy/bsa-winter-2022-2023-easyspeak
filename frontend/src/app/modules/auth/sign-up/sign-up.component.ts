@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BaseComponent } from '@core/base/base.component';
@@ -15,6 +15,7 @@ import { CountriesTzLangProviderService } from 'src/app/services/countries-tz-la
 
 import { validationErrorMessage } from './error-helper';
 import { matchpassword } from './matchpassword.validator';
+import { NgSelectComponent } from '@ng-select/ng-select';
 
 @Component({
     selector: 'app-sign-up',
@@ -37,6 +38,16 @@ export class SignUpComponent extends BaseComponent implements OnInit {
     languages: string[];
 
     placeholder = 'sex';
+
+    @ViewChild('ageDropdown') ageDropdown: NgSelectComponent;
+
+    @ViewChild('sexDropdown') sexDropdown: NgSelectComponent;
+
+    @ViewChild('countryDropdown') countryDropdown: NgSelectComponent;
+
+    @ViewChild('languageDropdown') languageDropdown: NgSelectComponent;
+
+    @ViewChild('levelDropdown') levelDropdown: NgSelectComponent;
 
     registerForm = new FormGroup({
         email: new FormControl('', [Validators.required, Validators.maxLength(30)]),
@@ -140,6 +151,16 @@ export class SignUpComponent extends BaseComponent implements OnInit {
 
         return '';
     }
+
+    expandAgeDropdown = () => this.ageDropdown.open();
+
+    expandSexDropdown = () => this.sexDropdown.open();
+
+    expandCountryDropdown = () => this.countryDropdown.open();
+
+    expandLanguageDropdown = () => this.languageDropdown.open();
+
+    expandLevelDropdown = () => this.levelDropdown.open();
 
     get email(): FormControl {
         return this.registerForm.get('email') as FormControl;
