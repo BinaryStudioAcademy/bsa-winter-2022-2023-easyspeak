@@ -6,40 +6,40 @@
         <div class="avatar-wrp">
             <app-avatar [size]="103"></app-avatar>
             <div class="edit-avatar-icon">
-                <img src="/assets/user-profile//edit-icon.svg" alt="edit"/>
+                <img src="/assets/user-profile/edit-icon.svg" alt="edit"/>
             </div>
             <div class="vertical-line"></div>
         </div>
         <div class="avatar-list">
             <div class="avatar-suggestion-wrp">
-                <img src="/assets//user-profile/boy.svg" alt=""/>
+                <img src="/assets/user-profile/boy.svg" alt=""/>
             </div>
             <div class="avatar-suggestion-wrp">
-                <img src="/assets//user-profile/man-bald.svg" alt=""/>
+                <img src="/assets/user-profile/man-bald.svg" alt=""/>
             </div>
             <div class="avatar-suggestion-wrp">
-                <img src="/assets//user-profile/man-beard.svg" alt=""/>
+                <img src="/assets/user-profile/man-beard.svg" alt=""/>
             </div>
             <div class="avatar-suggestion-wrp">
-                <img src="/assets//user-profile/man-curly.svg" alt=""/>
+                <img src="/assets/user-profile/man-curly.svg" alt=""/>
             </div>
             <div class="avatar-suggestion-wrp">
-                <img src="/assets//user-profile/man-elf.svg" alt=""/>
+                <img src="/assets/user-profile/man-elf.svg" alt=""/>
             </div>
             <div class="avatar-suggestion-wrp">
-                <img src="/assets//user-profile/man-in-tuxedo.svg" alt=""/>
+                <img src="/assets/user-profile/man-in-tuxedo.svg" alt=""/>
             </div>
             <div class="avatar-suggestion-wrp">
-                <img src="/assets//user-profile/man-red-hair.svg" alt=""/>
+                <img src="/assets/user-profile/man-red-hair.svg" alt=""/>
             </div>
             <div class="avatar-suggestion-wrp">
-                <img src="/assets//user-profile/man-technologist.svg" alt=""/>
+                <img src="/assets/user-profile/man-technologist.svg" alt=""/>
             </div>
             <div class="avatar-suggestion-wrp">
-                <img src="/assets//user-profile/man-superhero.svg" alt=""/>
+                <img src="/assets/user-profile/man-superhero.svg" alt=""/>
             </div>
             <div class="avatar-suggestion-wrp">
-                <img src="/assets//user-profile/man-white-hair.svg" alt=""/>
+                <img src="/assets/user-profile/man-white-hair.svg" alt=""/>
             </div>
         </div>
     </div>
@@ -162,7 +162,7 @@
         <div *ngFor="let item of getStringTags(); let i = index" class="user-interest-content">
             <input type="checkbox" id="{{i}}" [checked]=includesTags(item)
                    class="item-checkbox"
-                   (change)="selectInterest($event)" formControlName="tags"/>
+                   (change)="selectInterest($event,i)" formControlName="tags"/>
             <label class="item-checkbox-label" for="{{i}}">
                 <div class="interest-image-container ">
                     <img class="icon" [src]="getIconByName(item)" alt="image"/>

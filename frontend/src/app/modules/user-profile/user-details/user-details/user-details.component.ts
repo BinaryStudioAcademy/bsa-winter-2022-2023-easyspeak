@@ -125,15 +125,18 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
         return this.detailsForm.get('email') as FormControl;
     }
 
-    selectInterest($event: Event) {
+    selectInterest($event: Event, i: number) {
         const ev = $event.target as HTMLInputElement;
-        const numb = parseInt(ev.id, 10);
 
         if (ev.checked) {
-            this.selectedTags = this.selectedTags.concat({ name: this.tagsList[numb].icon_name });
+            this.selectedTags = this.selectedTags.concat({ name: this.tagsList[i].icon_name });
         } else {
-            this.selectedTags = this.selectedTags.filter(x => x.name !== this.tagsList[numb].icon_name);
+            this.selectedTags = this.selectedTags.filter(x => x.name !== this.tagsList[i].icon_name);
         }
+
+        // this.selectedTags=(ev.checked)
+        //     ?this.selectedTags.concat({ name: this.tagsList[i].icon_name })
+        //     :this.selectedTags.filter(x => x.name !== this.tagsList[i].icon_name);
     }
 
     getIconByName(name: string) {

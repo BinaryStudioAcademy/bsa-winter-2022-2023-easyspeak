@@ -24,11 +24,9 @@ export class CalendarComponent implements ControlValueAccessor {
 
     _value: Date = new Date();
 
-    // eslint-disable-next-line no-unused-vars,no-empty-function
-    onChange = (_: unknown) => {};
+    onChange = (_: string) => {};
 
-    // eslint-disable-next-line no-unused-vars,no-empty-function
-    onTouch = (_: unknown) => {};
+    onTouch = (_: Date) => {};
 
     set value(val: Date) {
         this._value = val;
