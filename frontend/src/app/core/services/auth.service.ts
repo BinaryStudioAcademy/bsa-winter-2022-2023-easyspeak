@@ -25,12 +25,16 @@ export class AuthService {
         private userService: UserService,
     ) {}
 
-    async signIn(email: string, password: string): Promise<void> {
-        const userCredential = await this.afAuth.signInWithEmailAndPassword(email, password);
-
+    async handleUserCredential(userCredential: any) {
         if (userCredential.user) {
             await this.setAccessToken(userCredential.user).then(() => this.navigateTo('timetable'));
         }
+    }
+
+    async signIn(email: string, password: string): Promise<void> {
+        const userCredential = await this.afAuth.signInWithEmailAndPassword(email, password);
+
+        await this.handleUserCredential(userCredential);
 
         try {
             await firstValueFrom(this.userService.getUser());
@@ -44,9 +48,7 @@ export class AuthService {
         return this.afAuth
             .createUserWithEmailAndPassword(email, password)
             .then(async (userCredential) => {
-                if (userCredential.user) {
-                    await this.setAccessToken(userCredential.user).then(() => this.navigateTo('topics'));
-                }
+                await this.handleUserCredential(userCredential)
             })
             .catch(() => {
                 throw new Error('This email is already registered. Try another one');
