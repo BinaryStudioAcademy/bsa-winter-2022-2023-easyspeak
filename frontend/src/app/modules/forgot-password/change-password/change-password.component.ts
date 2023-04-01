@@ -16,11 +16,9 @@ export class ChangePasswordComponent implements OnInit {
 
     repeatPassword: string = '';
 
-    showPassword: boolean = false;
-
-    showRepeatPassword: boolean = false;
-
     passwordIsMatch: boolean = true;
+
+    passwordIsValid: boolean = true;
 
     token: string;
 
@@ -39,20 +37,18 @@ export class ChangePasswordComponent implements OnInit {
         });
     }
 
-    togglePassword(isShow: boolean) {
-        this.showPassword = isShow;
-    }
-
-    toggleRepeatPassword(isShow: boolean) {
-        this.showRepeatPassword = isShow;
-    }
-
-    async isSame() {
+    isSame() {
         this.passwordIsMatch = this.password === this.repeatPassword;
+    }
+
+    isValid() {
+        this.passwordIsValid = this.passwordPattern.test(this.password);
     }
 
     async resetPassword() {
         this.isSame();
+
+        this.isValid();
 
         if (this.passwordIsMatch && this.passwordPattern.test(this.password)) {
             const response = this.authService.confirmResetPassword(this.token, this.password);

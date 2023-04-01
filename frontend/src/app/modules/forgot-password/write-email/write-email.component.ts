@@ -15,17 +15,21 @@ export class WriteEmailComponent implements OnDestroy {
 
     email: string = '';
 
-    isMatch: boolean = true;
+    isMatchFormat: boolean = true;
 
-    wrongEmail: boolean = false;
+    isWrongEmail: boolean = false;
+
+    buttonClicked: boolean = false;
 
     constructor(private router: Router, private authService: AuthService, private toastr: ToastrService) {}
 
     async sendMail(): Promise<void> {
-        this.isMatch = emailFormatRegex.test(this.email);
+        this.isMatchFormat = emailFormatRegex.test(this.email);
 
-        if (this.isMatch) {
-            const goNextPage: Promise<Observable<boolean>> = this.authService.resetPassword(this.email);
+        this.buttonClicked = true;
+
+        if (this.isMatchFormat) {
+            const goNextPage: Observable<boolean> = await this.authService.resetPassword(this.email);
 
             this.resetPassSub = (await goNextPage).subscribe((success) => {
                 if (success) {
@@ -33,24 +37,30 @@ export class WriteEmailComponent implements OnDestroy {
 
                     this.router.navigate(['auth/forgot-password/check-email']);
                 } else {
-                    this.wrongEmail = true;
+                    this.isWrongEmail = true;
                 }
             });
         } else if (this.email.length === 0) {
-            this.isMatch = true;
+            this.isMatchFormat = true;
         }
     }
 
     changedMail(): void {
-        if (this.email.length === 0) {
-            this.isMatch = true;
-        } else
-        if (!this.isMatch) {
-            this.isMatch = emailFormatRegex.test(this.email);
+        this.isMatchFormat = emailFormatRegex.test(this.email);
+
+        this.buttonClicked = false;
+
+        if (this.isWrongEmail) {
+            this.isWrongEmail = false;
         }
-        if (this.wrongEmail) {
-            this.wrongEmail = false;
+    }
+
+    redWarning(): boolean {
+        if (!this.isMatchFormat && this.buttonClicked && this.email.length > 0) {
+            return true;
         }
+
+        return false;
     }
 
     ngOnDestroy() {
