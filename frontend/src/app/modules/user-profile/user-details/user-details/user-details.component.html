@@ -172,6 +172,6 @@
         </div>
     </div>
     <div class="submit-button-section">
-        <button type="submit" [disabled]="firstName.invalid && lastName.invalid" class="submit">Save</button>
+        <button type="submit" [disabled]="firstName.invalid || lastName.invalid" class="submit">Save</button>
     </div>
 </form>

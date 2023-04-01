@@ -232,15 +232,9 @@ input:focus
         font-weight: 700
         border-radius: 50px
         border-width: 0
+    button:disabled
+        background-color: $gray-200
 
-.submit:disabled,
-submit[disabled]
-    background: $gray-200
-    color: $white
-    font-size: 16px
-    font-weight: 700
-    border-radius: 50px
-    border-width: 0
 
 .form-input-group
     width: 100%
@@ -389,3 +383,6 @@ submit[disabled]
 :host::ng-deep .ng-tns-c117-2
     display: flex
     align-items: center
+
+::ng-deep.ng-option-label
+    font-size: 14px

@@ -159,14 +159,14 @@ public class UserService : BaseService, IUserService
         user.Tags.Clear();
 
         if (userDto.Tags != null)
-            foreach (var userDtoTag in userDto.Tags)
-            {
-                var tagFromDb = await _context.Tags.FirstOrDefaultAsync(t => t.Name == userDtoTag.Name);
-                if (tagFromDb != null)
-                {
-                    user.Tags.Add(tagFromDb);
-                }
-            }
+        {
+            user.Tags = userDto.Tags.Join(
+                _context.Tags,
+                dtoTags => dtoTags.Name,
+                dbTags => dbTags.Name,
+                (dto, dbTags) => dbTags).ToList();
+             
+        }
 
         await _context.SaveChangesAsync();
 

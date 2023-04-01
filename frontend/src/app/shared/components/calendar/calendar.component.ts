@@ -8,7 +8,6 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
-            // eslint-disable-next-line no-use-before-define
             useExisting: forwardRef(() => CalendarComponent),
             multi: true,
         },
@@ -24,17 +23,19 @@ export class CalendarComponent implements ControlValueAccessor {
 
     _value: Date = new Date();
 
-    onChange = (_: string) => {};
+    onChange?: (_: string) => void;
 
-    onTouch = (_: Date) => {};
+    onTouch?: (_: string) => void;
 
     set value(val: Date) {
         this._value = val;
         const hours = new Date().getHours();
 
         val.setHours(hours);
-        this.onChange(val.toISOString().split('T')[0]);
-        this.onTouch(val);
+        const date = val.toISOString().split('T')[0];
+
+        this.onChange?.(date);
+        this.onTouch?.(date);
     }
 
     get value() {
@@ -45,11 +46,11 @@ export class CalendarComponent implements ControlValueAccessor {
         this._value = value;
     }
 
-    registerOnChange(fn: (i: unknown) => void) {
+    registerOnChange(fn: (i: string) => void) {
         this.onChange = fn;
     }
 
-    registerOnTouched(fn: (i: unknown) => void) {
+    registerOnTouched(fn: (i: string) => void) {
         this.onTouch = fn;
     }
 }
