@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { BaseComponent } from '@core/base/base.component';
 import { AuthService } from '@core/services/auth.service';
 import { UserService } from '@core/services/user.service';
+import { NgSelectComponent } from '@ng-select/ng-select';
 import { Ages } from '@shared/data/ages.util';
 import { EnglishLevel } from '@shared/data/englishLevel';
 import { passFormatRegex } from '@shared/data/regex.util';
@@ -15,7 +16,6 @@ import { CountriesTzLangProviderService } from 'src/app/services/countries-tz-la
 
 import { validationErrorMessage } from './error-helper';
 import { matchpassword } from './matchpassword.validator';
-import { NgSelectComponent } from '@ng-select/ng-select';
 
 @Component({
     selector: 'app-sign-up',
