@@ -10,6 +10,8 @@ export interface ILesson {
     questions: IQuestion[],
     startAt: string,
     subscribersCount: number,
+    youtubeVideoId: string,
+    zoomMeetingLink: string,
     tags: ITag[],
     user: null
 }

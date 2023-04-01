@@ -25,13 +25,11 @@ export class HeaderComponent implements OnInit {
             this.authService.setUserSection();
         }
 
-        this.currentUser.subscribe(
-            (resp) => this.getFullName(resp),
-        );
+        this.currentUser.subscribe((resp) => this.setFullName(resp));
         this.userService.getUser().subscribe(this.currentUser);
     }
 
-    getFullName(userInfo: IUserInfo) {
+    setFullName(userInfo: IUserInfo) {
         this.userFullName = `${userInfo.firstName} ${userInfo.lastName}`;
     }
 

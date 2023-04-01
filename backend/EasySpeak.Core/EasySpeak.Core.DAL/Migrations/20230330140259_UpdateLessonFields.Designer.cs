@@ -4,6 +4,7 @@ using EasySpeak.Core.DAL.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EasySpeak.Core.DAL.Migrations
 {
     [DbContext(typeof(EasySpeakCoreContext))]
-    partial class EasySpeakCoreContextModelSnapshot : ModelSnapshot
+    [Migration("20230330140259_UpdateLessonFields")]
+    partial class UpdateLessonFields
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -2459,86 +2461,86 @@ namespace EasySpeak.Core.DAL.Migrations
                         {
                             Id = 1L,
                             BirthDate = new DateTime(2003, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Country = 196,
+                            Country = 0,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "Della.Rosenbaum@yahoo.com",
                             FirstName = "Della",
                             IsBanned = false,
                             IsSubscribed = true,
-                            Language = 175,
+                            Language = 0,
                             LanguageLevel = 2,
                             LastName = "Rosenbaum",
                             Sex = 0,
-                            Status = 0,
-                            Timezone = 275
+                            Status = 3,
+                            Timezone = 0
                         },
                         new
                         {
                             Id = 2L,
                             BirthDate = new DateTime(2003, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Country = 215,
+                            Country = 0,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "Georgia_Gorczany76@gmail.com",
-                            FirstName = "Georgia",
+                            Email = "Jon.Abshire@gmail.com",
+                            FirstName = "Jon",
                             IsBanned = false,
                             IsSubscribed = true,
-                            Language = 103,
+                            Language = 0,
                             LanguageLevel = 0,
-                            LastName = "Gorczany",
+                            LastName = "Abshire",
                             Sex = 1,
-                            Status = 1,
-                            Timezone = 197
+                            Status = 3,
+                            Timezone = 0
                         },
                         new
                         {
                             Id = 3L,
                             BirthDate = new DateTime(2003, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Country = 68,
+                            Country = 0,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "Jimmy89@hotmail.com",
-                            FirstName = "Jimmy",
+                            Email = "Kurt.Gulgowski93@gmail.com",
+                            FirstName = "Kurt",
                             IsBanned = false,
                             IsSubscribed = true,
-                            Language = 65,
+                            Language = 0,
                             LanguageLevel = 2,
-                            LastName = "Fritsch",
-                            Sex = 1,
-                            Status = 2,
-                            Timezone = 6
+                            LastName = "Gulgowski",
+                            Sex = 0,
+                            Status = 3,
+                            Timezone = 0
                         },
                         new
                         {
                             Id = 4L,
                             BirthDate = new DateTime(2003, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Country = 42,
+                            Country = 0,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "Raquel57@gmail.com",
-                            FirstName = "Raquel",
+                            Email = "Eduardo.Larson@gmail.com",
+                            FirstName = "Eduardo",
                             IsBanned = false,
                             IsSubscribed = true,
-                            Language = 21,
-                            LanguageLevel = 0,
-                            LastName = "Bartell",
-                            Sex = 1,
-                            Status = 1,
-                            Timezone = 71
+                            Language = 0,
+                            LanguageLevel = 2,
+                            LastName = "Larson",
+                            Sex = 2,
+                            Status = 0,
+                            Timezone = 0
                         },
                         new
                         {
                             Id = 5L,
                             BirthDate = new DateTime(2003, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Country = 86,
+                            Country = 0,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "Kay.Botsford86@yahoo.com",
-                            FirstName = "Kay",
+                            Email = "Francis16@yahoo.com",
+                            FirstName = "Francis",
                             IsBanned = false,
-                            IsSubscribed = false,
-                            Language = 1,
-                            LanguageLevel = 0,
-                            LastName = "Botsford",
-                            Sex = 1,
-                            Status = 1,
-                            Timezone = 21
+                            IsSubscribed = true,
+                            Language = 0,
+                            LanguageLevel = 2,
+                            LastName = "Little",
+                            Sex = 0,
+                            Status = 0,
+                            Timezone = 0
                         });
                 });
 

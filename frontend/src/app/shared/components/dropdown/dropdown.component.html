@@ -1,8 +1,8 @@
 <div class="container" (appClickOutside)="clickedOutside()">
     <div class="dropdown-btn" (click)="showDropdownMenu()">
-        <div *ngIf="selectedItems.length > 1" class="filters-count-group">
+        <div class="filters-count-group">
             <div class="filters-count-val">
-                {{selectedItems.length}}
+                {{selectedItems.length || 0}}
             </div>
         </div>
         <div class="dropdown-btn-title">
