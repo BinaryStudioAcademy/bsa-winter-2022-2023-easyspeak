@@ -177,7 +177,7 @@ public static class Seeder
         {
             Id = ++i,
             Name = t,
-            CreatedAt = DateTime.Now
+            CreatedAt = DefaultDate
         }).ToList();
     }
 
