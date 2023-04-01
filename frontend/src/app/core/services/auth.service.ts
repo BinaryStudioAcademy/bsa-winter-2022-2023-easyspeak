@@ -29,7 +29,7 @@ export class AuthService {
         const userCredential = await this.afAuth.signInWithEmailAndPassword(email, password);
 
         if (userCredential.user) {
-            await this.setAccessToken(userCredential.user);
+            await this.setAccessToken(userCredential.user).then(() => this.navigateTo('timetable'));
         }
 
         try {
@@ -41,9 +41,9 @@ export class AuthService {
     }
 
     signUp(email: string, password: string) {
-        return this.afAuth.createUserWithEmailAndPassword(email, password).then((userCredential) => {
+        return this.afAuth.createUserWithEmailAndPassword(email, password).then(async (userCredential) => {
             if (userCredential.user) {
-                this.setAccessToken(userCredential.user);
+                await this.setAccessToken(userCredential.user).then(() => this.navigateTo('timetable'));
             }
         });
     }
