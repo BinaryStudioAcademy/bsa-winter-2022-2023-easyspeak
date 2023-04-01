@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { BaseComponent } from '@core/base/base.component';
 import { SpinnerService } from '@core/services/spinner.service';
@@ -15,8 +15,10 @@ import { NotificationService } from 'src/app/services/notification.service';
     templateUrl: './lesson.component.html',
     styleUrls: ['./lesson.component.sass'],
 })
-export class LessonComponent extends BaseComponent {
+export class LessonComponent extends BaseComponent implements OnInit {
     @Input() lesson: Lesson;
+
+    previewImage: string;
 
     questions: Question[] = [];
 
@@ -35,6 +37,9 @@ export class LessonComponent extends BaseComponent {
     }
 
     openDialog(videoId: string) {
+        if (!videoId) {
+            return;
+        }
         this.dialogRef.open(YoutubePlayerComponent, {
             maxWidth: '100vw',
             maxHeight: '100vh',
@@ -75,5 +80,9 @@ export class LessonComponent extends BaseComponent {
                 this.notificationService.showSuccess(`You successfully registered for lesson ${this.lesson.title}`, 'Success!');
             },
             error: () => this.notificationService.showError(`Failed to register for lesson ${this.lesson.title}`, 'Failed!') });
+    }
+
+    ngOnInit(): void {
+        this.previewImage = this.lesson.videoId ? `//img.youtube.com/vi/${this.lesson.videoId}/0.jpg` : '';
     }
 }
