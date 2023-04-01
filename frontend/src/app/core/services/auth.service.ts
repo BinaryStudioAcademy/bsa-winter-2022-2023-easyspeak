@@ -25,7 +25,7 @@ export class AuthService {
         private userService: UserService,
     ) {}
 
-    async handleUserCredential(userCredential: any) {
+    async handleUserCredential(userCredential: firebase.auth.UserCredential) {
         if (userCredential.user) {
             await this.setAccessToken(userCredential.user).then(() => this.navigateTo('timetable'));
         }
