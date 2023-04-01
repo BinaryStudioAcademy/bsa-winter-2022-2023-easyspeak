@@ -8,7 +8,7 @@ import { IUserInfo } from '@shared/models/IUserInfo';
 import * as auth from 'firebase/auth';
 import firebase from 'firebase/compat';
 import { ToastrService } from 'ngx-toastr';
-import { from, firstValueFrom, Observable, of } from 'rxjs';
+import { firstValueFrom, Observable, of } from 'rxjs';
 
 import { UserService } from './user.service';
 
