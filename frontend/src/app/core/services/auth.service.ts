@@ -45,7 +45,7 @@ export class AuthService {
             .createUserWithEmailAndPassword(email, password)
             .then(async (userCredential) => {
                 if (userCredential.user) {
-                    await this.setAccessToken(userCredential.user).then(() => this.navigateTo('timetable'));
+                    await this.setAccessToken(userCredential.user).then(() => this.navigateTo('topics'));
                 }
             })
             .catch(() => {
