@@ -41,11 +41,16 @@ export class AuthService {
     }
 
     signUp(email: string, password: string) {
-        return this.afAuth.createUserWithEmailAndPassword(email, password).then(async (userCredential) => {
-            if (userCredential.user) {
-                await this.setAccessToken(userCredential.user).then(() => this.navigateTo('timetable'));
-            }
-        });
+        return this.afAuth
+            .createUserWithEmailAndPassword(email, password)
+            .then(async (userCredential) => {
+                if (userCredential.user) {
+                    await this.setAccessToken(userCredential.user).then(() => this.navigateTo('timetable'));
+                }
+            })
+            .catch(() => {
+                throw new Error('This email is already registered. Try another one');
+            });
     }
 
     private async setAccessToken(user: firebase.User): Promise<void> {

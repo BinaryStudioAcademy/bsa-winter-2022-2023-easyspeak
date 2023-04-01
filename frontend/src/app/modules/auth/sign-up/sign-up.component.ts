@@ -95,19 +95,18 @@ export class SignUpComponent extends BaseComponent implements OnInit {
     }
 
     private signUp() {
-        this.authService.signUp(this.email.value, this.password.value)
+        this.authService
+            .signUp(this.email.value, this.password.value)
             .then(() => {
-                this.createUser()
-                    .pipe(this.untilThis)
-                    .subscribe(
-                        () => {
-                            this.toastr.success('Account successfully created', 'Success!');
-                            this.router.navigate(['topics']);
-                        },
-                        (error) => {
-                            this.toastr.error(error.message, 'Sign up');
-                        },
-                    );
+                this.createUser().pipe(this.untilThis).subscribe(
+                    () => {
+                        this.toastr.success('Account successfully created', 'Success!');
+                        this.router.navigate(['topics']);
+                    },
+                );
+            })
+            .catch((error: Error) => {
+                this.toastr.error(error.message, 'Error!');
             });
     }
 
