@@ -83,7 +83,7 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
     }
 
     onSubmit() {
-        const userDetails = this.detailsForm.value as unknown as IUserInfo;
+        const userDetails = <IUserInfo> this.detailsForm.value;
 
         userDetails.tags = this.selectedTags;
 

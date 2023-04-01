@@ -9,7 +9,9 @@ export const detailsGroup = (fb: FormBuilder) => fb.group({
     language: '',
     languageLevel: '',
     email: '',
-    tags: '',
+    tags: {},
+    imagePath: '',
+    canOnlyFriendMessage: false,
 });
 
 export const userId = 0;
