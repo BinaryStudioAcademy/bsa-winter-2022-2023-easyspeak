@@ -152,17 +152,21 @@ public class UserService : BaseService, IUserService
     public async Task<UserDto> UpdateUser(UserDto userDto)
     {
         var userId = _authService.UserId;
-
         var user = await _context.Users.Include(u => u.Tags).FirstOrDefaultAsync(a => a.Id == userId) ?? throw new ArgumentException($"Failed to find the user with id {userId}");
+
         _mapper.Map(userDto, user);
 
         user.Tags.Clear();
 
-        var dbTags = await _context.Tags.Select(el => el.Name).ToListAsync();
         if (userDto.Tags != null)
-        {
-            user.Tags = userDto.Tags.Where(el => dbTags.Contains(el.Name)).Select(t => _mapper.Map<TagDto, Tag>(t)).ToList();
-        }
+            foreach (var userDtoTag in userDto.Tags)
+            {
+                var tagFromDb = await _context.Tags.FirstOrDefaultAsync(t => t.Name == userDtoTag.Name);
+                if (tagFromDb != null)
+                {
+                    user.Tags.Add(tagFromDb);
+                }
+            }
 
         await _context.SaveChangesAsync();
 
