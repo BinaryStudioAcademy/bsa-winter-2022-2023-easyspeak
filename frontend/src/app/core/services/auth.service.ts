@@ -48,7 +48,7 @@ export class AuthService {
         return this.afAuth
             .createUserWithEmailAndPassword(email, password)
             .then(async (userCredential) => {
-                await this.handleUserCredential(userCredential)
+                await this.handleUserCredential(userCredential);
             })
             .catch(() => {
                 throw new Error('This email is already registered. Try another one');
