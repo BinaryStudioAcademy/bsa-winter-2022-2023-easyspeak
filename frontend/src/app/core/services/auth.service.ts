@@ -25,16 +25,16 @@ export class AuthService {
         private userService: UserService,
     ) {}
 
-    async handleUserCredential(userCredential: firebase.auth.UserCredential) {
+    async handleUserCredentialThenNavigatoTo(userCredential: firebase.auth.UserCredential, route: string) {
         if (userCredential.user) {
-            await this.setAccessToken(userCredential.user).then(() => this.navigateTo('timetable'));
+            await this.setAccessToken(userCredential.user).then(() => this.navigateTo(route));
         }
     }
 
     async signIn(email: string, password: string): Promise<void> {
         const userCredential = await this.afAuth.signInWithEmailAndPassword(email, password);
 
-        await this.handleUserCredential(userCredential);
+        await this.handleUserCredentialThenNavigatoTo(userCredential, '/timetable');
 
         try {
             await firstValueFrom(this.userService.getUser());
@@ -48,7 +48,7 @@ export class AuthService {
         return this.afAuth
             .createUserWithEmailAndPassword(email, password)
             .then(async (userCredential) => {
-                await this.handleUserCredential(userCredential);
+                await this.handleUserCredentialThenNavigatoTo(userCredential, '/topics');
             })
             .catch(() => {
                 throw new Error('This email is already registered. Try another one');
