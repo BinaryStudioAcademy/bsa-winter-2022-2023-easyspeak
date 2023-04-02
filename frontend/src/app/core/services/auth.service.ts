@@ -72,27 +72,31 @@ export class AuthService {
         this.user.complete();
     }
 
-    public setUserSection() {
-        return new Promise<void>((resolve, reject) => {
-            this.userService.getUser().subscribe((resp) => {
-                localStorage.setItem('user', JSON.stringify({
+    setUser() {
+        this.userService.getUser().subscribe(
+            (resp) => {
+                const user = {
                     firstName: resp.firstName,
                     lastName: resp.lastName,
                     imagePath: resp.imagePath
-                }));
-                resolve();
-            }, (err) => {
-                reject(err);
-            });
-        });
+                };
+
+                this.setLocalStorage(user);
+            },
+            (err: Error) => {
+                this.logout();
+                this.toastr.showError(err.message, 'Error!')
+            }
+        );
+
+        return this.user.asObservable();
     }
 
-    public getUserSection() {
+    getUser() {
         const userSection: string = localStorage.getItem('user') as string;
-
         const userInfo: ILocalStorageUser = JSON.parse(userSection);
-
-        return userInfo;
+        this.user.next(userInfo);
+        return this.user.asObservable();
     }
 
     private navigateTo(route: string) {
