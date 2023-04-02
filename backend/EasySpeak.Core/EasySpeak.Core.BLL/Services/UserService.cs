@@ -145,8 +145,9 @@ public class UserService : BaseService, IUserService
     public async Task<TagDto[]> GetUserTags()
     {
         var userId = _authService.UserId;
-        var user = await _context.Users.Include(u => u.Tags).FirstOrDefaultAsync(u => u.Id == userId) ?? throw new ArgumentException($"Failed to find the user with id {userId}");
-        return user.Tags.Select(t => _mapper.Map<TagDto>(t)).ToArray();
+        var user = await _context.Users.FindAsync(userId) ?? throw new ArgumentException($"Failed to find the user with id {userId}");
+
+        return _mapper.Map<TagDto[]>(user.Tags);
     }
 
     public async Task<UserDto> UpdateUser(UserDto userDto)
@@ -155,17 +156,16 @@ public class UserService : BaseService, IUserService
         var user = await _context.Users.Include(u => u.Tags).FirstOrDefaultAsync(a => a.Id == userId) ?? throw new ArgumentException($"Failed to find the user with id {userId}");
 
         _mapper.Map(userDto, user);
-
         user.Tags.Clear();
 
         if (userDto.Tags != null)
         {
             user.Tags = userDto.Tags.Join(
-                _context.Tags,
-                dtoTags => dtoTags.Name,
-                dbTags => dbTags.Name,
-                (dto, dbTags) => dbTags).ToList();
-             
+                   _context.Tags,
+                   dtoTags => dtoTags.Name,
+                   dbTags => dbTags.Name,
+                   (dto, dbTags) => dbTags).ToList();
+
         }
 
         await _context.SaveChangesAsync();
