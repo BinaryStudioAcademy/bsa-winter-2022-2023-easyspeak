@@ -64,7 +64,11 @@ export class AuthService {
     public setUserSection() {
         return new Promise<void>((resolve, reject) => {
             this.userService.getUser().subscribe((resp) => {
-                localStorage.setItem('user', JSON.stringify(resp));
+                localStorage.setItem('user', JSON.stringify({
+                    firstName: resp.firstName,
+                    lastName: resp.lastName,
+                    imagePath: resp.imagePath
+                }));
                 resolve();
             }, (err) => {
                 reject(err);
