@@ -59,7 +59,6 @@
     display: inline-block
     vertical-align: top
     max-width: 85%
-    height: 70px
 
 .title-time
     display: flex
@@ -120,25 +119,23 @@
 
 .topic
     display: inline-block
-
-    padding: 0 5px
+    padding: 5px 10px
     margin-right: 5px
-    background: $pink-100
-
-    border-radius: 10px
+    background: $message-color
     font-style: normal
     font-weight: 500
     font-size: 12px
-    line-height: 146%
-
+    border-radius: 40px
     color: $blue-200
 
 .topic:last-child
     margin: 0
 
 .lesson-topics
+    display: flex
     height: 25px
     overflow-y: auto
+    align-items: center
 
 .time-icon
     background-color: $turquoise-100
@@ -194,6 +191,8 @@
 
 .main-info
     width: 100%
+    display: flex
+    flex-direction: column
 
 .join
     display: inline-block
