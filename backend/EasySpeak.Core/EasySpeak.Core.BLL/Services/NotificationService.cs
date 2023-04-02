@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using AutoMapper;
+﻿using AutoMapper;
 using EasySpeak.Core.BLL.Interfaces;
 using EasySpeak.Core.Common.DTO.Notification;
 using EasySpeak.Core.Common.Enums;
@@ -126,7 +125,9 @@ namespace EasySpeak.Core.BLL.Services
                     $"<strong>{sender.FirstName} {sender.LastName}</strong> wants to add you to friends",
                 _ => string.Empty
             };
-            
+
+            var imagePath = await GetProfileImageUrl(sender.ImageId);
+
             return new NewNotificationDto()
             {
                 IsRead = false,
@@ -136,7 +137,7 @@ namespace EasySpeak.Core.BLL.Services
                 CreatedAt = DateTime.Now,
                 Type = type,
                 Text = text,
-                ImagePath = sender.ImagePath
+                ImageId = sender.ImageId
             };
         }
 
@@ -153,6 +154,8 @@ namespace EasySpeak.Core.BLL.Services
                 NotificationType.reminding => $"The lesson is starting in <strong>30 minutes</strong>! Don't miss it.",
                 _ => string.Empty
             };
+            
+            var imagePath = await GetProfileImageUrl(lesson.User!.ImageId);
 
             return new NewNotificationDto()
             {
@@ -163,7 +166,7 @@ namespace EasySpeak.Core.BLL.Services
                 CreatedAt = DateTime.Now,
                 Type = type,
                 Text = text,
-                ImagePath = lesson.User.ImagePath
+                ImageId = lesson.User!.ImageId
             };
         }
 
@@ -171,10 +174,10 @@ namespace EasySpeak.Core.BLL.Services
         {
             return await _context.Notifications
                 .Where(n => n.UserId == _firebaseAuthService.UserId && n.Type == type)
-                .LeftJoin(_context.Users,
+                .LeftJoin(_context.EasySpeakFiles,
                     n => n.RelatedTo,
-                    u => u.Id,
-                    (n, u) => new {Notification = n, RelatedUser = u})
+                    u => u.UserId,
+                    (n, u) => new {Notification = n, ImagePath = u.Url})
                 .Select(x => new NotificationDto()
                 {
                     Id = x.Notification.Id,
@@ -182,7 +185,7 @@ namespace EasySpeak.Core.BLL.Services
                     IsRead = x.Notification.IsRead,
                     Text = x.Notification.Text,
                     Type = x.Notification.Type,
-                    ImagePath = x.RelatedUser.ImagePath
+                    ImagePath = x.ImagePath
                 })
                 .ToListAsync();
         }
@@ -191,11 +194,10 @@ namespace EasySpeak.Core.BLL.Services
         {
             return await _context.Notifications
                 .Where(n => n.UserId == _firebaseAuthService.UserId && n.Type == type)
-                .LeftJoin(_context.Lessons
-                        .Include(l => l.User),
+                .LeftJoin(_context.EasySpeakFiles,
                     n => n.RelatedTo,
-                    u => u.Id,
-                    (n, u) => new {Notification = n, Lesson = u})
+                    u => u.UserId,
+                    (n, u) => new {Notification = n, ImagePath = u.Url})
                 .Select(x => new NotificationDto()
                 {
                     Id = x.Notification.Id,
@@ -203,7 +205,7 @@ namespace EasySpeak.Core.BLL.Services
                     IsRead = x.Notification.IsRead,
                     Text = x.Notification.Text,
                     Type = x.Notification.Type,
-                    ImagePath = x.Lesson.User!.ImagePath
+                    ImagePath = x.ImagePath
                 })
                 .ToListAsync();
         }
@@ -236,6 +238,11 @@ namespace EasySpeak.Core.BLL.Services
                    ?? throw new ArgumentException($"Lesson with id {id} not found");
         }
         
+        private async Task<string> GetProfileImageUrl(long? imageId)
+        {
+            var profileImage = await _context.EasySpeakFiles.FirstOrDefaultAsync(f => f.Id == imageId);
+            return profileImage?.Url ?? ""; 
+        }
         
     }
 }

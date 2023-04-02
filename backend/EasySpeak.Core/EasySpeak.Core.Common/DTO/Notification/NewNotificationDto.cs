@@ -14,6 +14,6 @@ namespace EasySpeak.Core.Common.DTO.Notification
         public string Email { get; set; } = string.Empty;
         public bool IsRead { get; set; }
 
-        public string ImagePath { get; set; } = string.Empty;
+        public long? ImageId { get; set; }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using EasySpeak.Core.BLL.Interfaces;
 using EasySpeak.Core.Common.DTO.Tag;
 using EasySpeak.Core.Common.DTO.Filter;
@@ -11,8 +10,6 @@ using EasySpeak.Core.DAL.Context;
 using EasySpeak.Core.DAL.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.ComponentModel;
 
 namespace EasySpeak.Core.BLL.Services;
 
@@ -27,6 +24,7 @@ public class UserService : BaseService, IUserService
     {
         _authService = authService;
         _fileService = fileService;
+        _notificationService = notificationService;
     }
 
     public async Task<UserDto> CreateUser(UserRegisterDto userDto)
