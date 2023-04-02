@@ -18,17 +18,22 @@
 
 .photo
     position: relative
-    display: inline-block
+    display: flex
+    justify-content: center
+    align-items: center
 
-    width: 125px
+    min-width: 125px
     height: 95px
 
     margin-right: 15px
 
 .photo img
-    width: 125px
-    height: 95px
+    max-width: 125px
+    max-height: 95px
     border-radius: 5px
+    height: 100%
+    width: 100%
+    object-fit: cover
 
 .circle
     position: absolute
@@ -68,7 +73,6 @@
     text-overflow: ellipsis
     display: -webkit-box
     -webkit-line-clamp: 2
-            line-clamp: 2
     -webkit-box-orient: vertical
     font-style: normal
     font-weight: 700
