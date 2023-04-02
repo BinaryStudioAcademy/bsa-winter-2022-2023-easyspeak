@@ -8,6 +8,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
+            // eslint-disable-next-line no-use-before-define
             useExisting: forwardRef(() => CalendarComponent),
             multi: true,
         },

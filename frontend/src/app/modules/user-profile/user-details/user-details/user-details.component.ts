@@ -74,11 +74,11 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
                 });
 
                 this.userService.getTagNames().pipe(this.untilThis)
-                    .subscribe(tags => this.selectedTags = tags);
+                    .subscribe(tags => { this.selectedTags = tags; });
             });
 
         this.tagService.getAllTags().pipe(this.untilThis).subscribe(
-            tags => this.allTags = tags,
+            tags => { this.allTags = tags; },
         );
     }
 
