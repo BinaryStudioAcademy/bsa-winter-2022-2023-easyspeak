@@ -41,7 +41,9 @@
             </div>
             <div [matMenuTriggerFor]="menu" class="user-area">
                 <div class="user-avatar-placeholder">
-                    <app-avatar [fullName]="userFullName" [imagePath]="userImagePath"></app-avatar>
+                    <app-avatar
+                        [fullName]="currentUser.firstName + ' ' + currentUser.lastName"
+                        [imagePath]="currentUser.imagePath"></app-avatar>
                 </div>
                 <span>{{ currentUser.firstName }} {{ currentUser.lastName }}</span>
                 <img src="/assets/header/chevron-down-icon.svg" />
