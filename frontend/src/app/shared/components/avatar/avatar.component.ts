@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AuthService } from '@core/services/auth.service';
-import { IUserInfo } from '@shared/models/IUserInfo';
+import { ILocalStorageUser } from '@shared/models/ILocalStorageUser';
 import { ColorGenerationUtils } from '@shared/utils/color.utils';
 
 @Component({
@@ -11,13 +11,15 @@ import { ColorGenerationUtils } from '@shared/utils/color.utils';
 export class AvatarComponent implements OnInit {
     @Input() size: number;
 
-    userInfo: IUserInfo;
+    userInfo: ILocalStorageUser;
 
     constructor(private authService: AuthService) {}
 
     ngOnInit(): void {
-        this.authService.setUserSection().subscribe(() => {
-            this.userInfo = this.authService.getUserSection();
+        this.authService.setUserSection().subscribe({
+            next: (user) => {
+                this.userInfo = user;
+            },
         });
     }
 

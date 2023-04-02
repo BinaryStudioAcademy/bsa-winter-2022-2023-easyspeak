@@ -4,10 +4,12 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { HttpService } from '@core/services/http.service';
-import { IUserInfo } from '@shared/models/IUserInfo';
+import { ILocalStorageUser } from '@shared/models/ILocalStorageUser';
 import * as auth from 'firebase/auth';
 import firebase from 'firebase/compat';
 import { firstValueFrom, Subject } from 'rxjs';
+
+import { NotificationService } from 'src/app/services/notification.service';
 
 import { UserService } from './user.service';
 
@@ -15,6 +17,8 @@ import { UserService } from './user.service';
     providedIn: 'root',
 })
 export class AuthService {
+    user = new Subject<ILocalStorageUser>();
+
     constructor(
         private afs: AngularFirestore,
         private afAuth: AngularFireAuth,
@@ -23,6 +27,7 @@ export class AuthService {
         private httpService: HttpService,
         public jwtHelper: JwtHelperService,
         private userService: UserService,
+        private toastr: NotificationService,
     ) {}
 
     async handleUserCredentialThenNavigatoTo(userCredential: firebase.auth.UserCredential, route: string) {
@@ -61,31 +66,38 @@ export class AuthService {
         localStorage.setItem('accessToken', userIdToken);
     }
 
-    public setUserSection() {
-        const subject = new Subject<void>();
+    setLocalStorage(user: ILocalStorageUser) {
+        localStorage.setItem('user', JSON.stringify(user));
+        this.user.next(user);
+        this.user.complete();
+    }
 
+    public setUserSection() {
         this.userService.getUser().subscribe(
-            (response) => {
-                localStorage.setItem('user', JSON.stringify({
-                    firstName: response.firstName,
-                    lastName: response.lastName,
-                    imagePath: response.imagePath,
-                }));
-                subject.next();
-                subject.complete();
-            },
-            (error) => {
-                subject.error(error);
+            {
+                next: (response) => {
+                    const user: ILocalStorageUser = {
+                        firstName: response.firstName,
+                        lastName: response.lastName,
+                        imagePath: response.imagePath,
+                    };
+
+                    this.setLocalStorage(user);
+                },
+                error: (error) => {
+                    this.logout();
+                    this.toastr.showError(error.message, 'Error!');
+                },
             },
         );
 
-        return subject.asObservable();
+        return this.user.asObservable();
     }
 
     public getUserSection() {
         const userSection: string = localStorage.getItem('user') as string;
 
-        const userInfo: IUserInfo = JSON.parse(userSection);
+        const userInfo: ILocalStorageUser = JSON.parse(userSection);
 
         return userInfo;
     }
