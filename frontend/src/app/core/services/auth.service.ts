@@ -135,18 +135,11 @@ export class AuthService {
         });
     }
 
-    async resetPassword(email: string): Promise<Observable<boolean>> {
-        try {
-            await this.afAuth.sendPasswordResetEmail(email);
-
-            return of(true);
-        } catch (errorReset) {
-            const errorMessage = (errorReset as Error).message;
-
-            this.toastrService.error(errorMessage, 'Error');
-
-            return of(false);
-        }
+    async resetPassword(email: string) {
+        await this.afAuth.sendPasswordResetEmail(email)
+            .catch((error) => {
+                throw new Error(error.message);
+            });
     }
 
     async confirmResetPassword(code: string, newPassword: string) {

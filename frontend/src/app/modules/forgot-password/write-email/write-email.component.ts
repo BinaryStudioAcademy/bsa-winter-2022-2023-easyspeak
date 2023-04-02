@@ -1,18 +1,15 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '@core/services/auth.service';
 import { emailFormatRegex } from '@shared/data/regex.util';
 import { ToastrService } from 'ngx-toastr';
-import { Observable, Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-write-email',
     templateUrl: './write-email.component.html',
     styleUrls: ['./write-email.component.sass'],
 })
-export class WriteEmailComponent implements OnDestroy {
-    private resetPassSub: Subscription;
-
+export class WriteEmailComponent {
     email: string = '';
 
     isMatchFormat: boolean = true;
@@ -23,23 +20,20 @@ export class WriteEmailComponent implements OnDestroy {
 
     constructor(private router: Router, private authService: AuthService, private toastr: ToastrService) {}
 
-    async sendMail(): Promise<void> {
+    async sendMail() {
         this.isMatchFormat = emailFormatRegex.test(this.email);
 
         this.buttonClicked = true;
 
         if (this.isMatchFormat) {
-            const goNextPage: Observable<boolean> = await this.authService.resetPassword(this.email);
-
-            this.resetPassSub = (await goNextPage).subscribe((success) => {
-                if (success) {
+            await this.authService.resetPassword(this.email)
+                .then(() => {
                     this.toastr.success('Recovery link has been send to your email', 'Success');
-
                     this.router.navigate(['auth/forgot-password/check-email']);
-                } else {
-                    this.isWrongEmail = true;
-                }
-            });
+                })
+                .catch((error) => {
+                    this.toastr.error(error.message, 'Error');
+                });
         } else if (this.email.length === 0) {
             this.isMatchFormat = true;
         }
@@ -61,11 +55,5 @@ export class WriteEmailComponent implements OnDestroy {
         }
 
         return false;
-    }
-
-    ngOnDestroy() {
-        if (this.resetPassSub) {
-            this.resetPassSub.unsubscribe();
-        }
     }
 }
