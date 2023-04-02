@@ -78,15 +78,15 @@ export class AuthService {
                 const user = {
                     firstName: resp.firstName,
                     lastName: resp.lastName,
-                    imagePath: resp.imagePath
+                    imagePath: resp.imagePath,
                 };
 
                 this.setLocalStorage(user);
             },
             (err: Error) => {
                 this.logout();
-                this.toastr.showError(err.message, 'Error!')
-            }
+                this.toastr.showError(err.message, 'Error!');
+            },
         );
 
         return this.user.asObservable();
@@ -95,7 +95,9 @@ export class AuthService {
     getUser() {
         const userSection: string = localStorage.getItem('user') as string;
         const userInfo: ILocalStorageUser = JSON.parse(userSection);
+
         this.user.next(userInfo);
+
         return this.user.asObservable();
     }
 
