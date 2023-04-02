@@ -18,14 +18,15 @@ export class HeaderComponent implements OnInit {
 
     userFullName: string;
 
+    userImagePath: string;
+
     constructor(private authService: AuthService, private userService: UserService) {}
 
     ngOnInit(): void {
-        if (this.authService.isAuthenticated()) {
-            this.authService.setUserSection();
-        }
-
-        this.currentUser.subscribe((resp) => this.setFullName(resp));
+        this.currentUser.subscribe((resp) => {
+            this.setFullName(resp);
+            this.userImagePath = resp.imagePath;
+        });
         this.userService.getUser().subscribe(this.currentUser);
     }
 

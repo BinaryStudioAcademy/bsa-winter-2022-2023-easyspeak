@@ -32,6 +32,10 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
 
     detailsForm;
 
+    fullName: string;
+
+    imagePath: string;
+
     constructor(
         private fb: FormBuilder,
         private userService: UserService,
@@ -60,6 +64,8 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
                     language: resp.language,
                     languageLevel: resp.languageLevel,
                 });
+                this.fullName = `${resp.firstName} ${resp.lastName}`;
+                this.imagePath = resp.imagePath;
             });
     }
 
