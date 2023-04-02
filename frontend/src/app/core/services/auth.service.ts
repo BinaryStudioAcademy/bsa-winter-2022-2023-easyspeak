@@ -72,7 +72,7 @@ export class AuthService {
         this.user.complete();
     }
 
-    setUser() {
+    loadUser() {
         this.userService.getUser().subscribe(
             (resp) => {
                 const user = {
@@ -88,15 +88,6 @@ export class AuthService {
                 this.toastr.showError(err.message, 'Error!');
             },
         );
-
-        return this.user.asObservable();
-    }
-
-    getUser() {
-        const userSection: string = localStorage.getItem('user') as string;
-        const userInfo: ILocalStorageUser = JSON.parse(userSection);
-
-        this.user.next(userInfo);
 
         return this.user.asObservable();
     }
