@@ -129,7 +129,7 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
         const ev = $event.target as HTMLInputElement;
 
         this.selectedTags = (ev.checked)
-            ? this.selectedTags.concat({ name: this.tagsList[i].icon_name })
+            ? [...this.selectedTags, { name: this.tagsList[i].icon_name } as ITag]
             : this.selectedTags.filter(x => x.name !== this.tagsList[i].icon_name);
     }
 
