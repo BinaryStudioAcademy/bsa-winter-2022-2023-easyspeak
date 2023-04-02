@@ -4,11 +4,12 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { HttpService } from '@core/services/http.service';
-import { IUserInfo } from '@shared/models/IUserInfo';
+import { UserShort } from '@shared/models/UserShort';
 import * as auth from 'firebase/auth';
 import firebase from 'firebase/compat';
 import { ToastrService } from 'ngx-toastr';
-import { firstValueFrom, Observable, of } from 'rxjs';
+import { firstValueFrom, Observable, of, Subject } from 'rxjs';
+import { NotificationService } from 'src/app/services/notification.service';
 
 import { UserService } from './user.service';
 
@@ -16,6 +17,8 @@ import { UserService } from './user.service';
     providedIn: 'root',
 })
 export class AuthService {
+    user = new Subject<UserShort>();
+
     constructor(
         private afs: AngularFirestore,
         private afAuth: AngularFireAuth,
@@ -25,14 +28,19 @@ export class AuthService {
         private toastrService: ToastrService,
         public jwtHelper: JwtHelperService,
         private userService: UserService,
+        private toastr: NotificationService,
     ) {}
+
+    async handleUserCredentialThenNavigatoTo(userCredential: firebase.auth.UserCredential, route: string) {
+        if (userCredential.user) {
+            await this.setAccessToken(userCredential.user).then(() => this.navigateTo(route));
+        }
+    }
 
     async signIn(email: string, password: string): Promise<void> {
         const userCredential = await this.afAuth.signInWithEmailAndPassword(email, password);
 
-        if (userCredential.user) {
-            await this.setAccessToken(userCredential.user);
-        }
+        await this.handleUserCredentialThenNavigatoTo(userCredential, '/timetable');
 
         try {
             await firstValueFrom(this.userService.getUser());
@@ -43,11 +51,14 @@ export class AuthService {
     }
 
     signUp(email: string, password: string) {
-        return this.afAuth.createUserWithEmailAndPassword(email, password).then((userCredential) => {
-            if (userCredential.user) {
-                this.setAccessToken(userCredential.user);
-            }
-        });
+        return this.afAuth
+            .createUserWithEmailAndPassword(email, password)
+            .then(async (userCredential) => {
+                await this.handleUserCredentialThenNavigatoTo(userCredential, '/topics');
+            })
+            .catch(() => {
+                throw new Error('This email is already registered. Try another one');
+            });
     }
 
     private async setAccessToken(user: firebase.User): Promise<void> {
@@ -56,22 +67,30 @@ export class AuthService {
         localStorage.setItem('accessToken', userIdToken);
     }
 
-    public setUserSection() {
-        this.userService.getUser().subscribe((resp) => {
-            localStorage.setItem('user', JSON.stringify(resp));
-        });
+    setLocalStorage(user: UserShort) {
+        localStorage.setItem('user', JSON.stringify(user));
+        this.user.next(user);
+        this.user.complete();
     }
 
-    public getUserSection() {
-        const userSection = localStorage.getItem('user');
+    loadUser() {
+        this.userService.getUser().subscribe(
+            (resp) => {
+                const user = {
+                    firstName: resp.firstName,
+                    lastName: resp.lastName,
+                    imagePath: resp.imagePath,
+                };
 
-        if (!userSection) {
-            return null;
-        }
+                this.setLocalStorage(user);
+            },
+            (err: Error) => {
+                this.logout();
+                this.toastr.showError(err.message, 'Error!');
+            },
+        );
 
-        const userInfo: IUserInfo = JSON.parse(userSection);
-
-        return userInfo;
+        return this.user.asObservable();
     }
 
     private navigateTo(route: string) {
