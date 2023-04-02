@@ -14,5 +14,5 @@ export interface ILesson {
     zoomMeetingLink: string,
     tags: ITag[],
     user: null,
-    isDisabled: boolean
+    isSubscribed: boolean
 }

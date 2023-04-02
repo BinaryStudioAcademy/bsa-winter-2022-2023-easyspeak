@@ -53,7 +53,7 @@ public class LessonsService : BaseService, ILessonsService
             {
                 t.Id,
                 SbCount = t.Subscribers.Count,
-                IsDisabled = t.Subscribers.Select(u => u.Id).Any(id => id == _authService.UserId)
+                isSubscribed = t.Subscribers.Any(u => u.Id == _authService.UserId)
             }).ToDictionaryAsync(t => t.Id);
         var lessons = await lessonsFromContext.OrderBy(l => l.StartAt).ToListAsync();
 
@@ -62,7 +62,7 @@ public class LessonsService : BaseService, ILessonsService
         lessonDtos.ForEach(t =>
         {
             t.SubscribersCount = subscribersInfoDict[t.Id].SbCount;
-            t.IsDisabled = subscribersInfoDict[t.Id].IsDisabled;
+            t.isSubscribed = subscribersInfoDict[t.Id].isSubscribed;
         });
 
         return lessonDtos;
