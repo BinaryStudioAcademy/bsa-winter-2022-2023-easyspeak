@@ -18,7 +18,7 @@
                 Timetable
             </p>
         </div>
-        <div class="header-content">
+        <div class="header-content right-area">
             <div class="remaindings">
                 <div matBadge="1" class="reminding">
                     <img src="/assets/header/mail-icon.svg" />
@@ -37,7 +37,7 @@
             </div>
             <div [matMenuTriggerFor]="menu" class="user-area">
                 <app-avatar [size]="36"></app-avatar>
-                <span>{{userFullName}}</span>
+                <span>{{currentUser.firstName}} {{currentUser.lastName}}</span>
                 <img src="/assets/header/chevron-down-icon.svg" />
                 <mat-menu #menu="matMenu" xPosition="before">
                     <button mat-menu-item class="menu-element">
