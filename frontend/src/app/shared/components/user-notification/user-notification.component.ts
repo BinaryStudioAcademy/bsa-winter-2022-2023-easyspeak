@@ -68,9 +68,10 @@ export class UserNotificationComponent extends BaseComponent implements OnInit, 
     }
 
     readAllNotifications() {
-        this.notifications.forEach(notification => {
-            notification.isRead = true;
-        });
+        this.notifications.map(notification => ({
+            ...notification,
+            isRead: true,
+        }));
 
         this.httpService.put('/notification/readAll', null)
             .pipe(this.untilThis)

@@ -35,7 +35,8 @@ namespace EasySpeak.Core.WebAPI.Extensions
             services.AddScoped<IFirebaseAuthService, FirebaseAuthService>();
             services.AddScoped<IUserService, UserService>();
             services.AddFirebaseApp();
-            services.AddScoped<INotificationService, NotificationService>();
+            services.Configure<RabbitQueuesOptions>(configuration.GetSection("RabbitQueues"))
+                .AddScoped<INotificationService, NotificationService>();
         }
 
         public static void AddAutoMapper(this IServiceCollection services)

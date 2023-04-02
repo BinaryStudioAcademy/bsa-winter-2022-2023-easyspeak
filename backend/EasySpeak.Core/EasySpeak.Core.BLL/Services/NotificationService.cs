@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using EasySpeak.Core.BLL.Interfaces;
+using EasySpeak.Core.BLL.Options;
 using EasySpeak.Core.Common.DTO.Notification;
 using EasySpeak.Core.Common.Enums;
 using EasySpeak.Core.DAL.Context;
@@ -7,6 +8,7 @@ using EasySpeak.Core.DAL.Entities;
 using EasySpeak.RabbitMQ.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
+using Microsoft.Extensions.Options;
 
 namespace EasySpeak.Core.BLL.Services
 {
@@ -14,16 +16,18 @@ namespace EasySpeak.Core.BLL.Services
     {
         private readonly IFirebaseAuthService _firebaseAuthService;
         private readonly IMessageProducer _messageProducer;
+        private readonly RabbitQueuesOptions _queueOptions;
         public NotificationService(
             IFirebaseAuthService firebaseAuthService, 
             EasySpeakCoreContext context, 
             IMessageProducer messageProducer,
-            IMapper mapper
-            )
+            IMapper mapper,
+            IOptions<RabbitQueuesOptions> queueOptions)
             :base(context, mapper)
         {
             _firebaseAuthService = firebaseAuthService;
             _messageProducer = messageProducer;
+            _queueOptions = queueOptions.Value;
         }
 
         public async Task<NotificationDto> AddNotificationAsync(NotificationType type, long id)
@@ -31,6 +35,13 @@ namespace EasySpeak.Core.BLL.Services
             var newNotification = await CreateNotificationAsync(type, id);
 
             var notificationDto = await SaveNotificationAsync(newNotification);
+
+            if(newNotification.ImageId != null)
+            {
+                var imageFile = await GetFileOrThrowErrorAsync((long) newNotification.ImageId);
+
+                notificationDto.ImagePath = imageFile.Url;
+            }
 
             SendNotificationToRabbit(newNotification.Email, notificationDto);
 
@@ -78,7 +89,7 @@ namespace EasySpeak.Core.BLL.Services
 
         private void SendNotificationToRabbit(string email, NotificationDto notification)
         {
-            _messageProducer.Init("notifier", "");
+            _messageProducer.Init(_queueOptions.NotificationQueue, "");
             _messageProducer.SendMessage(new Tuple<string, NotificationDto>(email, notification));
         }
 
@@ -86,13 +97,18 @@ namespace EasySpeak.Core.BLL.Services
         {
             NewNotificationDto notification = type switch
             {
-                NotificationType.friendshipRequest => await CreateFriendshipNotificationAsync(_firebaseAuthService.UserId, id, type),
-                NotificationType.friendshipAcception => await CreateFriendshipNotificationAsync(id, _firebaseAuthService.UserId, type),
-                NotificationType.classJoin => await CreateLessonNotificationAsync(id, _firebaseAuthService.UserId, type),
-                NotificationType.reminding => await CreateLessonNotificationAsync(id, _firebaseAuthService.UserId, type),
-                _ => null
-            } ?? throw new InvalidOperationException("The notification type doesn't correspond to any of available types." +
-                                                     " Ensure that type of notification is correct");
+                NotificationType.friendshipRequest => await CreateFriendshipNotificationAsync(
+                    _firebaseAuthService.UserId, id, type),
+                NotificationType.friendshipAcception => await CreateFriendshipNotificationAsync(id,
+                    _firebaseAuthService.UserId, type),
+                NotificationType.classJoin =>
+                    await CreateLessonNotificationAsync(id, _firebaseAuthService.UserId, type),
+                NotificationType.reminding =>
+                    await CreateLessonNotificationAsync(id, _firebaseAuthService.UserId, type),
+                _ => throw new InvalidOperationException(
+                    "The notification type doesn't correspond to any of available types." +
+                    " Ensure that type of notification is correct")
+            };
 
             return notification;
         }
@@ -170,39 +186,43 @@ namespace EasySpeak.Core.BLL.Services
         {
             return await _context.Notifications
                 .Where(n => n.UserId == _firebaseAuthService.UserId && n.Type == type)
-                .LeftJoin(_context.EasySpeakFiles,
+                .GroupJoin(
+                    _context.EasySpeakFiles,
                     n => n.RelatedTo,
-                    u => u.UserId,
-                    (n, u) => new {Notification = n, ImagePath = u.Url})
-                .Select(x => new NotificationDto()
-                {
-                    Id = x.Notification.Id,
-                    CreatedAt = x.Notification.CreatedAt,
-                    IsRead = x.Notification.IsRead,
-                    Text = x.Notification.Text,
-                    Type = x.Notification.Type,
-                    ImagePath = x.ImagePath
-                })
+                    f => f.UserId,
+                    (n, f) => new { Notification = n, Files = f })
+                .SelectMany(
+                    x => x.Files.DefaultIfEmpty(),
+                    (n, f) => new NotificationDto()
+                    {
+                        Id = n.Notification.Id,
+                        CreatedAt = n.Notification.CreatedAt,
+                        IsRead = n.Notification.IsRead,
+                        Text = n.Notification.Text,
+                        Type = n.Notification.Type,
+                        ImagePath = f!.Url
+                    })
                 .ToListAsync();
         }
 
         private async Task<List<NotificationDto>> GetLessonNotificationsAsync(NotificationType type)
         {
             return await _context.Notifications
-                .Where(n => n.UserId == _firebaseAuthService.UserId && n.Type == type)
-                .LeftJoin(_context.EasySpeakFiles,
+                .GroupJoin(_context.EasySpeakFiles,
                     n => n.RelatedTo,
-                    u => u.UserId,
-                    (n, u) => new {Notification = n, ImagePath = u.Url})
-                .Select(x => new NotificationDto()
-                {
-                    Id = x.Notification.Id,
-                    CreatedAt = x.Notification.CreatedAt,
-                    IsRead = x.Notification.IsRead,
-                    Text = x.Notification.Text,
-                    Type = x.Notification.Type,
-                    ImagePath = x.ImagePath
-                })
+                    f => f.UserId,
+                    (n, f) => new {Notification = n, Files = f})
+                .SelectMany(
+                    x => x.Files.DefaultIfEmpty(),
+                    (n, f) => new NotificationDto()
+                    {
+                        Id = n.Notification.Id,
+                        CreatedAt = n.Notification.CreatedAt,
+                        IsRead = n.Notification.IsRead,
+                        Text = n.Notification.Text,
+                        Type = n.Notification.Type,
+                        ImagePath = f!.Url
+                    })
                 .ToListAsync();
         }
 
@@ -232,6 +252,12 @@ namespace EasySpeak.Core.BLL.Services
                        .Include(l => l.User)
                        .FirstOrDefaultAsync(l => l.Id == id)
                    ?? throw new ArgumentException($"Lesson with id {id} not found");
+        }
+
+        private async Task<EasySpeakFile> GetFileOrThrowErrorAsync(long id)
+        {
+            return await _context.EasySpeakFiles.FirstOrDefaultAsync(f => f.Id == id)
+                   ?? throw new ArgumentException($"File with id {id} not found");
         }
 
     }
