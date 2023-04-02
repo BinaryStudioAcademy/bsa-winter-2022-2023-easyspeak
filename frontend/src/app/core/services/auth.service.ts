@@ -4,9 +4,12 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { HttpService } from '@core/services/http.service';
+import { IUserInfo } from '@shared/models/IUserInfo';
 import * as auth from 'firebase/auth';
 import firebase from 'firebase/compat';
-import { from } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
+
+import { UserService } from './user.service';
 
 @Injectable({
     providedIn: 'root',
@@ -19,30 +22,61 @@ export class AuthService {
         private ngZone: NgZone,
         private httpService: HttpService,
         public jwtHelper: JwtHelperService,
+        private userService: UserService,
     ) {}
 
-    signIn(email: string, password: string) {
-        return this.afAuth.signInWithEmailAndPassword(email, password).then((userCredential) => {
-            if (userCredential.user) {
-                this.setAccessToken(userCredential.user);
-            }
+    async handleUserCredential(userCredential: firebase.auth.UserCredential) {
+        if (userCredential.user) {
+            await this.setAccessToken(userCredential.user).then(() => this.navigateTo('timetable'));
+        }
+    }
 
-            this.navigateTo('/timetable');
-        });
+    async signIn(email: string, password: string): Promise<void> {
+        const userCredential = await this.afAuth.signInWithEmailAndPassword(email, password);
+
+        await this.handleUserCredential(userCredential);
+
+        try {
+            await firstValueFrom(this.userService.getUser());
+        } catch {
+            await this.logout();
+            throw new Error('User was incorrectly registered, please try another one');
+        }
     }
 
     signUp(email: string, password: string) {
-        return this.afAuth.createUserWithEmailAndPassword(email, password).then((userCredential) => {
-            if (userCredential.user) {
-                this.setAccessToken(userCredential.user);
-            }
+        return this.afAuth
+            .createUserWithEmailAndPassword(email, password)
+            .then(async (userCredential) => {
+                await this.handleUserCredential(userCredential);
+            })
+            .catch(() => {
+                throw new Error('This email is already registered. Try another one');
+            });
+    }
 
-            this.navigateTo('/profile/topics');
+    private async setAccessToken(user: firebase.User): Promise<void> {
+        const userIdToken = await user.getIdToken();
+
+        localStorage.setItem('accessToken', userIdToken);
+    }
+
+    public setUserSection() {
+        this.userService.getUser().subscribe((resp) => {
+            localStorage.setItem('user', JSON.stringify(resp));
         });
     }
 
-    private setAccessToken(user: firebase.User) {
-        from(user.getIdToken()).subscribe((token) => localStorage.setItem('accessToken', token));
+    public getUserSection() {
+        const userSection = localStorage.getItem('user');
+
+        if (!userSection) {
+            return null;
+        }
+
+        const userInfo: IUserInfo = JSON.parse(userSection);
+
+        return userInfo;
     }
 
     private navigateTo(route: string) {

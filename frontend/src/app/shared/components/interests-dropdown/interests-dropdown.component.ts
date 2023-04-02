@@ -14,7 +14,9 @@ export class InterestsDropdownComponent implements OnChanges {
 
     @Output() selectedInterests = new EventEmitter<string[]>();
 
-    @Input() selectedItems: string[];
+    @Input() selectedItems: string[] = [];
+
+    @Input() usedInModal = false;
 
     outputList: string[] = [];
 
@@ -42,5 +44,9 @@ export class InterestsDropdownComponent implements OnChanges {
 
     clickButton() {
         this.toggle = !this.toggle;
+    }
+
+    clickedOutside() {
+        this.toggle = false;
     }
 }

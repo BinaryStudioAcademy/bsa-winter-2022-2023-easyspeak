@@ -15,7 +15,11 @@
     border-radius: 50px
     background: white
     border: none
-    position: relative
+
+.button-wrapper-modal
+    width: 100%
+    height: 50px
+    background: $gray-100
 
 .button-content
     display: flex
@@ -45,6 +49,9 @@
     color: $blue-200
     padding-bottom: 1px
 
+.counter-modal
+    margin-left: 4px
+
 .dropdown-button
     width: 100%
     height: 100%
@@ -62,6 +69,9 @@
 .dropdown-button:hover + .button-content
     box-shadow: 0 1px 4px $turquoise-100
 
+.dropdown-button:hover + .button-content-modal
+    box-shadow: none
+
 .dropdown-content
     background: $white
     width: 238px
@@ -77,6 +87,12 @@
     justify-content: flex-start
     border: 1px solid $inactive-color
     z-index: 100
+
+.dropdown-content-modal
+    width: 100%
+    background: $gray-100
+    top: 60px
+
 
 .icon
     width: 12px
@@ -108,12 +124,12 @@
     color: $white
 
 .item-checkbox-label
-    padding: 5px 11px
-    border: 2px solid  $turquoise-100
+    padding: 5px 11px 5px 5px
+    border: 2px solid $selected-color
     border-radius: 20px
     display: flex
     align-items: center
-    gap: 4px
+    gap: 5px
 
 .dropdown-item
     display: flex
@@ -138,3 +154,8 @@
     fill: $blue-200
     stroke: $blue-200
     stroke-width: 3px
+
+.arrow-icon-modal
+    width: 16px
+    height: 8px
+    margin-right: 2px

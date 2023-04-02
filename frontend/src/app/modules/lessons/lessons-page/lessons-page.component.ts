@@ -1,7 +1,9 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { langLevelsSample } from '@modules/filter-section/filter-section/filter-section.util';
+import { ModalComponent } from '@shared/components/modal/modal.component';
 import { YoutubePlayerComponent } from '@shared/components/youtube-player/youtube-player.component';
+import { IModal } from '@shared/models/IModal';
 import { ILesson } from '@shared/models/lesson/ILesson';
 import { LanguageLevels } from '@shared/models/lesson/LanguageLevels';
 import * as moment from 'moment';
@@ -60,12 +62,15 @@ export class LessonsPageComponent implements OnInit, OnChanges {
     }
 
     openCreate() {
-        this.dialogRef.open(LessonsCreateComponent, {
-            maxWidth: '100vw',
-            maxHeight: '100vh',
-            height: '80%',
-            width: '80%',
-        });
+        const config: MatDialogConfig<IModal> = {
+            data: {
+                header: 'Add Group Class',
+                hasButtons: false,
+                component: LessonsCreateComponent,
+            },
+        };
+
+        this.dialogRef.open(ModalComponent, config);
     }
 
     getLessons() {
@@ -74,32 +79,32 @@ export class LessonsPageComponent implements OnInit, OnChanges {
                 languageLevels: this.selectedLanguageFilters.map((level: string) =>
                     Object.values(LanguageLevels).indexOf(level)),
                 tags: this.selectedInterestsFilters.map((topic) => ({ name: topic })),
-                date: new Date(this.selectedDateFilter.toISOString().slice(0, 10)),
+                date: new Date(this.selectedDateFilter?.toISOString().slice(0, 10)),
             })
-            .subscribe((response: ILesson[]) => {
-                this.lessons = [];
-
-                //TODO: When everything regarding user in the database is finished, update the lesson retrieval code
-
-                response.forEach((lesson) => {
-                    this.lessons.push({
-                        id: lesson.id,
-                        imgPath: lesson.mediaPath,
-                        videoId: 'xqAriI87lFU',
-                        title: lesson.name,
-                        time: lesson.startAt.split('T')[1].substring(0, 5).replace(':', '.'),
-                        tutorAvatarPath: '../../../../assets/lesson-mocks/Photo )Patient).png',
-                        tutorFlagPath: '../../../../assets/lesson-icons/canada-test-flag.svg',
-                        tutorName: 'Roger Vaccaro',
-                        topics: lesson.tags.map((tag) => tag.name),
-                        subscribersCount: lesson.subscribersCount,
-                        level: langLevelsSample[lesson.languageLevel].title,
-                        isDisabled: new Date() > new Date(lesson.startAt),
-                    });
-                });
+            .subscribe((response) => {
+                this.lessons = this.mapLessons(response);
                 this.lessonsColumn1 = this.lessons.filter((el, index) => index % 2 === 0);
                 this.lessonsColumn2 = this.lessons.filter((el, index) => index % 2 === 1);
             });
+    }
+
+    private mapLessons(response: ILesson[]): Lesson[] {
+        return response.map((lesson) => ({
+            id: lesson.id,
+            imgPath: lesson.mediaPath,
+            videoId: lesson.youtubeVideoId,
+            zoomLink: lesson.zoomMeetingLink,
+            title: lesson.name,
+            time: moment(lesson.startAt).format('hh.mm'),
+            // TODO: Change tutor details to real when they are avaliable
+            tutorAvatarPath: 'https://www.christopherjungo.com/uploads/2/4/9/4/24948269/screen-shot-2018-02-10-at-00-09-32_orig.png',
+            tutorFlagPath: 'assets/lesson-icons/canada-test-flag.svg',
+            tutorName: 'Roger Vaccaro',
+            topics: lesson.tags.map((tag) => tag.name),
+            subscribersCount: lesson.subscribersCount,
+            level: langLevelsSample[lesson.languageLevel].title,
+            isDisabled: new Date() > new Date(lesson.startAt),
+        }));
     }
 
     getLessonsUnavailableMessage(): string {

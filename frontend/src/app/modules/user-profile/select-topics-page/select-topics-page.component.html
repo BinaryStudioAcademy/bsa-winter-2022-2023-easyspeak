@@ -1,8 +1,4 @@
 <main>
-    <button id="back">
-        <img src="assets/brackets/Icon.svg" />
-        <span>Back</span>
-    </button>
     <h2>Choose topics that interest you</h2>
     <div id="topics">
         <div *ngFor="let topic of topics" [className]="topic.selected ? 'selected topic' : 'not-selected topic'">
@@ -13,11 +9,7 @@
         </div>
     </div>
     <div id="next">
-        <button id="create" [disabled]="!selectedTopics.length">Create account</button>
-        <button id="skip" routerLink="/">Skip</button>
-    </div>
-    <div id="has-account">
-        <span>I have an account! </span>
-        <a routerLink="/auth/sign-in">Sign In</a>
+        <button id="create" (click)="saveTopics()" [disabled]="!selectedTopics.length">Save interests</button>
+        <button id="skip" routerLink="/timetable">Skip</button>
     </div>
 </main>

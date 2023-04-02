@@ -4,5 +4,6 @@ public enum Sex
 {
     Male,
     Female,
-    NonBinary
+    NonBinary,
+    DoNotWantToSpecify
 }

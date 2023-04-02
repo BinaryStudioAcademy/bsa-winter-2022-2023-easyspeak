@@ -12,29 +12,37 @@ import { Filter } from 'src/app/models/filters/filter';
 export class DropdownComponent extends BaseComponent implements OnInit, OnDestroy {
     @Input() data: Filter[];
 
+    @Input() isSingleChoice: boolean;
+
+    type: string;
+
     @Input() btnLabel: string | undefined;
 
     @Output() selectedFilters = new EventEmitter<string[]>();
 
-    @Input() resetEvent: Observable<void>;
+    @Input() resetEvent?: Observable<void>;
 
-    @Input() selectedItems: string[];
+    @Input() selectedItems: string[] = [];
 
     public showDropdown = false;
 
     ngOnInit(): void {
-        this.resetEvent
-            .pipe(this.untilThis)
-            .subscribe(() => {
-                this.selectedItems = [];
-            });
+        if (this.resetEvent) {
+            this.resetEvent
+                .pipe(this.untilThis)
+                .subscribe(() => {
+                    this.selectedItems = [];
+                });
+        }
+
+        this.type = this.isSingleChoice ? 'radio' : 'checkbox';
     }
 
     selectItem(title: string) {
         if (this.selectedItems.includes(title)) {
             this.selectedItems = this.selectedItems.filter(item => item !== title);
         } else {
-            this.selectedItems = [...this.selectedItems, title];
+            this.selectedItems = this.isSingleChoice ? [title] : [...this.selectedItems, title];
         }
 
         this.selectedFilters.emit(this.selectedItems);
@@ -42,5 +50,9 @@ export class DropdownComponent extends BaseComponent implements OnInit, OnDestro
 
     showDropdownMenu() {
         this.showDropdown = !this.showDropdown;
+    }
+
+    clickedOutside() {
+        this.showDropdown = false;
     }
 }

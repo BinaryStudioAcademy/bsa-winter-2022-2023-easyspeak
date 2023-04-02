@@ -7,11 +7,11 @@
             </div>
         </div>
         <div class="header-content main-area">
-            <p routerLink="social" routerLinkActive="active" #link="routerLinkActive" [class.disabled]="!link.isActive">
+            <p routerLink="/social" routerLinkActive="active" #link="routerLinkActive" [class.disabled]="!link.isActive">
                 Social
             </p>
             <p
-                routerLink="timetable"
+                routerLink="/timetable"
                 routerLinkActive="active"
                 #linkTimetable="routerLinkActive"
                 [class.disabled]="!linkTimetable.isActive">
@@ -36,8 +36,8 @@
                 </div>
             </div>
             <div [matMenuTriggerFor]="menu" class="user-area">
-                <img class="avatar avatar-size" src="/assets/header/avatar.svg" alt="avatar" />
-                <span>James Workman</span>
+                <app-avatar [size]="36"></app-avatar>
+                <span>{{userFullName}}</span>
                 <img src="/assets/header/chevron-down-icon.svg" />
                 <mat-menu class="user-menu" #menu="matMenu" xPosition="before">
                     <button mat-menu-item class="menu-element">

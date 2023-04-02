@@ -1,10 +1,14 @@
-<mat-dialog-content *ngIf="!!data.header"><div class="header">{{data.header}}</div></mat-dialog-content>
-<mat-dialog-content *ngIf="!!data.content"><div class="content">{{data.content}}</div></mat-dialog-content>
-<ng-container *ngIf="!!data.component">
-    <ng-container *ngComponentOutlet="data.component"></ng-container>
-</ng-container>
-<mat-dialog-actions>
-    <button mat-dialog-close="false" class="cancel" *ngIf="data.hasButtons">{{!!data.cancelText ? data.cancelText : "Cancel"}}</button>
-    <button mat-dialog-close="true" class="confirm" *ngIf="data.hasButtons">{{!!data.confirmText ? data.confirmText : "Confirm"}}</button>
-    <button mat-dialog-close="true" class="ok" *ngIf="!data.hasButtons">{{!!data.okText ? data.okText : "Ok"}}</button>
-</mat-dialog-actions>
+<div class="container">
+    <mat-dialog-content class="header-container" *ngIf="!!data.header">
+        <div class="header">{{data.header}}</div>
+        <mat-icon mat-dialog-close="true" class="close">close</mat-icon>
+    </mat-dialog-content>
+    <mat-dialog-content *ngIf="!!data.content"><div class="content">{{data.content}}</div></mat-dialog-content>
+    <ng-container *ngIf="!!data.component">
+        <ng-container *ngComponentOutlet="data.component"></ng-container>
+    </ng-container>
+    <mat-dialog-actions>
+        <button mat-dialog-close="false" class="cancel" *ngIf="data.hasButtons">{{!!data.cancelText ? data.cancelText : "Cancel"}}</button>
+        <button mat-dialog-close="true" class="confirm" *ngIf="data.hasButtons">{{!!data.confirmText ? data.confirmText : "Confirm"}}</button>
+    </mat-dialog-actions>
+</div>
