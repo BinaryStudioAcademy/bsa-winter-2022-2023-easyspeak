@@ -2,6 +2,7 @@
 using EasySpeak.Core.BLL.Interfaces;
 using EasySpeak.Core.Common.DTO.Lesson;
 using EasySpeak.Core.Common.DTO.User;
+using EasySpeak.Core.Common.Enums;
 using EasySpeak.Core.DAL.Context;
 using EasySpeak.Core.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -11,11 +12,13 @@ namespace EasySpeak.Core.BLL.Services
     public class UserService : BaseService, IUserService
     {
         private readonly IFirebaseAuthService _firebaseAuthService;
+        private readonly INotificationService _notificationService;
 
-        public UserService(EasySpeakCoreContext context, IMapper mapper, IFirebaseAuthService firebaseAuthService) :
+        public UserService(EasySpeakCoreContext context, IMapper mapper, IFirebaseAuthService firebaseAuthService, INotificationService notificationService) :
             base(context, mapper)
         {
             _firebaseAuthService = firebaseAuthService;
+            _notificationService = notificationService;
         }
 
         public async Task<UserDto> CreateUser(UserRegisterDto userDto)
@@ -39,6 +42,8 @@ namespace EasySpeak.Core.BLL.Services
             user.Lessons.Add(lesson);
 
             await _context.SaveChangesAsync();
+
+            await _notificationService.AddNotificationAsync(NotificationType.classJoin, lessonId);
 
             void AfterMapAction(Lesson o, LessonDto dto) => dto.SubscribersCount = _context.Lessons
                 .Select(t => new { Id = t.Id, SbCount = t.Subscribers.Count })
