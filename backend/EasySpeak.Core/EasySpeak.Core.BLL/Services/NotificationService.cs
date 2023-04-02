@@ -126,8 +126,6 @@ namespace EasySpeak.Core.BLL.Services
                 _ => string.Empty
             };
 
-            var imagePath = await GetProfileImageUrl(sender.ImageId);
-
             return new NewNotificationDto()
             {
                 IsRead = false,
@@ -154,8 +152,6 @@ namespace EasySpeak.Core.BLL.Services
                 NotificationType.reminding => $"The lesson is starting in <strong>30 minutes</strong>! Don't miss it.",
                 _ => string.Empty
             };
-            
-            var imagePath = await GetProfileImageUrl(lesson.User!.ImageId);
 
             return new NewNotificationDto()
             {
@@ -213,7 +209,7 @@ namespace EasySpeak.Core.BLL.Services
         public async Task ReadAllNotificationsAsync()
         {
             var notifications = await _context.Notifications
-                .Where(n => n.UserId == _firebaseAuthService.UserId && n.IsRead == false)
+                .Where(n => n.UserId == _firebaseAuthService.UserId && !n.IsRead)
                 .ToListAsync();
 
             foreach (var notification in notifications)
