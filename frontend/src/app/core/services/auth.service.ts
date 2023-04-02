@@ -4,7 +4,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { HttpService } from '@core/services/http.service';
-import { ILocalStorageUser } from '@shared/models/ILocalStorageUser';
+import { UserShort } from '@shared/models/UserShort';
 import * as auth from 'firebase/auth';
 import firebase from 'firebase/compat';
 import { firstValueFrom, Subject } from 'rxjs';
@@ -17,7 +17,7 @@ import { UserService } from './user.service';
     providedIn: 'root',
 })
 export class AuthService {
-    user = new Subject<ILocalStorageUser>();
+    user = new Subject<UserShort>();
 
     constructor(
         private afs: AngularFirestore,
@@ -66,7 +66,7 @@ export class AuthService {
         localStorage.setItem('accessToken', userIdToken);
     }
 
-    setLocalStorage(user: ILocalStorageUser) {
+    setLocalStorage(user: UserShort) {
         localStorage.setItem('user', JSON.stringify(user));
         this.user.next(user);
         this.user.complete();

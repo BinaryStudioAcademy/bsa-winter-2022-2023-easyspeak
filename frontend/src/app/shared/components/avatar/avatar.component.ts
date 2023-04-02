@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AuthService } from '@core/services/auth.service';
-import { ILocalStorageUser } from '@shared/models/ILocalStorageUser';
+import { UserShort } from '@shared/models/UserShort';
 import { ColorGenerationUtils } from '@shared/utils/color.utils';
 
 @Component({
@@ -11,7 +11,7 @@ import { ColorGenerationUtils } from '@shared/utils/color.utils';
 export class AvatarComponent implements OnInit {
     @Input() size: number;
 
-    userInfo: ILocalStorageUser;
+    userInfo: UserShort;
 
     constructor(private authService: AuthService) {}
 
