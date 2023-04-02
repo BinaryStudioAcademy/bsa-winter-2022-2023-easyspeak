@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '@core/services/auth.service';
+import { UserService } from '@core/services/user.service';
 import { IUserInfo } from '@shared/models/IUserInfo';
+import { Subject } from 'rxjs';
 
 import { UserNotificationComponent } from '../user-notification/user-notification.component';
 
@@ -12,15 +14,23 @@ import { UserNotificationComponent } from '../user-notification/user-notificatio
 export class HeaderComponent implements OnInit {
     @ViewChild('notificationsMenu') notificationsMenu: UserNotificationComponent;
 
-    currentUser: IUserInfo | null;
+    currentUser = new Subject<IUserInfo>();
 
-    constructor(private authService: AuthService) {}
+    userFullName: string;
+
+    constructor(private authService: AuthService, private userService: UserService) {}
 
     ngOnInit(): void {
         if (this.authService.isAuthenticated()) {
             this.authService.setUserSection();
-            this.currentUser = this.authService.getUserSection();
         }
+
+        this.currentUser.subscribe((resp) => this.setFullName(resp));
+        this.userService.getUser().subscribe(this.currentUser);
+    }
+
+    setFullName(userInfo: IUserInfo) {
+        this.userFullName = `${userInfo.firstName} ${userInfo.lastName}`;
     }
 
     logOut() {
