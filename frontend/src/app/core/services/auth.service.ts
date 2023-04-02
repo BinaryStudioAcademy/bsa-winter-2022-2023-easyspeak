@@ -7,7 +7,7 @@ import { HttpService } from '@core/services/http.service';
 import { IUserInfo } from '@shared/models/IUserInfo';
 import * as auth from 'firebase/auth';
 import firebase from 'firebase/compat';
-import { firstValueFrom } from 'rxjs';
+import { firstValueFrom, Subject } from 'rxjs';
 
 import { UserService } from './user.service';
 
@@ -62,18 +62,24 @@ export class AuthService {
     }
 
     public setUserSection() {
-        return new Promise<void>((resolve, reject) => {
-            this.userService.getUser().subscribe((resp) => {
+        const subject = new Subject<void>();
+
+        this.userService.getUser().subscribe(
+            (response) => {
                 localStorage.setItem('user', JSON.stringify({
-                    firstName: resp.firstName,
-                    lastName: resp.lastName,
-                    imagePath: resp.imagePath,
+                    firstName: response.firstName,
+                    lastName: response.lastName,
+                    imagePath: response.imagePath,
                 }));
-                resolve();
-            }, (err) => {
-                reject(err);
-            });
-        });
+                subject.next();
+                subject.complete();
+            },
+            (error) => {
+                subject.error(error);
+            },
+        );
+
+        return subject.asObservable();
     }
 
     public getUserSection() {

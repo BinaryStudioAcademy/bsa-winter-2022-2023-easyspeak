@@ -16,7 +16,7 @@ export class AvatarComponent implements OnInit {
     constructor(private authService: AuthService) {}
 
     ngOnInit(): void {
-        this.authService.setUserSection().then(() => {
+        this.authService.setUserSection().subscribe(() => {
             this.userInfo = this.authService.getUserSection();
         });
     }
