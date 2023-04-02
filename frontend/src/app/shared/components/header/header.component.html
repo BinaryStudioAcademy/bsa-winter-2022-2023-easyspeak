@@ -30,7 +30,7 @@
                         class="reminding">
                         <img src="/assets/header/notification-icon.svg" />
                     </div>
-                    <mat-menu #notifications="matMenu" xPosition="after">
+                    <mat-menu class="notifications-menu" #notifications="matMenu" xPosition="after">
                         <app-user-notification #notificationsMenu> </app-user-notification>
                     </mat-menu>
                 </div>
@@ -39,7 +39,7 @@
                 <img class="avatar avatar-size" src="/assets/header/avatar.svg" alt="avatar" />
                 <span>James Workman</span>
                 <img src="/assets/header/chevron-down-icon.svg" />
-                <mat-menu #menu="matMenu" xPosition="before">
+                <mat-menu class="user-menu" #menu="matMenu" xPosition="before">
                     <button mat-menu-item class="menu-element">
                         <img class="menu-icon" src="/assets/header/following-icon.svg" />
                         <span class="menu-text">Following</span>

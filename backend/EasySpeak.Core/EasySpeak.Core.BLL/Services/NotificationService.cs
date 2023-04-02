@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Diagnostics;
+using AutoMapper;
 using EasySpeak.Core.BLL.Interfaces;
 using EasySpeak.Core.Common.DTO.Notification;
 using EasySpeak.Core.Common.Enums;
@@ -6,12 +7,12 @@ using EasySpeak.Core.DAL.Context;
 using EasySpeak.Core.DAL.Entities;
 using EasySpeak.RabbitMQ.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace EasySpeak.Core.BLL.Services
 {
     public class NotificationService : BaseService, INotificationService
     {
-        private readonly EasySpeakCoreContext _context;
         private readonly IFirebaseAuthService _firebaseAuthService;
         private readonly IMessageProducer _messageProducer;
         public NotificationService(
@@ -23,34 +24,43 @@ namespace EasySpeak.Core.BLL.Services
             :base(context, mapper)
         {
             _firebaseAuthService = firebaseAuthService;
-            _context = context;
             _messageProducer = messageProducer;
         }
 
-        public async Task<ICollection<NotificationDto>> GetNotificationsAsync() =>
-            await _context.Notifications
-                .Where(notify => notify.UserId == _firebaseAuthService.UserId && !notify.IsRead)
-                .Select(notify =>
-                        new NotificationDto
-                        {
-                            Id = notify.Id,
-                            Text = notify.Text,
-                            Type = notify.Type
-                        })
-                .ToListAsync();
-
-        public async Task<NotificationDto> CreateNotificationAsync(Notification notification)
+        public async Task<NotificationDto> AddNotificationAsync(NotificationType type, long id)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == _firebaseAuthService.UserId);
+            var newNotification = await CreateNotificationAsync(type, id);
+
+            var notificationDto = await SaveNotificationAsync(newNotification);
+
+            SendNotificationToRabbit(newNotification.Email, notificationDto);
+
+            return notificationDto;
+        }
+        
+        public async Task<ICollection<NotificationDto>> GetNotificationsAsync()
+        {
+            var notifications = new List<NotificationDto>();
             
+            notifications.AddRange(await GetNotificationsAsync(NotificationType.reminding));
+            notifications.AddRange(await GetNotificationsAsync(NotificationType.classJoin));
+            notifications.AddRange(await GetNotificationsAsync(NotificationType.friendshipRequest));
+            notifications.AddRange(await GetNotificationsAsync(NotificationType.friendshipAcception));
+
+            return notifications.OrderByDescending(n => n.CreatedAt).ToList();
+        }
+
+        public async Task<NotificationDto> SaveNotificationAsync(NewNotificationDto newNotification)
+        {
+            var notification = _mapper.Map<Notification>(newNotification);
+
             await _context.Notifications.AddAsync(notification);
+            
             await _context.SaveChangesAsync();
 
-            var notificationDto = _mapper.Map<NotificationDto>(notification);
+            newNotification.Id = notification.Id;
 
-            SendNotificationToRabbit(user, notificationDto);
-
-            return _mapper.Map<NotificationDto>(new Tuple<long, NotificationDto>(notification.UserId, notificationDto));
+            return _mapper.Map<NotificationDto>(newNotification);
         }
 
         public async Task<long> ReadNotificationAsync(long id)
@@ -67,85 +77,165 @@ namespace EasySpeak.Core.BLL.Services
             return id;
         }
 
-        private void SendNotificationToRabbit(User user, NotificationDto notification)
+        private void SendNotificationToRabbit(string email, NotificationDto notification)
         {
             _messageProducer.Init("notifier", "");
-            _messageProducer.SendMessage<NotificationDto>(notification);
+            _messageProducer.SendMessage(new Tuple<string, NotificationDto>(email, notification));
         }
 
-        private async Task GenerateNotification(NotificationType type, long id)
+        private async Task<NewNotificationDto> CreateNotificationAsync(NotificationType type, long id)
         {
-            switch (type)
+            NewNotificationDto notification = type switch
             {
-                case NotificationType.friendshipRequest:
-                    await NotifyOnFriendshipRequest(id);
-                    break;
-                case NotificationType.friendshipAcception:
-                    await NotifyOnFriendshipAcception(id);
-                    break;
-                case NotificationType.classJoin:
-                    await GenerateGroupJoinNotification(id);
-                    break;
-            }
+                NotificationType.friendshipRequest => await CreateFriendshipNotificationAsync(_firebaseAuthService.UserId, id, type),
+                NotificationType.friendshipAcception => await CreateFriendshipNotificationAsync(id, _firebaseAuthService.UserId, type),
+                NotificationType.classJoin => await CreateLessonNotificationAsync(id, _firebaseAuthService.UserId, type),
+                NotificationType.reminding => await CreateLessonNotificationAsync(id, _firebaseAuthService.UserId, type),
+                _ => null
+            } ?? throw new InvalidOperationException("The notification type doesn't correspond to any of available types." +
+                                                     " Ensure that type of notification is correct");
+
+            return notification;
         }
-
-        private async Task NotifyOnFriendshipRequest(long id)
-        {
-            var receiverId = await _context.Users.Where(u => u.Id == id)
-                .Select(u => u.Id)
-                .FirstOrDefaultAsync();
-
-            var relatedUser = await _context.Users
-                .FirstOrDefaultAsync(x => x.Id == _firebaseAuthService.UserId);
-
-            var notification = new Notification()
+        
+        private async Task<List<NotificationDto>> GetNotificationsAsync(NotificationType type)
+        { 
+            List<NotificationDto> notifications = type switch
             {
-                IsRead = false,
-                UserId = receiverId,
-                RelatedTo = relatedUser!.Id,
-                CreatedAt = DateTime.Now,
-                Type = NotificationType.friendshipRequest,
-                Text = $"{relatedUser.FirstName} {relatedUser.LastName} wants to add you to friends"
+                NotificationType.friendshipRequest => await GetFriendshipNotificationsAsync(type),
+                NotificationType.friendshipAcception => await GetFriendshipNotificationsAsync(type),
+                NotificationType.classJoin => await GetLessonNotificationsAsync(type),
+                NotificationType.reminding => await GetLessonNotificationsAsync(type),
+                _ => new List<NotificationDto>()
             };
 
-            await CreateNotificationAsync(notification);
+            return notifications;
         }
 
-        private async Task NotifyOnFriendshipAcception(long id)
+        private async Task<NewNotificationDto> CreateFriendshipNotificationAsync(long senderId, long receiverId, NotificationType type)
         {
-            var relatedUser = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+            var sender = await GetUserOrThrowErrorAsync(senderId);
 
-            var notification = new Notification()
+            var receiver = await GetUserOrThrowErrorAsync(receiverId);
+
+            var text = type switch
             {
-                IsRead = false,
-                UserId = _firebaseAuthService.UserId,
-                RelatedTo = relatedUser!.Id,
-                CreatedAt = DateTime.Now,
-                Type = NotificationType.friendshipAcception,
-                Text = $"You are now friends with {relatedUser.FirstName} {relatedUser.LastName}"
-            };
-
-            await CreateNotificationAsync(notification);
-        }
-
-        private async Task GenerateGroupJoinNotification(long id)
-        {
-            var lesson = await _context.Lessons
-                .Include(l => l.User)
-                .FirstOrDefaultAsync(x => x.Id == id);
-
-            var notification = new Notification()
-            {
-                IsRead = false,
-                UserId = _firebaseAuthService.UserId,
-                RelatedTo = lesson.User.Id,
-                CreatedAt = DateTime.Now,
-                Type = NotificationType.classJoin,
-                Text = $"Congratulations! You've joined the Croup Class: " +
-                       $"{lesson.Name}, {lesson.CreatedAt:dd MMMM, HH:mm}"
+                NotificationType.friendshipAcception =>
+                    $"You are now friends with <strong>{sender.FirstName} {sender.LastName}</strong>",
+                NotificationType.friendshipRequest =>
+                    $"<strong>{sender.FirstName} {sender.LastName}</strong> wants to add you to friends",
+                _ => string.Empty
             };
             
-            await CreateNotificationAsync(notification);
+            return new NewNotificationDto()
+            {
+                IsRead = false,
+                UserId = receiver.Id,
+                Email = receiver.Email,
+                RelatedTo = sender.Id,
+                CreatedAt = DateTime.Now,
+                Type = type,
+                Text = text,
+                ImagePath = sender.ImagePath
+            };
         }
+
+        private async Task<NewNotificationDto> CreateLessonNotificationAsync(long lessonId, long receiverId, NotificationType type)
+        {
+            var lesson = await GetLessonOrThrowErrorAsync(lessonId);
+
+            var receiver = await GetUserOrThrowErrorAsync(receiverId);
+
+            var text = type switch
+            {
+                NotificationType.classJoin => $"Congratulations! You've joined the Group Class: " +
+                                              $"<strong>{lesson.Name}, {lesson.CreatedAt:dd MMMM, HH:mm}</strong>",
+                NotificationType.reminding => $"The lesson is starting in <strong>30 minutes</strong>! Don't miss it.",
+                _ => string.Empty
+            };
+
+            return new NewNotificationDto()
+            {
+                IsRead = false,
+                UserId = receiver.Id,
+                Email = receiver.Email,
+                RelatedTo = lesson.User!.Id,
+                CreatedAt = DateTime.Now,
+                Type = type,
+                Text = text,
+                ImagePath = lesson.User.ImagePath
+            };
+        }
+
+        private async Task<List<NotificationDto>> GetFriendshipNotificationsAsync(NotificationType type)
+        {
+            return await _context.Notifications
+                .Where(n => n.UserId == _firebaseAuthService.UserId && n.Type == type)
+                .LeftJoin(_context.Users,
+                    n => n.RelatedTo,
+                    u => u.Id,
+                    (n, u) => new {Notification = n, RelatedUser = u})
+                .Select(x => new NotificationDto()
+                {
+                    Id = x.Notification.Id,
+                    CreatedAt = x.Notification.CreatedAt,
+                    IsRead = x.Notification.IsRead,
+                    Text = x.Notification.Text,
+                    Type = x.Notification.Type,
+                    ImagePath = x.RelatedUser.ImagePath
+                })
+                .ToListAsync();
+        }
+
+        private async Task<List<NotificationDto>> GetLessonNotificationsAsync(NotificationType type)
+        {
+            return await _context.Notifications
+                .Where(n => n.UserId == _firebaseAuthService.UserId && n.Type == type)
+                .LeftJoin(_context.Lessons
+                        .Include(l => l.User),
+                    n => n.RelatedTo,
+                    u => u.Id,
+                    (n, u) => new {Notification = n, Lesson = u})
+                .Select(x => new NotificationDto()
+                {
+                    Id = x.Notification.Id,
+                    CreatedAt = x.Notification.CreatedAt,
+                    IsRead = x.Notification.IsRead,
+                    Text = x.Notification.Text,
+                    Type = x.Notification.Type,
+                    ImagePath = x.Lesson.User!.ImagePath
+                })
+                .ToListAsync();
+        }
+
+        public async Task ReadAllNotificationsAsync()
+        {
+            var notifications = await _context.Notifications
+                .Where(n => n.UserId == _firebaseAuthService.UserId && n.IsRead == false)
+                .ToListAsync();
+
+            foreach (var notification in notifications)
+            {
+                notification.IsRead = true;
+            }
+
+            await _context.SaveChangesAsync();
+        }
+
+        private async Task<User> GetUserOrThrowErrorAsync(long id)
+        {
+            return await _context.Users.FirstOrDefaultAsync(u => u.Id == id)
+                   ?? throw new ArgumentException($"User with id {id} not found");
+        }
+
+        private async Task<Lesson> GetLessonOrThrowErrorAsync(long id)
+        {
+            return await _context.Lessons
+                       .Include(l => l.User)
+                       .FirstOrDefaultAsync(l => l.Id == id)
+                   ?? throw new ArgumentException($"Lesson with id {id} not found");
+        }
+        
+        
     }
 }

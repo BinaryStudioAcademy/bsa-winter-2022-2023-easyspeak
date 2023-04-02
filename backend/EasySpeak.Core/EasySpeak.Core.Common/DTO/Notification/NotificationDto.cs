@@ -10,8 +10,8 @@ namespace EasySpeak.Core.Common.DTO.Notification
         public NotificationType Type { get; set; }
         public DateTime CreatedAt { get; set; }
         public string? Link { get; set; }
-        public long RelatedTo { get; set; }
         public bool IsRead { get; set; }
+        public string? ImagePath { get; set; } = string.Empty;
 
     }
 }

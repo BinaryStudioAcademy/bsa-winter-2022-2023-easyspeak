@@ -34,11 +34,11 @@ namespace EasySpeak.Notifier.WebAPI.Services
 
             try
             {
-                _consumer.Recieve<Tuple<long, NotificationDto>>((data) =>
+                _consumer.Recieve<Tuple<string, NotificationDto>>((data) =>
                 {
                     if (data is not null)
                     {
-                        _hubContext.Clients.All.SendAsync($"Notification_{data.Item2}", JsonConvert.SerializeObject(data.Item2));
+                        _hubContext.Clients.User(data.Item1).SendAsync("Notify", JsonConvert.SerializeObject(data.Item2));
                         Console.WriteLine(data);
                     }
                 });
