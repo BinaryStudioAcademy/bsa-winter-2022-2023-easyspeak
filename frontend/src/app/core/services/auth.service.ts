@@ -7,8 +7,7 @@ import { HttpService } from '@core/services/http.service';
 import { UserShort } from '@shared/models/UserShort';
 import * as auth from 'firebase/auth';
 import firebase from 'firebase/compat';
-import { ToastrService } from 'ngx-toastr';
-import { firstValueFrom, Observable, of, Subject } from 'rxjs';
+import { firstValueFrom, Subject } from 'rxjs';
 
 import { NotificationService } from 'src/app/services/notification.service';
 
@@ -26,7 +25,6 @@ export class AuthService {
         private router: Router,
         private ngZone: NgZone,
         private httpService: HttpService,
-        private toastrService: ToastrService,
         public jwtHelper: JwtHelperService,
         private userService: UserService,
         private toastr: NotificationService,
@@ -143,16 +141,9 @@ export class AuthService {
     }
 
     async confirmResetPassword(code: string, newPassword: string) {
-        try {
-            await this.afAuth.confirmPasswordReset(code, newPassword);
-
-            return true;
-        } catch (errorConfirm: unknown) {
-            const errorMessage = (errorConfirm as Error).message;
-
-            this.toastrService.error(errorMessage, 'Error');
-
-            return false;
-        }
+        await this.afAuth.confirmPasswordReset(code, newPassword)
+            .catch((error) => {
+                throw new Error(error.message);
+            });
     }
 }

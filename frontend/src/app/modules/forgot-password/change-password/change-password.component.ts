@@ -51,17 +51,17 @@ export class ChangePasswordComponent implements OnInit {
         this.isValid();
 
         if (this.passwordIsMatch && this.passwordPattern.test(this.password)) {
-            const response = this.authService.confirmResetPassword(this.token, this.password);
+            await this.authService.confirmResetPassword(this.token, this.password)
+                .then(() => {
+                    this.authService.signIn(this.email, this.password);
 
-            if ((await response) === true) {
-                this.authService.signIn(this.email, this.password);
+                    this.toastr.success('Password have been changed successfully!', 'Success');
 
-                this.toastr.success('Password have been changed successfully!', 'Success');
-
-                this.router.navigate(['main']);
-            } else {
-                this.responseIsOk = false;
-            }
+                    this.router.navigate(['main']);
+                })
+                .catch((error) => {
+                    this.toastr.error(error.message, 'Error');
+                });
         }
     }
 }
