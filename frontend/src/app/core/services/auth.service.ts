@@ -67,7 +67,7 @@ export class AuthService {
                 localStorage.setItem('user', JSON.stringify({
                     firstName: resp.firstName,
                     lastName: resp.lastName,
-                    imagePath: resp.imagePath
+                    imagePath: resp.imagePath,
                 }));
                 resolve();
             }, (err) => {
