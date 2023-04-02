@@ -233,12 +233,6 @@ namespace EasySpeak.Core.BLL.Services
                        .FirstOrDefaultAsync(l => l.Id == id)
                    ?? throw new ArgumentException($"Lesson with id {id} not found");
         }
-        
-        private async Task<string> GetProfileImageUrl(long? imageId)
-        {
-            var profileImage = await _context.EasySpeakFiles.FirstOrDefaultAsync(f => f.Id == imageId);
-            return profileImage?.Url ?? ""; 
-        }
-        
+
     }
 }
