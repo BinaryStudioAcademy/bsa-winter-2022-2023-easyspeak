@@ -17,10 +17,8 @@ export class HeaderComponent implements OnInit {
     constructor(private authService: AuthService) {}
 
     ngOnInit(): void {
-        this.authService.setUserSection().subscribe({
-            next: (user) => {
-                this.currentUser = user;
-            },
+        this.authService.setUserSection().then(() => {
+            this.currentUser = this.authService.getUserSection()
         });
     }
 

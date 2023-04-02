@@ -73,25 +73,18 @@ export class AuthService {
     }
 
     public setUserSection() {
-        this.userService.getUser().subscribe(
-            {
-                next: (response) => {
-                    const user: ILocalStorageUser = {
-                        firstName: response.firstName,
-                        lastName: response.lastName,
-                        imagePath: response.imagePath,
-                    };
-
-                    this.setLocalStorage(user);
-                },
-                error: (error) => {
-                    this.logout();
-                    this.toastr.showError(error.message, 'Error!');
-                },
-            },
-        );
-
-        return this.user.asObservable();
+        return new Promise<void>((resolve, reject) => {
+            this.userService.getUser().subscribe((resp) => {
+                localStorage.setItem('user', JSON.stringify({
+                    firstName: resp.firstName,
+                    lastName: resp.lastName,
+                    imagePath: resp.imagePath
+                }));
+                resolve();
+            }, (err) => {
+                reject(err);
+            });
+        });
     }
 
     public getUserSection() {
