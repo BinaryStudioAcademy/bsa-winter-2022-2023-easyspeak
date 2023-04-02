@@ -25,12 +25,16 @@ export class AuthService {
         private userService: UserService,
     ) {}
 
+    async handleUserCredential(userCredential: firebase.auth.UserCredential) {
+        if (userCredential.user) {
+            await this.setAccessToken(userCredential.user).then(() => this.navigateTo('timetable'));
+        }
+    }
+
     async signIn(email: string, password: string): Promise<void> {
         const userCredential = await this.afAuth.signInWithEmailAndPassword(email, password);
 
-        if (userCredential.user) {
-            await this.setAccessToken(userCredential.user);
-        }
+        await this.handleUserCredential(userCredential);
 
         try {
             await firstValueFrom(this.userService.getUser());
@@ -41,11 +45,14 @@ export class AuthService {
     }
 
     signUp(email: string, password: string) {
-        return this.afAuth.createUserWithEmailAndPassword(email, password).then((userCredential) => {
-            if (userCredential.user) {
-                this.setAccessToken(userCredential.user);
-            }
-        });
+        return this.afAuth
+            .createUserWithEmailAndPassword(email, password)
+            .then(async (userCredential) => {
+                await this.handleUserCredential(userCredential);
+            })
+            .catch(() => {
+                throw new Error('This email is already registered. Try another one');
+            });
     }
 
     private async setAccessToken(user: firebase.User): Promise<void> {

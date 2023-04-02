@@ -10,7 +10,7 @@
     display: flex
     justify-content: center
     align-items: center
-    
+
 
 @mixin icon
     width: 70%
@@ -41,7 +41,7 @@
 .router
     width: 50vw
     height: 100vh
-        
+
 
 .image-section
     height: 100%
@@ -142,15 +142,17 @@ h1
     position: relative
     .expand-icon
         position: absolute
-        right: 1.5vw
-        top: 1.6vh
+        right: 15px
+        top: 54%
+        transform: translateY(-50%)
         color: $blue-200
         z-index: 4
+        cursor: pointer
     .placeholder
         position: absolute
         left: 1vw
-        top: 1.8vh
-        align-self: center
+        top: 50%
+        transform: translateY(-50%)
         color: $gray-200
         font-size: 14px
         z-index: 4
@@ -160,7 +162,7 @@ h1
         height: 100%
         top: 0
         box-sizing: border-box
-        box-shadow: 0px 1px 4px $error-color
+        box-shadow: 0 1px 4px $error-color
         border-radius: 50px
         z-index: 1
     .errors-wrp
@@ -175,6 +177,7 @@ h1
             display: flex
             align-items: center
             height: 100%
+            margin-left: 5px
             img
                 filter: invert(31%) sepia(100%) saturate(3362%) hue-rotate(325deg) brightness(94%) contrast(99%)
                 height: 13px
@@ -186,6 +189,7 @@ h1
     display: grid
     grid-template-columns: repeat(2, calc( 12vw - 7.5px ))
     gap: 15px
+    position: relative
 
 
 input
@@ -266,8 +270,6 @@ input
 
 ::ng-deep.ng-dropdown-panel
     background-color: $white
-    max-height: 200px
-    overflow: scroll
     margin-top: 5px
     border-radius: 4px
 
@@ -281,7 +283,7 @@ input
         align-items: center
         color: $gray-300
 
-    
+
 ::ng-deep.ng-select.ng-select-focused
     box-shadow: 0px 2px 6px $turquoise-100
     outline-color: $gray-100
