@@ -10,6 +10,7 @@ import { IUserInfo } from '@shared/models/IUserInfo';
 import { ITag } from '@shared/models/user/ITag';
 import { getTags } from '@shared/utils/tagsForInterests';
 import { ToastrService } from 'ngx-toastr';
+import { forkJoin } from 'rxjs';
 
 import { CountriesTzLangProviderService } from 'src/app/services/countries-tz-lang-provider.service';
 
@@ -73,13 +74,14 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
                     birthDate: resp.birthDate,
                 });
 
-                this.userService.getTagNames().pipe(this.untilThis)
-                    .subscribe(tags => { this.selectedTags = tags; });
-            });
+                const userTags = this.userService.getTagNames();
+                const allTags = this.tagService.getAllTags();
 
-        this.tagService.getAllTags().pipe(this.untilThis).subscribe(
-            tags => { this.allTags = tags; },
-        );
+                forkJoin([userTags, allTags]).subscribe(([data1, data2]) => {
+                    this.selectedTags = data1;
+                    this.allTags = data2;
+                });
+            });
     }
 
     onSubmit() {
