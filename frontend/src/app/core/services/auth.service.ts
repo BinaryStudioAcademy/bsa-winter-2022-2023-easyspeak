@@ -62,17 +62,18 @@ export class AuthService {
     }
 
     public setUserSection() {
-        this.userService.getUser().subscribe((resp) => {
-            localStorage.setItem('user', JSON.stringify(resp));
+        return new Promise<void>((resolve, reject) => {
+            this.userService.getUser().subscribe((resp) => {
+                localStorage.setItem('user', JSON.stringify(resp));
+                resolve();
+            }, (err) => {
+                reject(err);
+            });
         });
     }
 
     public getUserSection() {
-        const userSection = localStorage.getItem('user');
-
-        if (!userSection) {
-            return null;
-        }
+        const userSection: string = localStorage.getItem('user') as string;
 
         const userInfo: IUserInfo = JSON.parse(userSection);
 

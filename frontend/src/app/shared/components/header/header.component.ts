@@ -17,10 +17,9 @@ export class HeaderComponent implements OnInit {
     constructor(private authService: AuthService) {}
 
     ngOnInit(): void {
-        if (this.authService.isAuthenticated()) {
-            this.authService.setUserSection();
+        this.authService.setUserSection().then(() => {
             this.currentUser = this.authService.getUserSection();
-        }
+        });
     }
 
     logOut() {
