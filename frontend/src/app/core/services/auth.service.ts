@@ -9,6 +9,7 @@ import * as auth from 'firebase/auth';
 import firebase from 'firebase/compat';
 import { ToastrService } from 'ngx-toastr';
 import { firstValueFrom, Observable, of, Subject } from 'rxjs';
+
 import { NotificationService } from 'src/app/services/notification.service';
 
 import { UserService } from './user.service';
