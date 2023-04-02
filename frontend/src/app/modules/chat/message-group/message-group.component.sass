@@ -5,8 +5,9 @@
     width: 100%
 
 .message
-    width: 50%
+    max-width: 50%
     display: flex
+    min-width: 5%
     flex-direction: column
     align-items: flex-start
     margin: 10px
@@ -14,17 +15,21 @@
     border-radius: 0 10px 10px 10px
     background-color: $white
 
+
 .message-time
     width: 100%
     display: flex
     justify-content: flex-end
     position: relative
+    margin-bottom: 3px
+    margin-right: 7px
     span
         bottom: -2px
         right: 16px
         position: absolute
         color: $blue-200
         font-size: 12px
+        margin-left: auto
 
 .sender
     background-color: $message-color
@@ -57,7 +62,8 @@
     justify-content: flex-end
 
 .not-own-message
-    .message-time span
-        color: $gray-300
+    .message-time
+        height: 9px
     span
+        color: $gray-300
         right: 0
