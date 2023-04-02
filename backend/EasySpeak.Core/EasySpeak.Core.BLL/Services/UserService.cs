@@ -145,9 +145,11 @@ public class UserService : BaseService, IUserService
     public async Task<TagDto[]> GetUserTags()
     {
         var userId = _authService.UserId;
-        var user = await _context.Users.FindAsync(userId) ?? throw new ArgumentException($"Failed to find the user with id {userId}");
 
-        return _mapper.Map<TagDto[]>(user.Tags);
+        var user = await _context.Users.Include(u => u.Tags).FirstOrDefaultAsync(u => u.Id == userId);
+        var tags = user?.Tags ?? throw new ArgumentException($"Failed to find tags for user with id {userId}");
+
+        return _mapper.Map<TagDto[]>(tags);
     }
 
     public async Task<UserDto> UpdateUser(UserDto userDto)
