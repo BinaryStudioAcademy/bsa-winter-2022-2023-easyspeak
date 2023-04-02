@@ -122,7 +122,7 @@ export class SignUpComponent extends BaseComponent implements OnInit {
             age: this.dateOfBirth.value,
             sex: this.sex.value,
             language: this.language.value,
-            languageLevel: this.languageLevel.value,
+            languageLevel: (this.languageLevel.value as string).substring(0, 2),
             country: this.country.value,
         };
 
