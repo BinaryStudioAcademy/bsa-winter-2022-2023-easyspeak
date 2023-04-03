@@ -7,8 +7,7 @@ import { HttpService } from '@core/services/http.service';
 import { UserShort } from '@shared/models/UserShort';
 import * as auth from 'firebase/auth';
 import firebase from 'firebase/compat';
-import { firstValueFrom, from, Subject } from 'rxjs';
-import { mergeMap } from 'rxjs/operators';
+import { firstValueFrom, Subject } from 'rxjs';
 
 import { NotificationService } from 'src/app/services/notification.service';
 
