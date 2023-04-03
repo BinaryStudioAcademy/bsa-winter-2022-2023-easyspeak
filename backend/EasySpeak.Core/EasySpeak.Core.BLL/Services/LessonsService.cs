@@ -10,10 +10,12 @@ namespace EasySpeak.Core.BLL.Services;
 
 public class LessonsService : BaseService, ILessonsService
 {
+    private readonly IFirebaseAuthService _authService;
     public const int DaysInWeek = 7;
 
-    public LessonsService(EasySpeakCoreContext context, IMapper mapper) : base(context, mapper)
+    public LessonsService(EasySpeakCoreContext context, IMapper mapper, IFirebaseAuthService authService) : base(context, mapper)
     {
+        _authService = authService;
     }
 
     public async Task<ICollection<QuestionForLessonDto>> GetQuestionsByLessonIdAsync(int id)
@@ -46,12 +48,22 @@ public class LessonsService : BaseService, ILessonsService
             lessonsFromContext = lessonsFromContext.Where(m => filtersRequest.LanguageLevels.Contains(m.LanguageLevel));
         }
 
-        var subscribersCountDict = await lessonsFromContext.Select(t => new { t.Id, SbCount = t.Subscribers.Count }).ToDictionaryAsync(t => t.Id);
+        var subscribersInfoDict = await lessonsFromContext.Select(t =>
+            new
+            {
+                t.Id,
+                SbCount = t.Subscribers.Count,
+                isSubscribed = t.Subscribers.Any(u => u.Id == _authService.UserId)
+            }).ToDictionaryAsync(t => t.Id);
         var lessons = await lessonsFromContext.OrderBy(l => l.StartAt).ToListAsync();
 
         var lessonDtos = _mapper.Map<List<Lesson>, List<LessonDto>>(lessons);
 
-        lessonDtos.ForEach(t => t.SubscribersCount = subscribersCountDict[t.Id].SbCount);
+        lessonDtos.ForEach(t =>
+        {
+            t.SubscribersCount = subscribersInfoDict[t.Id].SbCount;
+            t.isSubscribed = subscribersInfoDict[t.Id].isSubscribed;
+        });
 
         return lessonDtos;
     }

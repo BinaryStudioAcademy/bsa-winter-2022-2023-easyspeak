@@ -75,7 +75,7 @@ export class LessonComponent extends BaseComponent implements OnInit {
         this.userService.enrollUserToLesson(this.lesson.id)
             .pipe(this.untilThis)
             .subscribe({ next: (lesson) => {
-                this.lesson.isDisabled = true;
+                this.lesson.isSubscribed = true;
                 this.lesson.subscribersCount = lesson.subscribersCount;
                 this.notificationService.showSuccess(`You successfully registered for lesson ${this.lesson.title}`, 'Success!');
             },
@@ -84,5 +84,20 @@ export class LessonComponent extends BaseComponent implements OnInit {
 
     ngOnInit(): void {
         this.previewImage = this.lesson.videoId ? `//img.youtube.com/vi/${this.lesson.videoId}/maxresdefault.jpg` : '';
+    }
+
+    isDisabled() {
+        return this.lesson.isSubscribed || new Date() > this.lesson.startAt;
+    }
+
+    getButtonContent() {
+        if (new Date() > this.lesson.startAt) {
+            return 'Expired';
+        }
+        if (this.lesson.isSubscribed) {
+            return 'Subscribed';
+        }
+
+        return 'Join';
     }
 }

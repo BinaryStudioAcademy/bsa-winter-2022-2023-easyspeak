@@ -195,12 +195,14 @@
     flex-direction: column
 
 .join
-    display: inline-block
-
-    width: 60px
+    display: flex
+    align-items: center
+    justify-content: center
+    width: auto
+    min-width: 60px
     height: 25px
-
     margin: 8px 10px
+    padding: 4px 12px
 
     background: $blue-200
     border: none
@@ -215,11 +217,7 @@
     cursor: pointer
 
 .join:disabled, .join[disabled]
-    width: 60px
     height: 25px
-
-    margin: 8px 10px
-
     background: $gray-200
 
 .expand
