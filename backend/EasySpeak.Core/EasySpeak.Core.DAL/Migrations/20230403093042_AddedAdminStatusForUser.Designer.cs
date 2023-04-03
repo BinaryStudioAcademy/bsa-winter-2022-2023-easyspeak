@@ -4,6 +4,7 @@ using EasySpeak.Core.DAL.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EasySpeak.Core.DAL.Migrations
 {
     [DbContext(typeof(EasySpeakCoreContext))]
-    partial class EasySpeakCoreContextModelSnapshot : ModelSnapshot
+    [Migration("20230403093042_AddedAdminStatusForUser")]
+    partial class AddedAdminStatusForUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -2421,6 +2423,9 @@ namespace EasySpeak.Core.DAL.Migrations
                     b.Property<long?>("ImageId")
                         .HasColumnType("bigint");
 
+                    b.Property<bool>("IsAdmin")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsBanned")
                         .HasColumnType("bit");
 
@@ -2463,13 +2468,13 @@ namespace EasySpeak.Core.DAL.Migrations
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "Della.Rosenbaum@yahoo.com",
                             FirstName = "Della",
-                            IsAdmin = false,
+                            IsAdmin = true,
                             IsBanned = false,
                             IsSubscribed = true,
                             Language = 175,
                             LanguageLevel = 2,
                             LastName = "Rosenbaum",
-                            Sex = 0,
+                            Sex = 1,
                             Status = 0,
                             Timezone = 275
                         },
@@ -2479,14 +2484,14 @@ namespace EasySpeak.Core.DAL.Migrations
                             BirthDate = new DateTime(2003, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Country = 215,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "Georgia_Gorczany76@gmail.com",
-                            FirstName = "Georgia",
-                            IsAdmin = false,
+                            Email = "Randall_Hegmann56@hotmail.com",
+                            FirstName = "Randall",
+                            IsAdmin = true,
                             IsBanned = false,
                             IsSubscribed = true,
                             Language = 103,
                             LanguageLevel = 0,
-                            LastName = "Gorczany",
+                            LastName = "Hegmann",
                             Sex = 1,
                             Status = 1,
                             Timezone = 197
@@ -2497,15 +2502,15 @@ namespace EasySpeak.Core.DAL.Migrations
                             BirthDate = new DateTime(2003, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Country = 68,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "Jimmy89@hotmail.com",
-                            FirstName = "Jimmy",
-                            IsAdmin = false,
+                            Email = "Alfred89@hotmail.com",
+                            FirstName = "Alfred",
+                            IsAdmin = true,
                             IsBanned = false,
                             IsSubscribed = true,
                             Language = 65,
                             LanguageLevel = 2,
-                            LastName = "Fritsch",
-                            Sex = 1,
+                            LastName = "Rohan",
+                            Sex = 2,
                             Status = 2,
                             Timezone = 6
                         },
@@ -2515,15 +2520,15 @@ namespace EasySpeak.Core.DAL.Migrations
                             BirthDate = new DateTime(2003, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Country = 42,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "Raquel57@gmail.com",
-                            FirstName = "Raquel",
-                            IsAdmin = false,
+                            Email = "Sandra57@gmail.com",
+                            FirstName = "Sandra",
+                            IsAdmin = true,
                             IsBanned = false,
                             IsSubscribed = true,
                             Language = 21,
                             LanguageLevel = 0,
-                            LastName = "Bartell",
-                            Sex = 1,
+                            LastName = "Satterfield",
+                            Sex = 2,
                             Status = 1,
                             Timezone = 71
                         },
@@ -2531,19 +2536,19 @@ namespace EasySpeak.Core.DAL.Migrations
                         {
                             Id = 5L,
                             BirthDate = new DateTime(2003, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Country = 86,
+                            Country = 236,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "Kay.Botsford86@yahoo.com",
-                            FirstName = "Kay",
+                            Email = "Frances.Lemke37@gmail.com",
+                            FirstName = "Frances",
                             IsAdmin = false,
                             IsBanned = false,
-                            IsSubscribed = false,
-                            Language = 1,
-                            LanguageLevel = 0,
-                            LastName = "Botsford",
-                            Sex = 1,
-                            Status = 1,
-                            Timezone = 21
+                            IsSubscribed = true,
+                            Language = 55,
+                            LanguageLevel = 3,
+                            LastName = "Lemke",
+                            Sex = 2,
+                            Status = 3,
+                            Timezone = 175
                         });
                 });
 
