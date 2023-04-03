@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace EasySpeak.Core.Common.DTO.Message
 {
-    internal class MessageGroupDto
+    public class MessageGroupDto
     {
+        public DateTime Date { get; set; }
+        public ICollection<MessageDto>? Messages { get; set; }
     }
 }

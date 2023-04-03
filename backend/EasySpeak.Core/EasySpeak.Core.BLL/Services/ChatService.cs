@@ -2,6 +2,7 @@
 using EasySpeak.Core.BLL.Interfaces;
 using EasySpeak.Core.Common.DTO.Message;
 using EasySpeak.Core.DAL.Context;
+using EasySpeak.Core.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Runtime.CompilerServices;
 
@@ -30,8 +31,13 @@ namespace EasySpeak.Core.BLL.Services
                         })
                 .ToListAsync();
 
-        public async Task<ICollection<MessageGroupDto>> GetMessagesInChat(int chatId) =>
-            await _context.Chats.FirstOrDefaultAsync(chat => chat.Id == chatId)
-            .Select()
+        //public async Task<ICollection<MessageGroupDto>> GetMessagesInChat(int chatId) =>
+        //    await _context.Chats.FirstOrDefault(chat => chat.Id == chatId)?.Messages
+        //    .Select(message => 
+        //                    new MessageGroupDto
+        //                    {
+        //                        Messages = 
+        //                    }
+        //    )
     }
 }
