@@ -7,7 +7,8 @@ import { HttpService } from '@core/services/http.service';
 import { UserShort } from '@shared/models/UserShort';
 import * as auth from 'firebase/auth';
 import firebase from 'firebase/compat';
-import { firstValueFrom, Subject } from 'rxjs';
+import { firstValueFrom, from, Subject } from 'rxjs';
+import { mergeMap } from 'rxjs/operators';
 
 import { NotificationService } from 'src/app/services/notification.service';
 
@@ -19,6 +20,8 @@ import { UserService } from './user.service';
 export class AuthService {
     user = new Subject<UserShort>();
 
+    fbUser: firebase.User;
+
     constructor(
         private afs: AngularFirestore,
         private afAuth: AngularFireAuth,
@@ -28,7 +31,14 @@ export class AuthService {
         public jwtHelper: JwtHelperService,
         private userService: UserService,
         private toastr: NotificationService,
-    ) {}
+    ) {
+        this.afAuth.onAuthStateChanged((user) => {
+            if (user) {
+                this.fbUser = user;
+            }
+            console.log(user);
+        });
+    }
 
     async handleUserCredentialThenNavigatoTo(userCredential: firebase.auth.UserCredential, route: string) {
         if (userCredential.user) {
@@ -103,7 +113,19 @@ export class AuthService {
     public isAuthenticated(): boolean {
         const token = localStorage.getItem('accessToken');
 
+        if (token) {
+            if (this.jwtHelper.isTokenExpired(token) && this.fbUser) {
+                this.refreshToken();
+
+                return true;
+            }
+        }
+
         return !this.jwtHelper.isTokenExpired(token);
+    }
+
+    async refreshToken() {
+        await this.setAccessToken(this.fbUser);
     }
 
     logout(): Promise<void> {
