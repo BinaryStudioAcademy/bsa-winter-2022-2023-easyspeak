@@ -11,6 +11,7 @@ import { passFormatRegex } from '@shared/data/regex.util';
 import { Sex } from '@shared/data/sex';
 import { INewUser } from '@shared/models/INewUser';
 import { ToastrService } from 'ngx-toastr';
+import { concatMap } from 'rxjs';
 
 import { CountriesTzLangProviderService } from 'src/app/services/countries-tz-lang-provider.service';
 
@@ -98,7 +99,7 @@ export class SignUpComponent extends BaseComponent implements OnInit {
         this.authService
             .signUp(this.email.value, this.password.value)
             .then(() => {
-                this.createUser().pipe(this.untilThis).subscribe(
+                this.createUser().pipe(concatMap(() => this.createUser())).subscribe(
                     () => {
                         this.toastr.success('Account successfully created', 'Success!');
                         this.router.navigate(['topics']);
