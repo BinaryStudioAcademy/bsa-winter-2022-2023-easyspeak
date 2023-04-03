@@ -145,4 +145,16 @@ public class UserService : BaseService, IUserService
          var profileImage = await _context.EasySpeakFiles.FirstOrDefaultAsync(f => f.Id == imageId);
          return profileImage?.Url ?? ""; 
      }
+
+     public async Task<UserDto> MakeAdminAsync(int userId)
+    {
+        var user = await _context.Users.Where(u => u.Id == userId).SingleOrDefaultAsync();
+        if (user is not null)
+        {
+            user.IsAdmin = true;
+            await _context.SaveChangesAsync();
+        }
+        UserDto userDto = _mapper.Map<UserDto>(user);
+        return userDto;
+    }
 }
