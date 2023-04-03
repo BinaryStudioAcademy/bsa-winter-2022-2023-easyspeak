@@ -42,7 +42,7 @@ export class UserService {
         return this.httpService.put<Lesson>(`${this.routePrefix}/enroll/${lessonId}`, {} as Lesson);
     }
 
-    public getTagNames() {
+    public getUserTags() {
         return this.httpService.get<ITag[]>(`${this.routePrefix}/tags`);
     }
 

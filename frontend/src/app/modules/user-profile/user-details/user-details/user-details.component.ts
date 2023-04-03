@@ -70,10 +70,9 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
                     sex: resp.sex,
                     language: resp.language,
                     languageLevel: resp.languageLevel,
-                    birthDate: resp.birthDate,
-                });
+                    birthDate: resp.birthDate });
 
-                this.userService.getTagNames().pipe(this.untilThis)
+                this.userService.getUserTags().pipe(this.untilThis)
                     .subscribe(tags => { this.selectedTags = tags; });
             });
 
@@ -125,23 +124,17 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
         return this.detailsForm.get('email') as FormControl;
     }
 
-    selectInterest($event: Event, i: number) {
-        const ev = $event.target as HTMLInputElement;
-
-        this.selectedTags = (ev.checked)
-            ? [...this.selectedTags, { name: this.tagsList[i].icon_name } as ITag]
-            : this.selectedTags.filter(x => x.name !== this.tagsList[i].icon_name);
+    selectInterest(tag: ITag) {
+        this.selectedTags = (this.includesTags(tag.id))
+            ? this.selectedTags.filter(x => x.id !== tag.id)
+            : [...this.selectedTags, tag];
     }
 
-    getIconByName(name: string) {
-        return this.tagsList.find(t => t.icon_name === name)?.link;
+    getIconById(id: number) {
+        return this.tagsList.find(t => t.id === id)?.link;
     }
 
-    getStringTags() {
-        return Array.from(this.allTags, t => t.name);
-    }
-
-    includesTags(item: string) {
-        return this.selectedTags.find(t => t.name === item);
+    includesTags(id: number) {
+        return this.selectedTags.find(t => t.id === id);
     }
 }

@@ -159,15 +159,15 @@
         </div>
     </div>
     <div class="user-interests-section">
-        <div *ngFor="let item of getStringTags(); let i = index" class="user-interest-content">
-            <input type="checkbox" id="{{i}}" [checked]=includesTags(item)
+        <div *ngFor="let item of allTags; let i = index" class="user-interest-content">
+            <input type="checkbox" id="{{i}}" [checked]=includesTags(item.id)
                    class="item-checkbox"
-                   (change)="selectInterest($event,i)" />
+                   (change)="selectInterest(item) " />
             <label class="item-checkbox-label" for="{{i}}">
                 <div class="interest-image-container ">
-                    <img class="icon" [src]="getIconByName(item)" alt="image"/>
+                    <img class="icon" [src]="getIconById(item.id)" alt="image"/>
                 </div>
-                <div class="interest-image-text">{{item}}</div>
+                <div class="interest-image-text">{{item.name}}</div>
             </label>
         </div>
     </div>
