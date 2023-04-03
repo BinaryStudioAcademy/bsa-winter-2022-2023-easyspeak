@@ -22,6 +22,9 @@ export class SuitableLessonComponent implements OnInit {
 
     ngOnInit(): void {
         this.setDays();
+        this.lessonService.lessonAdded$.subscribe(() => {
+            this.setDays();
+        });
     }
 
     select(event: Date | null) {

@@ -36,12 +36,15 @@ export class LessonsPageComponent implements OnInit, OnChanges {
 
         this.getLessons();
 
+        this.lessonService.lessonAdded$.subscribe(() => {
+            this.getLessons();
+        });
+
         this.todayDate = moment().format('DD MMMM YYYY, dddd');
     }
 
     ngOnChanges(): void {
         this.getLessons();
-
         this.todayDate = moment(this.selectedDateFilter).format('DD MMMM YYYY, dddd');
     }
 
