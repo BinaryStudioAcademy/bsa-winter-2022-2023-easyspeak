@@ -3,7 +3,11 @@
         <div class="user-general-info">
             <div class="left-area">
                 <div class="picture">
-                    <app-avatar [fullName]="user.name" [imagePath]="user.imagePath"></app-avatar>
+                    <app-avatar
+                        [firstName]="getUserFirstName()"
+                        [lastName]="getUserLastName()"
+                        [imagePath]="user.imagePath"
+                        [imageSize]="56"></app-avatar>
                 </div>
 
                 <div class="info">

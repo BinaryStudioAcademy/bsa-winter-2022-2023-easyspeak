@@ -8,19 +8,22 @@ import { ColorGenerationUtils } from '@shared/utils/color.utils';
     styleUrls: ['./avatar.component.sass'],
 })
 export class AvatarComponent {
-    @Input() fullName: string;
+    @Input() firstName: string;
+
+    @Input() lastName: string;
 
     @Input() imagePath: string;
+
+    @Input() imageSize: number;
 
     constructor(private authService: AuthService) {}
 
     getInitials(): string {
-        if (!this.fullName) {
+        if (!this.firstName || !this.lastName) {
             return 'NO';
         }
-        const userName = this.fullName.split(' ');
 
-        return (userName[0][0] + userName[1][0]).toUpperCase();
+        return (this.firstName[0] + this.lastName[0]).toUpperCase();
     }
 
     getAvatarBackground(): string {

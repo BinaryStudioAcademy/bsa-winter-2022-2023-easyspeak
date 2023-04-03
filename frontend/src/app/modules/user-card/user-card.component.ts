@@ -12,15 +12,21 @@ import { CountriesTzLangProviderService } from 'src/app/services/countries-tz-la
 export class UserCardComponent implements OnInit {
     @Input() user: UserCard = Utils.user;
 
-    constructor(private countriesService: CountriesTzLangProviderService) { }
+    constructor(private countriesService: CountriesTzLangProviderService) {}
 
     ngOnInit(): void {
         this.user.tags = [...new Set(this.user.tags)];
     }
 
     public getUserCountryFlag() {
-        return this.countriesService.getCountriesList()
-            .find(c => c.name === this.user.country)
-            ?.flag;
+        return this.countriesService.getCountriesList().find((c) => c.name === this.user.country)?.flag;
+    }
+
+    getUserFirstName(): string {
+        return this.user.name.split(' ')[0];
+    }
+
+    getUserLastName(): string {
+        return this.user.name.split(' ')[1];
     }
 }

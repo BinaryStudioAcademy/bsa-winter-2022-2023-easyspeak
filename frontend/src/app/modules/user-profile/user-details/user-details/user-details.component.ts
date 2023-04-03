@@ -32,7 +32,9 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
 
     detailsForm;
 
-    fullName: string;
+    userFirstName: string;
+
+    userLastName: string;
 
     imagePath: string;
 
@@ -64,7 +66,8 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
                     language: resp.language,
                     languageLevel: resp.languageLevel,
                 });
-                this.fullName = `${resp.firstName} ${resp.lastName}`;
+                this.userFirstName = resp.firstName;
+                this.userLastName = resp.lastName;
                 this.imagePath = resp.imagePath;
             });
     }
