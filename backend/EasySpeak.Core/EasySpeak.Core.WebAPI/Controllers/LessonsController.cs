@@ -10,10 +10,12 @@ namespace EasySpeak.Core.WebAPI.Controllers
     public class LessonsController : ControllerBase
     {
         private readonly ILessonsService _lessonsService;
+        private readonly IUserService _userService;
 
-        public LessonsController(ILessonsService lessonsService)
+        public LessonsController(ILessonsService lessonsService, IUserService userService)
         {
             _lessonsService = lessonsService;
+            _userService = userService;
         }
 
         [HttpGet("{id}/questions")]
@@ -33,8 +35,12 @@ namespace EasySpeak.Core.WebAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<LessonDto>> CreateAsync(NewLessonDto lessonDto)
         {
-            var lesson = await _lessonsService.CreateLessonAsync(lessonDto);
-            return Ok(lesson);
+            if (await _userService.GetAdminStatusAsync())
+            {
+                var lesson = await _lessonsService.CreateLessonAsync(lessonDto);
+                return Ok(lesson);
+            }
+            return StatusCode(403);
         }
     }
 }
