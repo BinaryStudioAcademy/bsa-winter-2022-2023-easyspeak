@@ -46,6 +46,8 @@ textarea:focus, input:focus
     padding-left: 19px
     padding-top: 9px
     margin-bottom: 15px
+    &:focus
+        box-shadow: 0px 1px 4px rgba(97, 212, 246, 0.8)
 
 .input-container
     position: relative
@@ -74,13 +76,16 @@ textarea:focus, input:focus
 
 .wrong-format
     display: flex
-    margin: 0 0 20px 0
+    margin: 0 0 13px 0
     color: red
+    font-weight: 400
+    font-size: 12px
     img
         margin-right: 5px
         width: 18px
     
-.red
+.red,
+.red:focus
     color: red
-    box-shadow: 0px 1px 4px rgba(238, 42, 100, 0.48)
+    box-shadow: 0px 1px 4px rgba(238, 42, 100, 0.8)
     margin-bottom: 5px

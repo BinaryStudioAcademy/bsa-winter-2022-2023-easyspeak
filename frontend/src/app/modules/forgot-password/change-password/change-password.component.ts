@@ -24,15 +24,11 @@ export class ChangePasswordComponent implements OnInit {
 
     email: string;
 
-    responseIsOk: boolean = true;
-
     constructor(private router: Router, private route: ActivatedRoute, private authService: AuthService, private toastr: ToastrService) {}
 
     ngOnInit(): void {
         this.route.queryParams.subscribe((params) => {
             this.token = params['oobCode'];
-        });
-        this.route.queryParams.subscribe((params) => {
             this.email = params['email'];
         });
     }
@@ -55,12 +51,12 @@ export class ChangePasswordComponent implements OnInit {
                 .then(() => {
                     this.authService.signIn(this.email, this.password);
 
-                    this.toastr.success('Password have been changed successfully!', 'Success');
+                    this.toastr.success('Password have been changed successfully!', 'Change Password');
 
-                    this.router.navigate(['main']);
+                    this.router.navigate(['timetable']);
                 })
                 .catch((error) => {
-                    this.toastr.error(error.message, 'Error');
+                    this.toastr.error(error.message, 'Change Password error');
                 });
         }
     }

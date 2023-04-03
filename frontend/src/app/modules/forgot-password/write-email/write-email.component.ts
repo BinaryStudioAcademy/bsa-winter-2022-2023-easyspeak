@@ -14,8 +14,6 @@ export class WriteEmailComponent {
 
     isMatchFormat: boolean = true;
 
-    isWrongEmail: boolean = false;
-
     buttonClicked: boolean = false;
 
     constructor(private router: Router, private authService: AuthService, private toastr: ToastrService) {}
@@ -28,14 +26,12 @@ export class WriteEmailComponent {
         if (this.isMatchFormat) {
             await this.authService.resetPassword(this.email)
                 .then(() => {
-                    this.toastr.success('Recovery link has been send to your email', 'Success');
+                    this.toastr.success('Recovery link has been send to your email', 'Email send');
                     this.router.navigate(['auth/forgot-password/check-email']);
                 })
                 .catch((error) => {
-                    this.toastr.error(error.message, 'Error');
+                    this.toastr.error(error.message, 'Email send error');
                 });
-        } else if (this.email.length === 0) {
-            this.isMatchFormat = true;
         }
     }
 
@@ -43,10 +39,6 @@ export class WriteEmailComponent {
         this.isMatchFormat = emailFormatRegex.test(this.email);
 
         this.buttonClicked = false;
-
-        if (this.isWrongEmail) {
-            this.isWrongEmail = false;
-        }
     }
 
     redWarning(): boolean {
