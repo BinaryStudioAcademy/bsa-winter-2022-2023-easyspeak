@@ -3,11 +3,11 @@
         <div class="up">
             <div class="lesson-preview">
                 <div class="photo" (click)="openDialog(lesson.videoId)">
-                    <img src="{{ lesson.imgPath }}" alt="thumbnail" />
-                    <div class="circle">
+                    <img src="{{ previewImage || 'assets/lesson-icons/no-video.png'}}" alt="thumbnail" />
+                    <div class="circle" *ngIf="previewImage">
                         <img src="assets/lesson-icons/circle.svg" alt="circle-icon" />
                     </div>
-                    <div class="play">
+                    <div class="play" *ngIf="previewImage">
                         <img src="assets/lesson-icons/play.svg" alt="play-icon" />
                     </div>
                 </div>
