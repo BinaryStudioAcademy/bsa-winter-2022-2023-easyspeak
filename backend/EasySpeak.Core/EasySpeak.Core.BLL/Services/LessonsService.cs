@@ -70,7 +70,7 @@ public class LessonsService : BaseService, ILessonsService
 
     public async Task<ICollection<DayCardDto>?> GetDayCardsOfWeekAsync(RequestDayCardDto requestDto)
     {
-        var mondayDate = requestDto.Date.AddDays(-(int)requestDto.Date.DayOfWeek).Date;
+        var mondayDate = requestDto.Date.AddDays(-((7 + (requestDto.Date.DayOfWeek - DayOfWeek.Monday)) % 7)).Date;
         var dayCards = await _context.Lessons
             .Where(c => c.StartAt.Date >= mondayDate
                         && c.StartAt.Date <= mondayDate.AddDays(DaysInWeek - 1))

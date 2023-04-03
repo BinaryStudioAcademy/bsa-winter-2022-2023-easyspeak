@@ -29,10 +29,6 @@ export class LessonsPageComponent implements OnInit, OnChanges {
 
     lessons: Lesson[];
 
-    lessonsColumn1: Lesson[];
-
-    lessonsColumn2: Lesson[];
-
     constructor(private dialogRef: MatDialog, private lessonService: LessonsService) {}
 
     ngOnInit(): void {
@@ -83,8 +79,6 @@ export class LessonsPageComponent implements OnInit, OnChanges {
             })
             .subscribe((response) => {
                 this.lessons = this.mapLessons(response);
-                this.lessonsColumn1 = this.lessons.filter((el, index) => index % 2 === 0);
-                this.lessonsColumn2 = this.lessons.filter((el, index) => index % 2 === 1);
             });
     }
 
