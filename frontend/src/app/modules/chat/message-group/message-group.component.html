@@ -12,7 +12,7 @@
     <div *ngFor="let mess of message.messages" [ngClass]="{'message-photo': true, 'own-message': mess.userId === currentUserId, 'not-own-message': mess.userId !== currentUserId}">
         <img src="assets/header/avatar.svg" *ngIf="mess.userId !== currentUserId" alt="img">
         <div class="message" [ngClass]="{ sender: mess.userId === currentUserId }">
-            <p>{{ mess.text }}</p>
+            <p class="message-content">{{ mess.text }}</p>
             <div class="message-time">
                     <span>
                         {{mess.createdAt | date: 'HH:mm'}}
