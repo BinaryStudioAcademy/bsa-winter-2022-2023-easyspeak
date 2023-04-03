@@ -73,12 +73,11 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
                     birthDate: resp.birthDate });
 
                 this.userService.getUserTags().pipe(this.untilThis)
-                    .subscribe(tags => { this.selectedTags = tags; });
+                    .subscribe(tags => {
+                        this.allTags = tags;
+                        this.selectedTags = tags.filter(t => t.isSelected === true);
+                    });
             });
-
-        this.tagService.getAllTags().pipe(this.untilThis).subscribe(
-            tags => { this.allTags = tags; },
-        );
     }
 
     onSubmit() {

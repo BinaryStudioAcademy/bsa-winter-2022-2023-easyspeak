@@ -145,9 +145,16 @@ public class UserService : BaseService, IUserService
     public async Task<TagDto[]> GetUserTags()
     {
         var userId = _authService.UserId;
-        var userTags = await _context.Tags.Where(t => t.Users.Any(u => u.Id == userId)).ToArrayAsync();
+        var result = new List<TagDto>();
 
-        return _mapper.Map<TagDto[]>(userTags);
+        await _context.Tags.Include(t => t.Users)
+            .ForEachAsync(t => result.Add(_mapper.Map<Tag, TagDto>(t, opt => opt.AfterMap((tag, dto) =>
+            {
+                dto.IsSelected = tag.Users.Any(u => u.Id == userId);
+            })
+        )));
+
+        return result.ToArray();
     }
 
     public async Task<UserDto> UpdateUser(UserDto userDto)
