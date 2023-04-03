@@ -137,7 +137,7 @@
         </div>
 
         <div class="form-input-group">
-            <div *ngIf="!language.getRawValue()" class="placeholder" style="z-index: 1">Native Language</div>
+            <div *ngIf="!language.getRawValue()" class="placeholder">Native Language</div>
             <label class="label" *ngIf="language.getRawValue()">Native Language</label>
             <ng-select class="custom" dropdownPosition="bottom" appearance="underline" #languageSelect
                        formControlName="language">
