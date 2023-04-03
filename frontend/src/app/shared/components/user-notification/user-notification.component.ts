@@ -1,10 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BaseComponent } from '@core/base/base.component';
 import { NotificationsHubService } from '@core/hubs/notifications-hub.service';
-import { HttpService } from '@core/services/http.service';
+import { NotificationService } from '@core/services/notification.service';
 import { INotification } from '@shared/models/INotification';
-import * as moment from 'moment';
+import { NotificationType } from '@shared/utils/user-notifications.util';
 import { Subscription } from 'rxjs';
+
+import { getTimeDiff } from './date-time-diff.helper';
 
 @Component({
     selector: 'app-user-notification',
@@ -14,19 +16,16 @@ import { Subscription } from 'rxjs';
 export class UserNotificationComponent extends BaseComponent implements OnInit, OnDestroy {
     readonly notificationsHub: NotificationsHubService;
 
-    readonly httpService: HttpService;
-
     notifications: INotification[] = [];
 
     notifySubscription: Subscription;
 
     constructor(
         notificationsHub: NotificationsHubService,
-        httpService: HttpService,
+        private notificationService: NotificationService,
     ) {
         super();
         this.notificationsHub = notificationsHub;
-        this.httpService = httpService;
     }
 
     async ngOnInit() {
@@ -36,7 +35,7 @@ export class UserNotificationComponent extends BaseComponent implements OnInit, 
     }
 
     async getNotifications() {
-        this.notifySubscription = await this.httpService.get<INotification[]>('/notification').subscribe((data) => {
+        this.notifySubscription = await this.notificationService.getNotifications().subscribe((data) => {
             this.notifications = data;
         });
     }
@@ -64,7 +63,7 @@ export class UserNotificationComponent extends BaseComponent implements OnInit, 
         notification.isRead = true;
         this.notifications = this.notifications.filter((n) => !n.isRead);
 
-        this.httpService.put('/notification', notification.id).subscribe();
+        this.notificationService.readNotification(notification.id).subscribe();
     }
 
     readAllNotifications() {
@@ -73,9 +72,7 @@ export class UserNotificationComponent extends BaseComponent implements OnInit, 
             isRead: true,
         }));
 
-        this.httpService.put('/notification/readAll', null)
-            .pipe(this.untilThis)
-            .subscribe();
+        this.notificationService.readAllNotifications();
     }
 
     override ngOnDestroy() {
@@ -83,48 +80,21 @@ export class UserNotificationComponent extends BaseComponent implements OnInit, 
         this.notifySubscription.unsubscribe();
     }
 
-    getNotificationTypeIcon(type: string) {
+    getNotificationTypeIcon(type: NotificationType) {
         switch (type) {
-            case 'Accepted friendship request':
-            case 'New friendship request':
+            case NotificationType.friendshipAcception:
+            case NotificationType.friendshipRequest:
                 return '/assets/notifications/user-plus.svg';
-            case 'Lesson reminding':
+            case NotificationType.reminding:
                 return '/assets/notifications/link.svg';
-            case 'Group class join':
+            case NotificationType.classJoin:
                 return '/assets/notifications/cofee.svg';
             default:
                 return '';
         }
     }
 
-    getTimeDiff(createdAt: Date): string {
-        const date = moment(createdAt);
-
-        const diffInMinutes = moment().diff(date, 'minutes');
-
-        if (diffInMinutes < 1) {
-            return 'Just now';
-        }
-        if (diffInMinutes < 60) {
-            return `${diffInMinutes} minutes ago`;
-        }
-        if (diffInMinutes < 1440) {
-            const diffInHours = moment().diff(date, 'hours');
-
-            return `${diffInHours} hours ago`;
-        }
-        if (diffInMinutes < 10080) {
-            const diffInDays = moment().diff(date, 'days');
-
-            return `${diffInDays} days ago`;
-        } if (diffInMinutes < 43200) {
-            const diffInWeeks = moment().diff(date, 'weeks');
-
-            return `${diffInWeeks} weeks ago`;
-        }
-
-        const diffInMonths = moment().diff(date, 'months');
-
-        return `${diffInMonths} months ago`;
+    timeDiff(createdAt: Date): string {
+        return getTimeDiff(createdAt);
     }
 }

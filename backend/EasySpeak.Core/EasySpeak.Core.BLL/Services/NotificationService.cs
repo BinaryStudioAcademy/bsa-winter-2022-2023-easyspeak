@@ -47,18 +47,6 @@ namespace EasySpeak.Core.BLL.Services
 
             return notificationDto;
         }
-        
-        public async Task<ICollection<NotificationDto>> GetNotificationsAsync()
-        {
-            var notifications = new List<NotificationDto>();
-            
-            notifications.AddRange(await GetNotificationsAsync(NotificationType.reminding));
-            notifications.AddRange(await GetNotificationsAsync(NotificationType.classJoin));
-            notifications.AddRange(await GetNotificationsAsync(NotificationType.friendshipRequest));
-            notifications.AddRange(await GetNotificationsAsync(NotificationType.friendshipAcception));
-
-            return notifications.OrderByDescending(n => n.CreatedAt).ToList();
-        }
 
         public async Task<NotificationDto> SaveNotificationAsync(NewNotificationDto newNotification)
         {
@@ -111,20 +99,6 @@ namespace EasySpeak.Core.BLL.Services
             };
 
             return notification;
-        }
-        
-        private async Task<List<NotificationDto>> GetNotificationsAsync(NotificationType type)
-        { 
-            List<NotificationDto> notifications = type switch
-            {
-                NotificationType.friendshipRequest => await GetFriendshipNotificationsAsync(type),
-                NotificationType.friendshipAcception => await GetFriendshipNotificationsAsync(type),
-                NotificationType.classJoin => await GetLessonNotificationsAsync(type),
-                NotificationType.reminding => await GetLessonNotificationsAsync(type),
-                _ => new List<NotificationDto>()
-            };
-
-            return notifications;
         }
 
         private async Task<NewNotificationDto> CreateFriendshipNotificationAsync(long senderId, long receiverId, NotificationType type)
@@ -182,10 +156,10 @@ namespace EasySpeak.Core.BLL.Services
             };
         }
 
-        private async Task<List<NotificationDto>> GetFriendshipNotificationsAsync(NotificationType type)
+        public async Task<ICollection<NotificationDto>> GetNotificationsAsync()
         {
             return await _context.Notifications
-                .Where(n => n.UserId == _firebaseAuthService.UserId && n.Type == type)
+                .Where(n => n.UserId == _firebaseAuthService.UserId)
                 .GroupJoin(
                     _context.EasySpeakFiles,
                     n => n.RelatedTo,
@@ -202,27 +176,7 @@ namespace EasySpeak.Core.BLL.Services
                         Type = n.Notification.Type,
                         ImagePath = f!.Url
                     })
-                .ToListAsync();
-        }
-
-        private async Task<List<NotificationDto>> GetLessonNotificationsAsync(NotificationType type)
-        {
-            return await _context.Notifications
-                .GroupJoin(_context.EasySpeakFiles,
-                    n => n.RelatedTo,
-                    f => f.UserId,
-                    (n, f) => new {Notification = n, Files = f})
-                .SelectMany(
-                    x => x.Files.DefaultIfEmpty(),
-                    (n, f) => new NotificationDto()
-                    {
-                        Id = n.Notification.Id,
-                        CreatedAt = n.Notification.CreatedAt,
-                        IsRead = n.Notification.IsRead,
-                        Text = n.Notification.Text,
-                        Type = n.Notification.Type,
-                        ImagePath = f!.Url
-                    })
+                .OrderByDescending(n => n.CreatedAt)
                 .ToListAsync();
         }
 

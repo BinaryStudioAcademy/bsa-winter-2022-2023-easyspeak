@@ -38,7 +38,7 @@ public class LessonsService : BaseService, ILessonsService
 
         if (tagsName is not null && tagsName.Any())
         {
-            lessonsFromContext = lessonsFromContext.Where(x => x.Tags.Any(y => tagsName != null && tagsName.Contains(y.Name)));
+            lessonsFromContext = lessonsFromContext.Where(x => x.Tags.Any(y => tagsName.Contains(y.Name)));
         }
 
         if (filtersRequest.LanguageLevels is not null && filtersRequest.LanguageLevels.Any())

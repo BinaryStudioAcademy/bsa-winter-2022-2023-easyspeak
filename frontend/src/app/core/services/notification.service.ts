@@ -19,4 +19,12 @@ export class NotificationService {
     public readNotification(notificationId: number) {
         return this.httpService.updateByUd<INotification>(this.routePrefix, notificationId);
     }
+
+    public readAllNotifications() {
+        return this.httpService.put(`${this.routePrefix}/readAll`, null);
+    }
+
+    public getNotifications() {
+        return this.httpService.get<INotification[]>(this.routePrefix);
+    }
 }
