@@ -39,16 +39,15 @@
             <div class="lesson-level">
                 <img src="assets/lesson-icons/people-icon.svg" alt="people-icon" />
                 <span class="count">{{ lesson.subscribersCount }}</span>
-    
                 <img src="assets/lesson-icons/rocket-icon.svg" alt="rocket-icon" />
                 <span class="count">{{ lesson.level }}</span>
             </div>
-    
+
             <div class="lesson-actions">
                 <button
                     class="join"
-                    [disabled]="lesson.isDisabled"
-                    [textContent]="lesson.isDisabled ? 'Expired' : 'Join'"
+                    [disabled]="isDisabled()"
+                    [textContent]="getButtonContent()"
                     (click)="enrollLesson()">
                 </button>
                 <button class="expand" (click)="showQuestions(lesson.id)">See questions</button>

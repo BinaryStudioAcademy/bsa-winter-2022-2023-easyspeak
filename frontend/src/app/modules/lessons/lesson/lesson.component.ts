@@ -70,10 +70,21 @@ export class LessonComponent extends BaseComponent {
         this.userService.enrollUserToLesson(this.lesson.id)
             .pipe(this.untilThis)
             .subscribe({ next: (lesson) => {
-                this.lesson.isDisabled = true;
+                this.lesson.isSubscribed = true;
                 this.lesson.subscribersCount = lesson.subscribersCount;
                 this.notificationService.showSuccess(`You successfully registered for lesson ${this.lesson.title}`, 'Success!');
             },
             error: () => this.notificationService.showError(`Failed to register for lesson ${this.lesson.title}`, 'Failed!') });
+    }
+
+    isDisabled() {
+        return this.lesson.isSubscribed || new Date() > this.lesson.startAt;
+    }
+
+    getButtonContent() {
+        if (new Date() > this.lesson.startAt) { return 'Expired'; }
+        if (this.lesson.isSubscribed) { return 'Subscribed'; }
+
+        return 'Join';
     }
 }

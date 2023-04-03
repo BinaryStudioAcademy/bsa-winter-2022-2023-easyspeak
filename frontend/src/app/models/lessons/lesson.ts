@@ -11,5 +11,6 @@ export interface Lesson {
     topics: string[];
     subscribersCount: number;
     level: string;
-    isDisabled: boolean;
+    isSubscribed: boolean;
+    startAt: Date;
 }

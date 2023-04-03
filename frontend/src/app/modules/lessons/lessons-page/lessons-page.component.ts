@@ -103,7 +103,8 @@ export class LessonsPageComponent implements OnInit, OnChanges {
             topics: lesson.tags.map((tag) => tag.name),
             subscribersCount: lesson.subscribersCount,
             level: langLevelsSample[lesson.languageLevel].title,
-            isDisabled: new Date() > new Date(lesson.startAt) || lesson.isSubscribed,
+            isSubscribed: lesson.isSubscribed,
+            startAt: new Date(lesson.startAt),
         }));
     }
 
