@@ -65,6 +65,6 @@ export class DropdownComponent extends BaseComponent implements OnInit, OnDestro
                 fullItem?.title;
         }
 
-        return 'None';
+        return this.btnLabel;//
     }
 }

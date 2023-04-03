@@ -8,7 +8,7 @@
         <div class="dropdown-btn-title">
             {{getFullTitle()}}
         </div>
-        <div *ngIf="btnLabel" class="dropdown-btn-subtitle">
+        <div *ngIf="selectedItems.length>0" class="dropdown-btn-subtitle">
             {{btnLabel}}
         </div>
         <div class="dropdown-btn-icon">
