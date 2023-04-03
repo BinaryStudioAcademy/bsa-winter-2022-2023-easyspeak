@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
+import { NotifierHubFactoryService } from '@core/hubs/hubFactories/notifier-hub-factory.service';
 import { HubConnection } from '@microsoft/signalr';
 import { Subject, Subscription } from 'rxjs';
-
-import { SignalRHubFactoryService } from './signalr-hub-factory.service';
 
 @Injectable({
     providedIn: 'root',
@@ -16,7 +15,7 @@ export class NotificationsHubService {
 
     private subscriptions: Subscription[] = [];
 
-    constructor(private hubFactory: SignalRHubFactoryService) {}
+    constructor(private hubFactory: NotifierHubFactoryService) {}
 
     async start() {
         this.hubConnection = this.hubFactory.createHub(this.hubUrl);
