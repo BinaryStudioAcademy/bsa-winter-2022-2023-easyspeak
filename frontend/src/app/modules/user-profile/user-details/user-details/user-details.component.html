@@ -80,7 +80,7 @@
                     <img src="/assets/user-profile/alert-triangle.svg" alt=""/>
                     Minimal length is 2 characters
                 </mat-error>
-                <mat-error class="error" *ngIf="firstName.errors?.['required'] && firstName.touched || firstName.invalid">
+                <mat-error class="error" *ngIf="firstName.errors?.['required'] && firstName.touched">
                     <img src="/assets/user-profile/alert-triangle.svg" alt=""/>
                     This field is required
                 </mat-error>
@@ -98,7 +98,7 @@
                     <img src="/assets/user-profile/alert-triangle.svg" alt=""/>
                     Minimal length is 2 characters
                 </mat-error>
-                <mat-error class="error" *ngIf="lastName.errors?.['required'] && lastName.touched || lastName.invalid">
+                <mat-error class="error" *ngIf="lastName.errors?.['required'] && lastName.touched">
                     <img src="/assets/user-profile/alert-triangle.svg" alt=""/>
                     This field is required
                 </mat-error>
