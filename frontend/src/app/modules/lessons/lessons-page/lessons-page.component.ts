@@ -33,6 +33,8 @@ export class LessonsPageComponent implements OnInit, OnChanges {
 
     lessonsColumn2: Lesson[];
 
+    userIsAdmin = false;
+
     constructor(private dialogRef: MatDialog, private lessonService: LessonsService) {}
 
     ngOnInit(): void {
@@ -41,6 +43,12 @@ export class LessonsPageComponent implements OnInit, OnChanges {
         this.getLessons();
 
         this.todayDate = moment().format('DD MMMM YYYY, dddd');
+
+        const user = localStorage.getItem('user');
+
+        if (user) {
+            this.userIsAdmin = JSON.parse(user).isAdmin;
+        }
     }
 
     ngOnChanges(): void {
