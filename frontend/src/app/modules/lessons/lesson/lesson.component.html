@@ -23,7 +23,7 @@
                         </div>
                         <div class="time">
                             <img class="time-icon" src="assets/lesson-icons/clock-icon.svg" alt="clock-icon" />
-                            <h4 class="lesson-time">{{ lesson.time }}</h4>
+                            <h4 class="lesson-time">{{ lesson.time | date:'HH:mm'}}</h4>
                         </div>
                     </div>
                     <div class="lesson-topics">
