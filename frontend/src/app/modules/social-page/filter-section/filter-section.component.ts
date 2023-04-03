@@ -62,13 +62,14 @@ export class FilterSectionComponent implements OnInit {
     }
 
     remove(param: FilterOption, title: string) {
+        const splitedTitle = title.split(':');
+
         switch (param) {
             case 'lang':
                 this.selectedLanguagesFilters = this.selectedLanguagesFilters.filter(s => s !== title);
                 this.userFilters.language = null;
                 break;
             case 'level':
-                const splitedTitle = title.split(':');
                 this.selectedLevelFilters = this.selectedLevelFilters.filter(s => s !== splitedTitle[0]);
                 this.userFilters.langLevels = this.selectedLevelFilters;
                 this.selectedLevelWithSubtitleFilters = this.getLanguageLevelWithSubtitle();
@@ -125,7 +126,8 @@ export class FilterSectionComponent implements OnInit {
     private getLanguageLevelWithSubtitle() {
         return this.selectedLevelFilters.map(f => {
             const level = this.langLevels.find(l => l.title === f);
-            return level?.title + ': ' + level?.subtitle; 
+
+            return `${level?.title}: ${level?.subtitle}`;
         });
     }
 }
