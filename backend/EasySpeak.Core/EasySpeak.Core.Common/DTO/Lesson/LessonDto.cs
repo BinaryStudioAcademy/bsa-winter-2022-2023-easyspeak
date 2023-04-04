@@ -14,6 +14,7 @@ public class LessonDto
     public int SubscribersCount { get; set; }
     public string? YoutubeVideoId { get; set; } 
     public string? ZoomMeetingLink { get; set; }
+    public bool isSubscribed { get; set; }
 
     public ICollection<TagForLessonDto>? Tags { get; set; }
     public ICollection<QuestionForLessonDto>? Questions { get; set; }

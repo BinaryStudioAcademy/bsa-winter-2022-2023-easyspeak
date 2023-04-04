@@ -1,11 +1,6 @@
-import { Injectable } from '@angular/core';
-import { environment } from '@env/environment';
 import { HttpTransportType, HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
 
-@Injectable({
-    providedIn: 'root',
-})
-export class SignalRHubFactoryService {
+export abstract class SignalRHubFactoryService {
     private hubLookup = new Map<string, HubConnection>();
 
     createHub(hubUrl: string) {
@@ -30,7 +25,5 @@ export class SignalRHubFactoryService {
             .build();
     }
 
-    private buildUrl(hubUrl: string) {
-        return `${environment.notifierUrl}/${hubUrl}`;
-    }
+    abstract buildUrl(hubUrl: string): string;
 }

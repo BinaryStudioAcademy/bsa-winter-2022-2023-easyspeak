@@ -50,6 +50,8 @@ public class UserService : BaseService, IUserService
         return userDto;
     }
 
+    public Task<bool> GetAdminStatus() => _context.Users.Where(u => u.Id == _authService.UserId).Select(u => u.IsAdmin).FirstOrDefaultAsync();
+
     public async Task<UserDto> AddTagsAsync(List<TagDto> tags)
     {
         var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == _authService.UserId);
@@ -182,5 +184,17 @@ public class UserService : BaseService, IUserService
                 dbTags => dbTags.Name,
                 (_, dbTags) => dbTags).ToList();
         }
+    }
+
+    public async Task<UserDto> MakeAdminAsync(int userId)
+    {
+        var user = await _context.Users.Where(u => u.Id == userId).SingleOrDefaultAsync();
+        if (user is not null)
+        {
+            user.IsAdmin = true;
+            await _context.SaveChangesAsync();
+        }
+        UserDto userDto = _mapper.Map<UserDto>(user);
+        return userDto;
     }
 }

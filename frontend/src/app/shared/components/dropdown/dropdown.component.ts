@@ -55,4 +55,16 @@ export class DropdownComponent extends BaseComponent implements OnInit, OnDestro
     clickedOutside() {
         this.showDropdown = false;
     }
+
+    getFullTitle() {
+        if (this.selectedItems[0]) {
+            const fullItem = this.data.find(l => l.title === this.selectedItems[0]);
+
+            return fullItem && fullItem.subtitle ?
+                `${fullItem.title}: ${fullItem.subtitle}` :
+                fullItem?.title;
+        }
+
+        return 'None';
+    }
 }

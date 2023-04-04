@@ -4,6 +4,7 @@ using EasySpeak.Core.DAL.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EasySpeak.Core.DAL.Migrations
 {
     [DbContext(typeof(EasySpeakCoreContext))]
-    partial class EasySpeakCoreContextModelSnapshot : ModelSnapshot
+    [Migration("20230403093042_AddedAdminStatusForUser")]
+    partial class AddedAdminStatusForUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -2272,98 +2274,122 @@ namespace EasySpeak.Core.DAL.Migrations
                         new
                         {
                             Id = 1L,
-                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
-                            Name = "Architecture"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Mobility"
                         },
                         new
                         {
                             Id = 2L,
-                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
-                            Name = "Arts"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "synthesize"
                         },
                         new
                         {
                             Id = 3L,
-                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
-                            Name = "Cars"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "card"
                         },
                         new
                         {
                             Id = 4L,
-                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
-                            Name = "Celebrities"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "brand"
                         },
                         new
                         {
                             Id = 5L,
-                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
-                            Name = "Cooking"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Versatile"
                         },
                         new
                         {
                             Id = 6L,
-                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
-                            Name = "Dancing"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "withdrawal"
                         },
                         new
                         {
                             Id = 7L,
-                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
-                            Name = "Ecology"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Oman"
                         },
                         new
                         {
                             Id = 8L,
-                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
-                            Name = "Design"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Engineer"
                         },
                         new
                         {
                             Id = 9L,
-                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
-                            Name = "History"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Intelligent Frozen Mouse"
                         },
                         new
                         {
                             Id = 10L,
-                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
-                            Name = "Fashion"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Incredible Metal Hat"
                         },
                         new
                         {
                             Id = 11L,
-                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
-                            Name = "Medicine"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Platinum"
                         },
                         new
                         {
                             Id = 12L,
-                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
-                            Name = "Technologies"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Thailand"
                         },
                         new
                         {
                             Id = 13L,
-                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
-                            Name = "Pets"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "budgetary management"
                         },
                         new
                         {
                             Id = 14L,
-                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
-                            Name = "Philosophy"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "SDD"
                         },
                         new
                         {
                             Id = 15L,
-                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
-                            Name = "Photography"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "core"
                         },
                         new
                         {
                             Id = 16L,
-                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
-                            Name = "Politics"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Concrete"
+                        },
+                        new
+                        {
+                            Id = 17L,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "complexity"
+                        },
+                        new
+                        {
+                            Id = 18L,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Generic Concrete Shoes"
+                        },
+                        new
+                        {
+                            Id = 19L,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "navigating"
+                        },
+                        new
+                        {
+                            Id = 20L,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "plum"
                         });
                 });
 
@@ -2396,6 +2422,9 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.Property<long?>("ImageId")
                         .HasColumnType("bigint");
+
+                    b.Property<bool>("IsAdmin")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsBanned")
                         .HasColumnType("bit");
@@ -2439,13 +2468,13 @@ namespace EasySpeak.Core.DAL.Migrations
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "Della.Rosenbaum@yahoo.com",
                             FirstName = "Della",
-                            IsAdmin = false,
+                            IsAdmin = true,
                             IsBanned = false,
                             IsSubscribed = true,
                             Language = 175,
                             LanguageLevel = 2,
                             LastName = "Rosenbaum",
-                            Sex = 0,
+                            Sex = 1,
                             Status = 0,
                             Timezone = 275
                         },
@@ -2455,14 +2484,14 @@ namespace EasySpeak.Core.DAL.Migrations
                             BirthDate = new DateTime(2003, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Country = 215,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "Georgia_Gorczany76@gmail.com",
-                            FirstName = "Georgia",
-                            IsAdmin = false,
+                            Email = "Randall_Hegmann56@hotmail.com",
+                            FirstName = "Randall",
+                            IsAdmin = true,
                             IsBanned = false,
                             IsSubscribed = true,
                             Language = 103,
                             LanguageLevel = 0,
-                            LastName = "Gorczany",
+                            LastName = "Hegmann",
                             Sex = 1,
                             Status = 1,
                             Timezone = 197
@@ -2473,15 +2502,15 @@ namespace EasySpeak.Core.DAL.Migrations
                             BirthDate = new DateTime(2003, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Country = 68,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "Jimmy89@hotmail.com",
-                            FirstName = "Jimmy",
-                            IsAdmin = false,
+                            Email = "Alfred89@hotmail.com",
+                            FirstName = "Alfred",
+                            IsAdmin = true,
                             IsBanned = false,
                             IsSubscribed = true,
                             Language = 65,
                             LanguageLevel = 2,
-                            LastName = "Fritsch",
-                            Sex = 1,
+                            LastName = "Rohan",
+                            Sex = 2,
                             Status = 2,
                             Timezone = 6
                         },
@@ -2491,15 +2520,15 @@ namespace EasySpeak.Core.DAL.Migrations
                             BirthDate = new DateTime(2003, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Country = 42,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "Raquel57@gmail.com",
-                            FirstName = "Raquel",
-                            IsAdmin = false,
+                            Email = "Sandra57@gmail.com",
+                            FirstName = "Sandra",
+                            IsAdmin = true,
                             IsBanned = false,
                             IsSubscribed = true,
                             Language = 21,
                             LanguageLevel = 0,
-                            LastName = "Bartell",
-                            Sex = 1,
+                            LastName = "Satterfield",
+                            Sex = 2,
                             Status = 1,
                             Timezone = 71
                         },
@@ -2507,19 +2536,19 @@ namespace EasySpeak.Core.DAL.Migrations
                         {
                             Id = 5L,
                             BirthDate = new DateTime(2003, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Country = 86,
+                            Country = 236,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "Kay.Botsford86@yahoo.com",
-                            FirstName = "Kay",
+                            Email = "Frances.Lemke37@gmail.com",
+                            FirstName = "Frances",
                             IsAdmin = false,
                             IsBanned = false,
-                            IsSubscribed = false,
-                            Language = 1,
-                            LanguageLevel = 0,
-                            LastName = "Botsford",
-                            Sex = 1,
-                            Status = 1,
-                            Timezone = 21
+                            IsSubscribed = true,
+                            Language = 55,
+                            LanguageLevel = 3,
+                            LastName = "Lemke",
+                            Sex = 2,
+                            Status = 3,
+                            Timezone = 175
                         });
                 });
 
@@ -2545,48 +2574,98 @@ namespace EasySpeak.Core.DAL.Migrations
                         },
                         new
                         {
-                            LessonsId = 2L,
+                            LessonsId = 1L,
                             TagsId = 2L
                         },
                         new
                         {
-                            LessonsId = 3L,
+                            LessonsId = 2L,
                             TagsId = 3L
                         },
                         new
                         {
-                            LessonsId = 4L,
+                            LessonsId = 2L,
                             TagsId = 4L
                         },
                         new
                         {
-                            LessonsId = 5L,
+                            LessonsId = 3L,
                             TagsId = 5L
                         },
                         new
                         {
-                            LessonsId = 6L,
+                            LessonsId = 3L,
                             TagsId = 6L
                         },
                         new
                         {
-                            LessonsId = 7L,
+                            LessonsId = 4L,
                             TagsId = 7L
                         },
                         new
                         {
-                            LessonsId = 8L,
+                            LessonsId = 4L,
                             TagsId = 8L
                         },
                         new
                         {
-                            LessonsId = 9L,
+                            LessonsId = 5L,
                             TagsId = 9L
                         },
                         new
                         {
-                            LessonsId = 10L,
+                            LessonsId = 5L,
                             TagsId = 10L
+                        },
+                        new
+                        {
+                            LessonsId = 6L,
+                            TagsId = 11L
+                        },
+                        new
+                        {
+                            LessonsId = 6L,
+                            TagsId = 12L
+                        },
+                        new
+                        {
+                            LessonsId = 7L,
+                            TagsId = 13L
+                        },
+                        new
+                        {
+                            LessonsId = 7L,
+                            TagsId = 14L
+                        },
+                        new
+                        {
+                            LessonsId = 8L,
+                            TagsId = 15L
+                        },
+                        new
+                        {
+                            LessonsId = 8L,
+                            TagsId = 16L
+                        },
+                        new
+                        {
+                            LessonsId = 9L,
+                            TagsId = 17L
+                        },
+                        new
+                        {
+                            LessonsId = 9L,
+                            TagsId = 18L
+                        },
+                        new
+                        {
+                            LessonsId = 10L,
+                            TagsId = 19L
+                        },
+                        new
+                        {
+                            LessonsId = 10L,
+                            TagsId = 20L
                         });
                 });
 
@@ -2690,7 +2769,7 @@ namespace EasySpeak.Core.DAL.Migrations
                         new
                         {
                             TagsId = 4L,
-                            UsersId = 2L
+                            UsersId = 1L
                         },
                         new
                         {
@@ -2705,12 +2784,12 @@ namespace EasySpeak.Core.DAL.Migrations
                         new
                         {
                             TagsId = 7L,
-                            UsersId = 3L
+                            UsersId = 2L
                         },
                         new
                         {
                             TagsId = 8L,
-                            UsersId = 3L
+                            UsersId = 2L
                         },
                         new
                         {
@@ -2720,31 +2799,56 @@ namespace EasySpeak.Core.DAL.Migrations
                         new
                         {
                             TagsId = 10L,
-                            UsersId = 4L
+                            UsersId = 3L
                         },
                         new
                         {
                             TagsId = 11L,
-                            UsersId = 4L
+                            UsersId = 3L
                         },
                         new
                         {
                             TagsId = 12L,
-                            UsersId = 4L
+                            UsersId = 3L
                         },
                         new
                         {
                             TagsId = 13L,
-                            UsersId = 5L
+                            UsersId = 4L
                         },
                         new
                         {
                             TagsId = 14L,
-                            UsersId = 5L
+                            UsersId = 4L
                         },
                         new
                         {
                             TagsId = 15L,
+                            UsersId = 4L
+                        },
+                        new
+                        {
+                            TagsId = 16L,
+                            UsersId = 4L
+                        },
+                        new
+                        {
+                            TagsId = 17L,
+                            UsersId = 5L
+                        },
+                        new
+                        {
+                            TagsId = 18L,
+                            UsersId = 5L
+                        },
+                        new
+                        {
+                            TagsId = 19L,
+                            UsersId = 5L
+                        },
+                        new
+                        {
+                            TagsId = 20L,
                             UsersId = 5L
                         });
                 });

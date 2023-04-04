@@ -6,7 +6,7 @@
             </div>
         </div>
         <div class="dropdown-btn-title">
-            {{selectedItems[0] || 'None'}}
+            {{getFullTitle()}}
         </div>
         <div *ngIf="btnLabel" class="dropdown-btn-subtitle">
             {{btnLabel}}
@@ -19,7 +19,9 @@
         <div *ngFor="let item of data">
             <div class="dropdown-item">
                 <div class="dropdown-item-content">
-                    <input [type]="type" [checked]="selectedItems.includes(item.title)" (click)="selectItem(item.title)">
+                    <div class="dropdown-input">
+                        <input [type]="type" [checked]="selectedItems.includes(item.title)" (click)="selectItem(item.title)">
+                    </div>
                     <div class="dropdown-item-info">
                         <div *ngIf="item.subtitle" class="item-info-title">
                             {{item.title + ' : ' + item.subtitle}}

@@ -25,6 +25,8 @@ export class FilterSectionComponent implements OnInit {
 
     public selectedLevelFilters: string[] = [];
 
+    public selectedLevelWithSubtitleFilters: string[] = [];
+
     public selectedTopicsFilters: string[] = [];
 
     public selectedLanguagesFilters: string[] = [];
@@ -60,14 +62,17 @@ export class FilterSectionComponent implements OnInit {
     }
 
     remove(param: FilterOption, title: string) {
+        const splitedTitle = title.split(':');
+
         switch (param) {
             case 'lang':
                 this.selectedLanguagesFilters = this.selectedLanguagesFilters.filter(s => s !== title);
                 this.userFilters.language = null;
                 break;
             case 'level':
-                this.selectedLevelFilters = this.selectedLevelFilters.filter(s => s !== title);
+                this.selectedLevelFilters = this.selectedLevelFilters.filter(s => s !== splitedTitle[0]);
                 this.userFilters.langLevels = this.selectedLevelFilters;
+                this.selectedLevelWithSubtitleFilters = this.getLanguageLevelWithSubtitle();
                 break;
             case 'topic':
                 this.selectedTopicsFilters = this.selectedTopicsFilters.filter(s => s !== title);
@@ -92,6 +97,7 @@ export class FilterSectionComponent implements OnInit {
             case 'level':
                 this.selectedLevelFilters = eventData;
                 this.userFilters.langLevels = this.selectedLevelFilters;
+                this.selectedLevelWithSubtitleFilters = this.getLanguageLevelWithSubtitle();
                 break;
             case 'topic':
                 this.selectedTopicsFilters = eventData;
@@ -115,5 +121,13 @@ export class FilterSectionComponent implements OnInit {
         this.selectedCompatibilityFilters = [];
         this.userFilters = {} as UserFilter;
         this.filterChange.emit(this.userFilters);
+    }
+
+    private getLanguageLevelWithSubtitle() {
+        return this.selectedLevelFilters.map(f => {
+            const level = this.langLevels.find(l => l.title === f);
+
+            return `${level?.title}: ${level?.subtitle}`;
+        });
     }
 }

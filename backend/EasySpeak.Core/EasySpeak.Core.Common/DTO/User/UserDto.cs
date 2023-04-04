@@ -13,6 +13,7 @@ public class UserDto
     public string LanguageLevel { get; set; } = String.Empty;
     public string Email { get; set; } = String.Empty;
     public string ImagePath { get; set; } = String.Empty;
+    public bool IsAdmin { get; set; }
     public ICollection<TagDto>? Tags { get; set; }
 
     public UserDto()

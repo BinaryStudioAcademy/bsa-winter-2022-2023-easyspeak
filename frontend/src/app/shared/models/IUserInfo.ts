@@ -15,4 +15,5 @@ export interface IUserInfo {
     imagePath: string;
     canOnlyFriendMessage: boolean;
     tags: ITag[];
+    isAdmin: boolean;
 }
