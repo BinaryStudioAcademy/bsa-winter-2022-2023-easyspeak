@@ -5,10 +5,13 @@
                 {{selectedItems.length || 0}}
             </div>
         </div>
-        <div class="dropdown-btn-title">
+        <div *ngIf="selectedItems.length === 0" class="dropdown-btn-title" >
             {{getFullTitle()}}
         </div>
-        <div *ngIf="selectedItems.length>0" class="dropdown-btn-subtitle">
+        <div *ngIf="selectedItems.length > 0" class="dropdown-btn-title-when-selected" >
+            {{getFullTitle()}}
+        </div>
+        <div *ngIf="selectedItems.length > 0" class="dropdown-btn-subtitle">
             {{btnLabel}}
         </div>
         <div class="dropdown-btn-icon">
