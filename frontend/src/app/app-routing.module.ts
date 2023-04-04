@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '@core/guards/auth.guard';
 import { AuthorizedUsersGuard } from '@core/guards/authorized-users.guard';
 import { SelectTopicsPageComponent } from '@modules/user-profile/select-topics-page/select-topics-page.component';
-import { NotFoundComponent } from '@shared/components/not-found/not-found.component';
 
 const routes: Routes = [
     {
@@ -34,12 +33,6 @@ const routes: Routes = [
         path: '',
         pathMatch: 'prefix',
         loadChildren: () => import('./modules/main/main.module').then((m) => m.MainModule),
-        canActivate: [AuthGuard],
-    },
-    {
-        path: '**',
-        component: NotFoundComponent,
-        pathMatch: 'full',
         canActivate: [AuthGuard],
     },
 ];
