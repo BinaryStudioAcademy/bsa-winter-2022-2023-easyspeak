@@ -12,6 +12,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
+namespace EasySpeak.Core.BLL.Services;
 public class ZoomApiService : IZoomApiService
 {
     private readonly string _apiKey;
