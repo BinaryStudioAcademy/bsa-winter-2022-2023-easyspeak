@@ -10,5 +10,11 @@ namespace EasySpeak.Core.DAL.Entities
     {
         string JoinUrl { get; set; } = string.Empty;
         string HostUrl { get; set; } = string.Empty;
+
+        public ZoomMeetingLinks(string joinUrl, string hostUrl)
+        {
+            JoinUrl = joinUrl;
+            HostUrl = hostUrl;
+        }
     }
 }
