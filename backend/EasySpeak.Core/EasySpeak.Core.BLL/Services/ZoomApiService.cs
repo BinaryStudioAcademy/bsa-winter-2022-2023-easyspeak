@@ -54,7 +54,10 @@ public class ZoomApiService : IZoomApiService
         var responseBody = await response.Content.ReadAsStringAsync();
         dynamic meeting = JsonConvert.DeserializeObject(responseBody);
 
-        return new ZoomMeetingLinks(meeting.join_url, meeting.host_url);
+        string joinUrl = meeting.join_url;
+        string startUrl = meeting.start_url;
+
+        return new ZoomMeetingLinks(joinUrl, startUrl);
     }
 
     public string GenerateAccessToken()

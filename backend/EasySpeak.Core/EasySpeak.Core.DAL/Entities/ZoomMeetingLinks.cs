@@ -8,8 +8,8 @@ namespace EasySpeak.Core.DAL.Entities
 {
     public class ZoomMeetingLinks
     {
-        string JoinUrl { get; set; } = string.Empty;
-        string HostUrl { get; set; } = string.Empty;
+        public string JoinUrl { get; set; } = string.Empty;
+        public string HostUrl { get; set; } = string.Empty;
 
         public ZoomMeetingLinks(string joinUrl, string hostUrl)
         {
