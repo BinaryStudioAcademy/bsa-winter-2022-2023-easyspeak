@@ -30,16 +30,16 @@ export class AuthService {
         private toastr: NotificationService,
     ) {}
 
-    async handleUserCredentialThenNavigatoTo(userCredential: firebase.auth.UserCredential, route: string) {
+    async handleUserCredential(userCredential: firebase.auth.UserCredential) {
         if (userCredential.user) {
-            await this.setAccessToken(userCredential.user).then(() => this.navigateTo(route));
+            await this.setAccessToken(userCredential.user);
         }
     }
 
     async signIn(email: string, password: string): Promise<void> {
         const userCredential = await this.afAuth.signInWithEmailAndPassword(email, password);
 
-        await this.handleUserCredentialThenNavigatoTo(userCredential, '/timetable');
+        await this.handleUserCredential(userCredential);
 
         try {
             await firstValueFrom(this.userService.getUser());
@@ -56,7 +56,7 @@ export class AuthService {
                 first(),
                 tap({
                     next: (userCredential) => {
-                        from(this.handleUserCredentialThenNavigatoTo(userCredential, '/topics'));
+                        from(this.handleUserCredential(userCredential));
                     },
                     error: () => { throw new Error('This email is already registered. Try another one'); },
                 }),
