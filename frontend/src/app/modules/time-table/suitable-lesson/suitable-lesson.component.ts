@@ -16,7 +16,7 @@ export class SuitableLessonComponent implements OnInit {
 
     days: IIDayCard[] = [];
 
-    selectedDate: Date = new Date();
+    selectedDate: Date = moment().local().toDate();
 
     constructor(private lessonService: LessonsService) { }
 
@@ -60,7 +60,7 @@ export class SuitableLessonComponent implements OnInit {
             return { date, meetingsAmount: 0 };
         });
 
-        const requestDate = this.selectedDate.toISOString().slice(0, 10);
+        const requestDate = moment(this.selectedDate).format('YYYY-MM-DD');
 
         this.lessonService.getLessonsCount(requestDate).subscribe(response => {
             this.days = this.days.map(day => {
