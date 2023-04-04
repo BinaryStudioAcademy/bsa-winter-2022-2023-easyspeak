@@ -82,6 +82,7 @@ export class AuthService {
                     firstName: resp.firstName,
                     lastName: resp.lastName,
                     imagePath: resp.imagePath,
+                    isAdmin: resp.isAdmin,
                 };
 
                 this.setLocalStorage(user);

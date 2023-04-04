@@ -18,7 +18,7 @@ namespace EasySpeak.Core.DAL.Entities
         public UserStatus Status { get; set; }
         public bool IsSubscribed { get; set; }
         public bool IsBanned { get; set; }
-
+        public bool IsAdmin { get; set; }
         public ICollection<Chat> Chats { get; private set; }
         public ICollection<Lesson> Lessons { get; private set; }
         public ICollection<Lesson> CreatedLessons { get; private set; }

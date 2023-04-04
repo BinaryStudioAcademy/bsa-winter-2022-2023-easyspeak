@@ -17,9 +17,7 @@ import { HttpService } from './http.service';
 export class UserService {
     public routePrefix = '/users';
 
-    constructor(
-        private httpService: HttpService,
-    ) { }
+    constructor(private httpService: HttpService) {}
 
     public getUser() {
         return this.httpService.get<IUserInfo>(`${this.routePrefix}`);
@@ -42,9 +40,16 @@ export class UserService {
     }
 
     public getUsers(userFilter?: UserFilter): Observable<UserCard[]> {
-        return this.httpService.post<UserCard[]>(
-            `${this.routePrefix}/recommended`,
-            userFilter ?? {} as UserFilter,
-        );
+        return this.httpService.post<UserCard[]>(`${this.routePrefix}/recommended`, userFilter ?? ({} as UserFilter));
+    }
+
+    public isAdmin(): boolean {
+        const user = localStorage.getItem('user');
+
+        if (user) {
+            return JSON.parse(user).isAdmin;
+        }
+
+        return false;
     }
 }
