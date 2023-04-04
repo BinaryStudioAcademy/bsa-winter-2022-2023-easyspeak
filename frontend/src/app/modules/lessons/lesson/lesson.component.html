@@ -50,8 +50,10 @@
                     [textContent]="getButtonContent()"
                     (click)="enrollLesson()">
                 </button>
-                <button class="expand" (click)="showQuestions(lesson.id)">See questions</button>
-                <img src="assets/lesson-icons/expand.svg" alt="expand-icon" />
+                <button class="expand" (click)="showQuestions(lesson.id)">
+                    <span>See questions</span>
+                    <img src="assets/lesson-icons/expand.svg" alt="expand-icon" />
+                </button>
             </div>
         </div>
     </div>
