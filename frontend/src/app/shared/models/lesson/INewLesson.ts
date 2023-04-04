@@ -9,7 +9,6 @@ export interface INewLesson {
     startAt: Date,
     limitOfUsers?: number,
     youtubeVideoId: string,
-    zoomMeetingLink: string,
     questions: INewQuestion[],
     tags: INewTag[],
 }

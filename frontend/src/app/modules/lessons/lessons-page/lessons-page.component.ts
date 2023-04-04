@@ -103,6 +103,7 @@ export class LessonsPageComponent implements OnInit, OnChanges {
             imgPath: lesson.mediaPath,
             videoId: lesson.youtubeVideoId,
             zoomLink: lesson.zoomMeetingLink,
+            zoomLinkHost: lesson.zoomMeetingLinkHost,
             title: lesson.name,
             time: moment(lesson.startAt).format('hh.mm'),
             // TODO: Change tutor details to real when they are avaliable

@@ -12,6 +12,7 @@ export interface ILesson {
     subscribersCount: number,
     youtubeVideoId: string,
     zoomMeetingLink: string,
+    zoomMeetingLinkHost: string,
     tags: ITag[],
     user: null,
     isSubscribed: boolean

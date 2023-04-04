@@ -12,7 +12,6 @@ namespace EasySpeak.Core.Common.DTO
         public LanguageLevel LanguageLevel { get; set; }
         public int? LimitOfUsers { get; set; }
         public string YoutubeVideoId { get; set; } = string.Empty;
-        public string ZoomMeetingLink { get; set; } = string.Empty;
         public ICollection<TagForLessonDto>? Tags { get; set; }
         public ICollection<QuestionForLessonDto>? Questions { get; set; }
     }
