@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { NotFoundComponent } from '@shared/components/not-found/not-found.component';
 
 import { MainComponent } from './main-page/main-page.component';
 import { TimetablePageComponent } from './timetable-page/timetable-page.component';
-import {NotFoundComponent} from "@shared/components/not-found/not-found.component";
 
 const routes: Routes = [
     {
