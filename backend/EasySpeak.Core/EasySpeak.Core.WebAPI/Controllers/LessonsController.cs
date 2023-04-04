@@ -35,7 +35,7 @@ namespace EasySpeak.Core.WebAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<LessonDto>> CreateAsync(NewLessonDto lessonDto)
         {
-            if (await _userService.GetAdminStatusAsync())
+            if (await _userService.GetAdminStatus())
             {
                 var lesson = await _lessonsService.CreateLessonAsync(lessonDto);
                 return Ok(lesson);

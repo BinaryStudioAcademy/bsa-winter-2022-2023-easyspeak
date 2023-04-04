@@ -54,16 +54,8 @@ public class UserService : BaseService, IUserService
         return userDto;
     }
 
-    public async Task<bool> GetAdminStatusAsync()
-    {
-        var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == _authService.UserId);
-        if (user is not null)
-        {
-            return user.IsAdmin;
-        }
-        return false;
-    }
-
+    public Task<bool> GetAdminStatus() => _context.Users.Where(u => u.Id == _authService.UserId).Select(u => u.IsAdmin).FirstOrDefaultAsync();
+    
     public async Task<UserDto> AddTagsAsync(List<TagDto> tags)
     {
         var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == _authService.UserId);

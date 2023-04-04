@@ -62,7 +62,7 @@ namespace EasySpeak.Core.WebAPI.Controllers
         [HttpPut("makeAdmin/{userId}")]
         public async Task<ActionResult<UserDto>> MakeAdminAsync(int userId, string secret)
         {
-            var settingsSecret = _configuration.GetSection("MakeAdminSecret").Value;
+            var settingsSecret = _configuration.GetSection("adminSecret").Value;
             if (settingsSecret == secret)
             {
                 return Ok(await _userService.MakeAdminAsync(userId));
