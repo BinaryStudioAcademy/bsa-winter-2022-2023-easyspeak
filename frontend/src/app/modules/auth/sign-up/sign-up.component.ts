@@ -17,6 +17,7 @@ import { CountriesTzLangProviderService } from 'src/app/services/countries-tz-la
 
 import { validationErrorMessage } from './error-helper';
 import { matchpassword } from './matchpassword.validator';
+import {ConstantsService} from "@core/services/constants.service";
 
 @Component({
     selector: 'app-sign-up',
@@ -73,6 +74,7 @@ export class SignUpComponent extends BaseComponent implements OnInit {
         private toastr: ToastrService,
         private userService: UserService,
         private router: Router,
+        private constantsService: ConstantsService,
     ) {
         super();
     }
@@ -89,7 +91,9 @@ export class SignUpComponent extends BaseComponent implements OnInit {
 
     private setUpData() {
         this.countries = this.countriesTzLangProvider.getCountriesList().map((x) => x.name);
-        this.languages = this.countriesTzLangProvider.getLanguagesList();
+        this.constantsService.getAllLanguages().subscribe((languages) => {
+            this.languages = languages;
+        });
         this.englishLevels = Object.values(EnglishLevel) as string[];
         this.sexOptions = Object.values(this.sexEnumeration) as string[];
         this.ages = Ages;

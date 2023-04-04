@@ -11,6 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 import { CountriesTzLangProviderService } from 'src/app/services/countries-tz-lang-provider.service';
 
 import { detailsGroup, userId } from '../user-details.component.util';
+import {ConstantsService} from "@core/services/constants.service";
 
 @Component({
     selector: 'app-user-details',
@@ -22,7 +23,7 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
 
     ages = Ages;
 
-    languages;
+    languages: string[];
 
     languageLevelOptions: string[] = [];
 
@@ -37,10 +38,13 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
         private userService: UserService,
         private toastr: ToastrService,
         private countriesService: CountriesTzLangProviderService,
+        private constantsService: ConstantsService,
     ) {
         super();
         this.countries = this.countriesService.getCountriesList();
-        this.languages = this.countriesService.getLanguagesList();
+        this.constantsService.getAllLanguages().subscribe((languages) => {
+            this.languages = languages;
+        });
         this.detailsForm = detailsGroup(this.fb);
         this.sexOptions = Object.values(this.sexEnumeration) as string[];
         this.languageLevelOptions = Object.values(EnglishLevel) as string[];

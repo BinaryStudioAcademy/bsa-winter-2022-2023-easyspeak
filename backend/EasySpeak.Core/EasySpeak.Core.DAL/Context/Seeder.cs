@@ -41,7 +41,7 @@ public static class Seeder
             .Select(x => new ChatUser(x.Item1, x.Item2));
 
         var lessonTag = SeedHelper<Lesson, Tag, long>
-            .GetTablesJoin(lessons, tags, 2)
+            .GetTablesJoin(lessons, tags, 1)
             .Select(x => new LessonTag(x.Item1, x.Item2));
 
         var lessonUser = SeedHelper<User, Lesson, long>
@@ -49,7 +49,7 @@ public static class Seeder
             .Select(x => new LessonUser(x.Item1, x.Item2));
 
         var tagUser = SeedHelper<User, Tag, long>
-            .GetTablesJoin(users, tags, 4)
+            .GetTablesJoin(users, tags, 2)
             .Select(x => new TagUser(x.Item1, x.Item2));
 
         modelBuilder.Entity<Tag>().HasData(tags);
@@ -168,15 +168,123 @@ public static class Seeder
             .Generate(count);
     }
 
-    private static IList<Tag> GenerateTags(int count = 20)
+    private static IList<Tag> GenerateTags()
     {
-        Faker.GlobalUniqueIndex = 0;
-
-        return new Faker<Tag>()
-            .UseSeed(10)
-            .RuleFor(t => t.Id, f => f.IndexGlobal)
-            .RuleFor(t => t.Name, f => f.Random.Word())
-            .Generate(count);
+        return new List<Tag>()
+        {
+            new Tag
+            {
+                Id = 1,
+                Name = "Architecture",
+                ImageUrl = "ClassicalBuilding.svg",
+                CreatedAt = DateTime.Now,
+            },
+            new Tag
+            {
+                Id = 2,
+                Name = "Arts",
+                ImageUrl = "ArtistPalette.svg",
+                CreatedAt = DateTime.Now,
+            },
+            new Tag
+            {
+                Id = 3,
+                Name = "Cars",
+                ImageUrl = "RacingCar.svg",
+                CreatedAt = DateTime.Now,
+            },
+            new Tag
+            {
+                Id = 4,
+                Name = "Celebrities",
+                ImageUrl = "Crown.svg",
+                CreatedAt = DateTime.Now,
+            },
+            new Tag
+            {
+                Id = 5,
+                Name = "Cooking",
+                ImageUrl = "Cook.svg",
+                CreatedAt = DateTime.Now,
+            },
+            new Tag
+            {
+                Id = 6,
+                Name = "Dancing",
+                ImageUrl = "WomanDancing.svg",
+                CreatedAt = DateTime.Now,
+            },
+            new Tag
+            {
+                Id = 7,
+                Name = "Ecology",
+                ImageUrl = "FourLeafClover.svg",
+                CreatedAt = DateTime.Now,
+            },
+            new Tag
+            {
+                Id = 8,
+                Name = "Design",
+                ImageUrl = "Artist.svg",
+                CreatedAt = DateTime.Now,
+            },
+            new Tag
+            {
+                Id = 9,
+                Name = "History",
+                ImageUrl = "CrossedSwords.svg",
+                CreatedAt = DateTime.Now,
+            },
+            new Tag
+            {
+                Id = 10,
+                Name = "Fashion",
+                ImageUrl = "Dress.svg",
+                CreatedAt = DateTime.Now,
+            },
+            new Tag
+            {
+                Id = 11,
+                Name = "Medicine",
+                ImageUrl = "Pill.svg",
+                CreatedAt = DateTime.Now,
+            },
+            new Tag
+            {
+                Id = 12,
+                Name = "Technologies",
+                ImageUrl = "Robot.svg",
+                CreatedAt = DateTime.Now,
+            },
+            new Tag
+            {
+                Id = 13,
+                Name = "Pets",
+                ImageUrl = "DogFace.svg",
+                CreatedAt = DateTime.Now,
+            },
+            new Tag
+            {
+                Id = 14,
+                Name = "Philosophy",
+                ImageUrl = "FaceWithMonocle.svg",
+                CreatedAt = DateTime.Now,
+            },
+            new Tag
+            {
+                Id = 15,
+                Name = "Photography",
+                ImageUrl = "Camera.svg",
+                CreatedAt = DateTime.Now,
+            },
+            new Tag
+            {
+                Id = 16,
+                Name = "Politics",
+                ImageUrl = "TopHat.svg",
+                CreatedAt = DateTime.Now,
+            },
+        };
     }
 
     private static IList<User> GenerateUsers(int count = 5)
