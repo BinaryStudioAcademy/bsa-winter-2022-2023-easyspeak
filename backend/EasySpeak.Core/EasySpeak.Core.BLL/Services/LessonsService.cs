@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Bogus.DataSets;
 using EasySpeak.Core.BLL.Interfaces;
 using EasySpeak.Core.Common.DTO;
 using EasySpeak.Core.Common.DTO.Lesson;
@@ -70,7 +71,8 @@ public class LessonsService : BaseService, ILessonsService
 
     public async Task<ICollection<DayCardDto>?> GetDayCardsOfWeekAsync(RequestDayCardDto requestDto)
     {
-        var mondayDate = GetMondayDate(requestDto.Date);
+        var delta = GetDifferenceBetweenMondayAndTodayDate(requestDto.Date);
+        var mondayDate = requestDto.Date.AddDays(-delta).Date;
         var dayCards = await _context.Lessons
             .Where(c => c.StartAt.Date >= mondayDate
                         && c.StartAt.Date <= mondayDate.AddDays(DaysInWeek - 1))
@@ -87,13 +89,13 @@ public class LessonsService : BaseService, ILessonsService
         return dayCards;
     }
 
-    private DateTime GetMondayDate(DateTime date)
+    private int GetDifferenceBetweenMondayAndTodayDate(DateTime date)
     {
         if(date.DayOfWeek == DayOfWeek.Sunday)
         {
-            return date.AddDays(6).Date;
+            return 6;
         }
-        return date.AddDays(-((date.DayOfWeek - DayOfWeek.Monday) % 7)).Date;
+        return date.DayOfWeek - DayOfWeek.Monday;
     }
 
     public async Task<LessonDto> CreateLessonAsync(NewLessonDto lessonDto)
