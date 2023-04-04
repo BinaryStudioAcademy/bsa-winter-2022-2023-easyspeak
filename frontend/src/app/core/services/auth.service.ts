@@ -7,7 +7,7 @@ import { HttpService } from '@core/services/http.service';
 import { UserShort } from '@shared/models/UserShort';
 import * as auth from 'firebase/auth';
 import firebase from 'firebase/compat';
-import { firstValueFrom, Subject } from 'rxjs';
+import { defer, first, firstValueFrom, from, Subject, tap } from 'rxjs';
 
 import { NotificationService } from 'src/app/services/notification.service';
 
@@ -30,16 +30,16 @@ export class AuthService {
         private toastr: NotificationService,
     ) {}
 
-    async handleUserCredentialThenNavigatoTo(userCredential: firebase.auth.UserCredential, route: string) {
+    async handleUserCredential(userCredential: firebase.auth.UserCredential) {
         if (userCredential.user) {
-            await this.setAccessToken(userCredential.user).then(() => this.navigateTo(route));
+            await this.setAccessToken(userCredential.user);
         }
     }
 
     async signIn(email: string, password: string): Promise<void> {
         const userCredential = await this.afAuth.signInWithEmailAndPassword(email, password);
 
-        await this.handleUserCredentialThenNavigatoTo(userCredential, '/timetable');
+        await this.handleUserCredential(userCredential);
 
         try {
             await firstValueFrom(this.userService.getUser());
@@ -50,14 +50,17 @@ export class AuthService {
     }
 
     signUp(email: string, password: string) {
-        return this.afAuth
-            .createUserWithEmailAndPassword(email, password)
-            .then(async (userCredential) => {
-                await this.handleUserCredentialThenNavigatoTo(userCredential, '/topics');
-            })
-            .catch(() => {
-                throw new Error('This email is already registered. Try another one');
-            });
+        return defer(() => this.afAuth
+            .createUserWithEmailAndPassword(email, password))
+            .pipe(
+                first(),
+                tap({
+                    next: (userCredential) => {
+                        from(this.handleUserCredential(userCredential));
+                    },
+                    error: () => { throw new Error('This email is already registered. Try another one'); },
+                }),
+            );
     }
 
     private async setAccessToken(user: firebase.User): Promise<void> {
