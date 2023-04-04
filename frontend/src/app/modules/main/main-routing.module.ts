@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { MainComponent } from './main-page/main-page.component';
 import { TimetablePageComponent } from './timetable-page/timetable-page.component';
+import {NotFoundComponent} from "@shared/components/not-found/not-found.component";
 
 const routes: Routes = [
     {
@@ -22,6 +23,10 @@ const routes: Routes = [
             {
                 path: 'profile',
                 loadChildren: () => import('../user-profile/user-profile.module').then((m) => m.UserProfileModule),
+            },
+            {
+                path: '**',
+                component: NotFoundComponent,
             },
         ],
     },
