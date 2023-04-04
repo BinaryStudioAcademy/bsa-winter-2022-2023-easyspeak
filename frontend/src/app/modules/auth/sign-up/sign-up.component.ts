@@ -7,7 +7,7 @@ import { UserService } from '@core/services/user.service';
 import { NgSelectComponent } from '@ng-select/ng-select';
 import { Ages } from '@shared/data/ages.util';
 import { EnglishLevel } from '@shared/data/englishLevel';
-import { passFormatRegex } from '@shared/data/regex.util';
+import { emailFormatRegex, nameFormatRegex, passFormatRegex } from '@shared/data/regex.util';
 import { Sex } from '@shared/data/sex';
 import { INewUser } from '@shared/models/INewUser';
 import { ToastrService } from 'ngx-toastr';
@@ -51,16 +51,36 @@ export class SignUpComponent extends BaseComponent implements OnInit {
     @ViewChild('levelDropdown') levelDropdown: NgSelectComponent;
 
     registerForm = new FormGroup({
-        email: new FormControl('', [Validators.required, Validators.maxLength(30)]),
-        firstName: new FormControl('', [Validators.required]),
-        lastName: new FormControl('', [Validators.required]),
+        email: new FormControl('', [
+            Validators.required,
+            Validators.email,
+            Validators.maxLength(50),
+            Validators.minLength(3),
+            Validators.pattern(emailFormatRegex),
+        ]),
+        firstName: new FormControl('', [
+            Validators.required,
+            Validators.maxLength(25),
+            Validators.minLength(2),
+            Validators.pattern(nameFormatRegex),
+        ]),
+        lastName: new FormControl('', [
+            Validators.required,
+            Validators.maxLength(25),
+            Validators.minLength(2),
+            Validators.pattern(nameFormatRegex),
+        ]),
         sex: new FormControl('', [Validators.required]),
         languageLevel: new FormControl('', [Validators.required]),
         country: new FormControl('', [Validators.required]),
         language: new FormControl('', [Validators.required]),
         dateOfBirth: new FormControl('', [Validators.required]),
-        password: new FormControl('', [Validators.required, Validators.pattern(passFormatRegex),
-            Validators.minLength(6), Validators.maxLength(25)]),
+        password: new FormControl('', [
+            Validators.required,
+            Validators.pattern(passFormatRegex),
+            Validators.minLength(6),
+            Validators.maxLength(25),
+        ]),
         passwordConfirmation: new FormControl('', [Validators.required]),
     }, { validators: matchpassword });
 

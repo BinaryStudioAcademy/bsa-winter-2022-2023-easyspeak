@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '@core/services/auth.service';
-import { passFormatRegex } from '@shared/data/regex.util';
+import { emailFormatRegex, passFormatRegex } from '@shared/data/regex.util';
 import { ToastrService } from 'ngx-toastr';
 
 import { validationErrorMessage } from '../sign-up/error-helper';
@@ -14,16 +14,19 @@ import { validationErrorMessage } from '../sign-up/error-helper';
 })
 export class SignInComponent {
     form: FormGroup = new FormGroup({
-        email: new FormControl('', [Validators.required, Validators.email, Validators.maxLength(30)]),
-        password: new FormControl(
-            '',
-            [
-                Validators.required,
-                Validators.minLength(6),
-                Validators.maxLength(25),
-                Validators.pattern(passFormatRegex),
-            ],
-        ),
+        email: new FormControl('', [
+            Validators.required,
+            Validators.email,
+            Validators.maxLength(50),
+            Validators.minLength(3),
+            Validators.pattern(emailFormatRegex),
+        ]),
+        password: new FormControl('', [
+            Validators.required,
+            Validators.minLength(6),
+            Validators.maxLength(25),
+            Validators.pattern(passFormatRegex),
+        ]),
     });
 
     constructor(
@@ -31,7 +34,8 @@ export class SignInComponent {
         private authService: AuthService,
         private toastr: ToastrService,
         private router: Router,
-    ) {}
+    ) {
+    }
 
     public signIn() {
         this.authService
