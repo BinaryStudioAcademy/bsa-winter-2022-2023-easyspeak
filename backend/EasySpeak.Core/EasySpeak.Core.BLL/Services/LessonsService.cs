@@ -89,7 +89,7 @@ public class LessonsService : BaseService, ILessonsService
         return dayCards;
     }
 
-    private int GetDifferenceBetweenMondayAndTodayDate(DateTime date)
+    private static int GetDifferenceBetweenMondayAndTodayDate(DateTime date)
     {
         if(date.DayOfWeek == DayOfWeek.Sunday)
         {
