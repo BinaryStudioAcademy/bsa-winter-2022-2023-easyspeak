@@ -4,6 +4,7 @@ using EasySpeak.Core.DAL.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EasySpeak.Core.DAL.Migrations
 {
     [DbContext(typeof(EasySpeakCoreContext))]
-    partial class EasySpeakCoreContextModelSnapshot : ModelSnapshot
+    [Migration("20230405093442_RemovedTagTable")]
+    partial class RemovedTagTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -2247,146 +2249,6 @@ namespace EasySpeak.Core.DAL.Migrations
                         });
                 });
 
-            modelBuilder.Entity("EasySpeak.Core.DAL.Entities.Tag", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("getutcdate()");
-
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Tags");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            CreatedAt = new DateTime(2023, 4, 5, 12, 35, 40, 127, DateTimeKind.Local).AddTicks(6258),
-                            ImageUrl = "ClassicalBuilding.svg",
-                            Name = "Architecture"
-                        },
-                        new
-                        {
-                            Id = 2L,
-                            CreatedAt = new DateTime(2023, 4, 5, 12, 35, 40, 127, DateTimeKind.Local).AddTicks(6300),
-                            ImageUrl = "ArtistPalette.svg",
-                            Name = "Arts"
-                        },
-                        new
-                        {
-                            Id = 3L,
-                            CreatedAt = new DateTime(2023, 4, 5, 12, 35, 40, 127, DateTimeKind.Local).AddTicks(6303),
-                            ImageUrl = "RacingCar.svg",
-                            Name = "Cars"
-                        },
-                        new
-                        {
-                            Id = 4L,
-                            CreatedAt = new DateTime(2023, 4, 5, 12, 35, 40, 127, DateTimeKind.Local).AddTicks(6306),
-                            ImageUrl = "Crown.svg",
-                            Name = "Celebrities"
-                        },
-                        new
-                        {
-                            Id = 5L,
-                            CreatedAt = new DateTime(2023, 4, 5, 12, 35, 40, 127, DateTimeKind.Local).AddTicks(6309),
-                            ImageUrl = "Cook.svg",
-                            Name = "Cooking"
-                        },
-                        new
-                        {
-                            Id = 6L,
-                            CreatedAt = new DateTime(2023, 4, 5, 12, 35, 40, 127, DateTimeKind.Local).AddTicks(6314),
-                            ImageUrl = "WomanDancing.svg",
-                            Name = "Dancing"
-                        },
-                        new
-                        {
-                            Id = 7L,
-                            CreatedAt = new DateTime(2023, 4, 5, 12, 35, 40, 127, DateTimeKind.Local).AddTicks(6317),
-                            ImageUrl = "FourLeafClover.svg",
-                            Name = "Ecology"
-                        },
-                        new
-                        {
-                            Id = 8L,
-                            CreatedAt = new DateTime(2023, 4, 5, 12, 35, 40, 127, DateTimeKind.Local).AddTicks(6320),
-                            ImageUrl = "Artist.svg",
-                            Name = "Design"
-                        },
-                        new
-                        {
-                            Id = 9L,
-                            CreatedAt = new DateTime(2023, 4, 5, 12, 35, 40, 127, DateTimeKind.Local).AddTicks(6323),
-                            ImageUrl = "CrossedSwords.svg",
-                            Name = "History"
-                        },
-                        new
-                        {
-                            Id = 10L,
-                            CreatedAt = new DateTime(2023, 4, 5, 12, 35, 40, 127, DateTimeKind.Local).AddTicks(6365),
-                            ImageUrl = "Dress.svg",
-                            Name = "Fashion"
-                        },
-                        new
-                        {
-                            Id = 11L,
-                            CreatedAt = new DateTime(2023, 4, 5, 12, 35, 40, 127, DateTimeKind.Local).AddTicks(6368),
-                            ImageUrl = "Pill.svg",
-                            Name = "Medicine"
-                        },
-                        new
-                        {
-                            Id = 12L,
-                            CreatedAt = new DateTime(2023, 4, 5, 12, 35, 40, 127, DateTimeKind.Local).AddTicks(6371),
-                            ImageUrl = "Robot.svg",
-                            Name = "Technologies"
-                        },
-                        new
-                        {
-                            Id = 13L,
-                            CreatedAt = new DateTime(2023, 4, 5, 12, 35, 40, 127, DateTimeKind.Local).AddTicks(6374),
-                            ImageUrl = "DogFace.svg",
-                            Name = "Pets"
-                        },
-                        new
-                        {
-                            Id = 14L,
-                            CreatedAt = new DateTime(2023, 4, 5, 12, 35, 40, 127, DateTimeKind.Local).AddTicks(6377),
-                            ImageUrl = "FaceWithMonocle.svg",
-                            Name = "Philosophy"
-                        },
-                        new
-                        {
-                            Id = 15L,
-                            CreatedAt = new DateTime(2023, 4, 5, 12, 35, 40, 127, DateTimeKind.Local).AddTicks(6380),
-                            ImageUrl = "Camera.svg",
-                            Name = "Photography"
-                        },
-                        new
-                        {
-                            Id = 16L,
-                            CreatedAt = new DateTime(2023, 4, 5, 12, 35, 40, 127, DateTimeKind.Local).AddTicks(6383),
-                            ImageUrl = "TopHat.svg",
-                            Name = "Politics"
-                        });
-                });
-
             modelBuilder.Entity("EasySpeak.Core.DAL.Entities.User", b =>
                 {
                     b.Property<long>("Id")
@@ -2546,73 +2408,6 @@ namespace EasySpeak.Core.DAL.Migrations
                         });
                 });
 
-            modelBuilder.Entity("LessonTag", b =>
-                {
-                    b.Property<long>("LessonsId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("TagsId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("LessonsId", "TagsId");
-
-                    b.HasIndex("TagsId");
-
-                    b.ToTable("LessonTag");
-
-                    b.HasData(
-                        new
-                        {
-                            LessonsId = 1L,
-                            TagsId = 1L
-                        },
-                        new
-                        {
-                            LessonsId = 2L,
-                            TagsId = 2L
-                        },
-                        new
-                        {
-                            LessonsId = 3L,
-                            TagsId = 3L
-                        },
-                        new
-                        {
-                            LessonsId = 4L,
-                            TagsId = 4L
-                        },
-                        new
-                        {
-                            LessonsId = 5L,
-                            TagsId = 5L
-                        },
-                        new
-                        {
-                            LessonsId = 6L,
-                            TagsId = 6L
-                        },
-                        new
-                        {
-                            LessonsId = 7L,
-                            TagsId = 7L
-                        },
-                        new
-                        {
-                            LessonsId = 8L,
-                            TagsId = 8L
-                        },
-                        new
-                        {
-                            LessonsId = 9L,
-                            TagsId = 9L
-                        },
-                        new
-                        {
-                            LessonsId = 10L,
-                            TagsId = 10L
-                        });
-                });
-
             modelBuilder.Entity("LessonUser", b =>
                 {
                     b.Property<long>("LessonsId")
@@ -2677,73 +2472,6 @@ namespace EasySpeak.Core.DAL.Migrations
                         {
                             LessonsId = 10L,
                             SubscribersId = 5L
-                        });
-                });
-
-            modelBuilder.Entity("TagUser", b =>
-                {
-                    b.Property<long>("TagsId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("UsersId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("TagsId", "UsersId");
-
-                    b.HasIndex("UsersId");
-
-                    b.ToTable("TagUser");
-
-                    b.HasData(
-                        new
-                        {
-                            TagsId = 1L,
-                            UsersId = 1L
-                        },
-                        new
-                        {
-                            TagsId = 2L,
-                            UsersId = 1L
-                        },
-                        new
-                        {
-                            TagsId = 3L,
-                            UsersId = 2L
-                        },
-                        new
-                        {
-                            TagsId = 4L,
-                            UsersId = 2L
-                        },
-                        new
-                        {
-                            TagsId = 5L,
-                            UsersId = 3L
-                        },
-                        new
-                        {
-                            TagsId = 6L,
-                            UsersId = 3L
-                        },
-                        new
-                        {
-                            TagsId = 7L,
-                            UsersId = 4L
-                        },
-                        new
-                        {
-                            TagsId = 8L,
-                            UsersId = 4L
-                        },
-                        new
-                        {
-                            TagsId = 9L,
-                            UsersId = 5L
-                        },
-                        new
-                        {
-                            TagsId = 10L,
-                            UsersId = 5L
                         });
                 });
 
@@ -2855,21 +2583,6 @@ namespace EasySpeak.Core.DAL.Migrations
                     b.Navigation("Image");
                 });
 
-            modelBuilder.Entity("LessonTag", b =>
-                {
-                    b.HasOne("EasySpeak.Core.DAL.Entities.Lesson", null)
-                        .WithMany()
-                        .HasForeignKey("LessonsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EasySpeak.Core.DAL.Entities.Tag", null)
-                        .WithMany()
-                        .HasForeignKey("TagsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("LessonUser", b =>
                 {
                     b.HasOne("EasySpeak.Core.DAL.Entities.Lesson", null)
@@ -2881,21 +2594,6 @@ namespace EasySpeak.Core.DAL.Migrations
                     b.HasOne("EasySpeak.Core.DAL.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("SubscribersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("TagUser", b =>
-                {
-                    b.HasOne("EasySpeak.Core.DAL.Entities.Tag", null)
-                        .WithMany()
-                        .HasForeignKey("TagsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EasySpeak.Core.DAL.Entities.User", null)
-                        .WithMany()
-                        .HasForeignKey("UsersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
