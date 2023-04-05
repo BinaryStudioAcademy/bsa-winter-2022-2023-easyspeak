@@ -149,7 +149,6 @@ public static class Seeder
         return new Faker<Chat>()
             .UseSeed(10)
             .RuleFor(c => c.Id, f => f.IndexGlobal)
-            .RuleFor(c => c.Name, f => f.Random.Words(f.Random.Number(1, 3)))
             .Generate(count);
     }
 
