@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EasySpeak.Core.DAL.Migrations
 {
     [DbContext(typeof(EasySpeakCoreContext))]
-    [Migration("20230330194639_Update-seeds-tags")]
-    partial class Updateseedstags
+    [Migration("20230405205725_Added-All-Tags")]
+    partial class AddedAllTags
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -882,6 +882,14 @@ namespace EasySpeak.Core.DAL.Migrations
                     b.Property<DateTime>("StartAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("YoutubeVideoId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ZoomMeetingLink")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CreatedBy");
@@ -898,7 +906,9 @@ namespace EasySpeak.Core.DAL.Migrations
                             LimitOfUsers = 74,
                             MediaPath = "https://picsum.photos/640/480/?image=202",
                             Name = "Mobility",
-                            StartAt = new DateTime(2023, 4, 3, 19, 50, 29, 650, DateTimeKind.Utc).AddTicks(205)
+                            StartAt = new DateTime(2023, 4, 3, 19, 50, 29, 650, DateTimeKind.Utc).AddTicks(205),
+                            YoutubeVideoId = "",
+                            ZoomMeetingLink = ""
                         },
                         new
                         {
@@ -909,7 +919,9 @@ namespace EasySpeak.Core.DAL.Migrations
                             LimitOfUsers = 123,
                             MediaPath = "https://picsum.photos/640/480/?image=134",
                             Name = "Palau",
-                            StartAt = new DateTime(2023, 4, 15, 17, 57, 57, 902, DateTimeKind.Utc).AddTicks(9337)
+                            StartAt = new DateTime(2023, 4, 15, 17, 57, 57, 902, DateTimeKind.Utc).AddTicks(9337),
+                            YoutubeVideoId = "",
+                            ZoomMeetingLink = ""
                         },
                         new
                         {
@@ -919,7 +931,9 @@ namespace EasySpeak.Core.DAL.Migrations
                             LanguageLevel = 0,
                             MediaPath = "https://picsum.photos/640/480/?image=545",
                             Name = "EXE",
-                            StartAt = new DateTime(2023, 4, 3, 23, 3, 18, 306, DateTimeKind.Utc).AddTicks(6493)
+                            StartAt = new DateTime(2023, 4, 3, 23, 3, 18, 306, DateTimeKind.Utc).AddTicks(6493),
+                            YoutubeVideoId = "",
+                            ZoomMeetingLink = ""
                         },
                         new
                         {
@@ -930,7 +944,9 @@ namespace EasySpeak.Core.DAL.Migrations
                             LimitOfUsers = 59,
                             MediaPath = "https://picsum.photos/640/480/?image=376",
                             Name = "Ville",
-                            StartAt = new DateTime(2023, 4, 1, 19, 45, 38, 148, DateTimeKind.Utc).AddTicks(2420)
+                            StartAt = new DateTime(2023, 4, 1, 19, 45, 38, 148, DateTimeKind.Utc).AddTicks(2420),
+                            YoutubeVideoId = "",
+                            ZoomMeetingLink = ""
                         },
                         new
                         {
@@ -940,7 +956,9 @@ namespace EasySpeak.Core.DAL.Migrations
                             LanguageLevel = 0,
                             MediaPath = "https://picsum.photos/640/480/?image=659",
                             Name = "input",
-                            StartAt = new DateTime(2023, 4, 18, 19, 29, 4, 130, DateTimeKind.Utc).AddTicks(7404)
+                            StartAt = new DateTime(2023, 4, 18, 19, 29, 4, 130, DateTimeKind.Utc).AddTicks(7404),
+                            YoutubeVideoId = "",
+                            ZoomMeetingLink = ""
                         },
                         new
                         {
@@ -951,7 +969,9 @@ namespace EasySpeak.Core.DAL.Migrations
                             LimitOfUsers = 139,
                             MediaPath = "https://picsum.photos/640/480/?image=245",
                             Name = "front-end",
-                            StartAt = new DateTime(2023, 4, 1, 0, 33, 57, 99, DateTimeKind.Utc).AddTicks(9638)
+                            StartAt = new DateTime(2023, 4, 1, 0, 33, 57, 99, DateTimeKind.Utc).AddTicks(9638),
+                            YoutubeVideoId = "",
+                            ZoomMeetingLink = ""
                         },
                         new
                         {
@@ -962,7 +982,9 @@ namespace EasySpeak.Core.DAL.Migrations
                             LimitOfUsers = 133,
                             MediaPath = "https://picsum.photos/640/480/?image=934",
                             Name = "Peso Uruguayo",
-                            StartAt = new DateTime(2023, 4, 16, 11, 19, 31, 565, DateTimeKind.Utc).AddTicks(2009)
+                            StartAt = new DateTime(2023, 4, 16, 11, 19, 31, 565, DateTimeKind.Utc).AddTicks(2009),
+                            YoutubeVideoId = "",
+                            ZoomMeetingLink = ""
                         },
                         new
                         {
@@ -973,7 +995,9 @@ namespace EasySpeak.Core.DAL.Migrations
                             LimitOfUsers = 142,
                             MediaPath = "https://picsum.photos/640/480/?image=266",
                             Name = "Bedfordshire",
-                            StartAt = new DateTime(2023, 3, 31, 4, 21, 38, 476, DateTimeKind.Utc).AddTicks(9665)
+                            StartAt = new DateTime(2023, 3, 31, 4, 21, 38, 476, DateTimeKind.Utc).AddTicks(9665),
+                            YoutubeVideoId = "",
+                            ZoomMeetingLink = ""
                         },
                         new
                         {
@@ -984,7 +1008,9 @@ namespace EasySpeak.Core.DAL.Migrations
                             LimitOfUsers = 56,
                             MediaPath = "https://picsum.photos/640/480/?image=7",
                             Name = "Music",
-                            StartAt = new DateTime(2023, 4, 9, 2, 18, 12, 41, DateTimeKind.Utc).AddTicks(4570)
+                            StartAt = new DateTime(2023, 4, 9, 2, 18, 12, 41, DateTimeKind.Utc).AddTicks(4570),
+                            YoutubeVideoId = "",
+                            ZoomMeetingLink = ""
                         },
                         new
                         {
@@ -995,7 +1021,9 @@ namespace EasySpeak.Core.DAL.Migrations
                             LimitOfUsers = 29,
                             MediaPath = "https://picsum.photos/640/480/?image=878",
                             Name = "USB",
-                            StartAt = new DateTime(2023, 4, 14, 7, 44, 19, 22, DateTimeKind.Utc).AddTicks(6402)
+                            StartAt = new DateTime(2023, 4, 14, 7, 44, 19, 22, DateTimeKind.Utc).AddTicks(6402),
+                            YoutubeVideoId = "",
+                            ZoomMeetingLink = ""
                         });
                 });
 
@@ -1019,6 +1047,9 @@ namespace EasySpeak.Core.DAL.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsRead")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Text")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -1036,6 +1067,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             ChatId = 16L,
                             CreatedAt = new DateTime(2023, 3, 26, 23, 58, 21, 254, DateTimeKind.Utc).AddTicks(6980),
                             IsDeleted = false,
+                            IsRead = true,
                             Text = "input Singapore Dollar functionalities Field Branding impactful invoice actuating lavender purple neural-net Palau Operations SQL Fresh Incredible Customer-focused orange green Savings Account"
                         },
                         new
@@ -1044,6 +1076,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             ChatId = 17L,
                             CreatedAt = new DateTime(2023, 3, 26, 18, 45, 36, 557, DateTimeKind.Utc).AddTicks(9989),
                             IsDeleted = false,
+                            IsRead = true,
                             Text = "Run Checking Account New Hampshire Team-oriented"
                         },
                         new
@@ -1052,6 +1085,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             ChatId = 19L,
                             CreatedAt = new DateTime(2023, 3, 26, 22, 30, 49, 610, DateTimeKind.Utc).AddTicks(5596),
                             IsDeleted = false,
+                            IsRead = true,
                             Text = "Advanced input"
                         },
                         new
@@ -1060,6 +1094,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             ChatId = 17L,
                             CreatedAt = new DateTime(2023, 3, 24, 23, 1, 53, 780, DateTimeKind.Utc).AddTicks(9359),
                             IsDeleted = false,
+                            IsRead = true,
                             Text = "Ville interactive"
                         },
                         new
@@ -1068,6 +1103,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             ChatId = 14L,
                             CreatedAt = new DateTime(2023, 3, 29, 21, 45, 21, 98, DateTimeKind.Utc).AddTicks(7435),
                             IsDeleted = false,
+                            IsRead = true,
                             Text = "ability withdrawal even-keeled"
                         },
                         new
@@ -1076,6 +1112,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             ChatId = 2L,
                             CreatedAt = new DateTime(2023, 3, 24, 12, 28, 11, 306, DateTimeKind.Utc).AddTicks(3253),
                             IsDeleted = false,
+                            IsRead = true,
                             Text = "quantify deposit auxiliary Avon Intelligent strategy Forint copy Credit Card Account Avon front-end Bahraini Dinar Mount Georgia optical Infrastructure"
                         },
                         new
@@ -1084,6 +1121,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             ChatId = 16L,
                             CreatedAt = new DateTime(2023, 3, 26, 23, 37, 58, 715, DateTimeKind.Utc).AddTicks(4827),
                             IsDeleted = false,
+                            IsRead = true,
                             Text = "Islands Intelligent Steel Tuna SMTP indexing B2C Platinum system bus channels COM Money Market Account"
                         },
                         new
@@ -1092,6 +1130,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             ChatId = 19L,
                             CreatedAt = new DateTime(2023, 3, 25, 16, 50, 41, 835, DateTimeKind.Utc).AddTicks(9482),
                             IsDeleted = false,
+                            IsRead = true,
                             Text = "Reduced Industrial, Computers & Outdoors Multi-tiered Ameliorated"
                         },
                         new
@@ -1100,6 +1139,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             ChatId = 17L,
                             CreatedAt = new DateTime(2023, 3, 25, 20, 45, 10, 973, DateTimeKind.Utc).AddTicks(6040),
                             IsDeleted = false,
+                            IsRead = true,
                             Text = "Concrete Multi-tiered hacking Seychelles Electronics"
                         },
                         new
@@ -1108,6 +1148,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             ChatId = 4L,
                             CreatedAt = new DateTime(2023, 3, 25, 11, 46, 20, 369, DateTimeKind.Utc).AddTicks(685),
                             IsDeleted = false,
+                            IsRead = true,
                             Text = "application cross-platform Corners niches bleeding-edge Sleek Frozen Hat 1080p Cambridgeshire dot-com Gorgeous online Handmade Frozen Chair Auto Loan Account Burgs Borders Estonia value-added Crossing"
                         },
                         new
@@ -1116,6 +1157,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             ChatId = 15L,
                             CreatedAt = new DateTime(2023, 3, 26, 14, 50, 26, 296, DateTimeKind.Utc).AddTicks(7278),
                             IsDeleted = false,
+                            IsRead = true,
                             Text = "calculate"
                         },
                         new
@@ -1124,6 +1166,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             ChatId = 20L,
                             CreatedAt = new DateTime(2023, 3, 25, 10, 29, 35, 692, DateTimeKind.Utc).AddTicks(6543),
                             IsDeleted = false,
+                            IsRead = true,
                             Text = "transmitter Egypt online Creative Credit Card Account Fantastic Soft Soap TCP Industrial & Toys brand client-server compress drive"
                         },
                         new
@@ -1132,6 +1175,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             ChatId = 17L,
                             CreatedAt = new DateTime(2023, 3, 27, 0, 53, 3, 699, DateTimeKind.Utc).AddTicks(2571),
                             IsDeleted = false,
+                            IsRead = true,
                             Text = "backing up Licensed Granite Bike back up back-end e-enable Specialist Games alarm orange Savings Account interactive web-enabled Colorado Ergonomic Concrete Shoes"
                         },
                         new
@@ -1140,6 +1184,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             ChatId = 17L,
                             CreatedAt = new DateTime(2023, 3, 26, 21, 52, 39, 39, DateTimeKind.Utc).AddTicks(760),
                             IsDeleted = false,
+                            IsRead = true,
                             Text = "Awesome quantify Integration SDD reinvent Bedfordshire Generic Frozen Cheese Electronics & Sports open-source Licensed Concrete Sausages Practical Wooden Shirt"
                         },
                         new
@@ -1148,6 +1193,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             ChatId = 9L,
                             CreatedAt = new DateTime(2023, 3, 26, 20, 35, 54, 517, DateTimeKind.Utc).AddTicks(2778),
                             IsDeleted = false,
+                            IsRead = true,
                             Text = "Intelligent Fresh Soap strategize e-business Rustic Frozen Gloves Awesome Wooden Table Avon functionalities program implement clicks-and-mortar Practical Frozen Chips Syrian Pound Paradigm Pennsylvania Markets Consultant"
                         },
                         new
@@ -1156,6 +1202,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             ChatId = 19L,
                             CreatedAt = new DateTime(2023, 3, 26, 15, 25, 37, 728, DateTimeKind.Utc).AddTicks(3260),
                             IsDeleted = false,
+                            IsRead = true,
                             Text = "reboot Investor non-volatile Identity Graphic Interface Sports compressing facilitate AGP turquoise Grass-roots matrix relationships Rustic Rubber Shirt Soft enhance partnerships Estate green hierarchy"
                         },
                         new
@@ -1164,6 +1211,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             ChatId = 4L,
                             CreatedAt = new DateTime(2023, 3, 25, 15, 47, 35, 138, DateTimeKind.Utc).AddTicks(1191),
                             IsDeleted = false,
+                            IsRead = true,
                             Text = "Rustic Investment Account Money Market Account EXE New Hampshire Generic Fresh Mouse CSS Armenian Dram AI Pine compressing International Rustic Wooden Cheese online Investment Account experiences Idaho application Human"
                         },
                         new
@@ -1172,6 +1220,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             ChatId = 6L,
                             CreatedAt = new DateTime(2023, 3, 27, 15, 29, 43, 577, DateTimeKind.Utc).AddTicks(2038),
                             IsDeleted = true,
+                            IsRead = true,
                             Text = "workforce yellow generate web services Berkshire frame Uganda paradigm drive synthesize Coordinator reboot withdrawal asynchronous Borders Lead approach"
                         },
                         new
@@ -1180,6 +1229,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             ChatId = 17L,
                             CreatedAt = new DateTime(2023, 3, 25, 12, 51, 44, 274, DateTimeKind.Utc).AddTicks(6024),
                             IsDeleted = true,
+                            IsRead = true,
                             Text = "Books"
                         },
                         new
@@ -1188,6 +1238,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             ChatId = 8L,
                             CreatedAt = new DateTime(2023, 3, 28, 3, 54, 37, 636, DateTimeKind.Utc).AddTicks(691),
                             IsDeleted = false,
+                            IsRead = true,
                             Text = "magenta online tan Senior static Dynamic Multi-channelled database bleeding-edge COM actuating Mountain Re-engineered"
                         },
                         new
@@ -1196,6 +1247,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             ChatId = 12L,
                             CreatedAt = new DateTime(2023, 3, 26, 18, 43, 33, 844, DateTimeKind.Utc).AddTicks(4821),
                             IsDeleted = false,
+                            IsRead = true,
                             Text = "exuding compressing Buckinghamshire Pines asymmetric Books, Electronics & Health calculating Road Handmade Concrete Keyboard viral Concrete data-warehouse Bedfordshire Generic Rubber Towels"
                         },
                         new
@@ -1204,6 +1256,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             ChatId = 19L,
                             CreatedAt = new DateTime(2023, 3, 28, 15, 5, 23, 276, DateTimeKind.Utc).AddTicks(3731),
                             IsDeleted = false,
+                            IsRead = true,
                             Text = "South Carolina microchip multi-byte value-added Assimilated implement protocol Villages Beauty National Avon wireless Internal bleeding-edge invoice Buckinghamshire Savings Account Visionary Incredible Soft Chair Small"
                         },
                         new
@@ -1212,6 +1265,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             ChatId = 19L,
                             CreatedAt = new DateTime(2023, 3, 29, 13, 16, 32, 28, DateTimeKind.Utc).AddTicks(7141),
                             IsDeleted = false,
+                            IsRead = true,
                             Text = "Rustic Home Loan Account systemic Movies & Baby seize USB Planner Center Future"
                         },
                         new
@@ -1220,6 +1274,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             ChatId = 2L,
                             CreatedAt = new DateTime(2023, 3, 30, 4, 1, 11, 490, DateTimeKind.Utc).AddTicks(988),
                             IsDeleted = false,
+                            IsRead = true,
                             Text = "Factors circuit grid-enabled Central interactive microchip primary Nepalese Rupee matrix Generic Credit Card Account Burg Health & Electronics Manager conglomeration Technician Inlet Wooden benchmark capacitor"
                         },
                         new
@@ -1228,6 +1283,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             ChatId = 17L,
                             CreatedAt = new DateTime(2023, 3, 24, 14, 51, 7, 944, DateTimeKind.Utc).AddTicks(8222),
                             IsDeleted = false,
+                            IsRead = true,
                             Text = "connect envisioneer Burkina Faso multi-byte B2B Buckinghamshire USB Developer Avon sky blue yellow Grenada Borders Investment Account SMTP Checking Account Intelligent Soft Chips"
                         },
                         new
@@ -1236,6 +1292,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             ChatId = 7L,
                             CreatedAt = new DateTime(2023, 3, 25, 23, 53, 31, 897, DateTimeKind.Utc).AddTicks(640),
                             IsDeleted = true,
+                            IsRead = true,
                             Text = "portals B2C ADP motivating"
                         },
                         new
@@ -1244,6 +1301,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             ChatId = 18L,
                             CreatedAt = new DateTime(2023, 3, 30, 8, 52, 26, 964, DateTimeKind.Utc).AddTicks(4600),
                             IsDeleted = false,
+                            IsRead = true,
                             Text = "Multi-channelled Credit Card Account Supervisor programming French Southern Territories feed Investment Account payment Strategist IB synergies Refined digital Avon website transmitting Re-contextualized multi-byte Colorado"
                         },
                         new
@@ -1252,6 +1310,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             ChatId = 8L,
                             CreatedAt = new DateTime(2023, 3, 29, 4, 25, 33, 646, DateTimeKind.Utc).AddTicks(3207),
                             IsDeleted = true,
+                            IsRead = true,
                             Text = "deposit payment withdrawal calculate payment Generic Granite Bike wireless synthesizing South Carolina Mount Turnpike experiences deposit Refined Associate Garden & Industrial"
                         },
                         new
@@ -1260,6 +1319,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             ChatId = 3L,
                             CreatedAt = new DateTime(2023, 3, 25, 20, 31, 21, 27, DateTimeKind.Utc).AddTicks(9142),
                             IsDeleted = false,
+                            IsRead = true,
                             Text = "open system concept"
                         },
                         new
@@ -1268,6 +1328,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             ChatId = 20L,
                             CreatedAt = new DateTime(2023, 3, 29, 0, 21, 12, 74, DateTimeKind.Utc).AddTicks(4610),
                             IsDeleted = false,
+                            IsRead = true,
                             Text = "real-time dedicated 4th generation yellow payment Reduced feed Somalia deposit Summit copying Credit Card Account"
                         },
                         new
@@ -1276,6 +1337,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             ChatId = 3L,
                             CreatedAt = new DateTime(2023, 3, 28, 3, 39, 36, 238, DateTimeKind.Utc).AddTicks(9462),
                             IsDeleted = false,
+                            IsRead = true,
                             Text = "white Robust deposit virtual Oregon mobile Ford magnetic Forward seamless Sleek Rubber Hat Fantastic Metal Salad Awesome Steel Bacon Finland Regional Berkshire Generic Fresh Mouse upward-trending"
                         },
                         new
@@ -1284,6 +1346,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             ChatId = 18L,
                             CreatedAt = new DateTime(2023, 3, 26, 0, 51, 40, 606, DateTimeKind.Utc).AddTicks(445),
                             IsDeleted = false,
+                            IsRead = true,
                             Text = "Shoes infrastructures SMS Seychelles Rupee Saint Helena Pound functionalities Corporate Developer Architect Incredible Frozen Sausages Run monitor Engineer"
                         },
                         new
@@ -1292,6 +1355,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             ChatId = 11L,
                             CreatedAt = new DateTime(2023, 3, 26, 6, 3, 54, 892, DateTimeKind.Utc).AddTicks(6894),
                             IsDeleted = true,
+                            IsRead = true,
                             Text = "Refined Creative payment payment magenta 1080p compress Solutions content-based e-business Front-line Gorgeous monitoring orchestrate connect Sleek encryption application De-engineered Jewelery"
                         },
                         new
@@ -1300,6 +1364,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             ChatId = 20L,
                             CreatedAt = new DateTime(2023, 3, 27, 17, 3, 49, 552, DateTimeKind.Utc).AddTicks(2553),
                             IsDeleted = false,
+                            IsRead = true,
                             Text = "matrix Buckinghamshire Metrics"
                         },
                         new
@@ -1308,6 +1373,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             ChatId = 1L,
                             CreatedAt = new DateTime(2023, 3, 26, 22, 55, 25, 693, DateTimeKind.Utc).AddTicks(4411),
                             IsDeleted = false,
+                            IsRead = true,
                             Text = "1080p firewall Specialist Buckinghamshire alarm help-desk Cambridgeshire SAS Intelligent Fantastic Rubber Mouse SDD Ridge PCI online Balboa Beauty & Home"
                         },
                         new
@@ -1316,6 +1382,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             ChatId = 12L,
                             CreatedAt = new DateTime(2023, 3, 27, 21, 54, 27, 996, DateTimeKind.Utc).AddTicks(5217),
                             IsDeleted = false,
+                            IsRead = true,
                             Text = "productivity"
                         },
                         new
@@ -1324,6 +1391,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             ChatId = 14L,
                             CreatedAt = new DateTime(2023, 3, 23, 22, 38, 4, 423, DateTimeKind.Utc).AddTicks(3693),
                             IsDeleted = false,
+                            IsRead = true,
                             Text = "Borders Corporate CSS programming Rubber HDD"
                         },
                         new
@@ -1332,6 +1400,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             ChatId = 7L,
                             CreatedAt = new DateTime(2023, 3, 26, 10, 35, 26, 459, DateTimeKind.Utc).AddTicks(78),
                             IsDeleted = false,
+                            IsRead = true,
                             Text = "Automotive Som Division"
                         },
                         new
@@ -1340,6 +1409,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             ChatId = 3L,
                             CreatedAt = new DateTime(2023, 3, 25, 20, 55, 47, 217, DateTimeKind.Utc).AddTicks(9102),
                             IsDeleted = false,
+                            IsRead = true,
                             Text = "Small Fresh Pizza demand-driven cohesive bleeding-edge"
                         },
                         new
@@ -1348,6 +1418,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             ChatId = 4L,
                             CreatedAt = new DateTime(2023, 3, 28, 10, 52, 43, 915, DateTimeKind.Utc).AddTicks(8232),
                             IsDeleted = false,
+                            IsRead = true,
                             Text = "Cotton District USB quantify ivory Metal Unbranded Rubber Computer next-generation Brooks optical optimizing Money Market Account deposit Handcrafted benchmark Tunnel"
                         });
                 });
@@ -1365,6 +1436,9 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.Property<bool>("IsRead")
                         .HasColumnType("bit");
+
+                    b.Property<long>("RelatedTo")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Text")
                         .IsRequired()
@@ -1388,8 +1462,9 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 1L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsRead = false,
+                            RelatedTo = 0L,
                             Text = "Facere possimus eligendi quisquam ullam iure praesentium numquam sapiente distinctio.",
-                            Type = 1,
+                            Type = 3,
                             UserId = 5L
                         },
                         new
@@ -1397,8 +1472,9 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 2L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsRead = false,
+                            RelatedTo = 0L,
                             Text = "Voluptatibus ad et adipisci hic amet ratione corporis.",
-                            Type = 1,
+                            Type = 3,
                             UserId = 5L
                         },
                         new
@@ -1406,8 +1482,9 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 3L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsRead = false,
+                            RelatedTo = 0L,
                             Text = "A provident rerum nemo dolores debitis dicta voluptatem.",
-                            Type = 0,
+                            Type = 1,
                             UserId = 5L
                         },
                         new
@@ -1415,8 +1492,9 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 4L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsRead = false,
+                            RelatedTo = 0L,
                             Text = "Ipsam adipisci illo quidem.",
-                            Type = 0,
+                            Type = 2,
                             UserId = 1L
                         },
                         new
@@ -1424,8 +1502,9 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 5L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsRead = false,
+                            RelatedTo = 0L,
                             Text = "Ea dolor animi quod laborum quia perspiciatis sunt tempora.",
-                            Type = 1,
+                            Type = 3,
                             UserId = 2L
                         },
                         new
@@ -1433,8 +1512,9 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 6L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsRead = false,
+                            RelatedTo = 0L,
                             Text = "Est quasi incidunt perferendis.",
-                            Type = 1,
+                            Type = 4,
                             UserId = 3L
                         },
                         new
@@ -1442,8 +1522,9 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 7L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsRead = false,
+                            RelatedTo = 0L,
                             Text = "Voluptatem beatae vitae sunt a ut sed.",
-                            Type = 1,
+                            Type = 4,
                             UserId = 1L
                         },
                         new
@@ -1451,8 +1532,9 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 8L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsRead = false,
+                            RelatedTo = 0L,
                             Text = "Eos enim consequatur et praesentium ad ut beatae eius.",
-                            Type = 1,
+                            Type = 4,
                             UserId = 5L
                         },
                         new
@@ -1460,8 +1542,9 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 9L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsRead = false,
+                            RelatedTo = 0L,
                             Text = "Error et velit autem ipsa atque consequuntur vitae sit.",
-                            Type = 1,
+                            Type = 4,
                             UserId = 3L
                         },
                         new
@@ -1469,8 +1552,9 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 10L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsRead = false,
+                            RelatedTo = 0L,
                             Text = "Nisi omnis quia est facilis rem architecto laboriosam.",
-                            Type = 1,
+                            Type = 3,
                             UserId = 4L
                         },
                         new
@@ -1478,8 +1562,9 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 11L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsRead = false,
+                            RelatedTo = 0L,
                             Text = "In occaecati perspiciatis.",
-                            Type = 1,
+                            Type = 4,
                             UserId = 4L
                         },
                         new
@@ -1487,8 +1572,9 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 12L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsRead = true,
+                            RelatedTo = 0L,
                             Text = "Recusandae perspiciatis pariatur quod eum sint molestiae quis neque tempora.",
-                            Type = 1,
+                            Type = 3,
                             UserId = 5L
                         },
                         new
@@ -1496,8 +1582,9 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 13L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsRead = false,
+                            RelatedTo = 0L,
                             Text = "Nobis nulla dignissimos voluptas nemo cumque tenetur quod et placeat.",
-                            Type = 0,
+                            Type = 2,
                             UserId = 2L
                         },
                         new
@@ -1505,8 +1592,9 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 14L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsRead = false,
+                            RelatedTo = 0L,
                             Text = "Eos similique fuga enim.",
-                            Type = 0,
+                            Type = 2,
                             UserId = 5L
                         },
                         new
@@ -1514,8 +1602,9 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 15L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsRead = false,
+                            RelatedTo = 0L,
                             Text = "Velit magnam placeat voluptatem itaque.",
-                            Type = 0,
+                            Type = 1,
                             UserId = 4L
                         },
                         new
@@ -1523,8 +1612,9 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 16L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsRead = false,
+                            RelatedTo = 0L,
                             Text = "Ut atque dolore accusantium soluta cumque perferendis labore magni adipisci.",
-                            Type = 0,
+                            Type = 2,
                             UserId = 1L
                         },
                         new
@@ -1532,8 +1622,9 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 17L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsRead = false,
+                            RelatedTo = 0L,
                             Text = "Ratione et quibusdam consequatur voluptatem velit expedita eos maxime.",
-                            Type = 1,
+                            Type = 3,
                             UserId = 2L
                         },
                         new
@@ -1541,8 +1632,9 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 18L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsRead = false,
+                            RelatedTo = 0L,
                             Text = "Quia nobis iusto aspernatur nihil iure ut blanditiis veritatis.",
-                            Type = 1,
+                            Type = 4,
                             UserId = 4L
                         },
                         new
@@ -1550,8 +1642,9 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 19L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsRead = false,
+                            RelatedTo = 0L,
                             Text = "Illum quod atque nulla voluptas quos beatae.",
-                            Type = 1,
+                            Type = 4,
                             UserId = 1L
                         },
                         new
@@ -1559,8 +1652,9 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 20L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsRead = false,
+                            RelatedTo = 0L,
                             Text = "Ab placeat tenetur perferendis et omnis.",
-                            Type = 0,
+                            Type = 1,
                             UserId = 4L
                         },
                         new
@@ -1568,8 +1662,9 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 21L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsRead = true,
+                            RelatedTo = 0L,
                             Text = "Deserunt sint enim ex sit culpa.",
-                            Type = 1,
+                            Type = 3,
                             UserId = 3L
                         },
                         new
@@ -1577,8 +1672,9 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 22L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsRead = false,
+                            RelatedTo = 0L,
                             Text = "Necessitatibus doloremque omnis facilis unde exercitationem consectetur culpa porro.",
-                            Type = 1,
+                            Type = 3,
                             UserId = 2L
                         },
                         new
@@ -1586,8 +1682,9 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 23L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsRead = false,
+                            RelatedTo = 0L,
                             Text = "Vel rem rerum eum harum.",
-                            Type = 0,
+                            Type = 1,
                             UserId = 2L
                         },
                         new
@@ -1595,8 +1692,9 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 24L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsRead = false,
+                            RelatedTo = 0L,
                             Text = "Est officia accusamus doloremque perferendis ea.",
-                            Type = 1,
+                            Type = 3,
                             UserId = 2L
                         },
                         new
@@ -1604,8 +1702,9 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 25L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsRead = false,
+                            RelatedTo = 0L,
                             Text = "Laudantium ut amet repellendus enim consequatur.",
-                            Type = 1,
+                            Type = 3,
                             UserId = 4L
                         },
                         new
@@ -1613,8 +1712,9 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 26L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsRead = false,
+                            RelatedTo = 0L,
                             Text = "Sed expedita dolorem aperiam ipsa omnis.",
-                            Type = 0,
+                            Type = 1,
                             UserId = 4L
                         },
                         new
@@ -1622,8 +1722,9 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 27L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsRead = false,
+                            RelatedTo = 0L,
                             Text = "Ipsa quia cupiditate iure necessitatibus asperiores corporis doloremque corporis.",
-                            Type = 1,
+                            Type = 3,
                             UserId = 4L
                         },
                         new
@@ -1631,8 +1732,9 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 28L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsRead = false,
+                            RelatedTo = 0L,
                             Text = "Consectetur enim rerum consectetur magnam perspiciatis ut rem.",
-                            Type = 0,
+                            Type = 1,
                             UserId = 2L
                         },
                         new
@@ -1640,8 +1742,9 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 29L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsRead = false,
+                            RelatedTo = 0L,
                             Text = "Aut modi corrupti corrupti.",
-                            Type = 1,
+                            Type = 3,
                             UserId = 4L
                         },
                         new
@@ -1649,8 +1752,9 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 30L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsRead = true,
+                            RelatedTo = 0L,
                             Text = "Explicabo provident omnis culpa earum modi eos.",
-                            Type = 0,
+                            Type = 2,
                             UserId = 1L
                         },
                         new
@@ -1658,8 +1762,9 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 31L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsRead = false,
+                            RelatedTo = 0L,
                             Text = "Deleniti labore veritatis dolorum.",
-                            Type = 1,
+                            Type = 4,
                             UserId = 1L
                         },
                         new
@@ -1667,8 +1772,9 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 32L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsRead = false,
+                            RelatedTo = 0L,
                             Text = "Ut sit nulla.",
-                            Type = 0,
+                            Type = 1,
                             UserId = 5L
                         },
                         new
@@ -1676,8 +1782,9 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 33L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsRead = false,
+                            RelatedTo = 0L,
                             Text = "Voluptas ut itaque nesciunt.",
-                            Type = 0,
+                            Type = 1,
                             UserId = 2L
                         },
                         new
@@ -1685,8 +1792,9 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 34L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsRead = false,
+                            RelatedTo = 0L,
                             Text = "Molestias porro exercitationem omnis et eius.",
-                            Type = 1,
+                            Type = 3,
                             UserId = 5L
                         },
                         new
@@ -1694,8 +1802,9 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 35L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsRead = false,
+                            RelatedTo = 0L,
                             Text = "Esse sit quia dolorem sequi.",
-                            Type = 0,
+                            Type = 2,
                             UserId = 2L
                         },
                         new
@@ -1703,8 +1812,9 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 36L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsRead = false,
+                            RelatedTo = 0L,
                             Text = "Perspiciatis qui dignissimos.",
-                            Type = 0,
+                            Type = 1,
                             UserId = 1L
                         },
                         new
@@ -1712,8 +1822,9 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 37L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsRead = true,
+                            RelatedTo = 0L,
                             Text = "Saepe facere eos eum perferendis nisi.",
-                            Type = 0,
+                            Type = 1,
                             UserId = 3L
                         },
                         new
@@ -1721,8 +1832,9 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 38L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsRead = false,
+                            RelatedTo = 0L,
                             Text = "Repudiandae ut nobis voluptas rerum ullam.",
-                            Type = 1,
+                            Type = 4,
                             UserId = 2L
                         },
                         new
@@ -1730,8 +1842,9 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 39L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsRead = false,
+                            RelatedTo = 0L,
                             Text = "Ea voluptatibus voluptas sint et et asperiores omnis recusandae saepe.",
-                            Type = 0,
+                            Type = 2,
                             UserId = 1L
                         },
                         new
@@ -1739,8 +1852,9 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 40L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsRead = false,
+                            RelatedTo = 0L,
                             Text = "Non consequatur voluptatem in aut quia quo quo.",
-                            Type = 0,
+                            Type = 2,
                             UserId = 1L
                         });
                 });
@@ -2246,97 +2360,97 @@ namespace EasySpeak.Core.DAL.Migrations
                         new
                         {
                             Id = 1L,
-                            CreatedAt = new DateTime(2023, 3, 30, 22, 46, 38, 684, DateTimeKind.Local).AddTicks(4737),
+                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
                             Name = "Architecture"
                         },
                         new
                         {
                             Id = 2L,
-                            CreatedAt = new DateTime(2023, 3, 30, 22, 46, 38, 684, DateTimeKind.Local).AddTicks(4783),
+                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
                             Name = "Arts"
                         },
                         new
                         {
                             Id = 3L,
-                            CreatedAt = new DateTime(2023, 3, 30, 22, 46, 38, 684, DateTimeKind.Local).AddTicks(4787),
+                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
                             Name = "Cars"
                         },
                         new
                         {
                             Id = 4L,
-                            CreatedAt = new DateTime(2023, 3, 30, 22, 46, 38, 684, DateTimeKind.Local).AddTicks(4790),
+                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
                             Name = "Celebrities"
                         },
                         new
                         {
                             Id = 5L,
-                            CreatedAt = new DateTime(2023, 3, 30, 22, 46, 38, 684, DateTimeKind.Local).AddTicks(4793),
+                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
                             Name = "Cooking"
                         },
                         new
                         {
                             Id = 6L,
-                            CreatedAt = new DateTime(2023, 3, 30, 22, 46, 38, 684, DateTimeKind.Local).AddTicks(4799),
+                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
                             Name = "Dancing"
                         },
                         new
                         {
                             Id = 7L,
-                            CreatedAt = new DateTime(2023, 3, 30, 22, 46, 38, 684, DateTimeKind.Local).AddTicks(4804),
+                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
                             Name = "Ecology"
                         },
                         new
                         {
                             Id = 8L,
-                            CreatedAt = new DateTime(2023, 3, 30, 22, 46, 38, 684, DateTimeKind.Local).AddTicks(4806),
+                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
                             Name = "Design"
                         },
                         new
                         {
                             Id = 9L,
-                            CreatedAt = new DateTime(2023, 3, 30, 22, 46, 38, 684, DateTimeKind.Local).AddTicks(4810),
+                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
                             Name = "History"
                         },
                         new
                         {
                             Id = 10L,
-                            CreatedAt = new DateTime(2023, 3, 30, 22, 46, 38, 684, DateTimeKind.Local).AddTicks(4814),
+                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
                             Name = "Fashion"
                         },
                         new
                         {
                             Id = 11L,
-                            CreatedAt = new DateTime(2023, 3, 30, 22, 46, 38, 684, DateTimeKind.Local).AddTicks(4818),
+                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
                             Name = "Medicine"
                         },
                         new
                         {
                             Id = 12L,
-                            CreatedAt = new DateTime(2023, 3, 30, 22, 46, 38, 684, DateTimeKind.Local).AddTicks(4821),
+                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
                             Name = "Technologies"
                         },
                         new
                         {
                             Id = 13L,
-                            CreatedAt = new DateTime(2023, 3, 30, 22, 46, 38, 684, DateTimeKind.Local).AddTicks(4825),
+                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
                             Name = "Pets"
                         },
                         new
                         {
                             Id = 14L,
-                            CreatedAt = new DateTime(2023, 3, 30, 22, 46, 38, 684, DateTimeKind.Local).AddTicks(4828),
+                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
                             Name = "Philosophy"
                         },
                         new
                         {
                             Id = 15L,
-                            CreatedAt = new DateTime(2023, 3, 30, 22, 46, 38, 684, DateTimeKind.Local).AddTicks(4831),
+                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
                             Name = "Photography"
                         },
                         new
                         {
                             Id = 16L,
-                            CreatedAt = new DateTime(2023, 3, 30, 22, 46, 38, 684, DateTimeKind.Local).AddTicks(4834),
+                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
                             Name = "Politics"
                         });
                 });
@@ -2370,6 +2484,9 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.Property<long?>("ImageId")
                         .HasColumnType("bigint");
+
+                    b.Property<bool>("IsAdmin")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsBanned")
                         .HasColumnType("bit");
@@ -2413,12 +2530,13 @@ namespace EasySpeak.Core.DAL.Migrations
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "Della.Rosenbaum@yahoo.com",
                             FirstName = "Della",
+                            IsAdmin = true,
                             IsBanned = false,
                             IsSubscribed = true,
                             Language = 175,
                             LanguageLevel = 2,
                             LastName = "Rosenbaum",
-                            Sex = 0,
+                            Sex = 1,
                             Status = 0,
                             Timezone = 275
                         },
@@ -2428,13 +2546,14 @@ namespace EasySpeak.Core.DAL.Migrations
                             BirthDate = new DateTime(2003, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Country = 215,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "Georgia_Gorczany76@gmail.com",
-                            FirstName = "Georgia",
+                            Email = "Randall_Hegmann56@hotmail.com",
+                            FirstName = "Randall",
+                            IsAdmin = true,
                             IsBanned = false,
                             IsSubscribed = true,
                             Language = 103,
                             LanguageLevel = 0,
-                            LastName = "Gorczany",
+                            LastName = "Hegmann",
                             Sex = 1,
                             Status = 1,
                             Timezone = 197
@@ -2445,14 +2564,15 @@ namespace EasySpeak.Core.DAL.Migrations
                             BirthDate = new DateTime(2003, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Country = 68,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "Jimmy89@hotmail.com",
-                            FirstName = "Jimmy",
+                            Email = "Alfred89@hotmail.com",
+                            FirstName = "Alfred",
+                            IsAdmin = true,
                             IsBanned = false,
                             IsSubscribed = true,
                             Language = 65,
                             LanguageLevel = 2,
-                            LastName = "Fritsch",
-                            Sex = 1,
+                            LastName = "Rohan",
+                            Sex = 2,
                             Status = 2,
                             Timezone = 6
                         },
@@ -2462,14 +2582,15 @@ namespace EasySpeak.Core.DAL.Migrations
                             BirthDate = new DateTime(2003, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Country = 42,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "Raquel57@gmail.com",
-                            FirstName = "Raquel",
+                            Email = "Sandra57@gmail.com",
+                            FirstName = "Sandra",
+                            IsAdmin = true,
                             IsBanned = false,
                             IsSubscribed = true,
                             Language = 21,
                             LanguageLevel = 0,
-                            LastName = "Bartell",
-                            Sex = 1,
+                            LastName = "Satterfield",
+                            Sex = 2,
                             Status = 1,
                             Timezone = 71
                         },
@@ -2477,18 +2598,19 @@ namespace EasySpeak.Core.DAL.Migrations
                         {
                             Id = 5L,
                             BirthDate = new DateTime(2003, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Country = 86,
+                            Country = 236,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "Kay.Botsford86@yahoo.com",
-                            FirstName = "Kay",
+                            Email = "Frances.Lemke37@gmail.com",
+                            FirstName = "Frances",
+                            IsAdmin = false,
                             IsBanned = false,
-                            IsSubscribed = false,
-                            Language = 1,
-                            LanguageLevel = 0,
-                            LastName = "Botsford",
-                            Sex = 1,
-                            Status = 1,
-                            Timezone = 21
+                            IsSubscribed = true,
+                            Language = 55,
+                            LanguageLevel = 3,
+                            LastName = "Lemke",
+                            Sex = 2,
+                            Status = 3,
+                            Timezone = 175
                         });
                 });
 
