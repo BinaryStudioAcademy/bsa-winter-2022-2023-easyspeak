@@ -1,8 +1,6 @@
 ﻿using EasySpeak.Core.Common.DTO.Notification;
 using EasySpeak.Notifier.WebAPI.Hubs;
-using EasySpeak.RabbitMQ;
 using EasySpeak.RabbitMQ.Interfaces;
-using EasySpeak.RabbitMQ.Services;
 using Microsoft.AspNetCore.SignalR;
 using Newtonsoft.Json;
 
@@ -36,11 +34,11 @@ namespace EasySpeak.Notifier.WebAPI.Services
 
             try
             {
-                _consumer.Recieve<NewNotificationDto>((data) =>
+                _consumer.Recieve<Tuple<string, NotificationDto>>((data) =>
                 {
                     if (data is not null)
                     {
-                        _hubContext.Clients.All.SendAsync($"Notification_{data.Email.ToLower()}", JsonConvert.SerializeObject(data));
+                        _hubContext.Clients.User(data.Item1).SendAsync("Notify", JsonConvert.SerializeObject(data.Item2));
                         Console.WriteLine(data);
                     }
                 });

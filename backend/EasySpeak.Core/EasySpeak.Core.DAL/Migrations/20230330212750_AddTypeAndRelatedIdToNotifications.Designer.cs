@@ -4,6 +4,7 @@ using EasySpeak.Core.DAL.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EasySpeak.Core.DAL.Migrations
 {
     [DbContext(typeof(EasySpeakCoreContext))]
-    partial class EasySpeakCoreContextModelSnapshot : ModelSnapshot
+    [Migration("20230330212750_AddTypeAndRelatedIdToNotifications")]
+    partial class AddTypeAndRelatedIdToNotifications
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -628,28 +630,6 @@ namespace EasySpeak.Core.DAL.Migrations
                         });
                 });
 
-            modelBuilder.Entity("EasySpeak.Core.DAL.Entities.EasySpeakFile", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Url")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("EasySpeakFiles");
-                });
-
             modelBuilder.Entity("EasySpeak.Core.DAL.Entities.Friend", b =>
                 {
                     b.Property<long>("Id")
@@ -880,14 +860,6 @@ namespace EasySpeak.Core.DAL.Migrations
                     b.Property<DateTime>("StartAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("YoutubeVideoId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ZoomMeetingLink")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CreatedBy");
@@ -904,9 +876,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             LimitOfUsers = 74,
                             MediaPath = "https://picsum.photos/640/480/?image=202",
                             Name = "Mobility",
-                            StartAt = new DateTime(2023, 4, 3, 19, 50, 29, 650, DateTimeKind.Utc).AddTicks(205),
-                            YoutubeVideoId = "",
-                            ZoomMeetingLink = ""
+                            StartAt = new DateTime(2023, 4, 3, 19, 50, 29, 650, DateTimeKind.Utc).AddTicks(205)
                         },
                         new
                         {
@@ -917,9 +887,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             LimitOfUsers = 123,
                             MediaPath = "https://picsum.photos/640/480/?image=134",
                             Name = "Palau",
-                            StartAt = new DateTime(2023, 4, 15, 17, 57, 57, 902, DateTimeKind.Utc).AddTicks(9337),
-                            YoutubeVideoId = "",
-                            ZoomMeetingLink = ""
+                            StartAt = new DateTime(2023, 4, 15, 17, 57, 57, 902, DateTimeKind.Utc).AddTicks(9337)
                         },
                         new
                         {
@@ -929,9 +897,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             LanguageLevel = 0,
                             MediaPath = "https://picsum.photos/640/480/?image=545",
                             Name = "EXE",
-                            StartAt = new DateTime(2023, 4, 3, 23, 3, 18, 306, DateTimeKind.Utc).AddTicks(6493),
-                            YoutubeVideoId = "",
-                            ZoomMeetingLink = ""
+                            StartAt = new DateTime(2023, 4, 3, 23, 3, 18, 306, DateTimeKind.Utc).AddTicks(6493)
                         },
                         new
                         {
@@ -942,9 +908,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             LimitOfUsers = 59,
                             MediaPath = "https://picsum.photos/640/480/?image=376",
                             Name = "Ville",
-                            StartAt = new DateTime(2023, 4, 1, 19, 45, 38, 148, DateTimeKind.Utc).AddTicks(2420),
-                            YoutubeVideoId = "",
-                            ZoomMeetingLink = ""
+                            StartAt = new DateTime(2023, 4, 1, 19, 45, 38, 148, DateTimeKind.Utc).AddTicks(2420)
                         },
                         new
                         {
@@ -954,9 +918,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             LanguageLevel = 0,
                             MediaPath = "https://picsum.photos/640/480/?image=659",
                             Name = "input",
-                            StartAt = new DateTime(2023, 4, 18, 19, 29, 4, 130, DateTimeKind.Utc).AddTicks(7404),
-                            YoutubeVideoId = "",
-                            ZoomMeetingLink = ""
+                            StartAt = new DateTime(2023, 4, 18, 19, 29, 4, 130, DateTimeKind.Utc).AddTicks(7404)
                         },
                         new
                         {
@@ -967,9 +929,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             LimitOfUsers = 139,
                             MediaPath = "https://picsum.photos/640/480/?image=245",
                             Name = "front-end",
-                            StartAt = new DateTime(2023, 4, 1, 0, 33, 57, 99, DateTimeKind.Utc).AddTicks(9638),
-                            YoutubeVideoId = "",
-                            ZoomMeetingLink = ""
+                            StartAt = new DateTime(2023, 4, 1, 0, 33, 57, 99, DateTimeKind.Utc).AddTicks(9638)
                         },
                         new
                         {
@@ -980,9 +940,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             LimitOfUsers = 133,
                             MediaPath = "https://picsum.photos/640/480/?image=934",
                             Name = "Peso Uruguayo",
-                            StartAt = new DateTime(2023, 4, 16, 11, 19, 31, 565, DateTimeKind.Utc).AddTicks(2009),
-                            YoutubeVideoId = "",
-                            ZoomMeetingLink = ""
+                            StartAt = new DateTime(2023, 4, 16, 11, 19, 31, 565, DateTimeKind.Utc).AddTicks(2009)
                         },
                         new
                         {
@@ -993,9 +951,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             LimitOfUsers = 142,
                             MediaPath = "https://picsum.photos/640/480/?image=266",
                             Name = "Bedfordshire",
-                            StartAt = new DateTime(2023, 3, 31, 4, 21, 38, 476, DateTimeKind.Utc).AddTicks(9665),
-                            YoutubeVideoId = "",
-                            ZoomMeetingLink = ""
+                            StartAt = new DateTime(2023, 3, 31, 4, 21, 38, 476, DateTimeKind.Utc).AddTicks(9665)
                         },
                         new
                         {
@@ -1006,9 +962,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             LimitOfUsers = 56,
                             MediaPath = "https://picsum.photos/640/480/?image=7",
                             Name = "Music",
-                            StartAt = new DateTime(2023, 4, 9, 2, 18, 12, 41, DateTimeKind.Utc).AddTicks(4570),
-                            YoutubeVideoId = "",
-                            ZoomMeetingLink = ""
+                            StartAt = new DateTime(2023, 4, 9, 2, 18, 12, 41, DateTimeKind.Utc).AddTicks(4570)
                         },
                         new
                         {
@@ -1019,9 +973,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             LimitOfUsers = 29,
                             MediaPath = "https://picsum.photos/640/480/?image=878",
                             Name = "USB",
-                            StartAt = new DateTime(2023, 4, 14, 7, 44, 19, 22, DateTimeKind.Utc).AddTicks(6402),
-                            YoutubeVideoId = "",
-                            ZoomMeetingLink = ""
+                            StartAt = new DateTime(2023, 4, 14, 7, 44, 19, 22, DateTimeKind.Utc).AddTicks(6402)
                         });
                 });
 
@@ -2461,8 +2413,9 @@ namespace EasySpeak.Core.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long?>("ImageId")
-                        .HasColumnType("bigint");
+                    b.Property<string>("ImagePath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsBanned")
                         .HasColumnType("bit");
@@ -2491,10 +2444,6 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ImageId")
-                        .IsUnique()
-                        .HasFilter("[ImageId] IS NOT NULL");
-
                     b.ToTable("Users");
 
                     b.HasData(
@@ -2502,91 +2451,91 @@ namespace EasySpeak.Core.DAL.Migrations
                         {
                             Id = 1L,
                             BirthDate = new DateTime(2003, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Country = 196,
+                            Country = 0,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "Della.Rosenbaum@yahoo.com",
                             FirstName = "Della",
-                            IsAdmin = false,
+                            ImagePath = "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/343.jpg",
                             IsBanned = false,
                             IsSubscribed = true,
-                            Language = 175,
+                            Language = 0,
                             LanguageLevel = 2,
                             LastName = "Rosenbaum",
                             Sex = 0,
-                            Status = 0,
-                            Timezone = 275
+                            Status = 3,
+                            Timezone = 0
                         },
                         new
                         {
                             Id = 2L,
                             BirthDate = new DateTime(2003, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Country = 215,
+                            Country = 0,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "Georgia_Gorczany76@gmail.com",
-                            FirstName = "Georgia",
-                            IsAdmin = false,
+                            Email = "Jon.Abshire@gmail.com",
+                            FirstName = "Jon",
+                            ImagePath = "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/949.jpg",
                             IsBanned = false,
                             IsSubscribed = true,
-                            Language = 103,
+                            Language = 0,
                             LanguageLevel = 0,
-                            LastName = "Gorczany",
+                            LastName = "Abshire",
                             Sex = 1,
-                            Status = 1,
-                            Timezone = 197
+                            Status = 3,
+                            Timezone = 0
                         },
                         new
                         {
                             Id = 3L,
                             BirthDate = new DateTime(2003, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Country = 68,
+                            Country = 0,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "Jimmy89@hotmail.com",
-                            FirstName = "Jimmy",
-                            IsAdmin = false,
+                            Email = "Kurt.Gulgowski93@gmail.com",
+                            FirstName = "Kurt",
+                            ImagePath = "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1117.jpg",
                             IsBanned = false,
                             IsSubscribed = true,
-                            Language = 65,
+                            Language = 0,
                             LanguageLevel = 2,
-                            LastName = "Fritsch",
-                            Sex = 1,
-                            Status = 2,
-                            Timezone = 6
+                            LastName = "Gulgowski",
+                            Sex = 0,
+                            Status = 3,
+                            Timezone = 0
                         },
                         new
                         {
                             Id = 4L,
                             BirthDate = new DateTime(2003, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Country = 42,
+                            Country = 0,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "Raquel57@gmail.com",
-                            FirstName = "Raquel",
-                            IsAdmin = false,
+                            Email = "Eduardo.Larson@gmail.com",
+                            FirstName = "Eduardo",
+                            ImagePath = "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1114.jpg",
                             IsBanned = false,
                             IsSubscribed = true,
-                            Language = 21,
-                            LanguageLevel = 0,
-                            LastName = "Bartell",
-                            Sex = 1,
-                            Status = 1,
-                            Timezone = 71
+                            Language = 0,
+                            LanguageLevel = 2,
+                            LastName = "Larson",
+                            Sex = 2,
+                            Status = 0,
+                            Timezone = 0
                         },
                         new
                         {
                             Id = 5L,
                             BirthDate = new DateTime(2003, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Country = 86,
+                            Country = 0,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "Kay.Botsford86@yahoo.com",
-                            FirstName = "Kay",
-                            IsAdmin = false,
+                            Email = "Francis16@yahoo.com",
+                            FirstName = "Francis",
+                            ImagePath = "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/607.jpg",
                             IsBanned = false,
-                            IsSubscribed = false,
-                            Language = 1,
-                            LanguageLevel = 0,
-                            LastName = "Botsford",
-                            Sex = 1,
-                            Status = 1,
-                            Timezone = 21
+                            IsSubscribed = true,
+                            Language = 0,
+                            LanguageLevel = 2,
+                            LastName = "Little",
+                            Sex = 0,
+                            Status = 0,
+                            Timezone = 0
                         });
                 });
 
@@ -2990,15 +2939,6 @@ namespace EasySpeak.Core.DAL.Migrations
                     b.Navigation("Question");
                 });
 
-            modelBuilder.Entity("EasySpeak.Core.DAL.Entities.User", b =>
-                {
-                    b.HasOne("EasySpeak.Core.DAL.Entities.EasySpeakFile", "Image")
-                        .WithOne("User")
-                        .HasForeignKey("EasySpeak.Core.DAL.Entities.User", "ImageId");
-
-                    b.Navigation("Image");
-                });
-
             modelBuilder.Entity("LessonTag", b =>
                 {
                     b.HasOne("EasySpeak.Core.DAL.Entities.Lesson", null)
@@ -3049,12 +2989,6 @@ namespace EasySpeak.Core.DAL.Migrations
                     b.Navigation("Calls");
 
                     b.Navigation("Messages");
-                });
-
-            modelBuilder.Entity("EasySpeak.Core.DAL.Entities.EasySpeakFile", b =>
-                {
-                    b.Navigation("User")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("EasySpeak.Core.DAL.Entities.Lesson", b =>

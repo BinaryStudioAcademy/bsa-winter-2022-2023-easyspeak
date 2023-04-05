@@ -46,7 +46,7 @@ public class LessonsService : BaseService, ILessonsService
 
         if (filtersRequest.LanguageLevels is not null && filtersRequest.LanguageLevels.Any())
         {
-            lessonsFromContext = lessonsFromContext.Where(m => filtersRequest.LanguageLevels.Contains(m.LanguageLevel));
+            lessonsFromContext = lessonsFromContext.Where(m => filtersRequest.LanguageLevels != null && filtersRequest.LanguageLevels.Contains(m.LanguageLevel));
         }
 
         var subscribersInfoDict = await lessonsFromContext.Select(t =>
