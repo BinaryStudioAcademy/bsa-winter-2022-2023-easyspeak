@@ -34,7 +34,7 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.HasIndex("UsersId");
 
-                    b.ToTable("ChatUser");
+                    b.ToTable("ChatUser", (string)null);
 
                     b.HasData(
                         new
@@ -166,7 +166,7 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.HasIndex("ChatId");
 
-                    b.ToTable("Calls");
+                    b.ToTable("Calls", (string)null);
 
                     b.HasData(
                         new
@@ -503,7 +503,7 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Chats");
+                    b.ToTable("Chats", (string)null);
 
                     b.HasData(
                         new
@@ -647,7 +647,7 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("EasySpeakFiles");
+                    b.ToTable("EasySpeakFiles", (string)null);
                 });
 
             modelBuilder.Entity("EasySpeak.Core.DAL.Entities.Friend", b =>
@@ -678,7 +678,7 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Friends");
+                    b.ToTable("Friends", (string)null);
 
                     b.HasData(
                         new
@@ -892,7 +892,7 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.HasIndex("CreatedBy");
 
-                    b.ToTable("Lessons");
+                    b.ToTable("Lessons", (string)null);
 
                     b.HasData(
                         new
@@ -1053,7 +1053,7 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.HasIndex("ChatId");
 
-                    b.ToTable("Messages");
+                    b.ToTable("Messages", (string)null);
 
                     b.HasData(
                         new
@@ -1406,7 +1406,7 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Notifications");
+                    b.ToTable("Notifications", (string)null);
 
                     b.HasData(
                         new
@@ -1795,7 +1795,7 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.HasIndex("LessonId");
 
-                    b.ToTable("Questions");
+                    b.ToTable("Questions", (string)null);
 
                     b.HasData(
                         new
@@ -1962,7 +1962,7 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.HasIndex("QuestionId");
 
-                    b.ToTable("Subquestions");
+                    b.ToTable("Subquestions", (string)null);
 
                     b.HasData(
                         new
@@ -2260,130 +2260,134 @@ namespace EasySpeak.Core.DAL.Migrations
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("getutcdate()");
 
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tags");
+                    b.ToTable("Tags", (string)null);
 
                     b.HasData(
                         new
                         {
                             Id = 1L,
-                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ImageUrl = "ClassicalBuilding.svg",
-                            Name = "Architecture"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Mobility"
                         },
                         new
                         {
                             Id = 2L,
-                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ImageUrl = "ArtistPalette.svg",
-                            Name = "Arts"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "synthesize"
                         },
                         new
                         {
                             Id = 3L,
-                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ImageUrl = "RacingCar.svg",
-                            Name = "Cars"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "card"
                         },
                         new
                         {
                             Id = 4L,
-                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ImageUrl = "Crown.svg",
-                            Name = "Celebrities"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "brand"
                         },
                         new
                         {
                             Id = 5L,
-                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ImageUrl = "Cook.svg",
-                            Name = "Cooking"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Versatile"
                         },
                         new
                         {
                             Id = 6L,
-                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ImageUrl = "WomanDancing.svg",
-                            Name = "Dancing"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "withdrawal"
                         },
                         new
                         {
                             Id = 7L,
-                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ImageUrl = "FourLeafClover.svg",
-                            Name = "Ecology"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Oman"
                         },
                         new
                         {
                             Id = 8L,
-                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ImageUrl = "Artist.svg",
-                            Name = "Design"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Engineer"
                         },
                         new
                         {
                             Id = 9L,
-                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ImageUrl = "CrossedSwords.svg",
-                            Name = "History"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Intelligent Frozen Mouse"
                         },
                         new
                         {
                             Id = 10L,
-                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ImageUrl = "Dress.svg",
-                            Name = "Fashion"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Incredible Metal Hat"
                         },
                         new
                         {
                             Id = 11L,
-                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ImageUrl = "Pill.svg",
-                            Name = "Medicine"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Platinum"
                         },
                         new
                         {
                             Id = 12L,
-                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ImageUrl = "Robot.svg",
-                            Name = "Technologies"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Thailand"
                         },
                         new
                         {
                             Id = 13L,
-                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ImageUrl = "DogFace.svg",
-                            Name = "Pets"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "budgetary management"
                         },
                         new
                         {
                             Id = 14L,
-                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ImageUrl = "FaceWithMonocle.svg",
-                            Name = "Philosophy"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "SDD"
                         },
                         new
                         {
                             Id = 15L,
-                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ImageUrl = "Camera.svg",
-                            Name = "Photography"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "core"
                         },
                         new
                         {
                             Id = 16L,
-                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ImageUrl = "TopHat.svg",
-                            Name = "Politics"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Concrete"
+                        },
+                        new
+                        {
+                            Id = 17L,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "complexity"
+                        },
+                        new
+                        {
+                            Id = 18L,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Generic Concrete Shoes"
+                        },
+                        new
+                        {
+                            Id = 19L,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "navigating"
+                        },
+                        new
+                        {
+                            Id = 20L,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "plum"
                         });
                 });
 
@@ -2451,7 +2455,7 @@ namespace EasySpeak.Core.DAL.Migrations
                         .IsUnique()
                         .HasFilter("[ImageId] IS NOT NULL");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
 
                     b.HasData(
                         new
@@ -2558,7 +2562,7 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.HasIndex("TagsId");
 
-                    b.ToTable("LessonTag");
+                    b.ToTable("LessonTag", (string)null);
 
                     b.HasData(
                         new
@@ -2568,48 +2572,98 @@ namespace EasySpeak.Core.DAL.Migrations
                         },
                         new
                         {
-                            LessonsId = 2L,
+                            LessonsId = 1L,
                             TagsId = 2L
                         },
                         new
                         {
-                            LessonsId = 3L,
+                            LessonsId = 2L,
                             TagsId = 3L
                         },
                         new
                         {
-                            LessonsId = 4L,
+                            LessonsId = 2L,
                             TagsId = 4L
                         },
                         new
                         {
-                            LessonsId = 5L,
+                            LessonsId = 3L,
                             TagsId = 5L
                         },
                         new
                         {
-                            LessonsId = 6L,
+                            LessonsId = 3L,
                             TagsId = 6L
                         },
                         new
                         {
-                            LessonsId = 7L,
+                            LessonsId = 4L,
                             TagsId = 7L
                         },
                         new
                         {
-                            LessonsId = 8L,
+                            LessonsId = 4L,
                             TagsId = 8L
                         },
                         new
                         {
-                            LessonsId = 9L,
+                            LessonsId = 5L,
                             TagsId = 9L
                         },
                         new
                         {
-                            LessonsId = 10L,
+                            LessonsId = 5L,
                             TagsId = 10L
+                        },
+                        new
+                        {
+                            LessonsId = 6L,
+                            TagsId = 11L
+                        },
+                        new
+                        {
+                            LessonsId = 6L,
+                            TagsId = 12L
+                        },
+                        new
+                        {
+                            LessonsId = 7L,
+                            TagsId = 13L
+                        },
+                        new
+                        {
+                            LessonsId = 7L,
+                            TagsId = 14L
+                        },
+                        new
+                        {
+                            LessonsId = 8L,
+                            TagsId = 15L
+                        },
+                        new
+                        {
+                            LessonsId = 8L,
+                            TagsId = 16L
+                        },
+                        new
+                        {
+                            LessonsId = 9L,
+                            TagsId = 17L
+                        },
+                        new
+                        {
+                            LessonsId = 9L,
+                            TagsId = 18L
+                        },
+                        new
+                        {
+                            LessonsId = 10L,
+                            TagsId = 19L
+                        },
+                        new
+                        {
+                            LessonsId = 10L,
+                            TagsId = 20L
                         });
                 });
 
@@ -2625,7 +2679,7 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.HasIndex("SubscribersId");
 
-                    b.ToTable("LessonUser");
+                    b.ToTable("LessonUser", (string)null);
 
                     b.HasData(
                         new
@@ -2692,7 +2746,7 @@ namespace EasySpeak.Core.DAL.Migrations
 
                     b.HasIndex("UsersId");
 
-                    b.ToTable("TagUser");
+                    b.ToTable("TagUser", (string)null);
 
                     b.HasData(
                         new
@@ -2708,41 +2762,91 @@ namespace EasySpeak.Core.DAL.Migrations
                         new
                         {
                             TagsId = 3L,
-                            UsersId = 2L
+                            UsersId = 1L
                         },
                         new
                         {
                             TagsId = 4L,
-                            UsersId = 2L
+                            UsersId = 1L
                         },
                         new
                         {
                             TagsId = 5L,
-                            UsersId = 3L
+                            UsersId = 2L
                         },
                         new
                         {
                             TagsId = 6L,
-                            UsersId = 3L
+                            UsersId = 2L
                         },
                         new
                         {
                             TagsId = 7L,
-                            UsersId = 4L
+                            UsersId = 2L
                         },
                         new
                         {
                             TagsId = 8L,
-                            UsersId = 4L
+                            UsersId = 2L
                         },
                         new
                         {
                             TagsId = 9L,
-                            UsersId = 5L
+                            UsersId = 3L
                         },
                         new
                         {
                             TagsId = 10L,
+                            UsersId = 3L
+                        },
+                        new
+                        {
+                            TagsId = 11L,
+                            UsersId = 3L
+                        },
+                        new
+                        {
+                            TagsId = 12L,
+                            UsersId = 3L
+                        },
+                        new
+                        {
+                            TagsId = 13L,
+                            UsersId = 4L
+                        },
+                        new
+                        {
+                            TagsId = 14L,
+                            UsersId = 4L
+                        },
+                        new
+                        {
+                            TagsId = 15L,
+                            UsersId = 4L
+                        },
+                        new
+                        {
+                            TagsId = 16L,
+                            UsersId = 4L
+                        },
+                        new
+                        {
+                            TagsId = 17L,
+                            UsersId = 5L
+                        },
+                        new
+                        {
+                            TagsId = 18L,
+                            UsersId = 5L
+                        },
+                        new
+                        {
+                            TagsId = 19L,
+                            UsersId = 5L
+                        },
+                        new
+                        {
+                            TagsId = 20L,
                             UsersId = 5L
                         });
                 });
