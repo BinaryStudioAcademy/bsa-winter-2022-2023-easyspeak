@@ -53,7 +53,16 @@ public class ZoomApiService : IZoomApiService
         var responseBody = await response.Content.ReadAsStringAsync();
         var meetingLinks = JsonConvert.DeserializeObject<ZoomMeetingLinks>(responseBody);
 
-        return new ZoomMeetingLinks(meetingLinks.JoinUrl, meetingLinks.HostUrl);
+        if (meetingLinks is not null)
+        {
+            return new ZoomMeetingLinks(meetingLinks.JoinUrl, meetingLinks.HostUrl);
+        }
+        else
+        {
+            throw new Exception("Failed to generate Zoom meeting links.");
+        }
+
+        
     }
 
     private void AddAuthorizationHeader(HttpRequestHeaders headers, string token)
