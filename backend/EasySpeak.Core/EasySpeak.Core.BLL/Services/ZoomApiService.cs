@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using EasySpeak.Core.BLL.Helpers;
 using EasySpeak.Core.BLL.Interfaces;
+using EasySpeak.Domain;
 using EasySpeak.Core.BLL.Services;
 using EasySpeak.Core.DAL.Context;
 using EasySpeak.Core.DAL.Entities;
@@ -13,6 +14,7 @@ using System.Net.Http.Headers;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using EasySpeak.Domain.Exceptions;
 
 namespace EasySpeak.Core.BLL.Services;
 public class ZoomApiService : IZoomApiService
@@ -59,7 +61,7 @@ public class ZoomApiService : IZoomApiService
         }
         else
         {
-            throw new ArgumentNullException("meetingLinks", "Failed to generate Zoom meeting links.");
+            throw new EasySpeakException("Failed to generate Zoom meeting links.");
         }
     }
 
