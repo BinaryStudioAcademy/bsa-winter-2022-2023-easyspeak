@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using EasySpeak.Core.BLL.Helpers;
 using EasySpeak.Core.BLL.Interfaces;
 using EasySpeak.Core.BLL.Services;
 using EasySpeak.Core.DAL.Context;
@@ -30,14 +31,14 @@ public class ZoomApiService : IZoomApiService
     {
         if (_token == null || DateTime.UtcNow > _tokenExpiration)
         {
-            _token = GenerateAccessToken();
+            _token = JwtHelper.GenerateAccessToken(_apiKey, _apiSecret);
             _tokenExpiration = DateTime.UtcNow.AddMinutes(90);
         }
 
         using var httpClient = new HttpClient();
         httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
             "Bearer",
-            GenerateAccessToken()
+            JwtHelper.GenerateAccessToken(_apiKey, _apiSecret)
         );
 
         var response = await httpClient.PostAsync(
@@ -59,30 +60,5 @@ public class ZoomApiService : IZoomApiService
         string startUrl = meeting.start_url;
 
         return new ZoomMeetingLinks(joinUrl, startUrl);
-    }
-
-    public string GenerateAccessToken()
-    {
-        var header = new
-        {
-            alg = "HS256",
-            typ = "JWT"
-        };
-
-        var payload = new
-        {
-            iss = _apiKey,
-            exp = DateTimeOffset.UtcNow.AddMinutes(90).ToUnixTimeSeconds()
-        };
-
-        var encodedHeader = Convert.ToBase64String(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(header)));
-        var encodedPayload = Convert.ToBase64String(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(payload)));
-
-        var signature = new HMACSHA256(Encoding.UTF8.GetBytes(_apiSecret))
-            .ComputeHash(Encoding.UTF8.GetBytes($"{encodedHeader}.{encodedPayload}"));
-
-        var encodedSignature = Convert.ToBase64String(signature);
-
-        return $"{encodedHeader}.{encodedPayload}.{encodedSignature}";
     }
 }

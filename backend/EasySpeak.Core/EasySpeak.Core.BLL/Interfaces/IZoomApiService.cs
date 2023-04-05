@@ -5,6 +5,5 @@ namespace EasySpeak.Core.BLL.Interfaces
     public interface IZoomApiService
     {
         Task<ZoomMeetingLinks> GetMeetingLinks(string lessonTopic);
-        string GenerateAccessToken();
     }
 }
