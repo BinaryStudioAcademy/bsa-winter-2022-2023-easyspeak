@@ -1,12 +1,40 @@
-<div class="notifications" *ngIf="notifications.length">
-    <div class="notification-element" *ngFor="let notification of notifications">
-        <button class="notification-element" (click)="readNotification(notification)">
-            <span class="notification-text">{{ notification.text }}</span>
+<div class="container">
+    <div class="header-section">
+        <div class="title">
+            Notification
+        </div>
+        <a class="clear-button" (click)="readAllNotifications()">
+            Mark as read
+        </a>
+    </div>
+    <div class="notifications" *ngIf="notifications">
+        <div class="notification-element" *ngFor="let notification of notifications" (click)="readNotification(notification)">
+            <div class="notification-element-content">
+                <div class="author-icon-wrp">
+                    <img [src]="notification.imagePath" class="author-icon">
+                    <div class="notification-type-icon">
+                        <img [src]="getNotificationTypeIcon(notification.type)">
+                    </div>
+                </div>
+                <div class="notification-text-wrp">
+                    <div class="notification-text" [innerHTML]="notification.text"></div>
+                    <div *ngIf="notification.link" class="notification-link">
+                        <img src="/assets/notifications/link.svg">
+                        <a [href]="notification.link">lesson link</a>
+                    </div>
+                    <div class="notification-timespan">
+                        {{timeDiff(notification.createdAt)}}
+                    </div>
+                </div>
+            </div>
+            <div class="unread-indicator-wrp">
+                <div class="unread-indicator"></div>
+            </div>
+        </div>
+    </div>
+    <div class="notifications" *ngIf="!(notifications.length > 0)">
+        <button class="notification-element">
+            <span class="notification-text">There are no notifications</span>
         </button>
     </div>
-</div>
-<div class="notifications" *ngIf="!(notifications.length > 0)">
-    <button class="notification-element">
-        <span class="notification-text">There are no notifications</span>
-    </button>
 </div>

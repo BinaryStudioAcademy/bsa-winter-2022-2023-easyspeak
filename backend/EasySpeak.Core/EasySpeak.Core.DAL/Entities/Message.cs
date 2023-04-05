@@ -12,5 +12,6 @@ namespace EasySpeak.Core.DAL.Entities
         public Chat Chat { get; set; } = null!;
         public string Text { get; set; } = string.Empty;
         public bool IsDeleted { get; set; }
+        public bool IsRead { get; set; }
     }
 }

@@ -8,6 +8,8 @@ namespace EasySpeak.Core.DAL.Entities
         public User User { get; set; } = null!;
         public string Text { get; set; } = string.Empty;
         public NotificationType Type { get; set; }
+        
+        public long RelatedTo { get; set; }
         public bool IsRead { get; set; }
     }
 }
