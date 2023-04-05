@@ -61,16 +61,14 @@ public class ZoomApiService : IZoomApiService
         {
             throw new Exception("Failed to generate Zoom meeting links.");
         }
-
-        
     }
 
-    private void AddAuthorizationHeader(HttpRequestHeaders headers, string token)
+    static void AddAuthorizationHeader(HttpRequestHeaders headers, string token)
     {
         headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
     }
 
-    private StringContent GetPostContent(string lessonTopic)
+    static StringContent GetPostContent(string lessonTopic)
     {
         return new StringContent(
                 JsonConvert.SerializeObject(new
