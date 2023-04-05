@@ -118,7 +118,7 @@ export class SignUpComponent extends BaseComponent implements OnInit {
             firstName: this.firstName.value,
             lastName: this.lastName.value,
             email: this.email.value,
-            age: this.dateOfBirth.value,
+            birthDate: this.dateOfBirth.value,
             sex: this.sex.value,
             language: this.language.value,
             languageLevel: this.languageLevel.value,

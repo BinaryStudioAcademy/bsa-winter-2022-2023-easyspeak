@@ -1,0 +1,20 @@
+<div class="left-elements">
+    <button routerLink="/auth" class="button-back">
+        <mat-icon>keyboard_arrow_left</mat-icon>
+        <div>Back</div>
+    </button>
+
+    <h1>Forgot Password</h1>
+
+    <div class="input-container">
+        <input class="input-email" [ngClass]="{'red': redWarning()}" [(ngModel)]="email" (ngModelChange)="changedMail()" />
+        <label>Email</label>
+    </div>
+
+    <div class="wrong-format" *ngIf="redWarning()">
+        <img src="assets/forgot-password-icons/alert-triangle.svg"/>
+        The email is invalid
+    </div>
+
+    <button class="button-send" (click)="sendMail()"><h3>Send Recovery Code</h3></button>
+</div>

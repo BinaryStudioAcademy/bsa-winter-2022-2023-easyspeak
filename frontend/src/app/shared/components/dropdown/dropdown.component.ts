@@ -57,7 +57,7 @@ export class DropdownComponent extends BaseComponent implements OnInit, OnDestro
     }
 
     getFullTitle() {
-        if (this.selectedItems[0]) {
+        if (this.selectedItems[0] && this.selectedItems.length === 1) {
             const fullItem = this.data.find(l => l.title === this.selectedItems[0]);
 
             return fullItem && fullItem.subtitle ?
@@ -65,6 +65,6 @@ export class DropdownComponent extends BaseComponent implements OnInit, OnDestro
                 fullItem?.title;
         }
 
-        return 'None';
+        return this.btnLabel;
     }
 }

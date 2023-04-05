@@ -13,7 +13,7 @@ namespace EasySpeak.Core.WebAPI.Validators.User
             RuleFor(u => u.Timezone).NotEmpty();
             RuleFor(u => u.FirstName).NotEmpty().Matches(@"^[A-Za-z\s]*$").Length(3, 30);
             RuleFor(u => u.LastName).NotEmpty().Matches(@"^[A-Za-z\s]*$").Length(3, 30);
-            RuleFor(u => u.Age).InclusiveBetween(6, 99);
+            RuleFor(u => u.BirthDate).NotEmpty();
             RuleFor(u => u.Email).NotEmpty().EmailAddress();
             RuleFor(u => u.Sex).NotEmpty().IsEnumName(typeof(Sex));
             RuleFor(u => u.LanguageLevel).NotEmpty().IsEnumName(typeof(LanguageLevel));

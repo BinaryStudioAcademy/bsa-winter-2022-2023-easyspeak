@@ -136,4 +136,18 @@ export class AuthService {
             this.router.navigate(['']);
         });
     }
+
+    async resetPassword(email: string) {
+        await this.afAuth.sendPasswordResetEmail(email)
+            .catch((error) => {
+                throw new Error(error.message);
+            });
+    }
+
+    async confirmResetPassword(code: string, newPassword: string) {
+        await this.afAuth.confirmPasswordReset(code, newPassword)
+            .catch((error) => {
+                throw new Error(error.message);
+            });
+    }
 }
