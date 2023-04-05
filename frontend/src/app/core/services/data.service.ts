@@ -31,10 +31,6 @@ export class DataService {
         return this.getConstant<string>(LocalStorageEnumKeys.Languages, 'languages');
     }
 
-    public getAllTimezones(): Observable<string[]> {
-        return this.getConstant<string>(LocalStorageEnumKeys.Timezones, 'timezones');
-    }
-
     private getConstant<T>(localStorageKey: string, route: string) {
         const constants = localStorage.getItem(localStorageKey);
 
