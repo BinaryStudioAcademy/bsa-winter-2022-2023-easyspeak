@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace EasySpeak.Core.BLL.Helpers
 {
-    public class JwtHelper
+    public static class JwtHelper
     {
         public static string GenerateAccessToken(string apiKey, string apiSecret, int expirationTime = 90)
         {
