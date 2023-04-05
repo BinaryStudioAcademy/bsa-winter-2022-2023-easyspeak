@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from '@core/services/http.service';
-import {Observable, of, tap} from 'rxjs';
+import { Observable, of, tap } from 'rxjs';
 
 enum LocalStorageEnumKeys {
     Tags = 'all_interests',

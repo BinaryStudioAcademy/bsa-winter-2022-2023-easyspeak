@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { BaseComponent } from '@core/base/base.component';
 import { AuthService } from '@core/services/auth.service';
+import { ConstantsService } from '@core/services/constants.service';
 import { UserService } from '@core/services/user.service';
 import { NgSelectComponent } from '@ng-select/ng-select';
 import { Ages } from '@shared/data/ages.util';
@@ -17,7 +18,6 @@ import { CountriesTzLangProviderService } from 'src/app/services/countries-tz-la
 
 import { validationErrorMessage } from './error-helper';
 import { matchpassword } from './matchpassword.validator';
-import {ConstantsService} from "@core/services/constants.service";
 
 @Component({
     selector: 'app-sign-up',

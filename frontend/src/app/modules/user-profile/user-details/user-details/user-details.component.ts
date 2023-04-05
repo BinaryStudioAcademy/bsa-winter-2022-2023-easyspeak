@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { BaseComponent } from '@core/base/base.component';
+import { ConstantsService } from '@core/services/constants.service';
 import { UserService } from '@core/services/user.service';
 import { Ages } from '@shared/data/ages.util';
 import { EnglishLevel } from '@shared/data/englishLevel';
@@ -11,7 +12,6 @@ import { ToastrService } from 'ngx-toastr';
 import { CountriesTzLangProviderService } from 'src/app/services/countries-tz-lang-provider.service';
 
 import { detailsGroup, userId } from '../user-details.component.util';
-import {ConstantsService} from "@core/services/constants.service";
 
 @Component({
     selector: 'app-user-details',
