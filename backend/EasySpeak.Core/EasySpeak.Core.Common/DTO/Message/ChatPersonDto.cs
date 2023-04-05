@@ -9,9 +9,10 @@ namespace EasySpeak.Core.Common.DTO.Message
 {
     public class ChatPersonDto
     {
-        public string Name { get; set; } = string.Empty;
+        public string FirstName { get; set; } = string.Empty;
+        public string LastName { get; set; } = string.Empty;
         public bool IsOnline { get; set; }
         public string LastMessage { get; set; } = string.Empty;
-        public uint NumberOfUnreadMessages { get; set; }
+        public int NumberOfUnreadMessages { get; set; }
     }
 }

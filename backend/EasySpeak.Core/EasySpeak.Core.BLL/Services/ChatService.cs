@@ -2,42 +2,80 @@
 using EasySpeak.Core.BLL.Interfaces;
 using EasySpeak.Core.Common.DTO.Message;
 using EasySpeak.Core.DAL.Context;
-using EasySpeak.Core.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
-using System.Runtime.CompilerServices;
+using System.Linq;
 
 namespace EasySpeak.Core.BLL.Services
 {
-    public class ChatService : BaseService
+    public class ChatService : BaseService, IChatService
     {
         private readonly IFirebaseAuthService _firebaseAuthService;
+
         public ChatService(EasySpeakCoreContext context, IMapper mapper, IFirebaseAuthService firebaseAuthService) : base(context, mapper)
         {
             _firebaseAuthService = firebaseAuthService;
         }
 
-        public async Task<ICollection<ChatPersonDto>> GetUnreadAndLastSendMessageAsync() =>
-            await _context.Chats.Where(chat => chat.Users
-            .FirstOrDefault(user => user.Id == _firebaseAuthService.UserId) != null 
-            && chat.Messages.Any(message => message.IsRead == false))
-            .Select(chat =>
-                        new ChatPersonDto
-                        {
-                            Name = chat.Users
-                            .First(user => user.Id == _firebaseAuthService.UserId).FirstName + " " + chat.Users
-                            .First(user => user.Id == _firebaseAuthService.UserId).LastName,
-                            LastMessage = chat.Messages.Last(message => message.IsRead == false).Text,
-                            NumberOfUnreadMessages = (uint)chat.Messages.Count(message => message.IsRead == false)
-                        })
-                .ToListAsync();
+        public async Task<ICollection<ChatPersonDto>> GetUnreadAndLastSendMessageAsync()
+        {
+            return await _context.Chats
+             .Include(chat => chat.Messages)
+             .Include(chat => chat.Users)
+             .Where(chat => chat.Users
+             .Any(user => user.Id == _firebaseAuthService.UserId))
+             .AsEnumerable()
+             .Select(chat => {
+                 var user = chat.Users.First(user => user.Id != _firebaseAuthService.UserId);
+                 return new 
+                 {
+                     Date = chat.Messages.Max(message => message.CreatedAt),
+                     IsRead = chat.Messages.Select(message => message.IsRead),
+                     Value = new ChatPersonDto
+                     {
+                         FirstName = user.FirstName,
+                         LastName = user.LastName,
+                         LastMessage = chat.Messages.Last().Text,
+                         NumberOfUnreadMessages = chat.Messages.Count(message => !message.IsRead)
+                     }
+                 };
+             })
+            .OrderByDescending(entity => entity.IsRead)
+            .OrderByDescending(entity => entity.Date)
+            .Select(entity => entity.Value)
+            .AsQueryable()
+            .ToListAsync();
+        }
 
-        //public async Task<ICollection<MessageGroupDto>> GetMessagesInChat(int chatId) =>
-        //    await _context.Chats.FirstOrDefault(chat => chat.Id == chatId)?.Messages
-        //    .Select(message => 
-        //                    new MessageGroupDto
-        //                    {
-        //                        Messages = 
-        //                    }
-        //    )
+        public async Task<List<MessageGroupDto>> GetChatMessages(int chatId)
+        {
+            var currentChat = await _context.Chats.Include(chat => chat.Messages)
+                                            .FirstOrDefaultAsync(chat => chat.Id == chatId);
+
+            var result = new List<MessageGroupDto>();
+
+            if (currentChat != null)
+            {
+                result = await currentChat.Messages
+                        .GroupBy(test => test.CreatedAt.Date)
+                        .Take(20)
+                        .OrderByDescending(groupMessages => groupMessages.Key)
+                        .Select(groupedMessages => new MessageGroupDto
+                        {
+                            Date = groupedMessages.Key,
+                            Messages = groupedMessages
+                                    .Select(message => new MessageDto
+                                    {
+                                        ChatId = message.ChatId,
+                                        UserId = message.CreatedBy,
+                                        Message = message.Text,
+                                        CreatedAt = message.CreatedAt,
+                                    })
+                        })
+                        .AsQueryable()
+                        .ToListAsync();
+            }
+
+            return result;
+        }
     }
 }

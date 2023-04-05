@@ -34,6 +34,7 @@ namespace EasySpeak.Core.WebAPI.Extensions
             services.AddTransient<IHttpRequestService, HttpRequestService>();
             services.AddScoped<IFirebaseAuthService, FirebaseAuthService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IChatService, ChatService>();
             services.AddFirebaseApp();
             services.AddScoped<INotificationService, NotificationService>();
         }
