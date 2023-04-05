@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { BaseComponent } from '@core/base/base.component';
-import { TagService } from '@core/services/tag.service';
 import { UserService } from '@core/services/user.service';
 import { LanguageLevel } from '@shared/data/languageLevel';
 import { Sex } from '@shared/data/sex';
@@ -24,8 +23,6 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
     @Input() tagsList: IIcon[] = getTags();
 
     allTags: ITag[];
-
-    allStringTags: string[];
 
     countries;
 
@@ -52,7 +49,6 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
         private userService: UserService,
         private toastr: ToastrService,
         private countriesService: CountriesTzLangProviderService,
-        private tagService: TagService,
     ) {
         super();
         this.countries = this.countriesService.getCountriesList();
@@ -81,7 +77,7 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
                 this.userService.getUserTags().pipe(this.untilThis)
                     .subscribe(tags => {
                         this.allTags = tags;
-                        this.selectedTags = tags.filter(t => t.isSelected === true);
+                        this.selectedTags = tags.filter(t => t.isSelected);
                     });
                 this.userFirstName = resp.firstName;
                 this.userLastName = resp.lastName;
@@ -133,7 +129,7 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
     }
 
     selectInterest(tag: ITag) {
-        this.selectedTags = (this.includesTags(tag.id))
+        this.selectedTags = this.includesTags(tag.id)
             ? this.selectedTags.filter(x => x.id !== tag.id)
             : [...this.selectedTags, tag];
     }

@@ -1,5 +1,6 @@
 export enum Sex {
     male = 'Male',
     female = 'Female',
-    nonBinary = 'Don`t want to specify'
+    nonBinary = 'Non Binary',
+    dontWantToSpecify = 'Do not want to specify'
 }

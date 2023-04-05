@@ -36,7 +36,6 @@ namespace EasySpeak.Core.WebAPI.Extensions
             services.AddScoped<IChatService, ChatService>();
             services.AddFirebaseApp();
             services.AddScoped<INotificationService, NotificationService>();
-            services.AddTransient<ITagService, TagService>();
             services.Configure<RabbitQueuesOptions>(configuration.GetSection("RabbitQueues"));
         }
 
