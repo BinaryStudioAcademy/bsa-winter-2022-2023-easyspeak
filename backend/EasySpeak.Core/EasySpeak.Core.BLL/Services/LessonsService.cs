@@ -90,10 +90,19 @@ public class LessonsService : BaseService, ILessonsService
     public async Task<LessonDto> CreateLessonAsync(NewLessonDto lessonDto)
     {
         var lesson = _mapper.Map<Lesson>(lessonDto);
-
+        lesson.Tags.Clear();
+        if (lessonDto.Tags is not null)
+        {
+            lesson.Tags.Concat(await GetExistingTags(lessonDto.Tags));
+        }
         var createdLesson = _context.Add(lesson).Entity;
         await _context.SaveChangesAsync();
 
         return _mapper.Map<LessonDto>(createdLesson);
+    }
+
+    private Task<List<Tag>> GetExistingTags(ICollection<TagForLessonDto> tags)
+    {
+        return _context.Tags.Where(t => tags.Any(tag => tag.Name == t.Name)).ToListAsync();
     }
 }
