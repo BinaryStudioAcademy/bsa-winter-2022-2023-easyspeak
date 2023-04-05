@@ -1,23 +1,5 @@
 @import "src/styles/colors"
 
-@media screen and (min-width: 2540px)
-    .info-block-1-home
-            .choose-plan
-                width: 170px
-
-    .topics
-        .container
-            width: calc(213px * 1.4)
-            height: calc(131px * 1.4)
-
-    .info-block-3-about
-        height: 600px
-
-        .info-3-container
-            width: 815px
-            height: 340px
-
-
 .all
     background-color: $white
 
@@ -201,8 +183,8 @@ button
         column-gap: 25px
 
     .container
-        width: calc(266px - 41px - 23px)
-        height: calc(231px - 20px - 19px)
+        width: 202px
+        height: 192px
         padding: 19px 41px 20px 23px
         background-color: $white
         border: solid 1px white
@@ -234,52 +216,79 @@ button
         margin-top: 5px
 
 .info-block-2-ai
-    height: 411px
-    background-color: $white
-    display: flex
-    justify-content: center
-    align-items: center
+    height: 800px
+    display: grid
+    row-gap: 20px
+    column-gap: 20px
+    grid-template-columns: 1fr 1fr
 
     .ai-left
         display: flex
         flex-direction: column
         justify-content: center
         align-items: flex-end
-        width: 44.5%
-        margin-right: 5%
 
-    .left-container
-        width: 35vw
-
-    .ai-title
-        font-weight: 700
-        font-size: 142%
-        line-height: 146%
-        height: 1%
-        margin-bottom: 17px
+        h1
+            font-weight: 700
+            font-size: 142%
+            line-height: 146%
+            text-transform: capitalize
         
-    .ai-info
-        color: $gray-300
-        font-weight: 500
-        font-size: 16px
-        line-height: 150%
-
+        p
+            margin-top: 17px
+            color: $gray-300
+            font-weight: 500
+            font-size: 16px
+            line-height: 150%
+            max-width: 565px
+    
     .ai-right
         display: flex
-        width: 44%
         position: relative
+    
+    .time-table-img
+        z-index: 10
+        margin-top: 80px
+        margin-left: 30px
+        width: 523px
+        height: 327px
 
-    .ai-card-container
-        width: 422px
-        height: 200px
-        border: 1px solid #F6F5FA
-        box-shadow: 0 0 3px rgba(89, 104, 133, 0.18)
-        border-radius: 10px
+    .cards-img
+        z-index: 10
+        margin-top: 0px
+        margin-left: 30px
+        width: 551px
+        height: 229px
 
-    .ai-card-over
+    .elipse-bottom-pink
+        z-index: 1
+        width: 170px
+        height: 170px
         position: absolute
-        top: 52px
-        left: 101px
+        border: 35px solid $pink-100
+        border-radius: 50%
+        top: 45px
+        left: 190px
+
+    .elipse-top-pink
+        z-index: 2
+        width: 250px
+        height: 250px
+        position: absolute
+        border: 40px solid $pink-100
+        border-radius: 50%
+        top: 32px
+        left: 0
+
+    .elipse-top-aqua
+        position: absolute
+        z-index: 2
+        background-color: $turquoise-100
+        border-radius: 50%
+        width: 230px
+        height: 230px
+        top: calc(327px - 98px)
+        left: calc(523px - 130px)
 
 .plan
     height: 745px
