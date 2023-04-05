@@ -101,13 +101,15 @@ export class LessonsPageComponent implements OnInit, OnChanges {
     }
 
     private mapLessons(response: ILesson[]): Lesson[] {
+        const offset = new Date().getTimezoneOffset();
+
         return response.map((lesson) => ({
             id: lesson.id,
             imgPath: lesson.mediaPath,
             videoId: lesson.youtubeVideoId,
             zoomLink: lesson.zoomMeetingLink,
             title: lesson.name,
-            time: moment(lesson.startAt).format('hh.mm'),
+            time: moment(lesson.startAt).add(-offset, 'minutes').toDate(),
             // TODO: Change tutor details to real when they are avaliable
             tutorAvatarPath:
                 'https://www.christopherjungo.com/uploads/2/4/9/4/24948269/screen-shot-2018-02-10-at-00-09-32_orig.png',
