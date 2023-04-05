@@ -1,116 +1,146 @@
-<div class="container" >
+<div class="container">
     <form [formGroup]="myForm" autocomplete="off">
         <div class="form-field">
             <div id="floatContainer" class="float-container">
                 <label for="groupClassName">The Name of the Group Class</label>
-                <input id="groupClassName" type="text" formControlName="name">
+                <input id="groupClassName" type="text" formControlName="name" />
             </div>
 
-            <mat-error *ngIf="name?.invalid && name?.touched">
-                Name is Required
+            <mat-error class="error-container">
+                <div class="error" *ngIf="name?.invalid && submitted">
+                    <img src="/assets/user-profile/alert-triangle.svg" alt="" />
+                    <p>Name is Required</p>
+                </div>
             </mat-error>
         </div>
 
         <div class="form-field">
             <div id="floatContainer" class="float-container-with-icon">
                 <label for="date" class="dateLabel">Date</label>
-                <input id="date" matInput [matDatepicker]="picker" formControlName="date">
+                <input id="date" matInput [matDatepicker]="picker" formControlName="date" />
                 <mat-datepicker #picker></mat-datepicker>
                 <mat-datepicker-toggle [for]="picker" class="dateIcon"></mat-datepicker-toggle>
             </div>
 
-            <mat-error *ngIf="date?.invalid && date?.touched">
-                Date is Required
+            <mat-error class="error-container">
+                <div class="error" *ngIf="date?.invalid && submitted">
+                    <img src="/assets/user-profile/alert-triangle.svg" alt="" />
+                    <p>Date is Required</p>
+                </div>
             </mat-error>
         </div>
 
         <div class="form-field">
-            <div class="input" (click)="expandTimeDropdown()">
+            <div class="input selector" (click)="expandTimeDropdown()">
                 <div class="label">
-                    <img src="assets/lesson-icons/clock-icon.svg" alt="clock-icon" class="icon">
+                    <img src="assets/lesson-icons/clock-icon.svg" alt="clock-icon" class="icon" />
                     <span *ngIf="!time" class="noTime">Time</span>
-                    <span *ngIf="time" class="time">{{time}}</span>
+                    <span *ngIf="time" class="time">{{ time }}</span>
                 </div>
 
-                <img src="assets/interestsDropdown/chevron_down.svg" alt="chevron_down-icon" class="timeDropdown">
+                <img src="assets/interestsDropdown/chevron_down.svg" alt="chevron_down-icon" class="timeDropdown" />
                 <div *ngIf="timeDropdownVisible" class="dropdownContent">
-                    <p *ngFor="let time of timesList" (click)="updateTime($event)">{{time}}</p>
+                    <p *ngFor="let time of timesList" (click)="updateTime($event)">{{ time }}</p>
                 </div>
             </div>
 
-            <mat-error *ngIf="!time && submitted">
-                Time is Required
+            <mat-error class="error-container">
+                <div class="error" *ngIf="!time && submitted">
+                    <img src="/assets/user-profile/alert-triangle.svg" alt="" />
+                    <p>Time is Required</p>
+                </div>
             </mat-error>
         </div>
 
         <div class="form-field">
             <div class="input">
-                <img src="assets/lesson-icons/chains.svg" alt="chains-icon" class="icon">
-                <input type="text" placeholder="Link to the Video for the Lesson" formControlName="videoLink">
+                <img src="assets/lesson-icons/chains.svg" alt="chains-icon" class="icon" />
+                <input type="text" placeholder="Link to the Video for the Lesson" formControlName="videoLink" />
             </div>
 
-            <mat-error *ngIf="videoLink?.invalid && videoLink?.touched">
-                Video Link is Required
+            <mat-error class="error-container">
+                <div class="error" *ngIf="videoLink?.invalid && submitted">
+                    <img src="/assets/user-profile/alert-triangle.svg" alt="" />
+                    <p>Video Link is Required</p>
+                </div>
             </mat-error>
         </div>
 
         <div class="form-field">
-            <div class="input" (click)="expandLevelDropdown()">
+            <div class="input selector" (click)="expandLevelDropdown()">
                 <div class="label">
-                    <img src="assets/user-card-icons/rocket-icon.svg" alt="rocket-icon" class="icon">
+                    <img src="assets/user-card-icons/rocket-icon.svg" alt="rocket-icon" class="icon" />
                     <span *ngIf="!level" class="noTime">Level</span>
-                    <span *ngIf="level" class="time">{{level}}</span>
+                    <span *ngIf="level" class="time">{{ level }}</span>
                 </div>
 
-                <img src="assets/interestsDropdown/chevron_down.svg" alt="chevron_down-icon" class="timeDropdown">
+                <img src="assets/interestsDropdown/chevron_down.svg" alt="chevron_down-icon" class="timeDropdown" />
                 <div *ngIf="levelDropdownVisible" class="dropdownContent">
-                    <p *ngFor="let level of levelsList" (click)="updateLevel($event)">{{level}}</p>
+                    <p *ngFor="let level of levelsList" (click)="updateLevel($event)">{{ level }}</p>
                 </div>
             </div>
 
-            <mat-error *ngIf="!level && submitted">
-                Level is Required
+            <mat-error class="error-container">
+                <div class="error" *ngIf="!level && submitted">
+                    <img src="/assets/user-profile/alert-triangle.svg" alt="" />
+                    <p>Level is Required</p>
+                </div>
             </mat-error>
         </div>
 
         <div class="form-field">
-            <app-interests-dropdown [usedInModal]="true" (selectedInterests)="updateTags($event)"></app-interests-dropdown>
+            <app-interests-dropdown
+                [usedInModal]="true"
+                (selectedInterests)="updateTags($event)"></app-interests-dropdown>
 
-            <mat-error *ngIf="!tagsList.length && submitted">
-                At least 1 Interest is Required
-            </mat-error>
-        </div>
-
-        <div class="form-field">
-            <div class="input">
-                <img src="assets/lesson-icons/people-icon.svg" alt="people-icon" class="icon">
-                <input type="number" [min]="1" placeholder="Number of students" formControlName="studentsCount">
-            </div>
-
-            <mat-error *ngIf="!studentsCount?.value && studentsCount?.touched ">
-                Number of students is Required
-            </mat-error>
-            <mat-error *ngIf="studentsCount?.value && studentsCount?.value < 1 && studentsCount?.touched ">
-                Number of students cannot be less than 1
+            <mat-error class="error-container">
+                <div class="error" *ngIf="!tagsList.length && submitted">
+                    <img src="/assets/user-profile/alert-triangle.svg" alt="" />
+                    <p>At least 1 Interest is Required</p>
+                </div>
             </mat-error>
         </div>
 
         <div class="form-field">
             <div class="input">
-                <img src="assets/lesson-icons/chains.svg" alt="chains-icon" class="icon">
-                <input type="text" placeholder="Zoom Link to the Lesson" formControlName="meetLink">
+                <img src="assets/lesson-icons/people-icon.svg" alt="people-icon" class="icon" />
+                <input type="number" [min]="1" placeholder="Number of students" formControlName="studentsCount" />
             </div>
 
-            <mat-error *ngIf="meetLink?.invalid && meetLink?.touched">
-                Meet Link is Required
+            <mat-error class="error-container">
+                <div class="error" *ngIf="!studentsCount?.value && submitted">
+                    <img src="/assets/user-profile/alert-triangle.svg" alt="" />
+                    <p>Number of students is Required</p>
+                </div>
+                <div class="error" *ngIf="studentsCount?.value && studentsCount?.value < 1 && studentsCount?.touched">
+                    <img src="/assets/user-profile/alert-triangle.svg" alt="" />
+                    <p>Number of students cannot be less than 1</p>
+                </div>
+            </mat-error>
+        </div>
+
+        <div class="form-field">
+            <div class="input">
+                <img src="assets/lesson-icons/chains.svg" alt="chains-icon" class="icon" />
+                <input type="text" placeholder="Zoom Link to the Lesson" formControlName="meetLink" />
+            </div>
+
+            <mat-error class="error-container">
+                <div class="error" *ngIf="meetLink?.invalid && submitted">
+                    <img src="/assets/user-profile/alert-triangle.svg" alt="" />
+                    <p>Meet Link is Required</p>
+                </div>
             </mat-error>
         </div>
 
         <div class="form-field">
             <textarea placeholder="Questions for the Group Class" formControlName="questions"></textarea>
 
-            <mat-error *ngIf="questions?.invalid && questions?.touched">
-                At least one question is required
+            <mat-error class="error-container">
+                <div class="error" *ngIf="questions?.invalid && submitted">
+                    <img src="/assets/user-profile/alert-triangle.svg" alt="" />
+                    <p>At least one question is required</p>
+                </div>
             </mat-error>
         </div>
 

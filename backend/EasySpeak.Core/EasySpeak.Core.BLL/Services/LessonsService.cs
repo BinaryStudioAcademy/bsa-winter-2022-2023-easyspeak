@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Bogus.DataSets;
 using EasySpeak.Core.BLL.Interfaces;
 using EasySpeak.Core.Common.DTO;
 using EasySpeak.Core.Common.DTO.Lesson;
@@ -10,10 +11,12 @@ namespace EasySpeak.Core.BLL.Services;
 
 public class LessonsService : BaseService, ILessonsService
 {
+    private readonly IFirebaseAuthService _authService;
     public const int DaysInWeek = 7;
 
-    public LessonsService(EasySpeakCoreContext context, IMapper mapper) : base(context, mapper)
+    public LessonsService(EasySpeakCoreContext context, IMapper mapper, IFirebaseAuthService authService) : base(context, mapper)
     {
+        _authService = authService;
     }
 
     public async Task<ICollection<QuestionForLessonDto>> GetQuestionsByLessonIdAsync(int id)
@@ -46,19 +49,30 @@ public class LessonsService : BaseService, ILessonsService
             lessonsFromContext = lessonsFromContext.Where(m => filtersRequest.LanguageLevels != null && filtersRequest.LanguageLevels.Contains(m.LanguageLevel));
         }
 
-        var subscribersCountDict = await lessonsFromContext.Select(t => new { t.Id, SbCount = t.Subscribers.Count }).ToDictionaryAsync(t => t.Id);
+        var subscribersInfoDict = await lessonsFromContext.Select(t =>
+            new
+            {
+                t.Id,
+                SbCount = t.Subscribers.Count,
+                isSubscribed = t.Subscribers.Any(u => u.Id == _authService.UserId)
+            }).ToDictionaryAsync(t => t.Id);
         var lessons = await lessonsFromContext.OrderBy(l => l.StartAt).ToListAsync();
 
         var lessonDtos = _mapper.Map<List<Lesson>, List<LessonDto>>(lessons);
 
-        lessonDtos.ForEach(t => t.SubscribersCount = subscribersCountDict[t.Id].SbCount);
+        lessonDtos.ForEach(t =>
+        {
+            t.SubscribersCount = subscribersInfoDict[t.Id].SbCount;
+            t.isSubscribed = subscribersInfoDict[t.Id].isSubscribed;
+        });
 
         return lessonDtos;
     }
 
     public async Task<ICollection<DayCardDto>?> GetDayCardsOfWeekAsync(RequestDayCardDto requestDto)
     {
-        var mondayDate = requestDto.Date.AddDays(-(int)requestDto.Date.DayOfWeek).Date;
+        var delta = GetDifferenceBetweenMondayAndTodayDate(requestDto.Date);
+        var mondayDate = requestDto.Date.AddDays(-delta).Date;
         var dayCards = await _context.Lessons
             .Where(c => c.StartAt.Date >= mondayDate
                         && c.StartAt.Date <= mondayDate.AddDays(DaysInWeek - 1))
@@ -73,6 +87,15 @@ public class LessonsService : BaseService, ILessonsService
             .ToListAsync();
 
         return dayCards;
+    }
+
+    private static int GetDifferenceBetweenMondayAndTodayDate(DateTime date)
+    {
+        if(date.DayOfWeek == DayOfWeek.Sunday)
+        {
+            return 6;
+        }
+        return date.DayOfWeek - DayOfWeek.Monday;
     }
 
     public async Task<LessonDto> CreateLessonAsync(NewLessonDto lessonDto)

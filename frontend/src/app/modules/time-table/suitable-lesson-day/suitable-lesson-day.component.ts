@@ -33,5 +33,5 @@ export class SuitableLessonDayComponent {
         }
     }
 
-    meetingNumber = () => (this.meetingCount === 1 ? 'meeting' : 'meetings');
+    meetingNumber = () => (this.meetingCount === 1 ? 'group class' : 'group classes');
 }
