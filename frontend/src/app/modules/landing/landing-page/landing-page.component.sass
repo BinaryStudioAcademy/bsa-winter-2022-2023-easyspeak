@@ -35,7 +35,7 @@ button
         line-height: 150%
 
     &:hover
-        background-color: $turquoise-100
+        box-shadow: 0px 2px 4px rgba($turquoise-100, 1)
 
 .sign-up
     background-color: $blue-200
@@ -44,7 +44,7 @@ button
 
 .header
     display: flex
-    justify-content: space-around
+    justify-content: space-between
     align-items: center
     background-color: $white
     height: 80px
@@ -54,6 +54,7 @@ button
     box-shadow: 0 2px 4px 2px rgba(71, 83, 108, 0.06)
 
     .logo
+        margin-left: 150px
         display: flex
         justify-content: center
         align-content: center
@@ -62,20 +63,8 @@ button
         img
             height: 30px
 
-    .links
-        display: grid
-        grid-auto-flow: column
-        column-gap: 20px
-        color: $gray-300
-        font-weight: 500
-        font-size: 16px
-        line-height: 24px
-        p
-            cursor: pointer
-            &:hover
-                color: $turquoise-100
-
     .buttons-header
+        margin-right: 150px
         h4
             font-size: 16px
             font-weight: 700
@@ -85,8 +74,7 @@ button
             height: 34px
             border: 1px solid $blue-200
             border-radius: 17px
-            &:hover
-                background-color: $turquoise-100
+
         .sign-in
             margin-right: 10px
             background-color: $white
@@ -104,8 +92,7 @@ button
 
     .left-block
         display: flex
-        justify-content: center
-        justify-items: center
+        justify-content: flex-end
         align-items: center
         width: 50%
         h1
@@ -120,6 +107,8 @@ button
             font-size: 16px
         .buttons-home
             margin-top: 23px
+            button
+                width: 154px
 
     .right-block
         position: relative
@@ -141,11 +130,11 @@ button
 
     .radius-medium
             position: absolute
-            background-color: $white
+            background-color: rgba($turquoise-100, 0.4)
             width: 89px
             height: 89px
             border-radius: 75px
-            padding: 20.5px
+            padding: 20.5px 16.5px 20.5px 24.5px
             img
                 position: absolute
                 width: 82px
@@ -171,7 +160,7 @@ button
         img
             transform: rotate(45deg)
 
-    .dog
+    .dna
         top: calc(70% - 75px)
         left: calc(65% - 75px)
         border-radius: 500px 500px 500px 0
@@ -179,42 +168,25 @@ button
         img
             transform: rotate(-135deg)
 
-    .car
+    .drum
         top: calc(50% - 65px)
         left: calc(50% - 65px)
-        padding-bottom: 30px
-        padding-top: 11px
 
-    .cook
+    .sandwich
         top: calc(70% - 65px)
         left: calc(35% - 65px)
 
-    .camera
+    .clapper-board
         top: calc(30% - 65px)
         left: calc(65% - 65px)
 
-    .woman
+    .kite
         top: calc(50% - 43.5px)
         left: calc(78% - 43.5px)
 
     .face
         top: calc(50% - 43.5px)
         left: calc(22% - 43.5px)
-
-
-    .choose-plan
-        margin-right: 10px
-        background-color: $white
-        color: $blue-200
-        &:hover
-            background-color: $turquoise-100
-            color: white
-
-    .sign-up
-        background-color: $blue-200
-        color: $white
-        &:hover
-            background-color: $turquoise-100
 
 .topics
     background-color: $blue-200
@@ -229,9 +201,9 @@ button
         column-gap: 25px
 
     .container
-        width: 213px
-        height: 131px
-        padding: 19px 30px 19px 23px
+        width: calc(266px - 41px - 23px)
+        height: calc(231px - 20px - 19px)
+        padding: 19px 41px 20px 23px
         background-color: $white
         border: solid 1px white
         border-radius: 7px
@@ -253,13 +225,13 @@ button
         margin-bottom: 2px
         font-weight: 700
         font-size: 18px
-        line-height: 146%
 
     .info
         color: $gray-300
         font-weight: 400
         font-size: 14px
-        line-height: 146%
+        line-height: 20px
+        margin-top: 5px
 
 .info-block-2-ai
     height: 411px
@@ -324,27 +296,28 @@ button
     align-items: center
 
     h1
+        text-align: center
         font-weight: 700
         font-size: 24px
-        line-height: 146%
-        margin-bottom: 9px
-
-    .about-text
-        color: $gray-300
-        font-weight: 500
-        font-size: 16px
-        line-height: 150%
-        text-align: center
-        margin-bottom: 9px
+        line-height: 46px
+    
+    .blue
+        color: $blue-200
 
     .info-3-container
-        width: 615px
-        height: 240px
+        padding: 57px 13px 52px 13px
         display: flex
         justify-content: center
         align-items: center
         flex-direction: column
         background-color: $white
+    
+    .inline
+        display: flex
+
+    button
+        margin-top: 19px
+        width: 170px
 
 .footer
     height: 256px
@@ -360,7 +333,7 @@ button
         flex-direction: column
         justify-content: center
         align-content: center
-        margin: 0 100px
+        margin-left: 150px
         h2
             margin-left: 6px
 
@@ -418,7 +391,7 @@ button
 
     .buttons
         width: 350px
-        margin: 0 100px
+        margin-right: 150px
 
         h4
             font-size: 16px
@@ -431,8 +404,6 @@ button
             border: 1px solid $blue-200
             border-radius: 17px
             font-size: 16px
-            &:hover
-                background-color: $turquoise-100
 
         .sign-in
             margin-right: 10px

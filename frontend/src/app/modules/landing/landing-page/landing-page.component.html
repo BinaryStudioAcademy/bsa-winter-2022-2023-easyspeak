@@ -4,33 +4,27 @@
             <img class="camera" src="assets/logo/logo.svg" />
             <h2>EasySpeak</h2>
         </div>
-        <div class="links">
-            <p (click)="scrollToElement(home)">Home</p>
-            <p (click)="scrollToElement(ai)">AI</p>
-            <p (click)="scrollToElement(plan)">Plan</p>
-            <p (click)="scrollToElement(about)">About Us</p>
-        </div>
         <div class="buttons-header">
             <button class="sign-in" routerLink="/auth/sign-in"><h4>Sign In</h4></button>
             <button class="sign-up" routerLink="/auth/sign-up"><h4>Sign Up</h4></button>
         </div>
     </div>
 
-    <div #home class="info-block-1-home">
+    <div class="info-block-1-home">
         <div class="left-block">
             <div class="left-content">
                 <h1>
-                    What Will We Talk About <br />
-                    In English?
+                    Speak English Confidently 
+                    <br />
+                    With Anyone!
                 </h1>
                 <label>
-                    Lorem ipsum dolor sit amet consectetur. Amet aliquam ipsum purus luctus. <br />
-                    Tellus euismod dictum sed odio elementum tincidunt. Mauris purus commodo <br />
-                    facilisi mauris lorem ut pellentesque in. Laoreet sagittis dui faucibus in mattis.
+                    Practice your conversational English with people from all over the globe on our<br/>
+                    group and one-on-one calls. We use engaging videos to spark discussions<br/>
+                    on various topics.
                 </label>
                 <div class="buttons-home">
-                    <button class="sign-up" routerLink="/auth/sign-up"><h3>Sign Up</h3></button>
-                    <button class="choose-plan"><h3>Choose plan</h3></button>
+                    <button class="sign-up" routerLink="/auth/sign-up"><h3>Sign Up Now</h3></button>
                 </div>
             </div>
         </div>
@@ -38,20 +32,20 @@
             <div class="radius-big leaf">
                 <img src="assets/topic-icons/FourLeafClover.svg" />
             </div>
-            <div class="radius-big dog">
-                <img src="assets/topic-icons/DogFace.svg" />
+            <div class="radius-big dna">
+                <img src="assets/topic-icons/Dna.svg" />
             </div>
-            <div class="radius-medium car">
-                <img src="assets/topic-icons/RacingCar.svg" />
+            <div class="radius-medium drum">
+                <img src="assets/topic-icons/Drum.svg" />
             </div>
-            <div class="radius-medium cook">
-                <img src="assets/topic-icons/Cook.svg" />
+            <div class="radius-medium sandwich">
+                <img src="assets/topic-icons/Sandwich.svg" />
             </div>
-            <div class="radius-medium camera">
-                <img src="assets/topic-icons/Camera.svg" />
+            <div class="radius-medium clapper-board">
+                <img src="assets/topic-icons/ClapperBoard.svg" />
             </div>
-            <div class="radius-small woman">
-                <img src="assets/topic-icons/WomanDancing.svg" />
+            <div class="radius-small kite">
+                <img src="assets/topic-icons/Kite.svg" />
             </div>
             <div class="radius-small face">
                 <img src="assets/topic-icons/FaceWithMonocle.svg" />
@@ -65,36 +59,46 @@
                 <div class="radius-topic">
                     <img src="assets/topic-icons/AlarmClock.svg" />
                 </div>
-                <div class="title">Choose a convenient time</div>
-                <div class="info">Lorem ipsum dolor sit amet consectetur. Nunc sed facilisi enim leo ut quis.</div>
+                <div class="title">Choose a Time That <br/> Suits You</div>
+                <div class="info">
+                    Our Group Calls are available at <br/>
+                    a variety of times throughout <br/>
+                    the day, making it easy for you <br/>
+                    to find a time that fits your 
+                    <br/> schedule.
+                </div>
             </div>
             <div class="container">
                 <div class="radius-topic">
                     <img src="assets/topic-icons/Sunglasses.svg" />
                 </div>
-                <div class="title">Talk about your interests</div>
-                <div class="info">Lorem ipsum dolor sit amet consectetur. Nunc sed facilisi enim leo ut quis.</div>
+                <div class="title">Discuss Topics That <br/> Interest You</div>
+                <div class="info">
+                    Choose from a variety of video topics, including science, music, entertainment and more, to keep conversations engaging and interesting.
+                </div>
             </div>
             <div class="container">
                 <div class="radius-topic">
                     <img src="assets/topic-icons/SmilingFaceWithHearts.svg" />
                 </div>
-                <div class="title">Find friends to chat with</div>
-                <div class="info">Lorem ipsum dolor sit amet consectetur. Nunc sed facilisi enim leo ut quis.</div>
+                <div class="title">Never Run Out of Things <br/> to Say</div>
+                <div class="info">
+                    We provide questions to guide the conversation, so you can focus on practicing your spoken English without worrying about what to talk about.
+                </div>
             </div>
             <div class="container">
                 <div class="radius-topic">
-                    <img src="assets/topic-icons/Ledger.svg" />
+                    <img src="assets/topic-icons/WorldMap.svg" />
                 </div>
-                <div class="title">From Intermediate</div>
+                <div class="title">Connect With People <br/> Worldwide</div>
                 <div class="info">
-                    Lorem ipsum dolor sit amet cons. Nunc sed facilisi enim leo ut quis. Sed facilisi enim.
+                    Our platform allows you to practice your language skills with people from all over the world, exposing you to different cultures and accents.
                 </div>
             </div>
         </div>
     </div>
 
-    <div #ai class="info-block-2-ai">
+    <div class="info-block-2-ai">
         <div class="ai-left">
             <div class="left-container">
                 <div class="ai-title">
@@ -118,24 +122,23 @@
         </div>
     </div>
 
-    <div #plan class="plan">
+    <div class="plan">
         <h1>
             Plan...<br />
             This block will be done later
         </h1>
     </div>
 
-    <div #about class="info-block-3-about">
+    <div class="info-block-3-about">
         <div class="info-3-container">
-            <h1>Lorem Ipsum Dolor</h1>
 
-            <h3 class="about-text">
-                Lorem ipsum dolor sit amet consectetur. Amet aliquam ipsum purus luctus. Tellus euismod dictum sed odio
-                elementum tincidunt.
-            </h3>
+            <h1>
+                <span class="blue">Ready To Start Practicing</span> Your Spoken English 
+                <br/>With People From Around The World?
+            </h1> 
 
             <button class="sign-up" routerLink="/auth/sign-up">
-                <h3>Sign Up</h3>
+                <h3>Sign Up Now</h3>
             </button>
         </div>
     </div>
@@ -162,10 +165,9 @@
 
         <div class="copyright">
             <div class="links">
-                <p (click)="scrollToElement(home)">Home</p>
-                <p (click)="scrollToElement(ai)">AI</p>
-                <p (click)="scrollToElement(plan)">Plan</p>
-                <p (click)="scrollToElement(about)">About Us</p>
+                <p>Terms of Service</p>
+                <p>Privacy Policy</p>
+                <p>Contact Us</p>
             </div>
             <div class="copy-label">Copyright © 2023 EasySpeak</div>
         </div>

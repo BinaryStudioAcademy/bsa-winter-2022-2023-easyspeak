@@ -24,8 +24,4 @@ export class LandingPageComponent {
 
         flag: '../../../assets/user-card-icons/canada-flag.svg',
     };
-
-    scrollToElement($element: Element): void {
-        $element.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
-    }
 }
