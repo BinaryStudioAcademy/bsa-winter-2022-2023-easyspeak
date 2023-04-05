@@ -41,6 +41,12 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
 
     selectedTags: ITag[] = [];
 
+    userFirstName: string;
+
+    userLastName: string;
+
+    imagePath: string;
+
     constructor(
         private fb: FormBuilder,
         private userService: UserService,
@@ -77,6 +83,9 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
                         this.allTags = tags;
                         this.selectedTags = tags.filter(t => t.isSelected === true);
                     });
+                this.userFirstName = resp.firstName;
+                this.userLastName = resp.lastName;
+                this.imagePath = resp.imagePath;
             });
     }
 

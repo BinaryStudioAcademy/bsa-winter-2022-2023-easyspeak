@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Bogus.DataSets;
 using EasySpeak.Core.BLL.Interfaces;
 using EasySpeak.Core.Common.DTO;
 using EasySpeak.Core.Common.DTO.Lesson;
@@ -45,7 +46,7 @@ public class LessonsService : BaseService, ILessonsService
 
         if (filtersRequest.LanguageLevels is not null && filtersRequest.LanguageLevels.Any())
         {
-            lessonsFromContext = lessonsFromContext.Where(m => filtersRequest.LanguageLevels.Contains(m.LanguageLevel));
+            lessonsFromContext = lessonsFromContext.Where(m => filtersRequest.LanguageLevels != null && filtersRequest.LanguageLevels.Contains(m.LanguageLevel));
         }
 
         var subscribersInfoDict = await lessonsFromContext.Select(t =>
@@ -70,7 +71,8 @@ public class LessonsService : BaseService, ILessonsService
 
     public async Task<ICollection<DayCardDto>?> GetDayCardsOfWeekAsync(RequestDayCardDto requestDto)
     {
-        var mondayDate = requestDto.Date.AddDays(-(int)requestDto.Date.DayOfWeek).Date;
+        var delta = GetDifferenceBetweenMondayAndTodayDate(requestDto.Date);
+        var mondayDate = requestDto.Date.AddDays(-delta).Date;
         var dayCards = await _context.Lessons
             .Where(c => c.StartAt.Date >= mondayDate
                         && c.StartAt.Date <= mondayDate.AddDays(DaysInWeek - 1))
@@ -85,6 +87,15 @@ public class LessonsService : BaseService, ILessonsService
             .ToListAsync();
 
         return dayCards;
+    }
+
+    private static int GetDifferenceBetweenMondayAndTodayDate(DateTime date)
+    {
+        if(date.DayOfWeek == DayOfWeek.Sunday)
+        {
+            return 6;
+        }
+        return date.DayOfWeek - DayOfWeek.Monday;
     }
 
     public async Task<LessonDto> CreateLessonAsync(NewLessonDto lessonDto)

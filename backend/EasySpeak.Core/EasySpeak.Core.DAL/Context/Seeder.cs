@@ -141,6 +141,7 @@ public static class Seeder
             .RuleFor(m => m.Text, f => f.Random.Words(f.Random.Number(1, 20)))
             .RuleFor(m => m.CreatedAt, f => f.Date.Recent(7, DefaultDate))
             .RuleFor(m => m.IsDeleted, f => f.Random.Bool(.15f))
+            .RuleFor(m => m.IsRead, f => true)
             .RuleFor(m => m.ChatId, f => f.Random.Number(1, 40))
             .Generate(count);
     }

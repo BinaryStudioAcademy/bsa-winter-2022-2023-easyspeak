@@ -120,11 +120,16 @@ export class LessonsCreateComponent implements OnInit {
             zoomMeetingLink: this.meetLink?.value,
         };
 
-        this.lessonService.createLesson(lessonToCreate).subscribe(() => {
-            this.dialogRef.close();
+        this.lessonService.createLesson(lessonToCreate).subscribe(
+            () => {
+                this.dialogRef.close();
 
-            this.notificationService.showSuccess('Successfully created a lesson!', 'Success');
-        });
+                this.notificationService.showSuccess('Successfully created a lesson!', 'Success');
+            },
+            (error) => {
+                this.notificationService.showError(`Lesson creation failed. ${error.message}`, 'Error');
+            },
+        );
     }
 
     updateTime(evendData: MouseEvent) {

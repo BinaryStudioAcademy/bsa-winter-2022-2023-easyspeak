@@ -1,7 +1,7 @@
 <mat-form-field appearance="fill">
     <input matInput [matDatepicker]="picker" [(ngModel)]="value" [min]="minDate"
-           [max]="maxDate" class="custom-datepicker">
-    <mat-datepicker #picker [(ngModel)]="value"></mat-datepicker>
+           [max]="maxDate" class="custom-datepicker" name="dateOfBirth" ngDefaultControl>
+    <mat-datepicker #picker></mat-datepicker>
     <mat-label>{{!!placeholder ? placeholder : "Choose a date"}}</mat-label>
     <mat-datepicker-toggle matIconPrefix [for]="picker"></mat-datepicker-toggle>
 </mat-form-field>

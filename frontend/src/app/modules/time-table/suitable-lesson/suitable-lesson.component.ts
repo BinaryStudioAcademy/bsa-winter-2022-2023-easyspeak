@@ -16,12 +16,15 @@ export class SuitableLessonComponent implements OnInit {
 
     days: IIDayCard[] = [];
 
-    selectedDate: Date = new Date();
+    selectedDate: Date = moment().local().toDate();
 
     constructor(private lessonService: LessonsService) { }
 
     ngOnInit(): void {
         this.setDays();
+        this.lessonService.lessonAdded$.subscribe(() => {
+            this.setDays();
+        });
     }
 
     select(event: Date | null) {
@@ -52,12 +55,19 @@ export class SuitableLessonComponent implements OnInit {
 
     setDays(): void {
         this.days = Array(this.amountOfDayInWeek).fill({}).map((_, i) => {
-            const date = moment(this.selectedDate).add(i - this.selectedDate.getDay() + 1, 'day').toDate();
+            const dateMoment = moment(this.selectedDate);
+            let date;
+
+            if (this.selectedDate.getDay() === 0) {
+                date = dateMoment.add(-(-i + 6), 'day').toDate();
+            } else {
+                date = dateMoment.add(i - this.selectedDate.getDay() + 1, 'day').toDate();
+            }
 
             return { date, meetingsAmount: 0 };
         });
 
-        const requestDate = this.selectedDate.toISOString().slice(0, 10);
+        const requestDate = moment(this.selectedDate).format('YYYY-MM-DD');
 
         this.lessonService.getLessonsCount(requestDate).subscribe(response => {
             this.days = this.days.map(day => {

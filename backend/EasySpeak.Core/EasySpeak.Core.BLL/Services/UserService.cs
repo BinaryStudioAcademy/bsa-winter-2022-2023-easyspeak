@@ -16,12 +16,14 @@ public class UserService : BaseService, IUserService
 {
     private readonly IEasySpeakFileService _fileService;
     private readonly IFirebaseAuthService _authService;
+    private readonly INotificationService _notificationService;
 
-    public UserService(IEasySpeakFileService fileService, EasySpeakCoreContext context, IMapper mapper, IFirebaseAuthService authService)
+    public UserService(IEasySpeakFileService fileService, EasySpeakCoreContext context, IMapper mapper, IFirebaseAuthService authService, INotificationService notificationService) 
         : base(context, mapper)
     {
         _authService = authService;
         _fileService = fileService;
+        _notificationService = notificationService;
     }
 
     public async Task<UserDto> CreateUser(UserRegisterDto userDto)

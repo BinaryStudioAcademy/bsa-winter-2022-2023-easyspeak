@@ -22,18 +22,18 @@ namespace EasySpeak.Core.WebAPI.Controllers
             return Ok(notifications);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> CreateNotificationAsync([FromBody] NotificationDto NotificationDto) 
-        {
-            var notification = await _notificationService.CreateNotificationAsync(NotificationDto);
-            return Ok(notification);
-        }
-
         [HttpPut]
         public async Task<IActionResult> ReadNotification([FromBody] long notificationId)
         {
             var id = await _notificationService.ReadNotificationAsync(notificationId);
             return Ok(id);
+        }
+        
+        [HttpPut("readAll")]
+        public async Task<IActionResult> ReadAllNotification()
+        {
+            await _notificationService.ReadAllNotificationsAsync();
+            return Ok();
         }
     }
 }

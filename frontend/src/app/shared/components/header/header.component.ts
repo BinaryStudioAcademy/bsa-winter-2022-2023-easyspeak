@@ -12,7 +12,11 @@ import { UserNotificationComponent } from '../user-notification/user-notificatio
 export class HeaderComponent implements OnInit {
     @ViewChild('notificationsMenu') notificationsMenu: UserNotificationComponent;
 
-    currentUser: UserShort;
+    currentUser: UserShort = {
+        firstName: '',
+        lastName: '',
+        imagePath: '',
+    };
 
     constructor(private authService: AuthService) {}
 
