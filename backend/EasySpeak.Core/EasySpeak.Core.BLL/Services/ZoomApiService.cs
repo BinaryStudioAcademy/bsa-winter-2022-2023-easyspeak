@@ -1,19 +1,10 @@
-﻿using AutoMapper;
-using EasySpeak.Core.BLL.Helpers;
+﻿using EasySpeak.Core.BLL.Helpers;
 using EasySpeak.Core.BLL.Interfaces;
-using EasySpeak.Domain;
-using EasySpeak.Core.BLL.Services;
-using EasySpeak.Core.DAL.Context;
 using EasySpeak.Core.DAL.Entities;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 using EasySpeak.Domain.Exceptions;
 
 namespace EasySpeak.Core.BLL.Services;
@@ -55,14 +46,9 @@ public class ZoomApiService : IZoomApiService
         var responseBody = await response.Content.ReadAsStringAsync();
         var meetingLinks = JsonConvert.DeserializeObject<ZoomMeetingLinks>(responseBody);
 
-        if (meetingLinks is not null)
-        {
-            return new ZoomMeetingLinks(meetingLinks.JoinUrl, meetingLinks.HostUrl);
-        }
-        else
-        {
-            throw new EasySpeakException("Failed to generate Zoom meeting links.");
-        }
+        return meetingLinks is not null 
+            ? new ZoomMeetingLinks(meetingLinks.JoinUrl, meetingLinks.HostUrl) 
+            : throw new EasySpeakException("Failed to generate Zoom meeting links.");
     }
 
     static void AddAuthorizationHeader(HttpRequestHeaders headers, string token)
