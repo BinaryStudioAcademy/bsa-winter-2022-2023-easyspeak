@@ -22,12 +22,16 @@ public class ZoomApiService : IZoomApiService
     private readonly string _apiSecret;
     private string? _token;
     private DateTime _tokenExpiration = DateTime.MinValue;
+    private readonly string _baseUrl;
+    private readonly string _meetingsUrl;
 
     public ZoomApiService(IHttpClientFactory httpClientFactory, IConfiguration configuration)
     {
         _httpClientFactory = httpClientFactory;
         _apiKey = configuration.GetSection("ZoomCredentials:ApiKey").Value;
         _apiSecret = configuration.GetSection("ZoomCredentials:ApiSecret").Value;
+        _baseUrl = configuration.GetSection("ZoomApi:baseUrl").Value;
+        _meetingsUrl = configuration.GetSection("ZoomApi:meetingsUrl").Value;
     }
 
     public async Task<ZoomMeetingLinks> GetMeetingLinks(string lessonTopic)
@@ -42,7 +46,7 @@ public class ZoomApiService : IZoomApiService
         AddAuthorizationHeader(httpClient.DefaultRequestHeaders, _token);
 
         var response = await httpClient.PostAsync(
-            "https://api.zoom.us/v2/users/me/meetings",
+            _baseUrl + _meetingsUrl,
             GetPostContent(lessonTopic)
         );
 
