@@ -4,44 +4,57 @@
         <form #userLoginForm="ngForm" [formGroup]="form" class="form-content" (submit)="signIn()">
             <div class="form-group-item">
                 <input
-                    type="email"
+
                     formControlName="email"
                     placeholder="Email"
-                    required
                     email="{{this.email}}"/>
-        
+
                 <div class="errors-wrp">
-                    <mat-error class="error" *ngIf="this.email.invalid && this.userLoginForm.submitted">
+<!--                    <mat-error class="error" *ngIf="this.email.invalid && this.userLoginForm.submitted">-->
+<!--                        <img src="/assets/user-profile/alert-triangle.svg" alt="">-->
+<!--                        {{getErrorMessage(email)}}-->
+<!--                    </mat-error>-->
+                    <mat-error class="error"
+                               *ngIf="(email.errors?.['minlength'] || email.errors?.['maxlength'])
+                            &&!doesntExist">
                         <img src="/assets/user-profile/alert-triangle.svg" alt="">
-                        {{getErrorMessage(email)}}
+                        Min 3, max 50
+                    </mat-error>
+                    <mat-error class="error" *ngIf="doesntExist">
+                        <img src="/assets/user-profile/alert-triangle.svg" alt="">
+                        User with such email doesn’t exist
                     </mat-error>
                 </div>
-        
-                <div class="error-surface" 
+
+                <div class="error-surface"
                     *ngIf="this.email.errors && this.userLoginForm.submitted">
                 </div>
             </div>
 
             <div class="form-group-item">
                 <input
-                    type="password"
                     formControlName="password"
                     placeholder="Password"
-                    required
                     appPasswordVisibility/>
-        
                 <div class="errors-wrp">
-                    <mat-error class="error" *ngIf="this.password.invalid && this.userLoginForm.submitted">
+                    <mat-error class="error"
+                               *ngIf="(password.errors?.['minlength'] || password.errors?.['maxlength'])
+                            ">
                         <img src="/assets/user-profile/alert-triangle.svg" alt="">
-                        {{getErrorMessage(password)}}
+                        Min 6, max 25
+                    </mat-error>
+                    <mat-error class="error" *ngIf="wrongPassword">
+                        <img src="/assets/user-profile/alert-triangle.svg" alt="">
+<!--                        {{getErrorMessage(password)}}-->
+                        Incorrect password
                     </mat-error>
                 </div>
-        
-                <div *ngIf="this.password.invalid && this.userLoginForm.submitted" 
+
+                <div *ngIf="this.password.invalid && this.userLoginForm.submitted"
                     class="error-surface">
                 </div>
             </div>
-            <button class="submit-btn" 
+            <button class="submit-btn"
                 mat-button type="submit">
                 Sign In
             </button>
