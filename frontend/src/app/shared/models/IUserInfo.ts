@@ -10,4 +10,5 @@ export interface IUserInfo {
     languageLevel: string
     topics?: ITopic[]
     imagePath: string;
+    isAdmin: boolean;
 }
