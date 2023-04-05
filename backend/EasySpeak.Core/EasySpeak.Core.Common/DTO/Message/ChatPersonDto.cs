@@ -12,6 +12,7 @@ namespace EasySpeak.Core.Common.DTO.Message
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
         public bool IsOnline { get; set; }
+        public long id { get; set; }
         public string LastMessage { get; set; } = string.Empty;
         public int NumberOfUnreadMessages { get; set; }
     }

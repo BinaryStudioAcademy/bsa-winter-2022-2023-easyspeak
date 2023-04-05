@@ -62,7 +62,7 @@
                 </button>
             </div>
         </header>
-        <div class="chat-body" *ngIf="messages">
+        <div class="chat-body" #scrollMe [scrollTop]="scrollMe.scrollHeight" *ngIf="messages">
             <app-message-group *ngFor="let message of groupedMessages; index as i" [message]="message" [i]="i" [messages]="groupedMessages"></app-message-group>
         </div>
         <div class="chat-input">

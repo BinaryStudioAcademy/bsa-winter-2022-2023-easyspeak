@@ -9,7 +9,7 @@ namespace EasySpeak.Core.BLL.Interfaces
 {
     public interface IChatService
     {
-        Task<ICollection<ChatPersonDto>> GetUnreadAndLastSendMessageAsync();
+        Task<List<ChatPersonDto>> GetUnreadAndLastSendMessageAsync();
         Task<List<MessageGroupDto>> GetChatMessages(int chatId);
     }
 }

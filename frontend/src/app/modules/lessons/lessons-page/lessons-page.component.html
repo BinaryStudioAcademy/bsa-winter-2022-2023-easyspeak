@@ -1,6 +1,7 @@
 <div class="container">
-    <button class="create-lesson-button" (click)="openCreate()">+ Add Group Class</button>
-
+    <div class="create-lesson" *ngIf="userIsAdmin">
+        <button class="create-lesson-button" (click)="openCreate()">+ Add Group Class</button>
+    </div>
     <div class="date-container">
         <h2 class="date">{{ todayDate }}</h2>
     </div>

@@ -2,7 +2,7 @@ export interface INewUser {
     firstName: string;
     lastName: string;
     email: string;
-    age: number;
+    birthDate: string;
     sex: string;
     languageLevel: string;
     country: string;

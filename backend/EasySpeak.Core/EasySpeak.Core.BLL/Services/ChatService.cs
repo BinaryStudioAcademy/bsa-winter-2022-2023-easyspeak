@@ -3,7 +3,6 @@ using EasySpeak.Core.BLL.Interfaces;
 using EasySpeak.Core.Common.DTO.Message;
 using EasySpeak.Core.DAL.Context;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 
 namespace EasySpeak.Core.BLL.Services
 {
@@ -16,34 +15,28 @@ namespace EasySpeak.Core.BLL.Services
             _firebaseAuthService = firebaseAuthService;
         }
 
-        public async Task<ICollection<ChatPersonDto>> GetUnreadAndLastSendMessageAsync()
+        public async Task<List<ChatPersonDto>> GetUnreadAndLastSendMessageAsync()
         {
             return await _context.Chats
-             .Include(chat => chat.Messages)
-             .Include(chat => chat.Users)
-             .Where(chat => chat.Users
-             .Any(user => user.Id == _firebaseAuthService.UserId))
-             .AsEnumerable()
-             .Select(chat => {
-                 var user = chat.Users.First(user => user.Id != _firebaseAuthService.UserId);
-                 return new 
-                 {
-                     Date = chat.Messages.Max(message => message.CreatedAt),
-                     IsRead = chat.Messages.Select(message => message.IsRead),
-                     Value = new ChatPersonDto
-                     {
-                         FirstName = user.FirstName,
-                         LastName = user.LastName,
-                         LastMessage = chat.Messages.Last().Text,
-                         NumberOfUnreadMessages = chat.Messages.Count(message => !message.IsRead)
-                     }
-                 };
-             })
-            .OrderByDescending(entity => entity.IsRead)
-            .OrderByDescending(entity => entity.Date)
-            .Select(entity => entity.Value)
-            .AsQueryable()
-            .ToListAsync();
+                         .Include(chat => chat.Users)
+                         .Where(chat => chat.Users.Any(user => user.Id == _firebaseAuthService.UserId))
+                         .Include(chat => chat.Messages)
+                         .Select(chat => new
+                         {
+                             Date = chat.Messages.Max(message => message.CreatedAt),
+                             IsRead = chat.Messages.Any(message => !message.IsRead),
+                             Value = new ChatPersonDto
+                             {
+                                 FirstName = chat.Users.First(user => user.Id != _firebaseAuthService.UserId).FirstName,
+                                 LastName = chat.Users.First(user => user.Id != _firebaseAuthService.UserId).LastName,
+                                 LastMessage = chat.Messages.OrderBy(message => message.CreatedBy).Last().Text,
+                                 NumberOfUnreadMessages = chat.Messages.Count(message => !message.IsRead)
+                             }
+                         })
+                           .OrderByDescending(entity => entity.IsRead ? 0 : 1)
+                           .ThenByDescending(entity => entity.Date)
+                           .Select(entity => entity.Value)
+                           .ToListAsync();
         }
 
         public async Task<List<MessageGroupDto>> GetChatMessages(int chatId)
@@ -55,10 +48,9 @@ namespace EasySpeak.Core.BLL.Services
 
             if (currentChat != null)
             {
-                result = await currentChat.Messages
+                result = currentChat.Messages
                         .GroupBy(test => test.CreatedAt.Date)
                         .Take(20)
-                        .OrderByDescending(groupMessages => groupMessages.Key)
                         .Select(groupedMessages => new MessageGroupDto
                         {
                             Date = groupedMessages.Key,
@@ -71,8 +63,8 @@ namespace EasySpeak.Core.BLL.Services
                                         CreatedAt = message.CreatedAt,
                                     })
                         })
-                        .AsQueryable()
-                        .ToListAsync();
+                        .OrderByDescending(groupMessages => groupMessages.Date)
+                        .ToList();
             }
 
             return result;
