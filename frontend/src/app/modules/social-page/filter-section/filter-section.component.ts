@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { ConstantsService } from '@core/services/constants.service';
+import { DataService } from '@core/services/data.service';
 import {
     compatibilities,
     langLevelsSample,
@@ -18,7 +18,7 @@ type FilterOption = 'compatibility' | 'lang' | 'level' | 'topic';
     styleUrls: ['./filter-section.component.sass'],
 })
 export class FilterSectionComponent implements OnInit {
-    public constructor(private constantsService: ConstantsService) {
+    public constructor(private dataService: DataService) {
     }
 
     resetFiltersEvent: Subject<void> = new Subject<void>();
@@ -51,7 +51,7 @@ export class FilterSectionComponent implements OnInit {
         this.langLevels = langLevelsSample;
         this.compatibilities = compatibilities.map(c => ({ title: c.toString() }));
         this.userFilters = {} as UserFilter;
-        this.constantsService.getAllLanguages().subscribe(languages => {
+        this.dataService.getAllLanguages().subscribe(languages => {
             this.languages = languages.map((l): Filter => ({ title: l }));
         });
     }

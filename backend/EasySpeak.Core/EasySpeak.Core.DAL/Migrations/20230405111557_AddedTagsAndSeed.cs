@@ -77,22 +77,22 @@ namespace EasySpeak.Core.DAL.Migrations
                 columns: new[] { "Id", "CreatedAt", "ImageUrl", "Name" },
                 values: new object[,]
                 {
-                    { 1L, new DateTime(2023, 4, 5, 12, 35, 40, 127, DateTimeKind.Local).AddTicks(6258), "ClassicalBuilding.svg", "Architecture" },
-                    { 2L, new DateTime(2023, 4, 5, 12, 35, 40, 127, DateTimeKind.Local).AddTicks(6300), "ArtistPalette.svg", "Arts" },
-                    { 3L, new DateTime(2023, 4, 5, 12, 35, 40, 127, DateTimeKind.Local).AddTicks(6303), "RacingCar.svg", "Cars" },
-                    { 4L, new DateTime(2023, 4, 5, 12, 35, 40, 127, DateTimeKind.Local).AddTicks(6306), "Crown.svg", "Celebrities" },
-                    { 5L, new DateTime(2023, 4, 5, 12, 35, 40, 127, DateTimeKind.Local).AddTicks(6309), "Cook.svg", "Cooking" },
-                    { 6L, new DateTime(2023, 4, 5, 12, 35, 40, 127, DateTimeKind.Local).AddTicks(6314), "WomanDancing.svg", "Dancing" },
-                    { 7L, new DateTime(2023, 4, 5, 12, 35, 40, 127, DateTimeKind.Local).AddTicks(6317), "FourLeafClover.svg", "Ecology" },
-                    { 8L, new DateTime(2023, 4, 5, 12, 35, 40, 127, DateTimeKind.Local).AddTicks(6320), "Artist.svg", "Design" },
-                    { 9L, new DateTime(2023, 4, 5, 12, 35, 40, 127, DateTimeKind.Local).AddTicks(6323), "CrossedSwords.svg", "History" },
-                    { 10L, new DateTime(2023, 4, 5, 12, 35, 40, 127, DateTimeKind.Local).AddTicks(6365), "Dress.svg", "Fashion" },
-                    { 11L, new DateTime(2023, 4, 5, 12, 35, 40, 127, DateTimeKind.Local).AddTicks(6368), "Pill.svg", "Medicine" },
-                    { 12L, new DateTime(2023, 4, 5, 12, 35, 40, 127, DateTimeKind.Local).AddTicks(6371), "Robot.svg", "Technologies" },
-                    { 13L, new DateTime(2023, 4, 5, 12, 35, 40, 127, DateTimeKind.Local).AddTicks(6374), "DogFace.svg", "Pets" },
-                    { 14L, new DateTime(2023, 4, 5, 12, 35, 40, 127, DateTimeKind.Local).AddTicks(6377), "FaceWithMonocle.svg", "Philosophy" },
-                    { 15L, new DateTime(2023, 4, 5, 12, 35, 40, 127, DateTimeKind.Local).AddTicks(6380), "Camera.svg", "Photography" },
-                    { 16L, new DateTime(2023, 4, 5, 12, 35, 40, 127, DateTimeKind.Local).AddTicks(6383), "TopHat.svg", "Politics" }
+                    { 1L, new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "ClassicalBuilding.svg", "Architecture" },
+                    { 2L, new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "ArtistPalette.svg", "Arts" },
+                    { 3L, new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "RacingCar.svg", "Cars" },
+                    { 4L, new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "Crown.svg", "Celebrities" },
+                    { 5L, new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cook.svg", "Cooking" },
+                    { 6L, new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "WomanDancing.svg", "Dancing" },
+                    { 7L, new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "FourLeafClover.svg", "Ecology" },
+                    { 8L, new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "Artist.svg", "Design" },
+                    { 9L, new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "CrossedSwords.svg", "History" },
+                    { 10L, new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "Dress.svg", "Fashion" },
+                    { 11L, new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "Pill.svg", "Medicine" },
+                    { 12L, new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "Robot.svg", "Technologies" },
+                    { 13L, new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "DogFace.svg", "Pets" },
+                    { 14L, new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "FaceWithMonocle.svg", "Philosophy" },
+                    { 15L, new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "Camera.svg", "Photography" },
+                    { 16L, new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "TopHat.svg", "Politics" }
                 });
 
             migrationBuilder.InsertData(

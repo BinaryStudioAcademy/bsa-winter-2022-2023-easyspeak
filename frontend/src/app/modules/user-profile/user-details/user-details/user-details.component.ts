@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { BaseComponent } from '@core/base/base.component';
-import { ConstantsService } from '@core/services/constants.service';
+import { DataService } from '@core/services/data.service';
 import { UserService } from '@core/services/user.service';
 import { Ages } from '@shared/data/ages.util';
 import { EnglishLevel } from '@shared/data/englishLevel';
@@ -38,7 +38,7 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
         private userService: UserService,
         private toastr: ToastrService,
         private countriesService: CountriesTzLangProviderService,
-        private constantsService: ConstantsService,
+        private constantsService: DataService,
     ) {
         super();
         this.countries = this.countriesService.getCountriesList();

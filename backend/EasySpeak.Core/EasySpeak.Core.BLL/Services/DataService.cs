@@ -13,12 +13,12 @@ using System.Threading.Tasks;
 
 namespace EasySpeak.Core.BLL.Services
 {
-    public class ConstantService : IConstantService
+    public class DataService : IDataService
     {
         private readonly EasySpeakCoreContext context;
         private readonly IMapper mapper;
 
-        public ConstantService(EasySpeakCoreContext context, IMapper mapper)
+        public DataService(EasySpeakCoreContext context, IMapper mapper)
         {
             this.context = context;
             this.mapper = mapper;
@@ -31,11 +31,6 @@ namespace EasySpeak.Core.BLL.Services
         public Task<List<TagWithImageDto>> GetTagsAsync()
         {
             return context.Tags.ProjectTo<TagWithImageDto>(mapper.ConfigurationProvider).ToListAsync();
-        }
-
-        public List<string> GetTimezones()
-        {
-            return GetEnumStringValues<Timezone>();
         }
 
         private List<string> GetEnumStringValues<T>() where T : struct, Enum

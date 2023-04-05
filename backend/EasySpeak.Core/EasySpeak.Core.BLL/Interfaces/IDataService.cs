@@ -7,12 +7,10 @@ using System.Threading.Tasks;
 
 namespace EasySpeak.Core.BLL.Interfaces
 {
-    public interface IConstantService
+    public interface IDataService
     {
         Task<List<TagWithImageDto>> GetTagsAsync();
 
         List<string> GetLanguages();
-
-        List<string> GetTimezones();
     }
 }

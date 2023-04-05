@@ -2276,112 +2276,112 @@ namespace EasySpeak.Core.DAL.Migrations
                         new
                         {
                             Id = 1L,
-                            CreatedAt = new DateTime(2023, 4, 5, 12, 35, 40, 127, DateTimeKind.Local).AddTicks(6258),
+                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ImageUrl = "ClassicalBuilding.svg",
                             Name = "Architecture"
                         },
                         new
                         {
                             Id = 2L,
-                            CreatedAt = new DateTime(2023, 4, 5, 12, 35, 40, 127, DateTimeKind.Local).AddTicks(6300),
+                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ImageUrl = "ArtistPalette.svg",
                             Name = "Arts"
                         },
                         new
                         {
                             Id = 3L,
-                            CreatedAt = new DateTime(2023, 4, 5, 12, 35, 40, 127, DateTimeKind.Local).AddTicks(6303),
+                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ImageUrl = "RacingCar.svg",
                             Name = "Cars"
                         },
                         new
                         {
                             Id = 4L,
-                            CreatedAt = new DateTime(2023, 4, 5, 12, 35, 40, 127, DateTimeKind.Local).AddTicks(6306),
+                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ImageUrl = "Crown.svg",
                             Name = "Celebrities"
                         },
                         new
                         {
                             Id = 5L,
-                            CreatedAt = new DateTime(2023, 4, 5, 12, 35, 40, 127, DateTimeKind.Local).AddTicks(6309),
+                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ImageUrl = "Cook.svg",
                             Name = "Cooking"
                         },
                         new
                         {
                             Id = 6L,
-                            CreatedAt = new DateTime(2023, 4, 5, 12, 35, 40, 127, DateTimeKind.Local).AddTicks(6314),
+                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ImageUrl = "WomanDancing.svg",
                             Name = "Dancing"
                         },
                         new
                         {
                             Id = 7L,
-                            CreatedAt = new DateTime(2023, 4, 5, 12, 35, 40, 127, DateTimeKind.Local).AddTicks(6317),
+                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ImageUrl = "FourLeafClover.svg",
                             Name = "Ecology"
                         },
                         new
                         {
                             Id = 8L,
-                            CreatedAt = new DateTime(2023, 4, 5, 12, 35, 40, 127, DateTimeKind.Local).AddTicks(6320),
+                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ImageUrl = "Artist.svg",
                             Name = "Design"
                         },
                         new
                         {
                             Id = 9L,
-                            CreatedAt = new DateTime(2023, 4, 5, 12, 35, 40, 127, DateTimeKind.Local).AddTicks(6323),
+                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ImageUrl = "CrossedSwords.svg",
                             Name = "History"
                         },
                         new
                         {
                             Id = 10L,
-                            CreatedAt = new DateTime(2023, 4, 5, 12, 35, 40, 127, DateTimeKind.Local).AddTicks(6365),
+                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ImageUrl = "Dress.svg",
                             Name = "Fashion"
                         },
                         new
                         {
                             Id = 11L,
-                            CreatedAt = new DateTime(2023, 4, 5, 12, 35, 40, 127, DateTimeKind.Local).AddTicks(6368),
+                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ImageUrl = "Pill.svg",
                             Name = "Medicine"
                         },
                         new
                         {
                             Id = 12L,
-                            CreatedAt = new DateTime(2023, 4, 5, 12, 35, 40, 127, DateTimeKind.Local).AddTicks(6371),
+                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ImageUrl = "Robot.svg",
                             Name = "Technologies"
                         },
                         new
                         {
                             Id = 13L,
-                            CreatedAt = new DateTime(2023, 4, 5, 12, 35, 40, 127, DateTimeKind.Local).AddTicks(6374),
+                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ImageUrl = "DogFace.svg",
                             Name = "Pets"
                         },
                         new
                         {
                             Id = 14L,
-                            CreatedAt = new DateTime(2023, 4, 5, 12, 35, 40, 127, DateTimeKind.Local).AddTicks(6377),
+                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ImageUrl = "FaceWithMonocle.svg",
                             Name = "Philosophy"
                         },
                         new
                         {
                             Id = 15L,
-                            CreatedAt = new DateTime(2023, 4, 5, 12, 35, 40, 127, DateTimeKind.Local).AddTicks(6380),
+                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ImageUrl = "Camera.svg",
                             Name = "Photography"
                         },
                         new
                         {
                             Id = 16L,
-                            CreatedAt = new DateTime(2023, 4, 5, 12, 35, 40, 127, DateTimeKind.Local).AddTicks(6383),
+                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ImageUrl = "TopHat.svg",
                             Name = "Politics"
                         });

@@ -16,8 +16,8 @@ interface Tag {
 @Injectable({
     providedIn: 'root',
 })
-export class ConstantsService {
-    public routePrefix = '/constants';
+export class DataService {
+    public routePrefix = '/data';
 
     constructor(
         private httpService: HttpService,

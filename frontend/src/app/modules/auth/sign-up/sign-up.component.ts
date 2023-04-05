@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { BaseComponent } from '@core/base/base.component';
 import { AuthService } from '@core/services/auth.service';
-import { ConstantsService } from '@core/services/constants.service';
+import { DataService } from '@core/services/data.service';
 import { UserService } from '@core/services/user.service';
 import { NgSelectComponent } from '@ng-select/ng-select';
 import { Ages } from '@shared/data/ages.util';
@@ -74,7 +74,7 @@ export class SignUpComponent extends BaseComponent implements OnInit {
         private toastr: ToastrService,
         private userService: UserService,
         private router: Router,
-        private constantsService: ConstantsService,
+        private dataService: DataService,
     ) {
         super();
     }
@@ -91,7 +91,7 @@ export class SignUpComponent extends BaseComponent implements OnInit {
 
     private setUpData() {
         this.countries = this.countriesTzLangProvider.getCountriesList().map((x) => x.name);
-        this.constantsService.getAllLanguages().subscribe((languages) => {
+        this.dataService.getAllLanguages().subscribe((languages) => {
             this.languages = languages;
         });
         this.englishLevels = Object.values(EnglishLevel) as string[];

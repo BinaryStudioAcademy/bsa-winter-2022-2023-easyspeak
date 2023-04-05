@@ -170,121 +170,32 @@ public static class Seeder
 
     private static IList<Tag> GenerateTags()
     {
-        return new List<Tag>()
+        var tags = new[]
         {
-            new Tag
-            {
-                Id = 1,
-                Name = "Architecture",
-                ImageUrl = "ClassicalBuilding.svg",
-                CreatedAt = DateTime.Now,
-            },
-            new Tag
-            {
-                Id = 2,
-                Name = "Arts",
-                ImageUrl = "ArtistPalette.svg",
-                CreatedAt = DateTime.Now,
-            },
-            new Tag
-            {
-                Id = 3,
-                Name = "Cars",
-                ImageUrl = "RacingCar.svg",
-                CreatedAt = DateTime.Now,
-            },
-            new Tag
-            {
-                Id = 4,
-                Name = "Celebrities",
-                ImageUrl = "Crown.svg",
-                CreatedAt = DateTime.Now,
-            },
-            new Tag
-            {
-                Id = 5,
-                Name = "Cooking",
-                ImageUrl = "Cook.svg",
-                CreatedAt = DateTime.Now,
-            },
-            new Tag
-            {
-                Id = 6,
-                Name = "Dancing",
-                ImageUrl = "WomanDancing.svg",
-                CreatedAt = DateTime.Now,
-            },
-            new Tag
-            {
-                Id = 7,
-                Name = "Ecology",
-                ImageUrl = "FourLeafClover.svg",
-                CreatedAt = DateTime.Now,
-            },
-            new Tag
-            {
-                Id = 8,
-                Name = "Design",
-                ImageUrl = "Artist.svg",
-                CreatedAt = DateTime.Now,
-            },
-            new Tag
-            {
-                Id = 9,
-                Name = "History",
-                ImageUrl = "CrossedSwords.svg",
-                CreatedAt = DateTime.Now,
-            },
-            new Tag
-            {
-                Id = 10,
-                Name = "Fashion",
-                ImageUrl = "Dress.svg",
-                CreatedAt = DateTime.Now,
-            },
-            new Tag
-            {
-                Id = 11,
-                Name = "Medicine",
-                ImageUrl = "Pill.svg",
-                CreatedAt = DateTime.Now,
-            },
-            new Tag
-            {
-                Id = 12,
-                Name = "Technologies",
-                ImageUrl = "Robot.svg",
-                CreatedAt = DateTime.Now,
-            },
-            new Tag
-            {
-                Id = 13,
-                Name = "Pets",
-                ImageUrl = "DogFace.svg",
-                CreatedAt = DateTime.Now,
-            },
-            new Tag
-            {
-                Id = 14,
-                Name = "Philosophy",
-                ImageUrl = "FaceWithMonocle.svg",
-                CreatedAt = DateTime.Now,
-            },
-            new Tag
-            {
-                Id = 15,
-                Name = "Photography",
-                ImageUrl = "Camera.svg",
-                CreatedAt = DateTime.Now,
-            },
-            new Tag
-            {
-                Id = 16,
-                Name = "Politics",
-                ImageUrl = "TopHat.svg",
-                CreatedAt = DateTime.Now,
-            },
+            (1, "Architecture", "ClassicalBuilding.svg", new DateTime(2023, 04, 05)),
+            (2, "Arts", "ArtistPalette.svg", new DateTime(2023, 04, 05)),
+            (3, "Cars", "RacingCar.svg", new DateTime(2023, 04, 05)),
+            (4, "Celebrities", "Crown.svg", new DateTime(2023, 04, 05)),
+            (5, "Cooking", "Cook.svg", new DateTime(2023, 04, 05)),
+            (6, "Dancing", "WomanDancing.svg", new DateTime(2023, 04, 05)),
+            (7, "Ecology", "FourLeafClover.svg", new DateTime(2023, 04, 05)),
+            (8, "Design", "Artist.svg", new DateTime(2023, 04, 05)),
+            (9, "History", "CrossedSwords.svg", new DateTime(2023, 04, 05)),
+            (10, "Fashion", "Dress.svg", new DateTime(2023, 04, 05)),
+            (11, "Medicine", "Pill.svg", new DateTime(2023, 04, 05)),
+            (12, "Technologies", "Robot.svg", new DateTime(2023, 04, 05)),
+            (13, "Pets", "DogFace.svg", new DateTime(2023, 04, 05)),
+            (14, "Philosophy", "FaceWithMonocle.svg", new DateTime(2023, 04, 05)),
+            (15, "Photography", "Camera.svg", new DateTime(2023, 04, 05)),
+            (16, "Politics", "TopHat.svg", new DateTime(2023, 04, 05)),
         };
+        return tags.Select(t => new Tag()
+        {
+            Id = t.Item1,
+            Name = t.Item2,
+            ImageUrl = t.Item3,
+            CreatedAt = t.Item4
+        }).ToList();
     }
 
     private static IList<User> GenerateUsers(int count = 5)
