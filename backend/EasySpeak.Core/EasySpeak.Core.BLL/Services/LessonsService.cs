@@ -93,7 +93,7 @@ public class LessonsService : BaseService, ILessonsService
         lesson.Tags.Clear();
         if (lessonDto.Tags is not null)
         {
-            lesson.Tags.Concat(await GetExistingTags(lessonDto.Tags));
+            lesson.Tags = await GetExistingTags(lessonDto.Tags);
         }
         var createdLesson = _context.Add(lesson).Entity;
         await _context.SaveChangesAsync();
