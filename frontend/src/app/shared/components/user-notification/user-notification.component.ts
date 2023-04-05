@@ -67,12 +67,13 @@ export class UserNotificationComponent extends BaseComponent implements OnInit, 
     }
 
     readAllNotifications() {
-        this.notifications.map(notification => ({
-            ...notification,
-            isRead: true,
-        }));
-
-        this.notificationService.readAllNotifications();
+        this.notificationService.readAllNotifications()
+            .subscribe(() => {
+                this.notifications.map(notification => ({
+                    ...notification,
+                    isRead: true,
+                }));
+            });
     }
 
     override ngOnDestroy() {
