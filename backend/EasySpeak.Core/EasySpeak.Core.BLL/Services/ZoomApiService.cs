@@ -59,7 +59,7 @@ public class ZoomApiService : IZoomApiService
         }
         else
         {
-            throw new ArgumentNullException();
+            throw new ArgumentNullException("meetingLinks", "Failed to generate Zoom meeting links.");
         }
     }
 
