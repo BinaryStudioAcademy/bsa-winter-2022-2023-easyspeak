@@ -5,13 +5,13 @@
                 {{selectedItems.length || 0}}
             </div>
         </div>
-        <div *ngIf="!selectedItems.length" class="dropdown-btn-title" >
+        <div *ngIf="selectedItems.length !== 1" class="dropdown-btn-title">
             {{getFullTitle()}}
         </div>
-        <div *ngIf="selectedItems.length" class="dropdown-btn-title-when-selected" >
+        <div *ngIf="selectedItems.length === 1" class="dropdown-btn-title-when-selected">
             {{getFullTitle()}}
         </div>
-        <div *ngIf="selectedItems.length" class="dropdown-btn-subtitle">
+        <div *ngIf="selectedItems.length === 1" class="dropdown-btn-subtitle">
             {{btnLabel}}
         </div>
         <div class="dropdown-btn-icon">
@@ -23,7 +23,8 @@
             <div class="dropdown-item">
                 <div class="dropdown-item-content">
                     <div class="dropdown-input">
-                        <input [type]="type" [checked]="selectedItems.includes(item.title)" (click)="selectItem(item.title)">
+                        <input [type]="type" [checked]="selectedItems.includes(item.title)"
+                               (click)="selectItem(item.title)">
                     </div>
                     <div class="dropdown-item-info">
                         <div *ngIf="item.subtitle" class="item-info-title">
