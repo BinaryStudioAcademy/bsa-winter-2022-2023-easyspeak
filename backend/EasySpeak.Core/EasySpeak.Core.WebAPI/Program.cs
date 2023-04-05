@@ -28,6 +28,7 @@ builder.Services.AddValidation();
 builder.Services.AddFirebaseAuthorization(builder.Configuration);
 builder.Services.AddSignalR();  
 builder.Services.AddFileService(builder.Configuration);
+builder.Services.AddHttpClient();
 
 builder.Services.AddCors();
 builder.Services.AddHealthChecks();
