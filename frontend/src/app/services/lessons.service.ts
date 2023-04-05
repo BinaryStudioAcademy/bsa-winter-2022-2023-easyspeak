@@ -4,6 +4,7 @@ import { IIDayCard } from '@shared/models/lesson/IDayCard';
 import { IFilter } from '@shared/models/lesson/IFilter';
 import { ILesson } from '@shared/models/lesson/ILesson';
 import { INewLesson } from '@shared/models/lesson/INewLesson';
+import { Subject, tap } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
@@ -11,10 +12,16 @@ import { INewLesson } from '@shared/models/lesson/INewLesson';
 export class LessonsService {
     public routePrefix = '/lessons';
 
+    public lessonAdded$ = new Subject<void>();
+
     constructor(private http: HttpService) { }
 
     createLesson(lesson: INewLesson) {
-        return this.http.post(this.routePrefix, lesson);
+        return this.http.post(this.routePrefix, lesson).pipe(
+            tap(() => {
+                this.lessonAdded$.next();
+            }),
+        );
     }
 
     getFilteredLessons(filter: IFilter) {
