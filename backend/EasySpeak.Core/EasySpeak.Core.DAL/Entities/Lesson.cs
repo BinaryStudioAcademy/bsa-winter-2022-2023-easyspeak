@@ -12,6 +12,7 @@ namespace EasySpeak.Core.DAL.Entities
         public int? LimitOfUsers { get; set; }
         public string YoutubeVideoId { get; set; } = string.Empty;
         public string ZoomMeetingLink { get; set; } = string.Empty;
+        public string ZoomMeetingLinkHost { get; set; } = string.Empty;
         public LanguageLevel LanguageLevel { get; set; }
 
         public ICollection<User> Subscribers { get; private set; }

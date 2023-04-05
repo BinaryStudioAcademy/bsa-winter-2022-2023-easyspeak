@@ -11,12 +11,14 @@ namespace EasySpeak.Core.BLL.Services;
 
 public class LessonsService : BaseService, ILessonsService
 {
+    private readonly IZoomApiService _zoomApiService;
     private readonly IFirebaseAuthService _authService;
     public const int DaysInWeek = 7;
 
-    public LessonsService(EasySpeakCoreContext context, IMapper mapper, IFirebaseAuthService authService) : base(context, mapper)
+    public LessonsService(EasySpeakCoreContext context, IMapper mapper, IFirebaseAuthService authService, IZoomApiService zoomApiService) : base(context, mapper)
     {
         _authService = authService;
+        _zoomApiService = zoomApiService;
     }
 
     public async Task<ICollection<QuestionForLessonDto>> GetQuestionsByLessonIdAsync(int id)
@@ -101,6 +103,12 @@ public class LessonsService : BaseService, ILessonsService
     public async Task<LessonDto> CreateLessonAsync(NewLessonDto lessonDto)
     {
         var lesson = _mapper.Map<Lesson>(lessonDto);
+
+        var zoomMeetingLinks = await _zoomApiService.GetMeetingLinks(lesson.Name);
+
+        lesson.ZoomMeetingLink = zoomMeetingLinks.JoinUrl;
+
+        lesson.ZoomMeetingLinkHost = zoomMeetingLinks.HostUrl;
 
         var createdLesson = _context.Add(lesson).Entity;
         await _context.SaveChangesAsync();
