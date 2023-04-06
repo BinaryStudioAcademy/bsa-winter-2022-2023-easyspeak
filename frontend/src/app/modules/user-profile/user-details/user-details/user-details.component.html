@@ -4,202 +4,181 @@
     </div>
     <div class="user-photo-section">
         <div class="avatar-wrp">
-            <app-avatar [size]="103"></app-avatar>
+            <div class="avatar-placeholder">
+                <app-avatar
+                    [firstName]="userFirstName"
+                    [lastName]="userLastName"
+                    [imagePath]="imagePath"
+                    [imageSize]="103">
+                </app-avatar>
+            </div>
             <div class="edit-avatar-icon">
-                <img src="/assets/user-profile//edit-icon.svg" alt="edit" />
+                <img src="/assets/user-profile/edit-icon.svg" alt="edit"/>
             </div>
             <div class="vertical-line"></div>
         </div>
         <div class="avatar-list">
             <div class="avatar-suggestion-wrp">
-                <img src="/assets//user-profile/boy.svg" alt="" />
+                <img src="/assets/user-profile/boy.svg" alt=""/>
             </div>
             <div class="avatar-suggestion-wrp">
-                <img src="/assets//user-profile/man-bald.svg" alt="" />
+                <img src="/assets/user-profile/man-bald.svg" alt=""/>
             </div>
             <div class="avatar-suggestion-wrp">
-                <img src="/assets//user-profile/man-beard.svg" alt="" />
+                <img src="/assets/user-profile/man-beard.svg" alt=""/>
             </div>
             <div class="avatar-suggestion-wrp">
-                <img src="/assets//user-profile/man-curly.svg" alt="" />
+                <img src="/assets/user-profile/man-curly.svg" alt=""/>
             </div>
             <div class="avatar-suggestion-wrp">
-                <img src="/assets//user-profile/man-elf.svg" alt="" />
+                <img src="/assets/user-profile/man-elf.svg" alt=""/>
             </div>
             <div class="avatar-suggestion-wrp">
-                <img src="/assets//user-profile/man-in-tuxedo.svg" alt="" />
+                <img src="/assets/user-profile/man-in-tuxedo.svg" alt=""/>
             </div>
             <div class="avatar-suggestion-wrp">
-                <img src="/assets//user-profile/man-red-hair.svg" alt="" />
+                <img src="/assets/user-profile/man-red-hair.svg" alt=""/>
             </div>
             <div class="avatar-suggestion-wrp">
-                <img src="/assets//user-profile/man-technologist.svg" alt="" />
+                <img src="/assets/user-profile/man-technologist.svg" alt=""/>
             </div>
             <div class="avatar-suggestion-wrp">
-                <img src="/assets//user-profile/man-superhero.svg" alt="" />
+                <img src="/assets/user-profile/man-superhero.svg" alt=""/>
             </div>
             <div class="avatar-suggestion-wrp">
-                <img src="/assets//user-profile/man-white-hair.svg" alt="" />
+                <img src="/assets/user-profile/man-white-hair.svg" alt=""/>
             </div>
         </div>
     </div>
+    <div class="who-can-message-section-title">
+        <div class="title">
+            Who can message me
+        </div>
+    </div>
+
     <div class="user-details-section-title">
         <div class="title">User Details</div>
     </div>
     <div class="user-interests-section-title">
         <div class="title">Interests</div>
     </div>
-    <div class="user-socials-section-title">
-        <div class="title">Social Networks</div>
+    <div class="who-can-message-section">
+        <div>
+            <input class="styled-checkbox" id="everyone" type="radio" name="whoCanMessage" Formcontrol="whoCanMessage"
+                   checked="true">
+            <label for="everyone">Everyone</label>
+        </div>
+        <div>
+            <input class="styled-checkbox" id="friendsCheckbox" type="radio" name="whoCanMessage"
+                   Formcontrol="whoCanMessage">
+            <label for="friendsCheckbox">Only my Friends</label>
+        </div>
     </div>
 
     <div class="user-details-section">
         <div class="form-input-group">
-            <input
-                class="input"
-                type="text"
-                id="firstName"
-                formControlName="firstName"
-                minlength="2"
-                maxlength="25"
-                required="" />
+            <input class="input" type="text" id="firstName" formControlName="firstName" minlength="2" maxlength="25"
+                   required>
+
             <div *ngIf="!firstName.getRawValue()" class="placeholder">First Name</div>
             <label *ngIf="firstName.getRawValue()" class="label" for="firstName">First Name</label>
-
             <div class="errors-wrp" *ngIf="firstName.errors">
                 <mat-error class="error" *ngIf="firstName.errors?.['minlength'] && firstName.touched">
-                    <img src="/assets/user-profile/alert-triangle.svg" alt="" />
+                    <img src="/assets/user-profile/alert-triangle.svg" alt=""/>
                     Minimal length is 2 characters
                 </mat-error>
                 <mat-error class="error" *ngIf="firstName.errors?.['required'] && firstName.touched">
-                    <img src="/assets/user-profile/alert-triangle.svg" alt="" />
+                    <img src="/assets/user-profile/alert-triangle.svg" alt=""/>
                     This field is required
                 </mat-error>
             </div>
-            <div class="error-surface" *ngIf="firstName.errors && firstName.touched"></div>
         </div>
 
         <div class="form-input-group">
             <label class="label" *ngIf="lastName.getRawValue()">Last Name</label>
             <div *ngIf="!lastName.getRawValue()" class="placeholder">Last Name</div>
-            <input
-                class="input"
-                type="text"
-                id="lastName"
-                formControlName="lastName"
-                required
-                minlength="2"
-                maxlength="25" />
+            <input class="input" type="text" id="lastName" formControlName="lastName" required minlength="2"
+                   maxlength="25">
 
             <div class="errors-wrp" *ngIf="lastName.errors">
                 <mat-error class="error" *ngIf="lastName.errors?.['minlength'] && lastName.touched">
-                    <img src="/assets/user-profile/alert-triangle.svg" alt="" />
+                    <img src="/assets/user-profile/alert-triangle.svg" alt=""/>
                     Minimal length is 2 characters
                 </mat-error>
                 <mat-error class="error" *ngIf="lastName.errors?.['required'] && lastName.touched">
-                    <img src="/assets/user-profile/alert-triangle.svg" alt="" />
+                    <img src="/assets/user-profile/alert-triangle.svg" alt=""/>
                     This field is required
                 </mat-error>
             </div>
-            <div *ngIf="lastName.errors && lastName.touched" class="error-surface"></div>
         </div>
 
         <div class="form-input-group">
-            <app-calendar *ngIf="!dateOfBirth.getRawValue()" placeholder="Date of birth"></app-calendar>
-            <label *ngIf="dateOfBirth.getRawValue()" class="label" for="firstName">First Name</label>
+            <app-calendar id="birthDate" name="birthDate" formControlName="birthDate"
+                          placeholder="Date of Birth"></app-calendar>
         </div>
 
         <div class="form-input-group">
+            <label class="label" *ngIf="sex.getRawValue()">Sex</label>
             <div *ngIf="!sex.getRawValue()" class="placeholder">Sex</div>
-            <ng-select
-                class="custom"
-                dropdownPosition="bottom"
-                appearance="underline"
-                #sexSelect
-                labelForId="sex"
-                formControlName="sex"
-                bindLabel="Sex">
-                <ng-option class="select-option" *ngFor="let sexOption of sexOptions" value="{{ sexOption }}">{{
-                    sexOption
-                }}</ng-option>
+            <ng-select class="custom" dropdownPosition="bottom" appearance="underline" #sexSelect labelForId="sex"
+                       formControlName="sex" bindLabel="Sex">
+                <ng-option class="select-option" *ngFor="let sexOption of sexOptions"
+                           value="{{sexOption}}">{{sexOption}}</ng-option>
             </ng-select>
             <mat-icon class="expand-icon">expand_more</mat-icon>
         </div>
 
         <div class="form-input-group">
             <div *ngIf="!country.getRawValue()" class="placeholder">Country</div>
-            <ng-select
-                class="custom"
-                dropdownPosition="bottom"
-                appearance="underline"
-                #countrySelect
-                labelForId="country"
-                formControlName="country"
-                bindLabel="Country">
-                <ng-option class="select-option" *ngFor="let country of countries" value="{{ country.name }}"
-                    >{{ country.name }}
-                    <img class="flag" src="{{ country.flag }}" />
+            <label class="label" *ngIf="country.getRawValue()">Country</label>
+            <ng-select class="custom" dropdownPosition="bottom" appearance="underline" #countrySelect
+                       labelForId="country"
+                       formControlName="country" bindLabel="Country">Country
+                <ng-option class="select-option" *ngFor="let country of countries"
+                           value="{{country.name}}">{{country.name}}
+                    <img class="flag" src="{{country.flag_rectangular}}">
                 </ng-option>
+
             </ng-select>
             <mat-icon class="expand-icon">expand_more</mat-icon>
         </div>
 
         <div class="form-input-group">
             <div *ngIf="!language.getRawValue()" class="placeholder">Native Language</div>
-            <ng-select
-                class="custom"
-                dropdownPosition="bottom"
-                appearance="underline"
-                #languageSelect
-                formControlName="language">
-                <ng-option class="select-option" *ngFor="let lang of languages" value="{{ lang }}">{{
-                    lang
-                }}</ng-option>
+            <label class="label" *ngIf="language.getRawValue()">Native Language</label>
+            <ng-select class="custom" dropdownPosition="bottom" appearance="underline" #languageSelect
+                       formControlName="language">
+                <ng-option class="select-option" *ngFor="let lang of languages" value="{{lang}}">{{lang}}</ng-option>
             </ng-select>
             <mat-icon class="expand-icon">expand_more</mat-icon>
         </div>
 
         <div class="form-input-group">
             <div *ngIf="!languageLevel.getRawValue()" class="placeholder">Level in English</div>
-            <ng-select
-                class="custom"
-                dropdownPosition="bottom"
-                appearance="underline"
-                #englishLevelSelect
-                formControlName="languageLevel">
-                <ng-option class="select-option" *ngFor="let level of languageLevelOptions" value="{{ level }}">
-                    {{ level }}
+            <label class="label" *ngIf="languageLevel.getRawValue()">Level in English</label>
+            <ng-select class="custom" dropdownPosition="bottom" appearance="underline" #languageLevelSelect
+                       formControlName="languageLevel">
+                <ng-option class="select-option" *ngFor="let level of languageLevelOptions" value="{{level}}">
+                    {{level}}
                 </ng-option>
             </ng-select>
             <mat-icon class="expand-icon">expand_more</mat-icon>
         </div>
     </div>
-    <div class="user-interests-section"></div>
-    <div class="user-socials-section">
-        <div class="form-input-group">
-            <label class="label" *ngIf="email.getRawValue()">Email</label>
-            <div *ngIf="!email.getRawValue()" class="placeholder">Email</div>
-            <input readonly class="input" type="text" id="email" formControlName="email" />
+    <div class="user-interests-section">
+        <div *ngFor="let item of allTags; let i = index" class="user-interest-content">
+            <input type="checkbox" id="{{i}}" [checked]=includesTags(item.id)
+                   class="item-checkbox"
+                   (change)="selectInterest(item) " />
+            <label class="item-checkbox-label" for="{{i}}">
+                <div class="interest-image-container ">
+                    <img class="icon" [src]="getIconById(item.id)" alt="image"/>
+                </div>
+                <div class="interest-image-text">{{item.name}}</div>
+            </label>
         </div>
-
-        <div class="form-input-group">
-            <label class="label" *ngIf="instagram.getRawValue()">Instagram</label>
-            <div *ngIf="!instagram.getRawValue()" class="placeholder">Instagram</div>
-            <input class="input" type="text" id="instagram" formControlName="instagram" />
-        </div>
-
-        <div class="form-input-group">
-            <label class="label" *ngIf="facebook.getRawValue()">Facebook</label>
-            <div *ngIf="!facebook.getRawValue()" class="placeholder">Facebook</div>
-            <input class="input" type="text" id="facebook" formControlName="facebook" />
-        </div>
-
-        <div class="form-input-group">
-            <label class="label" *ngIf="other.getRawValue()">Other</label>
-            <div *ngIf="!other.getRawValue()" class="placeholder">Other</div>
-            <input class="input" type="text" id="other" formControlName="other" />
-        </div>
-
-        <button type="submit">Save</button>
+    </div>
+    <div class="submit-button-section">
+        <button type="submit" [disabled]="firstName.invalid || lastName.invalid" class="submit">Save</button>
     </div>
 </form>

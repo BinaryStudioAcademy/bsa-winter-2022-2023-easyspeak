@@ -4,7 +4,7 @@ import { Utils } from '@shared/utils/user-card.utils';
 import languagesLib from 'iso-639-1';
 import countriesLib from 'iso-3166-1';
 
-import { CountriesTzLangProviderService } from 'src/app/services/countries-tz-lang-provider.service';
+import { CountriesTzLangProviderService, CountriesTzLangProviderService } from 'src/app/services/countries-tz-lang-provider.service';
 
 import { countryCodes } from './mappingLanguagetoCountry';
 
@@ -53,5 +53,17 @@ export class UserCardComponent implements OnInit {
 
     buttonFollow() {
         return true;
+    }
+
+    public getUserCountryFlag() {
+        return this.countriesService.getCountriesList().find((c) => c.name === this.user.country)?.flag;
+    }
+
+    getUserFirstName(): string {
+        return this.user.name.split(' ')[0];
+    }
+
+    getUserLastName(): string {
+        return this.user.name.split(' ')[1];
     }
 }

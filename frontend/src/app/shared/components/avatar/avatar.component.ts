@@ -1,6 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { AuthService } from '@core/services/auth.service';
-import { IUserInfo } from '@shared/models/IUserInfo';
 import { ColorGenerationUtils } from '@shared/utils/color.utils';
 
 @Component({
@@ -8,23 +7,23 @@ import { ColorGenerationUtils } from '@shared/utils/color.utils';
     templateUrl: './avatar.component.html',
     styleUrls: ['./avatar.component.sass'],
 })
-export class AvatarComponent implements OnInit {
-    @Input() size: number;
+export class AvatarComponent {
+    @Input() firstName: string;
 
-    userInfo: IUserInfo;
+    @Input() lastName: string;
+
+    @Input() imagePath: string;
+
+    @Input() imageSize: number;
 
     constructor(private authService: AuthService) {}
 
-    ngOnInit(): void {
-        const userSection = this.authService.getUserSection();
-
-        if (userSection) {
-            this.userInfo = userSection;
-        }
-    }
-
     getInitials(): string {
-        return (this.userInfo.firstName[0] + this.userInfo.lastName[0]).toUpperCase();
+        if (!this.firstName || !this.lastName) {
+            return 'NO';
+        }
+
+        return (this.firstName[0] + this.lastName[0]).toUpperCase();
     }
 
     getAvatarBackground(): string {
@@ -34,15 +33,15 @@ export class AvatarComponent implements OnInit {
     }
 
     getAvatarImage(): string {
-        if (this.userInfo.imagePath && this.userInfo.imagePath.match(/^predefinedavatar-\d+/)) {
-            return `assets/avatars/${this.userInfo.imagePath}`;
+        if (this.imagePath && this.imagePath.match(/^predefinedavatar-\d+/)) {
+            return `assets/avatars/${this.imagePath}`;
         }
 
-        return this.userInfo.imagePath;
+        return this.imagePath;
     }
 
     getAvatarSrc(): string {
-        if (!this.userInfo.imagePath) {
+        if (!this.imagePath) {
             return '';
         }
 

@@ -21,12 +21,18 @@
 
 .header-content
     display: flex
-    justify-content: center
+    width: 33%
     flex-direction: row
     align-items: center
     height: 100%
     &:focus
         outline: none
+
+.main-area
+    justify-content: center
+
+.right-area
+    justify-content: right
 
 .title img
     height: 35px
@@ -59,9 +65,6 @@
     line-height: 146%
     &:hover
       cursor: pointer
-
-.main-area
-    padding-left: 10%
 
 .main-area p
     margin: 0 10px
@@ -107,6 +110,14 @@
     &:hover
       cursor: pointer
 
+.user-avatar-placeholder
+    margin: 0
+    border-radius: 50%
+    width: 36px
+    height: 36px
+    overflow: hidden
+    font-size: 36px
+
 .user-area span
     padding: 0 10px
     font-weight: 500
@@ -141,3 +152,9 @@
 ::ng-deep .mdc-list-item__primary-text
     display: flex
     align-items: center
+
+::ng-deep.cdk-overlay-container .notifications-menu
+    margin-top: 0.5em
+
+::ng-deep.cdk-overlay-container .user-menu
+    margin-top: 0.5em

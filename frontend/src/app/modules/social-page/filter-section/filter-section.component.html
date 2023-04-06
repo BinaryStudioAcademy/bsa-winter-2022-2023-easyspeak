@@ -8,7 +8,6 @@
             (selectedFilters)="update('compatibility', $event)"
         ></app-dropdown>
         <app-dropdown
-            [isSingleChoice]="true"
             btnLabel='Native Language'
             [selectedItems]="selectedLanguagesFilters"
             [data]="languages"
@@ -39,7 +38,7 @@
                     <mat-icon (click)="remove('lang', selectedLang)">close</mat-icon>
                 </div>
             </div>
-            <div *ngFor="let selectedLevel of selectedLevelFilters">
+            <div *ngFor="let selectedLevel of selectedLevelWithSubtitleFilters">
                 <div *ngIf="selectedLevel" class="selected-filter-item">
                     {{selectedLevel}}
                     <mat-icon (click)="remove('level', selectedLevel)">close</mat-icon>

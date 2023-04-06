@@ -4,7 +4,11 @@
         <div class="user-general-info">
             <div class="left-area">
                 <div class="picture">
-                    <img alt="Image" class="picture-placeholder" src="{{ user.imagePath }}" />
+                    <app-avatar
+                        [firstName]="getUserFirstName()"
+                        [lastName]="getUserLastName()"
+                        [imagePath]="user.imagePath"
+                        [imageSize]="56"></app-avatar>
                 </div>
 
                 <div class="info">

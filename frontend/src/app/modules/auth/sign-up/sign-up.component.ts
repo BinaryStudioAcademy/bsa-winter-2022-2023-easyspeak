@@ -6,11 +6,12 @@ import { AuthService } from '@core/services/auth.service';
 import { UserService } from '@core/services/user.service';
 import { NgSelectComponent } from '@ng-select/ng-select';
 import { Ages } from '@shared/data/ages.util';
-import { EnglishLevel } from '@shared/data/englishLevel';
+import { LanguageLevel } from '@shared/data/languageLevel';
 import { passFormatRegex } from '@shared/data/regex.util';
 import { Sex } from '@shared/data/sex';
 import { INewUser } from '@shared/models/INewUser';
 import { ToastrService } from 'ngx-toastr';
+import { switchMap } from 'rxjs';
 
 import { CountriesTzLangProviderService } from 'src/app/services/countries-tz-lang-provider.service';
 
@@ -23,11 +24,11 @@ import { matchpassword } from './matchpassword.validator';
     styleUrls: ['./sign-up.component.sass'],
 })
 export class SignUpComponent extends BaseComponent implements OnInit {
-    emglishLevelEnumeration = EnglishLevel;
+    languageLevelEnumeration = LanguageLevel;
 
     sexEnumeration = Sex;
 
-    englishLevels: string[];
+    languageLevels: string[];
 
     ages: string[];
 
@@ -89,25 +90,18 @@ export class SignUpComponent extends BaseComponent implements OnInit {
     private setUpData() {
         this.countries = this.countriesTzLangProvider.getCountriesList().map((x) => x.name);
         this.languages = this.countriesTzLangProvider.getLanguagesList();
-        this.englishLevels = Object.values(EnglishLevel) as string[];
+        this.languageLevels = Object.values(LanguageLevel) as string[];
         this.sexOptions = Object.values(this.sexEnumeration) as string[];
         this.ages = Ages;
     }
 
     private signUp() {
-        this.authService.signUp(this.email.value, this.password.value)
-            .then(() => {
-                this.createUser()
-                    .pipe(this.untilThis)
-                    .subscribe(
-                        () => {
-                            this.toastr.success('Account successfully created', 'Success!');
-                            this.router.navigate(['topics']);
-                        },
-                        (error) => {
-                            this.toastr.error(error.message, 'Sign up');
-                        },
-                    );
+        this.authService
+            .signUp(this.email.value, this.password.value)
+            .pipe(switchMap(() => this.createUser().pipe(this.untilThis)))
+            .subscribe(() => {
+                this.toastr.success('Account successfully created', 'Success!');
+                this.router.navigate(['topics']);
             });
     }
 
@@ -120,7 +114,7 @@ export class SignUpComponent extends BaseComponent implements OnInit {
             firstName: this.firstName.value,
             lastName: this.lastName.value,
             email: this.email.value,
-            age: this.dateOfBirth.value,
+            birthDate: this.dateOfBirth.value,
             sex: this.sex.value,
             language: this.language.value,
             languageLevel: this.languageLevel.value,

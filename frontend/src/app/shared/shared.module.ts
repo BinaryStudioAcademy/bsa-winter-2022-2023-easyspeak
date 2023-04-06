@@ -22,6 +22,7 @@ import { UserNotificationComponent } from './components/user-notification/user-n
 import { YoutubePlayerComponent } from './components/youtube-player/youtube-player.component';
 import { ClickOutsideDirective } from './directives/click-outside.directive';
 import { PasswordVisibilityDirective } from './directives/password-visibility.directive';
+import { ScrollToBottomDirective } from './directives/scroll-to-bottom-directive';
 import { TooltipWhenOverflowDirective } from './directives/tooltip-when-overflow.directive';
 
 @NgModule({
@@ -53,6 +54,7 @@ import { TooltipWhenOverflowDirective } from './directives/tooltip-when-overflow
         ClickOutsideDirective,
         TooltipWhenOverflowDirective,
         AvatarComponent,
+        ScrollToBottomDirective,
     ],
     exports: [
         CommonModule,
@@ -74,6 +76,7 @@ import { TooltipWhenOverflowDirective } from './directives/tooltip-when-overflow
         PasswordVisibilityDirective,
         TooltipWhenOverflowDirective,
         AvatarComponent,
+        ScrollToBottomDirective,
     ],
 })
 export class SharedModule {}

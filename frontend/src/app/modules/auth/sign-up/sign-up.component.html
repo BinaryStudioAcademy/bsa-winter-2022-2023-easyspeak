@@ -48,17 +48,7 @@
             </div>
             <div class="age-sex-section">
                 <div class="form-group-item">
-                    <ng-select #ageDropdown [items]="ages" class="custom" dropdownPosition="bottom"
-                        appearance="underline" formControlName="dateOfBirth">
-                    </ng-select>
-
-                    <div class="placeholder" *ngIf="!this.dateOfBirth.value" (click)="expandAgeDropdown()">
-                        Age
-                    </div>
-
-                    <mat-icon class="expand-icon" (click)="expandAgeDropdown()">
-                        expand_more
-                    </mat-icon>
+                    <app-calendar id="dateOfBirth" formControlName="dateOfBirth" name="dateOfBirth" placeholder="Date of Birth"></app-calendar>
 
                     <div class="errors-wrp">
                         <mat-error class="error" *ngIf="this.dateOfBirth.invalid && this.userRegisterForm.submitted">
@@ -142,7 +132,7 @@
                 <div class="error-surface" *ngIf="this.language.invalid && this.userRegisterForm.submitted"></div>
             </div>
             <div class="form-group-item">
-                <ng-select #levelDropdown [items]="englishLevels" class="custom" dropdownPosition="bottom"
+                <ng-select #levelDropdown [items]="languageLevels" class="custom" dropdownPosition="bottom"
                     appearance="underline" formControlName="languageLevel">
                 </ng-select>
 

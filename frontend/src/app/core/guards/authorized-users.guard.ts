@@ -8,7 +8,7 @@ export class AuthorizedUsersGuard implements CanActivate {
 
     canActivate(): boolean {
         if (this.auth.isAuthenticated()) {
-            this.router.navigate(['/main']);
+            this.router.navigate(['/timetable']);
 
             return false;
         }

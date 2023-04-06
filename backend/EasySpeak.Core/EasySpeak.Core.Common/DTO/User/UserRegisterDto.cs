@@ -10,7 +10,7 @@ namespace EasySpeak.Core.Common.DTO.User
     {
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
-        public int Age { get; set; }
+        public DateTime BirthDate { get; set; }
         public string Email { get; set; } = string.Empty;
         public string Sex { get; set; } = string.Empty;
         public string LanguageLevel { get; set; } = string.Empty;

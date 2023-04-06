@@ -7,18 +7,22 @@
             </div>
         </div>
         <div class="header-content main-area">
-            <p routerLink="social" routerLinkActive="active" #link="routerLinkActive" [class.disabled]="!link.isActive">
+            <p
+                routerLink="/social"
+                routerLinkActive="active"
+                #link="routerLinkActive"
+                [class.disabled]="!link.isActive">
                 Social
             </p>
             <p
-                routerLink="timetable"
+                routerLink="/timetable"
                 routerLinkActive="active"
                 #linkTimetable="routerLinkActive"
                 [class.disabled]="!linkTimetable.isActive">
                 Timetable
             </p>
         </div>
-        <div class="header-content">
+        <div class="header-content right-area">
             <div class="remaindings">
                 <div matBadge="1" class="reminding">
                     <img src="/assets/header/mail-icon.svg" />
@@ -30,16 +34,23 @@
                         class="reminding">
                         <img src="/assets/header/notification-icon.svg" />
                     </div>
-                    <mat-menu #notifications="matMenu" xPosition="after">
+                    <mat-menu class="notifications-menu" #notifications="matMenu" xPosition="after">
                         <app-user-notification #notificationsMenu> </app-user-notification>
                     </mat-menu>
                 </div>
             </div>
             <div [matMenuTriggerFor]="menu" class="user-area">
-                <app-avatar [size]="36"></app-avatar>
-                <span>{{currentUser?.firstName}} {{currentUser?.lastName}}</span>
+                <div class="user-avatar-placeholder">
+                    <app-avatar
+                        [firstName]="currentUser.firstName"
+                        [lastName]="currentUser.lastName"
+                        [imagePath]="currentUser.imagePath"
+                        [imageSize]="36">
+                    </app-avatar>
+                </div>
+                <span>{{ currentUser.firstName }} {{ currentUser.lastName }}</span>
                 <img src="/assets/header/chevron-down-icon.svg" />
-                <mat-menu #menu="matMenu" xPosition="before">
+                <mat-menu class="user-menu" #menu="matMenu" xPosition="before">
                     <button mat-menu-item class="menu-element">
                         <img class="menu-icon" src="/assets/header/following-icon.svg" />
                         <span class="menu-text">Following</span>

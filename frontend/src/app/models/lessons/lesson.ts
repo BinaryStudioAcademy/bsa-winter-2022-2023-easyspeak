@@ -3,13 +3,15 @@ export interface Lesson {
     imgPath: string;
     videoId: string;
     zoomLink: string;
+    zoomLinkHost: string;
     title: string;
-    time: string;
+    time: Date;
     tutorAvatarPath: string;
     tutorFlagPath: string;
     tutorName: string;
     topics: string[];
     subscribersCount: number;
     level: string;
-    isDisabled: boolean;
+    isSubscribed: boolean;
+    startAt: Date;
 }

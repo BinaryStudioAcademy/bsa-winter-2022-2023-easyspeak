@@ -1,10 +1,31 @@
 @import "src/styles/colors"
 
-.notifications
+.container
     width: 280px
+    max-height: 500px
     display: flex
     flex-direction: column
-    max-height: 500px
+    gap: 5px
+
+
+.header-section
+    display: flex
+    justify-content: space-between
+    align-items: center
+    box-sizing: border-box
+    padding: 0.2em 0.8em
+    .title
+        font-size: 16px
+        font-weight: 500
+    .clear-button
+        color: $blue-200
+        text-decoration: none
+
+
+
+.notifications 
+    display: flex
+    flex-direction: column
     overflow-y: scroll
     overflow-x: hidden
     scrollbar-width: none
@@ -12,24 +33,82 @@
         width: 0
 
 
+
 .notification-element
     display: flex
-    justify-content: flex-start
-    align-items: center
-    width: 100%
-    height: 44px
-    max-height: 88px
+    justify-content: space-between
     border: hidden
     background-color: $white
+    box-sizing: border-box
+    width: 100%
+    height: 100%
+    gap: 10px
+    padding: 0.5em 0.7em
     &:hover
       cursor: pointer
       background-color: $gray-100
 
-.notification-icon
-    padding-left: 10px
-    padding-right: 10px
 
-.notification-text
+.notification-element-content
+    display: flex
+    gap: 10px
+
+
+.unread-indicator-wrp
+    display: flex
+    align-items: center
+
+.unread-indicator
+    background-color: $blue-200
+    width: 0.4em
+    height: 0.4em
+    border-radius: 50%
+
+.notification-text-wrp
+    display: flex
+    flex-direction: column
+    text-align: start
+    gap: 4px
+    width: 80%
     font-weight: 400
     font-size: 14px
     line-height: 120%
+    height: max-content
+    .notification-text
+        color: $gray-300
+    .notification-timespan
+        color: $blue-200
+
+.author-icon-wrp
+    width: 2.5em
+    height: 2.5em
+    position: relative
+    .author-icon
+        width: 33px
+        height: 33px
+        border-radius: 50%
+    .notification-type-icon
+        position: absolute
+        height: 1em
+        width: 1em
+        background-color: $turquoise-100
+        opacity: 0.7
+        border-radius: 50%
+        display: flex
+        justify-content: center
+        align-items: center
+        bottom: 7px
+        right: 5px
+        img
+            height: 0.7em
+            width: 0.6em
+
+.notification-link
+    display: flex
+    gap: 0.4em
+    align-items: center
+    a 
+        color: $blue-200
+    img
+        height: 0.8em
+        color: $blue-200

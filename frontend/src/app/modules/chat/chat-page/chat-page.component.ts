@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ScrollToBottomDirective } from '@shared/directives/scroll-to-bottom-directive';
 import { IChatPerson } from '@shared/models/IChatPerson';
 import { IMessage } from '@shared/models/IMessage';
 import * as moment from 'moment';
-// import { HttpService } from '@core/services/http.service';
 import { Observable, of } from 'rxjs';
 
 interface IMessageGroup {
@@ -17,11 +17,14 @@ interface IMessageGroup {
     styleUrls: ['./chat-page.component.sass'],
 })
 export class ChatPageComponent {
+    @ViewChild(ScrollToBottomDirective) scroll: ScrollToBottomDirective;
+
     people: IChatPerson[] = [
         { name: 'Giana Levin', isOnline: true, lastMessage: 'Lorem ipsum dolor sit amet consectetur?', numberOfUnreadMessages: 2 },
         { name: 'Giana Levin', isOnline: false, lastMessage: 'Lorem ipsum dolor sit amet consectetur?', numberOfUnreadMessages: 1 },
         { name: 'Giana Levin', isOnline: false, lastMessage: 'Lorem ipsum dolor sit amet consectetur?', numberOfUnreadMessages: 170 },
         { name: 'Giana Levin', isOnline: true, lastMessage: 'Lorem ipsum dolor sit amet consectetur?', numberOfUnreadMessages: 0 },
+        { name: 'Giana Levin', isOnline: false, lastMessage: 'Lorem ipsum dolor sit amet consectetur?', numberOfUnreadMessages: 170 },
     ];
 
     totalMessage = this.people.reduce((sum, person) => sum + person.numberOfUnreadMessages, 0);
@@ -87,6 +90,10 @@ export class ChatPageComponent {
                 createdAt: new Date(Date.now()),
             }];
             this.groupedMessages = this.groupByDate(this.messages);
+
+            setInterval(() => {
+                this.scroll.scrollToBottom();
+            }, 50);
         }
     }
 
