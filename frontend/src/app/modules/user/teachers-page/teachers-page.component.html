@@ -1,0 +1,79 @@
+<div class="container">
+    <div class="profile">
+        <div class="header">
+            <h1>Teachers Profile</h1>
+        </div>
+        <div class="card">
+            <div class="card-left">
+                <div class="bio">
+                    <div class="avatar">
+                        <app-avatar
+                        [firstName]="currentUser.firstName"
+                        [lastName]="currentUser.lastName"
+                        [imagePath]="currentUser.imagePath"
+                        [imageSize]="36">
+                        </app-avatar>
+                    </div>
+                    <div class="greeting">
+                        <p class="name">Hello, {{currentUser.firstName}} {{currentUser.lastName}}</p>
+                        <p class="question">Are you ready for the new Group Classes?</p>
+                    </div>
+                </div>
+                <div class="stats">
+                    <div class="stats-card">
+                        <div class="stats-icon">
+                            <div class="icon-wrapper">
+                                <img class="icon" src="" alt="image"/>
+                            </div>
+                        </div>
+                        <div class="stats-text">
+                            <p class="stats-desription">Total Group Classes</p>
+                            <p class="stats-count">{{totalClasses}}</p>
+                        </div>
+                    </div>
+                    <div class="stats-card">
+                        <div class="stats-icon">
+                            <div class="icon-wrapper">
+                                <img class="icon" src="" alt="image"/>
+                            </div>
+                        </div>
+                        <div class="stats-text">
+                            <p class="stats-desription">Group Classes Canceled</p>
+                            <p class="stats-count">{{canceledClasses}}</p>
+                        </div>
+                    </div>
+                    <div class="stats-card">
+                        <div class="stats-icon">
+                            <div class="icon-wrapper">
+                                <img class="icon" src="" alt="image"/>
+                            </div>
+                        </div>
+                        <div class="stats-text">
+                            <p class="stats-desription">Future Group Classes</p>
+                            <p class="stats-count">{{futureClasses}}</p>
+                        </div>
+                    </div>
+                    <div class="stats-card">
+                        <div class="stats-icon">
+                            <div class="icon-wrapper">
+                                <img class="icon" src="" alt="image"/>
+                            </div>
+                        </div>
+                        <div class="stats-text">
+                            <p class="stats-desription">Pupils visited Classes</p>
+                            <p class="stats-count">{{totalStudents}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-right">
+                <div class="add-class">
+
+                </div>
+                <div class="next-class-card">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
