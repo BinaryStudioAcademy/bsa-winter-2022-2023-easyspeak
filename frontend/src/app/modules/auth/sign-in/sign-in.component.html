@@ -7,7 +7,9 @@
 
                     formControlName="email"
                     placeholder="Email"
-                    email="{{this.email}}"/>
+                    email="{{this.email}}"
+                    (focus)="onFocus()"
+                />
 
                 <div class="errors-wrp">
 <!--                    <mat-error class="error" *ngIf="this.email.invalid && this.userLoginForm.submitted">-->
@@ -15,19 +17,26 @@
 <!--                        {{getErrorMessage(email)}}-->
 <!--                    </mat-error>-->
                     <mat-error class="error"
-                               *ngIf="(email.errors?.['minlength'] || email.errors?.['maxlength'])
-                            &&!doesntExist">
+                               *ngIf="
+                               !clearErrorMessage
+                               &&lengthError(email)
+                               &&userLoginForm.submitted">
                         <img src="/assets/user-profile/alert-triangle.svg" alt="">
-                        Min 3, max 50
+                        Min 3, max 50 {{lengthError(this.email)}}
                     </mat-error>
-                    <mat-error class="error" *ngIf="doesntExist">
+                    <mat-error class="error"
+                               *ngIf="
+                               !clearErrorMessage
+                               &&doesntExist
+                               &&email.errors?.['required']">
                         <img src="/assets/user-profile/alert-triangle.svg" alt="">
                         User with such email doesn’t exist
                     </mat-error>
                 </div>
 
                 <div class="error-surface"
-                    *ngIf="this.email.errors && this.userLoginForm.submitted">
+                    *ngIf="!clearErrorMessage&&(doesntExist&&email.errors?.['required']||lengthError(email)
+                               &&userLoginForm.submitted)">
                 </div>
             </div>
 

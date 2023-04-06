@@ -15,23 +15,24 @@ import { validationErrorMessage } from '../sign-up/error-helper';
 export class SignInComponent {
     form: FormGroup = new FormGroup({
         email: new FormControl('', [
-            // Validators.required,
-            // Validators.email,
+            Validators.required,
             Validators.maxLength(50),
             Validators.minLength(3),
-            // Validators.pattern(emailFormatRegex),
+            //Validators.pattern(emailFormatRegex),
         ]),
         password: new FormControl('', [
-            // Validators.required,
+            Validators.required,
             Validators.minLength(6),
             Validators.maxLength(25),
-            // Validators.pattern(passFormatRegex),
+            Validators.pattern(passFormatRegex),
         ]),
     });
 
     doesntExist: boolean;
 
     wrongPassword: boolean;
+
+    clearErrorMessage: boolean;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -42,6 +43,8 @@ export class SignInComponent {
     }
 
     public signIn() {
+        this.clearErrorMessage = false;
+        if (this.lengthError(this.email) || this.lengthError(this.password)) { return; }
         this.authService
             .signIn(this.email.value, this.password.value)
             .then(() => {
@@ -72,5 +75,13 @@ export class SignInComponent {
 
     get password(): FormControl {
         return this.form.get('password') as FormControl;
+    }
+
+    lengthError(item: FormControl) {
+        return item.errors?.['required'] || item.errors?.['minlength'] || item.errors?.['maxlength'];
+    }
+
+    onFocus() {
+        this.clearErrorMessage = true;
     }
 }
