@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AdminGuard } from '@core/guards/admin.guard';
 import { MaterialModule } from '@shared/material/material.module';
 import { SharedModule } from '@shared/shared.module';
 
@@ -13,5 +14,6 @@ import { LessonsRoutingModule } from './lessons-routing.module';
     declarations: [LessonsPageComponent, LessonsCreateComponent, LessonComponent],
     imports: [CommonModule, FormsModule, ReactiveFormsModule, MaterialModule, LessonsRoutingModule, SharedModule],
     exports: [LessonsPageComponent],
+    providers: [AdminGuard],
 })
 export class LessonsModule {}
