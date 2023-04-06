@@ -42,6 +42,19 @@ services:
         env_file:
             - /etc/environment
 
+    easyspeak_emailer:
+        image: tatihutii/easyspeak_comunicator:latest
+        container_name: 'easyspeak_comunicator'
+        restart: on-failure
+        networks:
+            - back
+        ports:
+            - "5080:5080"
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Production
+        env_file:
+            - /etc/environment
+
     easyspeak_frontend:
         depends_on:
             - easyspeak_core
