@@ -46,7 +46,7 @@
         </div>
         <div class="buttons">
             <button class="button">
-                <img src="assets/user-card-icons/clock-icon.svg" alt="book" />
+                <img [src]="!isRequest ? 'assets/user-card-icons/clock-icon.svg' : 'assets/user-card-icons/accept.svg'" alt="book" />
                 <span>Book</span>
             </button>
             <button class="button">

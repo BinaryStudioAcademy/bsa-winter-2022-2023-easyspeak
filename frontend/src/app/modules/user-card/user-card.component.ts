@@ -11,6 +11,7 @@ import { CountriesTzLangProviderService } from 'src/app/services/countries-tz-la
 })
 export class UserCardComponent implements OnInit {
     @Input() user: UserCard = Utils.user;
+    @Input() isRequest = false;
 
     constructor(private countriesService: CountriesTzLangProviderService) {}
 
