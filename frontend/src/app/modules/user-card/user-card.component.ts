@@ -4,7 +4,7 @@ import { Utils } from '@shared/utils/user-card.utils';
 import languagesLib from 'iso-639-1';
 import countriesLib from 'iso-3166-1';
 
-import { CountriesTzLangProviderService, CountriesTzLangProviderService } from 'src/app/services/countries-tz-lang-provider.service';
+import { CountriesTzLangProviderService } from 'src/app/services/countries-tz-lang-provider.service';
 
 import { countryCodes } from './mappingLanguagetoCountry';
 
