@@ -34,6 +34,8 @@ export class LessonsCreateComponent implements OnInit {
 
     submitted: boolean;
 
+    isPast: boolean;
+
     myForm: FormGroup;
 
     constructor(
@@ -97,13 +99,21 @@ export class LessonsCreateComponent implements OnInit {
         }
 
         const [hours, minutes] = this.time.split('.');
-        const startAt = moment(this.date?.value, 'YYYY-MM-DD').set({ hour: parseInt(hours, 10), minute: parseInt(minutes, 10) }).toDate();
+        const startAt = moment(this.date?.value, 'YYYY-MM-DD')
+            .set({ hour: parseInt(hours, 10), minute: parseInt(minutes, 10) })
+            .toDate();
 
-        const lessonQuestions: INewQuestion[] =
-            this.questions?.value
-                .split('\n')
-                .filter((entry: string) => entry.trim() !== '')
-                .map((element: string) => ({ topic: element, subquestions: [] }));
+        const timeNow = moment(Date.now()).toDate();
+
+        this.isPast = startAt < timeNow;
+        if (this.isPast) {
+            return;
+        }
+
+        const lessonQuestions: INewQuestion[] = this.questions?.value
+            .split('\n')
+            .filter((entry: string) => entry.trim() !== '')
+            .map((element: string) => ({ topic: element, subquestions: [] }));
 
         const lessonTags: INewTag[] = this.tagsList.map((element: string) => ({ name: element }));
 

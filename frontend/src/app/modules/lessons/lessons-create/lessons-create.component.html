@@ -23,9 +23,10 @@
             </div>
 
             <mat-error class="error-container">
-                <div class="error" *ngIf="date?.invalid && submitted">
+                <div class="error" *ngIf="(date?.invalid || isPast) && submitted">
                     <img src="/assets/user-profile/alert-triangle.svg" alt="" />
-                    <p>Date is Required</p>
+                    <p *ngIf="!isPast">Date is Required</p>
+                    <p *ngIf="isPast">That time has passed</p>
                 </div>
             </mat-error>
         </div>
@@ -45,9 +46,10 @@
             </div>
 
             <mat-error class="error-container">
-                <div class="error" *ngIf="!time && submitted">
+                <div class="error" *ngIf="(!time || isPast) && submitted">
                     <img src="/assets/user-profile/alert-triangle.svg" alt="" />
-                    <p>Time is Required</p>
+                    <p *ngIf="!isPast">Time is Required</p>
+                    <p *ngIf="isPast">That time has passed</p>
                 </div>
             </mat-error>
         </div>
