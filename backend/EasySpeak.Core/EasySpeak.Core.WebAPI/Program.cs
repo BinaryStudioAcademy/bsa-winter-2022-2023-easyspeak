@@ -1,3 +1,4 @@
+using EasySpeak.Communicator.WebAPI.Services;
 using EasySpeak.Core.WebAPI.Extensions;
 using EasySpeak.Core.WebAPI.Extentions;
 using EasySpeak.Core.WebAPI.Hubs;

@@ -26,6 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\EasySpeak.Communicator\EasySpeak.Communicator.WebAPI\EasySpeak.Communicator.WebAPI.csproj" />
     <ProjectReference Include="..\..\EasySpeak.RabbitMQ\EasySpeak.RabbitMQ.csproj" />
     <ProjectReference Include="..\EasySpeak.Core.BLL\EasySpeak.Core.BLL.csproj" />
     <ProjectReference Include="..\EasySpeak.Core.Common\EasySpeak.Core.Common.csproj" />
