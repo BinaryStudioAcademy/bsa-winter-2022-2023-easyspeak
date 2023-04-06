@@ -10,7 +10,6 @@ import { IBaseTag } from '@shared/models/user/IBaseTag';
 import { ITag } from '@shared/models/user/ITag';
 import { getTags } from '@shared/utils/tagsForInterests';
 import { ToastrService } from 'ngx-toastr';
-import { find } from 'rxjs';
 
 import { CountriesTzLangProviderService } from 'src/app/services/countries-tz-lang-provider.service';
 
