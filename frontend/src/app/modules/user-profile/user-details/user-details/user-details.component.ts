@@ -6,9 +6,11 @@ import { LanguageLevel } from '@shared/data/languageLevel';
 import { Sex } from '@shared/data/sex';
 import { IIcon } from '@shared/models/IIcon';
 import { IUserInfo } from '@shared/models/IUserInfo';
+import { IBaseTag } from '@shared/models/user/IBaseTag';
 import { ITag } from '@shared/models/user/ITag';
 import { getTags } from '@shared/utils/tagsForInterests';
 import { ToastrService } from 'ngx-toastr';
+import { find } from 'rxjs';
 
 import { CountriesTzLangProviderService } from 'src/app/services/countries-tz-lang-provider.service';
 
@@ -134,11 +136,15 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
             : [...this.selectedTags, tag];
     }
 
+    findTag<T extends IBaseTag>(collection: T[], id: number) {
+        return collection.find(t => t.id === id);
+    }
+
     getIconById(id: number) {
-        return this.tagsList.find(t => t.id === id)?.link;
+        return (this.findTag<IIcon>(this.tagsList, id))?.link;
     }
 
     includesTags(id: number) {
-        return this.selectedTags.find(t => t.id === id);
+        return this.findTag<ITag>(this.selectedTags, id);
     }
 }
