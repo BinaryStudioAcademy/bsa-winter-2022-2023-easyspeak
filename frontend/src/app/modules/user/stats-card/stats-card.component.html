@@ -6,6 +6,9 @@
     </div>
     <div class="stats-info">
         <p class="stats-description">{{description}}</p>
-        <p class="stats-text">{{text}}</p>
+        <p class="stats-text" *ngIf="text; else noLesson">{{text}}</p>
+        <ng-template #noLesson>
+            <p class="stats-text">No Group Classes</p>
+        </ng-template>
     </div>
 </div>

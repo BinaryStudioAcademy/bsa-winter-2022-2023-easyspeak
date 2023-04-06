@@ -119,4 +119,25 @@ public class LessonsService : BaseService, ILessonsService
 
         return createdLesson;
     }
+
+    public async Task<TeacherStatisticsDto> GetTeacherLessonsStatisticsAsync()
+    {
+        long id = _authService.UserId;
+
+        var statistics = new TeacherStatisticsDto();
+
+        statistics.TotalClasses = await _context.Lessons.CountAsync(l => l.CreatedBy == id);
+        statistics.CanceledClasses = await _context.Lessons.CountAsync(l => l.CreatedBy == id && l.IsCanceled);
+        statistics.FutureClasses = await _context.Lessons.CountAsync(l => l.CreatedBy == id && l.StartAt > DateTime.UtcNow);
+        int? total = await _context.Lessons.Where(l => l.CreatedBy == id).SumAsync(l => l.LimitOfUsers);
+        if (total is not null)
+        {
+            statistics.TotalStudents = (int)total;
+        }
+        statistics.NextClass = await _context.Lessons.Where(l => l.CreatedBy == id && l.StartAt > DateTime.UtcNow)
+                                                     .OrderBy(l => l.StartAt)
+                                                     .Select(l => l.StartAt)
+                                                     .FirstOrDefaultAsync();
+        return statistics;
+    }
 }

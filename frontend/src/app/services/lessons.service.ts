@@ -14,7 +14,7 @@ export class LessonsService {
 
     public lessonAdded$ = new Subject<void>();
 
-    constructor(private http: HttpService) { }
+    constructor(private http: HttpService) {}
 
     createLesson(lesson: INewLesson) {
         return this.http.post(this.routePrefix, lesson).pipe(
@@ -34,5 +34,9 @@ export class LessonsService {
 
     getQuestions(id: number) {
         return this.http.get(`${this.routePrefix}/${id}/questions`);
+    }
+
+    getTeacherStatistics() {
+        return this.http.get(`${this.routePrefix}/statistics`);
     }
 }

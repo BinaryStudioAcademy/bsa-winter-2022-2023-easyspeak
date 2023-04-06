@@ -22,22 +22,22 @@
                 <div class="stats">
                     <app-stats-card
                         [description]="'Total Group Classes'"
-                        [text]="totalClasses"
+                        [text]="statistics.totalClasses"
                         [iconPath]="'assets/teachers-page-icons/total-icon.svg'">
                     </app-stats-card>
                     <app-stats-card
                         [description]="'Group Classes Canceled'"
-                        [text]="canceledClasses"
+                        [text]="statistics.canceledClasses"
                         [iconPath]="'assets/teachers-page-icons/canceled-icon.svg'">
                     </app-stats-card>
                     <app-stats-card
                         [description]="'Future Group Classes'"
-                        [text]="futureClasses"
+                        [text]="statistics.futureClasses"
                         [iconPath]="'assets/teachers-page-icons/future-icon.svg'">
                     </app-stats-card>
                     <app-stats-card
                         [description]="'Pupils visited Classes'"
-                        [text]="totalStudents"
+                        [text]="statistics.totalStudents"
                         [iconPath]="'assets/teachers-page-icons/students-icon.svg'">
                     </app-stats-card>
                 </div>
@@ -49,7 +49,7 @@
                 <div class="next-lesson-card">
                     <app-stats-card
                         [description]="'The Nearest Group Class'"
-                        [text]="nextClass"
+                        [text]="statistics.nextClass"
                         [iconPath]="'assets/teachers-page-icons/next-icon.svg'">
                     </app-stats-card>
                 </div>
@@ -60,7 +60,7 @@
 <div class="lessons-container">
     <div class="lessons-header">
         <p class="lessons-title">My Group Classes</p>
-        <mat-button-toggle-group name="favoriteColor" value="week">
+        <mat-button-toggle-group name="selectPeriod" value="week">
             <mat-button-toggle (click)="displayToday()" value="today">Today</mat-button-toggle>
             <mat-button-toggle (click)="displayWeek()" value="week">Week</mat-button-toggle>
             <mat-button-toggle (click)="displayMonth()" value="month">Month</mat-button-toggle>

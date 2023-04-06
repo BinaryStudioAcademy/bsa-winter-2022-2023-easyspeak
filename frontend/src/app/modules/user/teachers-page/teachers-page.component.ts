@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AuthService } from '@core/services/auth.service';
@@ -5,6 +6,9 @@ import { LessonsCreateComponent } from '@modules/lessons/lessons-create/lessons-
 import { ModalComponent } from '@shared/components/modal/modal.component';
 import { IModal } from '@shared/models/IModal';
 import { UserShort } from '@shared/models/UserShort';
+
+import { TeacherStatistics } from 'src/app/models/lessons/teacher-statistics';
+import { LessonsService } from 'src/app/services/lessons.service';
 
 @Component({
     selector: 'app-teachers-page',
@@ -18,23 +22,34 @@ export class TeachersPageComponent implements OnInit {
         imagePath: '',
     };
 
-    totalClasses = 0;
+    statistics: TeacherStatistics = {
+        totalClasses: 0,
+        canceledClasses: 0,
+        futureClasses: 0,
+        totalStudents: 0,
+        nextClass: null,
+    };
 
-    canceledClasses = 0;
-
-    futureClasses = 0;
-
-    totalStudents = 0;
-
-    nextClass = 'No Classes';
-
-    constructor(private authService: AuthService, private dialogRef: MatDialog) {}
+    constructor(
+        private authService: AuthService,
+        private dialogRef: MatDialog,
+        private lessonsService: LessonsService,
+    ) {}
 
     ngOnInit(): void {
         this.authService.loadUser().subscribe();
 
         this.authService.user.subscribe((user) => {
             this.currentUser = user;
+        });
+
+        this.lessonsService.getTeacherStatistics().subscribe((data) => {
+            this.statistics = data as TeacherStatistics;
+            if (this.statistics.nextClass) {
+                const datePipe = new DatePipe('en-US');
+
+                this.statistics.nextClass = datePipe.transform(this.statistics.nextClass, 'd MMMM yyyy, EEE');
+            }
         });
 
         this.displayWeek();

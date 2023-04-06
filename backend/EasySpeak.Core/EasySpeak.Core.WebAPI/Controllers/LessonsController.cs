@@ -42,5 +42,7 @@ namespace EasySpeak.Core.WebAPI.Controllers
             }
             return StatusCode(403);
         }
+        [HttpGet("statistics")]
+        public async Task<ActionResult<TeacherStatisticsDto>> GetTeacherLessonsStatisticsAsync(int teacherId) => Ok(await _lessonsService.GetTeacherLessonsStatisticsAsync());
     }
 }
