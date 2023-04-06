@@ -26,7 +26,7 @@ export class TeachersPageComponent implements OnInit {
 
     totalStudents = 0;
 
-    nextClass = 'No classes planned';
+    nextClass = 'No Classes';
 
     constructor(private authService: AuthService, private dialogRef: MatDialog) {}
 
@@ -36,6 +36,8 @@ export class TeachersPageComponent implements OnInit {
         this.authService.user.subscribe((user) => {
             this.currentUser = user;
         });
+
+        this.displayWeek();
     }
 
     openCreate() {
@@ -48,5 +50,17 @@ export class TeachersPageComponent implements OnInit {
         };
 
         this.dialogRef.open(ModalComponent, config);
+    }
+
+    displayToday() {
+        console.log('display today');
+    }
+
+    displayWeek() {
+        console.log('display week');
+    }
+
+    displayMonth() {
+        console.log('display month');
     }
 }

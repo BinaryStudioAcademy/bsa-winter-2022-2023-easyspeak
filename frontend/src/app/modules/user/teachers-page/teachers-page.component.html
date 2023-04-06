@@ -1,10 +1,10 @@
 <div class="profile-container">
     <div class="profile">
-        <div class="header">
+        <div class="profile-header">
             <h1>Teachers Profile</h1>
         </div>
-        <div class="card">
-            <div class="card-left">
+        <div class="profile-card">
+            <div class="profile-card-left">
                 <div class="bio">
                     <div class="avatar">
                         <app-avatar
@@ -20,22 +20,37 @@
                     </div>
                 </div>
                 <div class="stats">
-                    <app-stats-card [description]="'Total Group Classes'" [text]="totalClasses" [iconPath]="'TODO'">
+                    <app-stats-card
+                        [description]="'Total Group Classes'"
+                        [text]="totalClasses"
+                        [iconPath]="'assets/teachers-page-icons/total-icon.svg'">
                     </app-stats-card>
-                    <app-stats-card [description]="'Group Classes Canceled'" [text]="canceledClasses" [iconPath]="'TODO'">
+                    <app-stats-card
+                        [description]="'Group Classes Canceled'"
+                        [text]="canceledClasses"
+                        [iconPath]="'assets/teachers-page-icons/canceled-icon.svg'">
                     </app-stats-card>
-                    <app-stats-card [description]="'Future Group Classes'" [text]="futureClasses" [iconPath]="'TODO'">
+                    <app-stats-card
+                        [description]="'Future Group Classes'"
+                        [text]="futureClasses"
+                        [iconPath]="'assets/teachers-page-icons/future-icon.svg'">
                     </app-stats-card>
-                    <app-stats-card [description]="'Pupils visited Classes'" [text]="totalStudents" [iconPath]="'TODO'">
+                    <app-stats-card
+                        [description]="'Pupils visited Classes'"
+                        [text]="totalStudents"
+                        [iconPath]="'assets/teachers-page-icons/students-icon.svg'">
                     </app-stats-card>
                 </div>
             </div>
-            <div class="card-right">
-                <div class="add-class">
+            <div class="profile-card-right">
+                <div class="add-lesson">
                     <button class="create-lesson-button" (click)="openCreate()">+ Add Group Class</button>
                 </div>
-                <div class="next-class-card">
-                    <app-stats-card [description]="'The Nearest Group Classes'" [text]="nextClass" [iconPath]="'TODO'">
+                <div class="next-lesson-card">
+                    <app-stats-card
+                        [description]="'The Nearest Group Class'"
+                        [text]="nextClass"
+                        [iconPath]="'assets/teachers-page-icons/next-icon.svg'">
                     </app-stats-card>
                 </div>
             </div>
@@ -43,5 +58,18 @@
     </div>
 </div>
 <div class="lessons-container">
-    
+    <div class="lessons-header">
+        <p class="lessons-title">My Group Classes</p>
+        <mat-button-toggle-group name="favoriteColor" value="week">
+            <mat-button-toggle (click)="displayToday()" value="today">Today</mat-button-toggle>
+            <mat-button-toggle (click)="displayWeek()" value="week">Week</mat-button-toggle>
+            <mat-button-toggle (click)="displayMonth()" value="month">Month</mat-button-toggle>
+        </mat-button-toggle-group>
+    </div>
+    <div class="lessons-by-day">
+        <div class="date-container">
+            <p class="date"></p>
+        </div>
+        <div class="lessons"></div>
+    </div>
 </div>

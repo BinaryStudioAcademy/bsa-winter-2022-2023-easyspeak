@@ -8,8 +8,101 @@
     align-items: center
     background-color: $white
 
-.header
-    height: 105px
-
 .profile
     width: 100%
+
+.profile-header
+    display: flex
+    justify-content: center
+    height: 105px
+
+.profile-card
+    height: 158px
+    padding: 30px
+    border-radius: 15px
+    background-color: $gray-100
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+
+.profile-card-left
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+
+.bio
+    display: flex
+    flex-direction: row
+
+.avatar
+    width: 50px
+    height: 50px
+    border-radius: 50%
+    margin-right: 10px
+    overflow: hidden
+    font-size: 50px
+
+.greeting
+    display: flex
+    flex-direction: column
+    justify-content: center
+
+.name
+    font-size: 18px
+    font-weight: 700
+    color: $black-100
+
+.question
+    font-size: 14px
+    font-weight: 400
+    color: $gray-300
+
+.stats
+    display: flex
+    flex-direction: row
+    gap: 15px
+
+.profile-card-right
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    align-items: center
+    padding: 0 35px 0 65px
+    border-left: 1px solid $inactive-color
+
+.create-lesson-button
+    width: 200px
+    height: 45px
+
+    border-radius: 50px
+    border: none
+    background-color: $blue-200
+
+    color: $white
+    font-style: normal
+    font-weight: 500
+    font-size: 16px
+    line-height: 150%
+    text-align: center
+
+    cursor: pointer
+
+
+
+
+
+.mat-button-toggle-group
+    height: 30px
+    align-items: center
+    border: none
+    box-shadow: none
+
+.mat-button-toggle
+    background-color: $inactive-color
+    color: $gray-300
+    width: 115px
+    border-radius: 2px
+
+.mat-button-toggle-checked 
+    background-color: $blue-200
+    color: $white
