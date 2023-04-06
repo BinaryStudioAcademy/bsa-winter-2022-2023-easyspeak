@@ -140,7 +140,13 @@ export class ChatPageComponent implements OnInit, OnDestroy {
             }];
             this.groupedMessages = this.groupByDate(this.messages);
 
-            this.chatHub.invoke('SendMessageAsync', message);
+            this.chatHub.invoke(
+                'SendMessageAsync',
+                this.messages[this.messages.length - 1].text,
+                this.messages[this.messages.length - 1].chatId,
+                this.messages[this.messages.length - 1].userId,
+                this.messages[this.messages.length - 1].createdAt,
+            );
 
             // setInterval(() => {
             //     this.scroll.scrollToBottom();

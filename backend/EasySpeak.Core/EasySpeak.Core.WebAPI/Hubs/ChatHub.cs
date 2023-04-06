@@ -14,15 +14,20 @@ namespace EasySpeak.Core.WebAPI.Hubs
             _chatService = chatService;
         }
 
-        public async Task SendMessageAsync(NewMessageDto message)
+        public async Task SendMessageAsync(string text, int chatId, int userId, string createdAt)
         {
-            string chatId = message.ChatId.ToString();
+            var message = new NewMessageDto();
 
-            await EmitLog("Client " + Context.ConnectionId + " said: " + message, chatId);
+            message.Text = text;
+            message.ChatId = chatId;
+            message.IsDeleted = false;
+            message.IsRead = false;
+
+            await EmitLog("Client " + Context.ConnectionId + " said: " + message, chatId.ToString());
 
             await _chatService.SendMessageAsync(message);
 
-            await Clients.OthersInGroup(chatId).SendAsync("message", message);
+            await Clients.OthersInGroup(chatId.ToString()).SendAsync("message", message);
         }
 
         public async Task GetMessageAsync()
