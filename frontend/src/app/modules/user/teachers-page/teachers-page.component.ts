@@ -22,6 +22,8 @@ export class TeachersPageComponent implements OnInit {
 
     totalStudents = 0;
 
+    nextClass = 'No classes planned';
+
     constructor(private authService: AuthService) {}
 
     ngOnInit(): void {

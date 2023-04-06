@@ -8,70 +8,33 @@
                 <div class="bio">
                     <div class="avatar">
                         <app-avatar
-                        [firstName]="currentUser.firstName"
-                        [lastName]="currentUser.lastName"
-                        [imagePath]="currentUser.imagePath"
-                        [imageSize]="36">
+                            [firstName]="currentUser.firstName"
+                            [lastName]="currentUser.lastName"
+                            [imagePath]="currentUser.imagePath"
+                            [imageSize]="36">
                         </app-avatar>
                     </div>
                     <div class="greeting">
-                        <p class="name">Hello, {{currentUser.firstName}} {{currentUser.lastName}}</p>
+                        <p class="name">Hello, {{ currentUser.firstName }} {{ currentUser.lastName }}</p>
                         <p class="question">Are you ready for the new Group Classes?</p>
                     </div>
                 </div>
                 <div class="stats">
-                    <div class="stats-card">
-                        <div class="stats-icon">
-                            <div class="icon-wrapper">
-                                <img class="icon" src="" alt="image"/>
-                            </div>
-                        </div>
-                        <div class="stats-text">
-                            <p class="stats-desription">Total Group Classes</p>
-                            <p class="stats-count">{{totalClasses}}</p>
-                        </div>
-                    </div>
-                    <div class="stats-card">
-                        <div class="stats-icon">
-                            <div class="icon-wrapper">
-                                <img class="icon" src="" alt="image"/>
-                            </div>
-                        </div>
-                        <div class="stats-text">
-                            <p class="stats-desription">Group Classes Canceled</p>
-                            <p class="stats-count">{{canceledClasses}}</p>
-                        </div>
-                    </div>
-                    <div class="stats-card">
-                        <div class="stats-icon">
-                            <div class="icon-wrapper">
-                                <img class="icon" src="" alt="image"/>
-                            </div>
-                        </div>
-                        <div class="stats-text">
-                            <p class="stats-desription">Future Group Classes</p>
-                            <p class="stats-count">{{futureClasses}}</p>
-                        </div>
-                    </div>
-                    <div class="stats-card">
-                        <div class="stats-icon">
-                            <div class="icon-wrapper">
-                                <img class="icon" src="" alt="image"/>
-                            </div>
-                        </div>
-                        <div class="stats-text">
-                            <p class="stats-desription">Pupils visited Classes</p>
-                            <p class="stats-count">{{totalStudents}}</p>
-                        </div>
-                    </div>
+                    <app-stats-card [description]="'Total Group Classes'" [text]="totalClasses" [iconPath]="'TODO'">
+                    </app-stats-card>
+                    <app-stats-card [description]="'Group Classes Canceled'" [text]="canceledClasses" [iconPath]="'TODO'">
+                    </app-stats-card>
+                    <app-stats-card [description]="'Future Group Classes'" [text]="futureClasses" [iconPath]="'TODO'">
+                    </app-stats-card>
+                    <app-stats-card [description]="'Pupils visited Classes'" [text]="totalStudents" [iconPath]="'TODO'">
+                    </app-stats-card>
                 </div>
             </div>
             <div class="card-right">
-                <div class="add-class">
-
-                </div>
+                <div class="add-class"></div>
                 <div class="next-class-card">
-                    
+                    <app-stats-card [description]="'The Nearest Group Classes'" [text]="nextClass" [iconPath]="'TODO'">
+                    </app-stats-card>
                 </div>
             </div>
         </div>
