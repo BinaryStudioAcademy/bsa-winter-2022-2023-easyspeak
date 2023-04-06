@@ -117,7 +117,6 @@ export class LessonsCreateComponent implements OnInit {
             tags: lessonTags,
             limitOfUsers: parseInt(this.studentsCount?.value, 10),
             youtubeVideoId: this.getYoutubeVideoId(this.videoLink?.value),
-            zoomMeetingLink: this.meetLink?.value,
         };
 
         this.lessonService.createLesson(lessonToCreate).subscribe(
