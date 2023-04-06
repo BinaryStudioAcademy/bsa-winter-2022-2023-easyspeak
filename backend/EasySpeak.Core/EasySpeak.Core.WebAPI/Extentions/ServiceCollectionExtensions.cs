@@ -13,7 +13,6 @@ using FluentValidation.AspNetCore;
 using Google.Apis.Auth.OAuth2;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.Reflection;
 
@@ -37,8 +36,8 @@ namespace EasySpeak.Core.WebAPI.Extensions
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IChatService, ChatService>();
             services.AddFirebaseApp();
-            services.Configure<RabbitQueuesOptions>(configuration.GetSection("RabbitQueues"))
-                .AddScoped<INotificationService, NotificationService>();
+            services.AddScoped<INotificationService, NotificationService>();
+            services.Configure<RabbitQueuesOptions>(configuration.GetSection("RabbitQueues"));
         }
 
         public static void AddAutoMapper(this IServiceCollection services)

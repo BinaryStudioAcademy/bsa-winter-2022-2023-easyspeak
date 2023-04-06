@@ -1,6 +1,6 @@
-using EasySpeak.Core.Common.DTO.Tag;
-using EasySpeak.Core.Common.DTO.Lesson;
 using EasySpeak.Core.Common.DTO.Filter;
+using EasySpeak.Core.Common.DTO.Lesson;
+using EasySpeak.Core.Common.DTO.Tag;
 using EasySpeak.Core.Common.DTO.User;
 using Microsoft.AspNetCore.Http;
 
@@ -15,6 +15,8 @@ namespace EasySpeak.Core.BLL.Interfaces
         Task<UserDto?> GetUserAsync();
         Task<bool> GetAdminStatus();
         Task<string> UploadProfilePhoto(IFormFile file);
+        Task<TagDto[]> GetUserTags();
+        Task<UserDto> UpdateUser(UserDto userDto);
         Task<UserDto> MakeAdminAsync(int userId);
     }
 }

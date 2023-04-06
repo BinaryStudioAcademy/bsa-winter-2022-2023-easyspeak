@@ -4,6 +4,7 @@ using EasySpeak.Core.DAL.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EasySpeak.Core.DAL.Migrations
 {
     [DbContext(typeof(EasySpeakCoreContext))]
-    partial class EasySpeakCoreContextModelSnapshot : ModelSnapshot
+    [Migration("20230405205725_Added-All-Tags")]
+    partial class AddedAllTags
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -888,10 +890,6 @@ namespace EasySpeak.Core.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ZoomMeetingLinkHost")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CreatedBy");
@@ -910,8 +908,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             Name = "Mobility",
                             StartAt = new DateTime(2023, 4, 3, 19, 50, 29, 650, DateTimeKind.Utc).AddTicks(205),
                             YoutubeVideoId = "",
-                            ZoomMeetingLink = "",
-                            ZoomMeetingLinkHost = ""
+                            ZoomMeetingLink = ""
                         },
                         new
                         {
@@ -924,8 +921,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             Name = "Palau",
                             StartAt = new DateTime(2023, 4, 15, 17, 57, 57, 902, DateTimeKind.Utc).AddTicks(9337),
                             YoutubeVideoId = "",
-                            ZoomMeetingLink = "",
-                            ZoomMeetingLinkHost = ""
+                            ZoomMeetingLink = ""
                         },
                         new
                         {
@@ -937,8 +933,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             Name = "EXE",
                             StartAt = new DateTime(2023, 4, 3, 23, 3, 18, 306, DateTimeKind.Utc).AddTicks(6493),
                             YoutubeVideoId = "",
-                            ZoomMeetingLink = "",
-                            ZoomMeetingLinkHost = ""
+                            ZoomMeetingLink = ""
                         },
                         new
                         {
@@ -951,8 +946,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             Name = "Ville",
                             StartAt = new DateTime(2023, 4, 1, 19, 45, 38, 148, DateTimeKind.Utc).AddTicks(2420),
                             YoutubeVideoId = "",
-                            ZoomMeetingLink = "",
-                            ZoomMeetingLinkHost = ""
+                            ZoomMeetingLink = ""
                         },
                         new
                         {
@@ -964,8 +958,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             Name = "input",
                             StartAt = new DateTime(2023, 4, 18, 19, 29, 4, 130, DateTimeKind.Utc).AddTicks(7404),
                             YoutubeVideoId = "",
-                            ZoomMeetingLink = "",
-                            ZoomMeetingLinkHost = ""
+                            ZoomMeetingLink = ""
                         },
                         new
                         {
@@ -978,8 +971,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             Name = "front-end",
                             StartAt = new DateTime(2023, 4, 1, 0, 33, 57, 99, DateTimeKind.Utc).AddTicks(9638),
                             YoutubeVideoId = "",
-                            ZoomMeetingLink = "",
-                            ZoomMeetingLinkHost = ""
+                            ZoomMeetingLink = ""
                         },
                         new
                         {
@@ -992,8 +984,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             Name = "Peso Uruguayo",
                             StartAt = new DateTime(2023, 4, 16, 11, 19, 31, 565, DateTimeKind.Utc).AddTicks(2009),
                             YoutubeVideoId = "",
-                            ZoomMeetingLink = "",
-                            ZoomMeetingLinkHost = ""
+                            ZoomMeetingLink = ""
                         },
                         new
                         {
@@ -1006,8 +997,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             Name = "Bedfordshire",
                             StartAt = new DateTime(2023, 3, 31, 4, 21, 38, 476, DateTimeKind.Utc).AddTicks(9665),
                             YoutubeVideoId = "",
-                            ZoomMeetingLink = "",
-                            ZoomMeetingLinkHost = ""
+                            ZoomMeetingLink = ""
                         },
                         new
                         {
@@ -1020,8 +1010,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             Name = "Music",
                             StartAt = new DateTime(2023, 4, 9, 2, 18, 12, 41, DateTimeKind.Utc).AddTicks(4570),
                             YoutubeVideoId = "",
-                            ZoomMeetingLink = "",
-                            ZoomMeetingLinkHost = ""
+                            ZoomMeetingLink = ""
                         },
                         new
                         {
@@ -1034,8 +1023,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             Name = "USB",
                             StartAt = new DateTime(2023, 4, 14, 7, 44, 19, 22, DateTimeKind.Utc).AddTicks(6402),
                             YoutubeVideoId = "",
-                            ZoomMeetingLink = "",
-                            ZoomMeetingLinkHost = ""
+                            ZoomMeetingLink = ""
                         });
                 });
 

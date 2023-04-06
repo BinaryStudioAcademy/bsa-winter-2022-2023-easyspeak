@@ -1,5 +1,8 @@
 @import "src/styles/colors.sass"
 
+*
+    box-sizing: border-box
+
 .container
     width: 100%
     height: 100%
@@ -8,33 +11,35 @@
     padding: 30px
     display: grid
     grid-template-columns: 1fr 495px 1fr
-    grid-template-rows: 125px 290px 340px 305px
+    grid-template-rows: 125px 26px 290px 1fr auto
     gap: 30px
     border-radius: 0 10px 10px 10px
 
 .user-photo-section-title
-    grid-row: 1/2
-    grid-column: 1/2
+    grid-row: 1
+    grid-column: 1
+
+.who-can-message-section-title
+    grid-row: 2
+    grid-column: 1
+    display: flex
+    align-items: center
 
 .user-details-section-title
-    grid-row: 2/3
-    grid-column: 1/2
+    grid-row: 3
+    grid-column: 1
 
 .user-interests-section-title
-    grid-row: 3/4
-    grid-column: 1/2
-
-.user-socials-section-title
-    grid-row: 4/5
-    grid-column: 1/2
+    grid-row: 4
+    grid-column: 1
 
 .title
     font-weight: 700
     font-size: 18px
 
 .user-photo-section
-    grid-row: 1/2
-    grid-column: 2/3
+    grid-row: 1
+    grid-column: 2
     width: 100%
     height: 100%
     position: relative
@@ -60,7 +65,7 @@
         width: 24px
         height: 24px
         position: absolute
-        background-color: $selected-color
+        background-color: $turquoise-100
         top: 80px
         right: 0
         border-radius: 50%
@@ -86,14 +91,83 @@
     width: 100%
     height: 100%
     border-radius: 50%
-    background-color: $selected-color
+    background-color: $turquoise-100
     display: flex
     align-items: center
     justify-content: center
 
+.who-can-message-section
+    grid-row: 2
+    grid-column: 2
+    height: 100%
+    display: flex
+    align-items: center
+    gap: 15px
+
+.container-message-me
+    display: flex
+    flex-direction: row-reverse
+    gap: 8px
+    font-size: 14px
+
+.input
+    box-sizing: border-box
+    width: 100%
+    height: 100%
+    border-radius: 50px
+    border: none
+    padding: 5px 18px 0
+
+.input:focus
+    outline: none
+
+.input:hover
+    box-shadow: 0 1px 4px $turquoise-100
+
+.input:focus
+    box-shadow: 0 1px 4px $turquoise-100
+
+.input:invalid
+    box-shadow: 0 1px 4px $error-color
+
+.checkbox-message
+    height: 1px
+    width: 1px
+    visibility: hidden
+
+.styled-checkbox
+    position: absolute
+    opacity: 0
+
+    & + label
+        position: relative
+        cursor: pointer
+        padding: 0
+        color: $gray-300
+
+    & + label:before
+        content: ''
+        margin-right: 10px
+        display: inline-block
+        vertical-align: text-top
+        width: 16px
+        height: 16px
+        background: $gray-100
+        border: 1px solid $blue-200
+        border-radius: 2px
+
+    &:checked + label:before
+        background: $blue-200
+        background-repeat: no-repeat
+        background-image: url("Path.svg")
+        background-position: center
+
+    &:checked + label
+        color: $black-100
+
 .user-details-section
-    grid-row: 2/3
-    grid-column: 2/3
+    grid-row: 3
+    grid-column: 2
     height: 100%
     display: grid
     grid-template-rows: repeat(5, 46px)
@@ -110,37 +184,86 @@
         grid-column: 1/3
 
 .user-interests-section
-    grid-row: 3/4
-    grid-column: 2/3
-    height: 100%
+    grid-row: 4
+    grid-column: 2
+    display: grid
+    grid-template-columns: repeat(7, 1fr)
+    justify-items: center
+    align-items: start
+    gap: 10px
 
-.user-socials-section
-    grid-row: 4/5
-    grid-column: 2/3
+
+.user-interest-content
+    display: flex
+    flex-direction: column
+    align-items: center
+    gap: 5px
+
+
+.interest-image-container
+    height: 46px
+    width: 46px
+    border-radius: 50%
+    background-color: #E0E2F2
+    padding: 0
+    display: flex
+    justify-content: center
+    align-items: center
+
+.interest-image-text
+    font-weight: 500
+    font-size: 12px
+    color: #6C707A
+
+.icon
+    width: 25px
+    height: 25px
+
+.item-checkbox
+    height: 1px
+    width: 1px
+    opacity: 0
+
+
+.item-checkbox:checked + .item-checkbox-label > .interest-image-container
+    background-color: $turquoise-100
+
+.item-checkbox:checked + .item-checkbox-label > .interest-image-text
+    color: $black-100
+
+.item-checkbox-label
+    display: flex
+    flex-direction: column
+    align-items: center
+    gap: 3px
+
+
+.submit-button-section
+    grid-row: 5
+    grid-column: 2
     height: 100%
     display: grid
-    grid-template-rows: repeat(5, 46px)
+    grid-template-rows: 46px
     gap: 15px
     button
         width: 182px
-        background-color: $button-color
+        background-color: $blue-200
         color: $white
         font-size: 16px
         font-weight: 700
         border-radius: 50px
         border-width: 0
+    button:disabled
+        background-color: $gray-200
+
 
 .form-input-group
     width: 100%
     height: 100%
     position: relative
-    .error-surface
-        position: absolute
-        width: 100%
-        height: 100%
-        top: 0
-        box-shadow: 0 1px 4px #EE2A64
-        border-radius: 50px
+    background-color: $white
+    border-radius: 25px
+
     .label
         position: absolute
         top: 5px
@@ -164,31 +287,26 @@
                 margin-right: 6px
 
 
-.input
-    box-sizing: border-box
-    width: 100%
-    height: 100%
-    border-radius: 50px
-    border: none
-    padding: 0 18px
-    padding-top: 5px
-
 .placeholder
     position: absolute
     color: $gray-200
     top: 13px
     left: 18px
     font-size: 14px
-    z-index: 100
+    z-index: 1
 
 .expand-icon
     position: absolute
     top: 10px
     right: 10px
-    color: $button-color
+    color: $blue-200
+    z-index: 0
 
-::ng-deep.custom
+:host::ng-deep.custom
     height: 100%
+
+:host::ng-deep .ng-dropdown-panel
+    overflow: auto
 
 ::ng-deep.ng-input
     top: 0
@@ -199,17 +317,38 @@
 ::ng-deep.ng-clear-wrapper
     display: none
 
-::ng-deep.ng-select-container
+:host::ng-deep.ng-select-container
     height: 100%
-    box-sizing: border-box
-    padding: 13px 18px
-    background-color: $white
+    padding: 10px 18px
+    background-color: transparent
     border-radius: 50px
     font-size: 14px
+    z-index: 10
 
+:host::ng-deep.ng-select-container:hover
+    cursor: pointer
+    box-shadow: 0 1px 4px $turquoise-100
+
+:host::ng-deep.ng-select:visited
+    box-shadow: 0 1px 4px $turquoise-100
+
+:host::ng-deep.ng-value
+    margin-top: 8px
+
+:host::ng-deep.ng-value> .ng-value-label> .flag
+    margin-bottom: -3px
+    margin-left: 10px
+
+.expand-icon
+    z-index: 1
 ::ng-deep.ng-dropdown-panel
     background-color: $white
+    max-height: 200px
+    overflow: auto
     margin-top: 5px
+
+:host::ng-deep.ng-dropdown-panel .ng-dropdown-panel-items
+    max-height: 200px
 
 ::ng-deep.ng-option
     padding: 10px
@@ -219,11 +358,42 @@
         gap: 10px
         align-items: center
 
-::ng-deep.ng-select-container
-    z-index: 0 !important
-
 .flag
     width: 20px
-    height: 14px
+    border: 1px solid $gray-100
 
+.button-icon
+    border-width: 0
+    background: $turquoise-100
+    color: $blue-200
+    border-radius: 15px
+    width: 24px
+    height: 24px
+    display: flex
+    justify-content: center
+    align-items: center
+    margin-right: 5px
+    &:hover
+        cursor: pointer
 
+.calendar-block
+    display: flex
+    align-items: center
+    height: 46px
+    background-color: $white
+    border-radius: 18px
+    padding: 0 15px
+    margin: 15px
+
+:host::ng-deep .mat-mdc-text-field-wrapper
+    border-radius: 25px
+
+:host::ng-deep .mdc-line-ripple
+    display: none
+
+:host::ng-deep .ng-tns-c117-2
+    display: flex
+    align-items: center
+
+::ng-deep.ng-option-label
+    font-size: 14px

@@ -1,11 +1,10 @@
 ﻿using AutoMapper;
 using EasySpeak.Core.BLL.Interfaces;
-using EasySpeak.Core.Common.DTO.Tag;
 using EasySpeak.Core.Common.DTO.Filter;
-using EasySpeak.Core.Common.DTO.UploadFile;
 using EasySpeak.Core.Common.DTO.Lesson;
+using EasySpeak.Core.Common.DTO.Tag;
+using EasySpeak.Core.Common.DTO.UploadFile;
 using EasySpeak.Core.Common.DTO.User;
-using EasySpeak.Core.Common.Enums;
 using EasySpeak.Core.DAL.Context;
 using EasySpeak.Core.DAL.Entities;
 using Microsoft.AspNetCore.Http;
@@ -54,7 +53,7 @@ public class UserService : BaseService, IUserService
     }
 
     public Task<bool> GetAdminStatus() => _context.Users.Where(u => u.Id == _authService.UserId).Select(u => u.IsAdmin).FirstOrDefaultAsync();
-    
+
     public async Task<UserDto> AddTagsAsync(List<TagDto> tags)
     {
         var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == _authService.UserId);
@@ -145,6 +144,48 @@ public class UserService : BaseService, IUserService
     {
         var profileImage = await _context.EasySpeakFiles.FirstOrDefaultAsync(f => f.Id == imageId);
         return profileImage?.Url ?? "";
+    }
+
+    public async Task<TagDto[]> GetUserTags()
+    {
+        var userId = _authService.UserId;
+
+        // get users tags
+        var userTags = _context.Tags.Where(t => t.Users.Any(u => u.Id == userId));
+
+        // get all tags DTO
+        var allTagsTdo = await _context.Tags.Select(t => _mapper.Map<Tag, TagDto>(t)).ToArrayAsync();
+
+        // form needed data
+        return allTagsTdo.Select(tagDto =>
+        {
+            tagDto.IsSelected = userTags.Any(x => x.Id == tagDto.Id);
+            return tagDto;
+        }).ToArray();
+    }
+
+    public async Task<UserDto> UpdateUser(UserDto userDto)
+    {
+        var userId = _authService.UserId;
+        var user = await _context.Users.Include(u => u.Tags).FirstOrDefaultAsync(a => a.Id == userId) ?? throw new ArgumentException($"Failed to find the user with id {userId}");
+
+        _mapper.Map(userDto, user, opt => opt.AfterMap(SetUserTags));
+
+        await _context.SaveChangesAsync();
+
+        return _mapper.Map<User, UserDto>(user);
+    }
+
+    private void SetUserTags(UserDto dtoUser, User dbUser)
+    {
+        if (dtoUser.Tags != null)
+        {
+            dbUser.Tags = dtoUser.Tags.Join(
+                _context.Tags,
+                dtoTags => dtoTags.Name,
+                dbTags => dbTags.Name,
+                (_, dbTags) => dbTags).ToList();
+        }
     }
 
     public async Task<UserDto> MakeAdminAsync(int userId)
