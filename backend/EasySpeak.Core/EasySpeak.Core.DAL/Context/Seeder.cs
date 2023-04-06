@@ -41,7 +41,7 @@ public static class Seeder
             .Select(x => new ChatUser(x.Item1, x.Item2));
 
         var lessonTag = SeedHelper<Lesson, Tag, long>
-            .GetTablesJoin(lessons, tags, 1)
+            .GetTablesJoin(lessons, tags, 2)
             .Select(x => new LessonTag(x.Item1, x.Item2));
 
         var lessonUser = SeedHelper<User, Lesson, long>
@@ -49,7 +49,7 @@ public static class Seeder
             .Select(x => new LessonUser(x.Item1, x.Item2));
 
         var tagUser = SeedHelper<User, Tag, long>
-            .GetTablesJoin(users, tags, 2)
+            .GetTablesJoin(users, tags, 4)
             .Select(x => new TagUser(x.Item1, x.Item2));
 
         modelBuilder.Entity<Tag>().HasData(tags);
@@ -173,29 +173,33 @@ public static class Seeder
     {
         var tags = new[]
         {
-            (1, "Architecture", "ClassicalBuilding.svg", new DateTime(2023, 04, 05)),
-            (2, "Arts", "ArtistPalette.svg", new DateTime(2023, 04, 05)),
-            (3, "Cars", "RacingCar.svg", new DateTime(2023, 04, 05)),
-            (4, "Celebrities", "Crown.svg", new DateTime(2023, 04, 05)),
-            (5, "Cooking", "Cook.svg", new DateTime(2023, 04, 05)),
-            (6, "Dancing", "WomanDancing.svg", new DateTime(2023, 04, 05)),
-            (7, "Ecology", "FourLeafClover.svg", new DateTime(2023, 04, 05)),
-            (8, "Design", "Artist.svg", new DateTime(2023, 04, 05)),
-            (9, "History", "CrossedSwords.svg", new DateTime(2023, 04, 05)),
-            (10, "Fashion", "Dress.svg", new DateTime(2023, 04, 05)),
-            (11, "Medicine", "Pill.svg", new DateTime(2023, 04, 05)),
-            (12, "Technologies", "Robot.svg", new DateTime(2023, 04, 05)),
-            (13, "Pets", "DogFace.svg", new DateTime(2023, 04, 05)),
-            (14, "Philosophy", "FaceWithMonocle.svg", new DateTime(2023, 04, 05)),
-            (15, "Photography", "Camera.svg", new DateTime(2023, 04, 05)),
-            (16, "Politics", "TopHat.svg", new DateTime(2023, 04, 05)),
+            ("Arts", "ArtistPalette.svg", new DateTime(2023, 04, 05)),
+            ("Business", "Briefcase.svg", new DateTime(2023, 04, 05)),
+            ("Culture", "ClassicalBuilding.svg", new DateTime(2023, 04, 05)),
+            ("Education", "GraduationCap.svg", new DateTime(2023, 04, 05)),
+            ("Environment", "Kite.svg", new DateTime(2023, 04, 05)),
+            ("Fashion", "Dress.svg", new DateTime(2023, 04, 05)),
+            ("Food", "Sandwich.svg", new DateTime(2023, 04, 05)),
+            ("Health", "Dna.svg", new DateTime(2023, 04, 05)),
+            ("History", "CrossedSwords.svg", new DateTime(2023, 04, 05)),
+            ("Literature", "Books.svg", new DateTime(2023, 04, 05)),
+            ("Movies", "ClapperBoard.svg", new DateTime(2023, 04, 05)),
+            ("Music", "Drum.svg", new DateTime(2023, 04, 05)),
+            ("Nature", "FourLeafClover.svg", new DateTime(2023, 04, 05)),
+            ("Philosophy", "FaceWithMonocle.svg", new DateTime(2023, 04, 05)),
+            ("Politics", "TopHat.svg", new DateTime(2023, 04, 05)),
+            ("Science", "TestTube.svg", new DateTime(2023, 04, 05)),
+            ("Social Media", "MobilePhone.svg", new DateTime(2023, 04, 05)),
+            ("Storts", "BoxingGlove.svg", new DateTime(2023, 04, 05)),
+            ("Technologies", "Robot.svg", new DateTime(2023, 04, 05)),
+            ("Travel", "DesertIsland.svg", new DateTime(2023, 04, 05)),
         };
-        return tags.Select(t => new Tag()
+        return tags.Select((tag, i) => new Tag()
         {
-            Id = t.Item1,
-            Name = t.Item2,
-            ImageUrl = t.Item3,
-            CreatedAt = t.Item4
+            Id = i + 1,
+            Name = tag.Item1,
+            ImageUrl = tag.Item2,
+            CreatedAt = tag.Item3
         }).ToList();
     }
 
