@@ -166,6 +166,7 @@ public static class Seeder
             .RuleFor(l => l.MediaPath, f => f.Image.PicsumUrl())
             .RuleFor(l => l.StartAt, f => f.Date.Soon(30, DefaultDate))
             .RuleFor(l => l.LimitOfUsers, f => f.Random.Int(20, 200).OrNull(f, .2f))
+            .RuleFor(l => l.IsCanceled, f => f.Random.Bool(0.1f))
             .Generate(count);
     }
 
