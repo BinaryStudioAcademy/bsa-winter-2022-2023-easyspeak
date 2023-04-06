@@ -110,9 +110,13 @@ public class LessonsService : BaseService, ILessonsService
 
         lesson.ZoomMeetingLinkHost = zoomMeetingLinks.HostUrl;
 
-        var createdLesson = _context.Add(lesson).Entity;
+        var createdLesson = _mapper.Map<LessonDto>(lesson);
+
+        lesson.CreatedBy = _authService.UserId;
+
+        _context.Add(lesson);
         await _context.SaveChangesAsync();
 
-        return _mapper.Map<LessonDto>(createdLesson);
+        return createdLesson;
     }
 }
