@@ -1,3 +1,4 @@
+
 <div class="card">
     <div class="up">
         <div class="user-general-info">
@@ -9,14 +10,16 @@
                 <div class="info">
                     <div class="name">{{ user.name }}</div>
                     <div class="country">
-                        <img alt="Image" class="flag" src="assets/user-card-icons/canada-flag.svg" />
+                        <img src="{{userCountryFlag}}"/>
                         <div class="culture">{{ user.country }}</div>
                     </div>
                 </div>
             </div>
+
             <div class="networks">
-                <div class="social-icon">
-                    <img src="assets/user-card-icons/france.svg" alt="facebook-icon" />
+                <div class="social-icon img-wrap">
+                    <img src="{{userLanguageFlag}}"/>
+                    <div class="img-description">{{user.language}}</div>
                 </div>
                 <div class="social-icon">
                     <img src="assets/user-card-icons/great-britain.svg" alt="instagram-icon" />
@@ -41,13 +44,14 @@
             </div>
         </div>
         <div class="buttons">
-            <button class="button">
+            <button (click)="buttomGoToMessage()" class="button">
                 <img src="assets/user-card-icons/message.svg" alt="book" />
                 <span>Message</span>
             </button>
-            <button class="button">
-                <img src="assets/user-card-icons/follow-icon.svg" alt="follow" />
-                <span>Add to Friends</span>
+            <button (click)="buttonFollow()" class="button" [ngClass]="{'button-gray' : isFriend}">
+                <img *ngIf="!isFriend" src="assets/user-card-icons/follow-icon.svg" alt="follow" />
+                <span *ngIf="isFriend">Added to friends</span>
+                <span *ngIf="!isFriend">Add to Friends</span>
             </button>
         </div>
     </div>
