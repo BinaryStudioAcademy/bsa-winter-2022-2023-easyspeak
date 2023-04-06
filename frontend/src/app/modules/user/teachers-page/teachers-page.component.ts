@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AuthService } from '@core/services/auth.service';
+import { LessonsCreateComponent } from '@modules/lessons/lessons-create/lessons-create.component';
+import { ModalComponent } from '@shared/components/modal/modal.component';
+import { IModal } from '@shared/models/IModal';
 import { UserShort } from '@shared/models/UserShort';
 
 @Component({
@@ -24,7 +28,7 @@ export class TeachersPageComponent implements OnInit {
 
     nextClass = 'No classes planned';
 
-    constructor(private authService: AuthService) {}
+    constructor(private authService: AuthService, private dialogRef: MatDialog) {}
 
     ngOnInit(): void {
         this.authService.loadUser().subscribe();
@@ -32,5 +36,17 @@ export class TeachersPageComponent implements OnInit {
         this.authService.user.subscribe((user) => {
             this.currentUser = user;
         });
+    }
+
+    openCreate() {
+        const config: MatDialogConfig<IModal> = {
+            data: {
+                header: 'Add Group Class',
+                hasButtons: false,
+                component: LessonsCreateComponent,
+            },
+        };
+
+        this.dialogRef.open(ModalComponent, config);
     }
 }

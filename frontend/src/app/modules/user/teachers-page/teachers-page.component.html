@@ -1,4 +1,4 @@
-<div class="container">
+<div class="profile-container">
     <div class="profile">
         <div class="header">
             <h1>Teachers Profile</h1>
@@ -31,7 +31,9 @@
                 </div>
             </div>
             <div class="card-right">
-                <div class="add-class"></div>
+                <div class="add-class">
+                    <button class="create-lesson-button" (click)="openCreate()">+ Add Group Class</button>
+                </div>
                 <div class="next-class-card">
                     <app-stats-card [description]="'The Nearest Group Classes'" [text]="nextClass" [iconPath]="'TODO'">
                     </app-stats-card>
@@ -39,4 +41,7 @@
             </div>
         </div>
     </div>
+</div>
+<div class="lessons-container">
+    
 </div>
