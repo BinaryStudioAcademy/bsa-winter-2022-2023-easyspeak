@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { IMessage } from '@shared/models/IMessage';
+import { IMessageGroup } from '@shared/models/chat/IMessageGroup';
 import * as moment from 'moment';
 
 @Component({
@@ -12,11 +12,11 @@ export class MessageGroupComponent {
         this.showDate = true;
     }
 
-    @Input() message: { date: Date, messages: IMessage[] };
+    @Input() message: IMessageGroup;
 
     @Input() i: number;
 
-    @Input() messages: { date: Date, messages: IMessage[] }[];
+    @Input() messages: IMessageGroup[];
 
     today = new Date();
 

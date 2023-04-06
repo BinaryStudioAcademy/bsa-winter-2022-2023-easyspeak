@@ -1,4 +1,4 @@
-﻿using EasySpeak.Core.Common.DTO.Message;
+﻿using EasySpeak.Core.Common.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +11,6 @@ namespace EasySpeak.Core.BLL.Interfaces
     {
         Task<List<ChatPersonDto>> GetUnreadAndLastSendMessageAsync();
         Task<List<MessageGroupDto>> GetChatMessages(int chatId);
+        Task<NewMessageDto> SendMessageAsync(NewMessageDto newMessageDto);
     }
 }

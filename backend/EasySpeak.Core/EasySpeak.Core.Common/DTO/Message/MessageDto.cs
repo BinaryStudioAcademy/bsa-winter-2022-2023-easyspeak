@@ -1,4 +1,4 @@
-﻿namespace EasySpeak.Core.Common.DTO.Message
+﻿namespace EasySpeak.Core.Common.DTO
 {
     public class MessageDto
     {

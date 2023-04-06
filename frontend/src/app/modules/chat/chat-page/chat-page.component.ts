@@ -1,53 +1,102 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ChatHubService } from '@core/hubs/chat-hub.service';
+import { HttpService } from '@core/services/http.service';
 import { ScrollToBottomDirective } from '@shared/directives/scroll-to-bottom-directive';
-import { IChatPerson } from '@shared/models/IChatPerson';
-import { IMessage } from '@shared/models/IMessage';
+import { IChatPerson } from '@shared/models/chat/IChatPerson';
+import { IMessage } from '@shared/models/chat/IMessage';
+import { IMessageGroup } from '@shared/models/chat/IMessageGroup';
 import * as moment from 'moment';
-import { Observable, of } from 'rxjs';
+import { Subscription } from 'rxjs';
 
-interface IMessageGroup {
-    date: Date;
-    messages: IMessage[];
-}
 @Component({
     selector: 'app-chat-page',
     templateUrl: './chat-page.component.html',
     styleUrls: ['./chat-page.component.sass'],
 })
-export class ChatPageComponent {
+export class ChatPageComponent implements OnInit, OnDestroy {
     @ViewChild(ScrollToBottomDirective) scroll: ScrollToBottomDirective;
 
-    people: IChatPerson[] = [
-        { name: 'Giana Levin', isOnline: true, lastMessage: 'Lorem ipsum dolor sit amet consectetur?', numberOfUnreadMessages: 2 },
-        { name: 'Giana Levin', isOnline: false, lastMessage: 'Lorem ipsum dolor sit amet consectetur?', numberOfUnreadMessages: 1 },
-        { name: 'Giana Levin', isOnline: false, lastMessage: 'Lorem ipsum dolor sit amet consectetur?', numberOfUnreadMessages: 170 },
-        { name: 'Giana Levin', isOnline: true, lastMessage: 'Lorem ipsum dolor sit amet consectetur?', numberOfUnreadMessages: 0 },
-        { name: 'Giana Levin', isOnline: false, lastMessage: 'Lorem ipsum dolor sit amet consectetur?', numberOfUnreadMessages: 170 },
-    ];
+    people: IChatPerson[];
 
-    totalMessage = this.people.reduce((sum, person) => sum + person.numberOfUnreadMessages, 0);
+    messages: IMessage[] = [];
 
-    currentChatId = 1;
+    groupedMessages: IMessageGroup[] = [];
+
+    // people: IChatPerson[] = [
+    // eslint-disable-next-line max-len
+    //     { firstName: 'Giana', lastName: 'Levin', isOnline: true, lastMessage: 'Lorem ipsum dolor sit amet consectetur?', numberOfUnreadMessages: 2 },
+    // eslint-disable-next-line max-len
+    //     { firstName: 'Giana', lastName: 'Levin', isOnline: false, lastMessage: 'Lorem ipsum dolor sit amet consectetur?', numberOfUnreadMessages: 1 },
+    // eslint-disable-next-line max-len
+    //     { firstName: 'Giana', lastName: 'Levin', isOnline: false, lastMessage: 'Lorem ipsum dolor sit amet consectetur?', numberOfUnreadMessages: 170 },
+    // eslint-disable-next-line max-len
+    //     { firstName: 'Giana', lastName: 'Levin', isOnline: true, lastMessage: 'Lorem ipsum dolor sit amet consecrate?', numberOfUnreadMessages: 0 },
+    // eslint-disable-next-line max-len
+    //     { firstName: 'Giana', lastName: 'Levin', isOnline: false, lastMessage: 'Lorem ipsum dolor sit amet consectetur?', numberOfUnreadMessages: 170 },
+    // ];
+    // currentPerson: IChatPerson = {
+    //     firstName: 'adsasd',
+    //     lastName: 'asdasd',
+    //     isOnline: true,
+    //     lastMessage: 'asfasf',
+    //     numberOfUnreadMessages: 0,
+    //     chatId: 22,
+    // };
+    // messages: IMessage[] = [
+    //     { chatId: 1, userId: 1, text: 'Hello', createdAt: new Date(2022, 11, 17, 17, 3) },
+    //     { chatId: 1, userId: 1, text: 'Anyone here?', createdAt: new Date(2022, 11, 17, 17, 4) },
+    //     { chatId: 1, userId: 2, text: 'Hi', createdAt: new Date(2023, 2, 3, 1, 3) },
+    //     { chatId: 1, userId: 1, text: 'How are you?', createdAt: new Date(2023, 2, 3, 1, 3) },
+    //     { chatId: 1, userId: 2, text: 'I am fine, thanks', createdAt: new Date(2023, 2, 3, 1, 3) },
+    //     { chatId: 1, userId: 1, text: 'Awesome :)', createdAt: new Date(2023, 2, 30, 1, 3) },
+    // ];
+
+    currentPerson: IChatPerson;
+
+    totalMessage: number;
+
+    currentChatId: number;
 
     currentUserId = 1;
 
-    messages$: Observable<[]> = of([]);
+    allMessagesSubscription: any;
 
-    messages: IMessage[] = [
-        { chatId: 1, userId: 1, text: 'Hello', createdAt: new Date(2022, 11, 17, 17, 3) },
-        { chatId: 1, userId: 1, text: 'Anyone here?', createdAt: new Date(2022, 11, 17, 17, 4) },
-        { chatId: 1, userId: 2, text: 'Hi', createdAt: new Date(2023, 2, 3, 1, 3) },
-        { chatId: 1, userId: 1, text: 'How are you?', createdAt: new Date(2023, 2, 3, 1, 3) },
-        { chatId: 1, userId: 2, text: 'I am fine, thanks', createdAt: new Date(2023, 2, 3, 1, 3) },
-        { chatId: 1, userId: 1, text: 'Awesome :)', createdAt: new Date(2023, 2, 30, 1, 3) },
-    ];
+    constructor(
+        private router: Router,
+        private httpService: HttpService,
+        private chatHub: ChatHubService,
+    ) {
 
-    groupedMessages: { date: Date; messages: IMessage[] }[] = [];
+    }
 
-    constructor(private router: Router) {
-        this.groupedMessages = this.groupByDate(this.messages);
+    async ngOnInit() {
+        await this.chatHub.start();
+
+        this.httpService.get<IChatPerson[]>('/chat/lastSendMessages').subscribe((people) => {
+            this.people = people;
+            this.totalMessage = this.people.reduce((sum, person) => sum + person.numberOfUnreadMessages, 0);
+            //this.groupedMessages = this.groupByDate(this.messages);
+        });
+
+        this.chatHub.listenToSendMessages();
+        this.allMessagesSubscription = this.chatHub.messages
+            .subscribe((res: IMessage) => {
+                this.messages = [...this.messages, res];
+            });
+    }
+
+    ngOnDestroy(): void {
+        (<Subscription> this.allMessagesSubscription).unsubscribe();
+    }
+
+    getChat(person: IChatPerson) {
+        this.httpService.get<IMessageGroup[]>(`/chat/chatMessages/${person.chatId}`).subscribe((groupedMessages) => {
+            this.groupedMessages = groupedMessages;
+            this.currentChatId = person.chatId;
+            this.currentPerson = person;
+        });
     }
 
     groupByDate(messages: IMessage[]): IMessageGroup[] {
@@ -91,9 +140,11 @@ export class ChatPageComponent {
             }];
             this.groupedMessages = this.groupByDate(this.messages);
 
-            setInterval(() => {
-                this.scroll.scrollToBottom();
-            }, 50);
+            this.chatHub.invoke('SendMessageAsync', message);
+
+            // setInterval(() => {
+            //     this.scroll.scrollToBottom();
+            // }, 50);
         }
     }
 
