@@ -33,7 +33,7 @@ export class UserCardComponent implements OnInit {
     }
 
     setFlagByLanguage() {
-        if (this.user.language !== undefined) {
+        if (this.user?.language) {
             const languageCode = languagesLib.getCode(this.user.language);
 
             if (languageCode) {
@@ -47,7 +47,7 @@ export class UserCardComponent implements OnInit {
         }
     }
 
-    buttomGoToMessage() {
+    buttonGoToMessage() {
         return true;
     }
 
