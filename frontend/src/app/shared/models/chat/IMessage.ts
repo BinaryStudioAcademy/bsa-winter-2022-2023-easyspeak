@@ -1,6 +1,6 @@
 export interface IMessage {
     chatId: number;
     userId: number;
-    text: string;
+    message: string;
     createdAt: Date;
 }

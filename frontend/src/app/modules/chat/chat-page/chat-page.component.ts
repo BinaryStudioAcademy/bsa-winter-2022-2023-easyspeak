@@ -2,11 +2,13 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ChatHubService } from '@core/hubs/chat-hub.service';
+import { AuthService } from '@core/services/auth.service';
 import { HttpService } from '@core/services/http.service';
 import { ScrollToBottomDirective } from '@shared/directives/scroll-to-bottom-directive';
 import { IChatPerson } from '@shared/models/chat/IChatPerson';
 import { IMessage } from '@shared/models/chat/IMessage';
 import { IMessageGroup } from '@shared/models/chat/IMessageGroup';
+import { IUserShort } from '@shared/models/IUserShort';
 import * as moment from 'moment';
 import { Subscription } from 'rxjs';
 
@@ -20,10 +22,11 @@ export class ChatPageComponent implements OnInit, OnDestroy {
 
     people: IChatPerson[];
 
-    messages: IMessage[] = [];
+    newMessage: IMessage;
 
     groupedMessages: IMessageGroup[] = [];
 
+    currentUser: IUserShort;
     // people: IChatPerson[] = [
     // eslint-disable-next-line max-len
     //     { firstName: 'Giana', lastName: 'Levin', isOnline: true, lastMessage: 'Lorem ipsum dolor sit amet consectetur?', numberOfUnreadMessages: 2 },
@@ -59,19 +62,24 @@ export class ChatPageComponent implements OnInit, OnDestroy {
 
     currentChatId: number;
 
-    currentUserId = 1;
-
     allMessagesSubscription: any;
 
     constructor(
         private router: Router,
         private httpService: HttpService,
         private chatHub: ChatHubService,
+        private authService: AuthService,
     ) {
 
     }
 
     async ngOnInit() {
+        this.authService.loadUser().subscribe();
+
+        this.authService.user.subscribe((user) => {
+            this.currentUser = user;
+        });
+
         await this.chatHub.start();
 
         this.httpService.get<IChatPerson[]>('/chat/lastSendMessages').subscribe((people) => {
@@ -83,7 +91,7 @@ export class ChatPageComponent implements OnInit, OnDestroy {
         this.chatHub.listenToSendMessages();
         this.allMessagesSubscription = this.chatHub.messages
             .subscribe((res: IMessage) => {
-                this.messages = [...this.messages, res];
+                this.newMessage = res;
             });
     }
 
@@ -93,30 +101,40 @@ export class ChatPageComponent implements OnInit, OnDestroy {
 
     getChat(person: IChatPerson) {
         this.httpService.get<IMessageGroup[]>(`/chat/chatMessages/${person.chatId}`).subscribe((groupedMessages) => {
-            this.groupedMessages = groupedMessages;
+            this.groupedMessages = groupedMessages.map((messageGroup): IMessageGroup => {
+                return {
+                    date: new Date(messageGroup.date),
+                    messages: messageGroup.messages.map((message): IMessage => {
+                        return {
+                            ...message,
+                            createdAt: new Date(message.createdAt),
+                        };
+                    }),
+                };
+            });
             this.currentChatId = person.chatId;
             this.currentPerson = person;
         });
     }
 
-    groupByDate(messages: IMessage[]): IMessageGroup[] {
-        return messages.reduce((acc: IMessageGroup[], message: IMessage) => {
-            const messageDate = new Date(message.createdAt.toDateString());
-            const messageGroupIndex = acc.findIndex((group) => {
-                const groupDate = new Date(group.date.toDateString());
-
-                return moment(groupDate.getTime()).isSame(moment(messageDate.getTime()));
-            });
-
-            if (messageGroupIndex === -1) {
-                acc.push({ date: messageDate, messages: [message] });
-            } else {
-                acc[messageGroupIndex].messages.push(message);
-            }
-
-            return acc;
-        }, []);
-    }
+    // groupByDate(messages: IMessage[]): IMessageGroup[] {
+    //     return messages.reduce((acc: IMessageGroup[], message: IMessage) => {
+    //         const messageDate = new Date(message.createdAt.toDateString());
+    //         const messageGroupIndex = acc.findIndex((group) => {
+    //             const groupDate = new Date(group.date.toDateString());
+    //
+    //             return moment(groupDate.getTime()).isSame(moment(messageDate.getTime()));
+    //         });
+    //
+    //         if (messageGroupIndex === -1) {
+    //             acc.push({ date: messageDate, messages: [message] });
+    //         } else {
+    //             acc[messageGroupIndex].messages.push(message);
+    //         }
+    //
+    //         return acc;
+    //     }, []);
+    // }
 
     lotsOfMessages(value: number): string {
         return value < 100 ? `${value}` : '99+';
@@ -132,20 +150,20 @@ export class ChatPageComponent implements OnInit, OnDestroy {
 
         if (message) {
             this.form.reset();
-            this.messages = [...this.messages, {
+            const msg: IMessage = {
                 chatId: this.currentChatId,
-                userId: this.currentUserId,
-                text: message,
+                userId: this.currentUser.id,
+                message,
                 createdAt: new Date(Date.now()),
-            }];
-            this.groupedMessages = this.groupByDate(this.messages);
+            };
 
             this.chatHub.invoke(
                 'SendMessageAsync',
-                this.messages[this.messages.length - 1].text,
-                this.messages[this.messages.length - 1].chatId,
-                this.messages[this.messages.length - 1].userId,
-                this.messages[this.messages.length - 1].createdAt,
+                {
+                    ...msg,
+                    Text: msg.message,
+                    CreatedBy: msg.userId,
+                },
             );
 
             // setInterval(() => {

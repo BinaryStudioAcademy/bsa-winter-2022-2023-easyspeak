@@ -9,17 +9,17 @@
             }}
         </div>
     </div>
-    <div *ngFor="let mess of message.messages" [ngClass]="{'message-photo': true, 'own-message': mess.userId === currentUserId, 'not-own-message': mess.userId !== currentUserId}">
-        <img src="assets/header/avatar.svg" *ngIf="mess.userId !== currentUserId" alt="img">
-        <div class="message" [ngClass]="{ sender: mess.userId === currentUserId }">
-            <p class="message-content">{{ mess.text }}</p>
+    <div *ngFor="let mess of message.messages" [ngClass]="{'message-photo': true, 'own-message': mess.userId === currentUser.id, 'not-own-message': mess.userId !== currentUser.id}">
+        <img src="assets/header/avatar.svg" *ngIf="mess.userId !== currentUser.id" alt="img">
+        <div class="message" [ngClass]="{ sender: mess.userId === currentUser.id }">
+            <p class="message-content">{{ mess.message }}</p>
             <div class="message-time">
                     <span>
                         {{mess.createdAt | date: 'HH:mm'}}
                     </span>
-                <img src="assets/chat/ReadMessage.svg" alt="img" *ngIf="mess.userId === currentUserId">
+                <img src="assets/chat/ReadMessage.svg" alt="img" *ngIf="mess.userId === currentUser.id">
             </div>
         </div>
-        <img src="assets/header/avatar.svg" *ngIf="mess.userId === currentUserId" alt="img">
+        <img src="assets/header/avatar.svg" *ngIf="mess.userId === currentUser.id" alt="img">
     </div>
 </div>

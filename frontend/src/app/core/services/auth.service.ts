@@ -4,7 +4,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { HttpService } from '@core/services/http.service';
-import { UserShort } from '@shared/models/UserShort';
+import { IUserShort } from '@shared/models/IUserShort';
 import * as auth from 'firebase/auth';
 import firebase from 'firebase/compat';
 import { defer, first, firstValueFrom, from, Subject, tap } from 'rxjs';
@@ -17,7 +17,7 @@ import { UserService } from './user.service';
     providedIn: 'root',
 })
 export class AuthService {
-    user = new Subject<UserShort>();
+    user = new Subject<IUserShort>();
 
     constructor(
         private afs: AngularFirestore,
@@ -69,7 +69,7 @@ export class AuthService {
         localStorage.setItem('accessToken', userIdToken);
     }
 
-    setLocalStorage(user: UserShort) {
+    setLocalStorage(user: IUserShort) {
         localStorage.setItem('user', JSON.stringify(user));
         this.user.next(user);
         this.user.complete();
@@ -79,6 +79,7 @@ export class AuthService {
         this.userService.getUser().subscribe(
             (resp) => {
                 const user = {
+                    id: resp.id,
                     firstName: resp.firstName,
                     lastName: resp.lastName,
                     imagePath: resp.imagePath,

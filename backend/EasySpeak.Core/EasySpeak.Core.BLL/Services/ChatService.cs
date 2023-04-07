@@ -63,7 +63,7 @@ namespace EasySpeak.Core.BLL.Services
                                         CreatedAt = message.CreatedAt,
                                     })
                         })
-                        .OrderByDescending(groupMessages => groupMessages.Date)
+                        .OrderBy(groupMessages => groupMessages.Date)
                         .ToList();
 
             return result;

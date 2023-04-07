@@ -40,19 +40,8 @@ export class WebrtcHubService {
             .then(() => console.info(`"${this.hubFactory}" successfully started.`))
             .catch(() => console.info(`"${this.hubFactory}" failed.`));
 
-        this.hubConnection.on('log', (msg: string) => {
-            this.messages.next(msg);
-        });
-
-        this.hubConnection.on('created', () => {
-            this.messages.next('created');
-        });
-
-        this.hubConnection.on('joined', () => {
-            this.messages.next('joined');
-        });
-
         this.hubConnection.on('message', (msg: string) => {
+            console.log(msg);
             this.messages.next(msg);
         });
     }

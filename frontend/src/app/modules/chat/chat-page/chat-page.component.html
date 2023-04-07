@@ -65,7 +65,13 @@
             </div>
         </header>
         <div class="chat-body" #scrollMe [scrollTop]="scrollMe.scrollHeight" *ngIf="groupedMessages.length > 0">
-            <app-message-group *ngFor="let message of groupedMessages; index as i" [message]="message" [i]="i" [messages]="groupedMessages"></app-message-group>
+            <app-message-group
+                *ngFor="let message of groupedMessages; index as i"
+                [message]="message"
+                [i]="i"
+                [currentUser]="currentUser"
+            >
+            </app-message-group>
         </div>
         <div class="chat-body" #scrollMe [scrollTop]="scrollMe.scrollHeight" *ngIf="groupedMessages.length === 0">
             <span>No messages in this chat :( <br> Say 'Hi 👋' to your friend!</span>

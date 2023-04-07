@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { IMessageGroup } from '@shared/models/chat/IMessageGroup';
+import { IUserShort } from '@shared/models/IUserShort';
 import * as moment from 'moment';
 
 @Component({
@@ -16,11 +17,9 @@ export class MessageGroupComponent {
 
     @Input() i: number;
 
-    @Input() messages: IMessageGroup[];
+    @Input() currentUser: IUserShort;
 
     today = new Date();
-
-    currentUserId = 1;
 
     showDate: boolean;
 
@@ -28,7 +27,7 @@ export class MessageGroupComponent {
         if (moment(date).isSame(moment().startOf('day'))) {
             return 'Today';
         }
-        if (moment(date).isSame(moment().add('days', -1).startOf('day'))) {
+        if (moment(date).isSame(moment().add(-1, 'days').startOf('day'))) {
             return 'Yesterday';
         }
 
