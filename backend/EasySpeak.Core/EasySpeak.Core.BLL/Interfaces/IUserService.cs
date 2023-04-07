@@ -18,5 +18,7 @@ namespace EasySpeak.Core.BLL.Interfaces
         Task<TagDto[]> GetUserTags();
         Task<UserDto> UpdateUser(UserDto userDto);
         Task<UserDto> MakeAdminAsync(int userId);
+        Task<long> GetUserIdByEmail(string email);
+        Task<List<UserShortInfoDto>> GetFriends();
     }
 }

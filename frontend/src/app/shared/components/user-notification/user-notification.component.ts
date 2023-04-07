@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { BaseComponent } from '@core/base/base.component';
 import { NotificationsHubService } from '@core/hubs/notifications-hub.service';
 import { NotificationService } from '@core/services/notification.service';
@@ -23,6 +24,7 @@ export class UserNotificationComponent extends BaseComponent implements OnInit, 
     constructor(
         notificationsHub: NotificationsHubService,
         private notificationService: NotificationService,
+        private router: Router,
     ) {
         super();
         this.notificationsHub = notificationsHub;
