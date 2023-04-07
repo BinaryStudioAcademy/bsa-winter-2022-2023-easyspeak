@@ -56,17 +56,17 @@ export class AuthService {
     }
 
     signUp(email: string, password: string) {
-        return defer(() => this.afAuth.createUserWithEmailAndPassword(email, password)).pipe(
-            first(),
-            tap({
-                next: (userCredential) => {
-                    from(this.handleUserCredential(userCredential));
-                },
-                error: () => {
-                    throw new Error('This email is already registered. Try another one');
-                },
-            }),
-        );
+        return defer(() => this.afAuth
+            .createUserWithEmailAndPassword(email, password))
+            .pipe(
+                first(),
+                tap({
+                    next: (userCredential) => {
+                        from(this.handleUserCredential(userCredential));
+                    },
+                    error: () => { throw new Error('This email is already registered. Try another one'); },
+                }),
+            );
     }
 
     private async setAccessToken(user: firebase.User): Promise<void> {
