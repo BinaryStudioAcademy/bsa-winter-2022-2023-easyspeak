@@ -69,5 +69,11 @@ namespace EasySpeak.Core.WebAPI.Controllers
             }
             return StatusCode(403);
         }
+
+        [HttpGet("friends")]
+        public async Task<ActionResult<List<UserShortInfoDto>>> GetFriends()
+        {
+            return Ok(await _userService.GetFriends());
+        }
     }
 }
