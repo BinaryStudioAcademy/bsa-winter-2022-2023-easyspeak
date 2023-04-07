@@ -133,7 +133,7 @@ export class ChatPageComponent implements OnInit {
     startSessionCall(): void {
         const videoCallId = crypto.randomUUID();
 
-        this.webrtcHub.callUser('finaltest1@gmail.com', videoCallId);
+        this.webrtcHub.callUser('stagetest@gmail.com', videoCallId);
         this.router.navigate([`session-call/${videoCallId}`]);
     }
 }
