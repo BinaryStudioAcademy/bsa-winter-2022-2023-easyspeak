@@ -103,9 +103,7 @@ export class LessonsCreateComponent implements OnInit {
             .set({ hour: parseInt(hours, 10), minute: parseInt(minutes, 10) })
             .toDate();
 
-        const timeNow = moment(Date.now()).toDate();
-
-        this.isPast = startAt < timeNow;
+        this.isPast = startAt < moment().toDate();
         if (this.isPast) {
             return;
         }

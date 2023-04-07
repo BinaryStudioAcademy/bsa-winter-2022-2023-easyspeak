@@ -26,7 +26,7 @@
                 <div class="error" *ngIf="(date?.invalid || isPast) && submitted">
                     <img src="/assets/user-profile/alert-triangle.svg" alt="" />
                     <p *ngIf="!isPast">Date is Required</p>
-                    <p *ngIf="isPast">That time has passed</p>
+                    <p *ngIf="isPast">Lesson with past date can't be created</p>
                 </div>
             </mat-error>
         </div>
@@ -49,7 +49,7 @@
                 <div class="error" *ngIf="(!time || isPast) && submitted">
                     <img src="/assets/user-profile/alert-triangle.svg" alt="" />
                     <p *ngIf="!isPast">Time is Required</p>
-                    <p *ngIf="isPast">That time has passed</p>
+                    <p *ngIf="isPast">Selected time has passed, Select future one</p>
                 </div>
             </mat-error>
         </div>
