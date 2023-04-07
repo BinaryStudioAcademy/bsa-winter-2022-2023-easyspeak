@@ -18,7 +18,7 @@ export class SignInComponent {
             Validators.required,
             Validators.maxLength(50),
             Validators.minLength(3),
-            //Validators.pattern(emailFormatRegex),
+            Validators.pattern(emailFormatRegex),
         ]),
         password: new FormControl('', [
             Validators.required,
@@ -44,7 +44,7 @@ export class SignInComponent {
 
     public signIn() {
         this.clearErrorMessage = false;
-        if (this.lengthError(this.email) || this.lengthError(this.password)) { return; }
+        if (this.lengthError(this.email) || this.lengthError(this.password) || this.email.errors?.['pattern']) { return; }
         this.authService
             .signIn(this.email.value, this.password.value)
             .then(() => {
@@ -54,6 +54,9 @@ export class SignInComponent {
             .catch((error) => {
                 this.wrongPassword = error.code === 'auth/wrong-password';
                 this.doesntExist = error.code === 'auth/user-not-found';
+                if (this.doesntExist) {
+                    this.email.setErrors({ signInEmailNotFound: true });
+                }
                 this.toastr.error(error.message, 'Sign up');
             });
     }
@@ -77,10 +80,16 @@ export class SignInComponent {
         return this.form.get('password') as FormControl;
     }
 
+    ////
     lengthError(item: FormControl) {
-        return item.errors?.['required'] || item.errors?.['minlength'] || item.errors?.['maxlength'];
+        const error = item.errors?.['required'] || item.errors?.['minlength'] || item.errors?.['maxlength'];
+
+        this.email.setErrors({ signInEmailNotFound: true });
+
+        return error;
     }
 
+    ////
     onFocus() {
         this.clearErrorMessage = true;
     }

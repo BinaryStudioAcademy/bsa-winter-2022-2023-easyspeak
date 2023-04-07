@@ -27,10 +27,10 @@
                     <mat-error class="error"
                                *ngIf="
                                !clearErrorMessage
-                               &&doesntExist
-                               &&email.errors?.['required']">
+                               &&(doesntExist
+                               ||email.errors?.['pattern'])">
                         <img src="/assets/user-profile/alert-triangle.svg" alt="">
-                        User with such email doesn’t exist
+                        {{getErrorMessage(email)}}}
                     </mat-error>
                 </div>
 
