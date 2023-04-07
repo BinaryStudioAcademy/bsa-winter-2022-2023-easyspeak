@@ -112,13 +112,9 @@ public class UserService : BaseService, IUserService
             {
                 user.UserFriendshipStatus = UserFriendshipStatus.Acceptor;
             }
-            else if (friends.Any(friend => (friend.UserId == user.Id || friend.RequesterId == user.Id) && friend.FriendshipStatus == FriendshipStatus.Confirmed))
-            {
-                user.UserFriendshipStatus = UserFriendshipStatus.Friend;
-            }
             else
             {
-                user.UserFriendshipStatus = UserFriendshipStatus.Regular;
+                user.UserFriendshipStatus = UserFriendshipStatus.Friend;
             }
         });
     }
