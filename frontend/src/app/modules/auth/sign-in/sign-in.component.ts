@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '@core/services/auth.service';
+import { EmailLengthValidator } from '@modules/auth/sign-in/EmailLengthValidator';
 import { emailFormatRegex, passFormatRegex } from '@shared/data/regex.util';
 import { ToastrService } from 'ngx-toastr';
 
@@ -19,6 +20,7 @@ export class SignInComponent {
             Validators.maxLength(50),
             Validators.minLength(3),
             Validators.pattern(emailFormatRegex),
+
         ]),
         password: new FormControl('', [
             Validators.required,
@@ -82,11 +84,13 @@ export class SignInComponent {
 
     ////
     lengthError(item: FormControl) {
-        const error = item.errors?.['required'] || item.errors?.['minlength'] || item.errors?.['maxlength'];
+        if (item.errors?.['required'] || item.errors?.['minlength'] || item.errors?.['maxlength']) {
+            this.email.setErrors({ signInEmailLength: true });
 
-        this.email.setErrors({ signInEmailNotFound: true });
+            return true;
+        }
 
-        return error;
+        return false;
     }
 
     ////

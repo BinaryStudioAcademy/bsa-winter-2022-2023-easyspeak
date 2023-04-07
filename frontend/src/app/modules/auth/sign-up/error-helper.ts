@@ -7,4 +7,5 @@ export const validationErrorMessage: { [id: string]: string } = {
     pattern: 'Can contain latin letters, at least one lowercase and one uppercase, min 6, max 25',
     matchError: 'Not match',
     signInEmailNotFound: 'User with such email doesn’t exist',
+    signInEmailLength: 'Min 3, max 50',
 };

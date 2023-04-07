@@ -22,7 +22,8 @@
                                &&lengthError(email)
                                &&userLoginForm.submitted">
                         <img src="/assets/user-profile/alert-triangle.svg" alt="">
-                        Min 3, max 50 {{lengthError(this.email)}}
+                        Length
+<!--                        {{getErrorMessage(email)}}-->
                     </mat-error>
                     <mat-error class="error"
                                *ngIf="
@@ -30,7 +31,8 @@
                                &&(doesntExist
                                ||email.errors?.['pattern'])">
                         <img src="/assets/user-profile/alert-triangle.svg" alt="">
-                        {{getErrorMessage(email)}}}
+<!--                        {{getErrorMessage(email)}}-->
+                        Base
                     </mat-error>
                 </div>
 
