@@ -1,18 +1,24 @@
-﻿using EasySpeak.Core.BLL.Interfaces;
+﻿using AutoMapper;
+using EasySpeak.Core.BLL.Interfaces;
 using EasySpeak.Core.Common.DTO.Notification;
+using EasySpeak.Core.Common.Enums;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EasySpeak.Core.WebAPI.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("notifications")]
     public class NotificationController : ControllerBase
     {
         private readonly INotificationService _notificationService;
+        private readonly IUserService _userService;
+        private readonly IMapper mapper;
 
-        public NotificationController(INotificationService notificationService)
+        public NotificationController(INotificationService notificationService, IUserService userService, IMapper mapper)
         {
             _notificationService = notificationService;
+            _userService = userService;
+            this.mapper = mapper;
         }
 
         [HttpGet]
@@ -34,6 +40,14 @@ namespace EasySpeak.Core.WebAPI.Controllers
         {
             await _notificationService.ReadAllNotificationsAsync();
             return Ok();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<NotificationDto>> AddNotification([FromBody] PostNotificationDto newNotification)
+        {
+            long id = await _userService.GetUserIdByEmail(newNotification.Email);
+            var notification = await _notificationService.AddNotificationAsync(mapper.Map<NotificationType>(newNotification.Type), id);
+            return Ok(notification);
         }
     }
 }

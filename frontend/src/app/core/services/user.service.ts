@@ -52,4 +52,8 @@ export class UserService {
 
         return false;
     }
+
+    public getFriends(): Observable<UserCard[]> {
+        return this.httpService.get<UserCard[]>(`${this.routePrefix}/friends`);
+    }
 }

@@ -16,5 +16,7 @@ namespace EasySpeak.Core.BLL.Interfaces
         Task<bool> GetAdminStatus();
         Task<string> UploadProfilePhoto(IFormFile file);
         Task<UserDto> MakeAdminAsync(int userId);
+        Task<long> GetUserIdByEmail(string email);
+        Task<List<UserShortInfoDto>> GetFriends();
     }
 }

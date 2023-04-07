@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FriendHubService } from '@core/hubs/friend-hub.service';
 import { UserService } from '@core/services/user.service';
 import { UserCard } from '@shared/models/user/user-card';
 import { Observable } from 'rxjs';
@@ -10,14 +11,22 @@ import { UserFilter } from '../../../models/filters/userFilter';
     templateUrl: './social-page.component.html',
     styleUrls: ['./social-page.component.sass'],
 })
-export class SocialPageComponent implements OnInit {
+export class SocialPageComponent implements OnInit, OnDestroy {
     public users$: Observable<UserCard[]>;
 
-    public constructor(private userService: UserService) {
+    public constructor(
+        private userService: UserService,
+        private friendHub: FriendHubService,
+    ) {
     }
 
-    ngOnInit(): void {
+    async ngOnInit(): Promise<void> {
         this.users$ = this.userService.getUsers();
+        await this.friendHub.start();
+    }
+
+    async ngOnDestroy(): Promise<void> {
+        await this.friendHub.stop();
     }
 
     onFilterChanges(filters: UserFilter) {
