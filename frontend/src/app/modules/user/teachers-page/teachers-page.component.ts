@@ -78,7 +78,14 @@ export class TeachersPageComponent implements OnInit {
             )
             .subscribe((data) => {
                 this.datesWithLessons = data as DateWithLessons[];
-                console.log(this.datesWithLessons);
+                this.splitLessons();
             });
+    }
+
+    splitLessons() {
+        this.datesWithLessons.forEach((dateWithLessons) => {
+            dateWithLessons.lessonsColumn1 = dateWithLessons.lessons.filter((el, index) => index % 2 === 0);
+            dateWithLessons.lessonsColumn2 = dateWithLessons.lessons.filter((el, index) => index % 2 === 1);
+        });
     }
 }

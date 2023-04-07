@@ -13,7 +13,7 @@ import { LessonsRoutingModule } from './lessons-routing.module';
 @NgModule({
     declarations: [LessonsPageComponent, LessonsCreateComponent, LessonComponent],
     imports: [CommonModule, FormsModule, ReactiveFormsModule, MaterialModule, LessonsRoutingModule, SharedModule],
-    exports: [LessonsPageComponent],
+    exports: [LessonsPageComponent, LessonComponent],
     providers: [AdminGuard],
 })
 export class LessonsModule {}
