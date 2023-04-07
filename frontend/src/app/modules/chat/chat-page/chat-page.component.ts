@@ -76,8 +76,8 @@ export class ChatPageComponent implements OnInit {
         this.groupedMessages = this.groupByDate(this.messages);
     }
 
-    ngOnInit(): void {
-        this.webrtcHub.start().then();
+    async ngOnInit(): Promise<void> {
+        await this.webrtcHub.start();
     }
 
     groupByDate(messages: IMessage[]): IMessageGroup[] {
