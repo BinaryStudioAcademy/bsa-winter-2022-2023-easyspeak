@@ -33,17 +33,19 @@ export class UserCardComponent implements OnInit {
     }
 
     setFlagByLanguage() {
-        if (this.user?.language) {
-            const languageCode = languagesLib.getCode(this.user.language);
+        if (!this.user.language) {
+            return;
+        }
 
-            if (languageCode) {
-                const country = countryCodes[languageCode];
+        const languageCode = languagesLib.getCode(this.user.language);
 
-                const fullCountry = countriesLib.whereAlpha2(country)?.country;
+        if (languageCode) {
+            const country = countryCodes[languageCode];
 
-                this.userLanguageFlag = this.countriesService.getCountriesList()
-                    .find((s: { name: string | undefined; }) => s.name === fullCountry)?.flag;
-            }
+            const fullCountry = countriesLib.whereAlpha2(country)?.country;
+
+            this.userLanguageFlag = this.countriesService.getCountriesList()
+                .find((s: { name: string | undefined; }) => s.name === fullCountry)?.flag;
         }
     }
 
