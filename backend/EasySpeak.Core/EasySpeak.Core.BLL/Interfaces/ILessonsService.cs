@@ -12,4 +12,5 @@ public interface ILessonsService
 
     Task<LessonDto> CreateLessonAsync(NewLessonDto lessonDto);
     Task<TeacherStatisticsDto> GetTeacherLessonsStatisticsAsync();
+    Task<ICollection<DaysWithLessonsDto>> GetLessonsInPeriodAsync(DateTime start, DateTime end);
 }
