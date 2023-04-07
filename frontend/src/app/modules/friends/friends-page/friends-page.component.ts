@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FriendHubService } from '@core/hubs/friend-hub.service';
 import { UserService } from '@core/services/user.service';
 import { UserCard, UserFriendshipStatus } from '@shared/models/user/user-card';
 
@@ -8,9 +7,8 @@ import { UserCard, UserFriendshipStatus } from '@shared/models/user/user-card';
     templateUrl: './friends-page.component.html',
     styleUrls: ['./friends-page.component.sass'],
 })
-export class FriendsPageComponent implements OnInit, OnDestroy {
+export class FriendsPageComponent implements OnInit {
     constructor(
-        private friendHub: FriendHubService,
         private userService: UserService,
     ) {
     }
@@ -19,15 +17,11 @@ export class FriendsPageComponent implements OnInit, OnDestroy {
 
     friends: UserCard[] = [];
 
-    async ngOnInit(): Promise<void> {
-        await this.friendHub.start();
+    ngOnInit(): void {
         this.userService.getFriends().subscribe(users => {
             this.friends = users.filter(u => u.userFriendshipStatus === UserFriendshipStatus.Friend);
             this.requests = users.filter(u => u.userFriendshipStatus !== UserFriendshipStatus.Friend);
         });
     }
 
-    async ngOnDestroy(): Promise<void> {
-        await this.friendHub.stop();
-    }
 }

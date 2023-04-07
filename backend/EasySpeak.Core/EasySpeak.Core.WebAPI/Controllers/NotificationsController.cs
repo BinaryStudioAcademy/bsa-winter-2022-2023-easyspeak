@@ -7,18 +7,14 @@ using Microsoft.AspNetCore.Mvc;
 namespace EasySpeak.Core.WebAPI.Controllers
 {
     [ApiController]
-    [Route("notifications")]
-    public class NotificationController : ControllerBase
+    [Route("[controller]")]
+    public class NotificationsController : ControllerBase
     {
         private readonly INotificationService _notificationService;
-        private readonly IUserService _userService;
-        private readonly IMapper mapper;
 
-        public NotificationController(INotificationService notificationService, IUserService userService, IMapper mapper)
+        public NotificationsController(INotificationService notificationService)
         {
             _notificationService = notificationService;
-            _userService = userService;
-            this.mapper = mapper;
         }
 
         [HttpGet]
@@ -40,14 +36,6 @@ namespace EasySpeak.Core.WebAPI.Controllers
         {
             await _notificationService.ReadAllNotificationsAsync();
             return Ok();
-        }
-
-        [HttpPost]
-        public async Task<ActionResult<NotificationDto>> AddNotification([FromBody] PostNotificationDto newNotification)
-        {
-            long id = await _userService.GetUserIdByEmail(newNotification.Email);
-            var notification = await _notificationService.AddNotificationAsync(mapper.Map<NotificationType>(newNotification.Type), id);
-            return Ok(notification);
         }
     }
 }

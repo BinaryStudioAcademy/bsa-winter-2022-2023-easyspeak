@@ -65,7 +65,6 @@ app.UseEndpoints(endpoints =>
 {
     endpoints.MapHealthChecks("/health");
     endpoints.MapHub<SignalRtcHub>("/signaling");
-    endpoints.MapHub<FriendHub>("/friend");
     endpoints.MapControllers();
 });
 

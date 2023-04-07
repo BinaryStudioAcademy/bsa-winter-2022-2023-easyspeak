@@ -10,6 +10,7 @@ using EasySpeak.Core.DAL.Context;
 using EasySpeak.Core.DAL.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Azure.Core;
 
 namespace EasySpeak.Core.BLL.Services;
 
@@ -70,7 +71,11 @@ public class UserService : BaseService, IUserService
     {
         var users = _context.Users
             .Include(u => u.Tags)
-            .Include(u => u.Image);
+            .Include(u => u.Image)
+            .Where(u => !_context.Friends.Any(f=>
+            (f.UserId == _authService.UserId || f.RequesterId == _authService.UserId)
+            && (f.UserId == u.Id || f.RequesterId == u.Id))
+            && u.Id != _authService.UserId);
         var filter = _mapper.Map<UserFilter>(userFilter);
 
         IQueryable<User> filteredUsers = users;
@@ -88,28 +93,24 @@ public class UserService : BaseService, IUserService
             filteredUsers = filteredUsers.Where(u => u.Tags.Any(t => filter.Topics.Contains(t.Name)));
         }
         var filteredUsersList = await filteredUsers.ToListAsync();
-        var mappedUsers = _mapper.Map<List<UserShortInfoDto>>(filteredUsersList);
-        await FillUserFriendshipStatus(mappedUsers);
-        return mappedUsers;
+        return _mapper.Map<List<UserShortInfoDto>>(filteredUsersList);
     }
 
     private async Task FillUserFriendshipStatus(List<UserShortInfoDto> users)
     {
         var myId = _authService.UserId;
-        var requesters = await _context.Friends.Where(f=>f.FriendshipStatus == FriendshipStatus.Pending && f.UserId == myId).ToListAsync();
-        var acceptors = await _context.Friends.Where(f => f.FriendshipStatus == FriendshipStatus.Pending && f.RequesterId == myId).ToListAsync();
-        var confirmedFriends = await _context.Friends.Where(f => f.FriendshipStatus == FriendshipStatus.Confirmed && (f.RequesterId == myId || f.UserId == myId)).ToListAsync();
+        var friends = await _context.Friends.Where(f => f.FriendshipStatus != FriendshipStatus.Rejected && (f.RequesterId == myId || f.UserId == myId)).ToListAsync();
         users.ForEach(user =>
         {
-            if (requesters.Any(requester => requester.RequesterId == user.Id))
+            if (friends.Any(requester => requester.RequesterId == user.Id && requester.FriendshipStatus == FriendshipStatus.Pending))
             {
                 user.UserFriendshipStatus = UserFriendshipStatus.Requester;
             }
-            else if (acceptors.Any(acceptor => acceptor.UserId == user.Id))
+            else if (friends.Any(acceptor => acceptor.UserId == user.Id && acceptor.FriendshipStatus == FriendshipStatus.Pending))
             {
                 user.UserFriendshipStatus = UserFriendshipStatus.Acceptor;
             }
-            else if (confirmedFriends.Any(friend => friend.UserId == user.Id || friend.RequesterId == user.Id))
+            else if (friends.Any(friend => (friend.UserId == user.Id || friend.RequesterId == user.Id) && friend.FriendshipStatus == FriendshipStatus.Confirmed))
             {
                 user.UserFriendshipStatus = UserFriendshipStatus.Friend;
             }
@@ -124,7 +125,7 @@ public class UserService : BaseService, IUserService
     {
         var userId = _authService.UserId;
 
-        var user = _context.Users.SingleOrDefault(u => u.Id == userId) ?? throw new ArgumentException($"Failed to find the f with id {userId}");
+        var user = _context.Users.SingleOrDefault(u => u.Id == userId) ?? throw new ArgumentException($"Failed to find the user with id {userId}");
         var lesson = _context.Lessons.SingleOrDefault(l => l.Id == lessonId) ?? throw new ArgumentException($"Failed to find the lesson with id {lessonId}");
 
         user.Lessons.Add(lesson);
@@ -144,7 +145,7 @@ public class UserService : BaseService, IUserService
 
         if (user == null)
         {
-            throw new ArgumentNullException("This f not found");
+            throw new ArgumentNullException("This user not found");
         }
 
         var fileDto = new NewEasySpeakFileDto()
@@ -196,19 +197,12 @@ public class UserService : BaseService, IUserService
     public async Task<List<UserShortInfoDto>> GetFriends()
     {
         var friendshipsWithUsers = _context.Friends.Include(f => f.User).Include(f => f.Requester);
-        var requestors = await friendshipsWithUsers
-            .Where(f => f.FriendshipStatus != FriendshipStatus.Rejected && f.UserId == _authService.UserId)
-            .Select(f=>f.Requester)
-            .ToListAsync();
+        var users = await friendshipsWithUsers
+           .Where(f => f.FriendshipStatus != FriendshipStatus.Rejected && f.UserId == _authService.UserId || f.RequesterId == _authService.UserId)
+           .Select(f => f.UserId == _authService.UserId ? f.Requester : f.User)
+           .ToListAsync();
 
-        var acceptors = await friendshipsWithUsers
-            .Where(f => f.FriendshipStatus != FriendshipStatus.Rejected && f.RequesterId == _authService.UserId)
-            .Select(f => f.User)
-            .ToListAsync();
-
-        var friends = requestors.Concat(acceptors).ToList();
-
-        var mappedFriends = _mapper.Map<List<UserShortInfoDto>>(friends);
+        var mappedFriends = _mapper.Map<List<UserShortInfoDto>>(users);
 
         await FillUserFriendshipStatus(mappedFriends);
 
