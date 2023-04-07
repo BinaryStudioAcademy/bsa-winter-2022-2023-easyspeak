@@ -9,8 +9,8 @@ namespace EasySpeak.Core.WebAPI.Hubs
 
         public void Connect(string email)
         {
-            var user = Context.User;
-            ConnectedUsers.Add(email, Context.ConnectionId);
+
+            ConnectedUsers[email] = Context.ConnectionId;
             Clients.All.SendAsync("UserConnected", email);
         }
 

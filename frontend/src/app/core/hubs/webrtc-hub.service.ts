@@ -3,7 +3,6 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CoreHubFactoryService } from '@core/hubs/hubFactories/core-hub-factory.service';
 import { HubConnection, HubConnectionState } from '@microsoft/signalr';
 import { AcceptCallComponent } from '@shared/components/accept-call/accept-call.component';
-import { ModalComponent } from '@shared/components/modal/modal.component';
 import { IModal } from '@shared/models/IModal';
 import { Subject, Subscription } from 'rxjs';
 
@@ -47,11 +46,11 @@ export class WebrtcHubService {
             .catch(() => console.info(`"${this.hubFactory}" failed.`));
 
         this.hubConnection.on('UserConnected', (username: string) => {
-            console.log(`${username} has connected`);
+            this.messages.next(`${username} has connected`);
         });
 
         this.hubConnection.on('UserDisconnected', (username: string) => {
-            console.log(`${username} has disconnected`);
+            this.messages.next(`${username} has disconnected`);
         });
 
         this.hubConnection.on('log', (msg: string) => {
@@ -94,7 +93,7 @@ export class WebrtcHubService {
     }
 
     public async callUser(email: string, roomName: string) {
-        await this.hubConnection.invoke('CallUser', email, roomName).catch((err) => console.log(err));
+        await this.hubConnection.invoke('CallUser', email, roomName).catch((err) => console.error(err));
     }
 
     async invoke(methodName: string, ...args: unknown[]): Promise<unknown> {
