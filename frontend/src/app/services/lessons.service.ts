@@ -39,4 +39,8 @@ export class LessonsService {
     getTeacherStatistics() {
         return this.http.get(`${this.routePrefix}/statistics`);
     }
+
+    getTeacherLessonsAtPeriod(start: string, end: string) {
+        return this.http.get(`${this.routePrefix}/${start}/${end}`);
+    }
 }

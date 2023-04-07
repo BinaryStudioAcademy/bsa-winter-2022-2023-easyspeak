@@ -61,9 +61,9 @@
     <div class="lessons-header">
         <p class="lessons-title">My Group Classes</p>
         <mat-button-toggle-group name="selectPeriod" value="week">
-            <mat-button-toggle (click)="displayToday()" value="today">Today</mat-button-toggle>
-            <mat-button-toggle (click)="displayWeek()" value="week">Week</mat-button-toggle>
-            <mat-button-toggle (click)="displayMonth()" value="month">Month</mat-button-toggle>
+            <mat-button-toggle (click)="loadLessons(1)" value="today">Today</mat-button-toggle>
+            <mat-button-toggle (click)="loadLessons(7)" value="week">Week</mat-button-toggle>
+            <mat-button-toggle (click)="loadLessons(30)" value="month">Month</mat-button-toggle>
         </mat-button-toggle-group>
     </div>
     <div class="lessons-by-day">

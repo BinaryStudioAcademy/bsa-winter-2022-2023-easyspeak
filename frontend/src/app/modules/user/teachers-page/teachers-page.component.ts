@@ -7,6 +7,7 @@ import { ModalComponent } from '@shared/components/modal/modal.component';
 import { IModal } from '@shared/models/IModal';
 import { UserShort } from '@shared/models/UserShort';
 
+import { DateWithLessons } from 'src/app/models/lessons/date-with-lessons';
 import { TeacherStatistics } from 'src/app/models/lessons/teacher-statistics';
 import { LessonsService } from 'src/app/services/lessons.service';
 
@@ -30,6 +31,8 @@ export class TeachersPageComponent implements OnInit {
         nextClass: null,
     };
 
+    datesWithLessons: DateWithLessons[] = [];
+
     constructor(
         private authService: AuthService,
         private dialogRef: MatDialog,
@@ -52,7 +55,7 @@ export class TeachersPageComponent implements OnInit {
             }
         });
 
-        this.displayWeek();
+        this.loadLessons(7);
     }
 
     openCreate() {
@@ -67,15 +70,15 @@ export class TeachersPageComponent implements OnInit {
         this.dialogRef.open(ModalComponent, config);
     }
 
-    displayToday() {
-        console.log('display today');
-    }
-
-    displayWeek() {
-        console.log('display week');
-    }
-
-    displayMonth() {
-        console.log('display month');
+    loadLessons(end: number) {
+        this.lessonsService
+            .getTeacherLessonsAtPeriod(
+                new Date().toISOString(),
+                new Date(new Date().setUTCHours(24 * end, 0, 0, 0)).toISOString(),
+            )
+            .subscribe((data) => {
+                this.datesWithLessons = data as DateWithLessons[];
+                console.log(this.datesWithLessons);
+            });
     }
 }

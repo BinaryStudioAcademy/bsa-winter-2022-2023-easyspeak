@@ -105,7 +105,7 @@ export class LessonsPageComponent implements OnInit, OnChanges {
 
         return response.map((lesson) => ({
             id: lesson.id,
-            imgPath: lesson.mediaPath,
+            mediaPath: lesson.mediaPath,
             videoId: lesson.youtubeVideoId,
             zoomLink: lesson.zoomMeetingLink,
             zoomLinkHost: lesson.zoomMeetingLinkHost,

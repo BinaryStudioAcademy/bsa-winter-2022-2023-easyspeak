@@ -103,20 +103,18 @@ public class LessonsService : BaseService, ILessonsService
     {
         var lesson = _mapper.Map<Lesson>(lessonDto);
 
+        lesson.CreatedBy = _authService.UserId;
+
         var zoomMeetingLinks = await _zoomApiService.GetMeetingLinks(lesson.Name);
 
         lesson.ZoomMeetingLink = zoomMeetingLinks.JoinUrl;
 
         lesson.ZoomMeetingLinkHost = zoomMeetingLinks.HostUrl;
 
-        var createdLesson = _mapper.Map<LessonDto>(lesson);
-
-        lesson.CreatedBy = _authService.UserId;
-
-        _context.Add(lesson);
+        var createdLesson = _context.Add(lesson).Entity;
         await _context.SaveChangesAsync();
 
-        return createdLesson;
+        return _mapper.Map<LessonDto>(createdLesson);
     }
 
     public async Task<TeacherStatisticsDto> GetTeacherLessonsStatisticsAsync()
