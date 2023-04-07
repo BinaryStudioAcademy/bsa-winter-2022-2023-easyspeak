@@ -1,19 +1,18 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { UserCardModule } from '@modules/user-card/user-card.module';
 
-import { FriendsRoutingModule } from './friends-routing.module';
 import { FriendsPageComponent } from './friends-page/friends-page.component';
-import {UserCardModule} from "@modules/user-card/user-card.module";
-
+import { FriendsRoutingModule } from './friends-routing.module';
 
 @NgModule({
-  declarations: [
-    FriendsPageComponent
-  ],
+    declarations: [
+        FriendsPageComponent,
+    ],
     imports: [
         CommonModule,
         FriendsRoutingModule,
-        UserCardModule
-    ]
+        UserCardModule,
+    ],
 })
 export class FriendsModule { }

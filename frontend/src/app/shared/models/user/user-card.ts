@@ -1,5 +1,4 @@
-import { FriendshipStatus } from '@shared/models/friendship/FriendDto';
-export enum UserFriendshipStatus{
+export enum UserFriendshipStatus {
     Regular,
     Requester,
     Acceptor,
