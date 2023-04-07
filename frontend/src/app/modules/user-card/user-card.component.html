@@ -53,9 +53,8 @@
                 <span>Message</span>
             </button>
             <button (click)="onFollowClick()" class="button">
-                <img *ngIf="!isFriend" src="assets/user-card-icons/follow-icon.svg" alt="follow" />
-                <span *ngIf="isFriend">Added to friends</span>
-                <span *ngIf="!isFriend">Add to Friends</span>
+                <img src="assets/user-card-icons/follow-icon.svg" alt="follow" />
+                <span>Add to Friends</span>
             </button>
         </div>
         <div *ngIf="user.userFriendshipStatus === eUserFriendshipStatus.Acceptor" class="buttons">
@@ -83,9 +82,9 @@
                 <img src="assets/user-card-icons/mail.svg" alt="message">
                 <span>Message</span>
             </button>
-            <button class="button" disabled>
+            <button class="button button-gray" disabled>
                 <img src="assets/user-card-icons/follow-icon.svg" alt="follow">
-                <span>Friend</span>
+                <span>Added to friends</span>
             </button>
         </div>
     </div>

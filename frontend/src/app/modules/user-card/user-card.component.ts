@@ -18,8 +18,6 @@ import { countryCodes } from './mappingLanguagetoCountry';
 export class UserCardComponent implements OnInit {
     @Input() user: UserCard = Utils.user;
 
-    @Input() isFriend: boolean = false;
-
     userCountryFlag: string | undefined;
 
     userLanguageFlag: string | undefined;
@@ -56,10 +54,6 @@ export class UserCardComponent implements OnInit {
     }
 
     buttonGoToMessage() {
-        return true;
-    }
-
-    buttonFollow() {
         return true;
     }
 
