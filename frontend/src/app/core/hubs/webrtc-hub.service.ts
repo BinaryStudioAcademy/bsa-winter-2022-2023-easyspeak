@@ -45,14 +45,6 @@ export class WebrtcHubService {
             .then(() => console.info(`"${this.hubFactory}" successfully started.`))
             .catch(() => console.info(`"${this.hubFactory}" failed.`));
 
-        this.hubConnection.on('UserConnected', (username: string) => {
-            this.messages.next(`${username} has connected`);
-        });
-
-        this.hubConnection.on('UserDisconnected', (username: string) => {
-            this.messages.next(`${username} has disconnected`);
-        });
-
         this.hubConnection.on('log', (msg: string) => {
             this.messages.next(msg);
         });

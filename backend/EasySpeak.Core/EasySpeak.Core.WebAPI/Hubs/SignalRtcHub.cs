@@ -9,15 +9,12 @@ namespace EasySpeak.Core.WebAPI.Hubs
 
         public void Connect(string email)
         {
-
             ConnectedUsers[email] = Context.ConnectionId;
-            Clients.All.SendAsync("UserConnected", email);
         }
 
         public void Disconnect(string email)
         {
             ConnectedUsers.Remove(email);
-            Clients.All.SendAsync("UserDisconnected", email);
         }
 
         public async Task CallUser(string email, string roomName)
