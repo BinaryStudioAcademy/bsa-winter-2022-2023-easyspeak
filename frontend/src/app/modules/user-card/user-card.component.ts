@@ -58,7 +58,7 @@ export class UserCardComponent implements OnInit {
     }
 
     onRejectClicked() {
-        this.friendService.acceptFriendship({ email: this.user.email! }).subscribe(() => {
+        this.friendService.rejectFriendship({ email: this.user.email! }).subscribe(() => {
             this.user.userFriendshipStatus = UserFriendshipStatus.Regular;
         });
     }

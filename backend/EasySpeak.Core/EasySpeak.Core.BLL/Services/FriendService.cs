@@ -36,9 +36,9 @@ namespace EasySpeak.Core.BLL.Services
             return friendDto;
         }
 
-        public async Task<FriendEmailDto> AddFriendAsync(FriendEmailDto friendEmailDto)
+        public async Task<FriendEmailDto> AddFriendAsync(FriendEmailDto friendDto)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == friendEmailDto.Email);
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == friendDto.Email);
             var friend = new Friend
             {
                 UserId = user!.Id,

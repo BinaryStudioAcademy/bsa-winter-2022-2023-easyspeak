@@ -72,10 +72,12 @@ public class UserService : BaseService, IUserService
         var users = _context.Users
             .Include(u => u.Tags)
             .Include(u => u.Image)
-            .Where(u => !_context.Friends.Any(f=>
-            (f.UserId == _authService.UserId || f.RequesterId == _authService.UserId)
-            && (f.UserId == u.Id || f.RequesterId == u.Id))
-            && u.Id != _authService.UserId);
+            .Where(u => 
+                !_context.Friends.Any(f=>
+                    (f.UserId == _authService.UserId || f.RequesterId == _authService.UserId)
+                    && (f.UserId == u.Id || f.RequesterId == u.Id))
+                && u.Id != _authService.UserId
+            );
         var filter = _mapper.Map<UserFilter>(userFilter);
 
         IQueryable<User> filteredUsers = users;
