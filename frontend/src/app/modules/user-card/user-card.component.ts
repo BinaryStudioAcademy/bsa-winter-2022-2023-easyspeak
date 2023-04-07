@@ -1,7 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FriendshipService } from '@core/services/friendship.service';
-import { UserService } from '@core/services/user.service';
-import { IUserInfo } from '@shared/models/IUserInfo';
 import { UserCard, UserFriendshipStatus } from '@shared/models/user/user-card';
 import { Utils } from '@shared/utils/user-card.utils';
 
@@ -15,21 +13,15 @@ import { CountriesTzLangProviderService } from 'src/app/services/countries-tz-la
 export class UserCardComponent implements OnInit {
     @Input() user: UserCard = Utils.user;
 
-    currentUser: IUserInfo;
-
     eUserFriendshipStatus = UserFriendshipStatus;
 
     constructor(
         private countriesService: CountriesTzLangProviderService,
         private friendService: FriendshipService,
-        private userService: UserService,
     ) {}
 
     ngOnInit(): void {
         this.user.tags = [...new Set(this.user.tags)];
-        this.userService.getUser().subscribe(u => {
-            this.currentUser = u;
-        });
     }
 
     public getUserCountryFlag() {
