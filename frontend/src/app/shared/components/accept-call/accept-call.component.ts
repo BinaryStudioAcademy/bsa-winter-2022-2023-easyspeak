@@ -16,7 +16,7 @@ export class AcceptCallComponent {
         private webRtcHub: WebrtcHubService,
     ) {}
 
-    accept() {
+    answerCall() {
         this.router.navigate([`session-call/${this.data.header}`]);
     }
 }
