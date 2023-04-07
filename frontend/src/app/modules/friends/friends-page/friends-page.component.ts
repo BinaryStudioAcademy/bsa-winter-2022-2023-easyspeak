@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from '@core/services/user.service';
 import { UserCard, UserFriendshipStatus } from '@shared/models/user/user-card';
 
@@ -23,5 +23,4 @@ export class FriendsPageComponent implements OnInit {
             this.requests = users.filter(u => u.userFriendshipStatus !== UserFriendshipStatus.Friend);
         });
     }
-
 }
