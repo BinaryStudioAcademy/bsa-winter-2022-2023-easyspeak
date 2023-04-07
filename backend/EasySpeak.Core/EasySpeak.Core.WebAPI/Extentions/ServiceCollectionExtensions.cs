@@ -16,6 +16,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.Reflection;
+using Neo4j.Driver;
 
 
 namespace EasySpeak.Core.WebAPI.Extensions
@@ -39,6 +40,15 @@ namespace EasySpeak.Core.WebAPI.Extensions
             services.AddFirebaseApp();
             services.Configure<RabbitQueuesOptions>(configuration.GetSection("RabbitQueues"))
                 .AddScoped<INotificationService, NotificationService>();
+            services.Configure<Neo4jOptions>(configuration.GetSection("Neo4jSettings"));
+
+            var neo4JSettings = new Neo4jOptions();
+            configuration.GetSection("Neo4jSettings").Bind(neo4JSettings);
+
+            services.AddSingleton(GraphDatabase.Driver(neo4JSettings.Neo4jConnection,
+                AuthTokens.Basic(neo4JSettings.Neo4jUser, neo4JSettings.Neo4jPassword)));
+            services.AddScoped<INeo4jDataAccessService, Neo4JDataAccessService>();
+            services.AddTransient<INeo4jUserService, Neo4jUserService>();
         }
 
         public static void AddAutoMapper(this IServiceCollection services)

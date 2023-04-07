@@ -20,4 +20,16 @@ public class UserDto
     {
         Tags = new List<TagDto>();
     }
+
+    public Dictionary<string, object> ToDictionary()
+    {
+        return new Dictionary<string, object>()
+        {
+            {"fullName", FirstName + " " + LastName},
+            {"country", Country},
+            {"language", Language},
+            {"languageLevel", LanguageLevel},
+            {"age", new DateTime().Year - BirthDate.Year}
+        };
+    }
 }
