@@ -65,12 +65,12 @@
             </button>
         </div>
         <div *ngIf="user.userFriendshipStatus === eUserFriendshipStatus.Requester" class="buttons">
-            <button class="button" (click)="onAcceptClicked()">
-                <img src="assets/user-card-icons/mail.svg" alt="message">
+            <button class="button accept-button" (click)="onAcceptClicked()">
+                <img src="assets/user-card-icons/accept.svg" alt="message">
                 <span>Accept</span>
             </button>
             <button class="button" (click)="onRejectClicked()">
-                <img src="assets/user-card-icons/follow-icon.svg" alt="follow">
+                <img src="assets/user-card-icons/cancel.svg" alt="follow">
                 <span>Cancel</span>
             </button>
         </div>
