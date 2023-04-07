@@ -43,10 +43,10 @@ namespace EasySpeak.Core.WebAPI.Controllers
             return StatusCode(403);
         }
         [HttpGet("statistics")]
-        public async Task<ActionResult<TeacherStatisticsDto>> GetTeacherLessonsStatisticsAsync(int teacherId) => Ok(await _lessonsService.GetTeacherLessonsStatisticsAsync());
+        public async Task<ActionResult<TeacherStatisticsDto>> GetTeacherLessonsStatisticsAsync() => Ok(await _lessonsService.GetTeacherLessonsStatisticsAsync());
 
-        [HttpGet]
-        public async Task<ActionResult<ICollection<DaysWithLessonsDto>>> GetLessonsInPeriodAsync([FromQuery] DateTime start, [FromQuery] DateTime end) 
+        [HttpGet("{start}/{end}")]
+        public async Task<ActionResult<ICollection<DaysWithLessonsDto>>> GetLessonsInPeriodAsync(DateTime start, DateTime end) 
             => Ok(await _lessonsService.GetLessonsInPeriodAsync(start, end));
     }
 }

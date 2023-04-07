@@ -142,16 +142,16 @@ public class LessonsService : BaseService, ILessonsService
 
     public async Task<ICollection<DaysWithLessonsDto>> GetLessonsInPeriodAsync(DateTime start, DateTime end)
     {
-        //long id = 4; //TODO: remove hardcode
-        //var daysWithLessons = await _context.Lessons.Where(l => l.CreatedBy == id && l.StartAt > start && l.StartAt < end)
-        //                                            .Include(l => l.Tags)
-        //                                            .Include(l => l.Questions)
-        //                                            .ThenInclude(q => q.Subquestions)
-        //                                            .GroupBy(l => l.StartAt.Date)
-        //                                            .Select(d => new DaysWithLessonsDto { LessonsDate = d.Key, Lessons = _mapper.Map<List<Lesson>, List<LessonDto>>(d.ToList()) })
-        //                                            .OrderBy(d => d.LessonsDate)
-        //                                            .ToListAsync();
-        //return daysWithLessons;
-        throw new NotImplementedException();
+        long id = _authService.UserId;
+        var selectedLessons = await _context.Lessons.Where(l => l.CreatedBy == id && l.StartAt > start && l.StartAt < end)
+                                                    .Include(l => l.Tags)
+                                                    .OrderBy(l => l.StartAt)
+                                                    .ToListAsync();
+                                                    
+        var groupedLessons = selectedLessons.GroupBy(l => l.StartAt.Date)
+                                            .Select(d => new DaysWithLessonsDto { LessonsDate = d.Key, Lessons = _mapper.Map<List<Lesson>, List<LessonDto>>(d.ToList()) })
+                                            .ToList();
+
+        return groupedLessons;
     }
 }
