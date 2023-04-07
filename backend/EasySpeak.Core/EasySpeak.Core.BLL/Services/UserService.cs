@@ -75,7 +75,8 @@ public class UserService : BaseService, IUserService
             .Where(u => 
                 !_context.Friends.Any(f=>
                     (f.UserId == _authService.UserId || f.RequesterId == _authService.UserId)
-                    && (f.UserId == u.Id || f.RequesterId == u.Id))
+                    && (f.UserId == u.Id || f.RequesterId == u.Id)
+                    && f.FriendshipStatus != FriendshipStatus.Rejected)
                 && u.Id != _authService.UserId
             );
         var filter = _mapper.Map<UserFilter>(userFilter);
@@ -196,7 +197,7 @@ public class UserService : BaseService, IUserService
     {
         var friendshipsWithUsers = _context.Friends.Include(f => f.User).Include(f => f.Requester);
         var users = await friendshipsWithUsers
-           .Where(f => f.FriendshipStatus != FriendshipStatus.Rejected && f.UserId == _authService.UserId || f.RequesterId == _authService.UserId)
+           .Where(f => f.FriendshipStatus != FriendshipStatus.Rejected && (f.UserId == _authService.UserId || f.RequesterId == _authService.UserId))
            .Select(f => f.UserId == _authService.UserId ? f.Requester : f.User)
            .ToListAsync();
 
