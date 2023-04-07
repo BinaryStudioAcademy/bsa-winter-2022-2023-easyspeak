@@ -1,6 +1,7 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { WebrtcHubService } from '@core/hubs/webrtc-hub.service';
 import { ScrollToBottomDirective } from '@shared/directives/scroll-to-bottom-directive';
 import { IChatPerson } from '@shared/models/IChatPerson';
 import { IMessage } from '@shared/models/IMessage';
@@ -16,15 +17,40 @@ interface IMessageGroup {
     templateUrl: './chat-page.component.html',
     styleUrls: ['./chat-page.component.sass'],
 })
-export class ChatPageComponent {
+export class ChatPageComponent implements OnInit {
     @ViewChild(ScrollToBottomDirective) scroll: ScrollToBottomDirective;
 
     people: IChatPerson[] = [
-        { name: 'Giana Levin', isOnline: true, lastMessage: 'Lorem ipsum dolor sit amet consectetur?', numberOfUnreadMessages: 2 },
-        { name: 'Giana Levin', isOnline: false, lastMessage: 'Lorem ipsum dolor sit amet consectetur?', numberOfUnreadMessages: 1 },
-        { name: 'Giana Levin', isOnline: false, lastMessage: 'Lorem ipsum dolor sit amet consectetur?', numberOfUnreadMessages: 170 },
-        { name: 'Giana Levin', isOnline: true, lastMessage: 'Lorem ipsum dolor sit amet consectetur?', numberOfUnreadMessages: 0 },
-        { name: 'Giana Levin', isOnline: false, lastMessage: 'Lorem ipsum dolor sit amet consectetur?', numberOfUnreadMessages: 170 },
+        {
+            name: 'Giana Levin',
+            isOnline: true,
+            lastMessage: 'Lorem ipsum dolor sit amet consectetur?',
+            numberOfUnreadMessages: 2,
+        },
+        {
+            name: 'Giana Levin',
+            isOnline: false,
+            lastMessage: 'Lorem ipsum dolor sit amet consectetur?',
+            numberOfUnreadMessages: 1,
+        },
+        {
+            name: 'Giana Levin',
+            isOnline: false,
+            lastMessage: 'Lorem ipsum dolor sit amet consectetur?',
+            numberOfUnreadMessages: 170,
+        },
+        {
+            name: 'Giana Levin',
+            isOnline: true,
+            lastMessage: 'Lorem ipsum dolor sit amet consectetur?',
+            numberOfUnreadMessages: 0,
+        },
+        {
+            name: 'Giana Levin',
+            isOnline: false,
+            lastMessage: 'Lorem ipsum dolor sit amet consectetur?',
+            numberOfUnreadMessages: 170,
+        },
     ];
 
     totalMessage = this.people.reduce((sum, person) => sum + person.numberOfUnreadMessages, 0);
@@ -46,8 +72,12 @@ export class ChatPageComponent {
 
     groupedMessages: { date: Date; messages: IMessage[] }[] = [];
 
-    constructor(private router: Router) {
+    constructor(private router: Router, private webrtcHub: WebrtcHubService) {
         this.groupedMessages = this.groupByDate(this.messages);
+    }
+
+    ngOnInit(): void {
+        this.webrtcHub.start().then();
     }
 
     groupByDate(messages: IMessage[]): IMessageGroup[] {
@@ -83,12 +113,15 @@ export class ChatPageComponent {
 
         if (message) {
             this.form.reset();
-            this.messages = [...this.messages, {
-                chatId: this.currentChatId,
-                userId: this.currentUserId,
-                text: message,
-                createdAt: new Date(Date.now()),
-            }];
+            this.messages = [
+                ...this.messages,
+                {
+                    chatId: this.currentChatId,
+                    userId: this.currentUserId,
+                    text: message,
+                    createdAt: new Date(Date.now()),
+                },
+            ];
             this.groupedMessages = this.groupByDate(this.messages);
 
             setInterval(() => {
@@ -98,6 +131,9 @@ export class ChatPageComponent {
     }
 
     startSessionCall(): void {
-        this.router.navigate([`session-call/${this.currentChatId}`]);
+        const videoCallId = crypto.randomUUID();
+
+        this.webrtcHub.callUser('finaltest1@gmail.com', videoCallId);
+        this.router.navigate([`session-call/${videoCallId}`]);
     }
 }

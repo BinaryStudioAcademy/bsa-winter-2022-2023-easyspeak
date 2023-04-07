@@ -12,6 +12,7 @@ import { defer, first, firstValueFrom, from, Subject, tap } from 'rxjs';
 import { NotificationService } from 'src/app/services/notification.service';
 
 import { UserService } from './user.service';
+import { WebrtcHubService } from '@core/hubs/webrtc-hub.service';
 
 @Injectable({
     providedIn: 'root',
@@ -28,11 +29,13 @@ export class AuthService {
         public jwtHelper: JwtHelperService,
         private userService: UserService,
         private toastr: NotificationService,
+        private webRtcHub: WebrtcHubService,
     ) {}
 
     async handleUserCredential(userCredential: firebase.auth.UserCredential) {
         if (userCredential.user) {
             await this.setAccessToken(userCredential.user);
+            this.webRtcHub.start().then();
         }
     }
 
@@ -50,17 +53,17 @@ export class AuthService {
     }
 
     signUp(email: string, password: string) {
-        return defer(() => this.afAuth
-            .createUserWithEmailAndPassword(email, password))
-            .pipe(
-                first(),
-                tap({
-                    next: (userCredential) => {
-                        from(this.handleUserCredential(userCredential));
-                    },
-                    error: () => { throw new Error('This email is already registered. Try another one'); },
-                }),
-            );
+        return defer(() => this.afAuth.createUserWithEmailAndPassword(email, password)).pipe(
+            first(),
+            tap({
+                next: (userCredential) => {
+                    from(this.handleUserCredential(userCredential));
+                },
+                error: () => {
+                    throw new Error('This email is already registered. Try another one');
+                },
+            }),
+        );
     }
 
     private async setAccessToken(user: firebase.User): Promise<void> {
@@ -138,16 +141,14 @@ export class AuthService {
     }
 
     async resetPassword(email: string) {
-        await this.afAuth.sendPasswordResetEmail(email)
-            .catch((error) => {
-                throw new Error(error.message);
-            });
+        await this.afAuth.sendPasswordResetEmail(email).catch((error) => {
+            throw new Error(error.message);
+        });
     }
 
     async confirmResetPassword(code: string, newPassword: string) {
-        await this.afAuth.confirmPasswordReset(code, newPassword)
-            .catch((error) => {
-                throw new Error(error.message);
-            });
+        await this.afAuth.confirmPasswordReset(code, newPassword).catch((error) => {
+            throw new Error(error.message);
+        });
     }
 }
