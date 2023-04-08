@@ -16,7 +16,7 @@ public class LessonDto
     public string? ZoomMeetingLinkHost { get; set; }
     public bool isSubscribed { get; set; }
 
-    //public UserForLessonDto? User { get; set; }
+    public UserForLessonDto? User { get; set; }
     public ICollection<TagForLessonDto>? Tags { get; set; }
     public ICollection<QuestionForLessonDto>? Questions { get; set; }
 }

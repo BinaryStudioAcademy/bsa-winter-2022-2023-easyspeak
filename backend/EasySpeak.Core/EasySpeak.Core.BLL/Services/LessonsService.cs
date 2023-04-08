@@ -105,6 +105,8 @@ public class LessonsService : BaseService, ILessonsService
 
         lesson.CreatedBy = _authService.UserId;
 
+        lesson.User = await _context.Users.Where(u => u.Id ==  _authService.UserId).FirstOrDefaultAsync();
+
         var zoomMeetingLinks = await _zoomApiService.GetMeetingLinks(lesson.Name);
 
         lesson.ZoomMeetingLink = zoomMeetingLinks.JoinUrl;
@@ -135,6 +137,10 @@ public class LessonsService : BaseService, ILessonsService
                                                      .OrderBy(l => l.StartAt)
                                                      .Select(l => l.StartAt)
                                                      .FirstOrDefaultAsync();
+        if (statistics.NextClass == DateTime.MinValue) 
+        {
+            statistics.NextClass = null;
+        }
         return statistics;
     }
 

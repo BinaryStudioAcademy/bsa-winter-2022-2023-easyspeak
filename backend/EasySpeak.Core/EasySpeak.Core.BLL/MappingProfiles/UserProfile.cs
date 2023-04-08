@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using EasySpeak.Core.BLL.Converters.Enum;
 using EasySpeak.Core.BLL.Helpers;
+using EasySpeak.Core.Common.DTO.Lesson;
 using EasySpeak.Core.Common.DTO.User;
 using EasySpeak.Core.Common.Enums;
 using EasySpeak.Core.DAL.Entities;
@@ -17,6 +18,8 @@ public class UserProfile : Profile
             src => src.MapFrom(userDto => EnumHelper.MapLanguageLevel(userDto.LanguageLevel)));
 
         CreateMap<User, UserDto>().ReverseMap();
+
+        CreateMap<User, UserForLessonDto>();
 
         CreateMap<User, UserDto>();
         CreateMap<User, UserShortInfoDto>()
