@@ -1,12 +1,11 @@
 <div class="container">
     <div class="form-wrp">
         <h1>Sign In</h1>
-        <form #userLoginForm="ngForm" [formGroup]="form" class="form-content" (ngSubmit)="signIn()">
+        <form #userLoginForm="ngForm" [formGroup]="form" class="form-content" (ngSubmit)="signIn()" [ngClass]="{'submitted': isSubmitted}">
             <div class="form-group-item">
                 <input formControlName="email" placeholder="Email" value="{{this.email}}" (focus)="ClearRemoteErrors(email)"/>
                 <div class="errors-wrp">
-                    <mat-error class="error"
-                               *ngIf="(email.errors?.['lengthValidator'] && email.touched) || (email.value===''&&userLoginForm.submitted)">
+                    <mat-error class="error" *ngIf="(email.errors?.['lengthValidator'] && email.touched) || (email.pristine && userLoginForm.submitted)">
                         <img src="/assets/user-profile/alert-triangle.svg" alt="">
                         'Min 3, max 50'
                     </mat-error>

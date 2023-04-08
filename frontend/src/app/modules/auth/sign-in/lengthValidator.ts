@@ -8,7 +8,7 @@ export function lengthValidator(min: number, max: number): ValidatorFn {
         // const { value } = control;
         const l = control.value?.length;
 
-        return !(((l >= min) && (l <= max)) || control.value === null) ?
-            { lengthValidator: true } : null;
+        return ((l >= min) && (l <= max)) ?
+            null : { lengthValidator: true };
     };
 }

@@ -26,6 +26,8 @@ export class SignInComponent {
         }),
     });
 
+    isSubmitted = false;
+
     constructor(
         private formBuilder: FormBuilder,
         private authService: AuthService,
@@ -35,6 +37,7 @@ export class SignInComponent {
     }
 
     public signIn() {
+        this.isSubmitted = true;
         if (this.email.valid && this.password.valid) {
             this.authService
                 .signIn(this.email.value, this.password.value)
@@ -74,7 +77,7 @@ export class SignInComponent {
     }
 
     ClearRemoteErrors(control: FormControl) {
-        control.setErrors(null);
-        //this.password.setErrors({ wrongPassword: null });
+        this.isSubmitted = false;
+        control.errors?
     }
 }
