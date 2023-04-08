@@ -5,14 +5,10 @@ import {
 
 export function lengthValidator(min: number, max: number): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-        const { value } = control;
-
-        if (!value) {
-            return null;
-        }
+        // const { value } = control;
         const l = control.value?.length;
 
-        return !((l >= min) && (l <= max)) ?
+        return !(((l >= min) && (l <= max)) || control.value === null) ?
             { lengthValidator: true } : null;
     };
 }

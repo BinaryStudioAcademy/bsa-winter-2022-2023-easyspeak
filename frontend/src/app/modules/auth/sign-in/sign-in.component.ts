@@ -15,22 +15,16 @@ import { validationErrorMessage } from '../sign-up/error-helper';
 })
 export class SignInComponent {
     form: FormGroup = new FormGroup({
-        email: new FormControl('', [
-            Validators.required,
-            lengthValidator(3, 50),
-            // Validators.pattern(emailFormatRegex),
-        ]),
-        password: new FormControl('', [
-            Validators.required,
-            Validators.minLength(6),
-            Validators.maxLength(25),
-            Validators.pattern(passFormatRegex),
-        ]),
+        email: new FormControl('', {
+            validators: [lengthValidator(3, 50), Validators.pattern(emailFormatRegex), Validators.required],
+
+            updateOn: 'submit',
+        }),
+        password: new FormControl('', {
+            validators: [lengthValidator(6, 25), Validators.pattern(passFormatRegex), Validators.required],
+            updateOn: 'submit',
+        }),
     });
-
-    doesntExist: boolean;
-
-    wrongPassword: boolean;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -41,22 +35,23 @@ export class SignInComponent {
     }
 
     public signIn() {
-        // this.clearErrorMessage = false;
-        // if (this.lengthError(this.email) || this.lengthError(this.password) || this.email.errors?.['pattern']) { return; }
-        this.authService
-            .signIn(this.email.value, this.password.value)
-            .then(() => {
-                this.toastr.success('Successfully sign in', 'Sign in');
-                this.router.navigate(['timetable']);
-            })
-            .catch((error) => {
-                this.wrongPassword = error.code === 'auth/wrong-password';
-                this.doesntExist = error.code === 'auth/user-not-found';
-                if (this.doesntExist) {
-                    this.email.setErrors({ signInEmailNotFound: true });
-                }
-                this.toastr.error(error.message, 'Sign up');
-            });
+        if (this.email.valid && this.password.valid) {
+            this.authService
+                .signIn(this.email.value, this.password.value)
+                .then(() => {
+                    this.toastr.success('Successfully sign in', 'Sign in');
+                    this.router.navigate(['timetable']);
+                })
+                .catch((error) => {
+                    if (error.code === 'auth/user-not-found') {
+                        this.email.setErrors({ emailNotFound: true });
+                    }
+                    if (error.code === 'auth/wrong-password') {
+                        this.password.setErrors({ wrongPassword: true });
+                    }
+                    this.toastr.error(error.message, 'Sign up');
+                });
+        }
     }
 
     getErrorMessage(control: FormControl): string {
@@ -78,16 +73,8 @@ export class SignInComponent {
         return this.form.get('password') as FormControl;
     }
 
-    ////
-    lengthError(item: FormControl) {
-        if (item.errors?.['required'] || item.errors?.['minlength'] || item.errors?.['maxlength']) {
-            this.email.setErrors({ signInEmailLength: true });
-
-            return true;
-        }
-
-        return false;
+    ClearRemoteErrors(control: FormControl) {
+        control.setErrors(null);
+        //this.password.setErrors({ wrongPassword: null });
     }
-
-    ////
 }
