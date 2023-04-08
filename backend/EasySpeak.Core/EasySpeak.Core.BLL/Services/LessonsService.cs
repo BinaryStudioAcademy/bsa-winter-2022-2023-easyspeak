@@ -128,13 +128,13 @@ public class LessonsService : BaseService, ILessonsService
 
         statistics.TotalClasses = await _context.Lessons.CountAsync(l => l.CreatedBy == id);
         statistics.CanceledClasses = await _context.Lessons.CountAsync(l => l.CreatedBy == id && l.IsCanceled);
-        statistics.FutureClasses = await _context.Lessons.CountAsync(l => l.CreatedBy == id && l.StartAt > DateTime.UtcNow);
+        statistics.FutureClasses = await _context.Lessons.CountAsync(l => l.CreatedBy == id && l.StartAt > DateTime.UtcNow && !l.IsCanceled);
         var total = await _context.Lessons.Where(l => l.CreatedBy == id && l.StartAt < DateTime.UtcNow).Select(l => l.Subscribers.Count()).ToListAsync();
         if (total is not null)
         {
             statistics.TotalStudents = total.Sum();
         }
-        statistics.NextClass = await _context.Lessons.Where(l => l.CreatedBy == id && l.StartAt > DateTime.UtcNow)
+        statistics.NextClass = await _context.Lessons.Where(l => l.CreatedBy == id && l.StartAt > DateTime.UtcNow && !l.IsCanceled)
                                                      .OrderBy(l => l.StartAt)
                                                      .Select(l => l.StartAt)
                                                      .FirstOrDefaultAsync();
