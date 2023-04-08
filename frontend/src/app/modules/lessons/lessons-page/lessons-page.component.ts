@@ -96,6 +96,8 @@ export class LessonsPageComponent implements OnInit, OnChanges {
                 this.lessons.forEach(element => {
                     element.startAt = this.lessonService.addTimeOffset(element.startAt);
                 });
+                this.lessons = this.lessons.filter((lesson) => !lesson.isCanceled);
+
                 this.lessonsColumn1 = this.lessons.filter((el, index) => index % 2 === 0);
                 this.lessonsColumn2 = this.lessons.filter((el, index) => index % 2 === 1);
             });

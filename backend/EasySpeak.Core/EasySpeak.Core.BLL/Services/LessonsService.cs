@@ -76,7 +76,8 @@ public class LessonsService : BaseService, ILessonsService
         var mondayDate = requestDto.Date.AddDays(-delta).Date;
         var dayCards = await _context.Lessons
             .Where(c => c.StartAt.Date >= mondayDate
-                        && c.StartAt.Date <= mondayDate.AddDays(DaysInWeek - 1))
+                        && c.StartAt.Date <= mondayDate.AddDays(DaysInWeek - 1)
+                        && !c.IsCanceled)
             .GroupBy(c => c.StartAt.Date)
             .Select(t =>
                 new DayCardDto
