@@ -97,8 +97,8 @@ export class LessonComponent extends BaseComponent implements OnInit {
                 });
         }
         if (this.page === 'teacher') {
-            this.lessonsService.cancelLesson(this.lesson.id).subscribe(() => {
-                this.lesson.isCanceled = true;
+            this.lessonsService.cancelLesson(this.lesson.id, this.lesson).subscribe((data) => {
+                this.lesson.isCanceled = data.isCanceled;
             });
         }
     }

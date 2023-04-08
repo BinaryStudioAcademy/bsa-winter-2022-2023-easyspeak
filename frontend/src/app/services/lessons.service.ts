@@ -53,7 +53,7 @@ export class LessonsService {
         return dateObject.toString();
     }
 
-    cancelLesson(id: number) {
-        return this.http.put(`${this.routePrefix}/cancel/${id}`, null);
+    cancelLesson(id: number, lesson: ILesson) {
+        return this.http.put(`${this.routePrefix}/cancel/${id}`, lesson);
     }
 }

@@ -158,4 +158,19 @@ public class LessonsService : BaseService, ILessonsService
 
         return groupedLessons;
     }
+
+    public async Task<LessonDto> CancelLessonAsync(int id)
+    {
+        var userId = _authService.UserId;
+
+        var lesson = await _context.Lessons.Where(l => l.Id == id).FirstOrDefaultAsync();
+
+        if (lesson is not null && lesson.CreatedBy == userId)
+        {
+            lesson.IsCanceled = true;
+            await _context.SaveChangesAsync();
+        }
+
+        return _mapper.Map<LessonDto>(lesson);
+    }
 }

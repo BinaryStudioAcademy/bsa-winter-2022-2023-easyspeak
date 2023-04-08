@@ -48,5 +48,16 @@ namespace EasySpeak.Core.WebAPI.Controllers
         [HttpGet("{start}/{end}")]
         public async Task<ActionResult<ICollection<DaysWithLessonsDto>>> GetLessonsInPeriodAsync(DateTime start, DateTime end) 
             => Ok(await _lessonsService.GetLessonsInPeriodAsync(start, end));
+
+        [HttpPut("cancel/{id}")]
+        public async Task<ActionResult<LessonDto>> CancelLessonAsync(int id)
+        {
+            var lesson = await _lessonsService.CancelLessonAsync(id);
+            if (lesson is not null)
+            {
+                return Ok(lesson);
+            }
+            return BadRequest();
+        }
     }
 }
