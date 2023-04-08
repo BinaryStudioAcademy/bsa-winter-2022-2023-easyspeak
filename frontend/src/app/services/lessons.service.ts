@@ -43,4 +43,13 @@ export class LessonsService {
     getTeacherLessonsAtPeriod(start: string, end: string) {
         return this.http.get(`${this.routePrefix}/${start}/${end}`);
     }
+
+    addTimeOffset(date: string): string {
+        const offset = new Date().getTimezoneOffset();
+        const dateObject = new Date(date);
+
+        dateObject.setMinutes(dateObject.getMinutes() - offset);
+
+        return dateObject.toString();
+    }
 }

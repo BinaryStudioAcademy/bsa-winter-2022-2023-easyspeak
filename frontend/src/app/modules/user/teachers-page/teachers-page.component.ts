@@ -84,6 +84,9 @@ export class TeachersPageComponent implements OnInit {
 
     splitLessons() {
         this.datesWithLessons.forEach((dateWithLessons) => {
+            dateWithLessons.lessons.forEach(element => {
+                element.startAt = this.lessonsService.addTimeOffset(element.startAt);
+            });
             dateWithLessons.lessonsColumn1 = dateWithLessons.lessons.filter((el, index) => index % 2 === 0);
             dateWithLessons.lessonsColumn2 = dateWithLessons.lessons.filter((el, index) => index % 2 === 1);
         });

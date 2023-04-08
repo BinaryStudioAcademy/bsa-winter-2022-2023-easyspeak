@@ -94,20 +94,11 @@ export class LessonsPageComponent implements OnInit, OnChanges {
             .subscribe((response) => {
                 this.lessons = response;
                 this.lessons.forEach(element => {
-                    element.startAt = this.addTimeOffset(element.startAt);
+                    element.startAt = this.lessonService.addTimeOffset(element.startAt);
                 });
                 this.lessonsColumn1 = this.lessons.filter((el, index) => index % 2 === 0);
                 this.lessonsColumn2 = this.lessons.filter((el, index) => index % 2 === 1);
             });
-    }
-
-    addTimeOffset(date: string): string {
-        const offset = new Date().getTimezoneOffset();
-        const dateObject = new Date(date);
-
-        dateObject.setMinutes(dateObject.getMinutes() - offset);
-
-        return dateObject.toString();
     }
 
     getLessonsUnavailableMessage(): string {
