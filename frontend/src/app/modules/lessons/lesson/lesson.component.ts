@@ -148,6 +148,8 @@ export class LessonComponent extends BaseComponent implements OnInit {
     }
 
     editLesson() {
-        console.log('edit lesson');
+        if (!this.lesson.isCanceled) {
+            //TODO: implement edit lesson
+        }
     }
 }
