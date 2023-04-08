@@ -26,5 +26,15 @@ namespace EasySpeak.Core.BLL.Helpers
 
             return dict[level];
         }
+
+        public static FriendshipStatus MapFriendshipStatus(string status)
+        {
+            var dict = new Dictionary<string, FriendshipStatus>{
+                         { "Pending", FriendshipStatus.Pending },
+                         { "Confirmed", FriendshipStatus.Confirmed },
+                         { "Rejected", FriendshipStatus.Rejected },};
+
+            return dict[status];
+        }
     }
 }

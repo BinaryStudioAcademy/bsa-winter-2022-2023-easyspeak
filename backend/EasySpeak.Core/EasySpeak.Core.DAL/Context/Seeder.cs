@@ -9,6 +9,9 @@ public static class Seeder
 {
     private static readonly DateTime DefaultDate = new DateTime(2023, 3, 30, 11, 0, 0, DateTimeKind.Utc);
     private static readonly Random Rnd = new Random(42);
+    private static readonly string[] AllTags = {
+        "Architecture", "Arts", "Cars", "Celebrities", "Cooking", "Dancing", "Ecology", "Design", "History", "Fashion",
+        "Medicine", "Technologies", "Pets", "Philosophy", "Photography", "Politics"};
 
     public static void Seed(ModelBuilder modelBuilder)
     {
@@ -41,7 +44,7 @@ public static class Seeder
             .Select(x => new ChatUser(x.Item1, x.Item2));
 
         var lessonTag = SeedHelper<Lesson, Tag, long>
-            .GetTablesJoin(lessons, tags, 2)
+            .GetTablesJoin(lessons, tags, 1)
             .Select(x => new LessonTag(x.Item1, x.Item2));
 
         var lessonUser = SeedHelper<User, Lesson, long>
@@ -49,7 +52,7 @@ public static class Seeder
             .Select(x => new LessonUser(x.Item1, x.Item2));
 
         var tagUser = SeedHelper<User, Tag, long>
-            .GetTablesJoin(users, tags, 4)
+            .GetTablesJoin(users, tags, 3)
             .Select(x => new TagUser(x.Item1, x.Item2));
 
         modelBuilder.Entity<Tag>().HasData(tags);
@@ -170,15 +173,14 @@ public static class Seeder
             .Generate(count);
     }
 
-    private static IList<Tag> GenerateTags(int count = 20)
+    private static IList<Tag> GenerateTags()
     {
-        Faker.GlobalUniqueIndex = 0;
-
-        return new Faker<Tag>()
-            .UseSeed(10)
-            .RuleFor(t => t.Id, f => f.IndexGlobal)
-            .RuleFor(t => t.Name, f => f.Random.Word())
-            .Generate(count);
+        return AllTags.Select((t, i) => new Tag
+        {
+            Id = ++i,
+            Name = t,
+            CreatedAt = DefaultDate
+        }).ToList();
     }
 
     private static IList<User> GenerateUsers(int count = 5)

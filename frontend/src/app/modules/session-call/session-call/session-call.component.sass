@@ -1,0 +1,87 @@
+@import 'src/styles/colors'
+
+.container
+    background-color: $white
+
+.header
+    position: absolute
+    background: $white
+    width: 100%
+    z-index: 10
+    display: flex
+    justify-content: center
+    align-items: center
+    gap: 7px
+    padding: 13px 0
+    img
+        height: 25px
+    h1
+        font-size: 18px
+        font-weight: 700
+
+.localVideoContainer
+    position: absolute
+    top: 82px
+    right: 26px
+    height: 200px
+
+#localVideo
+    position: relative
+    z-index: 10
+    height: 100%
+
+
+#localUser
+    padding: 9px 25px
+    z-index: 100
+
+    color: $blue-200
+    font-weight: 700
+    font-size: 16px
+    line-height: 150%
+
+    background: $turquoise-100
+    opacity: 0.7
+
+    position: absolute
+    bottom: 0
+
+.remoteVideoContainer
+    position: absolute
+    left: 50%
+    transform: translateX(-50%)
+    height: 100vh
+
+#remoteVideo
+    position: relative
+    z-index: 1
+    height: 100%
+
+#remoteUser
+    padding: 9px 25px
+    z-index: 100
+
+    color: $blue-200
+    font-weight: 700
+    font-size: 16px
+    line-height: 150%
+
+    background: $turquoise-100
+    opacity: 0.7
+
+    position: absolute
+    bottom: 62px
+
+.footer
+    position: absolute
+    background: $white
+    width: 100%
+    z-index: 10
+    bottom: 0
+    display: flex
+    justify-content: center
+    align-items: center
+    padding: 14px 0px
+    gap: 16px
+    img
+        cursor: pointer

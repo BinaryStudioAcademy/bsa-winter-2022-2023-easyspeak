@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { INewUser } from '@shared/models/INewUser';
 import { ITopic } from '@shared/models/ITopic';
 import { IUserInfo } from '@shared/models/IUserInfo';
+import { ITag } from '@shared/models/user/ITag';
 import { UserCard } from '@shared/models/user/user-card';
 import { Observable } from 'rxjs';
 
@@ -23,12 +24,12 @@ export class UserService {
         return this.httpService.get<IUserInfo>(`${this.routePrefix}`);
     }
 
-    public addTags(topics: ITopic[]) {
-        return this.httpService.post<ITopic[]>(`${this.routePrefix}/tags`, topics);
+    public updateUser(updatedUser: IUserInfo) {
+        return this.httpService.put(`${this.routePrefix}`, updatedUser);
     }
 
-    public updateUser(userId: number, updatedUser: IUserInfo) {
-        return this.httpService.put(`${this.routePrefix}/${userId}`, updatedUser);
+    public addTags(topics: ITopic[]) {
+        return this.httpService.post<ITopic[]>(`${this.routePrefix}/tags`, topics);
     }
 
     public createUser(user: INewUser) {
@@ -37,6 +38,10 @@ export class UserService {
 
     public enrollUserToLesson(lessonId: number) {
         return this.httpService.put<Lesson>(`${this.routePrefix}/enroll/${lessonId}`, {} as Lesson);
+    }
+
+    public getUserTags() {
+        return this.httpService.get<ITag[]>(`${this.routePrefix}/tags`);
     }
 
     public getUsers(userFilter?: UserFilter): Observable<UserCard[]> {
@@ -51,5 +56,9 @@ export class UserService {
         }
 
         return false;
+    }
+
+    public getFriends(): Observable<UserCard[]> {
+        return this.httpService.get<UserCard[]>(`${this.routePrefix}/friends`);
     }
 }

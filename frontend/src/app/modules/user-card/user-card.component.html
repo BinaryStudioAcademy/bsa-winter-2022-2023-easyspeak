@@ -44,14 +44,44 @@
                 <div>{{ user.languageLevel }}</div>
             </div>
         </div>
-        <div class="buttons">
+        <div *ngIf="user.userFriendshipStatus === eUserFriendshipStatus.Regular" class="buttons">
             <button class="button">
-                <img src="assets/user-card-icons/clock-icon.svg" alt="book" />
-                <span>Book</span>
+                <img src="assets/user-card-icons/mail.svg" alt="message">
+                <span>Message</span>
             </button>
-            <button class="button">
-                <img src="assets/user-card-icons/follow-icon.svg" alt="follow" />
+            <button class="button" (click)="onFollowClick()">
+                <img src="assets/user-card-icons/follow-icon.svg" alt="follow">
                 <span>Follow</span>
+            </button>
+        </div>
+        <div *ngIf="user.userFriendshipStatus === eUserFriendshipStatus.Acceptor" class="buttons">
+            <button class="button">
+                <img src="assets/user-card-icons/mail.svg" alt="message">
+                <span>Message</span>
+            </button>
+            <button class="button" disabled>
+                <img src="assets/user-card-icons/follow-icon.svg" alt="follow">
+                <span>Pending request</span>
+            </button>
+        </div>
+        <div *ngIf="user.userFriendshipStatus === eUserFriendshipStatus.Requester" class="buttons">
+            <button class="button accept-button" (click)="onAcceptClicked()">
+                <img src="assets/user-card-icons/accept.svg" alt="message">
+                <span>Accept</span>
+            </button>
+            <button class="button" (click)="onRejectClicked()">
+                <img src="assets/user-card-icons/cancel.svg" alt="follow">
+                <span>Cancel</span>
+            </button>
+        </div>
+        <div *ngIf="user.userFriendshipStatus === eUserFriendshipStatus.Friend" class="buttons">
+            <button class="button">
+                <img src="assets/user-card-icons/mail.svg" alt="message">
+                <span>Message</span>
+            </button>
+            <button class="button" disabled>
+                <img src="assets/user-card-icons/follow-icon.svg" alt="follow">
+                <span>Friend</span>
             </button>
         </div>
     </div>

@@ -1,15 +1,15 @@
 ﻿using AutoMapper;
 using EasySpeak.Core.BLL.Interfaces;
-using EasySpeak.Core.Common.DTO.Tag;
 using EasySpeak.Core.Common.DTO.Filter;
-using EasySpeak.Core.Common.DTO.UploadFile;
 using EasySpeak.Core.Common.DTO.Lesson;
+using EasySpeak.Core.Common.DTO.Tag;
+using EasySpeak.Core.Common.DTO.UploadFile;
 using EasySpeak.Core.Common.DTO.User;
-using EasySpeak.Core.Common.Enums;
 using EasySpeak.Core.DAL.Context;
 using EasySpeak.Core.DAL.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Azure.Core;
 
 namespace EasySpeak.Core.BLL.Services;
 
@@ -17,14 +17,12 @@ public class UserService : BaseService, IUserService
 {
     private readonly IEasySpeakFileService _fileService;
     private readonly IFirebaseAuthService _authService;
-    private readonly INotificationService _notificationService;
 
-    public UserService(IEasySpeakFileService fileService, EasySpeakCoreContext context, IMapper mapper, IFirebaseAuthService authService, INotificationService notificationService) 
+    public UserService(IEasySpeakFileService fileService, EasySpeakCoreContext context, IMapper mapper, IFirebaseAuthService authService) 
         : base(context, mapper)
     {
         _authService = authService;
         _fileService = fileService;
-        _notificationService = notificationService;
     }
 
     public async Task<UserDto> CreateUser(UserRegisterDto userDto)
@@ -54,7 +52,7 @@ public class UserService : BaseService, IUserService
     }
 
     public Task<bool> GetAdminStatus() => _context.Users.Where(u => u.Id == _authService.UserId).Select(u => u.IsAdmin).FirstOrDefaultAsync();
-    
+
     public async Task<UserDto> AddTagsAsync(List<TagDto> tags)
     {
         var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == _authService.UserId);
@@ -72,7 +70,14 @@ public class UserService : BaseService, IUserService
     {
         var users = _context.Users
             .Include(u => u.Tags)
-            .Include(u => u.Image);
+            .Include(u => u.Image)
+            .Where(u => 
+                !_context.Friends.Any(f=>
+                    (f.UserId == _authService.UserId || f.RequesterId == _authService.UserId)
+                    && (f.UserId == u.Id || f.RequesterId == u.Id)
+                    && f.FriendshipStatus != FriendshipStatus.Rejected)
+                && u.Id != _authService.UserId
+            );
         var filter = _mapper.Map<UserFilter>(userFilter);
 
         IQueryable<User> filteredUsers = users;
@@ -91,6 +96,27 @@ public class UserService : BaseService, IUserService
         }
         var filteredUsersList = await filteredUsers.ToListAsync();
         return _mapper.Map<List<UserShortInfoDto>>(filteredUsersList);
+    }
+
+    private async Task FillUserFriendshipStatus(List<UserShortInfoDto> users)
+    {
+        var myId = _authService.UserId;
+        var friends = await _context.Friends.Where(f => f.FriendshipStatus != FriendshipStatus.Rejected && (f.RequesterId == myId || f.UserId == myId)).ToListAsync();
+        users.ForEach(user =>
+        {
+            if (friends.Any(requester => requester.RequesterId == user.Id && requester.FriendshipStatus == FriendshipStatus.Pending))
+            {
+                user.UserFriendshipStatus = UserFriendshipStatus.Requester;
+            }
+            else if (friends.Any(acceptor => acceptor.UserId == user.Id && acceptor.FriendshipStatus == FriendshipStatus.Pending))
+            {
+                user.UserFriendshipStatus = UserFriendshipStatus.Acceptor;
+            }
+            else
+            {
+                user.UserFriendshipStatus = UserFriendshipStatus.Friend;
+            }
+        });
     }
 
     public async Task<LessonDto> EnrollUserToLesson(long lessonId)
@@ -147,6 +173,48 @@ public class UserService : BaseService, IUserService
         return profileImage?.Url ?? "";
     }
 
+    public async Task<TagDto[]> GetUserTags()
+    {
+        var userId = _authService.UserId;
+
+        // get users tags
+        var userTags = _context.Tags.Where(t => t.Users.Any(u => u.Id == userId));
+
+        // get all tags DTO
+        var allTagsTdo = await _context.Tags.Select(t => _mapper.Map<Tag, TagDto>(t)).ToArrayAsync();
+
+        // form needed data
+        return allTagsTdo.Select(tagDto =>
+        {
+            tagDto.IsSelected = userTags.Any(x => x.Id == tagDto.Id);
+            return tagDto;
+        }).ToArray();
+    }
+
+    public async Task<UserDto> UpdateUser(UserDto userDto)
+    {
+        var userId = _authService.UserId;
+        var user = await _context.Users.Include(u => u.Tags).FirstOrDefaultAsync(a => a.Id == userId) ?? throw new ArgumentException($"Failed to find the user with id {userId}");
+
+        _mapper.Map(userDto, user, opt => opt.AfterMap(SetUserTags));
+
+        await _context.SaveChangesAsync();
+
+        return _mapper.Map<User, UserDto>(user);
+    }
+
+    private void SetUserTags(UserDto dtoUser, User dbUser)
+    {
+        if (dtoUser.Tags != null)
+        {
+            dbUser.Tags = dtoUser.Tags.Join(
+                _context.Tags,
+                dtoTags => dtoTags.Name,
+                dbTags => dbTags.Name,
+                (_, dbTags) => dbTags).ToList();
+        }
+    }
+
     public async Task<UserDto> MakeAdminAsync(int userId)
     {
         var user = await _context.Users.Where(u => u.Id == userId).SingleOrDefaultAsync();
@@ -157,5 +225,27 @@ public class UserService : BaseService, IUserService
         }
         UserDto userDto = _mapper.Map<UserDto>(user);
         return userDto;
+    }
+
+    public async Task<long> GetUserIdByEmail(string email)
+    {
+        var user = await _context.Users.FirstOrDefaultAsync(user=>user.Email == email);
+        return user is null ? 0 : user.Id;
+
+    }
+
+    public async Task<List<UserShortInfoDto>> GetFriends()
+    {
+        var friendshipsWithUsers = _context.Friends.Include(f => f.User).Include(f => f.Requester);
+        var users = await friendshipsWithUsers
+           .Where(f => f.FriendshipStatus != FriendshipStatus.Rejected && (f.UserId == _authService.UserId || f.RequesterId == _authService.UserId))
+           .Select(f => f.UserId == _authService.UserId ? f.Requester : f.User)
+           .ToListAsync();
+
+        var mappedFriends = _mapper.Map<List<UserShortInfoDto>>(users);
+
+        await FillUserFriendshipStatus(mappedFriends);
+
+        return mappedFriends;
     }
 }

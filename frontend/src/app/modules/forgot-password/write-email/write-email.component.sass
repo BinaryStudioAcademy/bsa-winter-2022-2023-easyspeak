@@ -8,6 +8,7 @@ textarea:focus, input:focus
     display: flex
     flex-direction: column
     h1
+        font-size: 24px
         color: $blue-200
         margin-bottom: 20px
 
@@ -52,12 +53,15 @@ textarea:focus, input:focus
 .input-container
     position: relative
     
-    label
-        position: absolute
-        top: 5px
-        left: 18px
-        font-size: 12px
-        color: $gray-200
+.label-input
+    position: absolute
+    top: 5px
+    left: 18px
+    font-size: 14px
+    color: $gray-200
+
+.font-12
+    font-size: 12px
 
 .button-send
     display: flex
@@ -73,6 +77,8 @@ textarea:focus, input:focus
     margin-bottom: 40px
     &:hover
         background-color: $selected-color
+    h3
+        font-size: 16px
 
 .wrong-format
     display: flex
