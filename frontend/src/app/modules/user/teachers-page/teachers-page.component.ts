@@ -18,6 +18,7 @@ import { LessonsService } from 'src/app/services/lessons.service';
 })
 export class TeachersPageComponent implements OnInit {
     currentUser: UserShort = {
+        email: '',
         firstName: '',
         lastName: '',
         imagePath: '',
