@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { SignInExampleComponent } from '@modules/auth/sign-in/sign-in-example.component';
 
 import { AuthPageComponent } from './auth-page/auth-page.component';
-//import { SignInComponent } from './sign-in/sign-in.component';
+import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 
 const routes: Routes = [
@@ -22,7 +22,7 @@ const routes: Routes = [
             },
             {
                 path: 'sign-in',
-                component: SignInExampleComponent,
+                component: SignInComponent,
                 pathMatch: 'prefix',
             },
         ],

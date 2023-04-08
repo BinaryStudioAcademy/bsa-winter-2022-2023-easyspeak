@@ -1,34 +1,25 @@
 <div class="container">
     <div class="form-wrp">
         <h1>Sign In</h1>
-        <form #userLoginForm="ngForm" [formGroup]="form" class="form-content" (submit)="signIn()">
+        <form #userLoginForm="ngForm" [formGroup]="form" class="form-content" (ngSubmit)="signIn()">
             <div class="form-group-item">
-                <input
-
-                    formControlName="email"
-                    placeholder="Email"
-                    email="{{this.email}}"
-                    (focus)="onFocus()"
-                />
-
+                <input formControlName="email" placeholder="Email" email="{{this.email}}"/>
                 <div class="errors-wrp">
 <!--                    <mat-error class="error" *ngIf="this.email.invalid && this.userLoginForm.submitted">-->
 <!--                        <img src="/assets/user-profile/alert-triangle.svg" alt="">-->
 <!--                        {{getErrorMessage(email)}}-->
 <!--                    </mat-error>-->
+
                     <mat-error class="error"
-                               *ngIf="
-                               !clearErrorMessage
-                               &&lengthError(email)
-                               &&userLoginForm.submitted">
+                               *ngIf="form.controls['email'] && form.controls['email'].touched">
                         <img src="/assets/user-profile/alert-triangle.svg" alt="">
-                        Length
-<!--                        {{getErrorMessage(email)}}-->
+Length
+                        <!--                        {{getErrorMessage(email.errors.signInEmailLength)?}}-->
                     </mat-error>
                     <mat-error class="error"
                                *ngIf="
-                               !clearErrorMessage
-                               &&(doesntExist
+
+                               (doesntExist
                                ||email.errors?.['pattern'])">
                         <img src="/assets/user-profile/alert-triangle.svg" alt="">
 <!--                        {{getErrorMessage(email)}}-->
@@ -37,7 +28,7 @@
                 </div>
 
                 <div class="error-surface"
-                    *ngIf="!clearErrorMessage&&(doesntExist&&email.errors?.['required']||lengthError(email)
+                    *ngIf="(doesntExist&&email.errors?.['required']||lengthError(email)
                                &&userLoginForm.submitted)">
                 </div>
             </div>
@@ -48,9 +39,7 @@
                     placeholder="Password"
                     appPasswordVisibility/>
                 <div class="errors-wrp">
-                    <mat-error class="error"
-                               *ngIf="(password.errors?.['minlength'] || password.errors?.['maxlength'])
-                            ">
+                    <mat-error class="error" *ngIf="(password.errors?.['minlength'] || password.errors?.['maxlength'] || password.errors?.['required'])&& form.controls['password'].touched">
                         <img src="/assets/user-profile/alert-triangle.svg" alt="">
                         Min 6, max 25
                     </mat-error>

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '@core/services/auth.service';
+import { lengthValidator } from '@modules/auth/sign-in/lengthValidator';
 import { emailFormatRegex, passFormatRegex } from '@shared/data/regex.util';
 import { ToastrService } from 'ngx-toastr';
 
@@ -16,9 +17,8 @@ export class SignInComponent {
     form: FormGroup = new FormGroup({
         email: new FormControl('', [
             Validators.required,
-            Validators.maxLength(50),
-            Validators.minLength(3),
-            Validators.pattern(emailFormatRegex),
+            lengthValidator(3, 50),
+            // Validators.pattern(emailFormatRegex),
         ]),
         password: new FormControl('', [
             Validators.required,
@@ -32,8 +32,6 @@ export class SignInComponent {
 
     wrongPassword: boolean;
 
-    clearErrorMessage: boolean;
-
     constructor(
         private formBuilder: FormBuilder,
         private authService: AuthService,
@@ -43,8 +41,8 @@ export class SignInComponent {
     }
 
     public signIn() {
-        this.clearErrorMessage = false;
-        if (this.lengthError(this.email) || this.lengthError(this.password) || this.email.errors?.['pattern']) { return; }
+        // this.clearErrorMessage = false;
+        // if (this.lengthError(this.email) || this.lengthError(this.password) || this.email.errors?.['pattern']) { return; }
         this.authService
             .signIn(this.email.value, this.password.value)
             .then(() => {
@@ -92,7 +90,4 @@ export class SignInComponent {
     }
 
     ////
-    onFocus() {
-        this.clearErrorMessage = true;
-    }
 }

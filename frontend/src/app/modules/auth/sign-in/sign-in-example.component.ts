@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 //import { update } from '@angular/fire/database';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { createPasswordStrengthValidator } from '@modules/auth/sign-in/createPasswordStrengthValidator';
+import { lengthValidator } from '@modules/auth/sign-in/lengthValidator';
 
 @Component({
     selector: 'app-sign-in-example',
@@ -14,28 +14,14 @@ export class SignInExampleComponent {
     constructor() {
         this.myForm = new FormGroup({
 
-            userName: new FormControl('', {
-                validators: [Validators.required],
-                updateOn: 'blur',
-            }),
             userEmail: new FormControl('', [
                 Validators.required,
-                // Validators.email,
-                createPasswordStrengthValidator(2),
+                lengthValidator(3, 5),
             ]),
-            userPhone: new FormControl('', Validators.pattern('[0-9]{10}')),
         });
     }
 
     submit() {
         console.log(this.myForm);
-    }
-
-    userNameValidator(control: FormControl): { [s: string]: boolean } | null {
-        if (control.value === 'нет') {
-            return { userName: true };
-        }
-
-        return null;
     }
 }
