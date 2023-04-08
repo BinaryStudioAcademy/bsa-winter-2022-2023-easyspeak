@@ -18,15 +18,15 @@ export class UserCardComponent implements OnInit {
         this.user.tags = [...new Set(this.user.tags)];
     }
 
-    public getUserCountryFlag() {
-        return this.countriesService.getCountriesList().find((c) => c.name === this.user.country)?.flag;
-    }
-
     getUserFirstName(): string {
         return this.user.name.split(' ')[0];
     }
 
     getUserLastName(): string {
         return this.user.name.split(' ')[1];
+    }
+
+    getFlag(): string | undefined {
+        return this.countriesService.getUserCountryFlag(this.user.country);
     }
 }

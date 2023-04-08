@@ -9,7 +9,7 @@ public class LessonDto
     public string? Description { get; set; }
     public string? MediaPath { get; set; }
     public DateTime StartAt { get; set; }
-    public LanguageLevel LanguageLevel { get; set; }
+    public string? LanguageLevel { get; set; }
     public int SubscribersCount { get; set; }
     public string? YoutubeVideoId { get; set; } 
     public string? ZoomMeetingLink { get; set; }

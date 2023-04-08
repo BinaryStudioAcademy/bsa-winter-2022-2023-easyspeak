@@ -4,9 +4,10 @@ import { BaseComponent } from '@core/base/base.component';
 import { SpinnerService } from '@core/services/spinner.service';
 import { UserService } from '@core/services/user.service';
 import { YoutubePlayerComponent } from '@shared/components/youtube-player/youtube-player.component';
+import { ILesson } from '@shared/models/lesson/ILesson';
 
-import { Lesson } from 'src/app/models/lessons/lesson';
 import { Question } from 'src/app/models/lessons/question';
+import { CountriesTzLangProviderService } from 'src/app/services/countries-tz-lang-provider.service';
 import { LessonsService } from 'src/app/services/lessons.service';
 import { NotificationService } from 'src/app/services/notification.service';
 
@@ -16,7 +17,7 @@ import { NotificationService } from 'src/app/services/notification.service';
     styleUrls: ['./lesson.component.sass'],
 })
 export class LessonComponent extends BaseComponent implements OnInit {
-    @Input() lesson: Lesson;
+    @Input() lesson: ILesson;
 
     previewImage: string;
 
@@ -32,12 +33,13 @@ export class LessonComponent extends BaseComponent implements OnInit {
         private userService: UserService,
         private spinner: SpinnerService,
         private notificationService: NotificationService,
+        private countriesService: CountriesTzLangProviderService,
     ) {
         super();
     }
 
-    openDialog(videoId: string) {
-        if (!videoId) {
+    openDialog(youtubeVideoId: string) {
+        if (!youtubeVideoId) {
             return;
         }
         this.dialogRef.open(YoutubePlayerComponent, {
@@ -46,7 +48,7 @@ export class LessonComponent extends BaseComponent implements OnInit {
             height: '80%',
             width: '80%',
             data: {
-                videoId,
+                youtubeVideoId,
             },
         });
     }
@@ -72,26 +74,35 @@ export class LessonComponent extends BaseComponent implements OnInit {
     }
 
     enrollLesson() {
-        this.userService.enrollUserToLesson(this.lesson.id)
+        this.userService
+            .enrollUserToLesson(this.lesson.id)
             .pipe(this.untilThis)
-            .subscribe({ next: (lesson) => {
-                this.lesson.isSubscribed = true;
-                this.lesson.subscribersCount = lesson.subscribersCount;
-                this.notificationService.showSuccess(`You successfully registered for lesson ${this.lesson.title}`, 'Success!');
-            },
-            error: () => this.notificationService.showError(`Failed to register for lesson ${this.lesson.title}`, 'Failed!') });
+            .subscribe({
+                next: (lesson) => {
+                    this.lesson.isSubscribed = true;
+                    this.lesson.subscribersCount = lesson.subscribersCount;
+                    this.notificationService.showSuccess(
+                        `You successfully registered for lesson ${this.lesson.name}`,
+                        'Success!',
+                    );
+                },
+                error: () =>
+                    this.notificationService.showError(`Failed to register for lesson ${this.lesson.name}`, 'Failed!'),
+            });
     }
 
     ngOnInit(): void {
-        this.previewImage = this.lesson.videoId ? `//img.youtube.com/vi/${this.lesson.videoId}/maxresdefault.jpg` : '';
+        this.previewImage = this.lesson.youtubeVideoId
+            ? `//img.youtube.com/vi/${this.lesson.youtubeVideoId}/maxresdefault.jpg`
+            : '';
     }
 
     isDisabled() {
-        return this.lesson.isSubscribed || new Date() > this.lesson.startAt;
+        return this.lesson.isSubscribed || new Date() > new Date(this.lesson.startAt);
     }
 
     getButtonContent() {
-        if (new Date() > this.lesson.startAt) {
+        if (new Date() > new Date(this.lesson.startAt)) {
             return 'Expired';
         }
         if (this.lesson.isSubscribed) {
@@ -99,5 +110,9 @@ export class LessonComponent extends BaseComponent implements OnInit {
         }
 
         return 'Join';
+    }
+
+    getFlag(): string | undefined {
+        return this.countriesService.getUserCountryFlag(this.lesson.user.country);
     }
 }

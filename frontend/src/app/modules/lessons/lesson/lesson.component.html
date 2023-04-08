@@ -2,8 +2,8 @@
     <div class="lesson-card-content">
         <div class="up">
             <div class="lesson-preview">
-                <div class="photo" (click)="openDialog(lesson.videoId)">
-                    <img src="{{ previewImage || 'assets/lesson-icons/no-video.png'}}" alt="thumbnail" />
+                <div class="photo" (click)="openDialog(lesson.youtubeVideoId)">
+                    <img src="{{ previewImage || 'assets/lesson-icons/no-video.png' }}" alt="thumbnail" />
                     <div class="circle" *ngIf="previewImage">
                         <img src="assets/lesson-icons/circle.svg" alt="circle-icon" />
                     </div>
@@ -14,20 +14,25 @@
                 <div class="main-info">
                     <div class="title-time">
                         <div class="info">
-                            <h3 appTooltipWhenOverflow class="lesson-theme">{{ lesson.title }}</h3>
+                            <h3 appTooltipWhenOverflow class="lesson-theme">{{ lesson.name }}</h3>
                             <div class="lesson-tutor">
-                                <img class="avatar" src="{{ lesson.tutorAvatarPath }}" alt="tutor-avatar" />
-                                <img class="origin" src="{{ lesson.tutorFlagPath }}" alt="tutor-origin" />
-                                <p class="tutor-name">{{ lesson.tutorName }}</p>
+                                <app-avatar class="avatar"
+                                    [firstName]="lesson.user.firstName"
+                                    [lastName]="lesson.user.lastName"
+                                    [imagePath]="lesson.user.imagePath"
+                                    [imageSize]="36">
+                                </app-avatar>
+                                <img alt="Image" class="origin" src="{{ getFlag() }}" />
+                                <p class="tutor-name">{{ lesson.user.firstName }} {{ lesson.user.lastName }}</p>
                             </div>
                         </div>
                         <div class="time">
                             <img class="time-icon" src="assets/lesson-icons/clock-icon.svg" alt="clock-icon" />
-                            <h4 class="lesson-time">{{ lesson.time | date:'HH:mm'}}</h4>
+                            <h4 class="lesson-time">{{ lesson.startAt | date : 'HH:mm' }}</h4>
                         </div>
                     </div>
                     <div class="lesson-topics">
-                        <div class="topic" *ngFor="let topic of lesson.topics">{{ topic }}</div>
+                        <div class="topic" *ngFor="let topic of lesson.tags">{{ topic.name }}</div>
                     </div>
                 </div>
             </div>
@@ -40,7 +45,7 @@
                 <img src="assets/lesson-icons/people-icon.svg" alt="people-icon" />
                 <span class="count">{{ lesson.subscribersCount }}</span>
                 <img src="assets/lesson-icons/rocket-icon.svg" alt="rocket-icon" />
-                <span class="count">{{ lesson.level }}</span>
+                <span class="count">{{ lesson.languageLevel }}</span>
             </div>
 
             <div class="lesson-actions">
@@ -48,8 +53,7 @@
                     class="join"
                     [disabled]="isDisabled()"
                     [textContent]="getButtonContent()"
-                    (click)="enrollLesson()">
-                </button>
+                    (click)="enrollLesson()"></button>
                 <button class="expand" (click)="showQuestions(lesson.id)">
                     <span>See questions</span>
                     <img src="assets/lesson-icons/expand.svg" alt="expand-icon" />

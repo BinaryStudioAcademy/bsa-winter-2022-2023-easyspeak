@@ -1,6 +1,6 @@
 export interface UserCard {
     name: string,
-    country?: string,
+    country: string,
     language?: string,
     imagePath: string,
     languageLevel: string
