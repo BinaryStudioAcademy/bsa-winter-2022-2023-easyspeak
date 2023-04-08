@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '@core/services/auth.service';
-import { UserShort } from '@shared/models/UserShort';
 
 import { UserNotificationComponent } from '../user-notification/user-notification.component';
 
@@ -12,20 +11,10 @@ import { UserNotificationComponent } from '../user-notification/user-notificatio
 export class HeaderComponent implements OnInit {
     @ViewChild('notificationsMenu') notificationsMenu: UserNotificationComponent;
 
-    currentUser: UserShort = {
-        firstName: '',
-        lastName: '',
-        imagePath: '',
-    };
-
-    constructor(private authService: AuthService) {}
+    constructor(public authService: AuthService) {}
 
     ngOnInit(): void {
         this.authService.loadUser().subscribe();
-
-        this.authService.user.subscribe((user) => {
-            this.currentUser = user;
-        });
     }
 
     logOut() {

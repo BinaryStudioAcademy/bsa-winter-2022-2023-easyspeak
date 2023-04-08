@@ -33,8 +33,8 @@ export class AvatarComponent {
     }
 
     getAvatarImage(): string {
-        if (this.imagePath && this.imagePath.match(/^predefinedavatar-\d+/)) {
-            return `assets/avatars/${this.imagePath}`;
+        if (this.imagePath && this.imagePath.match(/^man+/)) {
+            return `assets/user-profile/${this.imagePath}`;
         }
 
         return this.imagePath;

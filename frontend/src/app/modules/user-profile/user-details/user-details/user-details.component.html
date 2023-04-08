@@ -8,18 +8,19 @@
                 <app-avatar
                     [firstName]="userFirstName"
                     [lastName]="userLastName"
-                    [imagePath]="imagePath"
+                    [imagePath]="authService.currentUser.imagePath"
                     [imageSize]="103">
                 </app-avatar>
             </div>
             <div class="edit-avatar-icon">
+                <input type="file" (change)="onFileChange($event)">
                 <img src="/assets/user-profile//edit-icon.svg" alt="edit" />
             </div>
             <div class="vertical-line"></div>
         </div>
         <div class="avatar-list">
             <div class="avatar-suggestion-wrp">
-                <img src="/assets//user-profile/boy.svg" alt="" />
+                <img src="/assets//user-profile/man.svg" alt="" />
             </div>
             <div class="avatar-suggestion-wrp">
                 <img src="/assets//user-profile/man-bald.svg" alt="" />

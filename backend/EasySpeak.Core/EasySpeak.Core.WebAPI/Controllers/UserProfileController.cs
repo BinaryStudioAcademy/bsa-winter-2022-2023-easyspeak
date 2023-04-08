@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EasySpeak.Core.WebAPI.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class UserProfileController : ControllerBase
     {
         private readonly IUserService _userService;
@@ -15,8 +15,10 @@ namespace EasySpeak.Core.WebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> UploadAvatar(IFormFile file)
+        public async Task<IActionResult> UploadAvatar()
         {
+            var formCollection = await Request.ReadFormAsync();
+            var file = formCollection.Files.First();
             return Ok(await _userService.UploadProfilePhoto(file));
         }
     }

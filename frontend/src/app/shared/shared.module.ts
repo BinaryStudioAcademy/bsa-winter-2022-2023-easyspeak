@@ -9,6 +9,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { HeaderComponent } from '@shared/components/header/header.component';
 import { RoundProgressBarComponent } from '@shared/components/round-progress-bar/round-progress-bar.component';
 import { MaterialModule } from '@shared/material/material.module';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 import { AvatarComponent } from './components/avatar/avatar.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
@@ -37,6 +38,7 @@ import { TooltipWhenOverflowDirective } from './directives/tooltip-when-overflow
         NgSelectModule,
         MatProgressSpinnerModule,
         MatSnackBarModule,
+        ImageCropperModule,
     ],
     declarations: [
         LoadingSpinnerComponent,
@@ -77,6 +79,7 @@ import { TooltipWhenOverflowDirective } from './directives/tooltip-when-overflow
         TooltipWhenOverflowDirective,
         AvatarComponent,
         ScrollToBottomDirective,
+        ImageCropperModule,
     ],
 })
 export class SharedModule {}

@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { BaseComponent } from '@core/base/base.component';
+import { AuthService } from '@core/services/auth.service';
 import { UserService } from '@core/services/user.service';
+import { CropImageDialogComponent } from '@modules/user-profile/crop-image.dialog/crop-image.dialog.component';
 import { Ages } from '@shared/data/ages.util';
 import { EnglishLevel } from '@shared/data/englishLevel';
 import { Sex } from '@shared/data/sex';
@@ -43,6 +46,8 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
         private userService: UserService,
         private toastr: ToastrService,
         private countriesService: CountriesTzLangProviderService,
+        public cropImgDialog: MatDialog,
+        public authService: AuthService,
     ) {
         super();
         this.countries = this.countriesService.getCountriesList();
@@ -77,6 +82,16 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
             .updateUser(userId, this.detailsForm.value as IUserInfo)
             .pipe(this.untilThis)
             .subscribe(() => this.toastr.success('User info updated successfully.', 'Success!'));
+    }
+
+    onFileChange(imgChangeEvt: Event) {
+        if (imgChangeEvt) {
+            this.cropImgDialog.open(CropImageDialogComponent, {
+                data: {
+                    imgChangeEvt,
+                },
+            });
+        }
     }
 
     get firstName(): FormControl {

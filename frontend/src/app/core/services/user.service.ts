@@ -43,6 +43,10 @@ export class UserService {
         return this.httpService.post<UserCard[]>(`${this.routePrefix}/recommended`, userFilter ?? ({} as UserFilter));
     }
 
+    public uploadAvatar(file: FormData) {
+        return this.httpService.post('/api/userprofile', file);
+    }
+
     public isAdmin(): boolean {
         const user = localStorage.getItem('user');
 
