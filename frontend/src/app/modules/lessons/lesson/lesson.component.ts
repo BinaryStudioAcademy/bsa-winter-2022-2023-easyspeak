@@ -19,6 +19,8 @@ import { NotificationService } from 'src/app/services/notification.service';
 export class LessonComponent extends BaseComponent implements OnInit {
     @Input() lesson: ILesson;
 
+    @Input() page: string;
+
     previewImage: string;
 
     questions: Question[] = [];
@@ -73,22 +75,32 @@ export class LessonComponent extends BaseComponent implements OnInit {
         });
     }
 
-    enrollLesson() {
-        this.userService
-            .enrollUserToLesson(this.lesson.id)
-            .pipe(this.untilThis)
-            .subscribe({
-                next: (lesson) => {
-                    this.lesson.isSubscribed = true;
-                    this.lesson.subscribersCount = lesson.subscribersCount;
-                    this.notificationService.showSuccess(
-                        `You successfully registered for lesson ${this.lesson.name}`,
-                        'Success!',
-                    );
-                },
-                error: () =>
-                    this.notificationService.showError(`Failed to register for lesson ${this.lesson.name}`, 'Failed!'),
+    buttonAction() {
+        if (this.page === 'timetable') {
+            this.userService
+                .enrollUserToLesson(this.lesson.id)
+                .pipe(this.untilThis)
+                .subscribe({
+                    next: (lesson) => {
+                        this.lesson.isSubscribed = true;
+                        this.lesson.subscribersCount = lesson.subscribersCount;
+                        this.notificationService.showSuccess(
+                            `You successfully registered for lesson ${this.lesson.name}`,
+                            'Success!',
+                        );
+                    },
+                    error: () =>
+                        this.notificationService.showError(
+                            `Failed to register for lesson ${this.lesson.name}`,
+                            'Failed!',
+                        ),
+                });
+        }
+        if (this.page === 'teacher') {
+            this.lessonsService.cancelLesson(this.lesson.id).subscribe(() => {
+                this.lesson.isCanceled = true;
             });
+        }
     }
 
     ngOnInit(): void {
@@ -98,18 +110,37 @@ export class LessonComponent extends BaseComponent implements OnInit {
     }
 
     isDisabled() {
-        return this.lesson.isSubscribed || new Date() > new Date(this.lesson.startAt);
+        if (this.page === 'timetable') {
+            return this.lesson.isSubscribed || new Date() > new Date(this.lesson.startAt);
+        }
+        if (this.page === 'teacher') {
+            return this.lesson.isCanceled || new Date() > new Date(this.lesson.startAt);
+        }
+
+        return false;
     }
 
     getButtonContent() {
-        if (new Date() > new Date(this.lesson.startAt)) {
-            return 'Expired';
-        }
-        if (this.lesson.isSubscribed) {
-            return 'Subscribed';
+        if (this.page === 'timetable') {
+            if (new Date() > new Date(this.lesson.startAt)) {
+                return 'Expired';
+            }
+            if (this.lesson.isSubscribed) {
+                return 'Subscribed';
+            }
+
+            return 'Join';
         }
 
-        return 'Join';
+        if (this.page === 'teacher') {
+            if (!this.lesson.isCanceled) {
+                return 'Cancel';
+            }
+
+            return 'Canceled';
+        }
+
+        return '';
     }
 
     getFlag(): string | undefined {

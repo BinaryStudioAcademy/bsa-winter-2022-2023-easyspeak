@@ -17,4 +17,5 @@ export interface ILesson {
     tags: ITag[];
     user: ILessonUser;
     isSubscribed: boolean;
+    isCanceled: boolean;
 }
