@@ -146,4 +146,8 @@ export class LessonComponent extends BaseComponent implements OnInit {
     getFlag(): string | undefined {
         return this.countriesService.getUserCountryFlag(this.lesson.user.country);
     }
+
+    editLesson() {
+        console.log('edit lesson');
+    }
 }

@@ -162,9 +162,9 @@
 
 .lesson-time
     font-style: normal
-    font-weight: 700
-    font-size: 14px
-    line-height: 146%
+    font-weight: 500
+    font-size: 16px
+    line-height: 24px
 
     color: $black-100
 
@@ -201,6 +201,13 @@
 .time
     display: flex
     align-items: center
+
+.teacher-time
+    height: 24px
+    margin: 5px 0
+
+.teacher-time-icon
+    margin-left: 0
 
 .lesson-preview
     display: flex
@@ -296,3 +303,24 @@
     align-items: center
     img
         padding: 0 7.25px
+
+.edit
+    display: flex
+    flex-direction: row
+    align-items: center
+
+    color: $blue-200
+    font-weight: 400
+    font-size: 14px
+
+    cursor: pointer
+
+.edit-icon
+    margin-right: 5px
+
+.edit-disabled
+    color: $gray-200
+    cursor: default
+
+.edit-disabled-icon    
+    filter: invert(98%) sepia(5%) saturate(1411%) hue-rotate(185deg) brightness(85%) contrast(91%)

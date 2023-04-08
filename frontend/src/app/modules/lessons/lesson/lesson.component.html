@@ -15,8 +15,9 @@
                     <div class="title-time">
                         <div class="info">
                             <h3 appTooltipWhenOverflow class="lesson-theme">{{ lesson.name }}</h3>
-                            <div class="lesson-tutor">
-                                <app-avatar class="avatar"
+                            <div class="lesson-tutor" *ngIf="page === 'timetable'">
+                                <app-avatar
+                                    class="avatar"
                                     [firstName]="lesson.user.firstName"
                                     [lastName]="lesson.user.lastName"
                                     [imagePath]="lesson.user.imagePath"
@@ -25,10 +26,18 @@
                                 <img alt="Image" class="origin" src="{{ getFlag() }}" />
                                 <p class="tutor-name">{{ lesson.user.firstName }} {{ lesson.user.lastName }}</p>
                             </div>
+                            <div class="time teacher-time" *ngIf="page === 'teacher'">
+                                <img class="time-icon teacher-time-icon" src="assets/lesson-icons/clock-icon.svg" alt="clock-icon" />
+                                <h4 class="lesson-time">{{ lesson.startAt | date : 'HH.mm' }}</h4>
+                            </div>
                         </div>
-                        <div class="time">
+                        <div class="time" *ngIf="page === 'timetable'">
                             <img class="time-icon" src="assets/lesson-icons/clock-icon.svg" alt="clock-icon" />
-                            <h4 class="lesson-time">{{ lesson.startAt | date : 'HH:mm' }}</h4>
+                            <h4 class="lesson-time">{{ lesson.startAt | date : 'HH.mm' }}</h4>
+                        </div>
+                        <div class="edit" [ngClass]="{'edit-disabled': lesson.isCanceled}" *ngIf="page === 'teacher'" (click)="editLesson()">
+                            <img class="edit-icon" [ngClass]="{'edit-disabled-icon': lesson.isCanceled}" src="assets/teachers-page-icons/edit-icon.svg" alt="edit-icon"/>
+                            <p class="edit-text">Edit</p>
                         </div>
                     </div>
                     <div class="lesson-topics">
