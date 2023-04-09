@@ -1,6 +1,5 @@
 ﻿using EasySpeak.Core.BLL.Interfaces;
 using EasySpeak.Core.Common.DTO.Friend;
-using EasySpeak.Core.WebAPI.Hubs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 
