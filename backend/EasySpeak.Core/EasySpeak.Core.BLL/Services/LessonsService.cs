@@ -120,25 +120,27 @@ public class LessonsService : BaseService, ILessonsService
 
     public async Task<TeacherStatisticsDto> GetTeacherLessonsStatisticsAsync()
     {
-        var statistics = await _context.Lessons
-        .Where(l => l.CreatedBy == _authService.UserId)
-        .GroupBy(l => l.CreatedBy)
-        .Select(l => new TeacherStatisticsDto
-        {
-            TotalClasses = l.Count(),
-            CanceledClasses = l.Count(l => l.IsCanceled),
-            FutureClasses = l.Count(l => l.StartAt > DateTime.UtcNow && !l.IsCanceled),
+        var teacherLessons = await _context.Lessons
+                .Where(l => l.CreatedBy == _authService.UserId)
+                .Include(l => l.Subscribers)
+                .ToListAsync();
 
-            TotalStudents = l.Where(l => l.StartAt < DateTime.UtcNow && !l.IsCanceled)
-                             .SelectMany(l => l.Subscribers)
-                             .Count(),
+        var statistics = teacherLessons.Select(l => new TeacherStatisticsDto
+            {
+                TotalClasses = teacherLessons.Count,
+                CanceledClasses = teacherLessons.Count(l => l.IsCanceled),
+                FutureClasses = teacherLessons.Count(l => l.StartAt > DateTime.UtcNow && !l.IsCanceled),
 
-            NextClass = l.Where(l => l.StartAt > DateTime.UtcNow && !l.IsCanceled)
-                         .OrderBy(l => l.StartAt)
-                         .Select(l => (DateTime?)l.StartAt)
-                         .FirstOrDefault(),
+                TotalStudents = teacherLessons.Where(l => l.StartAt < DateTime.UtcNow && !l.IsCanceled)
+                                              .SelectMany(l => l.Subscribers)
+                                              .Count(),
+
+                NextClass = teacherLessons.Where(l => l.StartAt > DateTime.UtcNow && !l.IsCanceled)
+                                          .OrderBy(l => l.StartAt)
+                                          .Select(l => (DateTime?)l.StartAt)
+                                          .FirstOrDefault(),
         })
-        .FirstOrDefaultAsync();
+        .FirstOrDefault();
 
         return statistics ?? new TeacherStatisticsDto();
     }
