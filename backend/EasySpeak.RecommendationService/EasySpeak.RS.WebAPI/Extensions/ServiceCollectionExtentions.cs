@@ -14,11 +14,9 @@ public static class ServiceCollectionExtensions
     public static void RegisterCustomServices(this IServiceCollection services,
         IConfiguration configuration)
     {
-        var serviceOption = new RecommendationServiceOptions();
-        configuration.GetSection("Neo4jSettings")
-            .Bind(serviceOption);
-        
+        var serviceOption = configuration.GetSection("Neo4jSettings").Get<RecommendationServiceOptions>();
         var hostname = configuration.GetValue<string>("Rabbit");
+        
         services.AddSingleton<IConnectionProvider>(_ => new ConnectionProvider(hostname));
         services.Configure<RabbitQueuesOptions>(configuration.GetSection("RabbitQueues"));
         services.AddTransient<IMessageConsumer, MessageConsumer>();

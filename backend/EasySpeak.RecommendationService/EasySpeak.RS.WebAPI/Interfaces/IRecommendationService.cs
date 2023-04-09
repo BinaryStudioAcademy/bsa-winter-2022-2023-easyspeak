@@ -1,3 +1,5 @@
+using EasySpeak.Core.Common.DTO.User;
+
 namespace EasySpeak.RS.WebAPI.Interfaces;
 
 public interface IRecommendationService
@@ -6,6 +8,7 @@ public interface IRecommendationService
     Task UpdateUser(Dictionary<string, object> parameters);
     Task AddClass(Dictionary<string, object> parameters);
     Task RemoveTags(Dictionary<string, object> parameters);
-    Task AddTags(Dictionary<string, object> parameters, List<string> parameterList);
-    Task<List<long>> GetRecommendedUsers(Dictionary<string, object> parameters);
+    Task AddTags(Dictionary<string, object> parameters, string[] parameterList);
+    Task<Dictionary<long, long>> GetRecommendedUsers(Dictionary<string, object> parameters);
+    
 }

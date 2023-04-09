@@ -12,6 +12,6 @@ namespace EasySpeak.Core.Common.DTO.Filter
         public string[]? Topics { get; set; }
         public Language? Language { get; set; }
         public LanguageLevel[]? LangLevels { get; set; }
-        public int? Compatibility { get; set; }
+        public int Compatibility { get; set; }
     }
 }

@@ -29,7 +29,7 @@ namespace EasySpeak.Notifier.WebAPI.Services
             await base.StopAsync(cancellationToken);
         }
 
-        protected override Task ExecuteAsync(CancellationToken stoppingToken)
+        protected override Task ExecuteAsync(CancellationToken cancellationToken)
         {
 
             try
@@ -38,7 +38,7 @@ namespace EasySpeak.Notifier.WebAPI.Services
                 {
                     if (data is not null)
                     {
-                        _hubContext.Clients.User(data.Item1).SendAsync("Notify", JsonConvert.SerializeObject(data.Item2),  stoppingToken);
+                        _hubContext.Clients.User(data.Item1).SendAsync("Notify", JsonConvert.SerializeObject(data.Item2),  cancellationToken);
                         Console.WriteLine(data);
                     }
                 });

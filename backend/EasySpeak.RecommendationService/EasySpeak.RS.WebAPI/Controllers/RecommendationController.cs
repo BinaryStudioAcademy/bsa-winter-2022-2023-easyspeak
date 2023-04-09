@@ -16,7 +16,7 @@ public class RecommendationController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<List<long>> GetRecommendedUsers(NewRecommendationDto recommendationDto)
+    public async Task<Dictionary<long, long>> GetRecommendedUsers(NewRecommendationDto recommendationDto)
     {
         return await _recommendationService.GetRecommendedUsers(recommendationDto.ToDictionary());
     }

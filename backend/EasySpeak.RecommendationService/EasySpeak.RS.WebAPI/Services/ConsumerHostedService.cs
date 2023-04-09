@@ -32,7 +32,7 @@ public class ConsumerHostedService : BackgroundService
         await base.StopAsync(cancellationToken);
     }
 
-    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+    protected override async Task ExecuteAsync(CancellationToken cancellationToken)
     {
         try 
         {
@@ -44,7 +44,7 @@ public class ConsumerHostedService : BackgroundService
                 }
             });
 
-            await Task.Delay(-1, stoppingToken);
+            await Task.Delay(-1, cancellationToken);
         }
         catch (Exception ex)
         {
@@ -56,11 +56,12 @@ public class ConsumerHostedService : BackgroundService
     {
         switch (data.Type)
         {
-            case QueryType.AddClass:
+            case QueryType.StartClass:
                 await _recommendationService.AddClass(data.Parameters);
                 break;
             case QueryType.AddTags:
-                if(data.ParameterList is not null) await _recommendationService.AddTags(data.Parameters, data.ParameterList);
+                if(data.ParameterList is null) break;
+                await _recommendationService.AddTags(data.Parameters, data.ParameterList);
                 break;
             case QueryType.AddUser:
                 await _recommendationService.AddUser(data.Parameters);

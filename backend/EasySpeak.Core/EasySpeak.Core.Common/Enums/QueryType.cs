@@ -4,6 +4,6 @@ public enum QueryType
 {
     AddUser,
     AddTags,
-    AddClass,
+    StartClass,
     UpdateUser
 }

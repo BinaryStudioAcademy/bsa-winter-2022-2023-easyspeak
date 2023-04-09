@@ -1,5 +1,7 @@
+using EasySpeak.Core.Common.DTO.User;
 using EasySpeak.RS.WebAPI.Helpers;
 using EasySpeak.RS.WebAPI.Interfaces;
+using Neo4j.Driver;
 
 namespace EasySpeak.RS.WebAPI.Services;
 
@@ -32,7 +34,7 @@ public class RecommendationService : IRecommendationService
     public async Task RemoveTags(Dictionary<string, object> parameters) 
         => await _dataAccessService.ExecuteWriteActionAsync(QueryHelper.RemoveTagsQuery, parameters);
 
-    public async Task AddTags(Dictionary<string, object> parameters, List<string> parameterList)
+    public async Task AddTags(Dictionary<string, object> parameters, string[] parameterList)
     {
         parameters.Add("tags", parameterList);
 
@@ -41,13 +43,19 @@ public class RecommendationService : IRecommendationService
         await _dataAccessService.ExecuteWriteActionAsync(QueryHelper.AddTagsQuery, parameters);
     }
 
-    public async Task<List<long>> GetRecommendedUsers(Dictionary<string, object> parameters)
+    public async Task<Dictionary<long, long>> GetRecommendedUsers(Dictionary<string, object> parameters)
     {
-        List<long> result = new List<long>();
+        Dictionary<long, long> result = new();
         try
         {
-            result = await _dataAccessService
-                .ExecuteWriteTransactionAsync<List<long>>(QueryHelper.GetRecommendedUsersQuery, parameters);
+            var users = await _dataAccessService
+                .ExecuteWriteTransactionAsync<List<object>>(QueryHelper.GetRecommendedUsersQuery, parameters);
+            
+            foreach (var record in users)
+            {
+                var values = record.As<List<object>>();
+                result.Add((long)values[0], (long)values[1]);
+            }
         }
         catch (Exception ex)
         {

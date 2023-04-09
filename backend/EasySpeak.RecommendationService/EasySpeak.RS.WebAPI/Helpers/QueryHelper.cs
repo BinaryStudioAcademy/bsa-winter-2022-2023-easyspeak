@@ -72,5 +72,5 @@ public static class QueryHelper
             WITH similar, commonWeight * 100 / maxWeight as percentage
             ORDER BY percentage DESC
             WHERE percentage > $compatibility
-            RETURN COLLECT(similar.id)";
+            RETURN COLLECT([similar.id, percentage])";
 }

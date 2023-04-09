@@ -16,6 +16,7 @@ using EasySpeak.RabbitMQ.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using UserShortInfoDto = EasySpeak.Core.Common.DTO.User.UserShortInfoDto;
 
 namespace EasySpeak.Core.BLL.Services;
 
@@ -115,15 +116,23 @@ public class UserService : BaseService, IUserService
         {
             filteredUsers = filteredUsers.Where(u => u.Tags.Any(t => filter.Topics.Contains(t.Name)));
         }
-        if (filter.Compatibility is not null)
-        {
-            var compatibleUsers =
-                await GetRecommendedUsers((int)filter.Compatibility, filteredUsers.Select(x => x.Id).ToList());
-            filteredUsers = filteredUsers.Where(x => compatibleUsers.Contains(x.Id));
-        }
-        
+
+
         var filteredUsersList = await filteredUsers.ToListAsync();
-        return _mapper.Map<List<UserShortInfoDto>>(filteredUsersList);
+        
+        var compatabilityInformation =
+            await GetRecommendedUsers(filter.Compatibility, filteredUsersList.Select(x => x.Id).ToList());
+        
+        var compatibleUsers = filteredUsersList.Where(x => compatabilityInformation.ContainsKey(x.Id)).Select(x => x).ToList();
+        
+        var result = _mapper.Map<List<UserShortInfoDto>>(compatibleUsers);
+
+        foreach (var user in result)
+        {
+            user.Compatibility = compatabilityInformation[user.Id];
+        }
+
+        return result;
     }
 
     private async Task FillUserFriendshipStatus(List<UserShortInfoDto> users)
@@ -288,7 +297,7 @@ public class UserService : BaseService, IUserService
             {
                 {"id", id}
             },
-            ParameterList = tags.Select(x => x.Name).ToList()
+            ParameterList = tags.Select(x => x.Name).ToArray()
         };
 
         SendQueryToRabbit(queryParams);
@@ -298,7 +307,7 @@ public class UserService : BaseService, IUserService
     {
         var queryParams = new RecommendationServiceMessageDto()
         {
-            Type = QueryType.AddClass,
+            Type = QueryType.StartClass,
             Parameters = lesson.ToDictionary()
         };
         
@@ -313,7 +322,7 @@ public class UserService : BaseService, IUserService
         _messageProducer.SendMessage(data);
     }
 
-    private async Task<List<long>> GetRecommendedUsers(int compatibility, List<long> filteredUsers)
+    private async Task<Dictionary<long, long>> GetRecommendedUsers(int compatibility, List<long> filteredUsers)
     {
         var recommendationRequestBody = new NewRecommendationDto()
         {
@@ -329,7 +338,7 @@ public class UserService : BaseService, IUserService
 
         response.EnsureSuccessStatusCode();
 
-        return await response.Content.ReadFromJsonAsync<List<long>>() ?? new List<long>();
+        return await response.Content.ReadFromJsonAsync<Dictionary<long, long>>() ?? new();
 
     }
 
