@@ -1,8 +1,10 @@
-﻿using Azure.Storage.Blobs;
+﻿using System.Reflection;
+using Azure.Storage.Blobs;
 using EasySpeak.Core.BLL.Interfaces;
 using EasySpeak.Core.BLL.MappingProfiles;
 using EasySpeak.Core.BLL.Options;
 using EasySpeak.Core.BLL.Services;
+using EasySpeak.Core.Common.Options;
 using EasySpeak.Core.DAL.Context;
 using EasySpeak.Core.WebAPI.Validators;
 using EasySpeak.RabbitMQ;
@@ -13,11 +15,7 @@ using FluentValidation.AspNetCore;
 using Google.Apis.Auth.OAuth2;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using System.Reflection;
-using Neo4j.Driver;
-
 
 namespace EasySpeak.Core.WebAPI.Extensions
 {
@@ -35,20 +33,13 @@ namespace EasySpeak.Core.WebAPI.Extensions
             services.AddTransient<IMessageProducer, MessageProducer>();
             services.AddTransient<IHttpRequestService, HttpRequestService>();
             services.AddScoped<IFirebaseAuthService, FirebaseAuthService>();
-            services.AddScoped<IUserService, UserService>();
             services.AddScoped<IChatService, ChatService>();
             services.AddFirebaseApp();
+            var test = new RabbitQueuesOptions();
+            configuration.GetSection("RabbitQueues").Bind(test);
             services.Configure<RabbitQueuesOptions>(configuration.GetSection("RabbitQueues"))
-                .AddScoped<INotificationService, NotificationService>();
-            services.Configure<Neo4jOptions>(configuration.GetSection("Neo4jSettings"));
-
-            var neo4JSettings = new Neo4jOptions();
-            configuration.GetSection("Neo4jSettings").Bind(neo4JSettings);
-
-            services.AddSingleton(GraphDatabase.Driver(neo4JSettings.Neo4jConnection,
-                AuthTokens.Basic(neo4JSettings.Neo4jUser, neo4JSettings.Neo4jPassword)));
-            services.AddScoped<INeo4jDataAccessService, Neo4JDataAccessService>();
-            services.AddTransient<INeo4jUserService, Neo4jUserService>();
+                .AddScoped<INotificationService, NotificationService>()
+                .AddScoped<IUserService, UserService>();
         }
 
         public static void AddAutoMapper(this IServiceCollection services)

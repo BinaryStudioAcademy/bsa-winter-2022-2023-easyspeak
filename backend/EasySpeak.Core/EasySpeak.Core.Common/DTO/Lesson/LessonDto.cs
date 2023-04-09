@@ -5,7 +5,7 @@ namespace EasySpeak.Core.Common.DTO.Lesson;
 public class LessonDto
 {
     public long Id { get; set; }
-    public string? Name { get; set; }
+    public string Name { get; set; } = string.Empty;
     public UserForLessonDto? User { get; set; }
     public string? Description { get; set; }
     public string? MediaPath { get; set; }
@@ -19,4 +19,13 @@ public class LessonDto
 
     public ICollection<TagForLessonDto>? Tags { get; set; }
     public ICollection<QuestionForLessonDto>? Questions { get; set; }
+
+    public Dictionary<string, object> ToDictionary()
+    {
+        return new Dictionary<string, object>()
+        {
+            {"classId", Id},
+            {"className", Name}
+        };
+    }
 }

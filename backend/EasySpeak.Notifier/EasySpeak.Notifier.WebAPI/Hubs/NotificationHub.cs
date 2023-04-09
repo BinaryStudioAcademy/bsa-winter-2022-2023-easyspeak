@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.SignalR;
-using EasySpeak.Core.Common.DTO.Notification;
 
 namespace EasySpeak.Notifier.WebAPI.Hubs
 {

@@ -29,7 +29,28 @@ public class UserDto
             {"country", Country},
             {"language", Language},
             {"languageLevel", LanguageLevel},
-            {"age", new DateTime().Year - BirthDate.Year}
+            {"ageGroup", GetAgeCategory()}
         };
+    }
+
+    private string GetAgeCategory()
+    {
+        var age = DateTime.Now.Year - BirthDate.Year;
+
+        switch (age)
+        {
+            case > 55:
+                return "Old";
+            case >=45:
+                return "Old Adults";
+            case >= 35:
+                return "Adults";
+            case >= 25:
+                return "Middle-aged Adults";
+            case >= 18:
+                return "Young Adults";
+            default:
+                return "Kids";
+        }
     }
 }
