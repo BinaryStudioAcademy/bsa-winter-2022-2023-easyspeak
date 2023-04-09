@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { UserService } from '@core/services/user.service';
+import { applyTimeOffset, filterColumn } from '@modules/lessons/lesson/lesson.helper';
 import { ModalComponent } from '@shared/components/modal/modal.component';
 import { YoutubePlayerComponent } from '@shared/components/youtube-player/youtube-player.component';
 import { IModal } from '@shared/models/IModal';
@@ -93,13 +94,10 @@ export class LessonsPageComponent implements OnInit, OnChanges {
             })
             .subscribe((response) => {
                 this.lessons = response;
-                this.lessons.forEach(element => {
-                    element.startAt = this.lessonService.addTimeOffset(element.startAt);
-                });
                 this.lessons = this.lessons.filter((lesson) => !lesson.isCanceled);
-
-                this.lessonsColumn1 = this.lessons.filter((el, index) => index % 2 === 0);
-                this.lessonsColumn2 = this.lessons.filter((el, index) => index % 2 === 1);
+                this.lessons = applyTimeOffset(this.lessons);
+                this.lessonsColumn1 = filterColumn(this.lessons, 1);
+                this.lessonsColumn2 = filterColumn(this.lessons, 2);
             });
     }
 

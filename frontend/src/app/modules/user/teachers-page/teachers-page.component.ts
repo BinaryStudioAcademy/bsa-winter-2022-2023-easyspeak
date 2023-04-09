@@ -2,6 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AuthService } from '@core/services/auth.service';
+import { applyTimeOffset, filterColumn } from '@modules/lessons/lesson/lesson.helper';
 import { LessonsCreateComponent } from '@modules/lessons/lessons-create/lessons-create.component';
 import { ModalComponent } from '@shared/components/modal/modal.component';
 import { IModal } from '@shared/models/IModal';
@@ -85,11 +86,9 @@ export class TeachersPageComponent implements OnInit {
 
     splitLessons() {
         this.datesWithLessons.forEach((dateWithLessons) => {
-            dateWithLessons.lessons.forEach(element => {
-                element.startAt = this.lessonsService.addTimeOffset(element.startAt);
-            });
-            dateWithLessons.lessonsColumn1 = dateWithLessons.lessons.filter((el, index) => index % 2 === 0);
-            dateWithLessons.lessonsColumn2 = dateWithLessons.lessons.filter((el, index) => index % 2 === 1);
+            dateWithLessons.lessons = applyTimeOffset(dateWithLessons.lessons);
+            dateWithLessons.lessonsColumn1 = filterColumn(dateWithLessons.lessons, 1);
+            dateWithLessons.lessonsColumn2 = filterColumn(dateWithLessons.lessons, 2);
         });
     }
 }
