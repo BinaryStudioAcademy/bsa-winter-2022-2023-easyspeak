@@ -122,33 +122,28 @@ public class LessonsService : BaseService, ILessonsService
 
     public async Task<TeacherStatisticsDto> GetTeacherLessonsStatisticsAsync()
     {
-        long id = _authService.UserId;
-
-        var statistics = new TeacherStatisticsDto();
-
-        statistics.TotalClasses = await _context.Lessons.CountAsync(l => l.CreatedBy == id);
-        statistics.CanceledClasses = await _context.Lessons.CountAsync(l => l.CreatedBy == id && l.IsCanceled);
-        statistics.FutureClasses = await _context.Lessons.CountAsync(l => l.CreatedBy == id && l.StartAt > DateTime.UtcNow && !l.IsCanceled);
-        var total = await _context.Lessons.Where(l => l.CreatedBy == id && l.StartAt < DateTime.UtcNow).Select(l => l.Subscribers.Count).ToListAsync();
-        if (total is not null)
+        var statistics = await _context.Lessons
+        .Select(l => new TeacherStatisticsDto
         {
-            statistics.TotalStudents = total.Sum();
-        }
-        statistics.NextClass = await _context.Lessons.Where(l => l.CreatedBy == id && l.StartAt > DateTime.UtcNow && !l.IsCanceled)
-                                                     .OrderBy(l => l.StartAt)
-                                                     .Select(l => l.StartAt)
-                                                     .FirstOrDefaultAsync();
-        if (statistics.NextClass == DateTime.MinValue) 
-        {
-            statistics.NextClass = null;
-        }
-        return statistics;
+            TotalClasses = _context.Lessons.Count(l => l.CreatedBy == _authService.UserId),
+            CanceledClasses = _context.Lessons.Count(l => l.CreatedBy == _authService.UserId && l.IsCanceled),
+            FutureClasses = _context.Lessons.Count(l => l.CreatedBy == _authService.UserId && l.StartAt > DateTime.UtcNow && !l.IsCanceled),
+            TotalStudents = _context.Lessons.Where(l => l.CreatedBy == _authService.UserId && l.StartAt < DateTime.UtcNow && !l.IsCanceled)
+                                            .SelectMany(l => l.Subscribers)
+                                            .Count(),
+            NextClass = _context.Lessons.Where(l => l.CreatedBy == _authService.UserId && l.StartAt > DateTime.UtcNow && !l.IsCanceled)
+                                        .OrderBy(l => l.StartAt)
+                                        .Select(l => (DateTime?)l.StartAt)
+                                        .FirstOrDefault() ?? null,
+        })
+        .FirstOrDefaultAsync();
+
+        return statistics ?? new TeacherStatisticsDto();
     }
 
     public async Task<ICollection<DaysWithLessonsDto>> GetLessonsInPeriodAsync(DateTime start, DateTime end)
     {
-        long id = _authService.UserId;
-        var selectedLessons = await _context.Lessons.Where(l => l.CreatedBy == id && l.StartAt > start && l.StartAt < end)
+        var selectedLessons = await _context.Lessons.Where(l => l.CreatedBy == _authService.UserId && l.StartAt > start && l.StartAt < end)
                                                     .Include(l => l.Tags)
                                                     .OrderBy(l => l.StartAt)
                                                     .ToListAsync();
@@ -162,15 +157,7 @@ public class LessonsService : BaseService, ILessonsService
 
     public async Task<LessonDto> CancelLessonAsync(int id)
     {
-        var userId = _authService.UserId;
-
-        var lesson = await _context.Lessons.Where(l => l.Id == id).FirstOrDefaultAsync();
-
-        if (lesson is not null && lesson.CreatedBy == userId)
-        {
-            lesson.IsCanceled = true;
-            await _context.SaveChangesAsync();
-        }
+        var lesson = await _context.Lessons.Where(l => l.Id == id && l.CreatedBy == _authService.UserId).FirstOrDefaultAsync();
 
         return _mapper.Map<LessonDto>(lesson);
     }

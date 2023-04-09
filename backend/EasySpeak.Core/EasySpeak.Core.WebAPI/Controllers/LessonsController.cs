@@ -46,8 +46,8 @@ namespace EasySpeak.Core.WebAPI.Controllers
         public async Task<ActionResult<TeacherStatisticsDto>> GetTeacherLessonsStatisticsAsync() => Ok(await _lessonsService.GetTeacherLessonsStatisticsAsync());
 
         [HttpGet("{start}/{end}")]
-        public async Task<ActionResult<ICollection<DaysWithLessonsDto>>> GetLessonsInPeriodAsync(DateTime start, DateTime end) 
-            => Ok(await _lessonsService.GetLessonsInPeriodAsync(start, end));
+        public Task<ICollection<DaysWithLessonsDto>> GetLessonsInPeriodAsync(DateTime start, DateTime end) 
+            => _lessonsService.GetLessonsInPeriodAsync(start, end);
 
         [HttpPut("cancel/{id}")]
         public async Task<ActionResult<LessonDto>> CancelLessonAsync(int id)

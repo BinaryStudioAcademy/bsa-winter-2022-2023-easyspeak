@@ -15,8 +15,6 @@ public class UserProfile : Profile
             .ForMember(user => user.LanguageLevel,
             src => src.MapFrom(userDto => EnumHelper.MapLanguageLevel(userDto.LanguageLevel)));
 
-        CreateMap<User, UserDto>().ReverseMap();
-
         CreateMap<User, UserForLessonDto>();
 
         CreateMap<User, UserDto>();
