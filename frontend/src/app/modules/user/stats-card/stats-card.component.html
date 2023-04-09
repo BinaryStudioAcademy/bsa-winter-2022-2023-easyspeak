@@ -1,0 +1,14 @@
+<div class="stats-card">
+    <div class="stats-icon">
+        <div class="icon-wrapper">
+            <img class="icon" src="{{iconPath}}" alt="icon">
+        </div>
+    </div>
+    <div class="stats-info">
+        <p class="stats-description">{{description}}</p>
+        <p class="stats-text" *ngIf="text; else noLesson">{{text}}</p>
+        <ng-template #noLesson>
+            <p class="stats-text">No Group Classes</p>
+        </ng-template>
+    </div>
+</div>
