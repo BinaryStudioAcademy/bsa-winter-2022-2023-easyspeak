@@ -14,7 +14,6 @@ import { ToastrService } from 'ngx-toastr';
 import { CountriesTzLangProviderService } from 'src/app/services/countries-tz-lang-provider.service';
 
 import { detailsGroup } from '../user-details.component.util';
-import * as moment from 'moment';
 
 @Component({
     selector: 'app-user-details',

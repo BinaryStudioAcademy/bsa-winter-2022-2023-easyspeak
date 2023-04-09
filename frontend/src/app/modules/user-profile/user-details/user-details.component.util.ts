@@ -1,5 +1,4 @@
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import * as moment from 'moment';
 
 export const detailsGroup = (fb: FormBuilder) => fb.group({
     firstName: ['', Validators.required],
