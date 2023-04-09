@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { AuthService } from '@core/services/auth.service';
 import { lengthValidator } from '@modules/auth/sign-in/lengthValidator';
-import { emailFormatRegex, passFormatRegex } from '@shared/data/regex.util';
+import { emailRegex, passwordRegex } from '@shared/data/regex.util';
 import { ToastrService } from 'ngx-toastr';
 
 import { validationErrorMessage } from '../sign-up/error-helper';
@@ -16,12 +16,11 @@ import { validationErrorMessage } from '../sign-up/error-helper';
 export class SignInComponent {
     form: FormGroup = new FormGroup({
         email: new FormControl('', {
-            validators: [lengthValidator(3, 50), Validators.pattern(emailFormatRegex), Validators.required],
-
+            validators: [lengthValidator(3, 50), Validators.pattern(emailRegex), Validators.required],
             updateOn: 'submit',
         }),
         password: new FormControl('', {
-            validators: [lengthValidator(6, 25), Validators.pattern(passFormatRegex), Validators.required],
+            validators: [lengthValidator(6, 25), Validators.pattern(passwordRegex), Validators.required],
             updateOn: 'submit',
         }),
     });
@@ -76,7 +75,7 @@ export class SignInComponent {
         return this.form.get('password') as FormControl;
     }
 
-    ClearRemoteErrors(control: FormControl) {
+    ClearRemoteErrors() {
         this.isSubmitted = false;
         // control.setErrors(null);
         //this.password.setErrors({ wrongPassword: null });

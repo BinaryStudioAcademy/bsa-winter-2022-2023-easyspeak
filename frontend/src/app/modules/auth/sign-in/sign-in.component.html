@@ -7,7 +7,7 @@
               (ngSubmit)="signIn()"
               [ngClass]="{'submitted': isSubmitted}">
             <div class="form-group-item">
-                <input formControlName="email" placeholder="Email" value="{{this.email}}" (focus)="ClearRemoteErrors(email)"/>
+                <input formControlName="email" placeholder="Email" value="{{this.email}}" (focus)="ClearRemoteErrors()"/>
                 <div class="errors-wrp" *ngIf="isSubmitted">
                     <mat-error class="error"
                                *ngIf="(email.errors?.['lengthValidator'] && email.touched) || email.pristine ">
@@ -26,7 +26,7 @@
                     formControlName="password"
                     placeholder="Password"
                     appPasswordVisibility
-                    (focus)="ClearRemoteErrors(password)"/>
+                    (focus)="ClearRemoteErrors()"/>
                 <div class="errors-wrp" *ngIf="isSubmitted">
                     <mat-error class="error"
                                *ngIf="(password.errors?.['lengthValidator'] && password.touched) || password.pristine">
