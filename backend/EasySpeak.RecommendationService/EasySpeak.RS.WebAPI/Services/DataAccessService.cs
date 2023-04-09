@@ -7,7 +7,7 @@ namespace EasySpeak.RS.WebAPI.Services;
 
 public class DataAccessService : IDataAccessService
 {
-    private IAsyncSession _session;
+    private readonly IAsyncSession _session;
 
     public DataAccessService(IDriver driver, IOptions<RecommendationServiceOptions> options)
     {

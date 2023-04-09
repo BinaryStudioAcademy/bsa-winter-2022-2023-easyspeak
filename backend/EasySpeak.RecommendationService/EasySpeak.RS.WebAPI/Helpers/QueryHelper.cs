@@ -1,6 +1,6 @@
 namespace EasySpeak.RS.WebAPI.Helpers;
 
-public class QueryHelper
+public static class QueryHelper
 {
     public static string AddUserQuery 
         => @"MERGE (u:User { id: $id, fullName: $fullName })
