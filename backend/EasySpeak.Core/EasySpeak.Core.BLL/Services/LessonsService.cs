@@ -106,8 +106,6 @@ public class LessonsService : BaseService, ILessonsService
 
         lesson.CreatedBy = _authService.UserId;
 
-        lesson.User = await _context.Users.Where(u => u.Id ==  _authService.UserId).FirstOrDefaultAsync();
-
         var zoomMeetingLinks = await _zoomApiService.GetMeetingLinks(lesson.Name);
 
         lesson.ZoomMeetingLink = zoomMeetingLinks.JoinUrl;
@@ -158,6 +156,9 @@ public class LessonsService : BaseService, ILessonsService
     public async Task<LessonDto> CancelLessonAsync(int id)
     {
         var lesson = await _context.Lessons.Where(l => l.Id == id && l.CreatedBy == _authService.UserId).FirstOrDefaultAsync();
+
+        lesson!.IsCanceled = true;
+        await _context.SaveChangesAsync();
 
         return _mapper.Map<LessonDto>(lesson);
     }
