@@ -93,8 +93,7 @@ export class LessonsPageComponent implements OnInit, OnChanges {
                 date: new Date(this.selectedDateFilter?.toISOString().slice(0, 10)),
             })
             .subscribe((response) => {
-                this.lessons = response;
-                this.lessons = applyTimeOffset(this.lessons);
+                this.lessons = applyTimeOffset(response);
                 this.lessonsColumn1 = filterColumn(this.lessons, 1);
                 this.lessonsColumn2 = filterColumn(this.lessons, 2);
             });

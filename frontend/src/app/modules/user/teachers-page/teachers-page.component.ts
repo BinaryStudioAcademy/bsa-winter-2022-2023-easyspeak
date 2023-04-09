@@ -41,8 +41,6 @@ export class TeachersPageComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.authService.user.subscribe();
-
         this.authService.user.subscribe((user) => {
             this.currentUser = user;
         });
@@ -66,11 +64,11 @@ export class TeachersPageComponent implements OnInit {
         this.dialogRef.open(ModalComponent, config);
     }
 
-    loadLessons(end: number) {
+    loadLessons(daysCount: number) {
         this.lessonsService
             .getTeacherLessonsAtPeriod(
                 new Date().toISOString(),
-                new Date(new Date().setUTCHours(24 * end, 0, 0, 0)).toISOString(),
+                new Date(new Date().setUTCHours(24 * daysCount, 0, 0, 0)).toISOString(),
             )
             .subscribe((data) => {
                 this.datesWithLessons = data;

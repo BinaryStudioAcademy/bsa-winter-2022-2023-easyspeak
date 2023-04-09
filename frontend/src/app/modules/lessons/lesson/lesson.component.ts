@@ -117,26 +117,26 @@ export class LessonComponent extends BaseComponent implements OnInit {
     }
 
     getButtonContent() {
-        if (!this.isTeachersPage) {
-            if (new Date() > new Date(this.lesson.startAt)) {
-                return 'Expired';
-            }
-            if (this.lesson.isSubscribed) {
-                return 'Subscribed';
-            }
+        switch (true) {
+            case !this.isTeachersPage:
+                if (new Date() > new Date(this.lesson.startAt)) {
+                    return 'Expired';
+                } if (this.lesson.isSubscribed) {
+                    return 'Subscribed';
+                }
 
-            return 'Join';
+                return 'Join';
+
+            case this.isTeachersPage:
+                if (!this.lesson.isCanceled) {
+                    return 'Cancel';
+                }
+
+                return 'Canceled';
+
+            default:
+                return '';
         }
-
-        if (this.isTeachersPage) {
-            if (!this.lesson.isCanceled) {
-                return 'Cancel';
-            }
-
-            return 'Canceled';
-        }
-
-        return '';
     }
 
     getFlag(): string | undefined {
