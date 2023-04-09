@@ -2372,122 +2372,98 @@ namespace EasySpeak.Core.DAL.Migrations
                         new
                         {
                             Id = 1L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Mobility"
+                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
+                            Name = "Architecture"
                         },
                         new
                         {
                             Id = 2L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "synthesize"
+                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
+                            Name = "Arts"
                         },
                         new
                         {
                             Id = 3L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "card"
+                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
+                            Name = "Cars"
                         },
                         new
                         {
                             Id = 4L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "brand"
+                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
+                            Name = "Celebrities"
                         },
                         new
                         {
                             Id = 5L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Versatile"
+                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
+                            Name = "Cooking"
                         },
                         new
                         {
                             Id = 6L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "withdrawal"
+                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
+                            Name = "Dancing"
                         },
                         new
                         {
                             Id = 7L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Oman"
+                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
+                            Name = "Ecology"
                         },
                         new
                         {
                             Id = 8L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Engineer"
+                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
+                            Name = "Design"
                         },
                         new
                         {
                             Id = 9L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Intelligent Frozen Mouse"
+                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
+                            Name = "History"
                         },
                         new
                         {
                             Id = 10L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Incredible Metal Hat"
+                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
+                            Name = "Fashion"
                         },
                         new
                         {
                             Id = 11L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Platinum"
+                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
+                            Name = "Medicine"
                         },
                         new
                         {
                             Id = 12L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Thailand"
+                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
+                            Name = "Technologies"
                         },
                         new
                         {
                             Id = 13L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "budgetary management"
+                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
+                            Name = "Pets"
                         },
                         new
                         {
                             Id = 14L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "SDD"
+                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
+                            Name = "Philosophy"
                         },
                         new
                         {
                             Id = 15L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "core"
+                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
+                            Name = "Photography"
                         },
                         new
                         {
                             Id = 16L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Concrete"
-                        },
-                        new
-                        {
-                            Id = 17L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "complexity"
-                        },
-                        new
-                        {
-                            Id = 18L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Generic Concrete Shoes"
-                        },
-                        new
-                        {
-                            Id = 19L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "navigating"
-                        },
-                        new
-                        {
-                            Id = 20L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "plum"
+                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
+                            Name = "Politics"
                         });
                 });
 
@@ -2672,98 +2648,48 @@ namespace EasySpeak.Core.DAL.Migrations
                         },
                         new
                         {
-                            LessonsId = 1L,
+                            LessonsId = 2L,
                             TagsId = 2L
                         },
                         new
                         {
-                            LessonsId = 2L,
+                            LessonsId = 3L,
                             TagsId = 3L
                         },
                         new
                         {
-                            LessonsId = 2L,
+                            LessonsId = 4L,
                             TagsId = 4L
                         },
                         new
                         {
-                            LessonsId = 3L,
+                            LessonsId = 5L,
                             TagsId = 5L
                         },
                         new
                         {
-                            LessonsId = 3L,
+                            LessonsId = 6L,
                             TagsId = 6L
                         },
                         new
                         {
-                            LessonsId = 4L,
+                            LessonsId = 7L,
                             TagsId = 7L
                         },
                         new
                         {
-                            LessonsId = 4L,
+                            LessonsId = 8L,
                             TagsId = 8L
                         },
                         new
                         {
-                            LessonsId = 5L,
+                            LessonsId = 9L,
                             TagsId = 9L
                         },
                         new
                         {
-                            LessonsId = 5L,
+                            LessonsId = 10L,
                             TagsId = 10L
-                        },
-                        new
-                        {
-                            LessonsId = 6L,
-                            TagsId = 11L
-                        },
-                        new
-                        {
-                            LessonsId = 6L,
-                            TagsId = 12L
-                        },
-                        new
-                        {
-                            LessonsId = 7L,
-                            TagsId = 13L
-                        },
-                        new
-                        {
-                            LessonsId = 7L,
-                            TagsId = 14L
-                        },
-                        new
-                        {
-                            LessonsId = 8L,
-                            TagsId = 15L
-                        },
-                        new
-                        {
-                            LessonsId = 8L,
-                            TagsId = 16L
-                        },
-                        new
-                        {
-                            LessonsId = 9L,
-                            TagsId = 17L
-                        },
-                        new
-                        {
-                            LessonsId = 9L,
-                            TagsId = 18L
-                        },
-                        new
-                        {
-                            LessonsId = 10L,
-                            TagsId = 19L
-                        },
-                        new
-                        {
-                            LessonsId = 10L,
-                            TagsId = 20L
                         });
                 });
 
@@ -2867,7 +2793,7 @@ namespace EasySpeak.Core.DAL.Migrations
                         new
                         {
                             TagsId = 4L,
-                            UsersId = 1L
+                            UsersId = 2L
                         },
                         new
                         {
@@ -2882,12 +2808,12 @@ namespace EasySpeak.Core.DAL.Migrations
                         new
                         {
                             TagsId = 7L,
-                            UsersId = 2L
+                            UsersId = 3L
                         },
                         new
                         {
                             TagsId = 8L,
-                            UsersId = 2L
+                            UsersId = 3L
                         },
                         new
                         {
@@ -2897,56 +2823,31 @@ namespace EasySpeak.Core.DAL.Migrations
                         new
                         {
                             TagsId = 10L,
-                            UsersId = 3L
+                            UsersId = 4L
                         },
                         new
                         {
                             TagsId = 11L,
-                            UsersId = 3L
+                            UsersId = 4L
                         },
                         new
                         {
                             TagsId = 12L,
-                            UsersId = 3L
+                            UsersId = 4L
                         },
                         new
                         {
                             TagsId = 13L,
-                            UsersId = 4L
+                            UsersId = 5L
                         },
                         new
                         {
                             TagsId = 14L,
-                            UsersId = 4L
+                            UsersId = 5L
                         },
                         new
                         {
                             TagsId = 15L,
-                            UsersId = 4L
-                        },
-                        new
-                        {
-                            TagsId = 16L,
-                            UsersId = 4L
-                        },
-                        new
-                        {
-                            TagsId = 17L,
-                            UsersId = 5L
-                        },
-                        new
-                        {
-                            TagsId = 18L,
-                            UsersId = 5L
-                        },
-                        new
-                        {
-                            TagsId = 19L,
-                            UsersId = 5L
-                        },
-                        new
-                        {
-                            TagsId = 20L,
                             UsersId = 5L
                         });
                 });

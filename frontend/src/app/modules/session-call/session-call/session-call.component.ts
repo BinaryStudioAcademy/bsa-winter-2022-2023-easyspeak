@@ -43,7 +43,6 @@ export class SessionCallComponent implements OnInit, OnDestroy {
 
     async ngOnInit() {
         // #1 connect to signaling server
-        await this.webrtcHub.start();
         // #2 define signaling communication
         this.callCreateOrJoinRoom();
         this.setActionsForMessages();
@@ -271,9 +270,6 @@ export class SessionCallComponent implements OnInit, OnDestroy {
         this.stopPeerConnection();
         this.sendMessage('bye');
         await this.webrtcHub.invoke('LeaveRoom', this.room);
-        setTimeout(() => {
-            this.webrtcHub.disconnect();
-        }, 1000);
     }
 
     /**

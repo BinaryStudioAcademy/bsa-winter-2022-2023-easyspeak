@@ -36,11 +36,11 @@ namespace EasySpeak.Core.WebAPI.Controllers
             return Ok(createdUser);
         }
 
-        [HttpPut("{userId}")]
-        public ActionResult<UserDto> Update(int userId, UserDto userDto)
-        {
-            return Ok(userDto);
-        }
+        [HttpPut]
+        public Task<UserDto> Update([FromBody] UserDto userDto) => _userService.UpdateUser(userDto);
+
+        [HttpGet("tags")]
+        public Task<TagDto[]> GetTagNames() => _userService.GetUserTags();
 
         [HttpPost("tags")]
         public async Task<ActionResult<UserDto>> AddTagsToUser([FromBody] List<TagDto> tags)
@@ -68,6 +68,12 @@ namespace EasySpeak.Core.WebAPI.Controllers
                 return Ok(await _userService.MakeAdminAsync(userId));
             }
             return StatusCode(403);
+        }
+
+        [HttpGet("friends")]
+        public async Task<ActionResult<List<UserShortInfoDto>>> GetFriends()
+        {
+            return Ok(await _userService.GetFriends());
         }
     }
 }
