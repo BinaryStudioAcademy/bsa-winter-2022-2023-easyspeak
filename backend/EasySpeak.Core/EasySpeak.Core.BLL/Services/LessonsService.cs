@@ -134,7 +134,7 @@ public class LessonsService : BaseService, ILessonsService
             NextClass = _context.Lessons.Where(l => l.CreatedBy == _authService.UserId && l.StartAt > DateTime.UtcNow && !l.IsCanceled)
                                         .OrderBy(l => l.StartAt)
                                         .Select(l => (DateTime?)l.StartAt)
-                                        .FirstOrDefault() ?? null,
+                                        .FirstOrDefault(),
         })
         .FirstOrDefaultAsync();
 
