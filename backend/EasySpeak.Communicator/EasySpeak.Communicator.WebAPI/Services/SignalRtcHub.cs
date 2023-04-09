@@ -1,10 +1,27 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 
-namespace EasySpeak.Core.WebAPI.Hubs
+namespace EasySpeak.Communicator.WebAPI.Services
 {
-    public class SignalRtcHub: Hub
+    public class SignalRtcHub : Hub
     {
+        private static readonly Dictionary<string, string> ConnectedUsers = new Dictionary<string, string>();
         static readonly Dictionary<string, List<string>> ConnectedClients = new Dictionary<string, List<string>>();
+
+        public void Connect(string email)
+        {
+            ConnectedUsers[email] = Context.ConnectionId;
+        }
+
+        public void Disconnect(string email)
+        {
+            ConnectedUsers.Remove(email);
+        }
+
+        public async Task CallUser(string email, string roomName)
+        {
+            var connectionId = ConnectedUsers[email];
+            await Clients.Client(connectionId).SendAsync("call", roomName);
+        }
 
         public async Task SendMessage(object message, string roomName)
         {

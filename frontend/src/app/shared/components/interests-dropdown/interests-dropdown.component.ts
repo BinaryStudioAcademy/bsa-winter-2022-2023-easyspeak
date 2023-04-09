@@ -30,9 +30,9 @@ export class InterestsDropdownComponent implements OnChanges {
         const { checked } = ev;
 
         if (checked) {
-            this.outputList = [...this.outputList, this.inputList[numb].icon_name];
+            this.outputList = [...this.outputList, this.inputList[numb].name];
         } else {
-            this.outputList = this.outputList.filter((interest) => interest !== this.inputList[numb].icon_name);
+            this.outputList = this.outputList.filter((interest) => interest !== this.inputList[numb].name);
         }
 
         this.selectedInterests.emit(this.outputList);

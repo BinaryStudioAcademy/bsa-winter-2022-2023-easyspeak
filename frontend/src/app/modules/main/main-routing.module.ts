@@ -29,6 +29,14 @@ const routes: Routes = [
                 loadChildren: () => import('../chat/chat.module').then((m) => m.ChatModule),
             },
             {
+                path: 'friends',
+                loadChildren: () => import('../friends/friends.module').then((m) => m.FriendsModule),
+            },
+            {
+                path: 'user',
+                loadChildren: () => import('../user/user.module').then((m) => m.UserModule),
+            },
+            {
                 path: '**',
                 component: NotFoundComponent,
             },

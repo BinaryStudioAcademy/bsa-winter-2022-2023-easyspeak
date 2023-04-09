@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CoreHubFactoryService } from '@core/hubs/hubFactories/core-hub-factory.service';
 import { HubConnection, HubConnectionState } from '@microsoft/signalr';
+import { AcceptCallComponent } from '@shared/components/accept-call/accept-call.component';
+import { IModal } from '@shared/models/IModal';
 import { Subject, Subscription } from 'rxjs';
 
 @Injectable({
@@ -15,11 +18,13 @@ export class WebrtcHubService {
 
     private subscriptions: Subscription[] = [];
 
-    constructor(private hubFactory: CoreHubFactoryService) {}
+    constructor(private hubFactory: CoreHubFactoryService, private dialogRef: MatDialog) {}
 
     async start() {
-        this.hubConnection = this.hubFactory.createHub(this.hubUrl);
-        await this.init();
+        if (!this.hubConnection || this.hubConnection.state === HubConnectionState.Disconnected) {
+            this.hubConnection = this.hubFactory.createHub(this.hubUrl);
+            await this.init();
+        }
     }
 
     /* eslint-disable  @typescript-eslint/no-explicit-any */
@@ -31,7 +36,7 @@ export class WebrtcHubService {
         if (this.isConnected()) {
             this.hubConnection.stop();
         }
-        this.subscriptions.forEach(s => s.unsubscribe());
+        this.subscriptions.forEach((s) => s.unsubscribe());
     }
 
     private async init() {
@@ -55,6 +60,32 @@ export class WebrtcHubService {
         this.hubConnection.on('message', (msg: string) => {
             this.messages.next(msg);
         });
+
+        this.hubConnection.on('call', (roomName: string) => {
+            const config: MatDialogConfig<IModal> = {
+                data: {
+                    header: roomName,
+                },
+            };
+
+            this.dialogRef.open(AcceptCallComponent, config);
+        });
+    }
+
+    public async connect(email: string) {
+        await this.hubConnection.invoke('Connect', email).catch((err) => {
+            console.error(err);
+        });
+    }
+
+    public async disconnectUser(email: string) {
+        await this.hubConnection.invoke('Disconnect', email).catch((err) => {
+            console.error(err);
+        });
+    }
+
+    public async callUser(email: string, roomName: string) {
+        await this.hubConnection.invoke('CallUser', email, roomName).catch((err) => console.error(err));
     }
 
     async invoke(methodName: string, ...args: unknown[]): Promise<unknown> {

@@ -157,6 +157,9 @@ export class ChatPageComponent implements OnInit, OnDestroy {
     });
 
     startSessionCall(): void {
-        this.router.navigate([`session-call/${this.currentChatId}`]);
+        const videoCallId = crypto.randomUUID();
+
+        this.webrtcHub.callUser('stagetest@gmail.com', videoCallId);
+        this.router.navigate([`session-call/${videoCallId}`]);
     }
 }

@@ -1,0 +1,88 @@
+<div class="profile-container">
+    <div class="profile">
+        <div class="profile-header">
+            <h1>Teachers Profile</h1>
+        </div>
+        <div class="profile-card">
+            <div class="profile-card-left">
+                <div class="bio">
+                    <div class="avatar">
+                        <app-avatar
+                            [firstName]="currentUser.firstName"
+                            [lastName]="currentUser.lastName"
+                            [imagePath]="currentUser.imagePath"
+                            [imageSize]="36">
+                        </app-avatar>
+                    </div>
+                    <div class="greeting">
+                        <p class="name">Hello, {{ currentUser.firstName }} {{ currentUser.lastName }}</p>
+                        <p class="question">Are you ready for the new Group Classes?</p>
+                    </div>
+                </div>
+                <div class="stats">
+                    <app-stats-card
+                        [description]="'Total Group Classes'"
+                        [text]="statistics.totalClasses"
+                        [iconPath]="'assets/teachers-page-icons/total-icon.svg'">
+                    </app-stats-card>
+                    <app-stats-card
+                        [description]="'Group Classes Canceled'"
+                        [text]="statistics.canceledClasses"
+                        [iconPath]="'assets/teachers-page-icons/canceled-icon.svg'">
+                    </app-stats-card>
+                    <app-stats-card
+                        [description]="'Future Group Classes'"
+                        [text]="statistics.futureClasses"
+                        [iconPath]="'assets/teachers-page-icons/future-icon.svg'">
+                    </app-stats-card>
+                    <app-stats-card
+                        [description]="'Pupils visited Classes'"
+                        [text]="statistics.totalStudents"
+                        [iconPath]="'assets/teachers-page-icons/students-icon.svg'">
+                    </app-stats-card>
+                </div>
+            </div>
+            <div class="profile-card-right">
+                <div class="add-lesson">
+                    <button class="create-lesson-button" (click)="openCreate()">+ Add Group Class</button>
+                </div>
+                <div class="next-lesson-card">
+                    <app-stats-card
+                        [description]="'The Nearest Group Class'"
+                        [text]="statistics.nextClass | date: 'd MMMM yyyy, EEE'"
+                        [iconPath]="'assets/teachers-page-icons/next-icon.svg'">
+                    </app-stats-card>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="lessons-container">
+    <div class="lessons-header">
+        <p class="lessons-title">My Group Classes</p>
+        <mat-button-toggle-group name="selectPeriod" value="week">
+            <mat-button-toggle (click)="loadLessons(1)" value="today">Today</mat-button-toggle>
+            <mat-button-toggle (click)="loadLessons(7)" value="week">Week</mat-button-toggle>
+            <mat-button-toggle (click)="loadLessons(30)" value="month">Month</mat-button-toggle>
+        </mat-button-toggle-group>
+    </div>
+    <div class="day-with-lessons" *ngFor="let day of datesWithLessons">
+        <div class="date-container">
+            <h2 class="date">{{day.lessonsDate | date: "dd MMMM yyyy, EEEE"}}</h2>
+        </div>
+        <div class="lessons-section" *ngIf="day.lessons">
+            <div class="lessons-column">
+                <div class="lesson" *ngFor="let lesson of day.lessonsColumn1">
+                    <app-lesson [lesson]="lesson" [isTeachersPage]="true"></app-lesson>
+                </div>
+            </div>
+            <div class="lessons-column">
+                <div class="lesson" *ngFor="let lesson of day.lessonsColumn2">
+                    <app-lesson [lesson]="lesson" [isTeachersPage]="true"></app-lesson>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="no-lessons" *ngIf="!datesWithLessons?.length">
+        <h1>No Group Classes</h1>
+</div>

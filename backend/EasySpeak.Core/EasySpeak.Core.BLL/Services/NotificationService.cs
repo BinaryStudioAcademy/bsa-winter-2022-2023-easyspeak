@@ -87,8 +87,8 @@ namespace EasySpeak.Core.BLL.Services
             {
                 NotificationType.friendshipRequest => await CreateFriendshipNotificationAsync(
                     _firebaseAuthService.UserId, id, type),
-                NotificationType.friendshipAcception => await CreateFriendshipNotificationAsync(id,
-                    _firebaseAuthService.UserId, type),
+                NotificationType.friendshipAcception => await CreateFriendshipNotificationAsync(
+                    _firebaseAuthService.UserId, id, type),
                 NotificationType.classJoin =>
                     await CreateLessonNotificationAsync(id, _firebaseAuthService.UserId, type),
                 NotificationType.reminding =>
@@ -122,7 +122,7 @@ namespace EasySpeak.Core.BLL.Services
                 UserId = receiver.Id,
                 Email = receiver.Email,
                 RelatedTo = sender.Id,
-                CreatedAt = DateTime.Now,
+                CreatedAt = DateTime.UtcNow,
                 Type = type,
                 Text = text,
                 ImageId = sender.ImageId
@@ -149,7 +149,7 @@ namespace EasySpeak.Core.BLL.Services
                 UserId = receiver.Id,
                 Email = receiver.Email,
                 RelatedTo = lesson.User!.Id,
-                CreatedAt = DateTime.Now,
+                CreatedAt = DateTime.UtcNow,
                 Type = type,
                 Text = text,
                 ImageId = lesson.User!.ImageId

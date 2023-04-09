@@ -1,16 +1,18 @@
-﻿using EasySpeak.Core.BLL.Interfaces;
+﻿using AutoMapper;
+using EasySpeak.Core.BLL.Interfaces;
 using EasySpeak.Core.Common.DTO.Notification;
+using EasySpeak.Core.Common.Enums;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EasySpeak.Core.WebAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class NotificationController : ControllerBase
+    public class NotificationsController : ControllerBase
     {
         private readonly INotificationService _notificationService;
 
-        public NotificationController(INotificationService notificationService)
+        public NotificationsController(INotificationService notificationService)
         {
             _notificationService = notificationService;
         }

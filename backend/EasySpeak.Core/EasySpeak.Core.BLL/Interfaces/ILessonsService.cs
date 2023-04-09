@@ -11,4 +11,7 @@ public interface ILessonsService
     Task<ICollection<DayCardDto>?> GetDayCardsOfWeekAsync(RequestDayCardDto requestDto);
 
     Task<LessonDto> CreateLessonAsync(NewLessonDto lessonDto);
+    Task<TeacherStatisticsDto> GetTeacherLessonsStatisticsAsync();
+    Task<ICollection<DaysWithLessonsDto>> GetLessonsInPeriodAsync(DateTime start, DateTime end);
+    Task<LessonDto> CancelLessonAsync(int id);
 }
