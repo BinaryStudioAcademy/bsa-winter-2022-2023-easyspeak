@@ -14,6 +14,7 @@ import { ToastrService } from 'ngx-toastr';
 import { CountriesTzLangProviderService } from 'src/app/services/countries-tz-lang-provider.service';
 
 import { detailsGroup } from '../user-details.component.util';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-user-details',
@@ -88,6 +89,10 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
 
     onSubmit() {
         const userDetails = <IUserInfo> this.detailsForm.value;
+
+        const birthDateMoment = moment(userDetails.birthDate, 'YYYY-MM-DD').add(1, 'day');
+
+        userDetails.birthDate = birthDateMoment.format('YYYY-MM-DD');
 
         userDetails.tags = this.selectedTags;
 
