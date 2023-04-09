@@ -16,7 +16,8 @@ public static class Seeder
     public static void Seed(ModelBuilder modelBuilder)
     {
         var users = GenerateUsers();
-        var lessons = GenerateLessons();
+        var lessons = GenerateLessons()
+            .AddForeignKeys(users, 5);
         var chats = GenerateChats();
         var tags = GenerateTags();
 
@@ -33,10 +34,12 @@ public static class Seeder
             .AddForeignKeys(questions, 20);
 
         var calls = GenerateCalls()
-            .AddForeignKeys(chats, 20);
+            .AddForeignKeys(chats, 20)
+            .AddForeignKeys(users, 5);
 
         var messages = GenerateMessages()
-            .AddForeignKeys(chats, 20);
+            .AddForeignKeys(chats, 20)
+            .AddForeignKeys(users, 5);
 
 
         var chatUser = SeedHelper<User, Chat, long>
@@ -169,6 +172,7 @@ public static class Seeder
             .RuleFor(l => l.MediaPath, f => f.Image.PicsumUrl())
             .RuleFor(l => l.StartAt, f => f.Date.Soon(30, DefaultDate))
             .RuleFor(l => l.LimitOfUsers, f => f.Random.Int(20, 200).OrNull(f, .2f))
+            .RuleFor(l=>l.CreatedBy, f => f.PickRandom<User>().Id)
             .Generate(count);
     }
 
@@ -216,6 +220,16 @@ public static class Seeder
         return friends;
     }
 
+    private static IList<Lesson> AddForeignKeys(this IList<Lesson> lessons, IList<User> users, int count)
+    {
+        foreach (var lesson in lessons)
+        {
+            lesson.CreatedBy = users[Rnd.Next(count)].Id;
+        }
+
+        return lessons;
+    }
+
     private static IList<Notification> AddForeingKeys(this IList<Notification> notifications, IList<User> users,
         int count)
     {
@@ -258,11 +272,31 @@ public static class Seeder
         return calls;
     }
 
+    private static IList<Call> AddForeignKeys(this IList<Call> calls, IList<User> users, int count)
+    {
+        foreach (var call in calls)
+        {
+            call.CreatedBy = users[Rnd.Next(count)].Id;
+        }
+
+        return calls;
+    }
+
     private static IList<Message> AddForeignKeys(this IList<Message> messages, IList<Chat> chats, int count)
     {
         foreach (var message in messages)
         {
             message.ChatId = chats[Rnd.Next(count)].Id;
+        }
+
+        return messages;
+    }
+
+    private static IList<Message> AddForeignKeys(this IList<Message> messages, IList<User> users, int count)
+    {
+        foreach (var message in messages)
+        {
+            message.CreatedBy = users[Rnd.Next(count)].Id;
         }
 
         return messages;
