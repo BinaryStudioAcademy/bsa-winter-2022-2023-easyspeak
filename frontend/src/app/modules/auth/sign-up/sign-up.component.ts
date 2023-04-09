@@ -7,7 +7,7 @@ import { DataService } from '@core/services/data.service';
 import { UserService } from '@core/services/user.service';
 import { NgSelectComponent } from '@ng-select/ng-select';
 import { Ages } from '@shared/data/ages.util';
-import { EnglishLevel } from '@shared/data/englishLevel';
+import { LanguageLevel } from '@shared/data/languageLevel';
 import { passFormatRegex } from '@shared/data/regex.util';
 import { Sex } from '@shared/data/sex';
 import { INewUser } from '@shared/models/INewUser';
@@ -25,11 +25,11 @@ import { matchpassword } from './matchpassword.validator';
     styleUrls: ['./sign-up.component.sass'],
 })
 export class SignUpComponent extends BaseComponent implements OnInit {
-    emglishLevelEnumeration = EnglishLevel;
+    languageLevelEnumeration = LanguageLevel;
 
     sexEnumeration = Sex;
 
-    englishLevels: string[];
+    languageLevels: string[];
 
     ages: string[];
 
@@ -94,7 +94,7 @@ export class SignUpComponent extends BaseComponent implements OnInit {
         this.dataService.getAllLanguages().subscribe((languages) => {
             this.languages = languages;
         });
-        this.englishLevels = Object.values(EnglishLevel) as string[];
+        this.languageLevels = Object.values(LanguageLevel) as string[];
         this.sexOptions = Object.values(this.sexEnumeration) as string[];
         this.ages = Ages;
     }

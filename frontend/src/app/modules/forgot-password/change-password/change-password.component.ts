@@ -49,15 +49,20 @@ export class ChangePasswordComponent implements OnInit {
         if (this.passwordIsMatch && this.passwordPattern.test(this.password)) {
             await this.authService.confirmResetPassword(this.token, this.password)
                 .then(() => {
-                    this.authService.signIn(this.email, this.password);
-
                     this.toastr.success('Password have been changed successfully!', 'Change Password');
-
-                    this.router.navigate(['timetable']);
+                    this.SignIn();
                 })
                 .catch((error) => {
                     this.toastr.error(error.message, 'Change Password error');
                 });
         }
+    }
+
+    private SignIn() {
+        this.authService.signIn(this.email, this.password)
+            .then(() => {
+                this.router.navigate(['timetable']);
+            })
+            .catch();
     }
 }
