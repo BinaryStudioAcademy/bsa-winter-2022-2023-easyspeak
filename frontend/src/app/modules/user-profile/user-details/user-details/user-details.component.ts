@@ -90,10 +90,6 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
     onSubmit() {
         const userDetails = <IUserInfo> this.detailsForm.value;
 
-        const birthDateMoment = moment(userDetails.birthDate, 'YYYY-MM-DD').add(1, 'day');
-
-        userDetails.birthDate = birthDateMoment.format('YYYY-MM-DD');
-
         userDetails.tags = this.selectedTags;
 
         this.userService
