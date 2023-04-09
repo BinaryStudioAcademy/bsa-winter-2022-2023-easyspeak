@@ -1,7 +1,5 @@
-//using EasySpeak.Communicator.WebAPI.Services;
 using EasySpeak.Core.WebAPI.Extensions;
 using EasySpeak.Core.WebAPI.Extentions;
-using EasySpeak.Core.WebAPI.Hubs;
 using EasySpeak.Core.WebAPI.Middlewares;
 using System.Reflection;
 
@@ -65,7 +63,6 @@ app.UseMiddleware<FirebaseAuthMiddleware>();
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapHealthChecks("/health");
-    //endpoints.MapHub<SignalRtcHub>("/signaling");
     endpoints.MapControllers();
 });
 
