@@ -49,7 +49,7 @@
                 <div class="next-lesson-card">
                     <app-stats-card
                         [description]="'The Nearest Group Class'"
-                        [text]="statistics.nextClass"
+                        [text]="statistics.nextClass | date: 'd MMMM yyyy, EEE'"
                         [iconPath]="'assets/teachers-page-icons/next-icon.svg'">
                     </app-stats-card>
                 </div>

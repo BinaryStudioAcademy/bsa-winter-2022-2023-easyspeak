@@ -1,4 +1,3 @@
-import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AuthService } from '@core/services/auth.service';
@@ -50,11 +49,6 @@ export class TeachersPageComponent implements OnInit {
 
         this.lessonsService.getTeacherStatistics().subscribe((data) => {
             this.statistics = data;
-            if (this.statistics.nextClass) {
-                const datePipe = new DatePipe('en-US');
-
-                this.statistics.nextClass = datePipe.transform(this.statistics.nextClass, 'd MMMM yyyy, EEE');
-            }
         });
 
         this.loadLessons(7);
