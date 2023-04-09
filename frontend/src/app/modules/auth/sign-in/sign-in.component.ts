@@ -78,6 +78,7 @@ export class SignInComponent {
 
     ClearRemoteErrors(control: FormControl) {
         this.isSubmitted = false;
-        control.errors?
+        // control.setErrors(null);
+        //this.password.setErrors({ wrongPassword: null });
     }
 }

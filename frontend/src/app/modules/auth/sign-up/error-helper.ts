@@ -8,4 +8,7 @@ export const validationErrorMessage: { [id: string]: string } = {
     matchError: 'Not match',
     signInEmailNotFound: 'User with such email doesn’t exist',
     signInEmailLength: 'Min 3, max 50',
+    signInPasswordLength: 'Min 6, max 25',
+    singInPasswordIncorrect: 'Incorrect password',
+
 };
