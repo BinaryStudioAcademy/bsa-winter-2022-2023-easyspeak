@@ -7,36 +7,39 @@
               (ngSubmit)="signIn()"
               [ngClass]="{'submitted': isSubmitted}">
             <div class="form-group-item">
-                <input formControlName="email" placeholder="Email" value="{{this.email}}" (focus)="ClearRemoteErrors()"/>
+                <input
+                    formControlName="email"
+                    placeholder="Email"
+                    value="{{this.email}}"
+                    (focus)="ClearErrors()"/>
                 <div class="errors-wrp" *ngIf="isSubmitted">
                     <mat-error class="error"
                                *ngIf="(email.errors?.['lengthValidator'] && email.touched) || email.pristine ">
                         <img src="/assets/user-profile/alert-triangle.svg" alt="">
-                        'Min 3, max 50'
+                        {{GetErrorMessageByKey('emailLength')}}
                     </mat-error>
                     <mat-error class="error" *ngIf="(email.errors?.['pattern'] || email.errors?.['emailNotFound'])">
                         <img src="/assets/user-profile/alert-triangle.svg" alt="">
-                        User with such email doesn’t exist
+                        {{GetErrorMessageByKey('emailNotFound')}}
                     </mat-error>
                 </div>
             </div>
 
             <div class="form-group-item">
-                <input
-                    formControlName="password"
-                    placeholder="Password"
-                    appPasswordVisibility
-                    (focus)="ClearRemoteErrors()"/>
+                <input formControlName="password"
+                       placeholder="Password"
+                       appPasswordVisibility
+                       (focus)="ClearErrors()"/>
                 <div class="errors-wrp" *ngIf="isSubmitted">
                     <mat-error class="error"
                                *ngIf="(password.errors?.['lengthValidator'] && password.touched) || password.pristine">
                         <img src="/assets/user-profile/alert-triangle.svg" alt="">
-                        Min 6, max 25
+                        {{GetErrorMessageByKey('passwordLength')}}
                     </mat-error>
                     <mat-error class="error"
                                *ngIf="password.errors?.['pattern'] || password.errors?.['wrongPassword'] ">
                         <img src="/assets/user-profile/alert-triangle.svg" alt="">
-                        Incorrect password
+                        {{GetErrorMessageByKey('passwordIncorrect')}}
                     </mat-error>
                 </div>
             </div>

@@ -32,8 +32,7 @@ export class SignInComponent {
         private authService: AuthService,
         private toastr: ToastrService,
         private router: Router,
-    ) {
-    }
+    ) { }
 
     public signIn() {
         this.isSubmitted = true;
@@ -75,9 +74,11 @@ export class SignInComponent {
         return this.form.get('password') as FormControl;
     }
 
-    ClearRemoteErrors() {
+    ClearErrors() {
         this.isSubmitted = false;
-        // control.setErrors(null);
-        //this.password.setErrors({ wrongPassword: null });
+    }
+
+    GetErrorMessageByKey(id: string) {
+        return Object.entries(validationErrorMessage).find(([t]) => t === id)?.[1];
     }
 }

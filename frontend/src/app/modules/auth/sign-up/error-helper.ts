@@ -6,8 +6,8 @@ export const validationErrorMessage: { [id: string]: string } = {
     name: 'Can contain latin letters and hyphen, min 2, max 25',
     pattern: 'Should have at least one small and one capital letter',
     matchError: 'Not match',
-    signInEmailNotFound: 'User with such email doesn’t exist',
-    signInEmailLength: 'Min 3, max 50',
-    signInPasswordLength: 'Min 6, max 25',
-    singInPasswordIncorrect: 'Incorrect password',
+    emailNotFound: 'User with such email doesn’t exist',
+    emailLength: 'Min 3, max 50',
+    passwordLength: 'Min 6, max 25',
+    passwordIncorrect: 'Incorrect password',
 };
