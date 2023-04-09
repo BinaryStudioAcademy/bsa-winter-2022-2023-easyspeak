@@ -42,7 +42,7 @@ export class TeachersPageComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.authService.loadUser().subscribe();
+        this.authService.user.subscribe();
 
         this.authService.user.subscribe((user) => {
             this.currentUser = user;

@@ -27,7 +27,10 @@
                                 <p class="tutor-name">{{ lesson.user.firstName }} {{ lesson.user.lastName }}</p>
                             </div>
                             <div class="time teacher-time" *ngIf="isTeachersPage">
-                                <img class="time-icon teacher-time-icon" src="assets/lesson-icons/clock-icon.svg" alt="clock-icon" />
+                                <img
+                                    class="time-icon teacher-time-icon"
+                                    src="assets/lesson-icons/clock-icon.svg"
+                                    alt="clock-icon" />
                                 <h4 class="lesson-time">{{ lesson.startAt | date : 'HH.mm' }}</h4>
                             </div>
                         </div>
@@ -35,8 +38,16 @@
                             <img class="time-icon" src="assets/lesson-icons/clock-icon.svg" alt="clock-icon" />
                             <h4 class="lesson-time">{{ lesson.startAt | date : 'HH.mm' }}</h4>
                         </div>
-                        <div class="edit" [ngClass]="{'edit-disabled': lesson.isCanceled}" *ngIf="isTeachersPage" (click)="editLesson()">
-                            <img class="edit-icon" [ngClass]="{'edit-disabled-icon': lesson.isCanceled}" src="assets/teachers-page-icons/edit-icon.svg" alt="edit-icon"/>
+                        <div
+                            class="edit"
+                            [ngClass]="{ 'edit-disabled': lesson.isCanceled }"
+                            *ngIf="isTeachersPage"
+                            (click)="editLesson()">
+                            <img
+                                class="edit-icon"
+                                [ngClass]="{ 'edit-disabled-icon': lesson.isCanceled }"
+                                src="assets/teachers-page-icons/edit-icon.svg"
+                                alt="edit-icon" />
                             <p class="edit-text">Edit</p>
                         </div>
                     </div>
@@ -59,10 +70,18 @@
 
             <div class="lesson-actions">
                 <button
+                    *ngIf="!isTeachersPage; else cancel"
                     class="join"
                     [disabled]="isDisabled()"
                     [textContent]="getButtonContent()"
-                    (click)="buttonAction()"></button>
+                    (click)="joinLesson()"></button>
+                <ng-template #cancel>
+                    <button
+                        class="cancel"
+                        [disabled]="isDisabled()"
+                        [textContent]="getButtonContent()"
+                        (click)="cancelLesson()"></button>
+                </ng-template>
                 <button class="expand" (click)="showQuestions(lesson.id)">
                     <span>See questions</span>
                     <img src="assets/lesson-icons/expand.svg" alt="expand-icon" />

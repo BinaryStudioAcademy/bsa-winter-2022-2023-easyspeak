@@ -75,32 +75,28 @@ export class LessonComponent extends BaseComponent implements OnInit {
         });
     }
 
-    buttonAction() {
-        if (!this.isTeachersPage) {
-            this.userService
-                .enrollUserToLesson(this.lesson.id)
-                .pipe(this.untilThis)
-                .subscribe({
-                    next: (lesson) => {
-                        this.lesson.isSubscribed = true;
-                        this.lesson.subscribersCount = lesson.subscribersCount;
-                        this.notificationService.showSuccess(
-                            `You successfully registered for lesson ${this.lesson.name}`,
-                            'Success!',
-                        );
-                    },
-                    error: () =>
-                        this.notificationService.showError(
-                            `Failed to register for lesson ${this.lesson.name}`,
-                            'Failed!',
-                        ),
-                });
-        }
-        if (this.isTeachersPage) {
-            this.lessonsService.cancelLesson(this.lesson.id, this.lesson).subscribe((data) => {
-                this.lesson.isCanceled = data.isCanceled;
+    joinLesson() {
+        this.userService
+            .enrollUserToLesson(this.lesson.id)
+            .pipe(this.untilThis)
+            .subscribe({
+                next: (lesson) => {
+                    this.lesson.isSubscribed = true;
+                    this.lesson.subscribersCount = lesson.subscribersCount;
+                    this.notificationService.showSuccess(
+                        `You successfully registered for lesson ${this.lesson.name}`,
+                        'Success!',
+                    );
+                },
+                error: () =>
+                    this.notificationService.showError(`Failed to register for lesson ${this.lesson.name}`, 'Failed!'),
             });
-        }
+    }
+
+    cancelLesson() {
+        this.lessonsService.cancelLesson(this.lesson.id, this.lesson).subscribe((data) => {
+            this.lesson.isCanceled = data.isCanceled;
+        });
     }
 
     ngOnInit(): void {
