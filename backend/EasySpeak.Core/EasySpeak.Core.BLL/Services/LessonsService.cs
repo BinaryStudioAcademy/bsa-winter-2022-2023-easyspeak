@@ -126,7 +126,7 @@ public class LessonsService : BaseService, ILessonsService
 
         var statistics = teacherLessons.Select(l => new TeacherStatisticsDto
             {
-                TotalClasses = teacherLessons.Count(),
+                TotalClasses = teacherLessons.Count,
                 CanceledClasses = teacherLessons.Count(l => l.IsCanceled),
                 FutureClasses = teacherLessons.Count(l => l.StartAt > DateTime.UtcNow && !l.IsCanceled),
 
