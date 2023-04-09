@@ -21,5 +21,11 @@ namespace EasySpeak.Core.WebAPI.Controllers
             var file = formCollection.Files.First();
             return Ok(await _userService.UploadProfilePhoto(file));
         }
+
+        [HttpPost("setemoji/{emojiName}")]
+        public async Task<IActionResult> UploadAvatar(string emojiName)
+        {
+            return Ok(await _userService.UploadEmojiAvatar(emojiName));
+        }
     }
 }

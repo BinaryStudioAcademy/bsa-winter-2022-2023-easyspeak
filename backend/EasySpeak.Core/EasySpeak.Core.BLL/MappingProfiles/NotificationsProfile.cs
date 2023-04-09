@@ -17,5 +17,6 @@ public class NotificationsProfile : Profile
         CreateMap<NewNotificationDto, NotificationDto>().ReverseMap();
         
         CreateMap<NotificationType, string>().ConvertUsing<EnumToStringConverter<NotificationType>>();
+        CreateMap<string, NotificationType>().ConvertUsing<StringToEnumConverter<NotificationType>>();
     }
 }

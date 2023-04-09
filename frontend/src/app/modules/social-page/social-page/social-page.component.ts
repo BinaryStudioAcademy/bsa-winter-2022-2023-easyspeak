@@ -13,7 +13,9 @@ import { UserFilter } from '../../../models/filters/userFilter';
 export class SocialPageComponent implements OnInit {
     public users$: Observable<UserCard[]>;
 
-    public constructor(private userService: UserService) {
+    public constructor(
+        private userService: UserService,
+    ) {
     }
 
     ngOnInit(): void {

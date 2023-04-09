@@ -3,7 +3,6 @@ import { Component, Inject, Input } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { BaseComponent } from '@core/base/base.component';
 import { AuthService } from '@core/services/auth.service';
-import { UserService } from '@core/services/user.service';
 import { base64ToFile, ImageCroppedEvent } from 'ngx-image-cropper';
 
 import { UserDetailsComponent } from '../user-details/user-details/user-details.component';
@@ -24,7 +23,6 @@ export class CropImageDialogComponent extends BaseComponent {
         public dialogRef: MatDialogRef<UserDetailsComponent>,
         @Inject(MAT_DIALOG_DATA) public data: { imgChangeEvt: HTMLInputEvent },
         private authService: AuthService,
-        private userService: UserService,
         private http: HttpClient,
     ) {
         super();

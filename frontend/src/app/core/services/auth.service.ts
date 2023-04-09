@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { WebrtcHubService } from '@core/hubs/webrtc-hub.service';
 import { HttpService } from '@core/services/http.service';
 import { UserShort } from '@shared/models/UserShort';
 import * as auth from 'firebase/auth';
@@ -30,11 +31,16 @@ export class AuthService {
         public jwtHelper: JwtHelperService,
         private userService: UserService,
         private toastr: NotificationService,
+        private webRtcHub: WebrtcHubService,
     ) {}
 
     async handleUserCredential(userCredential: firebase.auth.UserCredential) {
         if (userCredential.user) {
             await this.setAccessToken(userCredential.user);
+
+            this.webRtcHub.start().then(() => {
+                this.webRtcHub.connect(userCredential.user?.email as string);
+            });
         }
     }
 
@@ -81,6 +87,7 @@ export class AuthService {
         this.userService.getUser().subscribe(
             (resp) => {
                 const user = {
+                    email: resp.email,
                     firstName: resp.firstName,
                     lastName: resp.lastName,
                     imagePath: resp.imagePath,
@@ -88,6 +95,7 @@ export class AuthService {
                 };
 
                 this.currentUser = {
+                    email: user.email,
                     firstName: user.firstName,
                     lastName: user.lastName,
                     imagePath: user.imagePath,
@@ -118,6 +126,10 @@ export class AuthService {
     }
 
     logout(): Promise<void> {
+        const user: UserShort = JSON.parse(localStorage.getItem('user') as string);
+
+        this.webRtcHub.disconnectUser(user.email).then();
+
         localStorage.removeItem('accessToken');
         localStorage.removeItem('user');
 
@@ -145,16 +157,14 @@ export class AuthService {
     }
 
     async resetPassword(email: string) {
-        await this.afAuth.sendPasswordResetEmail(email)
-            .catch((error) => {
-                throw new Error(error.message);
-            });
+        await this.afAuth.sendPasswordResetEmail(email).catch((error) => {
+            throw new Error(error.message);
+        });
     }
 
     async confirmResetPassword(code: string, newPassword: string) {
-        await this.afAuth.confirmPasswordReset(code, newPassword)
-            .catch((error) => {
-                throw new Error(error.message);
-            });
+        await this.afAuth.confirmPasswordReset(code, newPassword).catch((error) => {
+            throw new Error(error.message);
+        });
     }
 }

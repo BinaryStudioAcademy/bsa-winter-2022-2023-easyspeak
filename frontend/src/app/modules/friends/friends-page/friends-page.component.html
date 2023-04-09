@@ -1,0 +1,19 @@
+<div class="block">
+    <ng-container *ngIf="requests">
+        <div class="user-grid" *ngIf="requests.length">
+            <h2 class="requests-header">Requests</h2>
+            <app-user-card class="user-card" *ngFor="let request of requests" [user]="request"></app-user-card>
+        </div>
+    </ng-container>
+    <h2 class="requests-header">Friends</h2>
+    <ng-container *ngIf="friends">
+        <div class="user-grid" *ngIf="friends.length; else noFriends">
+            <app-user-card class="user-card" *ngFor="let user of friends" [user]="user"></app-user-card>
+        </div>
+    </ng-container>
+    <ng-template #noFriends>
+        <div class="no-users">
+            <p>You don't have fiends for now</p>
+        </div>
+    </ng-template>
+</div>

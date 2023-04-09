@@ -51,7 +51,7 @@
                 <span>{{ authService.currentUser.firstName }} {{ authService.currentUser.lastName }}</span>
                 <img src="/assets/header/chevron-down-icon.svg" />
                 <mat-menu class="user-menu" #menu="matMenu" xPosition="before">
-                    <button mat-menu-item class="menu-element">
+                    <button [routerLink]="['/friends']" mat-menu-item class="menu-element">
                         <img class="menu-icon" src="/assets/header/following-icon.svg" />
                         <span class="menu-text">Following</span>
                     </button>

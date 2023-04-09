@@ -33,8 +33,8 @@ export class AvatarComponent {
     }
 
     getAvatarImage(): string {
-        if (this.imagePath && this.imagePath.match(/^man+/)) {
-            return `assets/user-profile/${this.imagePath}`;
+        if ((this.imagePath && this.imagePath.match(/^man+/)) || (this.imagePath && this.imagePath.match(/^boy/))) {
+            return `assets/user-profile/${this.imagePath}.svg`;
         }
 
         return this.imagePath;

@@ -11,6 +11,7 @@ import { RoundProgressBarComponent } from '@shared/components/round-progress-bar
 import { MaterialModule } from '@shared/material/material.module';
 import { ImageCropperModule } from 'ngx-image-cropper';
 
+import { AcceptCallComponent } from './components/accept-call/accept-call.component';
 import { AvatarComponent } from './components/avatar/avatar.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { ConfirmComponent } from './components/confirm/confirm.component';
@@ -57,6 +58,7 @@ import { TooltipWhenOverflowDirective } from './directives/tooltip-when-overflow
         TooltipWhenOverflowDirective,
         AvatarComponent,
         ScrollToBottomDirective,
+        AcceptCallComponent,
     ],
     exports: [
         CommonModule,
