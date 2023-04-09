@@ -38,7 +38,7 @@ public class LessonsService : BaseService, ILessonsService
         var lessonsFromContext = _context.Lessons
             .Include(l => l.Tags)
             .Include(l => l.User)
-            .Where(x => x.StartAt.Date == filtersRequest.Date);
+            .Where(x => x.StartAt.Date == filtersRequest.Date && !x.IsCanceled);
 
         if (tagsName is not null && tagsName.Any())
         {

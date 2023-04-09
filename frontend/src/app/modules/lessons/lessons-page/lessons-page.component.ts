@@ -94,7 +94,6 @@ export class LessonsPageComponent implements OnInit, OnChanges {
             })
             .subscribe((response) => {
                 this.lessons = response;
-                this.lessons = this.lessons.filter((lesson) => !lesson.isCanceled);
                 this.lessons = applyTimeOffset(this.lessons);
                 this.lessonsColumn1 = filterColumn(this.lessons, 1);
                 this.lessonsColumn2 = filterColumn(this.lessons, 2);
