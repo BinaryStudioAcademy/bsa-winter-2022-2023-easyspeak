@@ -19,7 +19,7 @@ import { NotificationService } from 'src/app/services/notification.service';
 export class LessonComponent extends BaseComponent implements OnInit {
     @Input() lesson: ILesson;
 
-    @Input() page: string;
+    @Input() isTeachersPage: boolean;
 
     previewImage: string;
 
@@ -76,7 +76,7 @@ export class LessonComponent extends BaseComponent implements OnInit {
     }
 
     buttonAction() {
-        if (this.page === 'timetable') {
+        if (!this.isTeachersPage) {
             this.userService
                 .enrollUserToLesson(this.lesson.id)
                 .pipe(this.untilThis)
@@ -96,7 +96,7 @@ export class LessonComponent extends BaseComponent implements OnInit {
                         ),
                 });
         }
-        if (this.page === 'teacher') {
+        if (this.isTeachersPage) {
             this.lessonsService.cancelLesson(this.lesson.id, this.lesson).subscribe((data) => {
                 this.lesson.isCanceled = data.isCanceled;
             });
@@ -110,10 +110,10 @@ export class LessonComponent extends BaseComponent implements OnInit {
     }
 
     isDisabled() {
-        if (this.page === 'timetable') {
+        if (!this.isTeachersPage) {
             return this.lesson.isSubscribed || new Date() > new Date(this.lesson.startAt);
         }
-        if (this.page === 'teacher') {
+        if (this.isTeachersPage) {
             return this.lesson.isCanceled || new Date() > new Date(this.lesson.startAt);
         }
 
@@ -121,7 +121,7 @@ export class LessonComponent extends BaseComponent implements OnInit {
     }
 
     getButtonContent() {
-        if (this.page === 'timetable') {
+        if (!this.isTeachersPage) {
             if (new Date() > new Date(this.lesson.startAt)) {
                 return 'Expired';
             }
@@ -132,7 +132,7 @@ export class LessonComponent extends BaseComponent implements OnInit {
             return 'Join';
         }
 
-        if (this.page === 'teacher') {
+        if (this.isTeachersPage) {
             if (!this.lesson.isCanceled) {
                 return 'Cancel';
             }
