@@ -12,9 +12,10 @@ import { AuthPageComponent } from './auth-page/auth-page.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { AuthRoutingModule } from './auth-routing.module';
+import { SignInExampleComponent } from './sign-in/sign-in-example.component';
 
 @NgModule({
-    declarations: [SignUpComponent, SignInComponent, AuthPageComponent],
+    declarations: [SignUpComponent, SignInComponent, AuthPageComponent, SignInExampleComponent],
     imports: [CommonModule, AuthRoutingModule, MaterialModule, FormsModule, ReactiveFormsModule, SharedModule],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     providers: [AuthGuard, AuthorizedUsersGuard, { provide: JWT_OPTIONS, useValue: JWT_OPTIONS }, JwtHelperService],

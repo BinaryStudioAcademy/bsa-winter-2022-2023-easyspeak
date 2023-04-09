@@ -1,47 +1,47 @@
 <div class="container">
     <div class="form-wrp">
         <h1>Sign In</h1>
-        <form #userLoginForm="ngForm" [formGroup]="form" class="form-content" (submit)="signIn()">
+        <form #userLoginForm="ngForm"
+              [formGroup]="form"
+              class="form-content"
+              (ngSubmit)="signIn()"
+              [ngClass]="{'submitted': isSubmitted}">
             <div class="form-group-item">
-                <input
-                    type="email"
-                    formControlName="email"
-                    placeholder="Email"
-                    required
-                    email="{{this.email}}"/>
-        
-                <div class="errors-wrp">
-                    <mat-error class="error" *ngIf="this.email.invalid && this.userLoginForm.submitted">
+                <input formControlName="email" placeholder="Email" value="{{this.email}}" (focus)="ClearRemoteErrors(email)"/>
+                <div class="errors-wrp" *ngIf="isSubmitted">
+                    <mat-error class="error"
+                               *ngIf="(email.errors?.['lengthValidator'] && email.touched) || email.pristine ">
                         <img src="/assets/user-profile/alert-triangle.svg" alt="">
-                        {{getErrorMessage(email)}}
+                        'Min 3, max 50'
                     </mat-error>
-                </div>
-        
-                <div class="error-surface" 
-                    *ngIf="this.email.errors && this.userLoginForm.submitted">
+                    <mat-error class="error" *ngIf="(email.errors?.['pattern'] || email.errors?.['emailNotFound'])">
+                        <img src="/assets/user-profile/alert-triangle.svg" alt="">
+                        User with such email doesn’t exist
+                    </mat-error>
                 </div>
             </div>
 
             <div class="form-group-item">
                 <input
-                    type="password"
                     formControlName="password"
                     placeholder="Password"
-                    required
-                    appPasswordVisibility/>
-        
-                <div class="errors-wrp">
-                    <mat-error class="error" *ngIf="this.password.invalid && this.userLoginForm.submitted">
+                    appPasswordVisibility
+                    (focus)="ClearRemoteErrors(password)"/>
+                <div class="errors-wrp" *ngIf="isSubmitted">
+                    <mat-error class="error"
+                               *ngIf="(password.errors?.['lengthValidator'] && password.touched) || password.pristine">
                         <img src="/assets/user-profile/alert-triangle.svg" alt="">
-                        {{getErrorMessage(password)}}
+                        Min 6, max 25
+                    </mat-error>
+                    <mat-error class="error"
+                               *ngIf="password.errors?.['pattern'] || password.errors?.['wrongPassword'] ">
+                        <img src="/assets/user-profile/alert-triangle.svg" alt="">
+                        Incorrect password
                     </mat-error>
                 </div>
-        
-                <div *ngIf="this.password.invalid && this.userLoginForm.submitted" 
-                    class="error-surface">
-                </div>
             </div>
-            <button class="submit-btn" 
+
+            <button class="submit-btn"
                 mat-button type="submit">
                 Sign In
             </button>

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { SignInExampleComponent } from '@modules/auth/sign-in/sign-in-example.component';
 
 import { AuthPageComponent } from './auth-page/auth-page.component';
 import { SignInComponent } from './sign-in/sign-in.component';
