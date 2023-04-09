@@ -59,6 +59,7 @@ services:
         depends_on:
             - easyspeak_core
             - easyspeak_notifier
+            - easyspeak_communicator
         image: tatihutii/easyspeak_frontend:latest
         container_name: 'easyspeak_frontend'
         restart: on-failure
