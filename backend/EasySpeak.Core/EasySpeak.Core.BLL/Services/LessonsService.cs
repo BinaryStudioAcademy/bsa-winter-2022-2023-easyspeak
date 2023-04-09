@@ -122,6 +122,7 @@ public class LessonsService : BaseService, ILessonsService
     {
         var teacherLessons = await _context.Lessons
                 .Where(l => l.CreatedBy == _authService.UserId)
+                .Include(l => l.Subscribers)
                 .ToListAsync();
 
         var statistics = teacherLessons.Select(l => new TeacherStatisticsDto
