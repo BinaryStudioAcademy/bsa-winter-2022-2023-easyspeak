@@ -45,6 +45,25 @@ services:
           - back
       environment:
           ASPNETCORE_ENVIRONMENT: 'Development'
+          RecommendationService_Connection: 'bolt://localhost:7687'
+          RecommendationService_User: 'neo4j'
+          RecommendationService_Password: 'e3hfuTFgkUYa4WanMbnlZUseHmmBtC1q'
+          RecommendationService_Database: 'neo4j'
+
+  easyspeak_recommendationservice:
+      build:
+        context: ./backend
+        dockerfile: ./EasySpeak.RecommendationService/Dockerfile
+        args:
+          - PROJECT_PORT=5110
+        container_name: 'easyspeac_reccomendationservice'
+        restart: on-failure
+        ports:
+          - "5110:5110"
+        networks: 
+          - back
+        environment:
+          ASPNETCORE_ENVIRONMENT: 'Development'
 
   easyspeak_client:
     depends_on:
