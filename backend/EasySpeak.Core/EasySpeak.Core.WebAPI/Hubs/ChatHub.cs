@@ -6,8 +6,7 @@ namespace EasySpeak.Core.WebAPI.Hubs
 {
     public class ChatHub : Hub
     {
-        static readonly Dictionary<string, List<string>> ConnectedClients = new Dictionary<string, List<string>>();
-        IChatService _chatService;
+        readonly IChatService _chatService;
 
         public ChatHub(IChatService chatService)
         {
@@ -34,7 +33,6 @@ namespace EasySpeak.Core.WebAPI.Hubs
 
         public async Task SendMessageAsync(NewMessageDto message)
         {
-            await EmitLog("Client " + Context.ConnectionId + " said: " + message, message.ChatId.ToString());
 
             await _chatService.SendMessageAsync(message);
 
@@ -43,14 +41,9 @@ namespace EasySpeak.Core.WebAPI.Hubs
 
         public async Task ReadMessages(long chatId, long userId)
         {
-            var messages = await _chatService.SetMessagesAsRead(chatId, userId);
+            await _chatService.SetMessagesAsRead(chatId, userId);
 
             await GetPeopleAsync(chatId, userId);
-        }
-
-        private async Task EmitLog(string message, string chatId)
-        {
-            await Clients.Group(chatId).SendAsync("log", "[Server]: " + chatId);
         }
     }
 }
