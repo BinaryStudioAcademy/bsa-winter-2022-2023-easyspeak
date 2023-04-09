@@ -20,6 +20,8 @@ export class FilterSectionComponent implements OnInit {
 
     @Input() selectedLanguageFilters: string[] = [];
 
+    public selectedLevelWithSubtitleFilters: string[] = [];
+
     public selectedInterestsFilters: string[] = [];
 
     public langLevels: Filter[];
@@ -29,7 +31,10 @@ export class FilterSectionComponent implements OnInit {
     }
 
     removeLangLevel(title: string) {
-        this.selectedLanguageFilters = this.selectedLanguageFilters.filter(filterTitle => filterTitle !== title);
+        const splitedTitle = title.split(':');
+
+        this.selectedLanguageFilters = this.selectedLanguageFilters.filter(filterTitle => filterTitle !== splitedTitle[0]);
+        this.selectedLevelWithSubtitleFilters = this.getLanguageLevelWithSubtitle();
         this.selectedLanguageFiltersChange.emit(this.selectedLanguageFilters);
     }
 
@@ -40,6 +45,7 @@ export class FilterSectionComponent implements OnInit {
 
     updateLangFilters(eventData: string[]) {
         this.selectedLanguageFilters = eventData;
+        this.selectedLevelWithSubtitleFilters = this.getLanguageLevelWithSubtitle();
         this.selectedLanguageFiltersChange.emit(this.selectedLanguageFilters);
     }
 
@@ -53,8 +59,19 @@ export class FilterSectionComponent implements OnInit {
 
         this.selectedLanguageFilters = [];
         this.selectedInterestsFilters = [];
+        this.selectedLevelWithSubtitleFilters = [];
 
         this.selectedLanguageFiltersChange.emit(this.selectedLanguageFilters);
         this.selectedInterestsFiltersChange.emit(this.selectedInterestsFilters);
+    }
+
+    isVisibilityButton = () => this.selectedInterestsFilters.length || this.selectedLanguageFilters.length;
+
+    private getLanguageLevelWithSubtitle() {
+        return this.selectedLanguageFilters.map(f => {
+            const level = this.langLevels.find(l => l.title === f);
+
+            return `${level?.title}: ${level?.subtitle}`;
+        });
     }
 }

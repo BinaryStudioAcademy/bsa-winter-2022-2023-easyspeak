@@ -32,6 +32,10 @@ export class HttpService {
         return this.httpClient.put<T>(this.buildUrl(url), resource).pipe(catchError(this.handleError));
     }
 
+    updateByUd<T>(url: string, id: string | number) {
+        return this.httpClient.put<T>(this.buildUrl(url), id).pipe(catchError(this.handleError));
+    }
+
     private handleError(err: HttpErrorResponse) {
         return throwError(() => err);
     }

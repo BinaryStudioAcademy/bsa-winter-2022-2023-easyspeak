@@ -1,3 +1,7 @@
+import { ITag } from '@shared/models/user/ITag';
+
+import { ITopic } from './ITopic';
+
 export interface IUserInfo {
     firstName: string;
     lastName: string;
@@ -6,4 +10,10 @@ export interface IUserInfo {
     language: string;
     sex: string;
     languageLevel: string;
+    birthDate: string;
+    topics?: ITopic[]
+    imagePath: string;
+    canOnlyFriendMessage: boolean;
+    tags: ITag[];
+    isAdmin: boolean;
 }

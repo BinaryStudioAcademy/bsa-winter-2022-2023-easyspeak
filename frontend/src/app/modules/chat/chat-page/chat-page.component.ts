@@ -1,54 +1,139 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-// import { HttpService } from '@core/services/http.service';
+import { WebrtcHubService } from '@core/hubs/webrtc-hub.service';
+import { ScrollToBottomDirective } from '@shared/directives/scroll-to-bottom-directive';
+import { IChatPerson } from '@shared/models/IChatPerson';
+import { IMessage } from '@shared/models/IMessage';
+import * as moment from 'moment';
 import { Observable, of } from 'rxjs';
 
+interface IMessageGroup {
+    date: Date;
+    messages: IMessage[];
+}
 @Component({
     selector: 'app-chat-page',
     templateUrl: './chat-page.component.html',
     styleUrls: ['./chat-page.component.sass'],
 })
-export class ChatPageComponent {
-    //This values are temporary, they will be received from the server
+export class ChatPageComponent implements OnInit {
+    @ViewChild(ScrollToBottomDirective) scroll: ScrollToBottomDirective;
+
+    people: IChatPerson[] = [
+        {
+            name: 'Giana Levin',
+            isOnline: true,
+            lastMessage: 'Lorem ipsum dolor sit amet consectetur?',
+            numberOfUnreadMessages: 2,
+        },
+        {
+            name: 'Giana Levin',
+            isOnline: false,
+            lastMessage: 'Lorem ipsum dolor sit amet consectetur?',
+            numberOfUnreadMessages: 1,
+        },
+        {
+            name: 'Giana Levin',
+            isOnline: false,
+            lastMessage: 'Lorem ipsum dolor sit amet consectetur?',
+            numberOfUnreadMessages: 170,
+        },
+        {
+            name: 'Giana Levin',
+            isOnline: true,
+            lastMessage: 'Lorem ipsum dolor sit amet consectetur?',
+            numberOfUnreadMessages: 0,
+        },
+        {
+            name: 'Giana Levin',
+            isOnline: false,
+            lastMessage: 'Lorem ipsum dolor sit amet consectetur?',
+            numberOfUnreadMessages: 170,
+        },
+    ];
+
+    totalMessage = this.people.reduce((sum, person) => sum + person.numberOfUnreadMessages, 0);
+
     currentChatId = 1;
 
     currentUserId = 1;
 
     messages$: Observable<[]> = of([]);
 
-    messages = [
-        { chatId: 1, userId: 1, text: 'Hello', createdAt: new Date() },
-        { chatId: 1, userId: 1, text: 'Anyone here?', createdAt: new Date() },
-        { chatId: 1, userId: 2, text: 'Hi', createdAt: new Date() },
-        { chatId: 1, userId: 1, text: 'How are you?', createdAt: new Date() },
-        { chatId: 1, userId: 2, text: 'I am fine, thanks', createdAt: new Date() },
-        { chatId: 1, userId: 1, text: 'Awesome :)', createdAt: new Date() },
+    messages: IMessage[] = [
+        { chatId: 1, userId: 1, text: 'Hello', createdAt: new Date(2022, 11, 17, 17, 3) },
+        { chatId: 1, userId: 1, text: 'Anyone here?', createdAt: new Date(2022, 11, 17, 17, 4) },
+        { chatId: 1, userId: 2, text: 'Hi', createdAt: new Date(2023, 2, 3, 1, 3) },
+        { chatId: 1, userId: 1, text: 'How are you?', createdAt: new Date(2023, 2, 3, 1, 3) },
+        { chatId: 1, userId: 2, text: 'I am fine, thanks', createdAt: new Date(2023, 2, 3, 1, 3) },
+        { chatId: 1, userId: 1, text: 'Awesome :)', createdAt: new Date(2023, 2, 30, 1, 3) },
     ];
+
+    groupedMessages: { date: Date; messages: IMessage[] }[] = [];
+
+    constructor(private router: Router, private webrtcHub: WebrtcHubService) {
+        this.groupedMessages = this.groupByDate(this.messages);
+    }
+
+    async ngOnInit(): Promise<void> {
+        await this.webrtcHub.start();
+    }
+
+    groupByDate(messages: IMessage[]): IMessageGroup[] {
+        return messages.reduce((acc: IMessageGroup[], message: IMessage) => {
+            const messageDate = new Date(message.createdAt.toDateString());
+            const messageGroupIndex = acc.findIndex((group) => {
+                const groupDate = new Date(group.date.toDateString());
+
+                return moment(groupDate.getTime()).isSame(moment(messageDate.getTime()));
+            });
+
+            if (messageGroupIndex === -1) {
+                acc.push({ date: messageDate, messages: [message] });
+            } else {
+                acc[messageGroupIndex].messages.push(message);
+            }
+
+            return acc;
+        }, []);
+    }
+
+    lotsOfMessages(value: number): string {
+        return value < 100 ? `${value}` : '99+';
+    }
 
     form = new FormGroup({
         message: new FormControl('', { nonNullable: true }),
+        file: new FormControl(''),
     });
-
-    constructor(private router: Router) {
-    }
 
     sendMessage() {
         const message = this.form.controls.message.value;
 
-        this.form.reset();
+        if (message) {
+            this.form.reset();
+            this.messages = [
+                ...this.messages,
+                {
+                    chatId: this.currentChatId,
+                    userId: this.currentUserId,
+                    text: message,
+                    createdAt: new Date(Date.now()),
+                },
+            ];
+            this.groupedMessages = this.groupByDate(this.messages);
 
-        this.messages.push({
-            chatId: this.currentChatId,
-            userId: this.currentUserId,
-            text: message,
-            createdAt: new Date(),
-        });
-        //this.httpService.post('messages',
-        // { chatId: this.currentChatId, userId: this.currentUserId, text: message, createdAt: new Date() });
+            setInterval(() => {
+                this.scroll.scrollToBottom();
+            }, 50);
+        }
     }
 
     startSessionCall(): void {
-        this.router.navigate([`session-call/${this.currentChatId}`]);
+        const videoCallId = crypto.randomUUID();
+
+        this.webrtcHub.callUser('stagetest@gmail.com', videoCallId);
+        this.router.navigate([`session-call/${videoCallId}`]);
     }
 }

@@ -5,8 +5,10 @@ export interface INewLesson {
     name: string,
     description: string,
     mediaPath: string,
+    languageLevel: number,
     startAt: Date,
     limitOfUsers?: number,
+    youtubeVideoId: string,
     questions: INewQuestion[],
     tags: INewTag[],
 }

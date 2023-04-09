@@ -21,7 +21,15 @@
     box-shadow: 0 1px 4px $turquoise-100
 
 .dropdown-btn-title
-    width: 100px
+    width: 170px
+    height: 20px
+    position: absolute
+    top: 14px
+    left: 42px
+    font-size: 1rem
+
+.dropdown-btn-title-when-selected
+    width: 170px
     height: 20px
     position: absolute
     top: 17px
@@ -29,7 +37,6 @@
     font-size: 1rem
 
 .dropdown-btn-subtitle
-    width: 2rem
     height: 16px
     top: 6px
     left: 42px
@@ -52,7 +59,7 @@
     max-height: 230px
     overflow-y: auto
     top: 51px
-    left: 0px
+    left: 0
     border-radius: 4px
     padding: 8px 0 12px 0
     display: flex
@@ -71,9 +78,11 @@
     top: 7px
     left: 1rem
     display: flex
-    align-items: flex-start
-    padding: 0px
+    padding: 0
     gap: 4px
+
+.dropdown-input
+    margin-top: 2px
 
 input[type="checkbox"]
         appearance: none
@@ -120,3 +129,4 @@ input[type="checkbox"]:checked
     font-weight: 700
     font-size: 14px
     color: $blue-200
+    padding-bottom: 1px

@@ -5,7 +5,7 @@
     </div>
     <div class="selected-filters-wrp">
         <div class="selected-filters-list">
-            <div style="margin: 0px;" *ngFor="let selectedTopic of this.selectedLanguageFilters">
+            <div class="selected-filter" *ngFor="let selectedTopic of this.selectedLevelWithSubtitleFilters">
                 <div *ngIf="selectedTopic" class="selected-filter-item">
                     {{selectedTopic}}
                     <mat-icon (click)="removeLangLevel(selectedTopic)">close</mat-icon>
@@ -18,7 +18,7 @@
                 </div>
             </div>
         </div>
-        <button class="close-filters-btn" (click)="resetFilters()">
+        <button *ngIf="isVisibilityButton()" class="close-filters-btn" (click)="resetFilters()">
             Close all
         </button>
     </div>

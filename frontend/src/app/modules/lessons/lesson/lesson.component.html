@@ -1,49 +1,92 @@
 <div class="lesson-card">
     <div class="lesson-card-content">
-        <div class="photo" (click)="openDialog(lesson.videoId)">
-            <img src="{{ lesson.imgPath }}" alt="thumbnail" />
-            <div class="circle">
-                <img src="assets/lesson-icons/circle.svg" alt="circle-icon" />
-            </div>
-            <div class="play">
-                <img src="assets/lesson-icons/play.svg" alt="play-icon" />
+        <div class="up">
+            <div class="lesson-preview">
+                <div class="photo" (click)="openDialog(lesson.youtubeVideoId)">
+                    <img src="{{ previewImage || 'assets/lesson-icons/no-video.png' }}" alt="thumbnail" />
+                    <div class="circle" *ngIf="previewImage">
+                        <img src="assets/lesson-icons/circle.svg" alt="circle-icon" />
+                    </div>
+                    <div class="play" *ngIf="previewImage">
+                        <img src="assets/lesson-icons/play.svg" alt="play-icon" />
+                    </div>
+                </div>
+                <div class="main-info">
+                    <div class="title-time">
+                        <div class="info">
+                            <h3 appTooltipWhenOverflow class="lesson-theme">{{ lesson.name }}</h3>
+                            <div class="lesson-tutor" *ngIf="!isTeachersPage">
+                                <app-avatar
+                                    class="avatar"
+                                    [firstName]="lesson.user.firstName"
+                                    [lastName]="lesson.user.lastName"
+                                    [imagePath]="lesson.user.imagePath"
+                                    [imageSize]="36">
+                                </app-avatar>
+                                <img alt="Image" class="origin" src="{{ getFlag() }}" />
+                                <p class="tutor-name">{{ lesson.user.firstName }} {{ lesson.user.lastName }}</p>
+                            </div>
+                            <div class="time teacher-time" *ngIf="isTeachersPage">
+                                <img
+                                    class="time-icon teacher-time-icon"
+                                    src="assets/lesson-icons/clock-icon.svg"
+                                    alt="clock-icon" />
+                                <h4 class="lesson-time">{{ lesson.startAt | date : 'HH.mm' }}</h4>
+                            </div>
+                        </div>
+                        <div class="time" *ngIf="!isTeachersPage">
+                            <img class="time-icon" src="assets/lesson-icons/clock-icon.svg" alt="clock-icon" />
+                            <h4 class="lesson-time">{{ lesson.startAt | date : 'HH.mm' }}</h4>
+                        </div>
+                        <div
+                            class="edit"
+                            [ngClass]="{ 'edit-disabled': lesson.isCanceled }"
+                            *ngIf="isTeachersPage"
+                            (click)="editLesson()">
+                            <img
+                                class="edit-icon"
+                                [ngClass]="{ 'edit-disabled-icon': lesson.isCanceled }"
+                                src="assets/teachers-page-icons/edit-icon.svg"
+                                alt="edit-icon" />
+                            <p class="edit-text">Edit</p>
+                        </div>
+                    </div>
+                    <div class="lesson-topics">
+                        <div class="topic" *ngFor="let topic of lesson.tags">{{ topic.name }}</div>
+                    </div>
+                </div>
             </div>
         </div>
-
-        <div class="info">
-            <h3 class="lesson-theme">{{ lesson.title }}</h3>
-            <div class="lesson-tutor">
-                <img class="avatar" src="{{ lesson.tutorAvatarPath }}" alt="tutor-avatar" />
-                <img class="origin" src="{{ lesson.tutorFlagPath }}" alt="tutor-origin" />
-                <p class="tutor-name">{{ lesson.tutorName }}</p>
-            </div>
-            <div class="lesson-topics">
-                <div class="topic" *ngFor="let topic of lesson.topics">{{ topic }}</div>
-            </div>
-        </div>
-
-        <img class="time-icon" src="assets/lesson-icons/clock-icon.svg" alt="clock-icon" />
-        <h4 class="lesson-time">{{ lesson.time }}</h4>
 
         <hr class="divider" />
 
-        <div class="lesson-level">
-            <img src="assets/lesson-icons/people-icon.svg" alt="people-icon" />
-            <span class="count">{{ lesson.subscribersCount }}</span>
+        <div class="bottom">
+            <div class="lesson-level">
+                <img src="assets/lesson-icons/people-icon.svg" alt="people-icon" />
+                <span class="count">{{ lesson.subscribersCount }}</span>
+                <img src="assets/lesson-icons/rocket-icon.svg" alt="rocket-icon" />
+                <span class="count">{{ lesson.languageLevel }}</span>
+            </div>
 
-            <img src="assets/lesson-icons/rocket-icon.svg" alt="rocket-icon" />
-            <span class="count">{{ lesson.level }}</span>
-        </div>
-
-        <div class="lesson-actions">
-            <button
-                class="join"
-                [disabled]="lesson.isDisabled"
-                [textContent]="lesson.isDisabled ? 'Expired' : 'Join'"
-                (click)="enrollLesson()">
-            </button>
-            <button class="expand" (click)="showQuestions(lesson.id)">See questions</button>
-            <img src="assets/lesson-icons/expand.svg" alt="expand-icon" />
+            <div class="lesson-actions">
+                <button
+                    *ngIf="!isTeachersPage; else cancel"
+                    class="join"
+                    [disabled]="isDisabled()"
+                    [textContent]="getButtonContent()"
+                    (click)="joinLesson()"></button>
+                <ng-template #cancel>
+                    <button
+                        class="cancel"
+                        [disabled]="isDisabled()"
+                        [textContent]="getButtonContent()"
+                        (click)="cancelLesson()"></button>
+                </ng-template>
+                <button class="expand" (click)="showQuestions(lesson.id)">
+                    <span>See questions</span>
+                    <img src="assets/lesson-icons/expand.svg" alt="expand-icon" />
+                </button>
+            </div>
         </div>
     </div>
     <div class="lesson-card-questions" *ngIf="isShowQuestions">

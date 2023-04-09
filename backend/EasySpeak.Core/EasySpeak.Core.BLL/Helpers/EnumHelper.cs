@@ -9,7 +9,9 @@ namespace EasySpeak.Core.BLL.Helpers
         {
             var dict = new Dictionary<string, Sex>{
                         { "Female", Sex.Female },
-                        { "Male", Sex.Male } };
+                        { "Male", Sex.Male },
+                        { "Non Binary", Sex.NonBinary },
+                        { "Do not want to specify", Sex.DoNotWantToSpecify } };
 
             return dict[sex];
         }
@@ -23,6 +25,16 @@ namespace EasySpeak.Core.BLL.Helpers
                         { "C2", LanguageLevel.C2 }};
 
             return dict[level];
+        }
+
+        public static FriendshipStatus MapFriendshipStatus(string status)
+        {
+            var dict = new Dictionary<string, FriendshipStatus>{
+                         { "Pending", FriendshipStatus.Pending },
+                         { "Confirmed", FriendshipStatus.Confirmed },
+                         { "Rejected", FriendshipStatus.Rejected },};
+
+            return dict[status];
         }
     }
 }

@@ -13,7 +13,6 @@ using FluentValidation.AspNetCore;
 using Google.Apis.Auth.OAuth2;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.Reflection;
 
@@ -29,13 +28,17 @@ namespace EasySpeak.Core.WebAPI.Extensions
                 .AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             services.AddTransient<ILessonsService, LessonsService>();
+            services.AddTransient<IZoomApiService, ZoomApiService>();
+            services.AddScoped<IFriendService, FriendService>();
             services.AddSingleton<IConnectionProvider>(_ => new ConnectionProvider(configuration.GetValue<string>("Rabbit")));
             services.AddTransient<IMessageProducer, MessageProducer>();
             services.AddTransient<IHttpRequestService, HttpRequestService>();
             services.AddScoped<IFirebaseAuthService, FirebaseAuthService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IChatService, ChatService>();
             services.AddFirebaseApp();
             services.AddScoped<INotificationService, NotificationService>();
+            services.Configure<RabbitQueuesOptions>(configuration.GetSection("RabbitQueues"));
         }
 
         public static void AddAutoMapper(this IServiceCollection services)

@@ -1,6 +1,4 @@
 <div class="container">
-    <button class="create-lesson-button" (click)="openCreate()">+ Add Speaking Club</button>
-
     <div class="date-container">
         <h2 class="date">{{ todayDate }}</h2>
     </div>
@@ -8,17 +6,17 @@
     <div class="lessons-section" *ngIf="lessons">
         <div class="lessons-column">
             <div class="lesson" *ngFor="let lesson of lessonsColumn1">
-                <app-lesson [lesson]="lesson"></app-lesson>
+                <app-lesson [lesson]="lesson" [isTeachersPage]="false"></app-lesson>
             </div>
         </div>
         <div class="lessons-column">
             <div class="lesson" *ngFor="let lesson of lessonsColumn2">
-                <app-lesson [lesson]="lesson"></app-lesson>
+                <app-lesson [lesson]="lesson" [isTeachersPage]="false"></app-lesson>
             </div>
         </div>
     </div>
 
-    <div class="no-lessons" *ngIf="!lessons.length">
+    <div class="no-lessons" *ngIf="!lessons?.length">
         <p>{{ getLessonsUnavailableMessage() }}</p>
     </div>
 </div>

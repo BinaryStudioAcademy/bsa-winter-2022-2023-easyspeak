@@ -10,6 +10,8 @@ import { HeaderComponent } from '@shared/components/header/header.component';
 import { RoundProgressBarComponent } from '@shared/components/round-progress-bar/round-progress-bar.component';
 import { MaterialModule } from '@shared/material/material.module';
 
+import { AcceptCallComponent } from './components/accept-call/accept-call.component';
+import { AvatarComponent } from './components/avatar/avatar.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { ConfirmComponent } from './components/confirm/confirm.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
@@ -21,6 +23,8 @@ import { UserNotificationComponent } from './components/user-notification/user-n
 import { YoutubePlayerComponent } from './components/youtube-player/youtube-player.component';
 import { ClickOutsideDirective } from './directives/click-outside.directive';
 import { PasswordVisibilityDirective } from './directives/password-visibility.directive';
+import { ScrollToBottomDirective } from './directives/scroll-to-bottom-directive';
+import { TooltipWhenOverflowDirective } from './directives/tooltip-when-overflow.directive';
 
 @NgModule({
     imports: [
@@ -49,6 +53,10 @@ import { PasswordVisibilityDirective } from './directives/password-visibility.di
         HeaderComponent,
         PasswordVisibilityDirective,
         ClickOutsideDirective,
+        TooltipWhenOverflowDirective,
+        AvatarComponent,
+        ScrollToBottomDirective,
+        AcceptCallComponent,
     ],
     exports: [
         CommonModule,
@@ -68,6 +76,9 @@ import { PasswordVisibilityDirective } from './directives/password-visibility.di
         UserNotificationComponent,
         HeaderComponent,
         PasswordVisibilityDirective,
+        TooltipWhenOverflowDirective,
+        AvatarComponent,
+        ScrollToBottomDirective,
     ],
 })
 export class SharedModule {}

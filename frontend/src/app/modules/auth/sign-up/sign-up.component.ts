@@ -1,181 +1,198 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { BaseComponent } from '@core/base/base.component';
 import { AuthService } from '@core/services/auth.service';
-import { HttpService } from '@core/services/http.service';
-import { ICountry } from '@shared/models/ICountry';
+import { UserService } from '@core/services/user.service';
+import { NgSelectComponent } from '@ng-select/ng-select';
+import { Ages } from '@shared/data/ages.util';
+import { LanguageLevel } from '@shared/data/languageLevel';
+import { passFormatRegex } from '@shared/data/regex.util';
+import { Sex } from '@shared/data/sex';
 import { INewUser } from '@shared/models/INewUser';
 import { ToastrService } from 'ngx-toastr';
+import { switchMap } from 'rxjs';
 
 import { CountriesTzLangProviderService } from 'src/app/services/countries-tz-lang-provider.service';
+
+import { validationErrorMessage } from './error-helper';
+import { matchpassword } from './matchpassword.validator';
 
 @Component({
     selector: 'app-sign-up',
     templateUrl: './sign-up.component.html',
     styleUrls: ['./sign-up.component.sass'],
 })
-export class SignUpComponent extends BaseComponent {
-    EnglishLevels = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
+export class SignUpComponent extends BaseComponent implements OnInit {
+    languageLevelEnumeration = LanguageLevel;
 
-    Countries: ICountry[] = [];
+    sexEnumeration = Sex;
 
-    private validationErrorMessage: { [id: string]: string } = {
-        required: 'Enter a value',
-        maxlength: "Can't be more than 25 characters",
-        email: 'Not a valid email',
-        minlength: "Can't be less 2 symbols",
-        pattern: 'Should be at least one small and one capital letter',
-    };
+    languageLevels: string[];
 
-    newUser: INewUser = {
-        firstName: '',
-        lastName: '',
-        email: '',
-        age: 0,
-        sex: '',
-        languageLevel: '',
-        country: '',
-        language: '',
-    };
+    ages: string[];
 
-    password: string = '';
+    countries: string[];
 
-    confirmPassword: string = '';
+    sexOptions: string[];
 
-    isValid = true;
+    languages: string[];
 
-    submitted = false;
+    placeholder = 'sex';
 
-    form: FormGroup = new FormGroup({
-        firstName: new FormControl(this.newUser.firstName),
-        lastName: new FormControl(this.newUser.lastName),
-        email: new FormControl(this.newUser.email),
-        password: new FormControl(this.password),
-        confirmPassword: new FormControl(this.confirmPassword),
-    });
+    @ViewChild('ageDropdown') ageDropdown: NgSelectComponent;
+
+    @ViewChild('sexDropdown') sexDropdown: NgSelectComponent;
+
+    @ViewChild('countryDropdown') countryDropdown: NgSelectComponent;
+
+    @ViewChild('languageDropdown') languageDropdown: NgSelectComponent;
+
+    @ViewChild('levelDropdown') levelDropdown: NgSelectComponent;
+
+    registerForm = new FormGroup({
+        email: new FormControl('', [Validators.required, Validators.maxLength(30)]),
+        firstName: new FormControl('', [Validators.required]),
+        lastName: new FormControl('', [Validators.required]),
+        sex: new FormControl('', [Validators.required]),
+        languageLevel: new FormControl('', [Validators.required]),
+        country: new FormControl('', [Validators.required]),
+        language: new FormControl('', [Validators.required]),
+        dateOfBirth: new FormControl('', [Validators.required]),
+        password: new FormControl('', [Validators.required, Validators.pattern(passFormatRegex),
+            Validators.minLength(6), Validators.maxLength(25)]),
+        passwordConfirmation: new FormControl('', [Validators.required]),
+    }, { validators: matchpassword });
+
+    user: INewUser;
 
     constructor(
         private formBuilder: FormBuilder,
         private countriesTzLangProvider: CountriesTzLangProviderService,
         private authService: AuthService,
         private toastr: ToastrService,
-        private httpService: HttpService,
+        private userService: UserService,
+        private router: Router,
     ) {
         super();
-        this.Countries = this.countriesTzLangProvider.getCountriesList();
     }
 
-    getErrorMessage(field: string) {
-        this.validateData();
-
-        const errorEntry = Object.entries(this.validationErrorMessage).find(([key]) => this.form.controls[field].hasError(key));
-
-        if (errorEntry) {
-            return errorEntry[1];
-        } if (this.form.controls['email'].hasError('maxlength')) {
-            return 'Can not be more than 30 characters';
-        }
-
-        return '';
+    ngOnInit(): void {
+        this.setUpData();
     }
 
-    getPasswordErrorMessage() {
-        const errorEntry = Object.entries(this.validationErrorMessage).find(([key]) => this.form.controls['password'].hasError(key));
-
-        if (errorEntry) {
-            return errorEntry[1];
-        } if (this.form.controls['password'].hasError('minlength')) {
-            return 'Can not be less than 6 symbols';
-        }
-
-        return '';
-    }
-
-    getConfirmPasswordErrorMessage() {
-        if (this.form.controls['confirmPassword'].hasError('required')) {
-            this.isValid = false;
-
-            return this.validationErrorMessage['required'];
-        }
-
-        if (this.confirmPassword !== this.password) {
-            this.isValid = false;
-
-            return 'The password does not match';
-        }
-
-        this.isValid = true;
-
-        return '';
-    }
-
-    validationThenSignUp() {
-        this.submitted = true;
-        this.validateData();
-
-        if (!this.form.invalid && this.isValid) {
+    submitForm() {
+        if (this.validateForm()) {
             this.signUp();
         }
     }
 
+    private setUpData() {
+        this.countries = this.countriesTzLangProvider.getCountriesList().map((x) => x.name);
+        this.languages = this.countriesTzLangProvider.getLanguagesList();
+        this.languageLevels = Object.values(LanguageLevel) as string[];
+        this.sexOptions = Object.values(this.sexEnumeration) as string[];
+        this.ages = Ages;
+    }
+
     private signUp() {
         this.authService
-            .signUp(this.newUser.email, this.password)
-            .then(() => {
-                this.createUser();
-                this.toastr.success('Successfully sign up', 'Sign up');
-            })
-            .catch((error) => {
-                this.toastr.error(error.message, 'Sign up');
+            .signUp(this.email.value, this.password.value)
+            .pipe(switchMap(() => this.createUser().pipe(this.untilThis)))
+            .subscribe(() => {
+                this.toastr.success('Account successfully created', 'Success!');
+                this.router.navigate(['topics']);
             });
     }
 
-    private validateData() {
-        this.form = this.formBuilder.group({
-            firstName: [
-                this.newUser.firstName,
-                [Validators.required, Validators.minLength(2), Validators.maxLength(25)],
-            ],
-            lastName: [this.newUser.lastName, [Validators.required, Validators.minLength(2), Validators.maxLength(25)]],
-            email: [this.newUser.email, [Validators.required, Validators.email, Validators.maxLength(30)]],
-            password: [
-                this.password,
-                [
-                    Validators.required,
-                    Validators.minLength(6),
-                    Validators.maxLength(25),
-                    Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\\d@$!%*?&\\.]{6,}$'),
-                ],
-            ],
-            confirmPassword: [
-                this.confirmPassword,
-                [
-                    Validators.required,
-                ],
-            ],
-        }, {
-            validators: this.confirmPasswordCheck('password', 'confirmPassword'),
-        });
-    }
-
-    confirmPasswordCheck(checkPassword: string, checkConfirmPassword: string) {
-        return (formGroup: FormGroup) => {
-            const pass = formGroup.controls[checkPassword];
-            const confirmPass = formGroup.controls[checkConfirmPassword];
-
-            if (confirmPass.errors && !confirmPass.errors['MustMatch']) {
-                return;
-            }
-
-            if (pass.value !== confirmPass.value) {
-                confirmPass.setErrors({ MustMatch: true });
-            } else {
-                confirmPass.setErrors(null);
-            }
-        };
+    private validateForm() {
+        return this.registerForm.valid;
     }
 
     private createUser() {
-        this.httpService.post<INewUser>('/users', this.newUser).pipe(this.untilThis);
+        this.user = {
+            firstName: this.firstName.value,
+            lastName: this.lastName.value,
+            email: this.email.value,
+            birthDate: this.dateOfBirth.value,
+            sex: this.sex.value,
+            language: this.language.value,
+            languageLevel: this.languageLevel.value,
+            country: this.country.value,
+        };
+
+        return this.userService.createUser(this.user);
+    }
+
+    getErrorMessage(control: FormControl): string {
+        const errorEntry = Object.entries(validationErrorMessage)
+            .find(([key]) => control.hasError(key));
+
+        if (errorEntry) {
+            return errorEntry[1];
+        }
+
+        return '';
+    }
+
+    getFormErrorMessage(formGroup: FormGroup): string {
+        const errorEntry = Object.entries(validationErrorMessage)
+            .find(([key]) => formGroup.hasError(key));
+
+        if (errorEntry) {
+            return errorEntry[1];
+        }
+
+        return '';
+    }
+
+    expandAgeDropdown = () => this.ageDropdown.open();
+
+    expandSexDropdown = () => this.sexDropdown.open();
+
+    expandCountryDropdown = () => this.countryDropdown.open();
+
+    expandLanguageDropdown = () => this.languageDropdown.open();
+
+    expandLevelDropdown = () => this.levelDropdown.open();
+
+    get email(): FormControl {
+        return this.registerForm.get('email') as FormControl;
+    }
+
+    get firstName(): FormControl {
+        return this.registerForm.get('firstName') as FormControl;
+    }
+
+    get lastName(): FormControl {
+        return this.registerForm.get('lastName') as FormControl;
+    }
+
+    get sex(): FormControl {
+        return this.registerForm.get('sex') as FormControl;
+    }
+
+    get country(): FormControl {
+        return this.registerForm.get('country') as FormControl;
+    }
+
+    get languageLevel(): FormControl {
+        return this.registerForm.get('languageLevel') as FormControl;
+    }
+
+    get language(): FormControl {
+        return this.registerForm.get('language') as FormControl;
+    }
+
+    get dateOfBirth(): FormControl {
+        return this.registerForm.get('dateOfBirth') as FormControl;
+    }
+
+    get password(): FormControl {
+        return this.registerForm.get('password') as FormControl;
+    }
+
+    get passwordConfirmation(): FormControl {
+        return this.registerForm.get('passwordConfirmation') as FormControl;
     }
 }

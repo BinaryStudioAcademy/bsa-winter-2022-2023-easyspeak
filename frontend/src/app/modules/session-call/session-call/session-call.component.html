@@ -1,10 +1,22 @@
+<div class="container">
+    <div class="header">
+        <img src="assets/logo/logo.svg" alt="">
+        <h1>EasySpeak</h1>
+    </div>
 
-<div class="content">
-    <div class="videos">
+    <div class="localVideoContainer">
         <video #localVideo id="localVideo" autoplay></video>
+        <p id="localUser">You</p>
+    </div>
+
+    <div class="remoteVideoContainer">
         <video #remoteVideo id="remoteVideo" autoplay></video>
+        <p id="remoteUser">Giana Levin</p>
+    </div>
+
+    <div class="footer">
+        <img src="assets/session-call/mic_icon.svg" alt="" (click)="toggleTrack('audio')">
+        <img src="assets/session-call/hangup_icon.svg" alt="" routerLink="/chat">
+        <img src="assets/session-call/video_icon.svg" alt="" (click)="toggleTrack('video')">
     </div>
 </div>
-<button (click)="toggleTrack('audio')">mute</button>
-<button (click)="toggleTrack('video')">cam</button>
-<button routerLink="..">end call</button>

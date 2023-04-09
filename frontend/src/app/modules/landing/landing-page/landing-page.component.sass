@@ -1,70 +1,5 @@
 @import "src/styles/colors"
 
-@media screen and (min-width: 2540px)
-  .all
-    button
-        h3
-            font-size: 24px
-
-    .header
-        .links
-            font-size: 25px
-        .buttons-header
-            h4
-                font-size: 20px
-
-    .info-block-1-home
-        .left-block
-            h1
-                font-size: 65px
-            h3
-                font-size: 24px
-            .choose-plan
-                width: 170px
-            label
-                font-size: 24px
-
-    .topics
-        .container
-            width: calc(213px * 1.4)
-            height: calc(131px * 1.4)
-        .title
-            font-size: 26px
-        .info
-            font-size: 20px
-
-    .info-block-2-ai
-        .left-container
-            .ai-title
-                font-size: 35px
-            .ai-info
-                font-size: 24px
-
-    .info-block-3-about
-        height: 600px
-
-        .info-3-container
-            width: 815px
-            height: 340px
-
-        h1
-            font-size: 35px
-        .about-text
-            font-size: 24px
-    
-    .footer
-        .links
-            p
-                font-size: 24px
-
-        .copy-label
-            font-size: 16px
-
-        .buttons
-            h4
-                font-size: 20px
-
-
 .all
     background-color: $white
 
@@ -74,53 +9,46 @@ button
     border: 1px solid $blue-200
     border-radius: 23px
     color: $blue-200
+    cursor: pointer
 
     h3
         font-weight: 500
         font-size: 16px
         line-height: 150%
-        
-    &:hover
-        background-color: $turquoise-100
 
-.sign-up    
+    &:hover
+        box-shadow: 0px 2px 4px rgba($turquoise-100, 1)
+
+.sign-up
     background-color: $blue-200
     color: $white
     margin-right: 15px
 
 .header
     display: flex
-    justify-content: space-around
+    justify-content: space-between
     align-items: center
     background-color: $white
-    height: 8vh
+    height: 80px
     z-index: 10000
-    
+    position: sticky
+    top: 0
+    box-shadow: 0 2px 4px 2px rgba(71, 83, 108, 0.06)
+
     .logo
+        margin-left: 150px
         display: flex
         justify-content: center
         align-content: center
         h2
             margin-left: 6px
         img
-        height: 30px
-
-    .links
-        display: grid
-        grid-auto-flow: column
-        column-gap: 20px
-        color: $gray-300
-        font-weight: 500
-        font-size: 16px
-        line-height: 24px
-        p 
-            cursor: pointer
-            &:hover
-                color: $turquoise-100
+            height: 30px
 
     .buttons-header
+        margin-right: 150px
         h4
-            font-size: 14px
+            font-size: 16px
             font-weight: 700
             line-height: 20.5px
         button
@@ -128,8 +56,7 @@ button
             height: 34px
             border: 1px solid $blue-200
             border-radius: 17px
-            &:hover
-                background-color: $turquoise-100
+
         .sign-in
             margin-right: 10px
             background-color: $white
@@ -137,7 +64,7 @@ button
         .sign-up
             background-color: $blue-200
             color: $white
-            
+
 .info-block-1-home
     display: flex
     justify-content: center
@@ -147,8 +74,7 @@ button
 
     .left-block
         display: flex
-        justify-content: center
-        justify-items: center
+        justify-content: flex-end
         align-items: center
         width: 50%
         h1
@@ -156,20 +82,22 @@ button
             font-size: 52px
         h3
             font-weight: 500
-            font-size: 16px 
+            font-size: 16px
             line-height: 24px
         label
             color: $gray-300
             font-size: 16px
-        .buttons-home 
+        .buttons-home
             margin-top: 23px
+            button
+                width: 154px
 
     .right-block
         position: relative
         width: 50%
         height: 100%
         background: repeating-linear-gradient(75deg, $white, $pink-100 2px, rgba($pink-100 , 0%) 4px, rgba($white, 0%) 190px), repeating-linear-gradient(165deg, $white, $pink-100 1px, rgba($pink-100 , 0%) 4px, rgba($white, 0%) 190px)
-    
+
     .radius-small
             position: absolute
             background-color: $inactive-color
@@ -184,12 +112,11 @@ button
 
     .radius-medium
             position: absolute
-            background-color: $white
+            background-color: rgba($turquoise-100, 0.4)
             width: 89px
             height: 89px
             border-radius: 75px
-            padding: 20.5px
-            background: rgba(#61d3f6, 40%)
+            padding: 20.5px 16.5px 20.5px 24.5px
             img
                 position: absolute
                 width: 82px
@@ -210,55 +137,38 @@ button
     .leaf
         top: calc(30% - 75px)
         left: calc(35% - 75px)
-        border-radius: 500px 500px 500px 0px
+        border-radius: 500px 500px 500px 0
         transform: rotate(-45deg)
         img
             transform: rotate(45deg)
 
-    .dog
+    .dna
         top: calc(70% - 75px)
         left: calc(65% - 75px)
-        border-radius: 500px 500px 500px 0px
+        border-radius: 500px 500px 500px 0
         transform: rotate(135deg)
         img
             transform: rotate(-135deg)
 
-    .car
+    .drum
         top: calc(50% - 65px)
         left: calc(50% - 65px)
-        padding-bottom: 30px
-        padding-top: 11px
 
-    .cook
+    .sandwich
         top: calc(70% - 65px)
         left: calc(35% - 65px)
 
-    .camera
+    .clapper-board
         top: calc(30% - 65px)
-        left: calc(65% - 65px)  
+        left: calc(65% - 65px)
 
-    .woman
+    .kite
         top: calc(50% - 43.5px)
-        left: calc(78% - 43.5px)  
+        left: calc(78% - 43.5px)
 
     .face
         top: calc(50% - 43.5px)
-        left: calc(22% - 43.5px) 
-
-            
-    .choose-plan
-        margin-right: 10px
-        background-color: $white
-        color: $blue-200
-        &:hover
-            background-color: $turquoise-100
-            color: white
-
-    .sign-up
-        background-color: $blue-200
-        color: $white
-        &:hover
-            background-color: $turquoise-100
+        left: calc(22% - 43.5px)
 
 .topics
     background-color: $blue-200
@@ -273,11 +183,9 @@ button
         column-gap: 25px
 
     .container
-        width: 213px
-        height: 131px
-        padding: 19px
-        padding-left: 23px
-        padding-right: 30px
+        width: 202px
+        height: 192px
+        padding: 19px 41px 20px 23px
         background-color: $white
         border: solid 1px white
         border-radius: 7px
@@ -299,59 +207,88 @@ button
         margin-bottom: 2px
         font-weight: 700
         font-size: 18px
-        line-height: 146%
 
     .info
         color: $gray-300
         font-weight: 400
         font-size: 14px
-        line-height: 146%
+        line-height: 20px
+        margin-top: 5px
 
 .info-block-2-ai
-    height: 411px
-    background-color: $white
-    display: flex
-    justify-content: center
-    align-items: center
+    height: 800px
+    display: grid
+    row-gap: 20px
+    column-gap: 20px
+    grid-template-columns: 1fr 1fr
 
     .ai-left
         display: flex
         flex-direction: column
         justify-content: center
         align-items: flex-end
-        width:50%
 
-    .left-container
-        width: 35vw
-
-    .ai-title
-        font-weight: 700
-        font-size: 24px
-        line-height: 146%
-        margin-bottom: 17px
-
-    .ai-info
-        color: $gray-300
-        font-weight: 500
-        font-size: 16px
-        line-height: 150%
+        h1
+            font-weight: 700
+            font-size: 142%
+            line-height: 146%
+            text-transform: capitalize
+        
+        p
+            margin-top: 17px
+            color: $gray-300
+            font-weight: 500
+            font-size: 16px
+            line-height: 150%
+            max-width: 565px
     
     .ai-right
         display: flex
-        width: 50%
         position: relative
+    
+    .time-table-img
+        z-index: 10
+        margin-top: 80px
+        margin-left: 30px
+        width: 523px
+        height: 327px
 
-    .ai-card-container
-        width:422px
-        height: 200px
-        border: 1px solid #F6F5FA
-        box-shadow: 0px 0px 3px rgba(89, 104, 133, 0.18)
-        border-radius: 10px
+    .cards-img
+        z-index: 10
+        margin-top: 0px
+        margin-left: 30px
+        width: 551px
+        height: 229px
 
-    .ai-card-over
+    .elipse-bottom-pink
+        z-index: 1
+        width: 170px
+        height: 170px
         position: absolute
-        top: 52px
-        left: 101px
+        border: 35px solid $pink-100
+        border-radius: 50%
+        top: 45px
+        left: 190px
+
+    .elipse-top-pink
+        z-index: 2
+        width: 250px
+        height: 250px
+        position: absolute
+        border: 40px solid $pink-100
+        border-radius: 50%
+        top: 32px
+        left: 0
+
+    .elipse-top-aqua
+        position: absolute
+        z-index: 2
+        background-color: $turquoise-100
+        border-radius: 50%
+        width: 230px
+        height: 230px
+        top: calc(327px - 98px)
+        left: calc(523px - 130px)
 
 .plan
     height: 745px
@@ -363,33 +300,33 @@ button
 .info-block-3-about
     height: 400px
     background: repeating-linear-gradient(75deg, $white, $pink-100 2px, rgba($pink-100 , 0%) 4px, rgba($white, 0%) 190px), repeating-linear-gradient(165deg, $white, $pink-100 1px, rgba($pink-100 , 0%) 4px, rgba($white, 0%) 190px)
-    background-color: $white
     display: flex
     justify-content: center
     align-items: center
 
     h1
+        text-align: center
         font-weight: 700
         font-size: 24px
-        line-height: 146%
-        margin-bottom: 9px
-
-    .about-text
-        color: $gray-300
-        font-weight: 500
-        font-size: 16px
-        line-height: 150%
-        text-align: center
-        margin-bottom: 9px
+        line-height: 46px
+    
+    .blue
+        color: $blue-200
 
     .info-3-container
-        width: 615px
-        height: 240px
+        padding: 57px 13px 52px 13px
         display: flex
         justify-content: center
         align-items: center
         flex-direction: column
         background-color: $white
+    
+    .inline
+        display: flex
+
+    button
+        margin-top: 19px
+        width: 170px
 
 .footer
     height: 256px
@@ -405,7 +342,7 @@ button
         flex-direction: column
         justify-content: center
         align-content: center
-        margin: 0 100px
+        margin-left: 150px
         h2
             margin-left: 6px
 
@@ -431,10 +368,11 @@ button
         margin-right: 10px
         &:hover
             filter: invert(66%) sepia(83%) saturate(339%) hue-rotate(158deg) brightness(101%) contrast(93%)
+            cursor: pointer
 
     .copyright
         text-align: center
-        
+
     .links
         display: grid
         grid-auto-flow: column
@@ -455,17 +393,17 @@ button
         font-weight: 400
         font-size: 12px
         line-height: 135.5%
-        
+
     .img-a
         width: 22px
         height: 22px
 
     .buttons
         width: 350px
-        margin: 0 100px
-        
+        margin-right: 150px
+
         h4
-            font-size: 14px
+            font-size: 16px
             font-weight: 700
             line-height: 20.5px
 
@@ -474,8 +412,7 @@ button
             height: 34px
             border: 1px solid $blue-200
             border-radius: 17px
-            &:hover
-                background-color: $turquoise-100
+            font-size: 16px
 
         .sign-in
             margin-right: 10px
@@ -486,3 +423,4 @@ button
         .sign-up
             background-color: $blue-200
             color: $white
+

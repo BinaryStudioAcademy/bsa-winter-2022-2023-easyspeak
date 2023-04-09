@@ -1,12 +1,14 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { langLevelsSample } from '@modules/filter-section/filter-section/filter-section.util';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { UserService } from '@core/services/user.service';
+import { applyTimeOffset, filterColumn } from '@modules/lessons/lesson/lesson.helper';
+import { ModalComponent } from '@shared/components/modal/modal.component';
 import { YoutubePlayerComponent } from '@shared/components/youtube-player/youtube-player.component';
+import { IModal } from '@shared/models/IModal';
 import { ILesson } from '@shared/models/lesson/ILesson';
 import { LanguageLevels } from '@shared/models/lesson/LanguageLevels';
 import * as moment from 'moment';
 
-import { Lesson } from 'src/app/models/lessons/lesson';
 import { LessonsService } from 'src/app/services/lessons.service';
 
 import { LessonsCreateComponent } from '../lessons-create/lessons-create.component';
@@ -25,25 +27,36 @@ export class LessonsPageComponent implements OnInit, OnChanges {
 
     @Input() selectedDateFilter: Date;
 
-    lessons: Lesson[];
+    lessons: ILesson[];
 
-    lessonsColumn1: Lesson[];
+    lessonsColumn1: ILesson[];
 
-    lessonsColumn2: Lesson[];
+    lessonsColumn2: ILesson[];
 
-    constructor(private dialogRef: MatDialog, private lessonService: LessonsService) {}
+    userIsAdmin = false;
+
+    constructor(
+        private dialogRef: MatDialog,
+        private lessonService: LessonsService,
+        private userService: UserService,
+    ) {}
 
     ngOnInit(): void {
         this.selectedDateFilter = new Date();
 
         this.getLessons();
 
+        this.lessonService.lessonAdded$.subscribe(() => {
+            this.getLessons();
+        });
+
         this.todayDate = moment().format('DD MMMM YYYY, dddd');
+
+        this.userIsAdmin = this.userService.isAdmin();
     }
 
     ngOnChanges(): void {
         this.getLessons();
-
         this.todayDate = moment(this.selectedDateFilter).format('DD MMMM YYYY, dddd');
     }
 
@@ -60,12 +73,15 @@ export class LessonsPageComponent implements OnInit, OnChanges {
     }
 
     openCreate() {
-        this.dialogRef.open(LessonsCreateComponent, {
-            maxWidth: '100vw',
-            maxHeight: '100vh',
-            height: '80%',
-            width: '80%',
-        });
+        const config: MatDialogConfig<IModal> = {
+            data: {
+                header: 'Add Group Class',
+                hasButtons: false,
+                component: LessonsCreateComponent,
+            },
+        };
+
+        this.dialogRef.open(ModalComponent, config);
     }
 
     getLessons() {
@@ -74,31 +90,12 @@ export class LessonsPageComponent implements OnInit, OnChanges {
                 languageLevels: this.selectedLanguageFilters.map((level: string) =>
                     Object.values(LanguageLevels).indexOf(level)),
                 tags: this.selectedInterestsFilters.map((topic) => ({ name: topic })),
-                date: new Date(this.selectedDateFilter.toISOString().slice(0, 10)),
+                date: new Date(this.selectedDateFilter?.toISOString().slice(0, 10)),
             })
-            .subscribe((response: ILesson[]) => {
-                this.lessons = [];
-
-                //TODO: When everything regarding user in the database is finished, update the lesson retrieval code
-
-                response.forEach((lesson) => {
-                    this.lessons.push({
-                        id: lesson.id,
-                        imgPath: lesson.mediaPath,
-                        videoId: 'xqAriI87lFU',
-                        title: lesson.name,
-                        time: lesson.startAt.split('T')[1].substring(0, 5).replace(':', '.'),
-                        tutorAvatarPath: '../../../../assets/lesson-mocks/Photo )Patient).png',
-                        tutorFlagPath: '../../../../assets/lesson-icons/canada-test-flag.svg',
-                        tutorName: 'Roger Vaccaro',
-                        topics: lesson.tags.map((tag) => tag.name),
-                        subscribersCount: lesson.subscribersCount,
-                        level: langLevelsSample[lesson.languageLevel].title,
-                        isDisabled: new Date() > new Date(lesson.startAt),
-                    });
-                });
-                this.lessonsColumn1 = this.lessons.filter((el, index) => index % 2 === 0);
-                this.lessonsColumn2 = this.lessons.filter((el, index) => index % 2 === 1);
+            .subscribe((response) => {
+                this.lessons = applyTimeOffset(response);
+                this.lessonsColumn1 = filterColumn(this.lessons, 1);
+                this.lessonsColumn2 = filterColumn(this.lessons, 2);
             });
     }
 

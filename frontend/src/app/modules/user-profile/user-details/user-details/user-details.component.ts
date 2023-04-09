@@ -1,16 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { BaseComponent } from '@core/base/base.component';
 import { UserService } from '@core/services/user.service';
-import { Ages } from '@shared/data/ages.util';
-import { EnglishLevel } from '@shared/data/englishLevel';
+import { LanguageLevel } from '@shared/data/languageLevel';
 import { Sex } from '@shared/data/sex';
+import { IIcon } from '@shared/models/IIcon';
 import { IUserInfo } from '@shared/models/IUserInfo';
+import { IBaseTag } from '@shared/models/user/IBaseTag';
+import { ITag } from '@shared/models/user/ITag';
+import { getTags } from '@shared/utils/tagsForInterests';
 import { ToastrService } from 'ngx-toastr';
 
 import { CountriesTzLangProviderService } from 'src/app/services/countries-tz-lang-provider.service';
 
-import { detailsGroup, userId } from '../user-details.component.util';
+import { detailsGroup } from '../user-details.component.util';
 
 @Component({
     selector: 'app-user-details',
@@ -18,21 +21,29 @@ import { detailsGroup, userId } from '../user-details.component.util';
     styleUrls: ['./user-details.component.sass'],
 })
 export class UserDetailsComponent extends BaseComponent implements OnInit {
-    countries;
+    @Input() tagsList: IIcon[] = getTags();
 
-    ages = Ages;
+    allTags: ITag[];
+
+    countries;
 
     languages;
 
-    emglishLevelEnumeration = EnglishLevel;
-
-    englishLevelOptions: string[] = [];
+    languageLevelOptions: string[] = [];
 
     sexEnumeration = Sex;
 
     sexOptions: string[] = [];
 
     detailsForm;
+
+    selectedTags: ITag[] = [];
+
+    userFirstName: string;
+
+    userLastName: string;
+
+    imagePath: string;
 
     constructor(
         private fb: FormBuilder,
@@ -45,7 +56,8 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
         this.languages = this.countriesService.getLanguagesList();
         this.detailsForm = detailsGroup(this.fb);
         this.sexOptions = Object.values(this.sexEnumeration) as string[];
-        this.englishLevelOptions = Object.values(EnglishLevel) as string[];
+        this.languageLevelOptions = Object.values(LanguageLevel) as string[];
+        this.tagsList = getTags();
     }
 
     ngOnInit(): void {
@@ -60,14 +72,27 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
                     country: resp.country,
                     sex: resp.sex,
                     language: resp.language,
-                    englishLevel: resp.languageLevel,
-                });
+                    languageLevel: resp.languageLevel,
+                    birthDate: resp.birthDate });
+
+                this.userService.getUserTags().pipe(this.untilThis)
+                    .subscribe(tags => {
+                        this.allTags = tags;
+                        this.selectedTags = tags.filter(t => t.isSelected);
+                    });
+                this.userFirstName = resp.firstName;
+                this.userLastName = resp.lastName;
+                this.imagePath = resp.imagePath;
             });
     }
 
     onSubmit() {
+        const userDetails = <IUserInfo> this.detailsForm.value;
+
+        userDetails.tags = this.selectedTags;
+
         this.userService
-            .updateUser(userId, this.detailsForm.value as IUserInfo)
+            .updateUser(userDetails)
             .pipe(this.untilThis)
             .subscribe(() => this.toastr.success('User info updated successfully.', 'Success!'));
     }
@@ -80,8 +105,8 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
         return this.detailsForm.get('lastName') as FormControl;
     }
 
-    get dateOfBirth(): FormControl {
-        return this.detailsForm.get('dateOfBirth') as FormControl;
+    get birthDate(): FormControl {
+        return this.detailsForm.get('birthDate') as FormControl;
     }
 
     get sex(): FormControl {
@@ -96,23 +121,29 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
         return this.detailsForm.get('language') as FormControl;
     }
 
-    get englishLevel(): FormControl {
-        return this.detailsForm.get('englishLevel') as FormControl;
+    get languageLevel(): FormControl {
+        return this.detailsForm.get('languageLevel') as FormControl;
     }
 
     get email(): FormControl {
         return this.detailsForm.get('email') as FormControl;
     }
 
-    get instagram(): FormControl {
-        return this.detailsForm.get('instagram') as FormControl;
+    selectInterest(tag: ITag) {
+        this.selectedTags = this.includesTags(tag.id)
+            ? this.selectedTags.filter(x => x.id !== tag.id)
+            : [...this.selectedTags, tag];
     }
 
-    get facebook(): FormControl {
-        return this.detailsForm.get('facebook') as FormControl;
+    findTag<T extends IBaseTag>(collection: T[], id: number) {
+        return collection.find(t => t.id === id);
     }
 
-    get other(): FormControl {
-        return this.detailsForm.get('other') as FormControl;
+    getIconById(id: number) {
+        return (this.findTag<IIcon>(this.tagsList, id))?.link;
+    }
+
+    includesTags(id: number) {
+        return this.findTag<ITag>(this.selectedTags, id);
     }
 }

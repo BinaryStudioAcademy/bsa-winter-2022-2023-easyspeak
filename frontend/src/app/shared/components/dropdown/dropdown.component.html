@@ -1,12 +1,17 @@
 <div class="container" (appClickOutside)="clickedOutside()">
     <div class="dropdown-btn" (click)="showDropdownMenu()">
         <div class="filters-count-group">
-            {{selectedItems.length}}
+            <div class="filters-count-val">
+                {{selectedItems.length || 0}}
+            </div>
         </div>
-        <div class="dropdown-btn-title">
-            {{selectedItems[0] || 'None'}}
+        <div [ngClass]="{
+        'dropdown-btn-title-when-selected':selectedItems.length === 1,
+        'dropdown-btn-title': selectedItems.length !== 1
+        }">
+            {{getFullTitle()}}
         </div>
-        <div *ngIf="btnLabel" class="dropdown-btn-subtitle">
+        <div *ngIf="selectedItems.length === 1" class="dropdown-btn-subtitle">
             {{btnLabel}}
         </div>
         <div class="dropdown-btn-icon">
@@ -17,7 +22,10 @@
         <div *ngFor="let item of data">
             <div class="dropdown-item">
                 <div class="dropdown-item-content">
-                    <input type="checkbox" [checked]="selectedItems.includes(item.title)" (click)="selectItem(item.title)">
+                    <div class="dropdown-input">
+                        <input [type]="type" [checked]="selectedItems.includes(item.title)"
+                               (click)="selectItem(item.title)">
+                    </div>
                     <div class="dropdown-item-info">
                         <div *ngIf="item.subtitle" class="item-info-title">
                             {{item.title + ' : ' + item.subtitle}}

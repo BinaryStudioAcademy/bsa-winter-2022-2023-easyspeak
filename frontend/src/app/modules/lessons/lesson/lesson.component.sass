@@ -16,19 +16,31 @@
     flex-direction: column
     overflow: hidden
 
+.lesson-card-content
+    height: 160px
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+
 .photo
     position: relative
-    display: inline-block
+    display: flex
+    justify-content: center
+    align-items: center
 
-    width: 125px
+    min-width: 125px
     height: 95px
 
     margin-right: 15px
+    cursor: pointer
 
 .photo img
-    width: 125px
-    height: 95px
+    max-width: 125px
+    max-height: 95px
     border-radius: 5px
+    height: 100%
+    width: 100%
+    object-fit: cover
 
 .circle
     position: absolute
@@ -52,18 +64,22 @@
 .info
     display: inline-block
     vertical-align: top
+    max-width: 85%
+
+.title-time
+    display: flex
+    align-items: flex-start
+    justify-content: space-between
 
 .lesson-theme
+    margin-right: 10px
     vertical-align: top
 
-    max-width: 60%
     overflow: hidden
     text-overflow: ellipsis
     display: -webkit-box
     -webkit-line-clamp: 2
-            line-clamp: 2
     -webkit-box-orient: vertical
-
     font-style: normal
     font-weight: 700
     font-size: 16px
@@ -73,26 +89,35 @@
 
 .lesson-tutor
     position: relative
+    display: flex
+    flex-direction: row
+    align-items: center
 
     margin: 5px 0
 
 .avatar
     display: inline-block
 
-    width: 20px
-    height: 20px
+    width: 24px
+    height: 24px
+
+    font-size: 24px
 
     border-radius: 50%
+    overflow: hidden
 
 .origin
     position: absolute
 
     background-color: $white
 
-    border-radius: 90%
+    border-radius: 50%
 
-    left: 10px
-    top: 10px
+    height: 12px
+    width: 12px
+
+    top: 14px
+    left: 14px
 
 .tutor-name
     display: inline-block
@@ -109,39 +134,37 @@
 
 .topic
     display: inline-block
-
-    padding: 0px 5px
+    padding: 5px 10px
     margin-right: 5px
-    background: $pink-100
-
-    border-radius: 10px
+    background: $message-color
     font-style: normal
     font-weight: 500
     font-size: 12px
-    line-height: 146%
-
+    border-radius: 40px
     color: $blue-200
 
 .topic:last-child
     margin: 0
 
+.lesson-topics
+    display: flex
+    margin-top: 10px
+    height: 25px
+    width: 100%
+    overflow-y: hidden
+    align-items: center
+
 .time-icon
-    position: absolute
-    right: 66px
     background-color: $turquoise-100
     border: 5px solid $turquoise-100
     border-radius: 50%
+    margin: 0 5px
 
 .lesson-time
-    display: inline-block
-    position: absolute
-    right: 30px
-    top: 25px
-
     font-style: normal
-    font-weight: 700
-    font-size: 14px
-    line-height: 146%
+    font-weight: 500
+    font-size: 16px
+    line-height: 24px
 
     color: $black-100
 
@@ -166,18 +189,44 @@
 
     color: $gray-200
 
-.lesson-actions
-    position: absolute
-    right: 35px
-    display: inline-block
+.up
+    display: flex
+    justify-content: space-between
+    align-items: flex-start
 
-.join
-    display: inline-block
+.bottom
+    display: flex
+    justify-content: space-between
 
-    width: 60px
+.time
+    display: flex
+    align-items: center
+
+.teacher-time
+    height: 24px
+    margin: 5px 0
+
+.teacher-time-icon
+    margin-left: 0
+
+.lesson-preview
+    display: flex
+    width: 100%
+
+.main-info
+    width: calc( 100% - 140px )
+    display: flex
+    flex-direction: column
+
+.join, .cancel
+    display: flex
+    align-items: center
+    justify-content: center
+    width: auto
+    min-width: 60px
     height: 25px
-
-    margin: 8px 10px 25px 395px
+    margin: 8px 10px
+    padding: 4px 12px
 
     background: $blue-200
     border: none
@@ -189,14 +238,12 @@
     line-height: 146%
 
     color: $white
+    cursor: pointer
 
-.join:disabled, .join[disabled]
-    width: 60px
+.join:disabled, .join[disabled], .cancel:disabled, .cancel[disabled]
     height: 25px
-
-    margin: 8px 10px 25px 395px
-
     background: $gray-200
+    cursor: default
 
 .expand
     display: inline-block
@@ -214,6 +261,7 @@
 
     text-decoration: none
     color: $blue-200
+    cursor: pointer
 
 .lesson-card-questions
     overflow-y: auto
@@ -250,3 +298,30 @@
     line-height: 157.5%
 
     color: $black-100
+
+.lesson-actions
+    display: flex
+    align-items: center
+    img
+        padding: 0 7.25px
+
+.edit
+    display: flex
+    flex-direction: row
+    align-items: center
+
+    color: $blue-200
+    font-weight: 400
+    font-size: 14px
+
+    cursor: pointer
+
+.edit-icon
+    margin-right: 5px
+
+.edit-disabled
+    color: $gray-200
+    cursor: default
+
+.edit-disabled-icon    
+    filter: invert(98%) sepia(5%) saturate(1411%) hue-rotate(185deg) brightness(85%) contrast(91%)

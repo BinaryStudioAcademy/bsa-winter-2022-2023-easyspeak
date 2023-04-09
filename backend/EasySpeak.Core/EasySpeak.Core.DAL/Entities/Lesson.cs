@@ -10,6 +10,10 @@ namespace EasySpeak.Core.DAL.Entities
         public User? User { get; set; }
         public DateTime StartAt { get; set; }
         public int? LimitOfUsers { get; set; }
+        public string YoutubeVideoId { get; set; } = string.Empty;
+        public string ZoomMeetingLink { get; set; } = string.Empty;
+        public string ZoomMeetingLinkHost { get; set; } = string.Empty;
+        public bool IsCanceled { get; set; }
         public LanguageLevel LanguageLevel { get; set; }
 
         public ICollection<User> Subscribers { get; private set; }

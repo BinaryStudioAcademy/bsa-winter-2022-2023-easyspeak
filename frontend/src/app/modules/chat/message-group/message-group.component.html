@@ -1,0 +1,25 @@
+<div>
+    <div class="date">
+        <div class="date-line"></div>
+        <div class="day">
+            {{
+            message.date.getFullYear() === today.getFullYear() ?
+                (getDateText(message.date)) :
+                (message.date | date:'dd MMM, YYYY')
+            }}
+        </div>
+    </div>
+    <div *ngFor="let mess of message.messages" [ngClass]="{'message-photo': true, 'own-message': mess.userId === currentUserId, 'not-own-message': mess.userId !== currentUserId}">
+        <img src="assets/header/avatar.svg" *ngIf="mess.userId !== currentUserId" alt="img">
+        <div class="message" [ngClass]="{ sender: mess.userId === currentUserId }">
+            <p class="message-content">{{ mess.text }}</p>
+            <div class="message-time">
+                    <span>
+                        {{mess.createdAt | date: 'HH:mm'}}
+                    </span>
+                <img src="assets/chat/ReadMessage.svg" alt="img" *ngIf="mess.userId === currentUserId">
+            </div>
+        </div>
+        <img src="assets/header/avatar.svg" *ngIf="mess.userId === currentUserId" alt="img">
+    </div>
+</div>

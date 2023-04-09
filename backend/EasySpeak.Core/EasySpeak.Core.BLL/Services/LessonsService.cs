@@ -10,10 +10,14 @@ namespace EasySpeak.Core.BLL.Services;
 
 public class LessonsService : BaseService, ILessonsService
 {
+    private readonly IZoomApiService _zoomApiService;
+    private readonly IFirebaseAuthService _authService;
     public const int DaysInWeek = 7;
 
-    public LessonsService(EasySpeakCoreContext context, IMapper mapper) : base(context, mapper)
+    public LessonsService(EasySpeakCoreContext context, IMapper mapper, IFirebaseAuthService authService, IZoomApiService zoomApiService) : base(context, mapper)
     {
+        _authService = authService;
+        _zoomApiService = zoomApiService;
     }
 
     public async Task<ICollection<QuestionForLessonDto>> GetQuestionsByLessonIdAsync(int id)
@@ -29,39 +33,51 @@ public class LessonsService : BaseService, ILessonsService
 
     public async Task<ICollection<LessonDto>> GetAllLessonsAsync(FiltersRequest filtersRequest)
     {
-        var tagsName = filtersRequest.Tags?.Select(x => x.Name);
+        var tagsName = filtersRequest.Tags?.Select(x => x.Name).ToList();
 
         var lessonsFromContext = _context.Lessons
             .Include(l => l.Tags)
             .Include(l => l.User)
-            .Where(x => x.StartAt.Date == filtersRequest.Date);
+            .Where(x => x.StartAt.Date == filtersRequest.Date && !x.IsCanceled);
 
-        if (tagsName?.Count() != 0)
+        if (tagsName is not null && tagsName.Any())
         {
             lessonsFromContext = lessonsFromContext.Where(x => x.Tags.Any(y => tagsName.Contains(y.Name)));
         }
 
-        if (filtersRequest.LanguageLevels?.Count() != 0)
+        if (filtersRequest.LanguageLevels is not null && filtersRequest.LanguageLevels.Any())
         {
-            lessonsFromContext = lessonsFromContext.Where(m => filtersRequest.LanguageLevels.Contains(m.LanguageLevel));
+            lessonsFromContext = lessonsFromContext.Where(m => filtersRequest.LanguageLevels != null && filtersRequest.LanguageLevels.Contains(m.LanguageLevel));
         }
 
-        var subscribersCountDict = await lessonsFromContext.Select(t => new { Id = t.Id, SbCount = t.Subscribers.Count }).ToDictionaryAsync(t => t.Id);
-        var lessons = await lessonsFromContext.ToListAsync();
+        var subscribersInfoDict = await lessonsFromContext.Select(t =>
+            new
+            {
+                t.Id,
+                SbCount = t.Subscribers.Count,
+                isSubscribed = t.Subscribers.Any(u => u.Id == _authService.UserId)
+            }).ToDictionaryAsync(t => t.Id);
+        var lessons = await lessonsFromContext.OrderBy(l => l.StartAt).ToListAsync();
 
         var lessonDtos = _mapper.Map<List<Lesson>, List<LessonDto>>(lessons);
 
-        lessonDtos.ForEach(t => t.SubscribersCount = subscribersCountDict[t.Id].SbCount);
+        lessonDtos.ForEach(t =>
+        {
+            t.SubscribersCount = subscribersInfoDict[t.Id].SbCount;
+            t.isSubscribed = subscribersInfoDict[t.Id].isSubscribed;
+        });
 
         return lessonDtos;
     }
 
     public async Task<ICollection<DayCardDto>?> GetDayCardsOfWeekAsync(RequestDayCardDto requestDto)
     {
-        var mondayDate = requestDto.Date.AddDays(-(int)requestDto.Date.DayOfWeek).Date;
+        var delta = GetDifferenceBetweenMondayAndTodayDate(requestDto.Date);
+        var mondayDate = requestDto.Date.AddDays(-delta).Date;
         var dayCards = await _context.Lessons
             .Where(c => c.StartAt.Date >= mondayDate
-                        && c.StartAt.Date <= mondayDate.AddDays(DaysInWeek - 1))
+                        && c.StartAt.Date <= mondayDate.AddDays(DaysInWeek - 1)
+                        && !c.IsCanceled)
             .GroupBy(c => c.StartAt.Date)
             .Select(t =>
                 new DayCardDto
@@ -75,13 +91,79 @@ public class LessonsService : BaseService, ILessonsService
         return dayCards;
     }
 
+    private static int GetDifferenceBetweenMondayAndTodayDate(DateTime date)
+    {
+        if(date.DayOfWeek == DayOfWeek.Sunday)
+        {
+            return 6;
+        }
+        return date.DayOfWeek - DayOfWeek.Monday;
+    }
+
     public async Task<LessonDto> CreateLessonAsync(NewLessonDto lessonDto)
     {
         var lesson = _mapper.Map<Lesson>(lessonDto);
+
+        lesson.CreatedBy = _authService.UserId;
+
+        var zoomMeetingLinks = await _zoomApiService.GetMeetingLinks(lesson.Name);
+
+        lesson.ZoomMeetingLink = zoomMeetingLinks.JoinUrl;
+
+        lesson.ZoomMeetingLinkHost = zoomMeetingLinks.HostUrl;
 
         var createdLesson = _context.Add(lesson).Entity;
         await _context.SaveChangesAsync();
 
         return _mapper.Map<LessonDto>(createdLesson);
+    }
+
+    public async Task<TeacherStatisticsDto> GetTeacherLessonsStatisticsAsync()
+    {
+        var statistics = await _context.Lessons
+        .Where(l => l.CreatedBy == _authService.UserId)
+        .GroupBy(l => l.CreatedBy)
+        .Select(l => new TeacherStatisticsDto
+        {
+            TotalClasses = l.Count(),
+            CanceledClasses = l.Count(l => l.IsCanceled),
+            FutureClasses = l.Count(l => l.StartAt > DateTime.UtcNow && !l.IsCanceled),
+
+            TotalStudents = l.Where(l => l.StartAt < DateTime.UtcNow && !l.IsCanceled)
+                             .SelectMany(l => l.Subscribers)
+                             .Count(),
+
+            NextClass = l.Where(l => l.StartAt > DateTime.UtcNow && !l.IsCanceled)
+                         .OrderBy(l => l.StartAt)
+                         .Select(l => (DateTime?)l.StartAt)
+                         .FirstOrDefault(),
+        })
+        .FirstOrDefaultAsync();
+
+        return statistics ?? new TeacherStatisticsDto();
+    }
+
+    public async Task<ICollection<DaysWithLessonsDto>> GetLessonsInPeriodAsync(DateTime start, DateTime end)
+    {
+        var selectedLessons = await _context.Lessons.Where(l => l.CreatedBy == _authService.UserId && l.StartAt > start && l.StartAt < end)
+                                                    .Include(l => l.Tags)
+                                                    .OrderBy(l => l.StartAt)
+                                                    .ToListAsync();
+                                                    
+        var groupedLessons = selectedLessons.GroupBy(l => l.StartAt.Date)
+                                            .Select(d => new DaysWithLessonsDto { LessonsDate = d.Key, Lessons = _mapper.Map<List<Lesson>, List<LessonDto>>(d.ToList()) })
+                                            .ToList();
+
+        return groupedLessons;
+    }
+
+    public async Task<LessonDto> CancelLessonAsync(int id)
+    {
+        var lesson = await _context.Lessons.Where(l => l.Id == id && l.CreatedBy == _authService.UserId).FirstOrDefaultAsync();
+
+        lesson!.IsCanceled = true;
+        await _context.SaveChangesAsync();
+
+        return _mapper.Map<LessonDto>(lesson);
     }
 }

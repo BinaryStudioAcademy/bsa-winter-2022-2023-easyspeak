@@ -1,6 +1,5 @@
 using EasySpeak.Core.WebAPI.Extensions;
 using EasySpeak.Core.WebAPI.Extentions;
-using EasySpeak.Core.WebAPI.Hubs;
 using EasySpeak.Core.WebAPI.Middlewares;
 using System.Reflection;
 
@@ -28,6 +27,7 @@ builder.Services.AddValidation();
 builder.Services.AddFirebaseAuthorization(builder.Configuration);
 builder.Services.AddSignalR();  
 builder.Services.AddFileService(builder.Configuration);
+builder.Services.AddHttpClient();
 
 builder.Services.AddCors();
 builder.Services.AddHealthChecks();
@@ -60,11 +60,10 @@ app.UseAuthorization();
 
 app.UseMiddleware<FirebaseAuthMiddleware>();
 
-app.UseEndpoints(endpoinds =>
+app.UseEndpoints(endpoints =>
 {
-    endpoinds.MapHealthChecks("/health");
-    endpoinds.MapHub<SignalRtcHub>("/signaling");
-    endpoinds.MapControllers();
+    endpoints.MapHealthChecks("/health");
+    endpoints.MapControllers();
 });
 
 

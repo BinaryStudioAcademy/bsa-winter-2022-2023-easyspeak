@@ -5,7 +5,6 @@
 
 .card
     padding: 23px 26px
-    max-width: 422px
     background: $white
     border-radius: 10px
     display: flex
@@ -33,23 +32,11 @@
     justify-content: flex-end
 
 .picture
-    display: flex
-    justify-content: center
-    align-items: center
     overflow: hidden
     width: 56px
     height: 56px
     border-radius: 5px
-
-.picture-placeholder
-    color: $gray-300
-    width: 100%
-    height: 100%
-    background-color: $gray-100
-    text-align: center
-    display: flex
-    justify-content: center
-    align-items: center
+    font-size: 56px
 
 .info
     display: flex
@@ -73,6 +60,10 @@
     align-items: center
     gap: 4px
     color: $gray-300
+
+.flag
+    height: 25px
+    border-radius: 15px
 
 .social-icon
     height: 24px
@@ -100,8 +91,13 @@
     display: flex
     align-items: center
     gap: 5px
-    width: 100%
+    max-width: 400px
+    height: 2.5em
+    flex-wrap: wrap
+    overflow-y: auto
     padding-bottom: 13px
+    overflow-x: hidden
+
 
 .tag
     display: flex
@@ -116,6 +112,7 @@
     font-size: 14px
     line-height: 146%
     color: $blue-200
+    width: max-content
 
 .bottom
     display: flex
@@ -148,7 +145,6 @@
     justify-content: center
     align-items: center
     gap: 4px
-    font-family: 'Barlow'
     font-style: normal
     font-weight: 700
     font-size: 14px
@@ -158,3 +154,12 @@
     border: 1px solid $blue-200
     border-radius: 24px
     padding: 8px 16px
+
+.accept-button
+    color: white
+    background: $blue-200
+
+.button:hover
+    cursor: pointer
+    box-shadow: 0px 1px 3px -2px $selected-color
+

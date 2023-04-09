@@ -1,17 +1,16 @@
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 export const detailsGroup = (fb: FormBuilder) => fb.group({
-    firstName: '',
-    lastName: '',
-    dateOfBirth: '',
+    firstName: ['', Validators.required],
+    lastName: ['', Validators.required],
+    birthDate: '',
     sex: '',
     country: '',
     language: '',
-    englishLevel: '',
+    languageLevel: '',
     email: '',
-    instagram: '',
-    facebook: '',
-    other: '',
+    imagePath: '',
+    canOnlyFriendMessage: false,
 });
 
 export const userId = 0;

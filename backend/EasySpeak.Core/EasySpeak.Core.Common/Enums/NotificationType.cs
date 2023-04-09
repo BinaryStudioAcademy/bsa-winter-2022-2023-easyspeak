@@ -1,8 +1,12 @@
-﻿namespace EasySpeak.Core.Common.Enums
+﻿using System.ComponentModel;
+
+namespace EasySpeak.Core.Common.Enums
 {
     public enum NotificationType
     {
-        Information,
-        Error
+        [Description("Accepted friendship request")] friendshipAcception = 1,
+        [Description("Group class join")] classJoin,
+        [Description("New friendship request")] friendshipRequest,
+        [Description("Lesson reminding")] reminding
     }
 }

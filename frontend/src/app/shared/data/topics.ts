@@ -3,17 +3,17 @@ import { ITopic } from '@shared/models/ITopic';
 export const topics: ITopic[] = [
     {
         name: 'Architecture',
-        imgName: 'Classical Building.svg',
+        imgName: 'ClassicalBuilding.svg',
         selected: false,
     },
     {
         name: 'Art',
-        imgName: 'Artist Palette.svg',
+        imgName: 'ArtistPalette.svg',
         selected: false,
     },
     {
         name: 'Cars',
-        imgName: 'Racing Car.svg',
+        imgName: 'RacingCar.svg',
         selected: false,
     },
     {
@@ -28,7 +28,7 @@ export const topics: ITopic[] = [
     },
     {
         name: 'Dancing',
-        imgName: 'Woman Dancing.svg',
+        imgName: 'WomanDancing.svg',
         selected: false,
     },
     {
@@ -38,7 +38,7 @@ export const topics: ITopic[] = [
     },
     {
         name: 'Ecology',
-        imgName: 'Four Leaf Clover.svg',
+        imgName: 'FourLeafClover.svg',
         selected: false,
     },
     {
@@ -48,7 +48,7 @@ export const topics: ITopic[] = [
     },
     {
         name: 'History',
-        imgName: 'Crossed Swords.svg',
+        imgName: 'CrossedSwords.svg',
         selected: false,
     },
     {
@@ -63,12 +63,12 @@ export const topics: ITopic[] = [
     },
     {
         name: 'Pets',
-        imgName: 'Dog Face.svg',
+        imgName: 'DogFace.svg',
         selected: false,
     },
     {
         name: 'Philosophy',
-        imgName: 'Face With Monocle.svg',
+        imgName: 'FaceWithMonocle.svg',
         selected: false,
     },
     {

@@ -27,8 +27,12 @@ export class PasswordVisibilityDirective {
 
         span.innerHTML = '<img src="assets/password-visibility/closed-eye.svg" alt="closed-eye"/>';
         span.style.position = 'absolute';
-        span.style.right = '0';
-        span.style.transform = 'translate(60%, -140%)';
+        span.style.right = '18px';
+        span.style.top = '52%';
+        span.style.height = '17px';
+        span.style.transform = 'translateY(-50%)';
+        span.style.zIndex = '10';
+        span.style.cursor = 'pointer';
         span.addEventListener('click', () => {
             this.toggle(span);
         });
