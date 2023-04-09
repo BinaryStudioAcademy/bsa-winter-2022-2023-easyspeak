@@ -40,6 +40,7 @@ namespace EasySpeak.Core.WebAPI.Extensions
             services.AddFirebaseApp();
             var test = new RabbitQueuesOptions();
             configuration.GetSection("RabbitQueues").Bind(test);
+            services.Configure<RecommendationServiceOptions>(configuration.GetSection("RecommendationService"));
             services.Configure<RabbitQueuesOptions>(configuration.GetSection("RabbitQueues"))
                 .AddScoped<INotificationService, NotificationService>()
                 .AddScoped<IUserService, UserService>();

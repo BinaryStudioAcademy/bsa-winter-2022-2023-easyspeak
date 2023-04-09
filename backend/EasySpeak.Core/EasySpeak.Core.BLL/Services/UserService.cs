@@ -1,6 +1,7 @@
 ﻿using System.Net.Http.Json;
 using AutoMapper;
 using EasySpeak.Core.BLL.Interfaces;
+using EasySpeak.Core.BLL.Options;
 using EasySpeak.Core.Common.DTO.Filter;
 using EasySpeak.Core.Common.DTO.Lesson;
 using EasySpeak.Core.Common.DTO.Rabbit;
@@ -25,11 +26,12 @@ public class UserService : BaseService, IUserService
     private readonly IMessageProducer _messageProducer;
     private readonly RabbitQueuesOptions _rabbitQueues;
     private readonly IHttpClientFactory _clientFactory;
-    
+    private readonly RecommendationServiceOptions _recommendationServiceOptions;
     
     public UserService(IEasySpeakFileService fileService, EasySpeakCoreContext context, 
             IMapper mapper, IFirebaseAuthService authService, IMessageProducer messageProducer,
-            IOptions<RabbitQueuesOptions> rabbitQueues, IHttpClientFactory clientFactory)
+            IOptions<RabbitQueuesOptions> rabbitQueues, IHttpClientFactory clientFactory,
+            IOptions<RecommendationServiceOptions> recommendationServiceOptions)
         : base(context, mapper)
     {
         _authService = authService;
@@ -37,6 +39,7 @@ public class UserService : BaseService, IUserService
         _messageProducer = messageProducer;
         _rabbitQueues = rabbitQueues.Value;
         _clientFactory = clientFactory;
+        _recommendationServiceOptions = recommendationServiceOptions.Value;
     }
 
     public async Task<UserDto> CreateUser(UserRegisterDto userDto)
@@ -321,7 +324,8 @@ public class UserService : BaseService, IUserService
 
         var client = _clientFactory.CreateClient("RecommendationClient");
 
-        var response = await client.PostAsJsonAsync("http://localhost:5110/recommendation", recommendationRequestBody);
+        var response = await client.PostAsJsonAsync(_recommendationServiceOptions.Host + "/recommendation",
+            recommendationRequestBody);
 
         response.EnsureSuccessStatusCode();
 
