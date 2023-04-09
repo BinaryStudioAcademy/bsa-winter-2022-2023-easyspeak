@@ -42,9 +42,9 @@ services:
         env_file:
             - /etc/environment
 
-    easyspeak_emailer:
-        image: tatihutii/easyspeak_comunicator:latest
-        container_name: 'easyspeak_comunicator'
+    easyspeak_communicator:
+        image: tatihutii/easyspeak_communicator:latest
+        container_name: 'easyspeak_communicator'
         restart: on-failure
         networks:
             - back
@@ -59,6 +59,7 @@ services:
         depends_on:
             - easyspeak_core
             - easyspeak_notifier
+            - easyspeak_communicator
         image: tatihutii/easyspeak_frontend:latest
         container_name: 'easyspeak_frontend'
         restart: on-failure
