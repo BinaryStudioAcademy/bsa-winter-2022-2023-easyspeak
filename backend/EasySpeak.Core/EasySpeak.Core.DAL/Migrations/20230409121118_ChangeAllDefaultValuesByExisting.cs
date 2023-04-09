@@ -10,11 +10,7 @@ namespace EasySpeak.Core.DAL.Migrations
         {
             migrationBuilder.Sql(@"UPDATE Users
                 SET Country = 1
-                WHERE Country = 0;
-
-                UPDATE Lessons
-                SET CreatedBy = (SELECT MIN(Id) FROM Users)
-                WHERE CreatedBy IS NULL;");
+                WHERE Country = 0;");
         }
     }
 }
