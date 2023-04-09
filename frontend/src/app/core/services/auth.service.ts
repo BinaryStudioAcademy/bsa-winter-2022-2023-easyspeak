@@ -119,7 +119,7 @@ export class AuthService {
     }
 
     logout(): Promise<void> {
-        const user: UserShort = JSON.parse(localStorage.getItem('user') as string);
+        const user: IUserShort = JSON.parse(localStorage.getItem('user') as string);
 
         this.webRtcHub.disconnectUser(user.email).then();
 
