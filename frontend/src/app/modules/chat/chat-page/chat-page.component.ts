@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ChatHubService } from '@core/hubs/chat-hub.service';
+import { WebrtcHubService } from '@core/hubs/webrtc-hub.service';
 import { AuthService } from '@core/services/auth.service';
 import { HttpService } from '@core/services/http.service';
 import { ScrollToBottomDirective } from '@shared/directives/scroll-to-bottom-directive';
@@ -36,11 +37,14 @@ export class ChatPageComponent implements OnInit, OnDestroy {
         private httpService: HttpService,
         private chatHub: ChatHubService,
         private authService: AuthService,
+        private webrtcHub: WebrtcHubService,
     ) {
 
     }
 
     async ngOnInit() {
+        await this.webrtcHub.start();
+
         this.authService.loadUser().subscribe();
 
         this.authService.user.subscribe((user) => {
@@ -111,12 +115,10 @@ export class ChatPageComponent implements OnInit, OnDestroy {
         this.httpService.get<IMessageGroup[]>(`/chat/chatMessages/${person.chatId}`).subscribe((groupedMessages) => {
             this.groupedMessages = groupedMessages.map((messageGroup): IMessageGroup => ({
                 date: new Date(messageGroup.date),
-                messages: messageGroup.messages.map((message): IMessage => {
-                    return {
-                        ...message,
-                        createdAt: new Date(message.createdAt),
-                    };
-                }),
+                messages: messageGroup.messages.map((message): IMessage => ({
+                    ...message,
+                    createdAt: new Date(message.createdAt),
+                })),
             }));
             this.currentChatId = person.chatId;
             this.currentPerson = person;
