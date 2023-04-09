@@ -5,8 +5,8 @@ import { applyTimeOffset, filterColumn } from '@modules/lessons/lesson/lesson.he
 import { LessonsCreateComponent } from '@modules/lessons/lessons-create/lessons-create.component';
 import { ModalComponent } from '@shared/components/modal/modal.component';
 import { IModal } from '@shared/models/IModal';
-import { IDateWithLessons } from '@shared/models/lesson/IDateWithLessons';
 import { IUserShort } from '@shared/models/IUserShort';
+import { IDateWithLessons } from '@shared/models/lesson/IDateWithLessons';
 
 import { TeacherStatistics } from 'src/app/models/lessons/teacher-statistics';
 import { LessonsService } from 'src/app/services/lessons.service';
