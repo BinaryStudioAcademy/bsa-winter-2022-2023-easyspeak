@@ -48,7 +48,7 @@ export class TeachersPageComponent implements OnInit {
         });
 
         this.lessonsService.getTeacherStatistics().subscribe((data) => {
-            this.statistics = data as TeacherStatistics;
+            this.statistics = data;
             if (this.statistics.nextClass) {
                 const datePipe = new DatePipe('en-US');
 
@@ -78,7 +78,7 @@ export class TeachersPageComponent implements OnInit {
                 new Date(new Date().setUTCHours(24 * end, 0, 0, 0)).toISOString(),
             )
             .subscribe((data) => {
-                this.datesWithLessons = data as IDateWithLessons[];
+                this.datesWithLessons = data;
                 this.splitLessons();
             });
     }

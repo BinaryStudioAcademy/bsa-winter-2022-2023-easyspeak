@@ -69,7 +69,7 @@ export class LessonComponent extends BaseComponent implements OnInit {
         this.isLoading = true;
         this.spinner.show();
         this.lessonsService.getQuestions(id).subscribe((questions) => {
-            this.questions = questions as Question[];
+            this.questions = questions;
             this.isLoading = false;
             this.spinner.hide();
         });

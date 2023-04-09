@@ -1,10 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from '@core/services/http.service';
+import { IDateWithLessons } from '@shared/models/lesson/IDateWithLessons';
 import { IIDayCard } from '@shared/models/lesson/IDayCard';
 import { IFilter } from '@shared/models/lesson/IFilter';
 import { ILesson } from '@shared/models/lesson/ILesson';
 import { INewLesson } from '@shared/models/lesson/INewLesson';
-import { Subject, tap } from 'rxjs';
+import { Observable, Subject, tap } from 'rxjs';
+
+import { Question } from 'src/app/models/lessons/question';
+
+import { TeacherStatistics } from '../models/lessons/teacher-statistics';
 
 @Injectable({
     providedIn: 'root',
@@ -32,15 +37,15 @@ export class LessonsService {
         return this.http.get<IIDayCard[]>(`${this.routePrefix}/week/?Date=${date}`);
     }
 
-    getQuestions(id: number) {
+    getQuestions(id: number): Observable<Question[]> {
         return this.http.get(`${this.routePrefix}/${id}/questions`);
     }
 
-    getTeacherStatistics() {
+    getTeacherStatistics(): Observable<TeacherStatistics> {
         return this.http.get(`${this.routePrefix}/statistics`);
     }
 
-    getTeacherLessonsAtPeriod(start: string, end: string) {
+    getTeacherLessonsAtPeriod(start: string, end: string): Observable<IDateWithLessons[]> {
         return this.http.get(`${this.routePrefix}/${start}/${end}`);
     }
 
