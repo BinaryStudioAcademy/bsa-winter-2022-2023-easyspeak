@@ -9,7 +9,7 @@ COPY ["EasySpeak.Communicator/EasySpeak.Communicator.WebAPI/EasySpeak.Communicat
 
 RUN dotnet restore "EasySpeak.Communicator.WebAPI/EasySpeak.Communicator.WebAPI.csproj"
 COPY . .
-WORKDIR "/src/EasySpeak.Communicator.WebAPI"
+WORKDIR "/src/EasySpeak.Communicator/EasySpeak.Communicator.WebAPI"
 RUN dotnet build "EasySpeak.Communicator.WebAPI.csproj" -c Release -o /app/build
 
 FROM build AS publish
