@@ -11,13 +11,13 @@
 
         <div [ngClass]="{'dropdown-content-modal': usedInModal}" class="dropdown-content" *ngIf="toggle">
             <div *ngFor="let item of inputList; let i = index" class="dropdown-item">
-                <input type="checkbox" id="{{i}}" [checked]="iconExistsInOutputList(item.icon_name)" class="item-checkbox"
+                <input type="checkbox" id="{{i}}" [checked]="iconExistsInOutputList(item.name)" class="item-checkbox"
                        (change)="selectInterest($event)"/>
                 <label class="item-checkbox-label" for="{{i}}">
                     <div class="icon-wrapper">
                         <img class="icon" src="{{item.link}}" alt="image"/>
                     </div>
-                    <div class="icon-name">{{item.icon_name}}</div>
+                    <div class="icon-name">{{item.name}}</div>
                 </label>
             </div>
         </div>

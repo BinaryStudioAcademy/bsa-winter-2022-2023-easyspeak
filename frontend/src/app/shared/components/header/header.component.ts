@@ -13,6 +13,7 @@ export class HeaderComponent implements OnInit {
     @ViewChild('notificationsMenu') notificationsMenu: UserNotificationComponent;
 
     currentUser: UserShort = {
+        email: '',
         firstName: '',
         lastName: '',
         imagePath: '',

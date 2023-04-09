@@ -25,11 +25,14 @@ namespace EasySpeak.Core.WebAPI.Extensions
         {
             services
                 .AddControllers()
-                .AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+                .AddNewtonsoftJson(options =>
+                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             services.AddTransient<ILessonsService, LessonsService>();
             services.AddTransient<IZoomApiService, ZoomApiService>();
-            services.AddSingleton<IConnectionProvider>(_ => new ConnectionProvider(configuration.GetValue<string>("Rabbit")));
+            services.AddScoped<IFriendService, FriendService>();
+            services.AddSingleton<IConnectionProvider>(_ =>
+                new ConnectionProvider(configuration.GetValue<string>("Rabbit")));
             services.AddTransient<IMessageProducer, MessageProducer>();
             services.AddTransient<IHttpRequestService, HttpRequestService>();
             services.AddScoped<IFirebaseAuthService, FirebaseAuthService>();
@@ -40,6 +43,7 @@ namespace EasySpeak.Core.WebAPI.Extensions
             services.Configure<RabbitQueuesOptions>(configuration.GetSection("RabbitQueues"))
                 .AddScoped<INotificationService, NotificationService>()
                 .AddScoped<IUserService, UserService>();
+            services.Configure<RabbitQueuesOptions>(configuration.GetSection("RabbitQueues"));
         }
 
         public static void AddAutoMapper(this IServiceCollection services)
