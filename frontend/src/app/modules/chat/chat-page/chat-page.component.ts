@@ -83,9 +83,16 @@ export class ChatPageComponent implements OnInit, OnDestroy {
             }
             this.chatHub.invoke(
                 'GetPeopleAsync',
-                this.currentUser.id,
                 msg.chatId,
+                this.currentUser.id,
             );
+            if (this.currentUser.id !== msg.createdBy) {
+                this.chatHub.invoke(
+                    'ReadMessages',
+                    this.currentChatId,
+                    this.currentUser.id,
+                );
+            }
             this.scroll.scrollToBottom();
         });
     }
@@ -114,20 +121,8 @@ export class ChatPageComponent implements OnInit, OnDestroy {
             this.currentChatId = person.chatId;
             this.currentPerson = person;
         });
+        this.chatHub.invoke('ReadMessages', person.chatId, this.currentUser.id);
     }
-
-    getTotalUnreadMessages(): number {
-        return this.people.reduce((sum, person) => sum + person.numberOfUnreadMessages, 0);
-    }
-
-    lotsOfMessages(value: number): string {
-        return value < 100 ? `${value}` : '99+';
-    }
-
-    form = new FormGroup({
-        message: new FormControl('', { nonNullable: true }),
-        file: new FormControl(''),
-    });
 
     sendMessage() {
         const message = this.form.controls.message.value;
@@ -147,6 +142,19 @@ export class ChatPageComponent implements OnInit, OnDestroy {
             );
         }
     }
+
+    getTotalUnreadMessages(): number {
+        return this.people.reduce((sum, person) => sum + person.numberOfUnreadMessages, 0);
+    }
+
+    lotsOfMessages(value: number): string {
+        return value < 100 ? `${value}` : '99+';
+    }
+
+    form = new FormGroup({
+        message: new FormControl('', { nonNullable: true }),
+        file: new FormControl(''),
+    });
 
     startSessionCall(): void {
         this.router.navigate([`session-call/${this.currentChatId}`]);
