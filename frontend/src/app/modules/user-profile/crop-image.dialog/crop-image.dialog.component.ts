@@ -53,6 +53,8 @@ export class CropImageDialogComponent extends BaseComponent {
                 file,
                 { responseType: 'text' },
             ).subscribe(() => this.authService.loadUser().subscribe());
+
+            this.onNoClick();
         }
     }
 }

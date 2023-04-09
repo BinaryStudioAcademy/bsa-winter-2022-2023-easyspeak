@@ -48,10 +48,6 @@ export class UserService {
         return this.httpService.post<UserCard[]>(`${this.routePrefix}/recommended`, userFilter ?? ({} as UserFilter));
     }
 
-    public uploadAvatar(emojiName: string) {
-        return this.httpService.post<string>(`/api/userprofile/setemoji/${emojiName}`, emojiName);
-    }
-
     public isAdmin(): boolean {
         const user = localStorage.getItem('user');
 

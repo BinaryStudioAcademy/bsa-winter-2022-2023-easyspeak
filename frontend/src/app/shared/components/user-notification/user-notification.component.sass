@@ -23,7 +23,7 @@
 
 
 
-.notifications 
+.notifications
     display: flex
     flex-direction: column
     overflow-y: scroll
@@ -80,13 +80,17 @@
         color: $blue-200
 
 .author-icon-wrp
+    position: absolute
     width: 2.5em
     height: 2.5em
     position: relative
+    border-radius: 50%
     .author-icon
+        position: absolute
         width: 33px
         height: 33px
         border-radius: 50%
+        overflow: hidden
     .notification-type-icon
         position: absolute
         height: 1em
@@ -97,9 +101,10 @@
         display: flex
         justify-content: center
         align-items: center
-        bottom: 7px
-        right: 5px
+        bottom: 8px
+        right: 2px
         img
+            position: absolute
             height: 0.7em
             width: 0.6em
 
@@ -107,7 +112,7 @@
     display: flex
     gap: 0.4em
     align-items: center
-    a 
+    a
         color: $blue-200
     img
         height: 0.8em
