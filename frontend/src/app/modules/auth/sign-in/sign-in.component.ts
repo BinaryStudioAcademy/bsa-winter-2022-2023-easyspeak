@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '@core/services/auth.service';
-import { lengthValidator } from '@modules/auth/sign-in/lengthValidator';
 import { emailRegex, passwordRegex } from '@shared/data/regex.util';
 import { ToastrService } from 'ngx-toastr';
 
@@ -16,11 +15,11 @@ import { validationErrorMessage } from '../sign-up/error-helper';
 export class SignInComponent {
     form: FormGroup = new FormGroup({
         email: new FormControl('', {
-            validators: [lengthValidator(3, 50), Validators.pattern(emailRegex), Validators.required],
+            validators: [Validators.minLength(3), Validators.maxLength(50), Validators.pattern(emailRegex), Validators.required],
             updateOn: 'submit',
         }),
         password: new FormControl('', {
-            validators: [lengthValidator(6, 25), Validators.pattern(passwordRegex), Validators.required],
+            validators: [Validators.pattern(passwordRegex), Validators.required],
             updateOn: 'submit',
         }),
     });
@@ -36,7 +35,7 @@ export class SignInComponent {
 
     public signIn() {
         this.isSubmitted = true;
-        if (this.email.valid && this.password.valid) {
+        if (this.form.valid) {
             this.authService
                 .signIn(this.email.value, this.password.value)
                 .then(() => {
@@ -44,13 +43,15 @@ export class SignInComponent {
                     this.router.navigate(['timetable']);
                 })
                 .catch((error) => {
+                    let errorMessage: string | undefined;
+
                     if (error.code === 'auth/user-not-found') {
-                        this.email.setErrors({ emailNotFound: true });
+                        errorMessage = this.GetErrorMessageByKey('notExists');
                     }
                     if (error.code === 'auth/wrong-password') {
-                        this.password.setErrors({ wrongPassword: true });
+                        errorMessage = this.GetErrorMessageByKey('incorrectPassword');
                     }
-                    this.toastr.error(error.message, 'Sign up');
+                    this.toastr.error(errorMessage, 'Sign up');
                 });
         }
     }
@@ -80,5 +81,17 @@ export class SignInComponent {
 
     GetErrorMessageByKey(id: string) {
         return Object.entries(validationErrorMessage).find(([t]) => t === id)?.[1];
+    }
+
+    CreateCondition(contr: FormControl, cond: string) {
+        if (cond === 'required') {
+            const r = ((contr.errors?.[cond] && contr.touched) || contr.pristine) && this.isSubmitted;
+
+            return r;
+        }
+
+        if (cond === 'pattern') {
+            return contr.errors?.[cond] && this.isSubmitted;
+        }
     }
 }

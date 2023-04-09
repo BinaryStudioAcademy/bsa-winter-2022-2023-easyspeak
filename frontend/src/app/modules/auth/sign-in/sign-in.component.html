@@ -12,15 +12,11 @@
                     placeholder="Email"
                     value="{{this.email}}"
                     (focus)="ClearErrors()"/>
-                <div class="errors-wrp" *ngIf="isSubmitted">
+                <div class="errors-wrp"  *ngFor="let cond of ['required','pattern'] ">
                     <mat-error class="error"
-                               *ngIf="(email.errors?.['lengthValidator'] && email.touched) || email.pristine ">
+                               *ngIf="CreateCondition(email,cond)">
                         <img src="/assets/user-profile/alert-triangle.svg" alt="">
-                        {{GetErrorMessageByKey('emailLength')}}
-                    </mat-error>
-                    <mat-error class="error" *ngIf="(email.errors?.['pattern'] || email.errors?.['emailNotFound'])">
-                        <img src="/assets/user-profile/alert-triangle.svg" alt="">
-                        {{GetErrorMessageByKey('emailNotFound')}}
+                        {{GetErrorMessageByKey('email'+cond)}}
                     </mat-error>
                 </div>
             </div>
@@ -30,16 +26,11 @@
                        placeholder="Password"
                        appPasswordVisibility
                        (focus)="ClearErrors()"/>
-                <div class="errors-wrp" *ngIf="isSubmitted">
+                <div class="errors-wrp"  *ngFor="let cond of ['required','pattern'] ">
                     <mat-error class="error"
-                               *ngIf="(password.errors?.['lengthValidator'] && password.touched) || password.pristine">
+                               *ngIf="CreateCondition(password,cond)">
                         <img src="/assets/user-profile/alert-triangle.svg" alt="">
-                        {{GetErrorMessageByKey('passwordLength')}}
-                    </mat-error>
-                    <mat-error class="error"
-                               *ngIf="password.errors?.['pattern'] || password.errors?.['wrongPassword'] ">
-                        <img src="/assets/user-profile/alert-triangle.svg" alt="">
-                        {{GetErrorMessageByKey('passwordIncorrect')}}
+                        {{GetErrorMessageByKey('password'+cond)}}
                     </mat-error>
                 </div>
             </div>
