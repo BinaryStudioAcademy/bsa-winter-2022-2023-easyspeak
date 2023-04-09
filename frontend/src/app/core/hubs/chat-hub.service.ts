@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { CoreHubFactoryService } from '@core/hubs/hubFactories/core-hub-factory.service';
 import { HubConnection, HubConnectionState } from '@microsoft/signalr';
+import { IChatPerson } from '@shared/models/chat/IChatPerson';
 import { IMessage } from '@shared/models/chat/IMessage';
-import { Observable, Subject, Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
@@ -13,6 +14,10 @@ export class ChatHubService {
     private hubConnection: HubConnection;
 
     readonly messages = new Subject<IMessage>();
+
+    readonly people = new Subject<IChatPerson[]>();
+
+    private subscriptions: Subscription[] = [];
 
     constructor(private hubFactory: CoreHubFactoryService) {}
 
@@ -26,16 +31,22 @@ export class ChatHubService {
             .start()
             .then(() => console.info(`"${this.hubFactory}" successfully started.`))
             .catch(() => console.info(`"${this.hubFactory}" failed.`));
-    }
 
-    public get AllMessagesObservable(): Observable<IMessage> {
-        return this.messages.asObservable();
-    }
-
-    public listenToSendMessages() {
-        (<HubConnection> this.hubConnection).on('GetMessageAsync', (data: IMessage) => {
-            this.messages.next(data);
+        this.hubConnection.on('message', (msg: IMessage) => {
+            this.messages.next(msg);
         });
+
+        this.hubConnection.on('people', (people: IChatPerson[]) => {
+            this.people.next(people);
+        });
+    }
+
+    public listenPeople(action: (people: IChatPerson[]) => void) {
+        this.subscriptions.push(this.people.subscribe({ next: action }));
+    }
+
+    public listenMessages(action: (msg: IMessage) => void) {
+        this.subscriptions.push(this.messages.subscribe({ next: action }));
     }
 
     async invoke(methodName: string, ...args: unknown[]): Promise<unknown> {

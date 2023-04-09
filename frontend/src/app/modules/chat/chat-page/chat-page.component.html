@@ -3,7 +3,7 @@
         <div class="message-header">
             <span class="message-span">Messages</span>
             <div class="total-number-of-messages">
-                <span>{{lotsOfMessages(totalMessage)}}</span>
+                <span>{{lotsOfMessages(getTotalUnreadMessages())}}</span>
             </div>
         </div>
         <mat-form-field appearance="fill">
@@ -35,7 +35,7 @@
                             <span class="person-online">{{person.isOnline ? 'online' : 'offline'}}</span>
                         </div>
                     </div>
-                    <span>12:00</span>
+                    <span>{{person.lastMessageDate | date: 'HH:mm'}}</span>
                 </div>
                 <div class="last-message-total">
                     <span class="last-message">{{person.lastMessage}}</span>

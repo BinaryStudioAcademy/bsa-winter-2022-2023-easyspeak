@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Inject, Input, LOCALE_ID } from '@angular/core';
 import { IMessageGroup } from '@shared/models/chat/IMessageGroup';
 import { IUserShort } from '@shared/models/IUserShort';
 import * as moment from 'moment';
@@ -9,7 +9,7 @@ import * as moment from 'moment';
     styleUrls: ['./message-group.component.sass'],
 })
 export class MessageGroupComponent {
-    constructor() {
+    constructor(@Inject(LOCALE_ID) private locale: string) {
         this.showDate = true;
     }
 
@@ -31,6 +31,6 @@ export class MessageGroupComponent {
             return 'Yesterday';
         }
 
-        return date.toLocaleDateString('en-US', { day: 'numeric', month: 'short' });
+        return date.toLocaleDateString(this.locale, { day: 'numeric', month: 'short' });
     }
 }
