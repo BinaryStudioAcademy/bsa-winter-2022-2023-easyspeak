@@ -93,7 +93,7 @@ export class SignInComponent {
         }
     }
 
-    CheckCondition(control: FormControl, cond: string) {
+    CheckCondition(control: FormControl, condition: string) {
         let isChanged = false;
 
         if (control === this.password) {
@@ -104,11 +104,12 @@ export class SignInComponent {
             isChanged = this.isChanged.email;
         }
 
-        if (cond === 'required') {
-            return ((control.errors?.[cond] && control.touched) || control.pristine) && isChanged;
-        }
-        if (cond === 'pattern') {
-            return control.errors?.[cond] && isChanged;
+        switch (condition) {
+            case 'required':
+                return ((control.errors?.[condition] && control.touched) || control.pristine) && isChanged;
+            case 'pattern':
+                return control.errors?.[condition] && isChanged;
+            default: return undefined;
         }
     }
 }
