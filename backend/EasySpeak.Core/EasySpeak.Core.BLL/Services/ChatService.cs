@@ -25,8 +25,8 @@ namespace EasySpeak.Core.BLL.Services
                          .Include(chat => chat.Messages)
                          .Select(chat => new ChatPersonDto
                          {
-                             FirstName = chat.Users.FirstOrDefault(user => user.Id != _firebaseAuthService.UserId).FirstName,
-                             LastName = chat.Users.FirstOrDefault(user => user.Id != _firebaseAuthService.UserId).LastName,
+                             FirstName = chat.Users.First(user => user.Id != _firebaseAuthService.UserId).FirstName,
+                             LastName = chat.Users.First(user => user.Id != _firebaseAuthService.UserId).LastName,
                              LastMessageDate = chat.Messages.Count() != 0 ? chat.Messages.Max(message => message.CreatedAt) : null,
                              IsRead = chat.Messages.Count() != 0 ? chat.Messages.Any(message => !message.IsRead) : null,
                              LastMessage = chat.Messages.Count() != 0 ? chat.Messages.OrderBy(message => message.CreatedAt).Last().Text : string.Empty,
@@ -45,8 +45,8 @@ namespace EasySpeak.Core.BLL.Services
                          .Include(chat => chat.Messages)
                          .Select(chat => new ChatPersonDto
                          {
-                             FirstName = chat.Users.FirstOrDefault(user => user.Id != id).FirstName,
-                             LastName = chat.Users.FirstOrDefault(user => user.Id != id).LastName,
+                             FirstName = chat.Users.First(user => user.Id != id).FirstName,
+                             LastName = chat.Users.First(user => user.Id != id).LastName,
                              LastMessageDate = chat.Messages.Count() != 0 ? chat.Messages.Max(message => message.CreatedAt) : null,
                              IsRead = chat.Messages.Count() != 0 ? chat.Messages.Any(message => !message.IsRead) : null,
                              LastMessage = chat.Messages.Count() != 0 ? chat.Messages.OrderBy(message => message.CreatedAt).Last().Text : string.Empty,
@@ -114,6 +114,9 @@ namespace EasySpeak.Core.BLL.Services
         {
             var currentChat = await _context.Chats.Include(chat => chat.Messages.Where(message => !message.IsRead))
                 .FirstOrDefaultAsync(chat => chat.Id == chatId);
+
+            if (currentChat is null)
+                throw new NullReferenceException(nameof(currentChat));
 
             currentChat.Messages
                 .Where(message => message.CreatedBy != userId)
