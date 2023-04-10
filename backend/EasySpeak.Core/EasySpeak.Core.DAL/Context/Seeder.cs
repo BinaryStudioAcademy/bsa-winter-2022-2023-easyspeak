@@ -153,7 +153,7 @@ public static class Seeder
             ("Politics", "TopHat.svg", new DateTime(2023, 04, 05)),
             ("Science", "TestTube.svg", new DateTime(2023, 04, 05)),
             ("Social Media", "MobilePhone.svg", new DateTime(2023, 04, 05)),
-            ("Storts", "BoxingGlove.svg", new DateTime(2023, 04, 05)),
+            ("Sports", "BoxingGlove.svg", new DateTime(2023, 04, 05)),
             ("Technologies", "Robot.svg", new DateTime(2023, 04, 05)),
             ("Travel", "DesertIsland.svg", new DateTime(2023, 04, 05)),
         };
