@@ -1,9 +1,9 @@
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 
 export const detailsGroup = (fb: FormBuilder) => fb.group({
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
-    birthDate: '',
+    birthDate: new FormControl(new Date(), Validators.required),
     sex: '',
     country: '',
     language: '',
