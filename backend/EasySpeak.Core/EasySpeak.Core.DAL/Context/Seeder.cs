@@ -9,9 +9,6 @@ public static class Seeder
 {
     private static readonly DateTime DefaultDate = new DateTime(2023, 3, 30, 11, 0, 0, DateTimeKind.Utc);
     private static readonly Random Rnd = new Random(42);
-    private static readonly string[] AllTags = {
-        "Architecture", "Arts", "Cars", "Celebrities", "Cooking", "Dancing", "Ecology", "Design", "History", "Fashion",
-        "Medicine", "Technologies", "Pets", "Philosophy", "Photography", "Politics"};
 
     public static void Seed(ModelBuilder modelBuilder)
     {

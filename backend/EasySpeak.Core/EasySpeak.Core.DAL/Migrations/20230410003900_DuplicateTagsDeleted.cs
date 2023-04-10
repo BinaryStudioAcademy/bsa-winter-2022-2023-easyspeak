@@ -47,6 +47,7 @@ namespace EasySpeak.Core.DAL.Migrations
                 );");
         }
 
+        //In order to have an ability to rallback migration
         protected override void Down(MigrationBuilder migrationBuilder)
         {
 
