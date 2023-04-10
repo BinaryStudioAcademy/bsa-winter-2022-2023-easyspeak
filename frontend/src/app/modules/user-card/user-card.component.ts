@@ -7,7 +7,7 @@ import countriesLib from 'iso-3166-1';
 
 import { CountriesTzLangProviderService } from 'src/app/services/countries-tz-lang-provider.service';
 
-import { countryCodes } from './mappingLanguagetoCountry';
+import { languageToCountryCodes } from './mappingLanguagetoCountry';
 
 @Component({
     selector: 'app-user-card',
@@ -44,7 +44,7 @@ export class UserCardComponent implements OnInit {
         const languageCode = languagesLib.getCode(this.user.language);
 
         if (languageCode) {
-            const country = countryCodes[languageCode];
+            const country = languageToCountryCodes[languageCode];
 
             const fullCountry = countriesLib.whereAlpha2(country)?.country;
 
@@ -55,10 +55,6 @@ export class UserCardComponent implements OnInit {
 
     buttonGoToMessage() {
         return true;
-    }
-
-    public getUserCountryFlag() {
-        return this.countriesService.getCountriesList().find((c) => c.name === this.user.country)?.flag;
     }
 
     getUserFirstName(): string {

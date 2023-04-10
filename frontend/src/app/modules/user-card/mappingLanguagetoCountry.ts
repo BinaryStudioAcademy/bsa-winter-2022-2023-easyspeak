@@ -1,8 +1,8 @@
-interface CountryCodes {
+interface LanguageToCountryCodes {
     [key: string]: string;
 }
 
-export const countryCodes: CountryCodes = {
+export const languageToCountryCodes: LanguageToCountryCodes = {
     aa: 'ET', // Afar
     ab: 'GE', // Abkhazian
     ae: 'AE', // Avestan
