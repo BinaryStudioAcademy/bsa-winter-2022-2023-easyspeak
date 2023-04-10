@@ -10,6 +10,4 @@ import { SharedModule } from '@shared/shared.module';
         UserCardComponent,
     ],
 })
-export class UserCardModule {
-
-}
+export class UserCardModule {}

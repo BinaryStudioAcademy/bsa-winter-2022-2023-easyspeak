@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '@core/services/auth.service';
-import { UserShort } from '@shared/models/UserShort';
+import { IUserShort } from '@shared/models/IUserShort';
 
 import { UserNotificationComponent } from '../user-notification/user-notification.component';
 
@@ -12,7 +12,7 @@ import { UserNotificationComponent } from '../user-notification/user-notificatio
 export class HeaderComponent implements OnInit {
     @ViewChild('notificationsMenu') notificationsMenu: UserNotificationComponent;
 
-    currentUser: UserShort = {
+    currentUser: IUserShort = {
         email: '',
         firstName: '',
         lastName: '',

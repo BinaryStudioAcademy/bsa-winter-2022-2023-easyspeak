@@ -182,10 +182,6 @@ namespace EasySpeak.Core.DAL.Migrations
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("getutcdate()");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.ToTable("Chats");
@@ -194,122 +190,102 @@ namespace EasySpeak.Core.DAL.Migrations
                         new
                         {
                             Id = 1L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "input Singapore Dollar functionalities"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 2L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Versatile withdrawal"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 3L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "invoice actuating"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 4L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Directives"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 5L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "neural-net"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 6L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Platinum Thailand"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 7L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Fresh"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 8L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "core"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 9L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "orange"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 10L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Generic Concrete Shoes"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 11L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "channels Run Checking Account"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 12L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Flat EXE"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 13L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "deposit"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 14L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Shoes, Beauty & Games"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 15L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Awesome"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 16L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "interactive parse GB"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 17L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Health & Home"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 18L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Intelligent Legacy"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 19L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "North Carolina indigo Sleek Wooden Car"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 20L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "strategy"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
@@ -1706,6 +1682,10 @@ namespace EasySpeak.Core.DAL.Migrations
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("getutcdate()");
 
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -1718,98 +1698,142 @@ namespace EasySpeak.Core.DAL.Migrations
                         new
                         {
                             Id = 1L,
-                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
-                            Name = "Architecture"
-                        },
-                        new
-                        {
-                            Id = 2L,
-                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageUrl = "ArtistPalette.svg",
                             Name = "Arts"
                         },
                         new
                         {
+                            Id = 2L,
+                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageUrl = "Briefcase.svg",
+                            Name = "Business"
+                        },
+                        new
+                        {
                             Id = 3L,
-                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
-                            Name = "Cars"
+                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageUrl = "ClassicalBuilding.svg",
+                            Name = "Culture"
                         },
                         new
                         {
                             Id = 4L,
-                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
-                            Name = "Celebrities"
+                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageUrl = "GraduationCap.svg",
+                            Name = "Education"
                         },
                         new
                         {
                             Id = 5L,
-                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
-                            Name = "Cooking"
+                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageUrl = "Kite.svg",
+                            Name = "Environment"
                         },
                         new
                         {
                             Id = 6L,
-                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
-                            Name = "Dancing"
+                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageUrl = "Dress.svg",
+                            Name = "Fashion"
                         },
                         new
                         {
                             Id = 7L,
-                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
-                            Name = "Ecology"
+                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageUrl = "Sandwich.svg",
+                            Name = "Food"
                         },
                         new
                         {
                             Id = 8L,
-                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
-                            Name = "Design"
+                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageUrl = "Dna.svg",
+                            Name = "Health"
                         },
                         new
                         {
                             Id = 9L,
-                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageUrl = "CrossedSwords.svg",
                             Name = "History"
                         },
                         new
                         {
                             Id = 10L,
-                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
-                            Name = "Fashion"
+                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageUrl = "Books.svg",
+                            Name = "Literature"
                         },
                         new
                         {
                             Id = 11L,
-                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
-                            Name = "Medicine"
+                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageUrl = "ClapperBoard.svg",
+                            Name = "Movies"
                         },
                         new
                         {
                             Id = 12L,
-                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
-                            Name = "Technologies"
+                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageUrl = "Drum.svg",
+                            Name = "Music"
                         },
                         new
                         {
                             Id = 13L,
-                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
-                            Name = "Pets"
+                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageUrl = "FourLeafClover.svg",
+                            Name = "Nature"
                         },
                         new
                         {
                             Id = 14L,
-                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageUrl = "FaceWithMonocle.svg",
                             Name = "Philosophy"
                         },
                         new
                         {
                             Id = 15L,
-                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
-                            Name = "Photography"
+                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageUrl = "TopHat.svg",
+                            Name = "Politics"
                         },
                         new
                         {
                             Id = 16L,
-                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
-                            Name = "Politics"
+                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageUrl = "TestTube.svg",
+                            Name = "Science"
+                        },
+                        new
+                        {
+                            Id = 17L,
+                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageUrl = "MobilePhone.svg",
+                            Name = "Social Media"
+                        },
+                        new
+                        {
+                            Id = 18L,
+                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageUrl = "BoxingGlove.svg",
+                            Name = "Storts"
+                        },
+                        new
+                        {
+                            Id = 19L,
+                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageUrl = "Robot.svg",
+                            Name = "Technologies"
+                        },
+                        new
+                        {
+                            Id = 20L,
+                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageUrl = "DesertIsland.svg",
+                            Name = "Travel"
                         });
                 });
 

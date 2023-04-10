@@ -15,9 +15,10 @@ public class UserProfile : Profile
             .ForMember(user => user.LanguageLevel,
             src => src.MapFrom(userDto => EnumHelper.MapLanguageLevel(userDto.LanguageLevel)));
 
+        CreateMap<User, UserDto>()
+            .ForMember(userDto => userDto.Sex, src => src.MapFrom(user => EnumHelper.MapSexToString(user.Sex)));
+            
         CreateMap<User, UserForLessonDto>();
-
-        CreateMap<User, UserDto>();
 
         CreateMap<UserDto, User>()
             .ForMember(user => user.Sex, src => src.MapFrom(userDto => EnumHelper.MapSex(userDto.Sex)))

@@ -3,7 +3,7 @@
         <div class="title">
             Notification
         </div>
-        <a class="clear-button" (click)="readAllNotifications()">
+        <a  *ngIf="notifications.length" class="clear-button" (click)="readAllNotifications()">
             Mark as read
         </a>
     </div>
