@@ -276,11 +276,7 @@ public class UserService : BaseService, IUserService
     
     private void SendAddUserQuery(long id, UserDto user)
     {
-        var queryParams = new RecommendationServiceMessageDto()
-        {
-            Type = QueryType.AddUser,
-            Parameters = user.ToDictionary()
-        };
+        var queryParams = new RecommendationServiceMessageDto(QueryType.AddUser, user.ToDictionary());
         
         queryParams.Parameters.Add("id", id);
         
@@ -305,11 +301,7 @@ public class UserService : BaseService, IUserService
 
     private void SendAddClassQuery(long id, LessonDto lesson)
     {
-        var queryParams = new RecommendationServiceMessageDto()
-        {
-            Type = QueryType.StartClass,
-            Parameters = lesson.ToDictionary()
-        };
+        var queryParams = new RecommendationServiceMessageDto(QueryType.StartClass, lesson.ToDictionary());
         
         queryParams.Parameters.Add("id", id);
 

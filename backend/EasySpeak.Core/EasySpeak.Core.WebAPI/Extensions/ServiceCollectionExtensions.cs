@@ -43,6 +43,7 @@ namespace EasySpeak.Core.WebAPI.Extensions
                 .AddScoped<INotificationService, NotificationService>()
                 .AddScoped<IUserService, UserService>();
             services.Configure<RabbitQueuesOptions>(configuration.GetSection("RabbitQueues"));
+            services.AddHostedService<LessonBackgroundService>();
         }
 
         public static void AddAutoMapper(this IServiceCollection services)

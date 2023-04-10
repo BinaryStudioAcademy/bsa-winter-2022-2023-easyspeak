@@ -52,12 +52,14 @@ public static class QueryHelper
             UNWIND tags as tag
             MERGE (t: Topic {name: tag})
             MERGE (u)-[:INTERESTED_IN { weight: 2 }]->(t)";
-    
-    public static string AddClassQuery
-        => @"MATCH (u: User { id: $id })
-            MERGE (c: Class { id: $classId, name: $className })
-            WITH u as user, c as class
-            MERGE (user)-[:SUBSCRIBED_ON {weight: 2}]->(class)";
+
+    public static string StartClassQuery
+        => @"MERGE (c: Class { id: $lessonId, name: $lessonName })
+            WITH c AS class
+            UNWIND $subscribers AS subscriberId
+            MATCH (s:User { id: subscriberId })
+            WITH class, s AS subscriber
+            CREATE (subscriber)-[:SUBSCRIBED_ON { weight: 2 }]->(class)";
 
     public static string GetRecommendedUsersQuery
         => @"MATCH (user:User { id: $id })-[r:LIVES_IN|SUBSCRIBED_ON|TALKS_IN|INTERESTED_IN|LEVEL_IS|AGE_IS]->(shared)

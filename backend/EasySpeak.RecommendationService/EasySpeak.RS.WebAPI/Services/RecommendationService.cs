@@ -69,7 +69,7 @@ public class RecommendationService : IRecommendationService
     {
         try
         {
-            await _dataAccessService.ExecuteWriteActionAsync(QueryHelper.AddClassQuery, parameters);
+            await _dataAccessService.ExecuteWriteActionAsync(QueryHelper.StartClassQuery, parameters);
         }
         catch (Exception ex)
         {
