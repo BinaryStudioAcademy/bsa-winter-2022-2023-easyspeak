@@ -24,7 +24,7 @@ export class SignInComponent {
         }),
     });
 
-    isSubmitted = false;
+    isChanged = false;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -34,7 +34,7 @@ export class SignInComponent {
     ) { }
 
     public signIn() {
-        this.isSubmitted = true;
+        this.isChanged = true;
         if (this.form.valid) {
             this.authService
                 .signIn(this.email.value, this.password.value)
@@ -76,7 +76,7 @@ export class SignInComponent {
     }
 
     ClearErrors() {
-        this.isSubmitted = false;
+        this.isChanged = false;
     }
 
     GetErrorMessageByKey(id: string) {
@@ -85,13 +85,13 @@ export class SignInComponent {
 
     CreateCondition(contr: FormControl, cond: string) {
         if (cond === 'required') {
-            const r = ((contr.errors?.[cond] && contr.touched) || contr.pristine) && this.isSubmitted;
+            const r = ((contr.errors?.[cond] && contr.touched) || contr.pristine) && this.isChanged;
 
             return r;
         }
 
         if (cond === 'pattern') {
-            return contr.errors?.[cond] && this.isSubmitted;
+            return contr.errors?.[cond] && this.isChanged;
         }
     }
 }

@@ -5,13 +5,13 @@
               [formGroup]="form"
               class="form-content"
               (ngSubmit)="signIn()"
-              [ngClass]="{'submitted': isSubmitted}">
+              [ngClass]="{'submitted': isChanged}">
             <div class="form-group-item">
                 <input
                     formControlName="email"
                     placeholder="Email"
                     value="{{this.email}}"
-                    (focus)="ClearErrors()"/>
+                    (change)="ClearErrors()"/>
                 <div class="errors-wrp"  *ngFor="let cond of ['required','pattern'] ">
                     <mat-error class="error"
                                *ngIf="CreateCondition(email,cond)">
@@ -25,7 +25,7 @@
                 <input formControlName="password"
                        placeholder="Password"
                        appPasswordVisibility
-                       (focus)="ClearErrors()"/>
+                       (change)="ClearErrors()"/>
                 <div class="errors-wrp"  *ngFor="let cond of ['required','pattern'] ">
                     <mat-error class="error"
                                *ngIf="CreateCondition(password,cond)">

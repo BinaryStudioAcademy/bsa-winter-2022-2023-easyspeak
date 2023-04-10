@@ -9,7 +9,7 @@ export const validationErrorMessage: { [id: string]: string } = {
     emailrequired: 'Email is required',
     emailpattern: 'Incorrect email format',
     passwordrequired: 'Password is required',
-    passwordpattern: 'At least 1 lowercase and 1 uppercase Latin letters, min 6, max 25',
+    passwordpattern: 'At least 1 upper, 1 lowercase Latin letter, min 6, max 25',
     incorrectPassword: 'Incorrect password',
     notExists: 'User with such email doesn’t exist',
 };
