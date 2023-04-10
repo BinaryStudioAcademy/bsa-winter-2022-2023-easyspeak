@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '@core/services/auth.service';
-import { emailRegex, passwordRegex } from '@shared/data/regex.util';
+import { emailFormatRegex, passFormatRegex } from '@shared/data/regex.util';
 import { ToastrService } from 'ngx-toastr';
 
 import { validationErrorMessage } from '../sign-up/error-helper';
@@ -15,11 +15,11 @@ import { validationErrorMessage } from '../sign-up/error-helper';
 export class SignInComponent {
     form: FormGroup = new FormGroup({
         email: new FormControl('', {
-            validators: [Validators.minLength(3), Validators.maxLength(50), Validators.pattern(emailRegex), Validators.required],
+            validators: [Validators.minLength(3), Validators.maxLength(50), Validators.pattern(emailFormatRegex), Validators.required],
             updateOn: 'submit',
         }),
         password: new FormControl('', {
-            validators: [Validators.pattern(passwordRegex), Validators.required],
+            validators: [Validators.pattern(passFormatRegex), Validators.required],
             updateOn: 'submit',
         }),
     });
