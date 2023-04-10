@@ -36,12 +36,12 @@ export class ChatHubService {
             this.messages.next(msg);
         });
 
-        this.hubConnection.on('people', (people: IChatPerson[]) => {
+        this.hubConnection.on('chats', (people: IChatPerson[]) => {
             this.people.next(people);
         });
     }
 
-    public listenPeople(action: (people: IChatPerson[]) => void) {
+    public listenChats(action: (people: IChatPerson[]) => void) {
         this.subscriptions.push(this.people.subscribe({ next: action }));
     }
 

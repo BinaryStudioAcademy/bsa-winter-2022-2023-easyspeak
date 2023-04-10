@@ -107,16 +107,15 @@ namespace EasySpeak.Core.BLL.Services
             if (chat is null)
                 throw new NullReferenceException(nameof(chat));
 
-            return chat.Users.FirstOrDefault(user => user.Id != id).Id;
+            return chat.Users.First(user => user.Id != id).Id;
         }
 
         public async Task<List<ChatPersonDto>> SetMessagesAsRead(long chatId, long userId)
         {
-            var currentChat = await _context.Chats.Include(chat => chat.Messages)
-                                            .FirstOrDefaultAsync(chat => chat.Id == chatId);
+            var currentChat = await _context.Chats.Include(chat => chat.Messages.Where(message => !message.IsRead))
+                .FirstOrDefaultAsync(chat => chat.Id == chatId);
 
             currentChat.Messages
-                .ToList()
                 .Where(message => message.CreatedBy != userId)
                 .ToList()
                 .ForEach(message => message.IsRead = true);

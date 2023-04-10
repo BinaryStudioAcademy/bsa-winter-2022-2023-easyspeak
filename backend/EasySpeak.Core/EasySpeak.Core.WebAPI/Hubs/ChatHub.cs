@@ -18,7 +18,7 @@ namespace EasySpeak.Core.WebAPI.Hubs
             await Task.WhenAll(chatIds.Select(chatId => Groups.AddToGroupAsync(Context.ConnectionId, chatId.ToString())));
         }
 
-        public async Task GetPeopleAsync(long chatId, long userId)
+        public async Task GetChatsAsync(long chatId, long userId)
         {
             var anotherUserId = await _chatService.GetAnotherUserId(chatId, userId);
 
@@ -26,9 +26,9 @@ namespace EasySpeak.Core.WebAPI.Hubs
 
             List<ChatPersonDto> peopleForAnother = await _chatService.GetUnreadAndLastSendMessageAsync(anotherUserId);
 
-            await Clients.Caller.SendAsync("people", peopleForThis);
+            await Clients.Caller.SendAsync("chats", peopleForThis);
 
-            await Clients.OthersInGroup(chatId.ToString()).SendAsync("people", peopleForAnother);
+            await Clients.OthersInGroup(chatId.ToString()).SendAsync("chats", peopleForAnother);
         }
 
         public async Task SendMessageAsync(NewMessageDto message)
@@ -43,7 +43,7 @@ namespace EasySpeak.Core.WebAPI.Hubs
         {
             await _chatService.SetMessagesAsRead(chatId, userId);
 
-            await GetPeopleAsync(chatId, userId);
+            await GetChatsAsync(chatId, userId);
         }
     }
 }

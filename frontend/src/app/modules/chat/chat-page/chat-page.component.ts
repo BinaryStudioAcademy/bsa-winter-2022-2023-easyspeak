@@ -56,31 +56,14 @@ export class ChatPageComponent implements OnInit, OnDestroy {
         });
         this.setActionsForMessages();
 
-        this.setActionsForPeople();
+        this.setActionsForChats();
     }
 
     private setActionsForMessages() {
         this.chatHub.listenMessages((msg) => {
-            if (this.groupedMessages.length > 0) {
-                this.groupedMessages[this.groupedMessages.length - 1].messages = [
-                    ...this.groupedMessages[this.groupedMessages.length - 1].messages,
-                    msg,
-                ];
-            } else {
-                this.groupedMessages = [
-                    {
-                        date: new Date(msg.createdAt),
-                        messages: [
-                            {
-                                ...msg,
-                                createdAt: new Date(msg.createdAt),
-                            },
-                        ],
-                    },
-                ];
-            }
+            this.addMessage(msg);
             this.chatHub.invoke(
-                'GetPeopleAsync',
+                'GetChatsAsync',
                 msg.chatId,
                 this.currentUser.id,
             );
@@ -95,14 +78,35 @@ export class ChatPageComponent implements OnInit, OnDestroy {
         });
     }
 
-    setActionsForPeople() {
-        this.chatHub.listenPeople((people) => {
+    setActionsForChats() {
+        this.chatHub.listenChats((people) => {
             this.people = people;
         });
     }
 
     ngOnDestroy(): void {
         this.allMessagesSubscription.unsubscribe();
+    }
+
+    addMessage(msg: IMessage): void {
+        if (this.groupedMessages.length > 0) {
+            this.groupedMessages[this.groupedMessages.length - 1].messages = [
+                ...this.groupedMessages[this.groupedMessages.length - 1].messages,
+                msg,
+            ];
+        } else {
+            this.groupedMessages = [
+                {
+                    date: new Date(msg.createdAt),
+                    messages: [
+                        {
+                            ...msg,
+                            createdAt: new Date(msg.createdAt),
+                        },
+                    ],
+                },
+            ];
+        }
     }
 
     getChat(person: IChatPerson) {
