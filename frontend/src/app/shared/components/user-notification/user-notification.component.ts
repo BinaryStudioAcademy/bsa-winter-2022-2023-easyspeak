@@ -69,12 +69,7 @@ export class UserNotificationComponent extends BaseComponent implements OnInit, 
     }
 
     readAllNotifications() {
-        this.notifications = this.notifications
-            .map((notification) => ({
-                ...notification,
-                isRead: true,
-            }))
-            .filter((n) => !n.isRead);
+        this.notifications = [];
 
         this.notificationService.readAllNotifications().subscribe();
     }
