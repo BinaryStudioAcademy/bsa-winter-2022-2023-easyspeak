@@ -5,6 +5,7 @@ import { AcceptCallComponent } from '@shared/components/accept-call/accept-call.
 import { IModal } from '@shared/models/IModal';
 import { Subject, Subscription } from 'rxjs';
 import { WebrtcHubFactoryService } from './hubFactories/webrtc-hub-factory.service';
+import { Router } from '@angular/router';
 
 @Injectable({
     providedIn: 'root',
@@ -18,7 +19,7 @@ export class WebrtcHubService {
 
     private subscriptions: Subscription[] = [];
 
-    constructor(private hubFactory: WebrtcHubFactoryService, private dialogRef: MatDialog) {}
+    constructor(private hubFactory: WebrtcHubFactoryService, private dialogRef: MatDialog, private router: Router) {}
 
     async start() {
         if (!this.hubConnection || this.hubConnection.state === HubConnectionState.Disconnected) {
@@ -61,15 +62,28 @@ export class WebrtcHubService {
             this.messages.next(msg);
         });
 
-        this.hubConnection.on('call', (roomName: string) => {
+        this.hubConnection.on('startCall', (callerEmail: string, roomName: string ) => {
             const config: MatDialogConfig<IModal> = {
                 data: {
                     header: roomName,
+                    content: callerEmail,
                 },
             };
 
             this.dialogRef.open(AcceptCallComponent, config);
         });
+
+        this.hubConnection.on('accept', (roomName: string) => {
+            this.router.navigate([`session-call/${roomName}`]);
+        });
+
+        this.hubConnection.on('reject', () => {
+            alert('Rejected');
+        });
+
+        this.hubConnection.on('endCall', () => {
+            this.router.navigate(['chat']);
+        })
     }
 
     public async connect(email: string) {
@@ -84,8 +98,26 @@ export class WebrtcHubService {
         });
     }
 
-    public async callUser(email: string, roomName: string) {
-        await this.hubConnection.invoke('CallUser', email, roomName).catch((err) => console.error(err));
+    public async callUser(calleeEmail: string, callerEmail: string, roomName: string) {
+        await this.hubConnection.invoke('CallUser', calleeEmail, callerEmail, roomName).catch((err) => console.error(err));
+    }
+
+    public async acceptCall(email: string, roomName: string) {
+        await this.hubConnection.invoke('AcceptCall', email, roomName).catch((err) => {
+            console.error(err);
+        });
+    }
+
+    public async rejectCall(email: string) {
+        await this.hubConnection.invoke('RejectCall', email).catch((err) => {
+            console.error(err);
+        });
+    }
+
+    public async endCall(email: string) {
+        await this.hubConnection.invoke('EndCall', email).catch((err) => {
+            console.error(err);
+        });
     }
 
     async invoke(methodName: string, ...args: unknown[]): Promise<unknown> {
