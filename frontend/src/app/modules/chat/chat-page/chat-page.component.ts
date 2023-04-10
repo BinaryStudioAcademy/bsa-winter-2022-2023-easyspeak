@@ -84,8 +84,8 @@ export class ChatPageComponent implements OnInit, OnDestroy {
         });
     }
 
-    ngOnDestroy(): void {
-        this.allMessagesSubscription.unsubscribe();
+    async ngOnDestroy(): Promise<void> {
+        await this.allMessagesSubscription.unsubscribe();
     }
 
     addMessage(msg: IMessage): void {
