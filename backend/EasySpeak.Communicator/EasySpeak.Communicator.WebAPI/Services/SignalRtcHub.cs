@@ -36,9 +36,9 @@ namespace EasySpeak.Communicator.WebAPI.Services
             await Clients.Client(connectionId).SendAsync("reject");
         }
 
-        public async Task EndCall(string email)
+        public async Task EndCall(string roomName)
         {
-            var connectionId = ConnectedUsers[email];
+            var connectionId = ConnectedClients[roomName].First(conn => conn != Context.ConnectionId);
             await Clients.Client(connectionId).SendAsync("endCall");
         }
 

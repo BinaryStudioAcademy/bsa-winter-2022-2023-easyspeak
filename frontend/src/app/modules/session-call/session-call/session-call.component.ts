@@ -269,7 +269,7 @@ export class SessionCallComponent implements OnInit, OnDestroy {
      */
     async hangup(): Promise<void> {
         this.stopPeerConnection();
-        this.sendMessage('bye');
+        await this.webrtcHub.endCall(this.room);
         await this.webrtcHub.invoke('LeaveRoom', this.room);
     }
 

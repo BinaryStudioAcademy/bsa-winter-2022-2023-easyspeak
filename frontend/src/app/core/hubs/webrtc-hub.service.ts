@@ -114,8 +114,8 @@ export class WebrtcHubService {
         });
     }
 
-    public async endCall(email: string) {
-        await this.hubConnection.invoke('EndCall', email).catch((err) => {
+    public async endCall(roomName: string) {
+        await this.hubConnection.invoke('EndCall', roomName).catch((err) => {
             console.error(err);
         });
     }
