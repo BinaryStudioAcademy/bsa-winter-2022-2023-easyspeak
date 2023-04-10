@@ -27,10 +27,10 @@ namespace EasySpeak.Core.BLL.Services
                          {
                              FirstName = chat.Users.First(user => user.Id != _firebaseAuthService.UserId).FirstName,
                              LastName = chat.Users.First(user => user.Id != _firebaseAuthService.UserId).LastName,
-                             LastMessageDate = chat.Messages.Count() != 0 ? chat.Messages.Max(message => message.CreatedAt) : null,
-                             IsRead = chat.Messages.Count() != 0 ? chat.Messages.Any(message => !message.IsRead) : null,
-                             LastMessage = chat.Messages.Count() != 0 ? chat.Messages.OrderBy(message => message.CreatedAt).Last().Text : string.Empty,
-                             NumberOfUnreadMessages = chat.Messages.Count() != 0 ? chat.Messages.Count(message => !message.IsRead && message.CreatedBy != _firebaseAuthService.UserId) : null,
+                             LastMessageDate = chat.Messages.Any() ? chat.Messages.Max(message => message.CreatedAt) : null,
+                             IsRead = chat.Messages.Any() ? chat.Messages.Any(message => !message.IsRead) : null,
+                             LastMessage = chat.Messages.Any() ? chat.Messages.OrderBy(message => message.CreatedAt).Last().Text : string.Empty,
+                             NumberOfUnreadMessages = chat.Messages.Any() ? chat.Messages.Count(message => !message.IsRead && message.CreatedBy != _firebaseAuthService.UserId) : null,
                              ChatId = chat.Id,
                          })
                          .OrderByDescending(entity => entity.LastMessageDate)
@@ -47,10 +47,10 @@ namespace EasySpeak.Core.BLL.Services
                          {
                              FirstName = chat.Users.First(user => user.Id != id).FirstName,
                              LastName = chat.Users.First(user => user.Id != id).LastName,
-                             LastMessageDate = chat.Messages.Count() != 0 ? chat.Messages.Max(message => message.CreatedAt) : null,
-                             IsRead = chat.Messages.Count() != 0 ? chat.Messages.Any(message => !message.IsRead) : null,
-                             LastMessage = chat.Messages.Count() != 0 ? chat.Messages.OrderBy(message => message.CreatedAt).Last().Text : string.Empty,
-                             NumberOfUnreadMessages = chat.Messages.Count() != 0 ? chat.Messages.Count(message => !message.IsRead && message.CreatedBy != id) : null,
+                             LastMessageDate = chat.Messages.Any() ? chat.Messages.Max(message => message.CreatedAt) : null,
+                             IsRead = chat.Messages.Any() ? chat.Messages.Any(message => !message.IsRead) : null,
+                             LastMessage = chat.Messages.Any() ? chat.Messages.OrderBy(message => message.CreatedAt).Last().Text : string.Empty,
+                             NumberOfUnreadMessages = chat.Messages.Any() ? chat.Messages.Count(message => !message.IsRead && message.CreatedBy != id) : null,
                              ChatId = chat.Id,
                          })
                          .OrderByDescending(entity => entity.LastMessageDate)
@@ -105,7 +105,7 @@ namespace EasySpeak.Core.BLL.Services
            var chat = await _context.Chats.Include(chat => chat.Users).FirstOrDefaultAsync(chat => chat.Id == chatId);
 
             if (chat is null)
-                throw new NullReferenceException(nameof(chat));
+                return 0;
 
             return chat.Users.First(user => user.Id != id).Id;
         }
@@ -116,7 +116,7 @@ namespace EasySpeak.Core.BLL.Services
                 .FirstOrDefaultAsync(chat => chat.Id == chatId);
 
             if (currentChat is null)
-                throw new NullReferenceException(nameof(currentChat));
+                return new List<ChatPersonDto>();
 
             currentChat.Messages
                 .Where(message => message.CreatedBy != userId)
