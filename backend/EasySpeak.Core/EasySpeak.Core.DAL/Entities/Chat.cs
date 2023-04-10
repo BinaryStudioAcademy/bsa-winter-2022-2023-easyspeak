@@ -8,7 +8,6 @@ namespace EasySpeak.Core.DAL.Entities
 {
     public class Chat: Entity<long>
     {
-        public string Name { get; set; } = string.Empty;
         public ICollection<User> Users { get; private set; }
         public ICollection<Message> Messages { get; private set; }
         public ICollection<Call> Calls { get; private set; }

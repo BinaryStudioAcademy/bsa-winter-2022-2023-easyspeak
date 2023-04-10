@@ -1,5 +1,5 @@
 ﻿using EasySpeak.Core.BLL.Interfaces;
-using EasySpeak.Core.Common.DTO.Message;
+using EasySpeak.Core.Common.DTO;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EasySpeak.Core.WebAPI.Controllers

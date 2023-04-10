@@ -15,11 +15,6 @@ const routes: Routes = [
         component: SelectTopicsPageComponent,
     },
     {
-        path: 'chat',
-        loadChildren: () => import('./modules/chat/chat.module').then((m) => m.ChatModule),
-        canActivate: [AuthGuard],
-    },
-    {
         path: 'session-call',
         loadChildren: () => import('./modules/session-call/session-call.module').then((m) => m.SessionCallModule),
         canActivate: [AuthGuard],
