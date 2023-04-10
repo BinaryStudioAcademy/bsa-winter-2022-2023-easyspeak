@@ -9,6 +9,7 @@ enum LocalStorageEnumKeys {
 }
 
 interface Tag {
+    id: number,
     name: string;
     imageUrl: string;
 }

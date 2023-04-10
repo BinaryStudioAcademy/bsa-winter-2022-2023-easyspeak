@@ -1,16 +1,16 @@
-import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { DataService } from '@core/services/data.service';
 import { IIcon } from '@shared/models/IIcon';
-import { getTags } from '@shared/utils/tagsForInterests';
 
 @Component({
     selector: 'app-interests-dropdown',
     templateUrl: './interests-dropdown.component.html',
     styleUrls: ['./interests-dropdown.component.sass'],
 })
-export class InterestsDropdownComponent implements OnChanges {
+export class InterestsDropdownComponent implements OnChanges, OnInit {
     toggle = false;
 
-    @Input() inputList: IIcon[] = getTags();
+    inputList: IIcon[];
 
     @Output() selectedInterests = new EventEmitter<string[]>();
 
@@ -19,6 +19,19 @@ export class InterestsDropdownComponent implements OnChanges {
     @Input() usedInModal = false;
 
     outputList: string[] = [];
+
+    constructor(private dataService: DataService) {
+    }
+
+    ngOnInit(): void {
+        this.dataService.getAllTags().subscribe((tags) => {
+            this.inputList = tags.map((tag): IIcon => ({
+                id: tag.id,
+                name: tag.name,
+                link: `assets/topic-icons/${tag.imageUrl}`,
+            }));
+        });
+    }
 
     ngOnChanges() {
         this.outputList = this.selectedItems;

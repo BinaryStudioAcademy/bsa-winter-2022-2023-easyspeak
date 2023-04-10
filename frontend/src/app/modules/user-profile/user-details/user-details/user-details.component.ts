@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { BaseComponent } from '@core/base/base.component';
 import { DataService } from '@core/services/data.service';
@@ -9,7 +9,6 @@ import { IIcon } from '@shared/models/IIcon';
 import { IUserInfo } from '@shared/models/IUserInfo';
 import { IBaseTag } from '@shared/models/user/IBaseTag';
 import { ITag } from '@shared/models/user/ITag';
-import { getTags } from '@shared/utils/tagsForInterests';
 import { ToastrService } from 'ngx-toastr';
 
 import { CountriesTzLangProviderService } from 'src/app/services/countries-tz-lang-provider.service';
@@ -22,7 +21,7 @@ import { detailsGroup } from '../user-details.component.util';
     styleUrls: ['./user-details.component.sass'],
 })
 export class UserDetailsComponent extends BaseComponent implements OnInit {
-    @Input() tagsList: IIcon[] = getTags();
+    tagsList: IIcon[];
 
     allTags: ITag[];
 
@@ -51,17 +50,23 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
         private userService: UserService,
         private toastr: ToastrService,
         private countriesService: CountriesTzLangProviderService,
-        private constantsService: DataService,
+        private dataService: DataService,
     ) {
         super();
         this.countries = this.countriesService.getCountriesList();
-        this.constantsService.getAllLanguages().subscribe((languages) => {
+        this.dataService.getAllLanguages().subscribe((languages) => {
             this.languages = languages;
+        });
+        this.dataService.getAllTags().subscribe((tags) => {
+            this.tagsList = tags.map((tag): IIcon => ({
+                id: tag.id,
+                name: tag.name,
+                link: `assets/topic-icons/${tag.imageUrl}`,
+            }));
         });
         this.detailsForm = detailsGroup(this.fb);
         this.sexOptions = Object.values(this.sexEnumeration) as string[];
         this.languageLevelOptions = Object.values(LanguageLevel) as string[];
-        this.tagsList = getTags();
     }
 
     ngOnInit(): void {
