@@ -122,7 +122,7 @@ namespace EasySpeak.Core.BLL.Services
                 UserId = receiver.Id,
                 Email = receiver.Email,
                 RelatedTo = sender.Id,
-                CreatedAt = DateTime.Now,
+                CreatedAt = DateTime.UtcNow,
                 Type = type,
                 Text = text,
                 ImageId = sender.ImageId
@@ -149,7 +149,7 @@ namespace EasySpeak.Core.BLL.Services
                 UserId = receiver.Id,
                 Email = receiver.Email,
                 RelatedTo = lesson.User!.Id,
-                CreatedAt = DateTime.Now,
+                CreatedAt = DateTime.UtcNow,
                 Type = type,
                 Text = text,
                 ImageId = lesson.User!.ImageId

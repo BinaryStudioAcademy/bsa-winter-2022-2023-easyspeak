@@ -51,9 +51,9 @@ export class CalendarComponent implements ControlValueAccessor {
     onTouch?: (_: string) => void;
 
     set value(val: moment.Moment) {
-        this._value = val;
+        this._value = moment(val.format('MM-DD-YYYY'));
 
-        const date = val.toISOString().split('T')[0];
+        const date = val.format('MM-DD-YYYY');
 
         this.onChange?.(date);
         this.onTouch?.(date);

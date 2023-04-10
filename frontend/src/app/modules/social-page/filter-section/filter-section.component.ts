@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { DataService } from '@core/services/data.service';
 import {
     compatibilities,
     langLevelsSample,
@@ -8,7 +9,6 @@ import { Subject } from 'rxjs';
 
 import { Filter } from '../../../models/filters/filter';
 import { UserFilter } from '../../../models/filters/userFilter';
-import { CountriesTzLangProviderService } from '../../../services/countries-tz-lang-provider.service';
 
 type FilterOption = 'compatibility' | 'lang' | 'level' | 'topic';
 
@@ -18,7 +18,7 @@ type FilterOption = 'compatibility' | 'lang' | 'level' | 'topic';
     styleUrls: ['./filter-section.component.sass'],
 })
 export class FilterSectionComponent implements OnInit {
-    public constructor(private languageTimezone: CountriesTzLangProviderService) {
+    public constructor(private dataService: DataService) {
     }
 
     resetFiltersEvent: Subject<void> = new Subject<void>();
@@ -50,8 +50,10 @@ export class FilterSectionComponent implements OnInit {
         this.topics = topicsSample;
         this.langLevels = langLevelsSample;
         this.compatibilities = compatibilities.map(c => ({ title: c.toString() }));
-        this.languages = this.languageTimezone.getLanguagesList().map(language => ({ title: language }));
         this.userFilters = {} as UserFilter;
+        this.dataService.getAllLanguages().subscribe(languages => {
+            this.languages = languages.map((l): Filter => ({ title: l }));
+        });
     }
 
     get hasFilters(): boolean {

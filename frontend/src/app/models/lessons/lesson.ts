@@ -1,6 +1,6 @@
 export interface Lesson {
     id: number;
-    imgPath: string;
+    mediaPath: string;
     videoId: string;
     zoomLink: string;
     zoomLinkHost: string;

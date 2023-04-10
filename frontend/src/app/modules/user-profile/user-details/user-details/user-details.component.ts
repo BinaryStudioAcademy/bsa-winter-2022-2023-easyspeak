@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { BaseComponent } from '@core/base/base.component';
 import { AuthService } from '@core/services/auth.service';
+import { DataService } from '@core/services/data.service';
 import { UserService } from '@core/services/user.service';
 import { environment } from '@env/environment';
 import { CropImageDialogComponent } from '@modules/user-profile/crop-image.dialog/crop-image.dialog.component';
@@ -14,7 +15,6 @@ import { IUserInfo } from '@shared/models/IUserInfo';
 import { IBaseTag } from '@shared/models/user/IBaseTag';
 import { ITag } from '@shared/models/user/ITag';
 import { UserShort } from '@shared/models/UserShort';
-import { getTags } from '@shared/utils/tagsForInterests';
 import { ToastrService } from 'ngx-toastr';
 import { switchMap } from 'rxjs';
 
@@ -28,13 +28,13 @@ import { detailsGroup } from '../user-details.component.util';
     styleUrls: ['./user-details.component.sass'],
 })
 export class UserDetailsComponent extends BaseComponent implements OnInit {
-    @Input() tagsList: IIcon[] = getTags();
+    tagsList: IIcon[];
 
     allTags: ITag[];
 
     countries;
 
-    languages;
+    languages: string[];
 
     languageLevelOptions: string[] = [];
 
@@ -60,14 +60,23 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
         public cropImgDialog: MatDialog,
         public authService: AuthService,
         private http: HttpClient,
+        private dataService: DataService,
     ) {
         super();
         this.countries = this.countriesService.getCountriesList();
-        this.languages = this.countriesService.getLanguagesList();
+        this.dataService.getAllLanguages().subscribe((languages) => {
+            this.languages = languages;
+        });
+        this.dataService.getAllTags().subscribe((tags) => {
+            this.tagsList = tags.map((tag): IIcon => ({
+                id: tag.id,
+                name: tag.name,
+                link: `assets/topic-icons/${tag.imageUrl}`,
+            }));
+        });
         this.detailsForm = detailsGroup(this.fb);
         this.sexOptions = Object.values(this.sexEnumeration) as string[];
         this.languageLevelOptions = Object.values(LanguageLevel) as string[];
-        this.tagsList = getTags();
     }
 
     ngOnInit(): void {

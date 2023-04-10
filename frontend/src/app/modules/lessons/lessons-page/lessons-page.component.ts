@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { UserService } from '@core/services/user.service';
-import { langLevelsSample } from '@modules/filter-section/filter-section/filter-section.util';
+import { applyTimeOffset, filterColumn } from '@modules/lessons/lesson/lesson.helper';
 import { ModalComponent } from '@shared/components/modal/modal.component';
 import { YoutubePlayerComponent } from '@shared/components/youtube-player/youtube-player.component';
 import { IModal } from '@shared/models/IModal';
@@ -9,7 +9,6 @@ import { ILesson } from '@shared/models/lesson/ILesson';
 import { LanguageLevels } from '@shared/models/lesson/LanguageLevels';
 import * as moment from 'moment';
 
-import { Lesson } from 'src/app/models/lessons/lesson';
 import { LessonsService } from 'src/app/services/lessons.service';
 
 import { LessonsCreateComponent } from '../lessons-create/lessons-create.component';
@@ -28,11 +27,11 @@ export class LessonsPageComponent implements OnInit, OnChanges {
 
     @Input() selectedDateFilter: Date;
 
-    lessons: Lesson[];
+    lessons: ILesson[];
 
-    lessonsColumn1: Lesson[];
+    lessonsColumn1: ILesson[];
 
-    lessonsColumn2: Lesson[];
+    lessonsColumn2: ILesson[];
 
     userIsAdmin = false;
 
@@ -43,15 +42,9 @@ export class LessonsPageComponent implements OnInit, OnChanges {
     ) {}
 
     ngOnInit(): void {
-        this.selectedDateFilter = new Date();
-
-        this.getLessons();
-
         this.lessonService.lessonAdded$.subscribe(() => {
             this.getLessons();
         });
-
-        this.todayDate = moment().format('DD MMMM YYYY, dddd');
 
         this.userIsAdmin = this.userService.isAdmin();
     }
@@ -91,37 +84,13 @@ export class LessonsPageComponent implements OnInit, OnChanges {
                 languageLevels: this.selectedLanguageFilters.map((level: string) =>
                     Object.values(LanguageLevels).indexOf(level)),
                 tags: this.selectedInterestsFilters.map((topic) => ({ name: topic })),
-                date: new Date(this.selectedDateFilter?.toISOString().slice(0, 10)),
+                date: new Date(this.selectedDateFilter.toISOString().slice(0, 10)),
             })
             .subscribe((response) => {
-                this.lessons = this.mapLessons(response);
-                this.lessonsColumn1 = this.lessons.filter((el, index) => index % 2 === 0);
-                this.lessonsColumn2 = this.lessons.filter((el, index) => index % 2 === 1);
+                this.lessons = applyTimeOffset(response);
+                this.lessonsColumn1 = filterColumn(this.lessons, 1);
+                this.lessonsColumn2 = filterColumn(this.lessons, 2);
             });
-    }
-
-    private mapLessons(response: ILesson[]): Lesson[] {
-        const offset = new Date().getTimezoneOffset();
-
-        return response.map((lesson) => ({
-            id: lesson.id,
-            imgPath: lesson.mediaPath,
-            videoId: lesson.youtubeVideoId,
-            zoomLink: lesson.zoomMeetingLink,
-            zoomLinkHost: lesson.zoomMeetingLinkHost,
-            title: lesson.name,
-            time: moment(lesson.startAt).add(-offset, 'minutes').toDate(),
-            // TODO: Change tutor details to real when they are avaliable
-            tutorAvatarPath:
-                'https://www.christopherjungo.com/uploads/2/4/9/4/24948269/screen-shot-2018-02-10-at-00-09-32_orig.png',
-            tutorFlagPath: 'assets/lesson-icons/canada-test-flag.svg',
-            tutorName: 'Roger Vaccaro',
-            topics: lesson.tags.map((tag) => tag.name),
-            subscribersCount: lesson.subscribersCount,
-            level: langLevelsSample[lesson.languageLevel].title,
-            isSubscribed: lesson.isSubscribed,
-            startAt: new Date(lesson.startAt),
-        }));
     }
 
     getLessonsUnavailableMessage(): string {
