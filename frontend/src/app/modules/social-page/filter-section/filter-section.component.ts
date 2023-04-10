@@ -42,8 +42,7 @@ export class FilterSectionComponent implements OnInit {
 
     public userFilters: UserFilter;
 
-    @Output()
-    filterChange = new EventEmitter<UserFilter>();
+    @Output() filterChange = new EventEmitter<UserFilter>();
 
     ngOnInit(): void {
         this.topics = topicsSample;
