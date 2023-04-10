@@ -4,14 +4,14 @@
         <form #userLoginForm="ngForm"
               [formGroup]="form"
               class="form-content"
-              (ngSubmit)="signIn()"
-              [ngClass]="{'submitted': isChanged}">
+              (ngSubmit)="signIn()">
             <div class="form-group-item">
                 <input
                     formControlName="email"
                     placeholder="Email"
                     value="{{this.email}}"
-                    (keyup)="ClearErrors()"/>
+                    (keyup)="ClearErrors(email)"
+                    [ngClass]="{'submitted-email': isChanged.email}"/>
                 <div class="errors-wrp"  *ngFor="let condition of ['required','pattern'] ">
                     <mat-error class="error"
                                *ngIf="CheckCondition(email,condition)">
@@ -26,7 +26,8 @@
                        placeholder="Password"
                        type="password"
                        appPasswordVisibility
-                       (keyup)="ClearErrors()"/>
+                       (keyup)="ClearErrors(password)"
+                       [ngClass]="{'submitted-pas': isChanged.password}"/>
                 <div class="errors-wrp"  *ngFor="let condition of ['required','pattern'] ">
                     <mat-error class="error"
                                *ngIf="CheckCondition(password,condition)">

@@ -24,7 +24,7 @@ export class SignInComponent {
         }),
     });
 
-    isChanged = false;
+    isChanged = { email: false, password: false };
 
     constructor(
         private formBuilder: FormBuilder,
@@ -34,7 +34,8 @@ export class SignInComponent {
     ) { }
 
     public signIn() {
-        this.isChanged = true;
+        this.isChanged.password = true;
+        this.isChanged.email = true;
         if (this.form.valid) {
             this.authService
                 .signIn(this.email.value, this.password.value)
@@ -69,8 +70,13 @@ export class SignInComponent {
         return this.form.get('password') as FormControl;
     }
 
-    ClearErrors() {
-        this.isChanged = false;
+    ClearErrors(control: FormControl) {
+        if (control === this.password) {
+            this.isChanged.password = false;
+        }
+        if (control === this.email) {
+            this.isChanged.email = false;
+        }
     }
 
     GetErrorMessageByKey(id: string) {
@@ -88,11 +94,21 @@ export class SignInComponent {
     }
 
     CheckCondition(control: FormControl, cond: string) {
+        let isChanged = false;
+
+        if (control === this.password) {
+            isChanged = this.isChanged.password;
+        }
+
+        if (control === this.email) {
+            isChanged = this.isChanged.email;
+        }
+
         if (cond === 'required') {
-            return ((control.errors?.[cond] && control.touched) || control.pristine) && this.isChanged;
+            return ((control.errors?.[cond] && control.touched) || control.pristine) && isChanged;
         }
         if (cond === 'pattern') {
-            return control.errors?.[cond] && this.isChanged;
+            return control.errors?.[cond] && isChanged;
         }
     }
 }
