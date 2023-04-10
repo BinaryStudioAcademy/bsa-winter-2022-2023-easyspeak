@@ -49,7 +49,6 @@ export class ChatPageComponent implements OnInit, OnDestroy {
 
         this.httpService.get<IChatPerson[]>('/chat/lastSendMessages').subscribe((people) => {
             this.people = people;
-            console.log(this.people);
             this.chatHub.invoke(
                 'AddToGroup',
                 this.people.map(p => p.chatId),
@@ -107,7 +106,6 @@ export class ChatPageComponent implements OnInit, OnDestroy {
     }
 
     getChat(person: IChatPerson) {
-        console.log(person);
         this.httpService.get<IMessageGroup[]>(`/chat/chatMessages/${person.chatId}`).subscribe((groupedMessages) => {
             this.groupedMessages = groupedMessages.map((messageGroup): IMessageGroup => ({
                 date: new Date(messageGroup.date),
