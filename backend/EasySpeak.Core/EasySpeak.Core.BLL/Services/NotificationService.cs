@@ -159,7 +159,7 @@ namespace EasySpeak.Core.BLL.Services
         public async Task<ICollection<NotificationDto>> GetNotificationsAsync()
         {
             return await _context.Notifications
-                .Where(n => n.UserId == _firebaseAuthService.UserId)
+                .Where(n => n.UserId == _firebaseAuthService.UserId && !n.IsRead)
                 .GroupJoin(
                     _context.EasySpeakFiles,
                     n => n.RelatedTo,
