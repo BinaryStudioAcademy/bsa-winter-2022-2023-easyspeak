@@ -45,14 +45,7 @@ public class UserService : BaseService, IUserService
             return userDto;
         }
 
-        if(user!.EmojiName != string.Empty)
-        {
-            userDto.ImagePath = user!.EmojiName;
-        }
-        else
-        {
-            userDto.ImagePath = await GetProfileImageUrl(user!.ImageId);
-        }
+        userDto.ImagePath = user!.EmojiName != string.Empty ? user!.EmojiName : await GetProfileImageUrl(user!.ImageId);
 
         return userDto;
     }
@@ -147,6 +140,14 @@ public class UserService : BaseService, IUserService
     {
         var user = await GetCurrentUser();
 
+        if(user.ImageId is not null)
+        {
+            await _fileService.DeleteFileAsync((long)user.ImageId);
+
+            user.ImageId = null;
+            await _context.SaveChangesAsync();
+        }
+         
         user.EmojiName = emojiName;
         await _context.SaveChangesAsync();
 
@@ -181,14 +182,8 @@ public class UserService : BaseService, IUserService
 
     private async Task<User> GetCurrentUser()
     {
-        var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == _authService.UserId);
-
-        if (user is null)
-        {
-            throw new ArgumentNullException("This user not found");
-        }
-
-        return user;
+        return await _context.Users.FirstOrDefaultAsync(u => u.Id == _authService.UserId) 
+            ?? throw new ArgumentNullException("This user not found");
     }
 
     private async Task<string> GetProfileImageUrl(long? imageId)

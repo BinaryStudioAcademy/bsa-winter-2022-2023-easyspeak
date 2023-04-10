@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { BaseComponent } from '@core/base/base.component';
 import { AuthService } from '@core/services/auth.service';
 import { UserService } from '@core/services/user.service';
+import { environment } from '@env/environment';
 import { CropImageDialogComponent } from '@modules/user-profile/crop-image.dialog/crop-image.dialog.component';
 import { LanguageLevel } from '@shared/data/languageLevel';
 import { Sex } from '@shared/data/sex';
@@ -12,8 +13,10 @@ import { IIcon } from '@shared/models/IIcon';
 import { IUserInfo } from '@shared/models/IUserInfo';
 import { IBaseTag } from '@shared/models/user/IBaseTag';
 import { ITag } from '@shared/models/user/ITag';
+import { UserShort } from '@shared/models/UserShort';
 import { getTags } from '@shared/utils/tagsForInterests';
 import { ToastrService } from 'ngx-toastr';
+import { switchMap } from 'rxjs';
 
 import { CountriesTzLangProviderService } from 'src/app/services/countries-tz-lang-provider.service';
 
@@ -91,6 +94,8 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
                 this.userLastName = resp.lastName;
                 this.imagePath = resp.imagePath;
             });
+
+        this.authService.user.subscribe((user) => this.setImgPath(user));
     }
 
     onSubmit() {
@@ -116,10 +121,15 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
 
     setEmojiAvatar(emojiName: string) {
         this.http.post(
-            `http://localhost:5050/api/userprofile/setemoji/${emojiName}`,
+            `${environment.coreUrl}/api/userprofile/setemoji/${emojiName}`,
             emojiName,
             { responseType: 'text' },
-        ).subscribe(() => this.authService.loadUser().subscribe());
+        ).pipe(switchMap(async () => this.authService.loadUser().subscribe()))
+            .subscribe();
+    }
+
+    private setImgPath(user: UserShort) {
+        this.imagePath = user.imagePath;
     }
 
     get firstName(): FormControl {

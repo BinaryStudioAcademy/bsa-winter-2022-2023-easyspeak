@@ -42,13 +42,13 @@
             <div [matMenuTriggerFor]="menu" class="user-area">
                 <div class="user-avatar-placeholder">
                     <app-avatar
-                        [firstName]="authService.currentUser.firstName"
-                        [lastName]="authService.currentUser.lastName"
-                        [imagePath]="authService.currentUser.imagePath"
+                        [firstName]="currentUser.firstName"
+                        [lastName]="currentUser.lastName"
+                        [imagePath]="currentUser.imagePath"
                         [imageSize]="36">
                     </app-avatar>
                 </div>
-                <span>{{ authService.currentUser.firstName }} {{ authService.currentUser.lastName }}</span>
+                <span>{{ currentUser.firstName }} {{ currentUser.lastName }}</span>
                 <img src="/assets/header/chevron-down-icon.svg" />
                 <mat-menu class="user-menu" #menu="matMenu" xPosition="before">
                     <button [routerLink]="['/friends']" mat-menu-item class="menu-element">

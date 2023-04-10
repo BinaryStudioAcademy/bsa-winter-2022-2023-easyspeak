@@ -20,8 +20,6 @@ import { UserService } from './user.service';
 export class AuthService {
     user = new Subject<UserShort>();
 
-    currentUser: UserShort;
-
     constructor(
         private afs: AngularFirestore,
         private afAuth: AngularFireAuth,
@@ -80,7 +78,6 @@ export class AuthService {
     setLocalStorage(user: UserShort) {
         localStorage.setItem('user', JSON.stringify(user));
         this.user.next(user);
-        this.user.complete();
     }
 
     loadUser() {
@@ -94,12 +91,6 @@ export class AuthService {
                     isAdmin: resp.isAdmin,
                 };
 
-                this.currentUser = {
-                    email: user.email,
-                    firstName: user.firstName,
-                    lastName: user.lastName,
-                    imagePath: user.imagePath,
-                };
                 this.setLocalStorage(user);
             },
             (err: Error) => {

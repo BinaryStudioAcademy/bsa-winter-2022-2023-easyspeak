@@ -8,7 +8,7 @@
                 <app-avatar
                     [firstName]="userFirstName"
                     [lastName]="userLastName"
-                    [imagePath]="authService.currentUser!.imagePath"
+                    [imagePath]="imagePath"
                     [imageSize]="103">
                 </app-avatar>
             </div>
@@ -19,8 +19,8 @@
             <div class="vertical-line"></div>
         </div>
         <div class="avatar-list">
-            <div class="avatar-suggestion-wrp" (click)="setEmojiAvatar('boy')">
-                <img src="/assets/user-profile/boy.svg" alt=""/>
+            <div class="avatar-suggestion-wrp" (click)="setEmojiAvatar('man-young')">
+                <img src="/assets/user-profile/man-young.svg" alt=""/>
             </div>
             <div class="avatar-suggestion-wrp" (click)="setEmojiAvatar('man-bald')">
                 <img src="/assets/user-profile/man-bald.svg" alt=""/>

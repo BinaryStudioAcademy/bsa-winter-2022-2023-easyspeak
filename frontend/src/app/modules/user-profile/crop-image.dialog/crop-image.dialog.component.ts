@@ -3,7 +3,9 @@ import { Component, Inject, Input } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { BaseComponent } from '@core/base/base.component';
 import { AuthService } from '@core/services/auth.service';
+import { environment } from '@env/environment';
 import { base64ToFile, ImageCroppedEvent } from 'ngx-image-cropper';
+import { switchMap } from 'rxjs';
 
 import { UserDetailsComponent } from '../user-details/user-details/user-details.component';
 
@@ -49,10 +51,11 @@ export class CropImageDialogComponent extends BaseComponent {
             file.append(fileWithNormName.name, fileWithNormName);
 
             this.http.post(
-                'http://localhost:5050/api/userprofile',
+                `${environment.coreUrl}/api/userprofile`,
                 file,
                 { responseType: 'text' },
-            ).subscribe(() => this.authService.loadUser().subscribe());
+            ).pipe(switchMap(async () => this.authService.loadUser().subscribe()))
+                .subscribe();
 
             this.onNoClick();
         }
