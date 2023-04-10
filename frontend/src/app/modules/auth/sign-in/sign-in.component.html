@@ -14,7 +14,7 @@
                     (change)="ClearErrors()"/>
                 <div class="errors-wrp"  *ngFor="let cond of ['required','pattern'] ">
                     <mat-error class="error"
-                               *ngIf="CreateCondition(email,cond)">
+                               *ngIf="CheckCondition(email,cond)">
                         <img src="/assets/user-profile/alert-triangle.svg" alt="">
                         {{GetErrorMessageByKey('email'+cond)}}
                     </mat-error>
@@ -24,11 +24,12 @@
             <div class="form-group-item">
                 <input formControlName="password"
                        placeholder="Password"
+                       type="password"
                        appPasswordVisibility
                        (change)="ClearErrors()"/>
                 <div class="errors-wrp"  *ngFor="let cond of ['required','pattern'] ">
                     <mat-error class="error"
-                               *ngIf="CreateCondition(password,cond)">
+                               *ngIf="CheckCondition(password,cond)">
                         <img src="/assets/user-profile/alert-triangle.svg" alt="">
                         {{GetErrorMessageByKey('password'+cond)}}
                     </mat-error>

@@ -43,14 +43,8 @@ export class SignInComponent {
                     this.router.navigate(['timetable']);
                 })
                 .catch((error) => {
-                    let errorMessage: string | undefined;
+                    const errorMessage: string | undefined = this.getFireBaseMessage(error.code);
 
-                    if (error.code === 'auth/user-not-found') {
-                        errorMessage = this.GetErrorMessageByKey('notExists');
-                    }
-                    if (error.code === 'auth/wrong-password') {
-                        errorMessage = this.GetErrorMessageByKey('incorrectPassword');
-                    }
                     this.toastr.error(errorMessage, 'Sign up');
                 });
         }
@@ -83,15 +77,22 @@ export class SignInComponent {
         return Object.entries(validationErrorMessage).find(([t]) => t === id)?.[1];
     }
 
-    CreateCondition(contr: FormControl, cond: string) {
-        if (cond === 'required') {
-            const r = ((contr.errors?.[cond] && contr.touched) || contr.pristine) && this.isChanged;
-
-            return r;
+    getFireBaseMessage(code: string) {
+        switch (code) {
+            case 'auth/user-not-found':
+                return this.GetErrorMessageByKey('notExists');
+            case 'auth/wrong-password':
+                return this.GetErrorMessageByKey('incorrectPassword');
+            default: return undefined;
         }
+    }
 
+    CheckCondition(control: FormControl, cond: string) {
+        if (cond === 'required') {
+            return ((control.errors?.[cond] && control.touched) || control.pristine) && this.isChanged;
+        }
         if (cond === 'pattern') {
-            return contr.errors?.[cond] && this.isChanged;
+            return control.errors?.[cond] && this.isChanged;
         }
     }
 }
