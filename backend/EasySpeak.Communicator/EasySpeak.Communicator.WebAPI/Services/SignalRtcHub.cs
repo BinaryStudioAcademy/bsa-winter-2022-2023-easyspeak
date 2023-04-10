@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 
-namespace EasySpeak.Core.WebAPI.Hubs
+namespace EasySpeak.Communicator.WebAPI.Services
 {
     public class SignalRtcHub : Hub
     {

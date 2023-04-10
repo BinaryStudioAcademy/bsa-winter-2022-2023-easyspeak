@@ -24,10 +24,6 @@ export class UserCardComponent implements OnInit {
         this.user.tags = [...new Set(this.user.tags)];
     }
 
-    public getUserCountryFlag() {
-        return this.countriesService.getCountriesList().find((c) => c.name === this.user.country)?.flag;
-    }
-
     getUserFirstName(): string {
         return this.user.name.split(' ')[0];
     }
@@ -53,5 +49,9 @@ export class UserCardComponent implements OnInit {
         this.friendService.rejectFriendship({ email: this.user.email! }).subscribe(() => {
             this.user.userFriendshipStatus = UserFriendshipStatus.Regular;
         });
+    }
+
+    getFlag(): string | undefined {
+        return this.countriesService.getUserCountryFlag(this.user.country);
     }
 }

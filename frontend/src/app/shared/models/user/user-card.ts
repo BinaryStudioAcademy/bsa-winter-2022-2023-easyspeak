@@ -7,7 +7,7 @@ export enum UserFriendshipStatus {
 export interface UserCard {
     name: string,
     email?: string,
-    country?: string,
+    country: string,
     language?: string,
     imagePath: string,
     languageLevel: string

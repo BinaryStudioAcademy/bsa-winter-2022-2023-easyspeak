@@ -16,6 +16,12 @@
     flex-direction: column
     overflow: hidden
 
+.lesson-card-content
+    height: 160px
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+
 .photo
     position: relative
     display: flex
@@ -83,26 +89,35 @@
 
 .lesson-tutor
     position: relative
+    display: flex
+    flex-direction: row
+    align-items: center
 
     margin: 5px 0
 
 .avatar
     display: inline-block
 
-    width: 20px
-    height: 20px
+    width: 24px
+    height: 24px
+
+    font-size: 24px
 
     border-radius: 50%
+    overflow: hidden
 
 .origin
     position: absolute
 
     background-color: $white
 
-    border-radius: 90%
+    border-radius: 50%
 
-    left: 10px
-    top: 10px
+    height: 12px
+    width: 12px
+
+    top: 14px
+    left: 14px
 
 .tutor-name
     display: inline-block
@@ -133,6 +148,7 @@
 
 .lesson-topics
     display: flex
+    margin-top: 10px
     height: 25px
     width: 100%
     overflow-y: hidden
@@ -146,9 +162,9 @@
 
 .lesson-time
     font-style: normal
-    font-weight: 700
-    font-size: 14px
-    line-height: 146%
+    font-weight: 500
+    font-size: 16px
+    line-height: 24px
 
     color: $black-100
 
@@ -186,6 +202,13 @@
     display: flex
     align-items: center
 
+.teacher-time
+    height: 24px
+    margin: 5px 0
+
+.teacher-time-icon
+    margin-left: 0
+
 .lesson-preview
     display: flex
     width: 100%
@@ -195,7 +218,7 @@
     display: flex
     flex-direction: column
 
-.join
+.join, .cancel
     display: flex
     align-items: center
     justify-content: center
@@ -217,9 +240,10 @@
     color: $white
     cursor: pointer
 
-.join:disabled, .join[disabled]
+.join:disabled, .join[disabled], .cancel:disabled, .cancel[disabled]
     height: 25px
     background: $gray-200
+    cursor: default
 
 .expand
     display: inline-block
@@ -280,3 +304,24 @@
     align-items: center
     img
         padding: 0 7.25px
+
+.edit
+    display: flex
+    flex-direction: row
+    align-items: center
+
+    color: $blue-200
+    font-weight: 400
+    font-size: 14px
+
+    cursor: pointer
+
+.edit-icon
+    margin-right: 5px
+
+.edit-disabled
+    color: $gray-200
+    cursor: default
+
+.edit-disabled-icon    
+    filter: invert(98%) sepia(5%) saturate(1411%) hue-rotate(185deg) brightness(85%) contrast(91%)

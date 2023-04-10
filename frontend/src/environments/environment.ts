@@ -6,6 +6,7 @@ export const environment = {
     production: false,
     coreUrl: 'http://localhost:5050',
     notifierUrl: 'http://localhost:5070',
+    communicatorUrl: 'https://localhost:5080',
     iceServers: [{ urls: 'stun:stun.1.google.com:19302' }, { urls: 'stun:stun1.l.google.com:19302' }],
     firebaseConfig: {
         apiKey: 'AIzaSyAA-TlYaZVolTEKFa2lXEVHYYH5GvYS9oI',
