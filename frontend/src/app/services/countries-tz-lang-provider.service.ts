@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { rawTimeZones } from '@vvo/tzdb';
-import languagesLib from 'iso-639-1';
 import countriesLib from 'iso-3166-1';
 
 @Injectable({
@@ -19,20 +17,5 @@ export class CountriesTzLangProviderService {
 
     public getUserCountryFlag(country: string): string | undefined {
         return this.getCountriesList().find((c) => c.name === country)?.flag;
-    }
-
-    getTimeZonesList() {
-        const timezones = rawTimeZones.map((timezone) => ({
-            name: timezone.name,
-            offsetInMinutes: timezone.rawOffsetInMinutes, //Subtract this value before saving time to DB, and add it back when displaying
-        }));
-
-        return timezones;
-    }
-
-    getLanguagesList() {
-        const languages = languagesLib.getAllNames();
-
-        return languages;
     }
 }

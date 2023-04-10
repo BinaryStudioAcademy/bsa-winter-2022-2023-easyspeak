@@ -4,6 +4,7 @@ namespace EasySpeak.Core.Common.DTO.User;
 
 public class UserDto
 {
+    public long Id { get; set; }
     public string FirstName { get; set; } = String.Empty;
     public string LastName { get; set; } = String.Empty;
     public DateTime BirthDate { get; set; }

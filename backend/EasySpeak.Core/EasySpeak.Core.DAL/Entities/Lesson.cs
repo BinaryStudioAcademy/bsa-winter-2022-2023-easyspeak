@@ -17,7 +17,7 @@ namespace EasySpeak.Core.DAL.Entities
         public LanguageLevel LanguageLevel { get; set; }
 
         public ICollection<User> Subscribers { get; private set; }
-        public ICollection<Tag> Tags { get; private set; }
+        public ICollection<Tag> Tags { get; set; }
         public ICollection<Question> Questions { get; private set; }
 
         public Lesson()
