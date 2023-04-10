@@ -39,29 +39,23 @@ textarea:focus, input:focus
 
 .input-email
     width: 303px
-    height: 37px
+    height: 46px
     background-color: $white
     border-width: 0
     border-radius: 35px
     font-size: 14px
     padding-left: 19px
-    padding-top: 9px
     margin-bottom: 15px
     &:focus
         box-shadow: 0px 1px 4px rgba(97, 212, 246, 0.8)
 
+::placeholder
+    color: $gray-200
+    font-size: 14px
+    font-weight: 400
+
 .input-container
     position: relative
-    
-.label-input
-    position: absolute
-    top: 5px
-    left: 18px
-    font-size: 14px
-    color: $gray-200
-
-.font-12
-    font-size: 12px
 
 .button-send
     display: flex

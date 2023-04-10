@@ -16,6 +16,17 @@ namespace EasySpeak.Core.BLL.Helpers
             return dict[sex];
         }
 
+        public static string MapSexToString(Sex sex)
+        {
+            var dict = new Dictionary<Sex, string>{
+                        { Sex.Female, "Female" },
+                        { Sex.Male, "Male" },
+                        { Sex.NonBinary, "Non Binary" },
+                        { Sex.DoNotWantToSpecify, "Do not want to specify" } };
+
+            return dict[sex];
+        }
+
         public static LanguageLevel MapLanguageLevel(string level)
         {
             var dict = new Dictionary<string, LanguageLevel>{

@@ -42,15 +42,9 @@ export class LessonsPageComponent implements OnInit, OnChanges {
     ) {}
 
     ngOnInit(): void {
-        this.selectedDateFilter = new Date();
-
-        this.getLessons();
-
         this.lessonService.lessonAdded$.subscribe(() => {
             this.getLessons();
         });
-
-        this.todayDate = moment().format('DD MMMM YYYY, dddd');
 
         this.userIsAdmin = this.userService.isAdmin();
     }
@@ -90,7 +84,7 @@ export class LessonsPageComponent implements OnInit, OnChanges {
                 languageLevels: this.selectedLanguageFilters.map((level: string) =>
                     Object.values(LanguageLevels).indexOf(level)),
                 tags: this.selectedInterestsFilters.map((topic) => ({ name: topic })),
-                date: new Date(this.selectedDateFilter?.toISOString().slice(0, 10)),
+                date: new Date(this.selectedDateFilter.toISOString().slice(0, 10)),
             })
             .subscribe((response) => {
                 this.lessons = applyTimeOffset(response);

@@ -9,9 +9,6 @@ public static class Seeder
 {
     private static readonly DateTime DefaultDate = new DateTime(2023, 3, 30, 11, 0, 0, DateTimeKind.Utc);
     private static readonly Random Rnd = new Random(42);
-    private static readonly string[] AllTags = {
-        "Architecture", "Arts", "Cars", "Celebrities", "Cooking", "Dancing", "Ecology", "Design", "History", "Fashion",
-        "Medicine", "Technologies", "Pets", "Philosophy", "Photography", "Politics"};
 
     public static void Seed(ModelBuilder modelBuilder)
     {
@@ -138,11 +135,35 @@ public static class Seeder
 
     private static IList<Tag> GenerateTags()
     {
-        return AllTags.Select((t, i) => new Tag
+        var tags = new[]
         {
-            Id = ++i,
-            Name = t,
-            CreatedAt = DefaultDate
+            ("Arts", "ArtistPalette.svg", new DateTime(2023, 04, 05)),
+            ("Business", "Briefcase.svg", new DateTime(2023, 04, 05)),
+            ("Culture", "ClassicalBuilding.svg", new DateTime(2023, 04, 05)),
+            ("Education", "GraduationCap.svg", new DateTime(2023, 04, 05)),
+            ("Environment", "Kite.svg", new DateTime(2023, 04, 05)),
+            ("Fashion", "Dress.svg", new DateTime(2023, 04, 05)),
+            ("Food", "Sandwich.svg", new DateTime(2023, 04, 05)),
+            ("Health", "Dna.svg", new DateTime(2023, 04, 05)),
+            ("History", "CrossedSwords.svg", new DateTime(2023, 04, 05)),
+            ("Literature", "Books.svg", new DateTime(2023, 04, 05)),
+            ("Movies", "ClapperBoard.svg", new DateTime(2023, 04, 05)),
+            ("Music", "Drum.svg", new DateTime(2023, 04, 05)),
+            ("Nature", "FourLeafClover.svg", new DateTime(2023, 04, 05)),
+            ("Philosophy", "FaceWithMonocle.svg", new DateTime(2023, 04, 05)),
+            ("Politics", "TopHat.svg", new DateTime(2023, 04, 05)),
+            ("Science", "TestTube.svg", new DateTime(2023, 04, 05)),
+            ("Social Media", "MobilePhone.svg", new DateTime(2023, 04, 05)),
+            ("Storts", "BoxingGlove.svg", new DateTime(2023, 04, 05)),
+            ("Technologies", "Robot.svg", new DateTime(2023, 04, 05)),
+            ("Travel", "DesertIsland.svg", new DateTime(2023, 04, 05)),
+        };
+        return tags.Select((tag, i) => new Tag()
+        {
+            Id = i + 1,
+            Name = tag.Item1,
+            ImageUrl = tag.Item2,
+            CreatedAt = tag.Item3
         }).ToList();
     }
 
