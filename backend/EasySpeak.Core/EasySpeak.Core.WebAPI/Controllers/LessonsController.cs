@@ -42,5 +42,22 @@ namespace EasySpeak.Core.WebAPI.Controllers
             }
             return StatusCode(403);
         }
+        [HttpGet("statistics")]
+        public async Task<ActionResult<TeacherStatisticsDto>> GetTeacherLessonsStatisticsAsync() => Ok(await _lessonsService.GetTeacherLessonsStatisticsAsync());
+
+        [HttpGet("{start}/{end}")]
+        public Task<ICollection<DaysWithLessonsDto>> GetLessonsInPeriodAsync(DateTime start, DateTime end) 
+            => _lessonsService.GetLessonsInPeriodAsync(start, end);
+
+        [HttpPut("cancel/{id}")]
+        public async Task<ActionResult<LessonDto>> CancelLessonAsync(int id)
+        {
+            var lesson = await _lessonsService.CancelLessonAsync(id);
+            if (lesson is not null)
+            {
+                return Ok(lesson);
+            }
+            return BadRequest();
+        }
     }
 }

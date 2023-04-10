@@ -1,7 +1,4 @@
 <div class="container">
-    <div class="create-lesson" *ngIf="userIsAdmin">
-        <button class="create-lesson-button" (click)="openCreate()">+ Add Group Class</button>
-    </div>
     <div class="date-container">
         <h2 class="date">{{ todayDate }}</h2>
     </div>
@@ -9,12 +6,12 @@
     <div class="lessons-section" *ngIf="lessons">
         <div class="lessons-column">
             <div class="lesson" *ngFor="let lesson of lessonsColumn1">
-                <app-lesson [lesson]="lesson"></app-lesson>
+                <app-lesson [lesson]="lesson" [isTeachersPage]="false"></app-lesson>
             </div>
         </div>
         <div class="lessons-column">
             <div class="lesson" *ngFor="let lesson of lessonsColumn2">
-                <app-lesson [lesson]="lesson"></app-lesson>
+                <app-lesson [lesson]="lesson" [isTeachersPage]="false"></app-lesson>
             </div>
         </div>
     </div>

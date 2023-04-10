@@ -46,10 +46,26 @@ services:
       environment:
           ASPNETCORE_ENVIRONMENT: 'Development'
 
+  easyspeak_communicator:
+      build:
+        context: ./backend
+        dockerfile: ./EasySpeak.Communicator/Dockerfile
+        args:
+          - PROJECT_PORT=5080
+      container_name: 'easyspeak_communicator'
+      restart: on-failure
+      ports:
+          - "5080:5080"
+      networks:
+          - back
+      environment:
+          ASPNETCORE_ENVIRONMENT: 'Development'
+
   easyspeak_client:
     depends_on:
         - easyspeak_core
         - easyspeak_notifier
+        - easyspeak_communicator
     build:
         context: ./frontend
         dockerfile: Dockerfile.dev

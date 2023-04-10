@@ -83,4 +83,8 @@ export class UserCardComponent implements OnInit {
             this.user.userFriendshipStatus = UserFriendshipStatus.Regular;
         });
     }
+
+    getFlag(): string | undefined {
+        return this.countriesService.getUserCountryFlag(this.user.country);
+    }
 }
