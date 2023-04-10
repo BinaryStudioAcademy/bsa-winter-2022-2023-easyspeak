@@ -84,8 +84,8 @@ export class ChatPageComponent implements OnInit, OnDestroy {
         });
     }
 
-    ngOnDestroy(): void {
-        this.allMessagesSubscription.unsubscribe();
+    async ngOnDestroy(): Promise<void> {
+       await this.allMessagesSubscription.unsubscribe();
     }
 
     addMessage(msg: IMessage): void {
@@ -159,7 +159,6 @@ export class ChatPageComponent implements OnInit, OnDestroy {
     startSessionCall(): void {
         const videoCallId = crypto.randomUUID();
 
-        this.webrtcHub.callUser('stagetest@gmail.com', videoCallId);
-        this.router.navigate([`session-call/${videoCallId}`]);
+        this.webrtcHub.callUser(this.currentPerson.email, this.currentUser.email, videoCallId);
     }
 }
