@@ -21,7 +21,7 @@ namespace EasySpeak.Core.BLL.Services
 
             return await _context.Chats
                          .Include(chat => chat.Users)
-                         .Where(chat => chat.Users.Any(user => user.Id == _firebaseAuthService.UserId))
+                         .Where(chat => chat.Users.Any(user => user.Id ==  _firebaseAuthService.UserId))
                          .Include(chat => chat.Messages)
                          .Select(chat => new ChatPersonDto
                          {
@@ -49,7 +49,7 @@ namespace EasySpeak.Core.BLL.Services
                              LastName = chat.Users.FirstOrDefault(user => user.Id != id).LastName,
                              LastMessageDate = chat.Messages.Count() != 0 ? chat.Messages.Max(message => message.CreatedAt) : null,
                              IsRead = chat.Messages.Count() != 0 ? chat.Messages.Any(message => !message.IsRead) : null,
-                             LastMessage = chat.Messages.Count != 0 ? chat.Messages.OrderBy(message => message.CreatedAt).Last().Text : string.Empty,
+                             LastMessage = chat.Messages.Count() != 0 ? chat.Messages.OrderBy(message => message.CreatedAt).Last().Text : string.Empty,
                              NumberOfUnreadMessages = chat.Messages.Count() != 0 ? chat.Messages.Count(message => !message.IsRead && message.CreatedBy != id) : null,
                              ChatId = chat.Id,
                          })

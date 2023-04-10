@@ -55,6 +55,7 @@ export class ChatPageComponent implements OnInit, OnDestroy {
 
         this.httpService.get<IChatPerson[]>('/chat/lastSendMessages').subscribe((people) => {
             this.people = people;
+            console.log(this.people);
             this.chatHub.invoke(
                 'AddToGroup',
                 this.people.map(p => p.chatId),
