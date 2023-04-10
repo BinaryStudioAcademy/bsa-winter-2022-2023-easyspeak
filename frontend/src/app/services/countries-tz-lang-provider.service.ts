@@ -17,6 +17,10 @@ export class CountriesTzLangProviderService {
         return countries;
     }
 
+    public getUserCountryFlag(country: string): string | undefined {
+        return this.getCountriesList().find((c) => c.name === country)?.flag;
+    }
+
     getTimeZonesList() {
         const timezones = rawTimeZones.map((timezone) => ({
             name: timezone.name,

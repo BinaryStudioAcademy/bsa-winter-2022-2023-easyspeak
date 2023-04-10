@@ -24,12 +24,13 @@ Frontend:
 
 By default, apps run on the following ports:
 
-| Application            | Port |
-| ---------------------- | ---- |
-| EasySpeak.**Core**     | 5050 |
-| EasySpeak.**Notifier** | 5070 |
-| RabbitMQ               | 5672 |
-| EasySpeak.**Emailer**  | 5090 |
+| Application                 | Port |
+| --------------------------- | ---- |
+| EasySpeak.**Core**          | 5050 |
+| EasySpeak.**Notifier**      | 5070 |
+| EasySpeak.**Communicator**  | 5080 |
+| EasySpeak.**Emailer**       | 5090 |
+| RabbitMQ                    | 5672 |
 
 _Tip: If you want to connect to the specific service outside of docker, then use "localhost" as a service name, but if both services are inside docker, use service_name from a "docker-compose" file instead._
 

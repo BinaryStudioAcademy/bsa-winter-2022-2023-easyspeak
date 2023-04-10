@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using EasySpeak.Core.BLL.Helpers;
+using EasySpeak.Core.Common.DTO.Lesson;
 using EasySpeak.Core.Common.DTO.User;
 using EasySpeak.Core.DAL.Entities;
 
@@ -16,6 +17,8 @@ public class UserProfile : Profile
 
         CreateMap<User, UserDto>()
             .ForMember(userDto => userDto.Sex, src => src.MapFrom(user => EnumHelper.MapSexToString(user.Sex)));
+            
+        CreateMap<User, UserForLessonDto>();
 
         CreateMap<UserDto, User>()
             .ForMember(user => user.Sex, src => src.MapFrom(userDto => EnumHelper.MapSex(userDto.Sex)))
