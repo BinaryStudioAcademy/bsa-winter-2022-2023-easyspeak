@@ -11,7 +11,7 @@ export interface IUserInfo {
     language: string,
     sex: string,
     languageLevel: string,
-    birthDate: string,
+    birthDate: Date,
     topics?: ITopic[],
     imagePath: string,
     canOnlyFriendMessage: boolean,
