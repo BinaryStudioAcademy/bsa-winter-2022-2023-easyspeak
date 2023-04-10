@@ -7,12 +7,10 @@ using EasySpeak.Core.Common.DTO.Lesson;
 using EasySpeak.Core.Common.DTO.Rabbit;
 using EasySpeak.Core.Common.DTO.User;
 using EasySpeak.Core.Common.Enums;
-using EasySpeak.Core.Common.Options;
 using EasySpeak.Core.Common.DTO.Tag;
 using EasySpeak.Core.Common.DTO.UploadFile;
 using EasySpeak.Core.DAL.Context;
 using EasySpeak.Core.DAL.Entities;
-using EasySpeak.RabbitMQ.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -24,23 +22,21 @@ public class UserService : BaseService, IUserService
 {
     private readonly IEasySpeakFileService _fileService;
     private readonly IFirebaseAuthService _authService;
-    private readonly IMessageProducer _messageProducer;
-    private readonly RabbitQueuesOptions _rabbitQueues;
     private readonly IHttpClientFactory _clientFactory;
     private readonly RecommendationServiceOptions _recommendationServiceOptions;
+    private readonly QueriesSenderService _queriesSender;
     
     public UserService(IEasySpeakFileService fileService, EasySpeakCoreContext context, 
-            IMapper mapper, IFirebaseAuthService authService, IMessageProducer messageProducer,
-            IOptions<RabbitQueuesOptions> rabbitQueues, IHttpClientFactory clientFactory,
-            IOptions<RecommendationServiceOptions> recommendationServiceOptions)
+            IMapper mapper, IFirebaseAuthService authService, IHttpClientFactory clientFactory,
+            IOptions<RecommendationServiceOptions> recommendationServiceOptions,
+            QueriesSenderService queriesSender)
         : base(context, mapper)
     {
         _authService = authService;
         _fileService = fileService;
-        _messageProducer = messageProducer;
-        _rabbitQueues = rabbitQueues.Value;
         _clientFactory = clientFactory;
         _recommendationServiceOptions = recommendationServiceOptions.Value;
+        _queriesSender = queriesSender;
     }
 
     public async Task<UserDto> CreateUser(UserRegisterDto userDto)
@@ -51,7 +47,8 @@ public class UserService : BaseService, IUserService
 
         await _context.SaveChangesAsync();
 
-        void AfterMapAction(User user, UserDto dto) => SendAddUserQuery(user.Id, dto);
+        void AfterMapAction(User user, UserDto dto) 
+            => _queriesSender.SendAddUserQuery(user.Id, dto);
 
         return _mapper.Map<User, UserDto>(userEntity, opts => opts.AfterMap(AfterMapAction));
     }
@@ -82,8 +79,8 @@ public class UserService : BaseService, IUserService
         user!.Tags = await _context.Tags.Where(t => tagsNames.Contains(t.Name)).ToListAsync();
 
         await _context.SaveChangesAsync();
-
-        SendAddTagsQuery(user.Id, tags);
+        
+        _queriesSender.SendAddTagsQuery(user.Id, tags);
 
         return _mapper.Map<UserDto>(user);
     }
@@ -119,14 +116,19 @@ public class UserService : BaseService, IUserService
 
 
         var filteredUsersList = await filteredUsers.ToListAsync();
-        
+
+        return await AddCompatibility(filteredUsersList, filter.Compatibility);
+    }
+
+    private async Task<List<UserShortInfoDto>> AddCompatibility(List<User> users, int compatibility)
+    {
         var compatabilityInformation =
-            await GetRecommendedUsers(filter.Compatibility, filteredUsersList.Select(x => x.Id).ToList());
+            await GetRecommendedUsers(compatibility, users.Select(x => x.Id).ToList());
         
-        var compatibleUsers = filteredUsersList.Where(x => compatabilityInformation.ContainsKey(x.Id)).Select(x => x).ToList();
+        var compatibleUsers = users.Where(x => compatabilityInformation.ContainsKey(x.Id)).Select(x => x).ToList();
         
         var result = _mapper.Map<List<UserShortInfoDto>>(compatibleUsers);
-
+        
         foreach (var user in result)
         {
             user.Compatibility = compatabilityInformation[user.Id];
@@ -176,11 +178,7 @@ public class UserService : BaseService, IUserService
                 .FirstOrDefault(l => l.Id == lessonId)!.SbCount;
         }
 
-        var lessonDto = _mapper.Map<Lesson, LessonDto>(lesson, options => options.AfterMap(AfterMapAction));
-        
-        SendAddClassQuery(_authService.UserId, lessonDto);
-
-        return lessonDto;
+        return _mapper.Map<Lesson, LessonDto>(lesson, options => options.AfterMap(AfterMapAction));
     }
 
     public async Task<string> UploadProfilePhoto(IFormFile file)
@@ -272,46 +270,6 @@ public class UserService : BaseService, IUserService
 
         var userDto = _mapper.Map<UserDto>(user);
         return userDto;
-    }
-    
-    private void SendAddUserQuery(long id, UserDto user)
-    {
-        var queryParams = new RecommendationServiceMessageDto(QueryType.AddUser, user.ToDictionary());
-        
-        queryParams.Parameters.Add("id", id);
-        
-        SendQueryToRabbit(queryParams);
-    }
-
-    private void SendAddTagsQuery(long id, List<TagDto> tags)
-    {
-
-        var queryParams = new RecommendationServiceMessageDto()
-        {
-            Type = QueryType.AddTags,
-            Parameters = new Dictionary<string, object>()
-            {
-                {"id", id}
-            },
-            ParameterList = tags.Select(x => x.Name).ToArray()
-        };
-
-        SendQueryToRabbit(queryParams);
-    }
-
-    private void SendAddClassQuery(long id, LessonDto lesson)
-    {
-        var queryParams = new RecommendationServiceMessageDto(QueryType.StartClass, lesson.ToDictionary());
-        
-        queryParams.Parameters.Add("id", id);
-
-        SendQueryToRabbit(queryParams);
-    }
-    
-    private void SendQueryToRabbit(RecommendationServiceMessageDto data)
-    {
-        _messageProducer.Init(_rabbitQueues.RecommendationQueue, "");
-        _messageProducer.SendMessage(data);
     }
 
     private async Task<Dictionary<long, long>> GetRecommendedUsers(int compatibility, List<long> filteredUsers)

@@ -1,4 +1,5 @@
 using System.Data.Entity;
+using EasySpeak.Core.BLL.Options;
 using EasySpeak.Core.Common.DTO.Lesson;
 using EasySpeak.Core.Common.DTO.Rabbit;
 using EasySpeak.Core.Common.Enums;
@@ -18,14 +19,15 @@ public class LessonBackgroundService : BackgroundService
     private readonly IServiceProvider _services;
     private readonly IMessageProducer _messageProducer;
     private readonly RabbitQueuesOptions _rabbitQueues;
-    
+    private readonly LessonBackgroundOptions _options;
     
     public LessonBackgroundService(IServiceProvider services, IMessageProducer messageProducer,
-        IOptions<RabbitQueuesOptions> rabbitQueues)
+        IOptions<RabbitQueuesOptions> rabbitQueues, IOptions<LessonBackgroundOptions> options)
     {
         _services = services;
         _messageProducer = messageProducer;
         _rabbitQueues = rabbitQueues.Value;
+        _options = options.Value;
     }
     
     protected override async Task ExecuteAsync(CancellationToken cancellationToken)
@@ -39,7 +41,7 @@ public class LessonBackgroundService : BackgroundService
                 try
                 {
                     IAsyncEnumerable<Lesson> lessons = QueryableExtensions.Include(context.Lessons, l => l.Subscribers)
-                        .Where(l => l.IsCalculated == false && l.StartAt >= DateTime.Now && l.StartAt <= DateTime.Now.AddMinutes(30)).AsAsyncEnumerable();
+                        .Where(l => !l.IsCalculated && l.StartAt <= DateTime.Now).AsAsyncEnumerable();
 
                     await foreach (var lesson in lessons)
                     {
@@ -48,7 +50,7 @@ public class LessonBackgroundService : BackgroundService
                     }
                     
                     await context.SaveChangesAsync(cancellationToken);
-                    await Task.Delay(TimeSpan.FromMinutes(30), cancellationToken);
+                    await Task.Delay(TimeSpan.FromMinutes(_options.DelayInMinutes), cancellationToken);
                 }
                 catch (Exception ex)
                 {
@@ -56,8 +58,6 @@ public class LessonBackgroundService : BackgroundService
                 }
             }
         }
-        
-        await Task.Delay(TimeSpan.FromMinutes(30), cancellationToken);
     }
 
     private void SendLessonStartQuery(Lesson lesson)
