@@ -195,9 +195,10 @@ public class UserService : BaseService, IUserService
     {
         var userId = _authService.UserId;
 
-        userDto.Id = userId;
-
         var user = await _context.Users.Include(u => u.Tags).FirstOrDefaultAsync(a => a.Id == userId) ?? throw new ArgumentException($"Failed to find the user with id {userId}");
+
+        userDto.Id = user.Id;
+        userDto.IsAdmin = user.IsAdmin;
 
         _mapper.Map(userDto, user, opt => opt.AfterMap(SetUserTags));
 
