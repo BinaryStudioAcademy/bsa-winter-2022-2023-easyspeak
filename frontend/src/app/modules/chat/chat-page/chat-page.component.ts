@@ -3,7 +3,6 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ChatHubService } from '@core/hubs/chat-hub.service';
 import { WebrtcHubService } from '@core/hubs/webrtc-hub.service';
-import { AuthService } from '@core/services/auth.service';
 import { HttpService } from '@core/services/http.service';
 import { ScrollToBottomDirective } from '@shared/directives/scroll-to-bottom-directive';
 import { IChatPerson } from '@shared/models/chat/IChatPerson';
