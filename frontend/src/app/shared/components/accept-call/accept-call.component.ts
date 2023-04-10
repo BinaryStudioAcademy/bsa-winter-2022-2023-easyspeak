@@ -16,7 +16,12 @@ export class AcceptCallComponent {
         private webRtcHub: WebrtcHubService,
     ) {}
 
-    answerCall() {
+    async answerCall() {
+        await this.webRtcHub.acceptCall(this.data.content as string, this.data.header as string);
         this.router.navigate([`session-call/${this.data.header}`]);
+    }
+
+    async rejectCall() {
+        await this.webRtcHub.rejectCall(this.data.content as string);
     }
 }
