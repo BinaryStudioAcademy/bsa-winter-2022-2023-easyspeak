@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '@core/services/auth.service';
-import { UserShort } from '@shared/models/UserShort';
+import { IUserShort } from '@shared/models/IUserShort';
 
 import { UserNotificationComponent } from '../user-notification/user-notification.component';
 
@@ -14,7 +14,7 @@ export class HeaderComponent implements OnInit {
 
     constructor(public authService: AuthService) {}
 
-    currentUser: UserShort;
+    currentUser: IUserShort;
 
     ngOnInit(): void {
         this.authService.loadUser().subscribe();
@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
         this.authService.user.subscribe((user) => this.setCurrentUser(user));
     }
 
-    private setCurrentUser(user: UserShort) {
+    private setCurrentUser(user: IUserShort) {
         this.currentUser = {
             email: user.email,
             firstName: user.firstName,

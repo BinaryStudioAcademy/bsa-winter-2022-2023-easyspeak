@@ -12,9 +12,9 @@ import { LanguageLevel } from '@shared/data/languageLevel';
 import { Sex } from '@shared/data/sex';
 import { IIcon } from '@shared/models/IIcon';
 import { IUserInfo } from '@shared/models/IUserInfo';
+import { IUserShort } from '@shared/models/IUserShort';
 import { IBaseTag } from '@shared/models/user/IBaseTag';
 import { ITag } from '@shared/models/user/ITag';
-import { UserShort } from '@shared/models/UserShort';
 import { ToastrService } from 'ngx-toastr';
 import { switchMap } from 'rxjs';
 
@@ -137,7 +137,7 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
             .subscribe();
     }
 
-    private setImgPath(user: UserShort) {
+    private setImgPath(user: IUserShort) {
         this.imagePath = user.imagePath;
     }
 
