@@ -18,8 +18,7 @@ type FilterOption = 'compatibility' | 'lang' | 'level' | 'topic';
     styleUrls: ['./filter-section.component.sass'],
 })
 export class FilterSectionComponent implements OnInit {
-    public constructor(private dataService: DataService, private languageTimezone: CountriesTzLangProviderService) {
-    }
+    public constructor(private dataService: DataService) {}
 
     resetFiltersEvent: Subject<void> = new Subject<void>();
 
@@ -49,10 +48,8 @@ export class FilterSectionComponent implements OnInit {
         this.topics = topicsSample;
         this.langLevels = langLevelsSample;
         this.compatibilities = compatibilities.map((c) => ({ title: c.toString() }));
-        this.languages = this.languageTimezone.getLanguagesList().map((language) => ({ title: language }));
-        this.compatibilities = compatibilities.map(c => ({ title: c.toString() }));
         this.userFilters = {} as UserFilter;
-        this.dataService.getAllLanguages().subscribe(languages => {
+        this.dataService.getAllLanguages().subscribe((languages) => {
             this.languages = languages.map((l): Filter => ({ title: l }));
         });
     }
