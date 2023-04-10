@@ -194,6 +194,9 @@ public class UserService : BaseService, IUserService
     public async Task<UserDto> UpdateUser(UserDto userDto)
     {
         var userId = _authService.UserId;
+
+        userDto.Id = userId;
+
         var user = await _context.Users.Include(u => u.Tags).FirstOrDefaultAsync(a => a.Id == userId) ?? throw new ArgumentException($"Failed to find the user with id {userId}");
 
         _mapper.Map(userDto, user, opt => opt.AfterMap(SetUserTags));
