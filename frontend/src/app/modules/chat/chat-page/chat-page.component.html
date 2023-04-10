@@ -1,10 +1,9 @@
-<app-header></app-header>
 <main>
     <aside>
         <div class="message-header">
             <span class="message-span">Messages</span>
             <div class="total-number-of-messages">
-                <span>{{lotsOfMessages(totalMessage)}}</span>
+                <span>{{lotsOfMessages(getTotalUnreadMessages())}}</span>
             </div>
         </div>
         <mat-form-field appearance="fill">
@@ -21,7 +20,7 @@
                   'read': !person.numberOfUnreadMessages
                 }"
                  *ngFor="let person of people"
-                >
+                (click)="getChat(person)">
                 <div class="img-name-status-time">
                     <div class="img-name-status">
                         <div class="img-online">
@@ -32,11 +31,11 @@
                              }"></div>
                         </div>
                         <div class="name-status">
-                            <span class="person-name">{{person.name}}</span>
+                            <span class="person-name">{{person.firstName}} {{person.lastName}}</span>
                             <span class="person-online">{{person.isOnline ? 'online' : 'offline'}}</span>
                         </div>
                     </div>
-                    <span>12:00</span>
+                    <span>{{person.lastMessageDate | date: 'HH:mm'}}</span>
                 </div>
                 <div class="last-message-total">
                     <span class="last-message">{{person.lastMessage}}</span>
@@ -47,11 +46,14 @@
             </div>
         </div>
     </aside>
-    <div class="container">
+    <div class="container" *ngIf="currentPerson">
         <header>
             <div class="interlocutor">
-                <div class="online"></div>
-                <span class="person-name">Giana Levin</span>
+                <div [ngClass]="{
+                'online': currentPerson.isOnline,
+                'offline': !currentPerson.isOnline
+                }"></div>
+                <span class="person-name">{{currentPerson.firstName}} {{currentPerson.lastName}}</span>
             </div>
             <div class="buttons">
                 <button class="send-button" (click)="startSessionCall()">
@@ -62,8 +64,17 @@
                 </button>
             </div>
         </header>
-        <div class="chat-body" #scrollMe [scrollTop]="scrollMe.scrollHeight" *ngIf="messages">
-            <app-message-group *ngFor="let message of groupedMessages; index as i" [message]="message" [i]="i" [messages]="groupedMessages"></app-message-group>
+        <div class="chat-body" #scrollMe [scrollTop]="scrollMe.scrollHeight" *ngIf="groupedMessages.length > 0">
+            <app-message-group
+                *ngFor="let message of groupedMessages; index as i"
+                [message]="message"
+                [i]="i"
+                [currentUser]="currentUser"
+            >
+            </app-message-group>
+        </div>
+        <div class="chat-body" #scrollMe [scrollTop]="scrollMe.scrollHeight" *ngIf="groupedMessages.length === 0">
+            <span>No messages in this chat :( <br> Say 'Hi 👋' to your friend!</span>
         </div>
         <div class="chat-input">
             <form [formGroup]="form" (ngSubmit)="sendMessage()">
@@ -82,5 +93,8 @@
                 <button type="submit" class="send-message">Send</button>
             </form>
         </div>
+    </div>
+    <div class="container-empty" *ngIf="!currentPerson">
+        <span>Select a chat</span>
     </div>
 </main>
