@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BaseComponent } from '@core/base/base.component';
 import { NotificationsHubService } from '@core/hubs/notifications-hub.service';
@@ -25,6 +25,7 @@ export class UserNotificationComponent extends BaseComponent implements OnInit, 
         notificationsHub: NotificationsHubService,
         private notificationService: NotificationService,
         private router: Router,
+        private cdRef: ChangeDetectorRef,
     ) {
         super();
         this.notificationsHub = notificationsHub;
@@ -37,9 +38,11 @@ export class UserNotificationComponent extends BaseComponent implements OnInit, 
     }
 
     async getNotifications() {
-        this.notifySubscription = await this.notificationService.getNotifications().subscribe((data) => {
-            this.notifications = data;
-        });
+        this.notifySubscription = await this.notificationService.getNotifications()
+            .pipe(this.untilThis)
+            .subscribe((data) => {
+                this.notifications = data;
+            });
     }
 
     async setUpHub() {
@@ -58,6 +61,8 @@ export class UserNotificationComponent extends BaseComponent implements OnInit, 
             };
 
             this.notifications.push(messages);
+            console.log(messages);
+            this.cdRef.detectChanges();
         });
     }
 
