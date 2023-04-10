@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { CoreHubFactoryService } from '@core/hubs/hubFactories/core-hub-factory.service';
 import { HubConnection, HubConnectionState } from '@microsoft/signalr';
 import { AcceptCallComponent } from '@shared/components/accept-call/accept-call.component';
 import { IModal } from '@shared/models/IModal';
 import { Subject, Subscription } from 'rxjs';
+import { WebrtcHubFactoryService } from './hubFactories/webrtc-hub-factory.service';
 
 @Injectable({
     providedIn: 'root',
@@ -18,7 +18,7 @@ export class WebrtcHubService {
 
     private subscriptions: Subscription[] = [];
 
-    constructor(private hubFactory: CoreHubFactoryService, private dialogRef: MatDialog) {}
+    constructor(private hubFactory: WebrtcHubFactoryService, private dialogRef: MatDialog) {}
 
     async start() {
         if (!this.hubConnection || this.hubConnection.state === HubConnectionState.Disconnected) {

@@ -43,6 +43,7 @@ export class SessionCallComponent implements OnInit, OnDestroy {
 
     async ngOnInit() {
         // #1 connect to signaling server
+        await this.webrtcHub.start();
         // #2 define signaling communication
         this.callCreateOrJoinRoom();
         this.setActionsForMessages();
