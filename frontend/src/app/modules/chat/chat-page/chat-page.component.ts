@@ -36,22 +36,17 @@ export class ChatPageComponent implements OnInit, OnDestroy {
         private router: Router,
         private httpService: HttpService,
         private chatHub: ChatHubService,
-        private authService: AuthService,
         private webrtcHub: WebrtcHubService,
     ) {
 
     }
 
     async ngOnInit() {
-        await this.webrtcHub.start();
-
-        this.authService.loadUser().subscribe();
-
-        this.authService.user.subscribe((user) => {
-            this.currentUser = user;
-        });
+        this.currentUser = JSON.parse(localStorage.getItem('user') as string);
 
         await this.chatHub.start();
+
+        await this.webrtcHub.start();
 
         this.httpService.get<IChatPerson[]>('/chat/lastSendMessages').subscribe((people) => {
             this.people = people;
@@ -113,6 +108,7 @@ export class ChatPageComponent implements OnInit, OnDestroy {
     }
 
     getChat(person: IChatPerson) {
+        console.log(person);
         this.httpService.get<IMessageGroup[]>(`/chat/chatMessages/${person.chatId}`).subscribe((groupedMessages) => {
             this.groupedMessages = groupedMessages.map((messageGroup): IMessageGroup => ({
                 date: new Date(messageGroup.date),

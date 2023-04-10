@@ -1,5 +1,6 @@
 export interface IChatPerson {
-    firstName: string
+    id?: number,
+    firstName: string,
     lastName: string,
     isOnline: boolean,
     lastMessage: string,
