@@ -27,7 +27,7 @@
 
 .networks
     display: flex
-    gap: 5px
+    gap: 8px
     height: 24px
     justify-content: flex-end
 
@@ -60,22 +60,60 @@
     align-items: center
     gap: 4px
     color: $gray-300
+    img
+        width: 24px
+        height: 24px
+        border-radius: 50%
+        box-shadow: 0 0 1px 1px $gray-200
+    
+.img-wrap 
+    position: relative
+    height: 200px
+    width: 257px
+
+.img-wrap:hover .img-description 
+    visibility: visible
+    opacity: 1
+
+.img-description 
+    z-index: 10
+    position: absolute
+    width: fit-content
+    padding: 2px 4px 2px 4px
+    height: calc(100% + 4px)
+    box-shadow: 1px 2px 5px 0px $turquoise-100
+    border-radius: 15px
+    top: calc(100% + 4px)
+    bottom: 0
+    left: 0
+    right: 0
+    background: $blue-200
+    color: $white
+    visibility: hidden
+    opacity: 0
+    transition: opacity .2s, visibility .2s
 
 .flag
     height: 25px
     border-radius: 15px
 
 .social-icon
-    height: 24px
-    width: 24px
+    position: relative
+    height: 22px
+    width: 22px
     background-color: $turquoise-100
     border-radius: 50%
     display: flex
     justify-content: center
     align-items: center
-    padding: 2px
+    padding: 0
     stroke-width: 1.5
     stroke: $blue-200
+    img
+        height: 24px
+        width: 24px
+        border-radius: 50%
+        box-shadow: 0 0 1px 1px $gray-200
 
 .fill-remaining-space
     flex: auto
@@ -153,13 +191,15 @@
     background: $white
     border: 1px solid $blue-200
     border-radius: 24px
-    padding: 8px 16px
+    padding: 8px 12px
+    &:hover
+        cursor: pointer
+        box-shadow: 0px 1px 3px -2px $selected-color
+
+.button-gray
+    background: $gray-200
 
 .accept-button
     color: white
     background: $blue-200
-
-.button:hover
-    cursor: pointer
-    box-shadow: 0px 1px 3px -2px $selected-color
 
