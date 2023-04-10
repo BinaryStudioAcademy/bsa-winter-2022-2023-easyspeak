@@ -11,12 +11,12 @@
                     formControlName="email"
                     placeholder="Email"
                     value="{{this.email}}"
-                    (change)="ClearErrors()"/>
-                <div class="errors-wrp"  *ngFor="let cond of ['required','pattern'] ">
+                    (keyup)="ClearErrors()"/>
+                <div class="errors-wrp"  *ngFor="let condition of ['required','pattern'] ">
                     <mat-error class="error"
-                               *ngIf="CheckCondition(email,cond)">
+                               *ngIf="CheckCondition(email,condition)">
                         <img src="/assets/user-profile/alert-triangle.svg" alt="">
-                        {{GetErrorMessageByKey('email'+cond)}}
+                        {{GetErrorMessageByKey('email'+condition)}}
                     </mat-error>
                 </div>
             </div>
@@ -26,12 +26,12 @@
                        placeholder="Password"
                        type="password"
                        appPasswordVisibility
-                       (change)="ClearErrors()"/>
-                <div class="errors-wrp"  *ngFor="let cond of ['required','pattern'] ">
+                       (keyup)="ClearErrors()"/>
+                <div class="errors-wrp"  *ngFor="let condition of ['required','pattern'] ">
                     <mat-error class="error"
-                               *ngIf="CheckCondition(password,cond)">
+                               *ngIf="CheckCondition(password,condition)">
                         <img src="/assets/user-profile/alert-triangle.svg" alt="">
-                        {{GetErrorMessageByKey('password'+cond)}}
+                        {{GetErrorMessageByKey('password'+condition)}}
                     </mat-error>
                 </div>
             </div>
