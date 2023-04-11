@@ -78,7 +78,6 @@ export class AuthService {
     setLocalStorage(user: IUserShort) {
         localStorage.setItem('user', JSON.stringify(user));
         this.user.next(user);
-        this.user.complete();
     }
 
     loadUser() {

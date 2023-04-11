@@ -170,6 +170,8 @@ namespace EasySpeak.Core.BLL.Services
                     (n, f) => new NotificationDto()
                     {
                         Id = n.Notification.Id,
+                        FirstName = n.Notification.User.FirstName,
+                        LastName = n.Notification.User.LastName,
                         CreatedAt = n.Notification.CreatedAt,
                         IsRead = n.Notification.IsRead,
                         Text = n.Notification.Text,
