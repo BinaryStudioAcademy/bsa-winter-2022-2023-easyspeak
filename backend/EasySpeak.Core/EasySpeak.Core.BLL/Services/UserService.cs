@@ -30,7 +30,6 @@ public class UserService : BaseService, IUserService
             IMapper mapper, IFirebaseAuthService authService, IHttpClientFactory clientFactory,
             IOptions<RecommendationServiceOptions> recommendationServiceOptions,
             QueriesSenderService queriesSender)
-        : base(context, mapper)
     {
         _authService = authService;
         _fileService = fileService;
@@ -63,7 +62,7 @@ public class UserService : BaseService, IUserService
             return userDto;
         }
 
-        userDto.ImagePath = await GetProfileImageUrl(user!.ImageId);
+        userDto.ImagePath = user!.EmojiName != string.Empty ? user!.EmojiName : await GetProfileImageUrl(user!.ImageId);
 
         return userDto;
     }
@@ -90,8 +89,8 @@ public class UserService : BaseService, IUserService
         var users = _context.Users
             .Include(u => u.Tags)
             .Include(u => u.Image)
-            .Where(u => 
-                !_context.Friends.Any(f=>
+            .Where(u =>
+                !_context.Friends.Any(f =>
                     (f.UserId == _authService.UserId || f.RequesterId == _authService.UserId)
                     && (f.UserId == u.Id || f.RequesterId == u.Id)
                     && f.FriendshipStatus != FriendshipStatus.Rejected)
@@ -181,14 +180,27 @@ public class UserService : BaseService, IUserService
         return _mapper.Map<Lesson, LessonDto>(lesson, options => options.AfterMap(AfterMapAction));
     }
 
+    public async Task<string> UploadEmojiAvatar(string emojiName)
+    {
+        var user = await GetCurrentUser();
+
+        if(user.ImageId is not null)
+        {
+            await _fileService.DeleteFileAsync((long)user.ImageId);
+
+            user.ImageId = null;
+            await _context.SaveChangesAsync();
+        }
+         
+        user.EmojiName = emojiName;
+        await _context.SaveChangesAsync();
+
+        return user.EmojiName;
+    }
+
     public async Task<string> UploadProfilePhoto(IFormFile file)
     {
-        var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == _authService.UserId);
-
-        if (user == null)
-        {
-            throw new ArgumentNullException("This user not found");
-        }
+        var user = await GetCurrentUser();
 
         var fileDto = new NewEasySpeakFileDto()
         {
@@ -204,11 +216,18 @@ public class UserService : BaseService, IUserService
             throw new ArgumentNullException("This file not found");
         }
 
+        user.EmojiName = string.Empty;
         user.ImageId = uploadFileDto.Id;
         profilePhoto.UserId = user.Id;
         await _context.SaveChangesAsync();
 
         return profilePhoto.Url;
+    }
+
+    private async Task<User> GetCurrentUser()
+    {
+        return await _context.Users.FirstOrDefaultAsync(u => u.Id == _authService.UserId) 
+            ?? throw new ArgumentNullException("This user not found");
     }
 
     private async Task<string> GetProfileImageUrl(long? imageId)
@@ -298,7 +317,7 @@ public class UserService : BaseService, IUserService
 
     public async Task<long> GetUserIdByEmail(string email)
     {
-        var user = await _context.Users.FirstOrDefaultAsync(user=>user.Email == email);
+        var user = await _context.Users.FirstOrDefaultAsync(user => user.Email == email);
         return user is null ? 0 : user.Id;
 
     }

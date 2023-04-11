@@ -11,7 +11,14 @@
         <div class="notification-element" *ngFor="let notification of notifications" (click)="readNotification(notification)">
             <div class="notification-element-content">
                 <div class="author-icon-wrp">
-                    <img [src]="notification.imagePath" class="author-icon">
+                    <div class="author-icon">
+                        <app-avatar
+                            [firstName]="notification.firstName"
+                            [lastName]="notification.lastName"
+                            [imagePath]="notification.imagePath"
+                            [imageSize]="36">
+                        </app-avatar>
+                    </div>
                     <div class="notification-type-icon">
                         <img [src]="getNotificationTypeIcon(notification.type)">
                     </div>

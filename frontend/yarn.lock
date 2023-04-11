@@ -6895,6 +6895,13 @@ neo-async@^2.6.2:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
+ngx-image-cropper@^6.3.2:
+  version "6.3.2"
+  resolved "https://registry.yarnpkg.com/ngx-image-cropper/-/ngx-image-cropper-6.3.2.tgz#732acb53594ebe2143318bd78108d6db9b27433f"
+  integrity sha512-w24kxXyXxwLdnaZlaIG8KI71sdw4vp+O7uYLTaWmxAbFOKOv9o6ko2CmtC7u5B3jXD0OuOzQgJJSGkJZZbnNcA==
+  dependencies:
+    tslib "^2.3.0"
+
 ngx-toastr@^16.1.0:
   version "16.1.0"
   resolved "https://registry.yarnpkg.com/ngx-toastr/-/ngx-toastr-16.1.0.tgz#cd0264e8f48cddc802dafb6e8413a10465df6b01"
