@@ -40,6 +40,8 @@ namespace EasySpeak.Core.WebAPI.Extensions
             services.AddFirebaseApp();
             services.AddScoped<INotificationService, NotificationService>();
             services.Configure<RabbitQueuesOptions>(configuration.GetSection("RabbitQueues"));
+            services.Configure<LessonSchedulerOptions>(configuration.GetSection("LessonSchedulerOptions"));
+            services.AddHostedService<LessonSchedulerService>();
         }
 
         public static void AddAutoMapper(this IServiceCollection services)
