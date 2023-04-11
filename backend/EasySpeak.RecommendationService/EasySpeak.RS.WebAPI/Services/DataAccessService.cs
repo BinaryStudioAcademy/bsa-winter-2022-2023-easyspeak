@@ -41,5 +41,6 @@ public class DataAccessService : IDataAccessService
     async ValueTask IAsyncDisposable.DisposeAsync()
     {
         await _session.CloseAsync();
+        GC.SuppressFinalize(this);
     }
 }
