@@ -86,9 +86,6 @@ export class SessionCallComponent implements OnInit, OnDestroy {
     async ngOnDestroy() {
         await this.hangup();
         this.stopAllVideoAndAudioTracks();
-        await this.webrtcHub.endCall(this.room);
-        await this.webrtcHub.invoke('LeaveRoom', this.room);
-
     }
 
     private stopAllVideoAndAudioTracks() {
@@ -269,14 +266,17 @@ export class SessionCallComponent implements OnInit, OnDestroy {
         this.remoteVideo.nativeElement.muted = false;
     }
 
+    closeModal(): void {
+        this.dialogRef.closeAll();
+    }
+
     /**
      * When local user disconnected
      */
     async hangup(): Promise<void> {
         this.stopPeerConnection();
-        //await this.webrtcHub.endCall(this.room);
-        this.dialogRef.closeAll();
-        //await this.webrtcHub.invoke('LeaveRoom', this.room);
+        this.sendMessage('bye');
+        await this.webrtcHub.invoke('LeaveRoom', this.room);
     }
 
     /**
@@ -286,6 +286,7 @@ export class SessionCallComponent implements OnInit, OnDestroy {
         this.stopPeerConnection();
         this.isInitiator = true;
         this.snack.open('Remote client has left the call.', 'Dismiss', { duration: 5000 });
+        this.dialogRef.closeAll();
     }
 
     stopPeerConnection(): void {
