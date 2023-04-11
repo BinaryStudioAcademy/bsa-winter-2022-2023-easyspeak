@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
     styleUrls: ['./user-password-change.component.sass'],
 })
 export class UserPasswordChangeComponent {
+    currentPassword: string;
 
+    newPassword: string;
+
+    repeatPassword: string;
 }
