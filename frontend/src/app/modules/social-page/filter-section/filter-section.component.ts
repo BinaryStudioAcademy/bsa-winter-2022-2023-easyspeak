@@ -3,7 +3,6 @@ import { DataService } from '@core/services/data.service';
 import {
     compatibilities,
     langLevelsSample,
-    topicsSample,
 } from '@modules/filter-section/filter-section/filter-section.util';
 import { IIcon } from '@shared/models/IIcon';
 import { Subject } from 'rxjs';
