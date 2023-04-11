@@ -1,5 +1,5 @@
 import { Component, ElementRef, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { WebrtcHubService } from '@core/hubs/webrtc-hub.service';
 import { WebrtcUtils } from '@core/services/webrtc-utils.service';
@@ -38,7 +38,7 @@ export class SessionCallComponent implements OnInit, OnDestroy {
         @Inject(MAT_DIALOG_DATA) public callInfo: ICallInfo,
         private webrtcHub: WebrtcHubService,
         private snack: MatSnackBar,
-        private dialogRef: MatDialog,
+        private dialogRef: MatDialogRef<SessionCallComponent>,
     ) { }
 
     async ngOnInit() {
@@ -267,7 +267,7 @@ export class SessionCallComponent implements OnInit, OnDestroy {
     }
 
     closeModal(): void {
-        this.dialogRef.closeAll();
+        this.dialogRef.close();
     }
 
     /**
@@ -286,7 +286,7 @@ export class SessionCallComponent implements OnInit, OnDestroy {
         this.stopPeerConnection();
         this.isInitiator = true;
         this.snack.open('Remote client has left the call.', 'Dismiss', { duration: 5000 });
-        this.dialogRef.closeAll();
+        this.dialogRef.close();
     }
 
     stopPeerConnection(): void {
