@@ -93,6 +93,7 @@ export class WebrtcHubService {
             'accept',
             (chatId: number, callerId: number, calleeEmail: string, calleeFullName: string, roomName: string) => {
                 const config: MatDialogConfig<ICallInfo> = {
+                    minWidth: '100vw',
                     data: {
                         chatId,
                         callerId,
