@@ -30,7 +30,13 @@ export class AuthService {
         private userService: UserService,
         private toastr: NotificationService,
         private webRtcHub: WebrtcHubService,
-    ) {}
+    ) {
+        this.afAuth.onIdTokenChanged(user => {
+            if (user) {
+                this.setAccessToken(user);
+            }
+        });
+    }
 
     async handleUserCredential(userCredential: firebase.auth.UserCredential) {
         if (userCredential.user) {
@@ -117,6 +123,21 @@ export class AuthService {
 
         return !this.jwtHelper.isTokenExpired(token);
     }
+
+    // public async refreshToken(): Promise<string> {
+    //     this.afs.collection('users').get().subscribe(console.log);
+    //     const user = await this.afAuth.currentUser;
+    //
+    //     if (user) {
+    //         const newToken = await user.getIdToken(true);
+    //
+    //         console.log(newToken);
+    //     } else {
+    //         console.log('user was null');
+    //     }
+    //
+    //     return '';
+    // }
 
     logout(): Promise<void> {
         const user: IUserShort = JSON.parse(localStorage.getItem('user') as string);
