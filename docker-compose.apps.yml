@@ -60,10 +60,6 @@ services:
           - back
         environment:
           ASPNETCORE_ENVIRONMENT: 'Development'
-          RecommendationService_Connection: 'bolt://localhost:7687'
-          RecommendationService_User: 'neo4j'
-          RecommendationService_Password: 'e3hfuTFgkUYa4WanMbnlZUseHmmBtC1q'
-          RecommendationService_Database: 'neo4j'
 
   easyspeak_communicator:
       build:
