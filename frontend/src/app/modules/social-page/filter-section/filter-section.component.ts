@@ -99,7 +99,7 @@ export class FilterSectionComponent implements OnInit {
 
     updateTopics(eventData: IIcon[]) {
         this.selectedTopicsFilters = eventData;
-        this.userFilters.topics = this.selectedTopicsFilters;
+        this.userFilters.topics = this.selectedTopicsFilters.map(f => ({ id: f.id }));
         this.filterChange.emit(this.userFilters);
     }
 

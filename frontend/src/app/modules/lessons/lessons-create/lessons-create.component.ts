@@ -122,7 +122,7 @@ export class LessonsCreateComponent implements OnInit {
             languageLevel: Object.values(LanguageLevels).indexOf(this.level),
             startAt,
             questions: lessonQuestions,
-            tags: lessonTags,
+            tags: lessonTags.map(f => ({ id: f.id })),
             limitOfUsers: parseInt(this.studentsCount?.value, 10),
             youtubeVideoId: this.getYoutubeVideoId(this.videoLink?.value),
         };

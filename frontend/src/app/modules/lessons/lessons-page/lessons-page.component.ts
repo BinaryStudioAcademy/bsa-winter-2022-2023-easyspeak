@@ -84,7 +84,7 @@ export class LessonsPageComponent implements OnInit, OnChanges {
             .getFilteredLessons({
                 languageLevels: this.selectedLanguageFilters.map((level: string) =>
                     Object.values(LanguageLevels).indexOf(level)),
-                tags: this.selectedInterestsFilters,
+                tags: this.selectedInterestsFilters.map(f => ({ id: f.id })),
                 date: new Date(this.selectedDateFilter.toISOString().slice(0, 10)),
             })
             .subscribe((response) => {
