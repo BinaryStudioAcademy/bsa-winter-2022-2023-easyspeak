@@ -3,7 +3,6 @@ import { INewTag } from './INewTag';
 
 export interface INewLesson {
     name: string,
-    description: string,
     mediaPath: string,
     languageLevel: number,
     startAt: Date,
