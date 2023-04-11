@@ -45,7 +45,7 @@ export class SessionCallComponent implements OnInit, OnDestroy {
         this.room = this.callInfo.roomName;
         this.remoteName = this.callInfo.remoteName;
         // #1 connect to signaling server
-        await this.webrtcHub.start();
+        // await this.webrtcHub.start();
         // #2 define signaling communication
         this.callCreateOrJoinRoom();
         this.setActionsForMessages();
@@ -86,6 +86,9 @@ export class SessionCallComponent implements OnInit, OnDestroy {
     async ngOnDestroy() {
         await this.hangup();
         this.stopAllVideoAndAudioTracks();
+        await this.webrtcHub.endCall(this.room);
+        await this.webrtcHub.invoke('LeaveRoom', this.room);
+
     }
 
     private stopAllVideoAndAudioTracks() {
@@ -271,9 +274,9 @@ export class SessionCallComponent implements OnInit, OnDestroy {
      */
     async hangup(): Promise<void> {
         this.stopPeerConnection();
-        await this.webrtcHub.endCall(this.room);
+        //await this.webrtcHub.endCall(this.room);
         this.dialogRef.closeAll();
-        await this.webrtcHub.invoke('LeaveRoom', this.room);
+        //await this.webrtcHub.invoke('LeaveRoom', this.room);
     }
 
     /**
