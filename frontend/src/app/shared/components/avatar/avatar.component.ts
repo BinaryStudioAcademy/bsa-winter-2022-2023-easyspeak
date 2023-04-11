@@ -34,8 +34,14 @@ export class AvatarComponent implements AfterViewInit, AfterContentChecked {
     ngAfterContentChecked() {
         this.avatarBackground = this.avatarBackgroundColor;
 
+        if (!this.imagePath) {
+            this.getAvatarBackground();
+        }
+
+        this.imgFlexSize = this.imageSize;
+
         if (this.isEmojiAvatar()) {
-            this.imgFlexSize = this.imgFlexSize > 37 ? this.imageSize - 20 : this.imageSize - 10;
+            this.imgFlexSize = this.imageSize > 37 ? this.imageSize - 20 : this.imageSize - 10;
         }
 
         this.changeDetector.detectChanges();
