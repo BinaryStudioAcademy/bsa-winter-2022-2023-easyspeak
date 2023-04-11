@@ -122,9 +122,13 @@ public class LessonsService : BaseService, ILessonsService
 
         return _mapper.Map<LessonDto>(createdLesson);
     }
-    private Task<List<Tag>> GetExistingTags(ICollection<TagForLessonDto> tags)
+    private async Task<List<Tag>> GetExistingTags(ICollection<TagForLessonDto> tags)
     {
-        return _context.Tags.Where(t => tags.Any(tag => tag.Name == t.Name)).ToListAsync();
+        var tagsn = await _context.Tags.Where(t => tags
+        .Select(tagDto=>tagDto.Name)
+        .Contains(t.Name))
+            .ToListAsync();
+        return tagsn;
     }
 
     public async Task<TeacherStatisticsDto> GetTeacherLessonsStatisticsAsync()
