@@ -1,4 +1,4 @@
-<div class="avatar" [style.background-color]="getAvatarBackground()">
+<div class="avatar" [style.background-color]="avatarBackground">
     <img *ngIf="getAvatarSrc()" [src]="getAvatarSrc()" [style.max-width.px]="imageSize"  alt="image"/>
     <span *ngIf="!getAvatarSrc()">
         {{ getInitials() }}

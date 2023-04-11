@@ -4,7 +4,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { UserDetailsComponent } from './user-details/user-details/user-details.component';
 import { UserPasswordChangeComponent } from './user-password-change/user-password-change.component';
 import { UserProfilePageComponent } from './user-profile-page/user-profile-page.component';
-import { UserSubscriptionComponent } from './user-subscription/user-subscription.component';
 
 const routes: Routes = [
     {
@@ -19,11 +18,6 @@ const routes: Routes = [
             {
                 path: 'details',
                 component: UserDetailsComponent,
-                pathMatch: 'full',
-            },
-            {
-                path: 'subscription',
-                component: UserSubscriptionComponent,
                 pathMatch: 'full',
             },
             {

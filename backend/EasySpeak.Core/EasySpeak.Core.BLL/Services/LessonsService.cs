@@ -124,7 +124,10 @@ public class LessonsService : BaseService, ILessonsService
     }
     private Task<List<Tag>> GetExistingTags(ICollection<TagForLessonDto> tags)
     {
-        return _context.Tags.Where(t => tags.Any(tag => tag.Name == t.Name)).ToListAsync();
+        return _context.Tags.Where(t => tags
+        .Select(tagDto=>tagDto.Name)
+        .Contains(t.Name))
+            .ToListAsync();
     }
 
     public async Task<TeacherStatisticsDto> GetTeacherLessonsStatisticsAsync()

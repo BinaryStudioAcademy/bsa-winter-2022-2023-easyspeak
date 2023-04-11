@@ -6128,6 +6128,11 @@ iso-3166-1@^2.1.1:
   resolved "https://registry.yarnpkg.com/iso-3166-1/-/iso-3166-1-2.1.1.tgz#79b80d2aebc3c9528d792bdbb8316c912fe37c68"
   integrity sha512-RZxXf8cw5Y8LyHZIwIRvKw8sWTIHh2/txBT+ehO0QroesVfnz3JNFFX4i/OC/Yuv2bDIVYrHna5PMvjtpefq5w==
 
+iso-639-1@^2.1.15:
+  version "2.1.15"
+  resolved "https://registry.yarnpkg.com/iso-639-1/-/iso-639-1-2.1.15.tgz#20cf78a4f691aeb802c16f17a6bad7d99271e85d"
+  integrity sha512-7c7mBznZu2ktfvyT582E2msM+Udc1EjOyhVRE/0ZsjD9LBtWSm23h3PtiRh2a35XoUsTQQjJXaJzuLjXsOdFDg==
+
 isobject@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/isobject/-/isobject-3.0.1.tgz#4e431e92b11a9731636aa1f9c8d1ccbcfdab78df"
@@ -6889,6 +6894,13 @@ neo-async@^2.6.2:
   version "2.6.2"
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
+
+ngx-image-cropper@^6.3.2:
+  version "6.3.2"
+  resolved "https://registry.yarnpkg.com/ngx-image-cropper/-/ngx-image-cropper-6.3.2.tgz#732acb53594ebe2143318bd78108d6db9b27433f"
+  integrity sha512-w24kxXyXxwLdnaZlaIG8KI71sdw4vp+O7uYLTaWmxAbFOKOv9o6ko2CmtC7u5B3jXD0OuOzQgJJSGkJZZbnNcA==
+  dependencies:
+    tslib "^2.3.0"
 
 ngx-toastr@^16.1.0:
   version "16.1.0"
