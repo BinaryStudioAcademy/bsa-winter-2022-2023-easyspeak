@@ -1,4 +1,4 @@
-import { AfterContentChecked, AfterViewInit, ChangeDetectorRef, Component, Input } from '@angular/core';
+import { AfterContentChecked, ChangeDetectorRef, Component, Input } from '@angular/core';
 import { ColorGenerationUtils } from '@shared/utils/color.utils';
 
 @Component({
@@ -6,7 +6,7 @@ import { ColorGenerationUtils } from '@shared/utils/color.utils';
     templateUrl: './avatar.component.html',
     styleUrls: ['./avatar.component.sass'],
 })
-export class AvatarComponent implements AfterViewInit, AfterContentChecked {
+export class AvatarComponent implements AfterContentChecked {
     @Input() firstName: string;
 
     @Input() lastName: string;
@@ -24,12 +24,6 @@ export class AvatarComponent implements AfterViewInit, AfterContentChecked {
     imgFlexSize: number;
 
     constructor(private changeDetector: ChangeDetectorRef) {}
-
-    ngAfterViewInit() {
-        if (!this.imagePath) {
-            this.getAvatarBackground();
-        }
-    }
 
     ngAfterContentChecked() {
         this.avatarBackground = this.avatarBackgroundColor;
