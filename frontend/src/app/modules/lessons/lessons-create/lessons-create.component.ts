@@ -118,7 +118,6 @@ export class LessonsCreateComponent implements OnInit {
 
         const lessonToCreate: INewLesson = {
             name: this.name?.value,
-            description: 'Description',
             mediaPath: '',
             languageLevel: Object.values(LanguageLevels).indexOf(this.level),
             startAt,
