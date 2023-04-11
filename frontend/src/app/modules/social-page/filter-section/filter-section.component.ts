@@ -5,12 +5,13 @@ import {
     langLevelsSample,
     topicsSample,
 } from '@modules/filter-section/filter-section/filter-section.util';
+import { IIcon } from '@shared/models/IIcon';
 import { Subject } from 'rxjs';
 
 import { Filter } from '../../../models/filters/filter';
 import { UserFilter } from '../../../models/filters/userFilter';
 
-type FilterOption = 'compatibility' | 'lang' | 'level' | 'topic';
+type FilterOption = 'compatibility' | 'lang' | 'level';
 
 @Component({
     selector: 'app-filter-section',
@@ -26,13 +27,13 @@ export class FilterSectionComponent implements OnInit {
 
     public selectedLevelWithSubtitleFilters: string[] = [];
 
-    public selectedTopicsFilters: string[] = [];
+    public selectedTopicsFilters: IIcon[] = [];
 
     public selectedLanguagesFilters: string[] = [];
 
     public selectedCompatibilityFilters: string[] = [];
 
-    public topics: Filter[];
+    public topics: IIcon[];
 
     public langLevels: Filter[];
 
@@ -45,7 +46,13 @@ export class FilterSectionComponent implements OnInit {
     @Output() filterChange = new EventEmitter<UserFilter>();
 
     ngOnInit(): void {
-        this.topics = topicsSample;
+        this.dataService.getAllTags().subscribe((tags) => {
+            this.topics = tags.map((tag): IIcon => ({
+                id: tag.id,
+                name: tag.name,
+                link: `assets/topic-icons/${tag.imageUrl}`,
+            }));
+        });
         this.langLevels = langLevelsSample;
         this.compatibilities = compatibilities.map((c) => ({ title: c.toString() }));
         this.userFilters = {} as UserFilter;
@@ -63,6 +70,11 @@ export class FilterSectionComponent implements OnInit {
         );
     }
 
+    removeTopic(topic: IIcon) {
+        this.selectedTopicsFilters = this.selectedTopicsFilters.filter((s) => s !== topic);
+        this.userFilters.topics = this.selectedTopicsFilters;
+    }
+
     remove(param: FilterOption, title: string) {
         const splitedTitle = title.split(':');
 
@@ -76,10 +88,6 @@ export class FilterSectionComponent implements OnInit {
                 this.userFilters.langLevels = this.selectedLevelFilters;
                 this.selectedLevelWithSubtitleFilters = this.getLanguageLevelWithSubtitle();
                 break;
-            case 'topic':
-                this.selectedTopicsFilters = this.selectedTopicsFilters.filter((s) => s !== title);
-                this.userFilters.topics = this.selectedTopicsFilters;
-                break;
             case 'compatibility':
                 this.selectedCompatibilityFilters = this.selectedCompatibilityFilters.filter((s) => s !== title);
                 this.userFilters.compatibility = null;
@@ -87,6 +95,12 @@ export class FilterSectionComponent implements OnInit {
             default:
                 break;
         }
+        this.filterChange.emit(this.userFilters);
+    }
+
+    updateTopics(eventData: IIcon[]) {
+        this.selectedTopicsFilters = eventData;
+        this.userFilters.topics = this.selectedTopicsFilters;
         this.filterChange.emit(this.userFilters);
     }
 
@@ -100,10 +114,6 @@ export class FilterSectionComponent implements OnInit {
                 this.selectedLevelFilters = eventData;
                 this.userFilters.langLevels = this.selectedLevelFilters;
                 this.selectedLevelWithSubtitleFilters = this.getLanguageLevelWithSubtitle();
-                break;
-            case 'topic':
-                this.selectedTopicsFilters = eventData;
-                this.userFilters.topics = this.selectedTopicsFilters;
                 break;
             case 'compatibility':
                 this.selectedCompatibilityFilters = eventData;

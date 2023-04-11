@@ -11,6 +11,7 @@ import * as moment from 'moment';
 
 import { LessonsService } from 'src/app/services/lessons.service';
 import { NotificationService } from 'src/app/services/notification.service';
+import {IIcon} from "@shared/models/IIcon";
 
 @Component({
     selector: 'app-lessons-create',
@@ -18,7 +19,7 @@ import { NotificationService } from 'src/app/services/notification.service';
     styleUrls: ['./lessons-create.component.sass'],
 })
 export class LessonsCreateComponent implements OnInit {
-    tagsList: string[] = [];
+    tagsList: IIcon[] = [];
 
     timesList: string[] = Utils.timesList;
 
@@ -81,7 +82,7 @@ export class LessonsCreateComponent implements OnInit {
         this.levelDropdownVisible = !this.levelDropdownVisible;
     }
 
-    updateTags(evendData: string[]) {
+    updateTags(evendData: IIcon[]) {
         this.tagsList = evendData;
     }
 
@@ -113,7 +114,7 @@ export class LessonsCreateComponent implements OnInit {
             .filter((entry: string) => entry.trim() !== '')
             .map((element: string) => ({ topic: element, subquestions: [] }));
 
-        const lessonTags: INewTag[] = this.tagsList.map((element: string) => ({ name: element }));
+        const lessonTags: IIcon[] = this.tagsList;
 
         const lessonToCreate: INewLesson = {
             name: this.name?.value,

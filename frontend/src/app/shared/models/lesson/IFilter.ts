@@ -1,7 +1,7 @@
-import { INewTag } from './INewTag';
+import { IIcon } from '@shared/models/IIcon';
 
 export interface IFilter {
     languageLevels: number[],
-    tags: INewTag[],
+    tags: IIcon[],
     date: Date,
 }

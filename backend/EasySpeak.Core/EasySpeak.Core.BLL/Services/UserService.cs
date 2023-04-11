@@ -91,7 +91,7 @@ public class UserService : BaseService, IUserService
         }
         if (filter.Topics is not null && filter.Topics.Any())
         {
-            filteredUsers = filteredUsers.Where(u => u.Tags.Any(t => filter.Topics.Contains(t.Name)));
+            filteredUsers = filteredUsers.Where(u => u.Tags.Any(t => filter.Topics.Select(t=>t.Id).Contains(t.Id)));
         }
         var filteredUsersList = await filteredUsers.ToListAsync();
         return _mapper.Map<List<UserShortInfoDto>>(filteredUsersList);
@@ -232,8 +232,8 @@ public class UserService : BaseService, IUserService
         {
             dbUser.Tags = dtoUser.Tags.Join(
                 _context.Tags,
-                dtoTags => dtoTags.Name,
-                dbTags => dbTags.Name,
+                dtoTags => dtoTags.Id,
+                dbTags => dbTags.Id,
                 (_, dbTags) => dbTags).ToList();
         }
     }

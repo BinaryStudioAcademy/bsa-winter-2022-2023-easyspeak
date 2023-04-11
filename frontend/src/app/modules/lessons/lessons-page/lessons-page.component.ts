@@ -12,6 +12,7 @@ import * as moment from 'moment';
 import { LessonsService } from 'src/app/services/lessons.service';
 
 import { LessonsCreateComponent } from '../lessons-create/lessons-create.component';
+import {IIcon} from "@shared/models/IIcon";
 
 @Component({
     selector: 'app-lessons-page',
@@ -23,7 +24,7 @@ export class LessonsPageComponent implements OnInit, OnChanges {
 
     @Input() selectedLanguageFilters: string[] = [];
 
-    @Input() selectedInterestsFilters: string[] = [];
+    @Input() selectedInterestsFilters: IIcon[] = [];
 
     @Input() selectedDateFilter: Date;
 
@@ -83,7 +84,7 @@ export class LessonsPageComponent implements OnInit, OnChanges {
             .getFilteredLessons({
                 languageLevels: this.selectedLanguageFilters.map((level: string) =>
                     Object.values(LanguageLevels).indexOf(level)),
-                tags: this.selectedInterestsFilters.map((topic) => ({ name: topic })),
+                tags: this.selectedInterestsFilters,
                 date: new Date(this.selectedDateFilter.toISOString().slice(0, 10)),
             })
             .subscribe((response) => {

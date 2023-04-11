@@ -21,7 +21,7 @@
         ></app-dropdown>
         <app-interests-dropdown
             [selectedItems]="selectedTopicsFilters"
-            (selectedInterests)="update('topic', $event)"
+            (selectedInterests)="updateTopics($event)"
         ></app-interests-dropdown>
     </div>
     <div class="selected-filters-wrp" *ngIf="hasFilters">
@@ -46,8 +46,8 @@
             </div>
             <div *ngFor="let selectedTopic of selectedTopicsFilters">
                 <div *ngIf="selectedTopic" class="selected-filter-item">
-                    {{selectedTopic}}
-                    <mat-icon (click)="remove('topic', selectedTopic)">close</mat-icon>
+                    {{selectedTopic.name}}
+                    <mat-icon (click)="removeTopic(selectedTopic)">close</mat-icon>
                 </div>
             </div>
         </div>
