@@ -21,6 +21,8 @@ export class ChatPageComponent implements OnInit, OnDestroy {
 
     people: IChatPerson[];
 
+    filteredPeople: IChatPerson[];
+
     groupedMessages: IMessageGroup[] = [];
 
     currentUser: IUserShort;
@@ -49,6 +51,7 @@ export class ChatPageComponent implements OnInit, OnDestroy {
 
         this.httpService.get<IChatPerson[]>('/chat/lastSendMessages').subscribe((people) => {
             this.people = people;
+            this.filteredPeople = people;
             this.chatHub.invoke(
                 'AddToGroup',
                 this.people.map(p => p.chatId),
@@ -61,7 +64,12 @@ export class ChatPageComponent implements OnInit, OnDestroy {
 
     private setActionsForMessages() {
         this.chatHub.listenMessages((msg) => {
-            this.addMessage(msg);
+            this.addMessage({
+                ...msg,
+                createdAt: new Date(
+                    new Date(msg.createdAt).setMinutes(new Date(msg.createdAt).getMinutes() + new Date().getTimezoneOffset()),
+                ),
+            });
             this.chatHub.invoke(
                 'GetChatsAsync',
                 msg.chatId,
@@ -81,6 +89,7 @@ export class ChatPageComponent implements OnInit, OnDestroy {
     setActionsForChats() {
         this.chatHub.listenChats((people) => {
             this.people = people;
+            this.filteredPeople = people;
         });
     }
 
@@ -143,8 +152,33 @@ export class ChatPageComponent implements OnInit, OnDestroy {
         }
     }
 
+    filterForm = new FormGroup({
+        filterInput: new FormControl(''),
+    });
+
+    filterPeople() {
+        const value = this.filterForm.value.filterInput?.toLowerCase();
+
+        this.filteredPeople = this.people.filter(person => `${person.firstName} ${person.lastName}`
+            .toLowerCase()
+            .includes(value as string));
+    }
+
+    addTimeOffset(date: string): string {
+        const offset = new Date().getTimezoneOffset();
+        const dateObject = new Date(date);
+
+        dateObject.setMinutes(dateObject.getMinutes() - offset);
+
+        return dateObject.toString();
+    }
+
     getTotalUnreadMessages(): number {
-        return this.people.reduce((sum, person) => sum + person.numberOfUnreadMessages, 0);
+        if (this.people) {
+            return this.people.reduce((sum, person) => sum + person.numberOfUnreadMessages, 0);
+        }
+
+        return 0;
     }
 
     lotsOfMessages(value: number): string {
@@ -153,7 +187,6 @@ export class ChatPageComponent implements OnInit, OnDestroy {
 
     form = new FormGroup({
         message: new FormControl('', { nonNullable: true }),
-        file: new FormControl(''),
     });
 
     startSessionCall(): void {

@@ -33,4 +33,13 @@ export class MessageGroupComponent {
 
         return date.toLocaleDateString(this.locale, { day: 'numeric', month: 'short' });
     }
+
+    addTimeOffset(date: string): string {
+        const offset = new Date().getTimezoneOffset();
+        const dateObject = new Date(date);
+
+        dateObject.setMinutes(dateObject.getMinutes() - offset);
+
+        return dateObject.toString();
+    }
 }
