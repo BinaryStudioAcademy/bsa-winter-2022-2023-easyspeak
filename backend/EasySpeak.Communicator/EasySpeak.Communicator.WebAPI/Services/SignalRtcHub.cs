@@ -76,7 +76,7 @@ namespace EasySpeak.Communicator.WebAPI.Services
 
             AddClientToRoom(roomName);
 
-            Task.WaitAll(EmitJoinRoom(roomName));
+            await EmitJoinRoom(roomName);
 
             var numberOfClients = ConnectedClients[roomName].Count;
 
