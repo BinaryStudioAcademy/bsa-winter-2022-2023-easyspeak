@@ -1,9 +1,10 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute } from '@angular/router';
 import { WebrtcHubService } from '@core/hubs/webrtc-hub.service';
 import { WebrtcUtils } from '@core/services/webrtc-utils.service';
 import { environment } from '@env/environment';
+import { ICallInfo } from '@shared/models/chat/ICallInfo';
 
 const useWebrtcUtils = true;
 
@@ -23,6 +24,8 @@ export class SessionCallComponent implements OnInit, OnDestroy {
 
     room: string;
 
+    remoteName: string;
+
     peerConnection: RTCPeerConnection;
 
     isInitiator: boolean;
@@ -32,16 +35,15 @@ export class SessionCallComponent implements OnInit, OnDestroy {
     isStarted: boolean;
 
     public constructor(
+        @Inject(MAT_DIALOG_DATA) public callInfo: ICallInfo,
         private webrtcHub: WebrtcHubService,
         private snack: MatSnackBar,
-        private route: ActivatedRoute,
-    ) {
-        this.route.paramMap.subscribe(async param => {
-            this.room = param.get('room')!;
-        });
-    }
+        private dialogRef: MatDialog,
+    ) { }
 
     async ngOnInit() {
+        this.room = this.callInfo.roomName;
+        this.remoteName = this.callInfo.remoteName;
         // #1 connect to signaling server
         await this.webrtcHub.start();
         // #2 define signaling communication
@@ -270,6 +272,7 @@ export class SessionCallComponent implements OnInit, OnDestroy {
     async hangup(): Promise<void> {
         this.stopPeerConnection();
         await this.webrtcHub.endCall(this.room);
+        this.dialogRef.closeAll();
         await this.webrtcHub.invoke('LeaveRoom', this.room);
     }
 
