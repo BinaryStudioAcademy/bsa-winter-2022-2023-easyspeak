@@ -29,9 +29,35 @@ export class UserPasswordChangeComponent {
     onSaveNewPassword() {
         this.checkPasswords();
 
-        if (this.isSame && this.isValid && this.isCurrentValid) {
+        if (this.isAllValid()) {
             this.savePassword();
+        } else {
+            this.showError();
         }
+    }
+
+    showError() {
+        switch (true) {
+            case !this.isSame:
+                this.toastr.error('Password/Repeat password don’t match', 'Save Password');
+                break;
+            case this.currentPassword !== this.newPassword:
+                this.toastr.error('New password is the same as current', 'Save Password');
+                break;
+            case (!this.currentPassword || !this.newPassword || !this.repeatPassword):
+                this.toastr.error('Field is required', 'Save Password');
+                break;
+            case !this.isValid || !this.isCurrentValid:
+                this.toastr.error('Password is not valid format!', 'Save Password');
+                break;
+            default:
+                this.toastr.error('Something gone wrong!', 'Save Password');
+                break;
+        }
+    }
+
+    isAllValid() {
+        return this.isSame && this.isValid && this.isCurrentValid && this.currentPassword !== this.newPassword;
     }
 
     checkPasswords() {
@@ -54,7 +80,7 @@ export class UserPasswordChangeComponent {
             })
             .catch((error) => {
                 this.toastr.error(error.message, 'Error');
-                this.toastr.error('Your currentpassword is incorrect!', 'Save Password');
+                this.toastr.error('Current password is wrong', 'Save Password');
             });
     }
 }
