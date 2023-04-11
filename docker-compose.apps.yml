@@ -50,7 +50,7 @@ services:
           RecommendationService_Password: 'e3hfuTFgkUYa4WanMbnlZUseHmmBtC1q'
           RecommendationService_Database: 'neo4j'
 
-  easyspeak_recommendationservice:
+  easyspeak_recommendator_service:
       build:
         context: ./backend
         dockerfile: ./EasySpeak.RecommendationService/Dockerfile
@@ -85,6 +85,7 @@ services:
         - easyspeak_core
         - easyspeak_notifier
         - easyspeak_communicator
+        - easyspeak_recommendator_service
     build:
         context: ./frontend
         dockerfile: Dockerfile.dev

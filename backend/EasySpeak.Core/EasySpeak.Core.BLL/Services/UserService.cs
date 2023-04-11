@@ -4,9 +4,7 @@ using EasySpeak.Core.BLL.Interfaces;
 using EasySpeak.Core.BLL.Options;
 using EasySpeak.Core.Common.DTO.Filter;
 using EasySpeak.Core.Common.DTO.Lesson;
-using EasySpeak.Core.Common.DTO.Rabbit;
 using EasySpeak.Core.Common.DTO.User;
-using EasySpeak.Core.Common.Enums;
 using EasySpeak.Core.Common.DTO.Tag;
 using EasySpeak.Core.Common.DTO.UploadFile;
 using EasySpeak.Core.DAL.Context;
@@ -29,7 +27,7 @@ public class UserService : BaseService, IUserService
     public UserService(IEasySpeakFileService fileService, EasySpeakCoreContext context, 
             IMapper mapper, IFirebaseAuthService authService, IHttpClientFactory clientFactory,
             IOptions<RecommendationServiceOptions> recommendationServiceOptions,
-            QueriesSenderService queriesSender)
+            QueriesSenderService queriesSender) : base(context, mapper)
     {
         _authService = authService;
         _fileService = fileService;
@@ -62,7 +60,7 @@ public class UserService : BaseService, IUserService
             return userDto;
         }
 
-        userDto.ImagePath = user!.EmojiName != string.Empty ? user!.EmojiName : await GetProfileImageUrl(user!.ImageId);
+        userDto.ImagePath = user!.EmojiName != string.Empty ? user.EmojiName : await GetProfileImageUrl(user.ImageId);
 
         return userDto;
     }
@@ -173,7 +171,7 @@ public class UserService : BaseService, IUserService
         void AfterMapAction(Lesson o, LessonDto dto)
         {
             dto.SubscribersCount = _context.Lessons
-                .Select(t => new {Id = t.Id, SbCount = t.Subscribers.Count})
+                .Select(t => new {t.Id, SbCount = t.Subscribers.Count})
                 .FirstOrDefault(l => l.Id == lessonId)!.SbCount;
         }
 
