@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { HubConnection, HubConnectionState } from '@microsoft/signalr';
-import { AcceptCallComponent } from '@shared/components/accept-call/accept-call.component';
-import { IModal } from '@shared/models/IModal';
-import { Subject, Subscription } from 'rxjs';
-import { WebrtcHubFactoryService } from './hubFactories/webrtc-hub-factory.service';
 import { Router } from '@angular/router';
+import { HubConnection, HubConnectionState } from '@microsoft/signalr';
+import { SessionCallComponent } from '@modules/session-call/session-call/session-call.component';
+import { AcceptCallComponent } from '@shared/components/accept-call/accept-call.component';
+import { ICallInfo } from '@shared/models/chat/ICallInfo';
+import { Subject, Subscription } from 'rxjs';
+
+import { WebrtcHubFactoryService } from './hubFactories/webrtc-hub-factory.service';
 
 @Injectable({
     providedIn: 'root',
@@ -62,28 +64,38 @@ export class WebrtcHubService {
             this.messages.next(msg);
         });
 
-        this.hubConnection.on('startCall', (callerEmail: string, roomName: string ) => {
-            const config: MatDialogConfig<IModal> = {
+        this.hubConnection.on('startCall', (callerEmail: string, callerFullName: string, callerImgPath: string, roomName: string) => {
+            const config: MatDialogConfig<ICallInfo> = {
                 data: {
-                    header: roomName,
-                    content: callerEmail,
+                    roomName,
+                    remoteEmail: callerEmail,
+                    remoteName: callerFullName,
+                    remoteImgPath: callerImgPath,
                 },
             };
 
             this.dialogRef.open(AcceptCallComponent, config);
         });
 
-        this.hubConnection.on('accept', (roomName: string) => {
-            this.router.navigate([`session-call/${roomName}`]);
+        this.hubConnection.on('accept', (calleeEmail: string, calleeFullName: string, roomName: string) => {
+            const config: MatDialogConfig<ICallInfo> = {
+                data: {
+                    roomName,
+                    remoteEmail: calleeEmail,
+                    remoteName: calleeFullName,
+                },
+            };
+
+            this.dialogRef.open(SessionCallComponent, config);
         });
 
         this.hubConnection.on('reject', () => {
-            alert('Rejected');
+            this.messages.next('Rejected');
         });
 
         this.hubConnection.on('endCall', () => {
-            this.router.navigate(['chat']);
-        })
+            this.dialogRef.closeAll();
+        });
     }
 
     public async connect(email: string) {
@@ -98,12 +110,14 @@ export class WebrtcHubService {
         });
     }
 
-    public async callUser(calleeEmail: string, callerEmail: string, roomName: string) {
-        await this.hubConnection.invoke('CallUser', calleeEmail, callerEmail, roomName).catch((err) => console.error(err));
+    public async callUser(calleeEmail: string, callerEmail: string, callerFullName: string, callerImgPath: string) {
+        await this.hubConnection.invoke('CallUser', calleeEmail, callerEmail, callerFullName, callerImgPath).catch((err) => {
+            console.error(err);
+        });
     }
 
-    public async acceptCall(email: string, roomName: string) {
-        await this.hubConnection.invoke('AcceptCall', email, roomName).catch((err) => {
+    public async acceptCall(callerEmail: string, calleeEmail: string, calleeFullName: string, roomName: string) {
+        await this.hubConnection.invoke('AcceptCall', callerEmail, calleeEmail, calleeFullName, roomName).catch((err) => {
             console.error(err);
         });
     }

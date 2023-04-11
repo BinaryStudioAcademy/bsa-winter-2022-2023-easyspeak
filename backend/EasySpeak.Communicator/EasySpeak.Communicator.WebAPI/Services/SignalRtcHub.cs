@@ -17,17 +17,21 @@ namespace EasySpeak.Communicator.WebAPI.Services
             ConnectedUsers.Remove(email);
         }
 
-        public async Task CallUser(string calleeEmail, string callerEmail, string roomName)
+        public async Task CallUser(string calleeEmail, string callerEmail, string callerFullName, string callerImgPath)
         {
             ConnectedUsers[callerEmail] = Context.ConnectionId;
             var connectionId = ConnectedUsers[calleeEmail];
-            await Clients.Client(connectionId).SendAsync("startCall", callerEmail, roomName);
+
+            var roomName = Guid.NewGuid().ToString();
+
+            await Clients.Client(connectionId).SendAsync("startCall", callerEmail, callerFullName, callerImgPath, roomName);
         }
 
-        public async Task AcceptCall(string email, string roomName)
+        public async Task AcceptCall(string callerEmail, string calleeEmail, string calleeFullName, string roomName)
         {
-            var connectionId = ConnectedUsers[email];
-            await Clients.Client(connectionId).SendAsync("accept", roomName);
+            var connectionId = ConnectedUsers[callerEmail];
+
+            await Clients.Client(connectionId).SendAsync("accept", calleeEmail, calleeFullName, roomName);
         }
 
         public async Task RejectCall(string email)
