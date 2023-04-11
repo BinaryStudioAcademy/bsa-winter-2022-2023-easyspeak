@@ -160,4 +160,23 @@ export class AuthService {
             throw new Error(error.message);
         });
     }
+
+    async saveNewPassword(oldPassword: string, newPassword: string) {
+        try {
+            const user = await this.afAuth.currentUser;
+
+            if (user?.email != null) {
+                await this.afAuth.signInWithEmailAndPassword(user.email, oldPassword)
+                    .then(async () => {
+                        await auth.updatePassword(user, newPassword);
+                    });
+            }
+        } catch (error) {
+            if (error instanceof Error) {
+                throw new Error(error.message);
+            } else {
+                throw new Error('Unexepted');
+            }
+        }
+    }
 }
