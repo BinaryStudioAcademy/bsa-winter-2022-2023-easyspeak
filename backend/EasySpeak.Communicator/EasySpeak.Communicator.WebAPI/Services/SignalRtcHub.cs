@@ -1,11 +1,19 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using EasySpeak.Core.DAL.Context;
+using EasySpeak.Core.DAL.Entities;
+using Microsoft.AspNetCore.SignalR;
 
 namespace EasySpeak.Communicator.WebAPI.Services
 {
     public class SignalRtcHub : Hub
     {
+        private readonly EasySpeakCoreContext _context;
         private static readonly Dictionary<string, string> ConnectedUsers = new Dictionary<string, string>();
         static readonly Dictionary<string, List<string>> ConnectedClients = new Dictionary<string, List<string>>();
+
+        public SignalRtcHub(EasySpeakCoreContext context)
+        {
+            _context = context;
+        }
 
         public void Connect(string email)
         {
@@ -17,21 +25,21 @@ namespace EasySpeak.Communicator.WebAPI.Services
             ConnectedUsers.Remove(email);
         }
 
-        public async Task CallUser(string calleeEmail, string callerEmail, string callerFullName, string callerImgPath)
+        public async Task CallUser(int chatId, string calleeEmail, int callerId, string callerEmail, string callerFullName, string callerImgPath)
         {
             ConnectedUsers[callerEmail] = Context.ConnectionId;
             var connectionId = ConnectedUsers[calleeEmail];
 
             var roomName = Guid.NewGuid().ToString();
 
-            await Clients.Client(connectionId).SendAsync("startCall", callerEmail, callerFullName, callerImgPath, roomName);
+            await Clients.Client(connectionId).SendAsync("startCall", chatId, callerId, callerEmail, callerFullName, callerImgPath, roomName);
         }
 
-        public async Task AcceptCall(string callerEmail, string calleeEmail, string calleeFullName, string roomName)
+        public async Task AcceptCall(int chatId, int callerId, string callerEmail, string calleeEmail, string calleeFullName, string roomName)
         {
             var connectionId = ConnectedUsers[callerEmail];
 
-            await Clients.Client(connectionId).SendAsync("accept", calleeEmail, calleeFullName, roomName);
+            await Clients.Client(connectionId).SendAsync("accept", chatId, callerId, calleeEmail, calleeFullName, roomName);
         }
 
         public async Task RejectCall(string email)
@@ -40,10 +48,19 @@ namespace EasySpeak.Communicator.WebAPI.Services
             await Clients.Client(connectionId).SendAsync("reject");
         }
 
-        public async Task EndCall(string roomName)
+        public async Task EndCall(int chatId, int userId, DateTime startedAt, DateTime finishedAt)
         {
-            var connectionId = ConnectedClients[roomName].First(conn => conn != Context.ConnectionId);
-            await Clients.Client(connectionId).SendAsync("endCall");
+            var call = new Call
+            {
+                ChatId = chatId, 
+                StartedAt = startedAt,
+                FinishedAt = finishedAt,
+                CreatedAt = startedAt,
+                CreatedBy = userId,
+            };
+
+            _context.Calls.Add(call);
+            await _context.SaveChangesAsync();
         }
 
         public async Task SendMessage(object message, string roomName)
@@ -55,13 +72,11 @@ namespace EasySpeak.Communicator.WebAPI.Services
 
         public async Task CreateOrJoinRoom(string roomName)
         {
-            await EmitLog("Received request to create or join room " + roomName + " from a client " + Context.ConnectionId, roomName);
-
             CreateRoom(roomName);
 
             AddClientToRoom(roomName);
 
-            await EmitJoinRoom(roomName);
+            Task.WaitAll(EmitJoinRoom(roomName));
 
             var numberOfClients = ConnectedClients[roomName].Count;
 

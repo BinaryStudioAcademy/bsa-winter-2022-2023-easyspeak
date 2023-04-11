@@ -35,6 +35,8 @@ export class AcceptCallComponent implements OnInit {
         const fullName = `${this.user.firstName} ${this.user.lastName}`;
 
         await this.webRtcHub.acceptCall(
+            this.callInfo.chatId,
+            this.callInfo.callerId,
             this.callInfo.remoteEmail,
             this.user.email,
             fullName,
@@ -43,6 +45,8 @@ export class AcceptCallComponent implements OnInit {
 
         const config: MatDialogConfig<ICallInfo> = {
             data: {
+                chatId: this.callInfo.chatId,
+                callerId: this.callInfo.callerId,
                 roomName: this.callInfo.roomName,
                 remoteEmail: this.callInfo.remoteEmail,
                 remoteName: this.callInfo.remoteName,

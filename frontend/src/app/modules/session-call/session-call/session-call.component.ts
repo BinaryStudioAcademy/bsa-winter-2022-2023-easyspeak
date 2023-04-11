@@ -22,6 +22,14 @@ export class SessionCallComponent implements OnInit, OnDestroy {
 
     remoteStream: MediaStream;
 
+    chatId: number;
+
+    callerId: number;
+
+    startedAt: Date;
+
+    finishedAt: Date;
+
     room: string;
 
     remoteName: string;
@@ -42,14 +50,15 @@ export class SessionCallComponent implements OnInit, OnDestroy {
     ) { }
 
     async ngOnInit() {
+        this.chatId = this.callInfo.chatId;
+        this.callerId = this.callInfo.callerId;
+        this.startedAt = new Date();
         this.room = this.callInfo.roomName;
         this.remoteName = this.callInfo.remoteName;
-        // #1 connect to signaling server
-        // await this.webrtcHub.start();
-        // #2 define signaling communication
+
         this.callCreateOrJoinRoom();
         this.setActionsForMessages();
-        // #3 get media from current client
+
         this.getUserMedia();
     }
 
@@ -267,6 +276,10 @@ export class SessionCallComponent implements OnInit, OnDestroy {
     }
 
     closeModal(): void {
+        this.finishedAt = new Date();
+
+        this.webrtcHub.endCall(this.chatId, this.callerId, this.startedAt, this.finishedAt);
+
         this.dialogRef.close();
     }
 

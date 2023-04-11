@@ -64,30 +64,47 @@ export class WebrtcHubService {
             this.messages.next(msg);
         });
 
-        this.hubConnection.on('startCall', (callerEmail: string, callerFullName: string, callerImgPath: string, roomName: string) => {
-            const config: MatDialogConfig<ICallInfo> = {
-                data: {
-                    roomName,
-                    remoteEmail: callerEmail,
-                    remoteName: callerFullName,
-                    remoteImgPath: callerImgPath,
-                },
-            };
+        this.hubConnection.on(
+            'startCall',
+            (
+                chatId: number,
+                callerId: number,
+                callerEmail: string,
+                callerFullName: string,
+                callerImgPath: string,
+                roomName: string,
+            ) => {
+                const config: MatDialogConfig<ICallInfo> = {
+                    data: {
+                        chatId,
+                        callerId,
+                        roomName,
+                        remoteEmail: callerEmail,
+                        remoteName: callerFullName,
+                        remoteImgPath: callerImgPath,
+                    },
+                };
 
-            this.dialogRef.open(AcceptCallComponent, config);
-        });
+                this.dialogRef.open(AcceptCallComponent, config);
+            },
+        );
 
-        this.hubConnection.on('accept', (calleeEmail: string, calleeFullName: string, roomName: string) => {
-            const config: MatDialogConfig<ICallInfo> = {
-                data: {
-                    roomName,
-                    remoteEmail: calleeEmail,
-                    remoteName: calleeFullName,
-                },
-            };
+        this.hubConnection.on(
+            'accept',
+            (chatId: number, callerId: number, calleeEmail: string, calleeFullName: string, roomName: string) => {
+                const config: MatDialogConfig<ICallInfo> = {
+                    data: {
+                        chatId,
+                        callerId,
+                        roomName,
+                        remoteEmail: calleeEmail,
+                        remoteName: calleeFullName,
+                    },
+                };
 
-            this.dialogRef.open(SessionCallComponent, config);
-        });
+                this.dialogRef.open(SessionCallComponent, config);
+            },
+        );
 
         this.hubConnection.on('reject', () => {
             this.messages.next('Rejected');
@@ -110,16 +127,34 @@ export class WebrtcHubService {
         });
     }
 
-    public async callUser(calleeEmail: string, callerEmail: string, callerFullName: string, callerImgPath: string) {
-        await this.hubConnection.invoke('CallUser', calleeEmail, callerEmail, callerFullName, callerImgPath).catch((err) => {
-            console.error(err);
-        });
+    public async callUser(
+        chatId: number,
+        calleeEmail: string,
+        callerId: number,
+        callerEmail: string,
+        callerFullName: string,
+        callerImgPath: string,
+    ) {
+        await this.hubConnection
+            .invoke('CallUser', chatId, calleeEmail, callerId, callerEmail, callerFullName, callerImgPath)
+            .catch((err) => {
+                console.error(err);
+            });
     }
 
-    public async acceptCall(callerEmail: string, calleeEmail: string, calleeFullName: string, roomName: string) {
-        await this.hubConnection.invoke('AcceptCall', callerEmail, calleeEmail, calleeFullName, roomName).catch((err) => {
-            console.error(err);
-        });
+    public async acceptCall(
+        chatId: number,
+        callerId: number,
+        callerEmail: string,
+        calleeEmail: string,
+        calleeFullName: string,
+        roomName: string,
+    ) {
+        await this.hubConnection
+            .invoke('AcceptCall', chatId, callerId, callerEmail, calleeEmail, calleeFullName, roomName)
+            .catch((err) => {
+                console.error(err);
+            });
     }
 
     public async rejectCall(email: string) {
@@ -128,8 +163,8 @@ export class WebrtcHubService {
         });
     }
 
-    public async endCall(roomName: string) {
-        await this.hubConnection.invoke('EndCall', roomName).catch((err) => {
+    public async endCall(chatId: number, userId: number, startedAt: Date, finishedAt: Date) {
+        await this.hubConnection.invoke('EndCall', chatId, userId, startedAt, finishedAt).catch((err) => {
             console.error(err);
         });
     }

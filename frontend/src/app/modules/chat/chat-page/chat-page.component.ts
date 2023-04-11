@@ -36,9 +36,7 @@ export class ChatPageComponent implements OnInit, OnDestroy {
         private httpService: HttpService,
         private chatHub: ChatHubService,
         private webrtcHub: WebrtcHubService,
-    ) {
-
-    }
+    ) {}
 
     async ngOnInit() {
         this.currentUser = JSON.parse(localStorage.getItem('user') as string);
@@ -51,7 +49,7 @@ export class ChatPageComponent implements OnInit, OnDestroy {
             this.people = people;
             this.chatHub.invoke(
                 'AddToGroup',
-                this.people.map(p => p.chatId),
+                this.people.map((p) => p.chatId),
             );
         });
         this.setActionsForMessages();
@@ -62,17 +60,9 @@ export class ChatPageComponent implements OnInit, OnDestroy {
     private setActionsForMessages() {
         this.chatHub.listenMessages((msg) => {
             this.addMessage(msg);
-            this.chatHub.invoke(
-                'GetChatsAsync',
-                msg.chatId,
-                this.currentUser.id,
-            );
+            this.chatHub.invoke('GetChatsAsync', msg.chatId, this.currentUser.id);
             if (this.currentUser.id !== msg.createdBy) {
-                this.chatHub.invoke(
-                    'ReadMessages',
-                    this.currentChatId,
-                    this.currentUser.id,
-                );
+                this.chatHub.invoke('ReadMessages', this.currentChatId, this.currentUser.id);
             }
             this.scroll.scrollToBottom();
         });
@@ -111,13 +101,17 @@ export class ChatPageComponent implements OnInit, OnDestroy {
 
     getChat(person: IChatPerson) {
         this.httpService.get<IMessageGroup[]>(`/chat/chatMessages/${person.chatId}`).subscribe((groupedMessages) => {
-            this.groupedMessages = groupedMessages.map((messageGroup): IMessageGroup => ({
-                date: new Date(messageGroup.date),
-                messages: messageGroup.messages.map((message): IMessage => ({
-                    ...message,
-                    createdAt: new Date(message.createdAt),
-                })),
-            }));
+            this.groupedMessages = groupedMessages.map(
+                (messageGroup): IMessageGroup => ({
+                    date: new Date(messageGroup.date),
+                    messages: messageGroup.messages.map(
+                        (message): IMessage => ({
+                            ...message,
+                            createdAt: new Date(message.createdAt),
+                        }),
+                    ),
+                }),
+            );
             this.currentChatId = person.chatId;
             this.currentPerson = person;
         });
@@ -136,10 +130,7 @@ export class ChatPageComponent implements OnInit, OnDestroy {
                 createdAt: new Date(Date.now()),
             };
 
-            this.chatHub.invoke(
-                'SendMessageAsync',
-                msg,
-            );
+            this.chatHub.invoke('SendMessageAsync', msg);
         }
     }
 
@@ -159,6 +150,13 @@ export class ChatPageComponent implements OnInit, OnDestroy {
     startSessionCall(): void {
         const fullName = `${this.currentUser.firstName} ${this.currentUser.lastName}`;
 
-        this.webrtcHub.callUser(this.currentPerson.email, this.currentUser.email, fullName, this.currentUser.imagePath);
+        this.webrtcHub.callUser(
+            this.currentChatId,
+            this.currentPerson.email,
+            <number> this.currentUser.id,
+            this.currentUser.email,
+            fullName,
+            this.currentUser.imagePath,
+        );
     }
 }
