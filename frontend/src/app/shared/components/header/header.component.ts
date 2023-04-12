@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit {
     currentUser: IUserShort;
 
     ngOnInit(): void {
-        this.authService.loadUser().subscribe(u => this.currentUser = u);
+        this.authService.loadUser().subscribe();
 
         this.authService.user.subscribe((user) => this.setCurrentUser(user));
     }

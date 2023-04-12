@@ -8,7 +8,7 @@ import { HttpService } from '@core/services/http.service';
 import { IUserShort } from '@shared/models/IUserShort';
 import * as auth from 'firebase/auth';
 import firebase from 'firebase/compat';
-import { defer, first, firstValueFrom, from, of, Subject, tap } from 'rxjs';
+import { defer, first, firstValueFrom, from, Subject, tap } from 'rxjs';
 
 import { NotificationService } from 'src/app/services/notification.service';
 
@@ -81,12 +81,6 @@ export class AuthService {
     }
 
     loadUser() {
-        const userFromStorage = localStorage.getItem('user');
-
-        if (userFromStorage) {
-            return of(JSON.parse(userFromStorage));
-        }
-
         this.userService.getUser().subscribe(
             (resp) => {
                 const user = {
