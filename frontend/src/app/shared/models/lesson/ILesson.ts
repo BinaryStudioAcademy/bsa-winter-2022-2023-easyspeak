@@ -9,6 +9,7 @@ export interface ILesson {
     name: string;
     questions: IQuestion[];
     startAt: string;
+    limitOfUsers: number;
     subscribersCount: number;
     youtubeVideoId: string;
     zoomMeetingLink: string;

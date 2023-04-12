@@ -1,50 +1,47 @@
 <div class="container">
     <div class="form-wrp">
         <h1>Sign In</h1>
-        <form #userLoginForm="ngForm" [formGroup]="form" class="form-content" (submit)="signIn()">
+        <form #userLoginForm="ngForm"
+              [formGroup]="form"
+              class="form-content"
+              (ngSubmit)="signIn()">
             <div class="form-group-item">
                 <input
-                    type="email"
                     formControlName="email"
                     placeholder="Email"
-                    required
-                    email="{{this.email}}"/>
-        
-                <div class="errors-wrp">
-                    <mat-error class="error" *ngIf="this.email.invalid && this.userLoginForm.submitted">
+                    value="{{this.email}}"
+                    (keyup)="ClearErrors(email)"
+                    [ngClass]="{'submitted-email': isChanged.email}"/>
+                <div class="errors-wrp"  *ngFor="let condition of ['required','pattern'] ">
+                    <mat-error class="error"
+                               *ngIf="CheckCondition(email,condition)">
                         <img src="/assets/user-profile/alert-triangle.svg" alt="">
-                        {{getErrorMessage(email)}}
+                        {{GetErrorMessageByKey('email'+condition)}}
                     </mat-error>
-                </div>
-        
-                <div class="error-surface" 
-                    *ngIf="this.email.errors && this.userLoginForm.submitted">
                 </div>
             </div>
 
             <div class="form-group-item">
-                <input
-                    type="password"
-                    formControlName="password"
-                    placeholder="Password"
-                    required
-                    appPasswordVisibility/>
-        
-                <div class="errors-wrp">
-                    <mat-error class="error" *ngIf="this.password.invalid && this.userLoginForm.submitted">
+                <input formControlName="password"
+                       placeholder="Password"
+                       type="password"
+                       appPasswordVisibility
+                       (keyup)="ClearErrors(password)"
+                       [ngClass]="{'submitted-pas': isChanged.password}"/>
+                <div class="errors-wrp"  *ngFor="let condition of ['required','pattern'] ">
+                    <mat-error class="error"
+                               *ngIf="CheckCondition(password,condition)">
                         <img src="/assets/user-profile/alert-triangle.svg" alt="">
-                        {{getErrorMessage(password)}}
+                        {{GetErrorMessageByKey('password'+condition)}}
                     </mat-error>
                 </div>
-        
-                <div *ngIf="this.password.invalid && this.userLoginForm.submitted" 
-                    class="error-surface">
-                </div>
             </div>
-            <button class="submit-btn" 
+
+            <button class="submit-btn"
                 mat-button type="submit">
                 Sign In
             </button>
+            <a href="auth/forgot-password" id="forgot-password">Forgot password?</a>
         </form>
     </div>
     <div id="has-account">

@@ -1,5 +1,7 @@
+import { INewTag } from '@shared/models/lesson/INewTag';
+
 export interface UserFilter {
-    topics: string[] | null;
+    topics: INewTag[] | null;
     langLevels: string[] | null;
     language: string | null;
     compatibility: number | null;

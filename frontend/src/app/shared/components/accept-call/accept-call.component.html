@@ -1,6 +1,6 @@
 <div class="container">
-    <h1 class="header">Calling Giana Levin</h1>
-    <img class="avatar" src="assets/session-call/avatar.svg" alt="">
+    <h1 class="header">Calling {{ remoteFullName }}</h1>
+    <img class="avatar" src="{{ remoteImgPath }}" alt="" (click)="rejectCall()">
     <div class="controls">
         <button mat-dialog-close="true" class="reject button">
             <img src="assets/session-call/reject_icon.svg" alt="">

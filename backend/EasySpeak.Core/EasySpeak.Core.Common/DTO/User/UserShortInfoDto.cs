@@ -18,6 +18,8 @@ namespace EasySpeak.Core.Common.DTO.User
         public string[] Tags { get; set; } = null!;
         public string ImagePath { get; set; } = string.Empty;
         public UserFriendshipStatus UserFriendshipStatus { get; set; }
+        
+        public long Compatibility { get; set; }
     }
 
     public enum UserFriendshipStatus

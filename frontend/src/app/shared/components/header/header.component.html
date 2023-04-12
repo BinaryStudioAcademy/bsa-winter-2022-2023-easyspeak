@@ -59,7 +59,12 @@
                         <img class="menu-icon" src="/assets/header/user-profile.svg" />
                         <span class="menu-text">User details</span>
                     </button>
+                    <button [routerLink]="['/user/lessons']" mat-menu-item class="menu-element" *ngIf="currentUser.isAdmin">
+                        <img class="menu-icon" src="/assets/header/book-icon.svg" />
+                        <span class="menu-text">Teacher profile</span>
+                    </button>
                     <button [routerLink]="['/profile/change-pass']" mat-menu-item class="menu-element">
+
                         <img class="menu-icon" src="/assets/header/lock-icon.svg" />
                         <span class="menu-text">Change Password</span>
                     </button>
