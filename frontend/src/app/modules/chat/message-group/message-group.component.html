@@ -10,7 +10,15 @@
         </div>
     </div>
     <div *ngFor="let mess of message.messages" [ngClass]="{'message-photo': true, 'own-message': mess.createdBy === currentUser.id, 'not-own-message': mess.createdBy !== currentUser.id}">
-        <img src="assets/header/avatar.svg" *ngIf="mess.createdBy !== currentUser.id" alt="img">
+        <div class="avatar-div">
+            <app-avatar
+                [imageSize]="36"
+                [firstName]="currentPerson.firstName"
+                [lastName]="currentPerson.lastName"
+                [imagePath]="currentPerson.imageUrl"
+                *ngIf="mess.createdBy !== currentUser.id">
+            </app-avatar>
+        </div>
         <div class="message" [ngClass]="{ sender: mess.createdBy === currentUser.id }">
             <p class="message-content">{{ mess.text }}</p>
             <div class="message-time">

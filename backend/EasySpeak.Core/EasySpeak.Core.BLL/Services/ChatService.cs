@@ -32,6 +32,7 @@ namespace EasySpeak.Core.BLL.Services
                              LastMessage = chat.Messages.Any() ? chat.Messages.OrderBy(message => message.CreatedAt).Last().Text : string.Empty,
                              NumberOfUnreadMessages = chat.Messages.Any() ? chat.Messages.Count(message => !message.IsRead && message.CreatedBy != _firebaseAuthService.UserId) : null,
                              ChatId = chat.Id,
+                             ImageUrl = chat.Users.First(user => user.Id != _firebaseAuthService.UserId).Image.Url?? string.Empty
                          })
                          .OrderByDescending(entity => entity.LastMessageDate)
                          .ToListAsync();
@@ -52,6 +53,7 @@ namespace EasySpeak.Core.BLL.Services
                              LastMessage = chat.Messages.Any() ? chat.Messages.OrderBy(message => message.CreatedAt).Last().Text : string.Empty,
                              NumberOfUnreadMessages = chat.Messages.Any() ? chat.Messages.Count(message => !message.IsRead && message.CreatedBy != id) : null,
                              ChatId = chat.Id,
+                             ImageUrl = chat.Users.First(user => user.Id != id).Image.Url ?? string.Empty
                          })
                          .OrderByDescending(entity => entity.LastMessageDate)
                          .ToListAsync();

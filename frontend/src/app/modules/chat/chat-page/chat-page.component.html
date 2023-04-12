@@ -26,8 +26,16 @@
                 <div class="img-name-status-time">
                     <div class="img-name-status">
                         <div class="img-online">
-                            <img src="assets/header/avatar.svg" alt="img">
+                            <div class="avatar-div">
+                                <app-avatar
+                                    [imageSize]="36"
+                                    [firstName]="person.firstName"
+                                    [lastName]="person.lastName"
+                                    [imagePath]="person.imageUrl">
+                                </app-avatar>
+                            </div>
                             <div [ngClass]="{
+                                'status' : true,
                                 'online' : person.isOnline,
                                 'offline' : !person.isOnline
                              }"></div>
@@ -69,6 +77,7 @@
                 [message]="message"
                 [i]="i"
                 [currentUser]="currentUser"
+                [currentPerson]="currentPerson"
             >
             </app-message-group>
         </div>

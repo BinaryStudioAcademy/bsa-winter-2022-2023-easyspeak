@@ -1,4 +1,5 @@
 import { Component, Inject, Input, LOCALE_ID } from '@angular/core';
+import { IChatPerson } from '@shared/models/chat/IChatPerson';
 import { IMessageGroup } from '@shared/models/chat/IMessageGroup';
 import { IUserShort } from '@shared/models/IUserShort';
 import * as moment from 'moment';
@@ -18,6 +19,8 @@ export class MessageGroupComponent {
     @Input() i: number;
 
     @Input() currentUser: IUserShort;
+
+    @Input() currentPerson: IChatPerson;
 
     today = new Date();
 
