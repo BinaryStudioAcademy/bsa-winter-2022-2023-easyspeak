@@ -32,7 +32,7 @@ export class AuthService {
         private toastr: NotificationService,
         private webRtcHub: WebrtcHubService,
         private notificationsHub: NotificationsHubService,
-    ){
+    ) {
         this.afAuth.onIdTokenChanged(user => {
             if (user) {
                 this.setAccessToken(user);
