@@ -10,6 +10,9 @@ COPY ["EasySpeak.Core/EasySpeak.Core.BLL/EasySpeak.Core.BLL.csproj", "EasySpeak.
 COPY ["EasySpeak.Core/EasySpeak.Core.DAL/EasySpeak.Core.DAL.csproj", "EasySpeak.Core/EasySpeak.Core.DAL/"]
 COPY ["EasySpeak.Core/EasySpeak.Core.Common/EasySpeak.Core.Common.csproj", "EasySpeak.Core/EasySpeak.Core.Common/"]
 COPY ["EasySpeak.RabbitMQ/EasySpeak.RabbitMQ.csproj", "EasySpeak.RabbitMQ/"]
+COPY ["EasySpeak.RecommendationService/EasySpeak.RS.WebAPI/EasySpeak.RS.WebAPI.csproj", "EasySpeak.RecommendationService/EasySpeak.RS.WebAPI/"]
+COPY ["EasySpeak.Emailer/EasySpeak.Emailer.WebAPI/EasySpeak.Emailer.WebAPI.csproj", "EasySpeak.Emailer/EasySpeak.Emailer.WebAPI/"]
+COPY ["EasySpeak.Notifier/EasySpeak.Notifier.WebAPI/EasySpeak.Notifier.WebAPI.csproj", "EasySpeak.Notifier/EasySpeak.Notifier.WebAPI/"]
 
 
 RUN dotnet restore "EasySpeak.Core/EasySpeak.Core.WebAPI/EasySpeak.Core.WebAPI.csproj"
