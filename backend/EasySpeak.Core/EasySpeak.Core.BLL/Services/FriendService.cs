@@ -15,14 +15,12 @@ namespace EasySpeak.Core.BLL.Services
 {
     public class FriendService : IFriendService
     {
-        private readonly IMapper _mapper;
         private readonly EasySpeakCoreContext _context;
         private readonly IFirebaseAuthService _authService;
         private readonly INotificationService notificationService;
 
-        public FriendService(IMapper mapper, EasySpeakCoreContext context, IFirebaseAuthService authService, INotificationService notificationService)
+        public FriendService(EasySpeakCoreContext context, IFirebaseAuthService authService, INotificationService notificationService)
         {
-            _mapper = mapper;
             _context = context;
             _authService = authService;
             this.notificationService = notificationService;
