@@ -17,12 +17,7 @@ import { LessonsService } from 'src/app/services/lessons.service';
     styleUrls: ['./teachers-page.component.sass'],
 })
 export class TeachersPageComponent implements OnInit {
-    currentUser: IUserShort = {
-        email: '',
-        firstName: '',
-        lastName: '',
-        imagePath: '',
-    };
+    currentUser: IUserShort;
 
     statistics: TeacherStatistics = {
         totalClasses: 0,
@@ -43,6 +38,8 @@ export class TeachersPageComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
+        this.authService.loadUser().subscribe();
+
         this.authService.user.subscribe((user) => {
             this.currentUser = user;
         });

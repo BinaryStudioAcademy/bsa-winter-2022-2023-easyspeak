@@ -28,6 +28,7 @@ export class HeaderComponent implements OnInit {
             firstName: user.firstName,
             lastName: user.lastName,
             imagePath: user.imagePath,
+            isAdmin: user.isAdmin,
         };
     }
 
