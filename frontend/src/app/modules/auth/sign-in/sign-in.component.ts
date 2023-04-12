@@ -37,7 +37,7 @@ export class SignInComponent {
         this.authService
             .signIn(this.email.value, this.password.value)
             .then(() => {
-                //this.toastr.success('Successfully sign in', 'Sign in');
+                this.toastr.success('Successfully sign in', 'Sign in');
                 this.router.navigate(['timetable']);
             })
             .catch((error) => {

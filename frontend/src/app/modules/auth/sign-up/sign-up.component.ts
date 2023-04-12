@@ -111,8 +111,8 @@ export class SignUpComponent extends BaseComponent implements OnInit {
                     imagePath: '',
                 };
 
-                this.authService.user.next(userShort);
-                // this.toastr.success('Account successfully created', 'Success!');
+                this.authService.setUser(userShort);
+                this.toastr.success('Account successfully created', 'Success!');
                 this.router.navigate(['topics']);
             });
     }
