@@ -130,26 +130,13 @@ namespace EasySpeak.Core.BLL.Services
             return await GetUnreadAndLastSendMessageAsync(userId);
         }
 
-        public long CheckIfChatExists(long firstUserId, long secondUserId)
+        public async Task<long> CheckIfChatExists(long firstUserId, long secondUserId)
         {
-            var exists = _context.Chats
-                .Include(chat => chat.Users)
-                .Where(chat => chat.Users
-                    .Any(user => user.Id == firstUserId))
-                .Any(chat => chat.Users
-                    .Any(user => user.Id == secondUserId));
-
-            if (exists)
-            {
-                return _context.Chats
-                    .Include(chat => chat.Users)
-                    .Where(chat => chat.Users
-                        .Any(user => user.Id == firstUserId)
-                     && chat.Users
-                        .Any(user => user.Id == secondUserId))
-                    .First().Id;
-            }
-            return 0;
+            var chat = await _context.Chats
+                .Include(c => c.Users)
+                .Where(c => c.Users.Any(u => u.Id == firstUserId))
+                .FirstOrDefaultAsync(c => c.Users.Any(u => u.Id == secondUserId));
+            return chat?.Id ?? 0;
         }
 
         public async Task<long> CreateChat(long firstUserId, long secondUserId)

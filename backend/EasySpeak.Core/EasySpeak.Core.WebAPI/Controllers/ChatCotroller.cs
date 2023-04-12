@@ -28,9 +28,9 @@ namespace EasySpeak.Core.WebAPI.Controllers
         }
 
         [HttpGet("checkForChat/{firstUserId}/{secondUserId}")]
-        public ActionResult<long> CheckIfChatExists(long firstUserId, long secondUserId)
+        public async Task<ActionResult<long>> CheckIfChatExists(long firstUserId, long secondUserId)
         {
-            return Ok(_chatService.CheckIfChatExists(firstUserId, secondUserId));
+            return Ok(await _chatService.CheckIfChatExists(firstUserId, secondUserId));
         }
 
         [HttpPost("createChat")]

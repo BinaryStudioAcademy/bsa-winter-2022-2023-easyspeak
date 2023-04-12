@@ -15,11 +15,11 @@ export class ChatService {
         this.currentUser = JSON.parse(localStorage.getItem('user') as string);
     }
 
-    checkForChat(userId: number): Observable<unknown> {
+    checkForChat(userId: number): Observable<number> {
         return this.httpService.get(`${this.routePrefix}/checkForChat/${userId}/${this.currentUser.id}`);
     }
 
-    createChat(userId: number): Observable<unknown> {
+    createChat(userId: number): Observable<number> {
         return this.httpService.post(`${this.routePrefix}/createChat`, [userId, this.currentUser.id]);
     }
 }
