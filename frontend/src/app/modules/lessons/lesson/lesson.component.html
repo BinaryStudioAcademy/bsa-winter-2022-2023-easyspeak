@@ -95,7 +95,8 @@
             <app-loading-spinner class="spinner"></app-loading-spinner>'
         </div>
         <div class="question" *ngFor="let question of questions">
-            <p class="question-text">{{ question.topic }}</p>
+<!--            <p class="question-text">{{ question.topic }}</p>-->
+            <markdown class="question-text" [data]="question.topic"></markdown>
             <div class="subquestion" *ngFor="let subquestion of question.subQuestions">
                 <img class="subquestion-elipse" src="assets/lesson-icons/bullet.svg" alt="bullet-icon" />
                 <p class="subquestion-text">{{ subquestion.text }}</p>
