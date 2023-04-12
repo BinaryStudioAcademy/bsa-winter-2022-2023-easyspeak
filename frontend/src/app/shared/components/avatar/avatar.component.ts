@@ -1,5 +1,4 @@
-import { Component, Input } from '@angular/core';
-import { AuthService } from '@core/services/auth.service';
+import { AfterContentChecked, ChangeDetectorRef, Component, Input } from '@angular/core';
 import { ColorGenerationUtils } from '@shared/utils/color.utils';
 
 @Component({
@@ -7,7 +6,7 @@ import { ColorGenerationUtils } from '@shared/utils/color.utils';
     templateUrl: './avatar.component.html',
     styleUrls: ['./avatar.component.sass'],
 })
-export class AvatarComponent {
+export class AvatarComponent implements AfterContentChecked {
     @Input() firstName: string;
 
     @Input() lastName: string;
@@ -16,7 +15,31 @@ export class AvatarComponent {
 
     @Input() imageSize: number;
 
-    constructor(private authService: AuthService) {}
+    private avatarBackgroundColor = '#61D4F6';
+
+    avatarBackground: string;
+
+    paddingAvatar: string;
+
+    imgFlexSize: number;
+
+    constructor(private changeDetector: ChangeDetectorRef) {}
+
+    ngAfterContentChecked() {
+        this.avatarBackground = this.avatarBackgroundColor;
+
+        if (!this.imagePath) {
+            this.getAvatarBackground();
+        }
+
+        this.imgFlexSize = this.imageSize;
+
+        if (this.isEmojiAvatar()) {
+            this.imgFlexSize = this.imageSize > 37 ? this.imageSize - 20 : this.imageSize - 10;
+        }
+
+        this.changeDetector.detectChanges();
+    }
 
     getInitials(): string {
         if (!this.firstName || !this.lastName) {
@@ -26,15 +49,17 @@ export class AvatarComponent {
         return (this.firstName[0] + this.lastName[0]).toUpperCase();
     }
 
-    getAvatarBackground(): string {
+    getAvatarBackground() {
         const HSL = ColorGenerationUtils.generateHsl(this.getInitials());
 
-        return ColorGenerationUtils.hslToString(HSL);
+        this.avatarBackground = ColorGenerationUtils.hslToString(HSL);
     }
 
     getAvatarImage(): string {
-        if (this.imagePath && this.imagePath.match(/^predefinedavatar-\d+/)) {
-            return `assets/avatars/${this.imagePath}`;
+        if (this.isEmojiAvatar()) {
+            this.avatarBackground = this.avatarBackgroundColor;
+
+            return `assets/user-profile/${this.imagePath}.svg`;
         }
 
         return this.imagePath;
@@ -47,4 +72,6 @@ export class AvatarComponent {
 
         return this.getAvatarImage();
     }
+
+    private isEmojiAvatar = () => this.imagePath && this.imagePath.match(/^man+/);
 }
