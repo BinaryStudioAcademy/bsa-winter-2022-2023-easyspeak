@@ -1,0 +1,9 @@
+<div class="crop-avatar">
+    <image-cropper [imageChangedEvent]="data.imgChangeEvt" [maintainAspectRatio]="true" [aspectRatio]="4 / 4"
+    [resizeToWidth]="100" (imageCropped)="cropImg($event)">
+    </image-cropper>
+    <div mat-dialog-actions>
+      <button mat-button class="cancel" (click)="onNoClick()">Cancel</button>
+      <button mat-button (click)="saveAvatar()">Ok</button>
+    </div>
+</div>

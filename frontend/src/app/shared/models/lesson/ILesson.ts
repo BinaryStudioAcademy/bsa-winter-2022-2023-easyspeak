@@ -3,13 +3,13 @@ import { IQuestion } from './IQuestion';
 import { ITag } from './ITag';
 
 export interface ILesson {
-    description: string;
     id: number;
     languageLevel: number;
     mediaPath: string;
     name: string;
     questions: IQuestion[];
     startAt: string;
+    limitOfUsers: number;
     subscribersCount: number;
     youtubeVideoId: string;
     zoomMeetingLink: string;

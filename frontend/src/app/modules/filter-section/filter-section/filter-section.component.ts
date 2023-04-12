@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { langLevelsSample } from '@modules/filter-section/filter-section/filter-section.util';
+import { IIcon } from '@shared/models/IIcon';
 import { Subject } from 'rxjs';
 
 import { Filter } from 'src/app/models/filters/filter';
@@ -12,7 +13,7 @@ import { Filter } from 'src/app/models/filters/filter';
 export class FilterSectionComponent implements OnInit {
     @Output() selectedLanguageFiltersChange = new EventEmitter<string[]>();
 
-    @Output() selectedInterestsFiltersChange = new EventEmitter<string[]>();
+    @Output() selectedInterestsFiltersChange = new EventEmitter<IIcon[]>();
 
     resetFiltersEvent: Subject<void> = new Subject<void>();
 
@@ -22,7 +23,7 @@ export class FilterSectionComponent implements OnInit {
 
     public selectedLevelWithSubtitleFilters: string[] = [];
 
-    public selectedInterestsFilters: string[] = [];
+    public selectedInterestsFilters: IIcon[] = [];
 
     public langLevels: Filter[];
 
@@ -38,8 +39,8 @@ export class FilterSectionComponent implements OnInit {
         this.selectedLanguageFiltersChange.emit(this.selectedLanguageFilters);
     }
 
-    removeInterest(title: string) {
-        this.selectedInterestsFilters = this.selectedInterestsFilters.filter(filterTitle => filterTitle !== title);
+    removeInterest(topic: IIcon) {
+        this.selectedInterestsFilters = this.selectedInterestsFilters.filter(filter => filter !== topic);
         this.selectedInterestsFiltersChange.emit(this.selectedInterestsFilters);
     }
 
@@ -49,7 +50,7 @@ export class FilterSectionComponent implements OnInit {
         this.selectedLanguageFiltersChange.emit(this.selectedLanguageFilters);
     }
 
-    updateInterestFilters(eventData: string[]) {
+    updateInterestFilters(eventData: IIcon[]) {
         this.selectedInterestsFilters = eventData;
         this.selectedInterestsFiltersChange.emit(this.selectedInterestsFilters);
     }

@@ -41,7 +41,7 @@ export class DataService {
 
         return this.httpService.get<T[]>(`${this.routePrefix}/${route}`).pipe(
             tap((result) => {
-                localStorage.setItem(localStorageKey, JSON.stringify(result));
+                localStorage.setItem(localStorageKey, JSON.stringify(result.sort()));
             }),
         );
     }

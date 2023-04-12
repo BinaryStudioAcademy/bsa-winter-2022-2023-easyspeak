@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BaseComponent } from '@core/base/base.component';
 import { NotificationsHubService } from '@core/hubs/notifications-hub.service';
@@ -25,7 +25,6 @@ export class UserNotificationComponent extends BaseComponent implements OnInit, 
         notificationsHub: NotificationsHubService,
         private notificationService: NotificationService,
         private router: Router,
-        private cdRef: ChangeDetectorRef,
     ) {
         super();
         this.notificationsHub = notificationsHub;
@@ -53,6 +52,8 @@ export class UserNotificationComponent extends BaseComponent implements OnInit, 
 
             const messages = {
                 id: broadcastMessage.Id,
+                firstName: broadcastMessage.firstName,
+                lastName: broadcastMessage.lastName,
                 text: broadcastMessage.Text,
                 type: broadcastMessage.Type,
                 isRead: broadcastMessage.IsRead,
@@ -61,8 +62,6 @@ export class UserNotificationComponent extends BaseComponent implements OnInit, 
             };
 
             this.notifications.push(messages);
-            console.log(messages);
-            this.cdRef.detectChanges();
         });
     }
 
@@ -74,13 +73,9 @@ export class UserNotificationComponent extends BaseComponent implements OnInit, 
     }
 
     readAllNotifications() {
-        this.notificationService.readAllNotifications()
-            .subscribe(() => {
-                this.notifications.map(notification => ({
-                    ...notification,
-                    isRead: true,
-                }));
-            });
+        this.notifications = [];
+
+        this.notificationService.readAllNotifications().subscribe();
     }
 
     override ngOnDestroy() {

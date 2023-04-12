@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EasySpeak.Core.DAL.Migrations
 {
     [DbContext(typeof(EasySpeakCoreContext))]
-    [Migration("20230410003900_DuplicateTagsDeleted")]
-    partial class DuplicateTagsDeleted
+    [Migration("20230411164424_Removed-Lesson-Description")]
+    partial class RemovedLessonDescription
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -184,10 +184,6 @@ namespace EasySpeak.Core.DAL.Migrations
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("getutcdate()");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.ToTable("Chats");
@@ -196,122 +192,102 @@ namespace EasySpeak.Core.DAL.Migrations
                         new
                         {
                             Id = 1L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "input Singapore Dollar functionalities"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 2L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Versatile withdrawal"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 3L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "invoice actuating"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 4L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Directives"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 5L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "neural-net"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 6L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Platinum Thailand"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 7L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Fresh"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 8L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "core"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 9L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "orange"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 10L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Generic Concrete Shoes"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 11L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "channels Run Checking Account"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 12L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Flat EXE"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 13L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "deposit"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 14L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Shoes, Beauty & Games"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 15L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Awesome"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 16L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "interactive parse GB"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 17L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Health & Home"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 18L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Intelligent Legacy"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 19L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "North Carolina indigo Sleek Wooden Car"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 20L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "strategy"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
@@ -546,10 +522,6 @@ namespace EasySpeak.Core.DAL.Migrations
                     b.Property<long?>("CreatedBy")
                         .HasColumnType("bigint");
 
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("IsCanceled")
                         .HasColumnType("bit");
 
@@ -594,13 +566,12 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 1L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatedBy = 1L,
-                            Description = "Singapore Dollar functionalities Field Branding impactful invoice actuating lavender",
                             IsCanceled = false,
                             LanguageLevel = 0,
-                            LimitOfUsers = 74,
-                            MediaPath = "https://picsum.photos/640/480/?image=202",
+                            LimitOfUsers = 150,
+                            MediaPath = "https://picsum.photos/640/480/?image=822",
                             Name = "Mobility",
-                            StartAt = new DateTime(2023, 4, 3, 19, 50, 29, 650, DateTimeKind.Utc).AddTicks(205),
+                            StartAt = new DateTime(2023, 4, 20, 5, 39, 54, 568, DateTimeKind.Utc).AddTicks(9782),
                             YoutubeVideoId = "",
                             ZoomMeetingLink = "",
                             ZoomMeetingLinkHost = ""
@@ -610,13 +581,12 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 2L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatedBy = 1L,
-                            Description = "Thailand budgetary management SDD core Concrete complexity Generic Concrete Shoes navigating plum pixel",
                             IsCanceled = false,
                             LanguageLevel = 0,
-                            LimitOfUsers = 123,
-                            MediaPath = "https://picsum.photos/640/480/?image=134",
-                            Name = "Palau",
-                            StartAt = new DateTime(2023, 4, 15, 17, 57, 57, 902, DateTimeKind.Utc).AddTicks(9337),
+                            LimitOfUsers = 139,
+                            MediaPath = "https://picsum.photos/640/480/?image=232",
+                            Name = "brand",
+                            StartAt = new DateTime(2023, 4, 28, 7, 4, 30, 405, DateTimeKind.Utc).AddTicks(2189),
                             YoutubeVideoId = "",
                             ZoomMeetingLink = "",
                             ZoomMeetingLinkHost = ""
@@ -626,12 +596,11 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 3L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatedBy = 2L,
-                            Description = "deposit Advanced input",
                             IsCanceled = false,
                             LanguageLevel = 0,
-                            MediaPath = "https://picsum.photos/640/480/?image=545",
-                            Name = "EXE",
-                            StartAt = new DateTime(2023, 4, 3, 23, 3, 18, 306, DateTimeKind.Utc).AddTicks(6493),
+                            MediaPath = "https://picsum.photos/640/480/?image=1065",
+                            Name = "Oman",
+                            StartAt = new DateTime(2023, 4, 7, 17, 24, 52, 871, DateTimeKind.Utc).AddTicks(8972),
                             YoutubeVideoId = "",
                             ZoomMeetingLink = "",
                             ZoomMeetingLinkHost = ""
@@ -641,13 +610,12 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 4L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatedBy = 5L,
-                            Description = "South Carolina Accountability Plastic Health & Home",
                             IsCanceled = false,
                             LanguageLevel = 0,
-                            LimitOfUsers = 59,
-                            MediaPath = "https://picsum.photos/640/480/?image=376",
-                            Name = "Ville",
-                            StartAt = new DateTime(2023, 4, 1, 19, 45, 38, 148, DateTimeKind.Utc).AddTicks(2420),
+                            LimitOfUsers = 143,
+                            MediaPath = "https://picsum.photos/640/480/?image=157",
+                            Name = "Directives",
+                            StartAt = new DateTime(2023, 4, 8, 12, 1, 17, 422, DateTimeKind.Utc).AddTicks(3002),
                             YoutubeVideoId = "",
                             ZoomMeetingLink = "",
                             ZoomMeetingLinkHost = ""
@@ -657,12 +625,11 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 5L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatedBy = 5L,
-                            Description = "deposit auxiliary Avon Intelligent strategy Forint copy",
                             IsCanceled = false,
                             LanguageLevel = 0,
-                            MediaPath = "https://picsum.photos/640/480/?image=659",
-                            Name = "input",
-                            StartAt = new DateTime(2023, 4, 18, 19, 29, 4, 130, DateTimeKind.Utc).AddTicks(7404),
+                            MediaPath = "https://picsum.photos/640/480/?image=576",
+                            Name = "Platinum",
+                            StartAt = new DateTime(2023, 4, 25, 23, 15, 50, 87, DateTimeKind.Utc).AddTicks(5649),
                             YoutubeVideoId = "",
                             ZoomMeetingLink = "",
                             ZoomMeetingLinkHost = ""
@@ -672,13 +639,11 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 6L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatedBy = 4L,
-                            Description = "Awesome Malta indigo XSS Texas interface Israel orchestrate",
                             IsCanceled = false,
                             LanguageLevel = 0,
-                            LimitOfUsers = 139,
-                            MediaPath = "https://picsum.photos/640/480/?image=245",
-                            Name = "front-end",
-                            StartAt = new DateTime(2023, 4, 1, 0, 33, 57, 99, DateTimeKind.Utc).AddTicks(9638),
+                            MediaPath = "https://picsum.photos/640/480/?image=345",
+                            Name = "SDD",
+                            StartAt = new DateTime(2023, 4, 6, 15, 15, 36, 36, DateTimeKind.Utc).AddTicks(7593),
                             YoutubeVideoId = "",
                             ZoomMeetingLink = "",
                             ZoomMeetingLinkHost = ""
@@ -688,13 +653,12 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 7L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatedBy = 1L,
-                            Description = "B2C Platinum system bus channels",
                             IsCanceled = false,
                             LanguageLevel = 0,
-                            LimitOfUsers = 133,
-                            MediaPath = "https://picsum.photos/640/480/?image=934",
-                            Name = "Peso Uruguayo",
-                            StartAt = new DateTime(2023, 4, 16, 11, 19, 31, 565, DateTimeKind.Utc).AddTicks(2009),
+                            LimitOfUsers = 52,
+                            MediaPath = "https://picsum.photos/640/480/?image=60",
+                            Name = "complexity",
+                            StartAt = new DateTime(2023, 4, 18, 12, 32, 59, 586, DateTimeKind.Utc).AddTicks(5964),
                             YoutubeVideoId = "",
                             ZoomMeetingLink = "",
                             ZoomMeetingLinkHost = ""
@@ -704,13 +668,12 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 8L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatedBy = 5L,
-                            Description = "white driver Usability Total Multi-tiered",
                             IsCanceled = false,
                             LanguageLevel = 0,
-                            LimitOfUsers = 142,
-                            MediaPath = "https://picsum.photos/640/480/?image=266",
-                            Name = "Bedfordshire",
-                            StartAt = new DateTime(2023, 3, 31, 4, 21, 38, 476, DateTimeKind.Utc).AddTicks(9665),
+                            LimitOfUsers = 153,
+                            MediaPath = "https://picsum.photos/640/480/?image=194",
+                            Name = "navigating",
+                            StartAt = new DateTime(2023, 4, 17, 11, 50, 19, 566, DateTimeKind.Utc).AddTicks(9665),
                             YoutubeVideoId = "",
                             ZoomMeetingLink = "",
                             ZoomMeetingLinkHost = ""
@@ -720,13 +683,12 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 9L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatedBy = 1L,
-                            Description = "Multi-tiered hacking Seychelles",
                             IsCanceled = false,
                             LanguageLevel = 0,
-                            LimitOfUsers = 56,
-                            MediaPath = "https://picsum.photos/640/480/?image=7",
-                            Name = "Music",
-                            StartAt = new DateTime(2023, 4, 9, 2, 18, 12, 41, DateTimeKind.Utc).AddTicks(4570),
+                            LimitOfUsers = 180,
+                            MediaPath = "https://picsum.photos/640/480/?image=620",
+                            Name = "Granite",
+                            StartAt = new DateTime(2023, 4, 6, 5, 31, 35, 722, DateTimeKind.Utc).AddTicks(2772),
                             YoutubeVideoId = "",
                             ZoomMeetingLink = "",
                             ZoomMeetingLinkHost = ""
@@ -736,13 +698,12 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 10L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatedBy = 2L,
-                            Description = "application cross-platform Corners niches bleeding-edge Sleek Frozen Hat 1080p Cambridgeshire dot-com Gorgeous",
                             IsCanceled = false,
                             LanguageLevel = 0,
-                            LimitOfUsers = 29,
-                            MediaPath = "https://picsum.photos/640/480/?image=878",
-                            Name = "USB",
-                            StartAt = new DateTime(2023, 4, 14, 7, 44, 19, 22, DateTimeKind.Utc).AddTicks(6402),
+                            LimitOfUsers = 22,
+                            MediaPath = "https://picsum.photos/640/480/?image=75",
+                            Name = "olive",
+                            StartAt = new DateTime(2023, 4, 6, 9, 54, 33, 817, DateTimeKind.Utc).AddTicks(7535),
                             YoutubeVideoId = "",
                             ZoomMeetingLink = "",
                             ZoomMeetingLinkHost = ""
@@ -1845,7 +1806,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 18L,
                             CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ImageUrl = "BoxingGlove.svg",
-                            Name = "Storts"
+                            Name = "Sports"
                         },
                         new
                         {
@@ -1883,6 +1844,10 @@ namespace EasySpeak.Core.DAL.Migrations
                         .HasDefaultValueSql("getutcdate()");
 
                     b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EmojiName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -1937,6 +1902,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             Country = 196,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "Della.Rosenbaum@yahoo.com",
+                            EmojiName = "",
                             FirstName = "Della",
                             IsAdmin = true,
                             IsBanned = false,
@@ -1955,6 +1921,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             Country = 215,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "Randall_Hegmann56@hotmail.com",
+                            EmojiName = "",
                             FirstName = "Randall",
                             IsAdmin = true,
                             IsBanned = false,
@@ -1973,6 +1940,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             Country = 68,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "Alfred89@hotmail.com",
+                            EmojiName = "",
                             FirstName = "Alfred",
                             IsAdmin = true,
                             IsBanned = false,
@@ -1991,6 +1959,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             Country = 42,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "Sandra57@gmail.com",
+                            EmojiName = "",
                             FirstName = "Sandra",
                             IsAdmin = true,
                             IsBanned = false,
@@ -2009,6 +1978,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             Country = 236,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "Frances.Lemke37@gmail.com",
+                            EmojiName = "",
                             FirstName = "Frances",
                             IsAdmin = false,
                             IsBanned = false,

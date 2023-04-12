@@ -6,9 +6,9 @@ public class LessonDto
 {
     public long Id { get; set; }
     public string? Name { get; set; }
-    public string? Description { get; set; }
     public string? MediaPath { get; set; }
     public DateTime StartAt { get; set; }
+    public int? LimitOfUsers { get; set; }
     public string? LanguageLevel { get; set; }
     public int SubscribersCount { get; set; }
     public string? YoutubeVideoId { get; set; } 
@@ -18,6 +18,6 @@ public class LessonDto
     public bool isCanceled { get; set; }
 
     public UserForLessonDto? User { get; set; }
-    public ICollection<TagForLessonDto>? Tags { get; set; }
+    public ICollection<TagForFiltrationDto>? Tags { get; set; }
     public ICollection<QuestionForLessonDto>? Questions { get; set; }
 }
