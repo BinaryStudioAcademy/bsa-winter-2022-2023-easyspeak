@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FriendshipService } from '@core/services/friendship.service';
 import { UserCard, UserFriendshipStatus } from '@shared/models/user/user-card';
-import { Utils } from '@shared/utils/user-card.utils';
 import languagesLib from 'iso-639-1';
 import countriesLib from 'iso-3166-1';
 
@@ -16,7 +15,7 @@ import { languageToCountryCodes } from './mappingLanguagetoCountry';
 })
 
 export class UserCardComponent implements OnInit {
-    @Input() user: UserCard = Utils.user;
+    @Input() user: UserCard;
 
     userCountryFlag: string | undefined;
 

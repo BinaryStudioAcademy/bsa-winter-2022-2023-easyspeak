@@ -29,7 +29,7 @@ namespace EasySpeak.Notifier.WebAPI.Services
             await base.StopAsync(cancellationToken);
         }
 
-        protected override Task ExecuteAsync(CancellationToken stoppingToken)
+        protected override Task ExecuteAsync(CancellationToken cancellationToken)
         {
             try
             {

@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.SignalR;
+using Microsoft.AspNetCore.SignalR;
 using EasySpeak.Core.Common.DTO.Notification;
 using Newtonsoft.Json;
 
