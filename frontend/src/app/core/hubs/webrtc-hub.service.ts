@@ -3,13 +3,14 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { HubConnection, HubConnectionState } from '@microsoft/signalr';
 import { SessionCallComponent } from '@modules/session-call/session-call/session-call.component';
 import { AcceptCallComponent } from '@shared/components/accept-call/accept-call.component';
+import { IAcceptCallInfo } from '@shared/models/chat/IAcceptCallInfo';
 import { ICallInfo } from '@shared/models/chat/ICallInfo';
+import { ICallUserInfo } from '@shared/models/chat/ICallUserInfo';
 import { Subject, Subscription } from 'rxjs';
 
-import { WebrtcHubFactoryService } from './hubFactories/webrtc-hub-factory.service';
-import { ICallUserInfo } from '@shared/models/chat/ICallUserInfo';
-import { IAcceptCallInfo } from '@shared/models/chat/IAcceptCallInfo';
 import { NotificationService } from 'src/app/services/notification.service';
+
+import { WebrtcHubFactoryService } from './hubFactories/webrtc-hub-factory.service';
 
 @Injectable({
     providedIn: 'root',

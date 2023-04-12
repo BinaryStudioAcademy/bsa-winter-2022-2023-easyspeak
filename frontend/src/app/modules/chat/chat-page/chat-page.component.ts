@@ -153,7 +153,7 @@ export class ChatPageComponent implements OnInit, OnDestroy {
         const callInfo: ICallUserInfo = {
             chatId: this.currentChatId,
             calleeEmail: this.currentPerson.email,
-            callerId: <number>this.currentUser.id,
+            callerId: <number> this.currentUser.id,
             callerEmail: this.currentUser.email,
             callerFullName: fullName,
             callerImgPath: this.currentUser.imagePath,
