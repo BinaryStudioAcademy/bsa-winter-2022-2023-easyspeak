@@ -9,7 +9,7 @@ COPY ["EasySpeak.RecommendationService/EasySpeak.RS.WebAPI/EasySpeak.RS.WebAPI.c
 COPY ["EasySpeak.RabbitMQ/EasySpeak.RabbitMQ.csproj", "EasySpeak.RabbitMQ/"]
 COPY ["EasySpeak.Core/EasySpeak.Core.Common/EasySpeak.Core.Common.csproj", "EasySpeak.Core/EasySpeak.Core.Common/"]
 
-RUN dotnet restore "EasySpeak.RecommendationService/EasySpeak.RS.WebAPI/EasySpeak.Notifier.WebAPI.csproj"
+RUN dotnet restore "EasySpeak.RecommendationService/EasySpeak.RS.WebAPI/EasySpeak.RS.WebAPI.csproj"
 COPY . .
 WORKDIR "/src/EasySpeak.RecommendationService/EasySpeak.RS.WebAPI"
 RUN dotnet build "EasySpeak.RS.WebAPI.csproj" -c Release -o /app/build

@@ -82,6 +82,7 @@ services:
         - easyspeak_notifier
         - easyspeak_communicator
         - easyspeak_recommendator_service
+        - easyspeak_emailer
     build:
         context: ./frontend
         dockerfile: Dockerfile.dev

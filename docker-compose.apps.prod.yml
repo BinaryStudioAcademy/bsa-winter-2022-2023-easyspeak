@@ -74,6 +74,7 @@ services:
             - easyspeak_notifier
             - easyspeak_communicator
             - easyspeak_recommendator_service
+            - easyspeak_emailer
         image: tatihutii/easyspeak_frontend:latest
         container_name: 'easyspeak_frontend'
         restart: on-failure
