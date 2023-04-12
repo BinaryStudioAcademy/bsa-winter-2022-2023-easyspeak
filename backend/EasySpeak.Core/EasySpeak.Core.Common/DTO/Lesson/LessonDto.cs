@@ -1,4 +1,5 @@
-﻿using EasySpeak.Core.Common.Enums;
+﻿using EasySpeak.Core.Common.DTO.Tag;
+using EasySpeak.Core.Common.Enums;
 
 namespace EasySpeak.Core.Common.DTO.Lesson;
 
@@ -19,7 +20,7 @@ public class LessonDto
     public bool isCanceled { get; set; }
 
     public UserForLessonDto? User { get; set; }
-    public ICollection<TagForFiltrationDto>? Tags { get; set; }
+    public ICollection<TagForLessonDto>? Tags { get; set; }
     public ICollection<QuestionForLessonDto>? Questions { get; set; }
 
     public Dictionary<string, object> ToDictionary()

@@ -61,7 +61,8 @@ services:
         restart: on-failure
         networks:
             - back
-        ports: "5110:5110"
+        ports: 
+            - "5110:5110"
         environment:
             - ASPNETCORE_ENVIRONMENT=Production
         env_file:
