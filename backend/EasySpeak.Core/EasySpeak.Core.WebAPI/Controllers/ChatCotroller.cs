@@ -22,9 +22,21 @@ namespace EasySpeak.Core.WebAPI.Controllers
         }
 
         [HttpGet("chatmessages/{chatId}")]
-        public async Task<ActionResult<List<MessageGroupDto>>> GetChatMessages(int chatId)
+        public async Task<ActionResult<List<MessageGroupDto>>> GetChatMessages(long chatId)
         {
             return Ok(await _chatService.GetChatMessages(chatId));
+        }
+
+        [HttpGet("checkForChat/{firstUserId}/{secondUserId}")]
+        public async Task<ActionResult<long>> CheckIfChatExists(long firstUserId, long secondUserId)
+        {
+            return Ok(await _chatService.CheckIfChatExists(firstUserId, secondUserId));
+        }
+
+        [HttpPost("createChat")]
+        public async Task<ActionResult<long>> CreateChat([FromBody] long[] userIds)
+        {
+            return Ok(await _chatService.CreateChat(userIds[0], userIds[1]));
         }
     }
 }

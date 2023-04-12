@@ -17,12 +17,7 @@ import { LessonsService } from 'src/app/services/lessons.service';
     styleUrls: ['./teachers-page.component.sass'],
 })
 export class TeachersPageComponent implements OnInit {
-    currentUser: IUserShort = {
-        email: '',
-        firstName: '',
-        lastName: '',
-        imagePath: '',
-    };
+    currentUser: IUserShort;
 
     statistics: TeacherStatistics = {
         totalClasses: 0,
@@ -31,6 +26,8 @@ export class TeachersPageComponent implements OnInit {
         totalStudents: 0,
         nextClass: null,
     };
+
+    selectedDaysCount: number;
 
     datesWithLessons: IDateWithLessons[] = [];
 
@@ -41,15 +38,21 @@ export class TeachersPageComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
+        this.authService.loadUser().subscribe();
+
         this.authService.user.subscribe((user) => {
             this.currentUser = user;
         });
 
+        this.loadStatistics();
+
+        this.loadLessons(7);
+    }
+
+    loadStatistics() {
         this.lessonsService.getTeacherStatistics().subscribe((data) => {
             this.statistics = data;
         });
-
-        this.loadLessons(7);
     }
 
     openCreate() {
@@ -61,10 +64,17 @@ export class TeachersPageComponent implements OnInit {
             },
         };
 
-        this.dialogRef.open(ModalComponent, config);
+        this.dialogRef
+            .open(ModalComponent, config)
+            .afterClosed()
+            .subscribe(() => {
+                this.loadLessons(this.selectedDaysCount);
+                this.loadStatistics();
+            });
     }
 
     loadLessons(daysCount: number) {
+        this.selectedDaysCount = daysCount;
         this.lessonsService
             .getTeacherLessonsAtPeriod(
                 new Date().toISOString(),

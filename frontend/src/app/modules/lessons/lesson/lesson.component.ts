@@ -42,8 +42,8 @@ export class LessonComponent extends BaseComponent implements OnInit {
         super();
     }
 
-    openDialog(youtubeVideoId: string) {
-        if (!youtubeVideoId) {
+    openDialog(videoId: string) {
+        if (!videoId) {
             return;
         }
         this.dialogRef.open(YoutubePlayerComponent, {
@@ -52,7 +52,7 @@ export class LessonComponent extends BaseComponent implements OnInit {
             height: '80%',
             width: '80%',
             data: {
-                youtubeVideoId,
+                videoId,
             },
         });
     }
