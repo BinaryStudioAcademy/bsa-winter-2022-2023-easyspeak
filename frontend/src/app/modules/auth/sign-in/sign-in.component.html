@@ -9,15 +9,15 @@
                     placeholder="Email"
                     required
                     email="{{this.email}}"/>
-        
+
                 <div class="errors-wrp">
                     <mat-error class="error" *ngIf="this.email.invalid && this.userLoginForm.submitted">
                         <img src="/assets/user-profile/alert-triangle.svg" alt="">
                         {{getErrorMessage(email)}}
                     </mat-error>
                 </div>
-        
-                <div class="error-surface" 
+
+                <div class="error-surface"
                     *ngIf="this.email.errors && this.userLoginForm.submitted">
                 </div>
             </div>
@@ -29,7 +29,7 @@
                     placeholder="Password"
                     required
                     appPasswordVisibility/>
-        
+
                 <div class="errors-wrp">
                     <mat-error class="error" *ngIf="this.password.invalid && this.userLoginForm.submitted">
                         <img src="/assets/user-profile/alert-triangle.svg" alt="">
@@ -45,6 +45,7 @@
                 mat-button type="submit">
                 Sign In
             </button>
+            <a href="auth/forgot-password" id="forgot-password">Forgot password?</a>
         </form>
     </div>
     <div id="has-account">

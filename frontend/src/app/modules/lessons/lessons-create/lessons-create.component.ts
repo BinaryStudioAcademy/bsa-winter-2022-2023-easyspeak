@@ -2,16 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { youtubeVideoLinkRegex } from '@shared/data/regex.util';
+import { IIcon } from '@shared/models/IIcon';
 import { INewLesson } from '@shared/models/lesson/INewLesson';
 import { INewQuestion } from '@shared/models/lesson/INewQuestion';
-import { INewTag } from '@shared/models/lesson/INewTag';
 import { LanguageLevels } from '@shared/models/lesson/LanguageLevels';
 import Utils from '@shared/utils/lesson.utils';
 import * as moment from 'moment';
 
 import { LessonsService } from 'src/app/services/lessons.service';
 import { NotificationService } from 'src/app/services/notification.service';
-import {IIcon} from "@shared/models/IIcon";
 
 @Component({
     selector: 'app-lessons-create',
@@ -122,7 +121,7 @@ export class LessonsCreateComponent implements OnInit {
             languageLevel: Object.values(LanguageLevels).indexOf(this.level),
             startAt,
             questions: lessonQuestions,
-            tags: lessonTags,
+            tags: lessonTags.map(f => ({ id: f.id })),
             limitOfUsers: parseInt(this.studentsCount?.value, 10),
             youtubeVideoId: this.getYoutubeVideoId(this.videoLink?.value),
         };

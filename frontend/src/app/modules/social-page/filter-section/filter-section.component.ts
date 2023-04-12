@@ -3,7 +3,6 @@ import { DataService } from '@core/services/data.service';
 import {
     compatibilities,
     langLevelsSample,
-    topicsSample,
 } from '@modules/filter-section/filter-section/filter-section.util';
 import { IIcon } from '@shared/models/IIcon';
 import { Subject } from 'rxjs';
@@ -48,8 +47,7 @@ export class FilterSectionComponent implements OnInit {
     ngOnInit(): void {
         this.dataService.getAllTags().subscribe((tags) => {
             this.topics = tags.map((tag): IIcon => ({
-                id: tag.id,
-                name: tag.name,
+                ...tag,
                 link: `assets/topic-icons/${tag.imageUrl}`,
             }));
         });
@@ -100,7 +98,7 @@ export class FilterSectionComponent implements OnInit {
 
     updateTopics(eventData: IIcon[]) {
         this.selectedTopicsFilters = eventData;
-        this.userFilters.topics = this.selectedTopicsFilters;
+        this.userFilters.topics = this.selectedTopicsFilters.map(f => ({ id: f.id }));
         this.filterChange.emit(this.userFilters);
     }
 

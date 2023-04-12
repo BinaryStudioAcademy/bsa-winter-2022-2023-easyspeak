@@ -107,7 +107,10 @@ export class LessonComponent extends BaseComponent implements OnInit {
 
     isDisabled() {
         if (!this.isTeachersPage) {
-            return this.lesson.isSubscribed || new Date() > new Date(this.lesson.startAt);
+            return this.lesson.isSubscribed
+                || new Date() > new Date(this.lesson.startAt)
+                || this.lesson.limitOfUsers === null
+                || this.lesson.subscribersCount === this.lesson.limitOfUsers;
         }
         if (this.isTeachersPage) {
             return this.lesson.isCanceled || new Date() > new Date(this.lesson.startAt);
