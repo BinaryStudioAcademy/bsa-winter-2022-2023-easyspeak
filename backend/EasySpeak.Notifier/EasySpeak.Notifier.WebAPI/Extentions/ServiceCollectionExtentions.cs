@@ -1,4 +1,5 @@
-﻿using EasySpeak.RabbitMQ.Interfaces;
+﻿using EasySpeak.Notifier.WebAPI.Hubs;
+using EasySpeak.RabbitMQ.Interfaces;
 using EasySpeak.RabbitMQ;
 using EasySpeak.RabbitMQ.Services;
 
@@ -11,6 +12,7 @@ namespace EasySpeak.Notifier.WebAPI.Extentions
             var hostname = configuration.GetValue<string>("Rabbit");
             services.AddSingleton<IConnectionProvider>(_ => new ConnectionProvider(hostname));
             services.AddTransient<IMessageConsumer, MessageConsumer>();
+            services.AddSingleton<NotificationHub>();
         }
     }
 }

@@ -17,13 +17,13 @@ namespace EasySpeak.Core.BLL.Services
     {
         private readonly EasySpeakCoreContext _context;
         private readonly IFirebaseAuthService _authService;
-        private readonly INotificationService notificationService;
+        private readonly INotificationService _notificationService;
 
         public FriendService(EasySpeakCoreContext context, IFirebaseAuthService authService, INotificationService notificationService)
         {
             _context = context;
             _authService = authService;
-            this.notificationService = notificationService;
+            _notificationService = notificationService;
         }
 
         public async Task AcceptFriendshipAsync(FriendEmailDto friendDto)

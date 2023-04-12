@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NotifierHubFactoryService } from '@core/hubs/hubFactories/notifier-hub-factory.service';
-import { HubConnection } from '@microsoft/signalr';
+import { HubConnection, HubConnectionState } from '@microsoft/signalr';
 import { Subject, Subscription } from 'rxjs';
 
 @Injectable({
@@ -18,17 +18,31 @@ export class NotificationsHubService {
     constructor(private hubFactory: NotifierHubFactoryService) {}
 
     async start() {
-        this.hubConnection = this.hubFactory.createHub(this.hubUrl);
-        await this.init();
+        if (!this.hubConnection || this.hubConnection.state === HubConnectionState.Disconnected) {
+            this.hubConnection = this.hubFactory.createHub(this.hubUrl);
+            await this.init();
+        }
     }
 
     listenMessages(action: (msg: string) => void) {
         this.subscriptions.push(this.messages.subscribe({ next: action }));
     }
 
-    async stop() {
-        await this.hubConnection?.stop();
+    stop(): void {
+        this.hubConnection.stop();
         this.subscriptions.forEach((s) => s.unsubscribe());
+    }
+
+    public async connect(email: string) {
+        await this.hubConnection.invoke('Connect', email).catch((err) => {
+            console.error(err);
+        });
+    }
+
+    public async disconnectUser(email: string) {
+        await this.hubConnection.invoke('Disconnect', email).catch((err) => {
+            console.error(err);
+        });
     }
 
     private async init() {
@@ -40,5 +54,9 @@ export class NotificationsHubService {
         this.hubConnection.on('Notify', (msg: string) => {
             this.messages.next(msg);
         });
+    }
+
+    isConnected(): boolean {
+        return this.hubConnection && this.hubConnection.state === HubConnectionState.Connected;
     }
 }
