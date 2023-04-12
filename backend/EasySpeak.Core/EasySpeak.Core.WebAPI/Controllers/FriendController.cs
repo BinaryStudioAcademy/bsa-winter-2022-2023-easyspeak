@@ -11,7 +11,7 @@ namespace EasySpeak.Core.WebAPI.Controllers
     {
         private readonly IFriendService _service;
 
-        public FriendController(IFriendService service, IUserService userService) 
+        public FriendController(IFriendService service) 
         {
             _service = service;
         }
@@ -19,8 +19,7 @@ namespace EasySpeak.Core.WebAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> AddFriendship([FromBody] FriendEmailDto friendDto)
         {
-            await _service.AddFriendAsync(friendDto);
-            return Ok();
+            return await _service.AddFriendAsync(friendDto) ? Ok() : BadRequest();
         }
 
         [HttpPut("accept")]

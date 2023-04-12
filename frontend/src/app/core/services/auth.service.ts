@@ -3,9 +3,10 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { NotificationsHubService } from '@core/hubs/notifications-hub.service';
 import { WebrtcHubService } from '@core/hubs/webrtc-hub.service';
 import { HttpService } from '@core/services/http.service';
-import { UserShort } from '@shared/models/UserShort';
+import { IUserShort } from '@shared/models/IUserShort';
 import * as auth from 'firebase/auth';
 import firebase from 'firebase/compat';
 import { defer, first, firstValueFrom, from, Subject, tap } from 'rxjs';
@@ -18,7 +19,7 @@ import { UserService } from './user.service';
     providedIn: 'root',
 })
 export class AuthService {
-    user = new Subject<UserShort>();
+    user = new Subject<IUserShort>();
 
     constructor(
         private afs: AngularFirestore,
@@ -30,7 +31,14 @@ export class AuthService {
         private userService: UserService,
         private toastr: NotificationService,
         private webRtcHub: WebrtcHubService,
-    ) {}
+        private notificationsHub: NotificationsHubService,
+    ) {
+        this.afAuth.onIdTokenChanged(user => {
+            if (user) {
+                this.setAccessToken(user);
+            }
+        });
+    }
 
     async handleUserCredential(userCredential: firebase.auth.UserCredential) {
         if (userCredential.user) {
@@ -38,6 +46,10 @@ export class AuthService {
 
             this.webRtcHub.start().then(() => {
                 this.webRtcHub.connect(userCredential.user?.email as string);
+            });
+
+            this.notificationsHub.start().then(() => {
+                this.notificationsHub.connect(userCredential.user?.email as string);
             });
         }
     }
@@ -75,16 +87,16 @@ export class AuthService {
         localStorage.setItem('accessToken', userIdToken);
     }
 
-    setLocalStorage(user: UserShort) {
+    setLocalStorage(user: IUserShort) {
         localStorage.setItem('user', JSON.stringify(user));
         this.user.next(user);
-        this.user.complete();
     }
 
     loadUser() {
         this.userService.getUser().subscribe(
             (resp) => {
                 const user = {
+                    id: resp.id,
                     email: resp.email,
                     firstName: resp.firstName,
                     lastName: resp.lastName,
@@ -118,9 +130,10 @@ export class AuthService {
     }
 
     logout(): Promise<void> {
-        const user: UserShort = JSON.parse(localStorage.getItem('user') as string);
+        const user: IUserShort = JSON.parse(localStorage.getItem('user') as string);
 
         this.webRtcHub.disconnectUser(user.email).then();
+        this.notificationsHub.disconnectUser(user.email).then();
 
         localStorage.removeItem('accessToken');
         localStorage.removeItem('user');

@@ -101,74 +101,75 @@ button
     .radius-small
             position: absolute
             background-color: $inactive-color
-            width: 55px
-            height: 55px
-            border-radius: 75px
-            padding: 16px
+            width: calc(55px / 1080px * 100vh)
+            height: calc(55px / 1080px * 100vh)
+            border-radius: 50%
+            padding: calc(16px / 1080px * 100vh)
+            top: calc(50% - 43.5px / 1080px * 100vh)
             img
                 position: absolute
-                width: 55px
-                height: 55px
+                width: calc(55px / 1080px * 100vh)
+                height: calc(55px / 1080px * 100vh)
 
     .radius-medium
             position: absolute
             background-color: rgba($turquoise-100, 0.4)
-            width: 89px
-            height: 89px
-            border-radius: 75px
-            padding: 20.5px 16.5px 20.5px 24.5px
+            width: calc(89px / 1080px * 100vh)
+            height: calc(89px / 1080px * 100vh)
+            border-radius: 50%
+            padding: calc(20.5px / 1080px * 100vh)
+            padding-right: calc(16.5px / 1080px * 100vh)
+            padding-left: calc(24.5px / 1080px * 100vh)
             img
                 position: absolute
-                width: 82px
-                height: 82px
+                width: calc(82px / 1080px * 100vh)
+                height: calc(82px / 1080px * 100vh)
 
     .radius-big
         position: absolute
         background-color: $turquoise-100
-        width: 96px
-        height: 96px
-        border-radius: 75px
-        padding: 27px
+        width: calc(96px / 1080px * 100vh)
+        height: calc(96px / 1080px * 100vh)
+        border-radius: 50%
+        padding: calc(27px / 1080px * 100vh)
         img
             position: absolute
-            width: 95px
-            height: 95px
+            width: calc(95px / 1080px * 100vh)
+            height: calc(95px / 1080px * 100vh)
 
     .leaf
-        top: calc(30% - 75px)
-        left: calc(35% - 75px)
+        top: calc(30% - 75px / 1080px * 100vh)
+        left: calc(35% - 75px / 1080px * 100vh)
         border-radius: 500px 500px 500px 0
         transform: rotate(-45deg)
         img
             transform: rotate(45deg)
 
     .dna
-        top: calc(70% - 75px)
-        left: calc(65% - 75px)
+        top: calc(70% - 75px / 1080px * 100vh)
+        left: calc(65% - 75px / 1080px * 100vh)
         border-radius: 500px 500px 500px 0
         transform: rotate(135deg)
         img
             transform: rotate(-135deg)
 
     .drum
-        top: calc(50% - 65px)
-        left: calc(50% - 65px)
+        top: calc(50% - 65px / 1080px * 100vh)
+        left: calc(50% - 65px / 1080px * 100vh)
 
     .sandwich
-        top: calc(70% - 65px)
-        left: calc(35% - 65px)
+        top: calc(70% - 65px / 1080px * 100vh)
+        left: calc(35% - 65px / 1080px * 100vh)
 
     .clapper-board
-        top: calc(30% - 65px)
-        left: calc(65% - 65px)
+        top: calc(30% - 65px / 1080px * 100vh)
+        left: calc(65% - 65px / 1080px * 100vh)
 
     .kite
-        top: calc(50% - 43.5px)
-        left: calc(78% - 43.5px)
+        left: calc(78% - 43.5px / 1080px * 100vh)
 
     .face
-        top: calc(50% - 43.5px)
-        left: calc(22% - 43.5px)
+        left: calc(22% - 43.5px / 1080px * 100vh)
 
 .topics
     background-color: $blue-200
@@ -289,13 +290,6 @@ button
         height: 230px
         top: calc(327px - 98px)
         left: calc(523px - 130px)
-
-.plan
-    height: 745px
-    background-color: $gray-100
-    display: flex
-    justify-content: center
-    align-items: center
 
 .info-block-3-about
     height: 400px

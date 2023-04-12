@@ -13,39 +13,40 @@
                 </app-avatar>
             </div>
             <div class="edit-avatar-icon">
-                <img src="/assets/user-profile/edit-icon.svg" alt="edit"/>
+                <input type="file" (change)="onFileChange($event)">
+                <img src="/assets/user-profile//edit-icon.svg" alt="edit" />
             </div>
             <div class="vertical-line"></div>
         </div>
         <div class="avatar-list">
-            <div class="avatar-suggestion-wrp">
-                <img src="/assets/user-profile/boy.svg" alt=""/>
+            <div class="avatar-suggestion-wrp" (click)="setEmojiAvatar('man-young')">
+                <img src="/assets/user-profile/man-young.svg" alt=""/>
             </div>
-            <div class="avatar-suggestion-wrp">
+            <div class="avatar-suggestion-wrp" (click)="setEmojiAvatar('man-bald')">
                 <img src="/assets/user-profile/man-bald.svg" alt=""/>
             </div>
-            <div class="avatar-suggestion-wrp">
+            <div class="avatar-suggestion-wrp" (click)="setEmojiAvatar('man-beard')">
                 <img src="/assets/user-profile/man-beard.svg" alt=""/>
             </div>
-            <div class="avatar-suggestion-wrp">
+            <div class="avatar-suggestion-wrp" (click)="setEmojiAvatar('man-curly')">
                 <img src="/assets/user-profile/man-curly.svg" alt=""/>
             </div>
-            <div class="avatar-suggestion-wrp">
+            <div class="avatar-suggestion-wrp" (click)="setEmojiAvatar('man-elf')">
                 <img src="/assets/user-profile/man-elf.svg" alt=""/>
             </div>
-            <div class="avatar-suggestion-wrp">
+            <div class="avatar-suggestion-wrp" (click)="setEmojiAvatar('man-in-tuxedo')">
                 <img src="/assets/user-profile/man-in-tuxedo.svg" alt=""/>
             </div>
-            <div class="avatar-suggestion-wrp">
+            <div class="avatar-suggestion-wrp" (click)="setEmojiAvatar('man-red-hair')">
                 <img src="/assets/user-profile/man-red-hair.svg" alt=""/>
             </div>
-            <div class="avatar-suggestion-wrp">
+            <div class="avatar-suggestion-wrp" (click)="setEmojiAvatar('man-technologist')">
                 <img src="/assets/user-profile/man-technologist.svg" alt=""/>
             </div>
-            <div class="avatar-suggestion-wrp">
+            <div class="avatar-suggestion-wrp" (click)="setEmojiAvatar('man-superhero')">
                 <img src="/assets/user-profile/man-superhero.svg" alt=""/>
             </div>
-            <div class="avatar-suggestion-wrp">
+            <div class="avatar-suggestion-wrp" (click)="setEmojiAvatar('man-white-hair')">
                 <img src="/assets/user-profile/man-white-hair.svg" alt=""/>
             </div>
         </div>

@@ -37,9 +37,11 @@ export class UserNotificationComponent extends BaseComponent implements OnInit, 
     }
 
     async getNotifications() {
-        this.notifySubscription = await this.notificationService.getNotifications().subscribe((data) => {
-            this.notifications = data;
-        });
+        this.notifySubscription = await this.notificationService.getNotifications()
+            .pipe(this.untilThis)
+            .subscribe((data) => {
+                this.notifications = data;
+            });
     }
 
     async setUpHub() {
@@ -50,6 +52,8 @@ export class UserNotificationComponent extends BaseComponent implements OnInit, 
 
             const messages = {
                 id: broadcastMessage.Id,
+                firstName: broadcastMessage.firstName,
+                lastName: broadcastMessage.lastName,
                 text: broadcastMessage.Text,
                 type: broadcastMessage.Type,
                 isRead: broadcastMessage.IsRead,
@@ -69,13 +73,9 @@ export class UserNotificationComponent extends BaseComponent implements OnInit, 
     }
 
     readAllNotifications() {
-        this.notificationService.readAllNotifications()
-            .subscribe(() => {
-                this.notifications.map(notification => ({
-                    ...notification,
-                    isRead: true,
-                }));
-            });
+        this.notifications = [];
+
+        this.notificationService.readAllNotifications().subscribe();
     }
 
     override ngOnDestroy() {

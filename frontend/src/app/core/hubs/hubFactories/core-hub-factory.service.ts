@@ -7,6 +7,6 @@ import { environment } from '@env/environment';
 })
 export class CoreHubFactoryService extends SignalRHubFactoryService {
     buildUrl(hubUrl: string): string {
-        return `${environment.communicatorUrl}/${hubUrl}`;
+        return `${environment.coreUrl}/${hubUrl}`;
     }
 }

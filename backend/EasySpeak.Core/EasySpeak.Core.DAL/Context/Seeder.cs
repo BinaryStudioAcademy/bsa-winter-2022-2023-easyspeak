@@ -9,14 +9,12 @@ public static class Seeder
 {
     private static readonly DateTime DefaultDate = new DateTime(2023, 3, 30, 11, 0, 0, DateTimeKind.Utc);
     private static readonly Random Rnd = new Random(42);
-    private static readonly string[] AllTags = {
-        "Architecture", "Arts", "Cars", "Celebrities", "Cooking", "Dancing", "Ecology", "Design", "History", "Fashion",
-        "Medicine", "Technologies", "Pets", "Philosophy", "Photography", "Politics"};
 
     public static void Seed(ModelBuilder modelBuilder)
     {
         var users = GenerateUsers();
-        var lessons = GenerateLessons();
+        var lessons = GenerateLessons()
+            .AddForeignKeys(users, 5);
         var chats = GenerateChats();
         var tags = GenerateTags();
 
@@ -31,13 +29,6 @@ public static class Seeder
 
         var subquestions = GenerateSubquestions()
             .AddForeignKeys(questions, 20);
-
-        var calls = GenerateCalls()
-            .AddForeignKeys(chats, 20);
-
-        var messages = GenerateMessages()
-            .AddForeignKeys(chats, 20);
-
 
         var chatUser = SeedHelper<User, Chat, long>
             .GetTablesJoin(users, chats, 4)
@@ -59,9 +50,7 @@ public static class Seeder
         modelBuilder.Entity<Lesson>().HasData(lessons);
         modelBuilder.Entity<Question>().HasData(questions);
         modelBuilder.Entity<Subquestion>().HasData(subquestions);
-        modelBuilder.Entity<Call>().HasData(calls);
         modelBuilder.Entity<Chat>().HasData(chats);
-        modelBuilder.Entity<Message>().HasData(messages);
         modelBuilder.Entity<Notification>().HasData(notifications);
         modelBuilder.Entity<Friend>().HasData(friends);
         modelBuilder.Entity<User>().HasData(users);
@@ -117,35 +106,6 @@ public static class Seeder
             .Generate(count);
     }
 
-    private static IList<Call> GenerateCalls(int count = 40)
-    {
-        Faker.GlobalUniqueIndex = 0;
-
-        return new Faker<Call>()
-            .UseSeed(10)
-            .RuleFor(c => c.Id, f => f.IndexGlobal)
-            .RuleFor(c => c.StartedAt, f => f.Date.Recent(1, DefaultDate))
-            .RuleFor(c => c.FinishedAt,
-                (f, c) => f.Date.Between(c.StartedAt, c.StartedAt.AddMinutes(180)).OrNull(f, 0.15f))
-            .RuleFor(c => c.ChatId, f => f.Random.Number(1, 40))
-            .Generate(count);
-    }
-
-    private static IList<Message> GenerateMessages(int count = 40)
-    {
-        Faker.GlobalUniqueIndex = 0;
-
-        return new Faker<Message>()
-            .UseSeed(10)
-            .RuleFor(m => m.Id, f => f.IndexGlobal)
-            .RuleFor(m => m.Text, f => f.Random.Words(f.Random.Number(1, 20)))
-            .RuleFor(m => m.CreatedAt, f => f.Date.Recent(7, DefaultDate))
-            .RuleFor(m => m.IsDeleted, f => f.Random.Bool(.15f))
-            .RuleFor(m => m.IsRead, f => true)
-            .RuleFor(m => m.ChatId, f => f.Random.Number(1, 40))
-            .Generate(count);
-    }
-
     private static IList<Chat> GenerateChats(int count = 20)
     {
         Faker.GlobalUniqueIndex = 0;
@@ -153,7 +113,6 @@ public static class Seeder
         return new Faker<Chat>()
             .UseSeed(10)
             .RuleFor(c => c.Id, f => f.IndexGlobal)
-            .RuleFor(c => c.Name, f => f.Random.Words(f.Random.Number(1, 3)))
             .Generate(count);
     }
 
@@ -165,7 +124,6 @@ public static class Seeder
             .UseSeed(10)
             .RuleFor(l => l.Id, f => f.IndexGlobal)
             .RuleFor(l => l.Name, f => f.Random.Word())
-            .RuleFor(l => l.Description, f => f.Random.Words(f.Random.Number(2, 10)))
             .RuleFor(l => l.MediaPath, f => f.Image.PicsumUrl())
             .RuleFor(l => l.StartAt, f => f.Date.Soon(30, DefaultDate))
             .RuleFor(l => l.LimitOfUsers, f => f.Random.Int(20, 200).OrNull(f, .2f))
@@ -175,11 +133,35 @@ public static class Seeder
 
     private static IList<Tag> GenerateTags()
     {
-        return AllTags.Select((t, i) => new Tag
+        var tags = new[]
         {
-            Id = ++i,
-            Name = t,
-            CreatedAt = DefaultDate
+            ("Arts", "ArtistPalette.svg", new DateTime(2023, 04, 05)),
+            ("Business", "Briefcase.svg", new DateTime(2023, 04, 05)),
+            ("Culture", "ClassicalBuilding.svg", new DateTime(2023, 04, 05)),
+            ("Education", "GraduationCap.svg", new DateTime(2023, 04, 05)),
+            ("Environment", "Kite.svg", new DateTime(2023, 04, 05)),
+            ("Fashion", "Dress.svg", new DateTime(2023, 04, 05)),
+            ("Food", "Sandwich.svg", new DateTime(2023, 04, 05)),
+            ("Health", "Dna.svg", new DateTime(2023, 04, 05)),
+            ("History", "CrossedSwords.svg", new DateTime(2023, 04, 05)),
+            ("Literature", "Books.svg", new DateTime(2023, 04, 05)),
+            ("Movies", "ClapperBoard.svg", new DateTime(2023, 04, 05)),
+            ("Music", "Drum.svg", new DateTime(2023, 04, 05)),
+            ("Nature", "FourLeafClover.svg", new DateTime(2023, 04, 05)),
+            ("Philosophy", "FaceWithMonocle.svg", new DateTime(2023, 04, 05)),
+            ("Politics", "TopHat.svg", new DateTime(2023, 04, 05)),
+            ("Science", "TestTube.svg", new DateTime(2023, 04, 05)),
+            ("Social Media", "MobilePhone.svg", new DateTime(2023, 04, 05)),
+            ("Sports", "BoxingGlove.svg", new DateTime(2023, 04, 05)),
+            ("Technologies", "Robot.svg", new DateTime(2023, 04, 05)),
+            ("Travel", "DesertIsland.svg", new DateTime(2023, 04, 05)),
+        };
+        return tags.Select((tag, i) => new Tag()
+        {
+            Id = i + 1,
+            Name = tag.Item1,
+            ImageUrl = tag.Item2,
+            CreatedAt = tag.Item3
         }).ToList();
     }
 
@@ -217,6 +199,16 @@ public static class Seeder
         return friends;
     }
 
+    private static IList<Lesson> AddForeignKeys(this IList<Lesson> lessons, IList<User> users, int count)
+    {
+        foreach (var lesson in lessons)
+        {
+            lesson.CreatedBy = users[Rnd.Next(count)].Id;
+        }
+
+        return lessons;
+    }
+
     private static IList<Notification> AddForeingKeys(this IList<Notification> notifications, IList<User> users,
         int count)
     {
@@ -247,26 +239,6 @@ public static class Seeder
         }
 
         return subquestions;
-    }
-
-    private static IList<Call> AddForeignKeys(this IList<Call> calls, IList<Chat> chats, int count)
-    {
-        foreach (var call in calls)
-        {
-            call.ChatId = chats[Rnd.Next(count)].Id;
-        }
-
-        return calls;
-    }
-
-    private static IList<Message> AddForeignKeys(this IList<Message> messages, IList<Chat> chats, int count)
-    {
-        foreach (var message in messages)
-        {
-            message.ChatId = chats[Rnd.Next(count)].Id;
-        }
-
-        return messages;
     }
 }
 

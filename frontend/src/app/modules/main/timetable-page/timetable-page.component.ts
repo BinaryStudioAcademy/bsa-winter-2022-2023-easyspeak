@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { IIcon } from '@shared/models/IIcon';
 
 @Component({
     selector: 'app-timetable-page',
@@ -8,7 +9,7 @@ import { Component } from '@angular/core';
 export class TimetablePageComponent {
     selectedLanguageFilters: string[] = [];
 
-    selectedInterestsFilters: string[] = [];
+    selectedInterestsFilters: IIcon[] = [];
 
     selectedDateFilter: Date;
 
@@ -16,7 +17,7 @@ export class TimetablePageComponent {
         this.selectedLanguageFilters = [...selectedLanguageFilters];
     }
 
-    onSelectedInterestsFiltersChange(selectedInterestsFilters: string[]) {
+    onSelectedInterestsFiltersChange(selectedInterestsFilters: IIcon[]) {
         this.selectedInterestsFilters = [...selectedInterestsFilters];
     }
 

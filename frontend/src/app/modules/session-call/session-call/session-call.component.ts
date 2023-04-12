@@ -1,9 +1,12 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute } from '@angular/router';
 import { WebrtcHubService } from '@core/hubs/webrtc-hub.service';
 import { WebrtcUtils } from '@core/services/webrtc-utils.service';
 import { environment } from '@env/environment';
+import { ICallInfo } from '@shared/models/chat/ICallInfo';
+
+import { NotificationService } from 'src/app/services/notification.service';
 
 const useWebrtcUtils = true;
 
@@ -21,7 +24,17 @@ export class SessionCallComponent implements OnInit, OnDestroy {
 
     remoteStream: MediaStream;
 
+    chatId: number;
+
+    callerId: number;
+
+    startedAt: Date;
+
+    finishedAt: Date;
+
     room: string;
+
+    remoteName: string;
 
     peerConnection: RTCPeerConnection;
 
@@ -32,21 +45,23 @@ export class SessionCallComponent implements OnInit, OnDestroy {
     isStarted: boolean;
 
     public constructor(
+        @Inject(MAT_DIALOG_DATA) public callInfo: ICallInfo,
         private webrtcHub: WebrtcHubService,
         private snack: MatSnackBar,
-        private route: ActivatedRoute,
-    ) {
-        this.route.paramMap.subscribe(async param => {
-            this.room = param.get('room')!;
-        });
-    }
+        private dialogRef: MatDialogRef<SessionCallComponent>,
+        private toastr: NotificationService,
+    ) { }
 
     async ngOnInit() {
-        // #1 connect to signaling server
-        // #2 define signaling communication
+        this.chatId = this.callInfo.chatId;
+        this.callerId = this.callInfo.callerId;
+        this.startedAt = new Date();
+        this.room = this.callInfo.roomName;
+        this.remoteName = this.callInfo.remoteName;
+
         this.callCreateOrJoinRoom();
         this.setActionsForMessages();
-        // #3 get media from current client
+
         this.getUserMedia();
     }
 
@@ -107,7 +122,7 @@ export class SessionCallComponent implements OnInit, OnDestroy {
                 }
             })
             .catch((e) => {
-                console.error(`getUserMedia() error: ${e.name}: ${e.message}`);
+                this.toastr.showError(`getUserMedia() error: ${e.name}: ${e.message}`, 'Error!');
             });
     }
 
@@ -167,7 +182,7 @@ export class SessionCallComponent implements OnInit, OnDestroy {
                 };
             }
         } catch (e: unknown) {
-            console.error('Failed to create PeerConnection.');
+            this.toastr.showError('Failed to create PeerConnection.', 'Error!');
         }
     }
 
@@ -263,6 +278,14 @@ export class SessionCallComponent implements OnInit, OnDestroy {
         this.remoteVideo.nativeElement.muted = false;
     }
 
+    closeModal(): void {
+        this.finishedAt = new Date();
+
+        this.webrtcHub.endCall(this.chatId, this.callerId, this.startedAt, this.finishedAt);
+
+        this.dialogRef.close();
+    }
+
     /**
      * When local user disconnected
      */
@@ -279,6 +302,7 @@ export class SessionCallComponent implements OnInit, OnDestroy {
         this.stopPeerConnection();
         this.isInitiator = true;
         this.snack.open('Remote client has left the call.', 'Dismiss', { duration: 5000 });
+        this.dialogRef.close();
     }
 
     stopPeerConnection(): void {

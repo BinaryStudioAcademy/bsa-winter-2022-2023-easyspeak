@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BaseComponent } from '@core/base/base.component';
+import { DataService } from '@core/services/data.service';
 import { UserService } from '@core/services/user.service';
-import { topics as data } from '@shared/data/topics';
 import { ITopic } from '@shared/models/ITopic';
 import { ToastrService } from 'ngx-toastr';
 
@@ -11,8 +11,8 @@ import { ToastrService } from 'ngx-toastr';
     templateUrl: './select-topics-page.component.html',
     styleUrls: ['./select-topics-page.component.sass'],
 })
-export class SelectTopicsPageComponent extends BaseComponent {
-    topics: ITopic[] = data;
+export class SelectTopicsPageComponent extends BaseComponent implements OnInit {
+    topics: ITopic[] = [];
 
     selectedTopics: ITopic[] = [];
 
@@ -20,8 +20,19 @@ export class SelectTopicsPageComponent extends BaseComponent {
         private userService: UserService,
         private toastr: ToastrService,
         private router: Router,
+        private dataService: DataService,
     ) {
         super();
+    }
+
+    ngOnInit(): void {
+        this.dataService.getAllTags().subscribe((tags) => {
+            this.topics = tags.map((tag): ITopic => ({
+                name: tag.name,
+                imgName: tag.imageUrl,
+                selected: false,
+            }));
+        });
     }
 
     topicClick(topic: ITopic) {

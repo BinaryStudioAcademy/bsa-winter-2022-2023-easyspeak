@@ -4,6 +4,7 @@ import { UserService } from '@core/services/user.service';
 import { applyTimeOffset, filterColumn } from '@modules/lessons/lesson/lesson.helper';
 import { ModalComponent } from '@shared/components/modal/modal.component';
 import { YoutubePlayerComponent } from '@shared/components/youtube-player/youtube-player.component';
+import { IIcon } from '@shared/models/IIcon';
 import { IModal } from '@shared/models/IModal';
 import { ILesson } from '@shared/models/lesson/ILesson';
 import { LanguageLevels } from '@shared/models/lesson/LanguageLevels';
@@ -23,7 +24,7 @@ export class LessonsPageComponent implements OnInit, OnChanges {
 
     @Input() selectedLanguageFilters: string[] = [];
 
-    @Input() selectedInterestsFilters: string[] = [];
+    @Input() selectedInterestsFilters: IIcon[] = [];
 
     @Input() selectedDateFilter: Date;
 
@@ -42,15 +43,9 @@ export class LessonsPageComponent implements OnInit, OnChanges {
     ) {}
 
     ngOnInit(): void {
-        this.selectedDateFilter = new Date();
-
-        this.getLessons();
-
         this.lessonService.lessonAdded$.subscribe(() => {
             this.getLessons();
         });
-
-        this.todayDate = moment().format('DD MMMM YYYY, dddd');
 
         this.userIsAdmin = this.userService.isAdmin();
     }
@@ -89,8 +84,8 @@ export class LessonsPageComponent implements OnInit, OnChanges {
             .getFilteredLessons({
                 languageLevels: this.selectedLanguageFilters.map((level: string) =>
                     Object.values(LanguageLevels).indexOf(level)),
-                tags: this.selectedInterestsFilters.map((topic) => ({ name: topic })),
-                date: new Date(this.selectedDateFilter?.toISOString().slice(0, 10)),
+                tags: this.selectedInterestsFilters.map(f => ({ id: f.id })),
+                date: new Date(this.selectedDateFilter.toISOString().slice(0, 10)),
             })
             .subscribe((response) => {
                 this.lessons = applyTimeOffset(response);

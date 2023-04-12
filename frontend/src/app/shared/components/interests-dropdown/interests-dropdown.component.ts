@@ -1,24 +1,37 @@
-import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { DataService } from '@core/services/data.service';
 import { IIcon } from '@shared/models/IIcon';
-import { getTags } from '@shared/utils/tagsForInterests';
 
 @Component({
     selector: 'app-interests-dropdown',
     templateUrl: './interests-dropdown.component.html',
     styleUrls: ['./interests-dropdown.component.sass'],
 })
-export class InterestsDropdownComponent implements OnChanges {
+export class InterestsDropdownComponent implements OnChanges, OnInit {
     toggle = false;
 
-    @Input() inputList: IIcon[] = getTags();
+    inputList: IIcon[];
 
-    @Output() selectedInterests = new EventEmitter<string[]>();
+    @Output() selectedInterests = new EventEmitter<IIcon[]>();
 
-    @Input() selectedItems: string[] = [];
+    @Input() selectedItems: IIcon[] = [];
 
     @Input() usedInModal = false;
 
-    outputList: string[] = [];
+    outputList: IIcon[] = [];
+
+    constructor(private dataService: DataService) {
+    }
+
+    ngOnInit(): void {
+        this.dataService.getAllTags().subscribe((tags) => {
+            this.inputList = tags.map((tag): IIcon => ({
+                id: tag.id,
+                name: tag.name,
+                link: `assets/topic-icons/${tag.imageUrl}`,
+            }));
+        });
+    }
 
     ngOnChanges() {
         this.outputList = this.selectedItems;
@@ -30,16 +43,16 @@ export class InterestsDropdownComponent implements OnChanges {
         const { checked } = ev;
 
         if (checked) {
-            this.outputList = [...this.outputList, this.inputList[numb].name];
+            this.outputList = [...this.outputList, this.inputList[numb]];
         } else {
-            this.outputList = this.outputList.filter((interest) => interest !== this.inputList[numb].name);
+            this.outputList = this.outputList.filter((interest) => interest !== this.inputList[numb]);
         }
 
         this.selectedInterests.emit(this.outputList);
     }
 
-    iconExistsInOutputList(icon: string): boolean {
-        return this.outputList.some(item => item === icon);
+    iconExistsInOutputList(icon: IIcon): boolean {
+        return this.outputList.some(item => item.name === icon.name);
     }
 
     clickButton() {
