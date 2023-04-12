@@ -109,6 +109,7 @@ export class SignUpComponent extends BaseComponent implements OnInit {
                     firstName: user.firstName,
                     lastName: user.lastName,
                     imagePath: '',
+                    isAdmin: false,
                 };
 
                 this.authService.setUser(userShort);
