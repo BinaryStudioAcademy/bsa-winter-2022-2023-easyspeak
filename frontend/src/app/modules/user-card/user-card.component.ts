@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { ChatService } from '@core/services/chat.service';
 import { FriendshipService } from '@core/services/friendship.service';
 import { UserCard, UserFriendshipStatus } from '@shared/models/user/user-card';
-import { Utils } from '@shared/utils/user-card.utils';
 import languagesLib from 'iso-639-1';
 import countriesLib from 'iso-3166-1';
 

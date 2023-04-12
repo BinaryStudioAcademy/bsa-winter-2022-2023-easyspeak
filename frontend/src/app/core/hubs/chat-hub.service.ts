@@ -17,7 +17,7 @@ export class ChatHubService {
 
     readonly people = new Subject<IChatPerson[]>();
 
-    public subscriptions: Subscription[] = [];
+    private subscriptions: Subscription[] = [];
 
     constructor(private hubFactory: CoreHubFactoryService) {}
 
