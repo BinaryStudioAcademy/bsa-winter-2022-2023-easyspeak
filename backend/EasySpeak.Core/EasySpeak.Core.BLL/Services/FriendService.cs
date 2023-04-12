@@ -18,21 +18,21 @@ namespace EasySpeak.Core.BLL.Services
         private readonly IMapper _mapper;
         private readonly EasySpeakCoreContext _context;
         private readonly IFirebaseAuthService _authService;
-        private readonly INotificationService notificationService;
+        private readonly INotificationService _notificationService;
 
         public FriendService(IMapper mapper, EasySpeakCoreContext context, IFirebaseAuthService authService, INotificationService notificationService)
         {
             _mapper = mapper;
             _context = context;
             _authService = authService;
-            this.notificationService = notificationService;
+            _notificationService = notificationService;
         }
 
         public async Task<FriendEmailDto> AcceptFriendshipAsync(FriendEmailDto friendDto)
         {
             await SetFriendshipStatus(friendDto.Email, FriendshipStatus.Confirmed);
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == friendDto.Email);
-            await notificationService.AddNotificationAsync(Common.Enums.NotificationType.friendshipAcception, user!.Id);
+            await _notificationService.AddNotificationAsync(Common.Enums.NotificationType.friendshipAcception, user!.Id);
             return friendDto;
         }
 
@@ -50,7 +50,7 @@ namespace EasySpeak.Core.BLL.Services
 
             await _context.SaveChangesAsync();
 
-            await notificationService.AddNotificationAsync(Common.Enums.NotificationType.friendshipRequest, user!.Id);
+            await _notificationService.AddNotificationAsync(Common.Enums.NotificationType.friendshipRequest, user!.Id);
 
             return _mapper.Map<FriendEmailDto>(friend);
         }
