@@ -1,8 +1,6 @@
 ﻿using EasySpeak.Core.Common.DTO.Notification;
 using EasySpeak.Notifier.WebAPI.Hubs;
 using EasySpeak.RabbitMQ.Interfaces;
-using Microsoft.AspNetCore.SignalR;
-using Newtonsoft.Json;
 
 namespace EasySpeak.Notifier.WebAPI.Services
 {
@@ -33,7 +31,7 @@ namespace EasySpeak.Notifier.WebAPI.Services
         {
             try
             {
-                _consumer.Recieve<Tuple<string, NotificationDto>>( async data =>
+                _consumer.Receive<Tuple<string, NotificationDto>>( async data =>
                 {
                     if (data is not null)
                     {

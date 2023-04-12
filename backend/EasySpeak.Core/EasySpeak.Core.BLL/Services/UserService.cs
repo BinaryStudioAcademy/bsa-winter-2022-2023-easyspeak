@@ -11,7 +11,6 @@ using EasySpeak.Core.DAL.Context;
 using EasySpeak.Core.DAL.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using Azure.Core;
 using EasySpeak.Core.Common.Enums;
 using Microsoft.Extensions.Options;
 using UserShortInfoDto = EasySpeak.Core.Common.DTO.User.UserShortInfoDto;
@@ -25,17 +24,19 @@ public class UserService : BaseService, IUserService
     private readonly IHttpClientFactory _clientFactory;
     private readonly RecommendationServiceOptions _recommendationServiceOptions;
     private readonly QueriesSenderService _queriesSender;
+    private readonly INotificationService _notificationService;
     
     public UserService(IEasySpeakFileService fileService, EasySpeakCoreContext context, 
             IMapper mapper, IFirebaseAuthService authService, IHttpClientFactory clientFactory,
             IOptions<RecommendationServiceOptions> recommendationServiceOptions,
-            QueriesSenderService queriesSender) : base(context, mapper)
+            QueriesSenderService queriesSender, INotificationService notificationService) : base(context, mapper)
     {
         _authService = authService;
         _fileService = fileService;
         _clientFactory = clientFactory;
         _recommendationServiceOptions = recommendationServiceOptions.Value;
         _queriesSender = queriesSender;
+        _notificationService = notificationService;
     }
 
     public async Task<UserDto> CreateUser(UserRegisterDto userDto)
