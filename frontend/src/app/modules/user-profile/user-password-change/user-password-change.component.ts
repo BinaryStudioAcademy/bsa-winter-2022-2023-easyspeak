@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '@core/services/auth.service';
 import { passFormatRegex } from '@shared/data/regex.util';
 import { ToastrService } from 'ngx-toastr';
+
+import { validationErrorMessage } from 'src/app/modules/user-profile/user-password-change/error-helper';
+
+import { matchpassword } from './matchpassword.validator';
 
 @Component({
     selector: 'app-user-password-change',
@@ -10,77 +14,94 @@ import { ToastrService } from 'ngx-toastr';
     styleUrls: ['./user-password-change.component.sass'],
 })
 export class UserPasswordChangeComponent {
+    warningOn: boolean = false;
+
+    passwordForm: FormGroup;
+
     passwordPattern: RegExp = new RegExp(passFormatRegex);
 
-    currentPassword: string;
-
-    newPassword: string;
-
-    repeatPassword: string;
-
-    isSame: boolean = true;
-
-    isValid: boolean = true;
-
-    isCurrentValid: boolean = true;
-
-    constructor(private router: Router, private authService: AuthService, private toastr: ToastrService) {}
+    constructor(private authService: AuthService, private toastr: ToastrService) {
+        this.passwordForm = new FormGroup(
+            {
+                currentPassword: new FormControl(
+                    '',
+                    [Validators.required,
+                        Validators.minLength(6),
+                        Validators.maxLength(25),
+                        Validators.pattern(passFormatRegex)],
+                ),
+                newPassword: new FormControl(
+                    '',
+                    [Validators.required,
+                        Validators.minLength(6),
+                        Validators.maxLength(25),
+                        Validators.pattern(passFormatRegex)],
+                ),
+                repeatPassword: new FormControl(
+                    '',
+                    [Validators.required,
+                        Validators.minLength(6),
+                        Validators.maxLength(25),
+                        Validators.pattern(passFormatRegex)],
+                ),
+            },
+            { validators: matchpassword },
+        );
+    }
 
     onSaveNewPassword() {
-        this.checkPasswords();
+        this.warningOn = true;
 
         if (this.isAllValid()) {
             this.savePassword();
         } else {
-            this.showError();
-        }
-    }
-
-    showError() {
-        switch (true) {
-            case !this.isSame:
-                this.toastr.error('Password/Repeat password don’t match', 'Save Password');
-                break;
-            case this.currentPassword !== this.newPassword:
-                this.toastr.error('New password is the same as current', 'Save Password');
-                break;
-            case (!this.currentPassword || !this.newPassword || !this.repeatPassword):
-                this.toastr.error('Field is required', 'Save Password');
-                break;
-            case !this.isValid || !this.isCurrentValid:
-                this.toastr.error('Password is not valid format!', 'Save Password');
-                break;
-            default:
-                this.toastr.error('Something gone wrong!', 'Save Password');
-                break;
+            this.toastr.error('Validation error', 'Error');
         }
     }
 
     isAllValid() {
-        return this.isSame && this.isValid && this.isCurrentValid && this.currentPassword !== this.newPassword;
-    }
-
-    checkPasswords() {
-        this.isSame = this.newPassword === this.repeatPassword;
-        this.isValid = this.passwordPattern.test(this.newPassword);
-        this.isCurrentValid = this.passwordPattern.test(this.currentPassword);
-    }
-
-    warningReset() {
-        this.isSame = true;
-        this.isValid = true;
-        this.isCurrentValid = true;
+        return (
+            this.isSame() &&
+            this.currentPassword.valid &&
+            this.newPassword.valid &&
+            this.currentPassword.value !== this.newPassword.value);
     }
 
     savePassword() {
-        this.authService.saveNewPassword(this.currentPassword, this.newPassword)
+        this.authService.saveNewPassword(this.currentPassword.value, this.newPassword.value)
             .then(() => {
                 this.toastr.success('New password has been saved!', 'Save Password');
-                this.router.navigate(['timetable']);
             })
             .catch((error) => {
                 this.toastr.error(error.message, 'Error');
                 this.toastr.error('Current password is wrong', 'Save Password');
             });
+    }
+
+    isSame = () => this.newPassword.value === this.repeatPassword.value;
+
+    newAsOldPassword = () => this.newPassword.value && this.newPassword.value === this.currentPassword.value;
+
+    getErrorMessage(control: FormControl): string {
+        const errorEntry = Object.entries(validationErrorMessage)
+            .find(([key]) => control.hasError(key));
+
+        if (errorEntry) {
+            return errorEntry[1];
+        }
+
+        return '';
+    }
+
+    get currentPassword(): FormControl {
+        return this.passwordForm.get('currentPassword') as FormControl;
+    }
+
+    get newPassword(): FormControl {
+        return this.passwordForm.get('newPassword') as FormControl;
+    }
+
+    get repeatPassword(): FormControl {
+        return this.passwordForm.get('repeatPassword') as FormControl;
     }
 }
