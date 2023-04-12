@@ -4,13 +4,13 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace EasySpeak.Communicator.WebAPI.Services
 {
-    public class SignalRtcHub : Hub
+    public class WebRtcHub : Hub
     {
         private readonly EasySpeakCoreContext _context;
         private static readonly Dictionary<string, string> ConnectedUsers = new Dictionary<string, string>();
         static readonly Dictionary<string, List<string>> ConnectedClients = new Dictionary<string, List<string>>();
 
-        public SignalRtcHub(EasySpeakCoreContext context)
+        public WebRtcHub(EasySpeakCoreContext context)
         {
             _context = context;
         }

@@ -30,7 +30,7 @@ app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>
 {
-    endpoints.MapHub<SignalRtcHub>("/signaling");
+    endpoints.MapHub<WebRtcHub>("/signaling");
     endpoints.MapControllers();
 });
 
