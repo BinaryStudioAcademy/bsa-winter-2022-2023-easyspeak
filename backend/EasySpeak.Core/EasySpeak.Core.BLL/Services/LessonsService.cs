@@ -33,16 +33,16 @@ public class LessonsService : BaseService, ILessonsService
 
     public async Task<ICollection<LessonDto>> GetAllLessonsAsync(FiltersRequest filtersRequest)
     {
-        var tagsName = filtersRequest.Tags?.Select(x => x.Name).ToList();
+        var tagsIds = filtersRequest.Tags?.Select(x => x.Id).ToList();
 
         var lessonsFromContext = _context.Lessons
             .Include(l => l.Tags)
             .Include(l => l.User)
             .Where(x => x.StartAt.Date == filtersRequest.Date && !x.IsCanceled);
 
-        if (tagsName is not null && tagsName.Any())
+        if (tagsIds is not null && tagsIds.Any())
         {
-            lessonsFromContext = lessonsFromContext.Where(x => x.Tags.Any(y => tagsName.Contains(y.Name)));
+            lessonsFromContext = lessonsFromContext.Where(x => x.Tags.Any(y => tagsIds.Contains(y.Id)));
         }
 
         if (filtersRequest.LanguageLevels is not null && filtersRequest.LanguageLevels.Any())
@@ -103,7 +103,7 @@ public class LessonsService : BaseService, ILessonsService
     public async Task<LessonDto> CreateLessonAsync(NewLessonDto lessonDto)
     {
         var lesson = _mapper.Map<Lesson>(lessonDto);
-        lesson.Tags.Clear();
+
         if (lessonDto.Tags is not null)
         {
             lesson.Tags = await GetExistingTags(lessonDto.Tags);
@@ -122,9 +122,12 @@ public class LessonsService : BaseService, ILessonsService
 
         return _mapper.Map<LessonDto>(createdLesson);
     }
-    private Task<List<Tag>> GetExistingTags(ICollection<TagForLessonDto> tags)
+    private Task<List<Tag>> GetExistingTags(ICollection<TagForFiltrationDto> tags)
     {
-        return _context.Tags.Where(t => tags.Any(tag => tag.Name == t.Name)).ToListAsync();
+        return _context.Tags.Where(t => tags
+        .Select(tagDto=>tagDto.Id)
+        .Contains(t.Id))
+            .ToListAsync();
     }
 
     public async Task<TeacherStatisticsDto> GetTeacherLessonsStatisticsAsync()

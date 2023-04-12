@@ -15,6 +15,7 @@ namespace EasySpeak.Core.BLL.Interfaces
         Task<UserDto?> GetUserAsync();
         Task<bool> GetAdminStatus();
         Task<string> UploadProfilePhoto(IFormFile file);
+        Task<string> UploadEmojiAvatar(string emojiName);
         Task<TagDto[]> GetUserTags();
         Task<UserDto> UpdateUser(UserDto userDto);
         Task<UserDto> MakeAdminAsync(int userId);

@@ -124,7 +124,6 @@ public static class Seeder
             .UseSeed(10)
             .RuleFor(l => l.Id, f => f.IndexGlobal)
             .RuleFor(l => l.Name, f => f.Random.Word())
-            .RuleFor(l => l.Description, f => f.Random.Words(f.Random.Number(2, 10)))
             .RuleFor(l => l.MediaPath, f => f.Image.PicsumUrl())
             .RuleFor(l => l.StartAt, f => f.Date.Soon(30, DefaultDate))
             .RuleFor(l => l.LimitOfUsers, f => f.Random.Int(20, 200).OrNull(f, .2f))
@@ -153,7 +152,7 @@ public static class Seeder
             ("Politics", "TopHat.svg", new DateTime(2023, 04, 05)),
             ("Science", "TestTube.svg", new DateTime(2023, 04, 05)),
             ("Social Media", "MobilePhone.svg", new DateTime(2023, 04, 05)),
-            ("Storts", "BoxingGlove.svg", new DateTime(2023, 04, 05)),
+            ("Sports", "BoxingGlove.svg", new DateTime(2023, 04, 05)),
             ("Technologies", "Robot.svg", new DateTime(2023, 04, 05)),
             ("Travel", "DesertIsland.svg", new DateTime(2023, 04, 05)),
         };

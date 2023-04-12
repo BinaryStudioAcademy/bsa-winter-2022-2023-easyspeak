@@ -12,13 +12,13 @@ export class InterestsDropdownComponent implements OnChanges, OnInit {
 
     inputList: IIcon[];
 
-    @Output() selectedInterests = new EventEmitter<string[]>();
+    @Output() selectedInterests = new EventEmitter<IIcon[]>();
 
-    @Input() selectedItems: string[] = [];
+    @Input() selectedItems: IIcon[] = [];
 
     @Input() usedInModal = false;
 
-    outputList: string[] = [];
+    outputList: IIcon[] = [];
 
     constructor(private dataService: DataService) {
     }
@@ -43,16 +43,16 @@ export class InterestsDropdownComponent implements OnChanges, OnInit {
         const { checked } = ev;
 
         if (checked) {
-            this.outputList = [...this.outputList, this.inputList[numb].name];
+            this.outputList = [...this.outputList, this.inputList[numb]];
         } else {
-            this.outputList = this.outputList.filter((interest) => interest !== this.inputList[numb].name);
+            this.outputList = this.outputList.filter((interest) => interest !== this.inputList[numb]);
         }
 
         this.selectedInterests.emit(this.outputList);
     }
 
-    iconExistsInOutputList(icon: string): boolean {
-        return this.outputList.some(item => item === icon);
+    iconExistsInOutputList(icon: IIcon): boolean {
+        return this.outputList.some(item => item.name === icon.name);
     }
 
     clickButton() {

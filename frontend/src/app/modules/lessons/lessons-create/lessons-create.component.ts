@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { youtubeVideoLinkRegex } from '@shared/data/regex.util';
+import { IIcon } from '@shared/models/IIcon';
 import { INewLesson } from '@shared/models/lesson/INewLesson';
 import { INewQuestion } from '@shared/models/lesson/INewQuestion';
-import { INewTag } from '@shared/models/lesson/INewTag';
 import { LanguageLevels } from '@shared/models/lesson/LanguageLevels';
 import Utils from '@shared/utils/lesson.utils';
 import * as moment from 'moment';
@@ -18,7 +18,7 @@ import { NotificationService } from 'src/app/services/notification.service';
     styleUrls: ['./lessons-create.component.sass'],
 })
 export class LessonsCreateComponent implements OnInit {
-    tagsList: string[] = [];
+    tagsList: IIcon[] = [];
 
     timesList: string[] = Utils.timesList;
 
@@ -81,7 +81,7 @@ export class LessonsCreateComponent implements OnInit {
         this.levelDropdownVisible = !this.levelDropdownVisible;
     }
 
-    updateTags(evendData: string[]) {
+    updateTags(evendData: IIcon[]) {
         this.tagsList = evendData;
     }
 
@@ -113,16 +113,15 @@ export class LessonsCreateComponent implements OnInit {
             .filter((entry: string) => entry.trim() !== '')
             .map((element: string) => ({ topic: element, subquestions: [] }));
 
-        const lessonTags: INewTag[] = this.tagsList.map((element: string) => ({ name: element }));
+        const lessonTags: IIcon[] = this.tagsList;
 
         const lessonToCreate: INewLesson = {
             name: this.name?.value,
-            description: 'Description',
             mediaPath: '',
             languageLevel: Object.values(LanguageLevels).indexOf(this.level),
             startAt,
             questions: lessonQuestions,
-            tags: lessonTags,
+            tags: lessonTags.map(f => ({ id: f.id })),
             limitOfUsers: parseInt(this.studentsCount?.value, 10),
             youtubeVideoId: this.getYoutubeVideoId(this.videoLink?.value),
         };
