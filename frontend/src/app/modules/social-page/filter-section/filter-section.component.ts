@@ -1,16 +1,16 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { DataService } from '@core/services/data.service';
 import {
     compatibilities,
     langLevelsSample,
-    topicsSample,
 } from '@modules/filter-section/filter-section/filter-section.util';
+import { IIcon } from '@shared/models/IIcon';
 import { Subject } from 'rxjs';
 
 import { Filter } from '../../../models/filters/filter';
 import { UserFilter } from '../../../models/filters/userFilter';
-import { CountriesTzLangProviderService } from '../../../services/countries-tz-lang-provider.service';
 
-type FilterOption = 'compatibility' | 'lang' | 'level' | 'topic';
+type FilterOption = 'compatibility' | 'lang' | 'level';
 
 @Component({
     selector: 'app-filter-section',
@@ -18,8 +18,7 @@ type FilterOption = 'compatibility' | 'lang' | 'level' | 'topic';
     styleUrls: ['./filter-section.component.sass'],
 })
 export class FilterSectionComponent implements OnInit {
-    public constructor(private languageTimezone: CountriesTzLangProviderService) {
-    }
+    public constructor(private dataService: DataService) {}
 
     resetFiltersEvent: Subject<void> = new Subject<void>();
 
@@ -27,13 +26,13 @@ export class FilterSectionComponent implements OnInit {
 
     public selectedLevelWithSubtitleFilters: string[] = [];
 
-    public selectedTopicsFilters: string[] = [];
+    public selectedTopicsFilters: IIcon[] = [];
 
     public selectedLanguagesFilters: string[] = [];
 
     public selectedCompatibilityFilters: string[] = [];
 
-    public topics: Filter[];
+    public topics: IIcon[];
 
     public langLevels: Filter[];
 
@@ -43,22 +42,35 @@ export class FilterSectionComponent implements OnInit {
 
     public userFilters: UserFilter;
 
-    @Output()
-        filterChange = new EventEmitter<UserFilter>();
+    @Output() filterChange = new EventEmitter<UserFilter>();
 
     ngOnInit(): void {
-        this.topics = topicsSample;
+        this.dataService.getAllTags().subscribe((tags) => {
+            this.topics = tags.map((tag): IIcon => ({
+                ...tag,
+                link: `assets/topic-icons/${tag.imageUrl}`,
+            }));
+        });
         this.langLevels = langLevelsSample;
-        this.compatibilities = compatibilities.map(c => ({ title: c.toString() }));
-        this.languages = this.languageTimezone.getLanguagesList().map(language => ({ title: language }));
+        this.compatibilities = compatibilities.map((c) => ({ title: c.toString() }));
         this.userFilters = {} as UserFilter;
+        this.dataService.getAllLanguages().subscribe((languages) => {
+            this.languages = languages.map((l): Filter => ({ title: l }));
+        });
     }
 
     get hasFilters(): boolean {
-        return !!this.selectedLanguagesFilters.length
-            || !!this.selectedCompatibilityFilters.length
-            || !!this.selectedLevelFilters.length
-            || !!this.selectedTopicsFilters.length;
+        return (
+            !!this.selectedLanguagesFilters.length ||
+            !!this.selectedCompatibilityFilters.length ||
+            !!this.selectedLevelFilters.length ||
+            !!this.selectedTopicsFilters.length
+        );
+    }
+
+    removeTopic(topic: IIcon) {
+        this.selectedTopicsFilters = this.selectedTopicsFilters.filter((s) => s !== topic);
+        this.userFilters.topics = this.selectedTopicsFilters;
     }
 
     remove(param: FilterOption, title: string) {
@@ -66,25 +78,27 @@ export class FilterSectionComponent implements OnInit {
 
         switch (param) {
             case 'lang':
-                this.selectedLanguagesFilters = this.selectedLanguagesFilters.filter(s => s !== title);
+                this.selectedLanguagesFilters = this.selectedLanguagesFilters.filter((s) => s !== title);
                 this.userFilters.language = null;
                 break;
             case 'level':
-                this.selectedLevelFilters = this.selectedLevelFilters.filter(s => s !== splitedTitle[0]);
+                this.selectedLevelFilters = this.selectedLevelFilters.filter((s) => s !== splitedTitle[0]);
                 this.userFilters.langLevels = this.selectedLevelFilters;
                 this.selectedLevelWithSubtitleFilters = this.getLanguageLevelWithSubtitle();
                 break;
-            case 'topic':
-                this.selectedTopicsFilters = this.selectedTopicsFilters.filter(s => s !== title);
-                this.userFilters.topics = this.selectedTopicsFilters;
-                break;
             case 'compatibility':
-                this.selectedCompatibilityFilters = this.selectedCompatibilityFilters.filter(s => s !== title);
+                this.selectedCompatibilityFilters = this.selectedCompatibilityFilters.filter((s) => s !== title);
                 this.userFilters.compatibility = null;
                 break;
             default:
                 break;
         }
+        this.filterChange.emit(this.userFilters);
+    }
+
+    updateTopics(eventData: IIcon[]) {
+        this.selectedTopicsFilters = eventData;
+        this.userFilters.topics = this.selectedTopicsFilters.map(f => ({ id: f.id }));
         this.filterChange.emit(this.userFilters);
     }
 
@@ -99,10 +113,6 @@ export class FilterSectionComponent implements OnInit {
                 this.userFilters.langLevels = this.selectedLevelFilters;
                 this.selectedLevelWithSubtitleFilters = this.getLanguageLevelWithSubtitle();
                 break;
-            case 'topic':
-                this.selectedTopicsFilters = eventData;
-                this.userFilters.topics = this.selectedTopicsFilters;
-                break;
             case 'compatibility':
                 this.selectedCompatibilityFilters = eventData;
                 this.userFilters.compatibility = Number(this.selectedCompatibilityFilters[0]) ?? null;
@@ -116,6 +126,7 @@ export class FilterSectionComponent implements OnInit {
     resetFilters() {
         this.resetFiltersEvent.next();
         this.selectedLevelFilters = [];
+        this.selectedLevelWithSubtitleFilters = [];
         this.selectedTopicsFilters = [];
         this.selectedLanguagesFilters = [];
         this.selectedCompatibilityFilters = [];
@@ -124,8 +135,8 @@ export class FilterSectionComponent implements OnInit {
     }
 
     private getLanguageLevelWithSubtitle() {
-        return this.selectedLevelFilters.map(f => {
-            const level = this.langLevels.find(l => l.title === f);
+        return this.selectedLevelFilters.map((f) => {
+            const level = this.langLevels.find((l) => l.title === f);
 
             return `${level?.title}: ${level?.subtitle}`;
         });

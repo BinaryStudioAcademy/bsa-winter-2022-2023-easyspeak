@@ -1,13 +1,12 @@
 ﻿using AutoMapper;
 using EasySpeak.Core.BLL.Interfaces;
-using EasySpeak.Core.BLL.Options;
 using EasySpeak.Core.Common.DTO.Notification;
 using EasySpeak.Core.Common.Enums;
+using EasySpeak.Core.Common.Options;
 using EasySpeak.Core.DAL.Context;
 using EasySpeak.Core.DAL.Entities;
 using EasySpeak.RabbitMQ.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.Options;
 
 namespace EasySpeak.Core.BLL.Services
@@ -122,7 +121,7 @@ namespace EasySpeak.Core.BLL.Services
                 UserId = receiver.Id,
                 Email = receiver.Email,
                 RelatedTo = sender.Id,
-                CreatedAt = DateTime.Now,
+                CreatedAt = DateTime.UtcNow,
                 Type = type,
                 Text = text,
                 ImageId = sender.ImageId
@@ -149,7 +148,7 @@ namespace EasySpeak.Core.BLL.Services
                 UserId = receiver.Id,
                 Email = receiver.Email,
                 RelatedTo = lesson.User!.Id,
-                CreatedAt = DateTime.Now,
+                CreatedAt = DateTime.UtcNow,
                 Type = type,
                 Text = text,
                 ImageId = lesson.User!.ImageId
@@ -159,7 +158,7 @@ namespace EasySpeak.Core.BLL.Services
         public async Task<ICollection<NotificationDto>> GetNotificationsAsync()
         {
             return await _context.Notifications
-                .Where(n => n.UserId == _firebaseAuthService.UserId)
+                .Where(n => n.UserId == _firebaseAuthService.UserId && !n.IsRead)
                 .GroupJoin(
                     _context.EasySpeakFiles,
                     n => n.RelatedTo,
@@ -170,6 +169,8 @@ namespace EasySpeak.Core.BLL.Services
                     (n, f) => new NotificationDto()
                     {
                         Id = n.Notification.Id,
+                        FirstName = n.Notification.User.FirstName,
+                        LastName = n.Notification.User.LastName,
                         CreatedAt = n.Notification.CreatedAt,
                         IsRead = n.Notification.IsRead,
                         Text = n.Notification.Text,

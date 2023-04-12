@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { BaseComponent } from '@core/base/base.component';
 import { AuthService } from '@core/services/auth.service';
+import { DataService } from '@core/services/data.service';
 import { UserService } from '@core/services/user.service';
 import { NgSelectComponent } from '@ng-select/ng-select';
 import { Ages } from '@shared/data/ages.util';
@@ -73,6 +74,7 @@ export class SignUpComponent extends BaseComponent implements OnInit {
         private toastr: ToastrService,
         private userService: UserService,
         private router: Router,
+        private dataService: DataService,
     ) {
         super();
     }
@@ -89,7 +91,9 @@ export class SignUpComponent extends BaseComponent implements OnInit {
 
     private setUpData() {
         this.countries = this.countriesTzLangProvider.getCountriesList().map((x) => x.name);
-        this.languages = this.countriesTzLangProvider.getLanguagesList();
+        this.dataService.getAllLanguages().subscribe((languages) => {
+            this.languages = languages;
+        });
         this.languageLevels = Object.values(LanguageLevel) as string[];
         this.sexOptions = Object.values(this.sexEnumeration) as string[];
         this.ages = Ages;

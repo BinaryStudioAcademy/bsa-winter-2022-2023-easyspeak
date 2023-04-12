@@ -1,5 +1,4 @@
 using EasySpeak.Core.WebAPI.Extensions;
-using EasySpeak.Core.WebAPI.Extentions;
 using EasySpeak.Core.WebAPI.Hubs;
 using EasySpeak.Core.WebAPI.Middlewares;
 using System.Reflection;
@@ -22,6 +21,7 @@ builder.Services.AddEasySpeakCoreContext(builder.Configuration);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.RegisterCustomServices(builder.Configuration);
 
+builder.Services.AddHttpClient();
 builder.Services.AddAutoMapper();
 builder.Services.AddSwaggerGen();
 builder.Services.AddValidation();
@@ -38,11 +38,12 @@ builder.WebHost.UseUrls("http://*:5050");
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+// if (app.Environment.IsDevelopment())
+// {
+// For now let's allow usage of swagger everywhere
+app.UseSwagger();
+app.UseSwaggerUI();
+// }
 
 app.UseMiddleware<GenericExceptionHandlerMiddleware>();
 
@@ -64,7 +65,7 @@ app.UseMiddleware<FirebaseAuthMiddleware>();
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapHealthChecks("/health");
-    endpoints.MapHub<SignalRtcHub>("/signaling");
+    endpoints.MapHub<ChatHub>("/chatting");
     endpoints.MapControllers();
 });
 

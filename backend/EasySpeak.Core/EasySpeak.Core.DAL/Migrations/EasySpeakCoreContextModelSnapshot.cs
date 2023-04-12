@@ -167,321 +167,6 @@ namespace EasySpeak.Core.DAL.Migrations
                     b.HasIndex("ChatId");
 
                     b.ToTable("Calls");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            ChatId = 11L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FinishedAt = new DateTime(2023, 3, 29, 14, 26, 33, 434, DateTimeKind.Utc).AddTicks(5987),
-                            StartedAt = new DateTime(2023, 3, 29, 12, 11, 17, 110, DateTimeKind.Utc).AddTicks(154)
-                        },
-                        new
-                        {
-                            Id = 2L,
-                            ChatId = 7L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FinishedAt = new DateTime(2023, 3, 29, 18, 35, 31, 975, DateTimeKind.Utc).AddTicks(2388),
-                            StartedAt = new DateTime(2023, 3, 29, 17, 41, 55, 56, DateTimeKind.Utc).AddTicks(3352)
-                        },
-                        new
-                        {
-                            Id = 3L,
-                            ChatId = 2L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FinishedAt = new DateTime(2023, 3, 30, 8, 43, 49, 598, DateTimeKind.Utc).AddTicks(8592),
-                            StartedAt = new DateTime(2023, 3, 30, 5, 50, 48, 472, DateTimeKind.Utc).AddTicks(1708)
-                        },
-                        new
-                        {
-                            Id = 4L,
-                            ChatId = 3L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FinishedAt = new DateTime(2023, 3, 30, 0, 50, 38, 838, DateTimeKind.Utc).AddTicks(6265),
-                            StartedAt = new DateTime(2023, 3, 29, 22, 49, 40, 541, DateTimeKind.Utc).AddTicks(2595)
-                        },
-                        new
-                        {
-                            Id = 5L,
-                            ChatId = 19L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FinishedAt = new DateTime(2023, 3, 30, 10, 0, 10, 657, DateTimeKind.Utc).AddTicks(9051),
-                            StartedAt = new DateTime(2023, 3, 30, 9, 25, 0, 982, DateTimeKind.Utc).AddTicks(1061)
-                        },
-                        new
-                        {
-                            Id = 6L,
-                            ChatId = 13L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FinishedAt = new DateTime(2023, 3, 30, 8, 24, 34, 334, DateTimeKind.Utc).AddTicks(2589),
-                            StartedAt = new DateTime(2023, 3, 30, 7, 30, 19, 11, DateTimeKind.Utc).AddTicks(6660)
-                        },
-                        new
-                        {
-                            Id = 7L,
-                            ChatId = 19L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FinishedAt = new DateTime(2023, 3, 29, 21, 33, 15, 710, DateTimeKind.Utc).AddTicks(304),
-                            StartedAt = new DateTime(2023, 3, 29, 18, 40, 48, 76, DateTimeKind.Utc).AddTicks(1597)
-                        },
-                        new
-                        {
-                            Id = 8L,
-                            ChatId = 12L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FinishedAt = new DateTime(2023, 3, 30, 3, 59, 21, 941, DateTimeKind.Utc).AddTicks(1908),
-                            StartedAt = new DateTime(2023, 3, 30, 3, 35, 7, 117, DateTimeKind.Utc).AddTicks(9355)
-                        },
-                        new
-                        {
-                            Id = 9L,
-                            ChatId = 4L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StartedAt = new DateTime(2023, 3, 30, 3, 21, 29, 243, DateTimeKind.Utc).AddTicks(7956)
-                        },
-                        new
-                        {
-                            Id = 10L,
-                            ChatId = 8L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StartedAt = new DateTime(2023, 3, 30, 3, 28, 0, 132, DateTimeKind.Utc).AddTicks(5627)
-                        },
-                        new
-                        {
-                            Id = 11L,
-                            ChatId = 3L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FinishedAt = new DateTime(2023, 3, 30, 8, 6, 45, 16, DateTimeKind.Utc).AddTicks(6326),
-                            StartedAt = new DateTime(2023, 3, 30, 6, 37, 47, 539, DateTimeKind.Utc).AddTicks(379)
-                        },
-                        new
-                        {
-                            Id = 12L,
-                            ChatId = 8L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FinishedAt = new DateTime(2023, 3, 30, 8, 29, 47, 433, DateTimeKind.Utc).AddTicks(9991),
-                            StartedAt = new DateTime(2023, 3, 30, 6, 41, 34, 852, DateTimeKind.Utc).AddTicks(4701)
-                        },
-                        new
-                        {
-                            Id = 13L,
-                            ChatId = 3L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FinishedAt = new DateTime(2023, 3, 30, 9, 39, 31, 443, DateTimeKind.Utc).AddTicks(6),
-                            StartedAt = new DateTime(2023, 3, 30, 8, 1, 46, 951, DateTimeKind.Utc).AddTicks(7384)
-                        },
-                        new
-                        {
-                            Id = 14L,
-                            ChatId = 1L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FinishedAt = new DateTime(2023, 3, 29, 15, 16, 40, 720, DateTimeKind.Utc).AddTicks(2498),
-                            StartedAt = new DateTime(2023, 3, 29, 13, 42, 8, 158, DateTimeKind.Utc).AddTicks(7855)
-                        },
-                        new
-                        {
-                            Id = 15L,
-                            ChatId = 14L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StartedAt = new DateTime(2023, 3, 30, 9, 19, 50, 80, DateTimeKind.Utc).AddTicks(2316)
-                        },
-                        new
-                        {
-                            Id = 16L,
-                            ChatId = 1L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FinishedAt = new DateTime(2023, 3, 29, 18, 7, 12, 46, DateTimeKind.Utc).AddTicks(5688),
-                            StartedAt = new DateTime(2023, 3, 29, 16, 36, 40, 789, DateTimeKind.Utc).AddTicks(6145)
-                        },
-                        new
-                        {
-                            Id = 17L,
-                            ChatId = 5L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FinishedAt = new DateTime(2023, 3, 30, 10, 44, 23, 732, DateTimeKind.Utc).AddTicks(9797),
-                            StartedAt = new DateTime(2023, 3, 30, 9, 1, 28, 118, DateTimeKind.Utc).AddTicks(4753)
-                        },
-                        new
-                        {
-                            Id = 18L,
-                            ChatId = 19L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FinishedAt = new DateTime(2023, 3, 30, 0, 27, 16, 695, DateTimeKind.Utc).AddTicks(9697),
-                            StartedAt = new DateTime(2023, 3, 29, 22, 5, 53, 13, DateTimeKind.Utc).AddTicks(4864)
-                        },
-                        new
-                        {
-                            Id = 19L,
-                            ChatId = 17L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StartedAt = new DateTime(2023, 3, 30, 7, 38, 51, 698, DateTimeKind.Utc).AddTicks(3241)
-                        },
-                        new
-                        {
-                            Id = 20L,
-                            ChatId = 17L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FinishedAt = new DateTime(2023, 3, 30, 0, 46, 0, 211, DateTimeKind.Utc).AddTicks(1848),
-                            StartedAt = new DateTime(2023, 3, 29, 23, 56, 10, 114, DateTimeKind.Utc).AddTicks(6730)
-                        },
-                        new
-                        {
-                            Id = 21L,
-                            ChatId = 8L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FinishedAt = new DateTime(2023, 3, 30, 8, 30, 13, 61, DateTimeKind.Utc).AddTicks(3295),
-                            StartedAt = new DateTime(2023, 3, 30, 5, 45, 0, 815, DateTimeKind.Utc).AddTicks(2755)
-                        },
-                        new
-                        {
-                            Id = 22L,
-                            ChatId = 12L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FinishedAt = new DateTime(2023, 3, 29, 23, 27, 4, 960, DateTimeKind.Utc).AddTicks(7554),
-                            StartedAt = new DateTime(2023, 3, 29, 21, 29, 30, 718, DateTimeKind.Utc).AddTicks(1004)
-                        },
-                        new
-                        {
-                            Id = 23L,
-                            ChatId = 3L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StartedAt = new DateTime(2023, 3, 30, 9, 59, 27, 748, DateTimeKind.Utc).AddTicks(5673)
-                        },
-                        new
-                        {
-                            Id = 24L,
-                            ChatId = 16L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FinishedAt = new DateTime(2023, 3, 30, 7, 28, 37, 281, DateTimeKind.Utc).AddTicks(218),
-                            StartedAt = new DateTime(2023, 3, 30, 6, 35, 54, 127, DateTimeKind.Utc).AddTicks(197)
-                        },
-                        new
-                        {
-                            Id = 25L,
-                            ChatId = 6L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FinishedAt = new DateTime(2023, 3, 30, 5, 1, 19, 258, DateTimeKind.Utc).AddTicks(6679),
-                            StartedAt = new DateTime(2023, 3, 30, 2, 44, 26, 789, DateTimeKind.Utc).AddTicks(4642)
-                        },
-                        new
-                        {
-                            Id = 26L,
-                            ChatId = 11L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StartedAt = new DateTime(2023, 3, 29, 19, 31, 1, 862, DateTimeKind.Utc).AddTicks(3087)
-                        },
-                        new
-                        {
-                            Id = 27L,
-                            ChatId = 2L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StartedAt = new DateTime(2023, 3, 29, 21, 2, 53, 964, DateTimeKind.Utc).AddTicks(8615)
-                        },
-                        new
-                        {
-                            Id = 28L,
-                            ChatId = 1L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FinishedAt = new DateTime(2023, 3, 30, 0, 8, 27, 519, DateTimeKind.Utc).AddTicks(4143),
-                            StartedAt = new DateTime(2023, 3, 29, 22, 30, 12, 796, DateTimeKind.Utc).AddTicks(6373)
-                        },
-                        new
-                        {
-                            Id = 29L,
-                            ChatId = 14L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FinishedAt = new DateTime(2023, 3, 29, 16, 33, 23, 960, DateTimeKind.Utc).AddTicks(292),
-                            StartedAt = new DateTime(2023, 3, 29, 13, 45, 19, 382, DateTimeKind.Utc).AddTicks(895)
-                        },
-                        new
-                        {
-                            Id = 30L,
-                            ChatId = 2L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FinishedAt = new DateTime(2023, 3, 29, 18, 19, 17, 272, DateTimeKind.Utc).AddTicks(9714),
-                            StartedAt = new DateTime(2023, 3, 29, 17, 10, 8, 565, DateTimeKind.Utc).AddTicks(6895)
-                        },
-                        new
-                        {
-                            Id = 31L,
-                            ChatId = 11L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FinishedAt = new DateTime(2023, 3, 30, 2, 33, 53, 237, DateTimeKind.Utc).AddTicks(1168),
-                            StartedAt = new DateTime(2023, 3, 30, 2, 4, 34, 205, DateTimeKind.Utc).AddTicks(8604)
-                        },
-                        new
-                        {
-                            Id = 32L,
-                            ChatId = 16L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FinishedAt = new DateTime(2023, 3, 29, 21, 49, 44, 615, DateTimeKind.Utc).AddTicks(1025),
-                            StartedAt = new DateTime(2023, 3, 29, 19, 11, 24, 720, DateTimeKind.Utc).AddTicks(7549)
-                        },
-                        new
-                        {
-                            Id = 33L,
-                            ChatId = 11L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FinishedAt = new DateTime(2023, 3, 30, 1, 20, 29, 357, DateTimeKind.Utc).AddTicks(3354),
-                            StartedAt = new DateTime(2023, 3, 30, 0, 21, 55, 496, DateTimeKind.Utc).AddTicks(9574)
-                        },
-                        new
-                        {
-                            Id = 34L,
-                            ChatId = 15L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FinishedAt = new DateTime(2023, 3, 29, 14, 19, 8, 285, DateTimeKind.Utc).AddTicks(9166),
-                            StartedAt = new DateTime(2023, 3, 29, 12, 6, 7, 251, DateTimeKind.Utc).AddTicks(1849)
-                        },
-                        new
-                        {
-                            Id = 35L,
-                            ChatId = 19L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FinishedAt = new DateTime(2023, 3, 29, 16, 4, 7, 596, DateTimeKind.Utc).AddTicks(5818),
-                            StartedAt = new DateTime(2023, 3, 29, 14, 48, 13, 217, DateTimeKind.Utc).AddTicks(4657)
-                        },
-                        new
-                        {
-                            Id = 36L,
-                            ChatId = 14L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FinishedAt = new DateTime(2023, 3, 29, 23, 15, 50, 767, DateTimeKind.Utc).AddTicks(7714),
-                            StartedAt = new DateTime(2023, 3, 29, 21, 23, 20, 947, DateTimeKind.Utc).AddTicks(8266)
-                        },
-                        new
-                        {
-                            Id = 37L,
-                            ChatId = 18L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FinishedAt = new DateTime(2023, 3, 30, 4, 51, 59, 469, DateTimeKind.Utc).AddTicks(8512),
-                            StartedAt = new DateTime(2023, 3, 30, 3, 51, 51, 340, DateTimeKind.Utc).AddTicks(7328)
-                        },
-                        new
-                        {
-                            Id = 38L,
-                            ChatId = 8L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FinishedAt = new DateTime(2023, 3, 29, 17, 5, 25, 147, DateTimeKind.Utc).AddTicks(6934),
-                            StartedAt = new DateTime(2023, 3, 29, 17, 1, 39, 455, DateTimeKind.Utc).AddTicks(9583)
-                        },
-                        new
-                        {
-                            Id = 39L,
-                            ChatId = 9L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FinishedAt = new DateTime(2023, 3, 30, 7, 50, 35, 166, DateTimeKind.Utc).AddTicks(6321),
-                            StartedAt = new DateTime(2023, 3, 30, 5, 9, 43, 906, DateTimeKind.Utc).AddTicks(2578)
-                        },
-                        new
-                        {
-                            Id = 40L,
-                            ChatId = 18L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FinishedAt = new DateTime(2023, 3, 30, 5, 10, 42, 787, DateTimeKind.Utc).AddTicks(6775),
-                            StartedAt = new DateTime(2023, 3, 30, 5, 6, 22, 377, DateTimeKind.Utc).AddTicks(3568)
-                        });
                 });
 
             modelBuilder.Entity("EasySpeak.Core.DAL.Entities.Chat", b =>
@@ -497,10 +182,6 @@ namespace EasySpeak.Core.DAL.Migrations
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("getutcdate()");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.ToTable("Chats");
@@ -509,122 +190,102 @@ namespace EasySpeak.Core.DAL.Migrations
                         new
                         {
                             Id = 1L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "input Singapore Dollar functionalities"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 2L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Versatile withdrawal"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 3L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "invoice actuating"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 4L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Directives"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 5L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "neural-net"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 6L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Platinum Thailand"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 7L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Fresh"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 8L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "core"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 9L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "orange"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 10L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Generic Concrete Shoes"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 11L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "channels Run Checking Account"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 12L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Flat EXE"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 13L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "deposit"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 14L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Shoes, Beauty & Games"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 15L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Awesome"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 16L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "interactive parse GB"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 17L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Health & Home"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 18L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Intelligent Legacy"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 19L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "North Carolina indigo Sleek Wooden Car"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 20L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "strategy"
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
@@ -686,7 +347,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 1L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FriendshipStatus = 2,
-                            RequesterId = 4L,
+                            RequesterId = 3L,
                             UserId = 3L
                         },
                         new
@@ -694,39 +355,39 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 2L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FriendshipStatus = 2,
-                            RequesterId = 5L,
-                            UserId = 1L
+                            RequesterId = 1L,
+                            UserId = 4L
                         },
                         new
                         {
                             Id = 3L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FriendshipStatus = 2,
-                            RequesterId = 3L,
-                            UserId = 2L
+                            RequesterId = 2L,
+                            UserId = 3L
                         },
                         new
                         {
                             Id = 4L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FriendshipStatus = 2,
-                            RequesterId = 2L,
-                            UserId = 4L
+                            RequesterId = 3L,
+                            UserId = 5L
                         },
                         new
                         {
                             Id = 5L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FriendshipStatus = 2,
-                            RequesterId = 4L,
-                            UserId = 3L
+                            RequesterId = 5L,
+                            UserId = 2L
                         },
                         new
                         {
                             Id = 6L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FriendshipStatus = 0,
-                            RequesterId = 1L,
+                            RequesterId = 3L,
                             UserId = 3L
                         },
                         new
@@ -734,7 +395,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 7L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FriendshipStatus = 1,
-                            RequesterId = 1L,
+                            RequesterId = 5L,
                             UserId = 5L
                         },
                         new
@@ -742,7 +403,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 8L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FriendshipStatus = 1,
-                            RequesterId = 2L,
+                            RequesterId = 1L,
                             UserId = 1L
                         },
                         new
@@ -751,15 +412,15 @@ namespace EasySpeak.Core.DAL.Migrations
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FriendshipStatus = 0,
                             RequesterId = 1L,
-                            UserId = 2L
+                            UserId = 1L
                         },
                         new
                         {
                             Id = 10L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FriendshipStatus = 2,
-                            RequesterId = 2L,
-                            UserId = 2L
+                            RequesterId = 4L,
+                            UserId = 5L
                         },
                         new
                         {
@@ -767,30 +428,30 @@ namespace EasySpeak.Core.DAL.Migrations
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FriendshipStatus = 1,
                             RequesterId = 3L,
-                            UserId = 5L
+                            UserId = 3L
                         },
                         new
                         {
                             Id = 12L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FriendshipStatus = 0,
-                            RequesterId = 3L,
-                            UserId = 2L
+                            RequesterId = 1L,
+                            UserId = 3L
                         },
                         new
                         {
                             Id = 13L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FriendshipStatus = 1,
-                            RequesterId = 4L,
-                            UserId = 4L
+                            RequesterId = 5L,
+                            UserId = 5L
                         },
                         new
                         {
                             Id = 14L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FriendshipStatus = 2,
-                            RequesterId = 2L,
+                            RequesterId = 1L,
                             UserId = 5L
                         },
                         new
@@ -798,8 +459,8 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 15L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FriendshipStatus = 2,
-                            RequesterId = 2L,
-                            UserId = 5L
+                            RequesterId = 3L,
+                            UserId = 2L
                         },
                         new
                         {
@@ -807,7 +468,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FriendshipStatus = 0,
                             RequesterId = 5L,
-                            UserId = 1L
+                            UserId = 4L
                         },
                         new
                         {
@@ -815,14 +476,14 @@ namespace EasySpeak.Core.DAL.Migrations
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FriendshipStatus = 0,
                             RequesterId = 4L,
-                            UserId = 3L
+                            UserId = 5L
                         },
                         new
                         {
                             Id = 18L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FriendshipStatus = 0,
-                            RequesterId = 5L,
+                            RequesterId = 2L,
                             UserId = 2L
                         },
                         new
@@ -830,16 +491,16 @@ namespace EasySpeak.Core.DAL.Migrations
                             Id = 19L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FriendshipStatus = 2,
-                            RequesterId = 3L,
-                            UserId = 1L
+                            RequesterId = 5L,
+                            UserId = 3L
                         },
                         new
                         {
                             Id = 20L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FriendshipStatus = 0,
-                            RequesterId = 2L,
-                            UserId = 5L
+                            RequesterId = 5L,
+                            UserId = 2L
                         });
                 });
 
@@ -859,9 +520,8 @@ namespace EasySpeak.Core.DAL.Migrations
                     b.Property<long?>("CreatedBy")
                         .HasColumnType("bigint");
 
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool>("IsCanceled")
+                        .HasColumnType("bit");
 
                     b.Property<int>("LanguageLevel")
                         .HasColumnType("int");
@@ -903,12 +563,13 @@ namespace EasySpeak.Core.DAL.Migrations
                         {
                             Id = 1L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Singapore Dollar functionalities Field Branding impactful invoice actuating lavender",
+                            CreatedBy = 1L,
+                            IsCanceled = false,
                             LanguageLevel = 0,
-                            LimitOfUsers = 74,
-                            MediaPath = "https://picsum.photos/640/480/?image=202",
+                            LimitOfUsers = 150,
+                            MediaPath = "https://picsum.photos/640/480/?image=822",
                             Name = "Mobility",
-                            StartAt = new DateTime(2023, 4, 3, 19, 50, 29, 650, DateTimeKind.Utc).AddTicks(205),
+                            StartAt = new DateTime(2023, 4, 20, 5, 39, 54, 568, DateTimeKind.Utc).AddTicks(9782),
                             YoutubeVideoId = "",
                             ZoomMeetingLink = "",
                             ZoomMeetingLinkHost = ""
@@ -917,12 +578,13 @@ namespace EasySpeak.Core.DAL.Migrations
                         {
                             Id = 2L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Thailand budgetary management SDD core Concrete complexity Generic Concrete Shoes navigating plum pixel",
+                            CreatedBy = 1L,
+                            IsCanceled = false,
                             LanguageLevel = 0,
-                            LimitOfUsers = 123,
-                            MediaPath = "https://picsum.photos/640/480/?image=134",
-                            Name = "Palau",
-                            StartAt = new DateTime(2023, 4, 15, 17, 57, 57, 902, DateTimeKind.Utc).AddTicks(9337),
+                            LimitOfUsers = 139,
+                            MediaPath = "https://picsum.photos/640/480/?image=232",
+                            Name = "brand",
+                            StartAt = new DateTime(2023, 4, 28, 7, 4, 30, 405, DateTimeKind.Utc).AddTicks(2189),
                             YoutubeVideoId = "",
                             ZoomMeetingLink = "",
                             ZoomMeetingLinkHost = ""
@@ -931,11 +593,12 @@ namespace EasySpeak.Core.DAL.Migrations
                         {
                             Id = 3L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "deposit Advanced input",
+                            CreatedBy = 2L,
+                            IsCanceled = false,
                             LanguageLevel = 0,
-                            MediaPath = "https://picsum.photos/640/480/?image=545",
-                            Name = "EXE",
-                            StartAt = new DateTime(2023, 4, 3, 23, 3, 18, 306, DateTimeKind.Utc).AddTicks(6493),
+                            MediaPath = "https://picsum.photos/640/480/?image=1065",
+                            Name = "Oman",
+                            StartAt = new DateTime(2023, 4, 7, 17, 24, 52, 871, DateTimeKind.Utc).AddTicks(8972),
                             YoutubeVideoId = "",
                             ZoomMeetingLink = "",
                             ZoomMeetingLinkHost = ""
@@ -944,12 +607,13 @@ namespace EasySpeak.Core.DAL.Migrations
                         {
                             Id = 4L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "South Carolina Accountability Plastic Health & Home",
+                            CreatedBy = 5L,
+                            IsCanceled = false,
                             LanguageLevel = 0,
-                            LimitOfUsers = 59,
-                            MediaPath = "https://picsum.photos/640/480/?image=376",
-                            Name = "Ville",
-                            StartAt = new DateTime(2023, 4, 1, 19, 45, 38, 148, DateTimeKind.Utc).AddTicks(2420),
+                            LimitOfUsers = 143,
+                            MediaPath = "https://picsum.photos/640/480/?image=157",
+                            Name = "Directives",
+                            StartAt = new DateTime(2023, 4, 8, 12, 1, 17, 422, DateTimeKind.Utc).AddTicks(3002),
                             YoutubeVideoId = "",
                             ZoomMeetingLink = "",
                             ZoomMeetingLinkHost = ""
@@ -958,11 +622,12 @@ namespace EasySpeak.Core.DAL.Migrations
                         {
                             Id = 5L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "deposit auxiliary Avon Intelligent strategy Forint copy",
+                            CreatedBy = 5L,
+                            IsCanceled = false,
                             LanguageLevel = 0,
-                            MediaPath = "https://picsum.photos/640/480/?image=659",
-                            Name = "input",
-                            StartAt = new DateTime(2023, 4, 18, 19, 29, 4, 130, DateTimeKind.Utc).AddTicks(7404),
+                            MediaPath = "https://picsum.photos/640/480/?image=576",
+                            Name = "Platinum",
+                            StartAt = new DateTime(2023, 4, 25, 23, 15, 50, 87, DateTimeKind.Utc).AddTicks(5649),
                             YoutubeVideoId = "",
                             ZoomMeetingLink = "",
                             ZoomMeetingLinkHost = ""
@@ -971,12 +636,12 @@ namespace EasySpeak.Core.DAL.Migrations
                         {
                             Id = 6L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Awesome Malta indigo XSS Texas interface Israel orchestrate",
+                            CreatedBy = 4L,
+                            IsCanceled = false,
                             LanguageLevel = 0,
-                            LimitOfUsers = 139,
-                            MediaPath = "https://picsum.photos/640/480/?image=245",
-                            Name = "front-end",
-                            StartAt = new DateTime(2023, 4, 1, 0, 33, 57, 99, DateTimeKind.Utc).AddTicks(9638),
+                            MediaPath = "https://picsum.photos/640/480/?image=345",
+                            Name = "SDD",
+                            StartAt = new DateTime(2023, 4, 6, 15, 15, 36, 36, DateTimeKind.Utc).AddTicks(7593),
                             YoutubeVideoId = "",
                             ZoomMeetingLink = "",
                             ZoomMeetingLinkHost = ""
@@ -985,12 +650,13 @@ namespace EasySpeak.Core.DAL.Migrations
                         {
                             Id = 7L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "B2C Platinum system bus channels",
+                            CreatedBy = 1L,
+                            IsCanceled = false,
                             LanguageLevel = 0,
-                            LimitOfUsers = 133,
-                            MediaPath = "https://picsum.photos/640/480/?image=934",
-                            Name = "Peso Uruguayo",
-                            StartAt = new DateTime(2023, 4, 16, 11, 19, 31, 565, DateTimeKind.Utc).AddTicks(2009),
+                            LimitOfUsers = 52,
+                            MediaPath = "https://picsum.photos/640/480/?image=60",
+                            Name = "complexity",
+                            StartAt = new DateTime(2023, 4, 18, 12, 32, 59, 586, DateTimeKind.Utc).AddTicks(5964),
                             YoutubeVideoId = "",
                             ZoomMeetingLink = "",
                             ZoomMeetingLinkHost = ""
@@ -999,12 +665,13 @@ namespace EasySpeak.Core.DAL.Migrations
                         {
                             Id = 8L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "white driver Usability Total Multi-tiered",
+                            CreatedBy = 5L,
+                            IsCanceled = false,
                             LanguageLevel = 0,
-                            LimitOfUsers = 142,
-                            MediaPath = "https://picsum.photos/640/480/?image=266",
-                            Name = "Bedfordshire",
-                            StartAt = new DateTime(2023, 3, 31, 4, 21, 38, 476, DateTimeKind.Utc).AddTicks(9665),
+                            LimitOfUsers = 153,
+                            MediaPath = "https://picsum.photos/640/480/?image=194",
+                            Name = "navigating",
+                            StartAt = new DateTime(2023, 4, 17, 11, 50, 19, 566, DateTimeKind.Utc).AddTicks(9665),
                             YoutubeVideoId = "",
                             ZoomMeetingLink = "",
                             ZoomMeetingLinkHost = ""
@@ -1013,12 +680,13 @@ namespace EasySpeak.Core.DAL.Migrations
                         {
                             Id = 9L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Multi-tiered hacking Seychelles",
+                            CreatedBy = 1L,
+                            IsCanceled = false,
                             LanguageLevel = 0,
-                            LimitOfUsers = 56,
-                            MediaPath = "https://picsum.photos/640/480/?image=7",
-                            Name = "Music",
-                            StartAt = new DateTime(2023, 4, 9, 2, 18, 12, 41, DateTimeKind.Utc).AddTicks(4570),
+                            LimitOfUsers = 180,
+                            MediaPath = "https://picsum.photos/640/480/?image=620",
+                            Name = "Granite",
+                            StartAt = new DateTime(2023, 4, 6, 5, 31, 35, 722, DateTimeKind.Utc).AddTicks(2772),
                             YoutubeVideoId = "",
                             ZoomMeetingLink = "",
                             ZoomMeetingLinkHost = ""
@@ -1027,12 +695,13 @@ namespace EasySpeak.Core.DAL.Migrations
                         {
                             Id = 10L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "application cross-platform Corners niches bleeding-edge Sleek Frozen Hat 1080p Cambridgeshire dot-com Gorgeous",
+                            CreatedBy = 2L,
+                            IsCanceled = false,
                             LanguageLevel = 0,
-                            LimitOfUsers = 29,
-                            MediaPath = "https://picsum.photos/640/480/?image=878",
-                            Name = "USB",
-                            StartAt = new DateTime(2023, 4, 14, 7, 44, 19, 22, DateTimeKind.Utc).AddTicks(6402),
+                            LimitOfUsers = 22,
+                            MediaPath = "https://picsum.photos/640/480/?image=75",
+                            Name = "olive",
+                            StartAt = new DateTime(2023, 4, 6, 9, 54, 33, 817, DateTimeKind.Utc).AddTicks(7535),
                             YoutubeVideoId = "",
                             ZoomMeetingLink = "",
                             ZoomMeetingLinkHost = ""
@@ -1071,368 +740,6 @@ namespace EasySpeak.Core.DAL.Migrations
                     b.HasIndex("ChatId");
 
                     b.ToTable("Messages");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            ChatId = 16L,
-                            CreatedAt = new DateTime(2023, 3, 26, 23, 58, 21, 254, DateTimeKind.Utc).AddTicks(6980),
-                            IsDeleted = false,
-                            IsRead = true,
-                            Text = "input Singapore Dollar functionalities Field Branding impactful invoice actuating lavender purple neural-net Palau Operations SQL Fresh Incredible Customer-focused orange green Savings Account"
-                        },
-                        new
-                        {
-                            Id = 2L,
-                            ChatId = 17L,
-                            CreatedAt = new DateTime(2023, 3, 26, 18, 45, 36, 557, DateTimeKind.Utc).AddTicks(9989),
-                            IsDeleted = false,
-                            IsRead = true,
-                            Text = "Run Checking Account New Hampshire Team-oriented"
-                        },
-                        new
-                        {
-                            Id = 3L,
-                            ChatId = 19L,
-                            CreatedAt = new DateTime(2023, 3, 26, 22, 30, 49, 610, DateTimeKind.Utc).AddTicks(5596),
-                            IsDeleted = false,
-                            IsRead = true,
-                            Text = "Advanced input"
-                        },
-                        new
-                        {
-                            Id = 4L,
-                            ChatId = 17L,
-                            CreatedAt = new DateTime(2023, 3, 24, 23, 1, 53, 780, DateTimeKind.Utc).AddTicks(9359),
-                            IsDeleted = false,
-                            IsRead = true,
-                            Text = "Ville interactive"
-                        },
-                        new
-                        {
-                            Id = 5L,
-                            ChatId = 14L,
-                            CreatedAt = new DateTime(2023, 3, 29, 21, 45, 21, 98, DateTimeKind.Utc).AddTicks(7435),
-                            IsDeleted = false,
-                            IsRead = true,
-                            Text = "ability withdrawal even-keeled"
-                        },
-                        new
-                        {
-                            Id = 6L,
-                            ChatId = 2L,
-                            CreatedAt = new DateTime(2023, 3, 24, 12, 28, 11, 306, DateTimeKind.Utc).AddTicks(3253),
-                            IsDeleted = false,
-                            IsRead = true,
-                            Text = "quantify deposit auxiliary Avon Intelligent strategy Forint copy Credit Card Account Avon front-end Bahraini Dinar Mount Georgia optical Infrastructure"
-                        },
-                        new
-                        {
-                            Id = 7L,
-                            ChatId = 16L,
-                            CreatedAt = new DateTime(2023, 3, 26, 23, 37, 58, 715, DateTimeKind.Utc).AddTicks(4827),
-                            IsDeleted = false,
-                            IsRead = true,
-                            Text = "Islands Intelligent Steel Tuna SMTP indexing B2C Platinum system bus channels COM Money Market Account"
-                        },
-                        new
-                        {
-                            Id = 8L,
-                            ChatId = 19L,
-                            CreatedAt = new DateTime(2023, 3, 25, 16, 50, 41, 835, DateTimeKind.Utc).AddTicks(9482),
-                            IsDeleted = false,
-                            IsRead = true,
-                            Text = "Reduced Industrial, Computers & Outdoors Multi-tiered Ameliorated"
-                        },
-                        new
-                        {
-                            Id = 9L,
-                            ChatId = 17L,
-                            CreatedAt = new DateTime(2023, 3, 25, 20, 45, 10, 973, DateTimeKind.Utc).AddTicks(6040),
-                            IsDeleted = false,
-                            IsRead = true,
-                            Text = "Concrete Multi-tiered hacking Seychelles Electronics"
-                        },
-                        new
-                        {
-                            Id = 10L,
-                            ChatId = 4L,
-                            CreatedAt = new DateTime(2023, 3, 25, 11, 46, 20, 369, DateTimeKind.Utc).AddTicks(685),
-                            IsDeleted = false,
-                            IsRead = true,
-                            Text = "application cross-platform Corners niches bleeding-edge Sleek Frozen Hat 1080p Cambridgeshire dot-com Gorgeous online Handmade Frozen Chair Auto Loan Account Burgs Borders Estonia value-added Crossing"
-                        },
-                        new
-                        {
-                            Id = 11L,
-                            ChatId = 15L,
-                            CreatedAt = new DateTime(2023, 3, 26, 14, 50, 26, 296, DateTimeKind.Utc).AddTicks(7278),
-                            IsDeleted = false,
-                            IsRead = true,
-                            Text = "calculate"
-                        },
-                        new
-                        {
-                            Id = 12L,
-                            ChatId = 20L,
-                            CreatedAt = new DateTime(2023, 3, 25, 10, 29, 35, 692, DateTimeKind.Utc).AddTicks(6543),
-                            IsDeleted = false,
-                            IsRead = true,
-                            Text = "transmitter Egypt online Creative Credit Card Account Fantastic Soft Soap TCP Industrial & Toys brand client-server compress drive"
-                        },
-                        new
-                        {
-                            Id = 13L,
-                            ChatId = 17L,
-                            CreatedAt = new DateTime(2023, 3, 27, 0, 53, 3, 699, DateTimeKind.Utc).AddTicks(2571),
-                            IsDeleted = false,
-                            IsRead = true,
-                            Text = "backing up Licensed Granite Bike back up back-end e-enable Specialist Games alarm orange Savings Account interactive web-enabled Colorado Ergonomic Concrete Shoes"
-                        },
-                        new
-                        {
-                            Id = 14L,
-                            ChatId = 17L,
-                            CreatedAt = new DateTime(2023, 3, 26, 21, 52, 39, 39, DateTimeKind.Utc).AddTicks(760),
-                            IsDeleted = false,
-                            IsRead = true,
-                            Text = "Awesome quantify Integration SDD reinvent Bedfordshire Generic Frozen Cheese Electronics & Sports open-source Licensed Concrete Sausages Practical Wooden Shirt"
-                        },
-                        new
-                        {
-                            Id = 15L,
-                            ChatId = 9L,
-                            CreatedAt = new DateTime(2023, 3, 26, 20, 35, 54, 517, DateTimeKind.Utc).AddTicks(2778),
-                            IsDeleted = false,
-                            IsRead = true,
-                            Text = "Intelligent Fresh Soap strategize e-business Rustic Frozen Gloves Awesome Wooden Table Avon functionalities program implement clicks-and-mortar Practical Frozen Chips Syrian Pound Paradigm Pennsylvania Markets Consultant"
-                        },
-                        new
-                        {
-                            Id = 16L,
-                            ChatId = 19L,
-                            CreatedAt = new DateTime(2023, 3, 26, 15, 25, 37, 728, DateTimeKind.Utc).AddTicks(3260),
-                            IsDeleted = false,
-                            IsRead = true,
-                            Text = "reboot Investor non-volatile Identity Graphic Interface Sports compressing facilitate AGP turquoise Grass-roots matrix relationships Rustic Rubber Shirt Soft enhance partnerships Estate green hierarchy"
-                        },
-                        new
-                        {
-                            Id = 17L,
-                            ChatId = 4L,
-                            CreatedAt = new DateTime(2023, 3, 25, 15, 47, 35, 138, DateTimeKind.Utc).AddTicks(1191),
-                            IsDeleted = false,
-                            IsRead = true,
-                            Text = "Rustic Investment Account Money Market Account EXE New Hampshire Generic Fresh Mouse CSS Armenian Dram AI Pine compressing International Rustic Wooden Cheese online Investment Account experiences Idaho application Human"
-                        },
-                        new
-                        {
-                            Id = 18L,
-                            ChatId = 6L,
-                            CreatedAt = new DateTime(2023, 3, 27, 15, 29, 43, 577, DateTimeKind.Utc).AddTicks(2038),
-                            IsDeleted = true,
-                            IsRead = true,
-                            Text = "workforce yellow generate web services Berkshire frame Uganda paradigm drive synthesize Coordinator reboot withdrawal asynchronous Borders Lead approach"
-                        },
-                        new
-                        {
-                            Id = 19L,
-                            ChatId = 17L,
-                            CreatedAt = new DateTime(2023, 3, 25, 12, 51, 44, 274, DateTimeKind.Utc).AddTicks(6024),
-                            IsDeleted = true,
-                            IsRead = true,
-                            Text = "Books"
-                        },
-                        new
-                        {
-                            Id = 20L,
-                            ChatId = 8L,
-                            CreatedAt = new DateTime(2023, 3, 28, 3, 54, 37, 636, DateTimeKind.Utc).AddTicks(691),
-                            IsDeleted = false,
-                            IsRead = true,
-                            Text = "magenta online tan Senior static Dynamic Multi-channelled database bleeding-edge COM actuating Mountain Re-engineered"
-                        },
-                        new
-                        {
-                            Id = 21L,
-                            ChatId = 12L,
-                            CreatedAt = new DateTime(2023, 3, 26, 18, 43, 33, 844, DateTimeKind.Utc).AddTicks(4821),
-                            IsDeleted = false,
-                            IsRead = true,
-                            Text = "exuding compressing Buckinghamshire Pines asymmetric Books, Electronics & Health calculating Road Handmade Concrete Keyboard viral Concrete data-warehouse Bedfordshire Generic Rubber Towels"
-                        },
-                        new
-                        {
-                            Id = 22L,
-                            ChatId = 19L,
-                            CreatedAt = new DateTime(2023, 3, 28, 15, 5, 23, 276, DateTimeKind.Utc).AddTicks(3731),
-                            IsDeleted = false,
-                            IsRead = true,
-                            Text = "South Carolina microchip multi-byte value-added Assimilated implement protocol Villages Beauty National Avon wireless Internal bleeding-edge invoice Buckinghamshire Savings Account Visionary Incredible Soft Chair Small"
-                        },
-                        new
-                        {
-                            Id = 23L,
-                            ChatId = 19L,
-                            CreatedAt = new DateTime(2023, 3, 29, 13, 16, 32, 28, DateTimeKind.Utc).AddTicks(7141),
-                            IsDeleted = false,
-                            IsRead = true,
-                            Text = "Rustic Home Loan Account systemic Movies & Baby seize USB Planner Center Future"
-                        },
-                        new
-                        {
-                            Id = 24L,
-                            ChatId = 2L,
-                            CreatedAt = new DateTime(2023, 3, 30, 4, 1, 11, 490, DateTimeKind.Utc).AddTicks(988),
-                            IsDeleted = false,
-                            IsRead = true,
-                            Text = "Factors circuit grid-enabled Central interactive microchip primary Nepalese Rupee matrix Generic Credit Card Account Burg Health & Electronics Manager conglomeration Technician Inlet Wooden benchmark capacitor"
-                        },
-                        new
-                        {
-                            Id = 25L,
-                            ChatId = 17L,
-                            CreatedAt = new DateTime(2023, 3, 24, 14, 51, 7, 944, DateTimeKind.Utc).AddTicks(8222),
-                            IsDeleted = false,
-                            IsRead = true,
-                            Text = "connect envisioneer Burkina Faso multi-byte B2B Buckinghamshire USB Developer Avon sky blue yellow Grenada Borders Investment Account SMTP Checking Account Intelligent Soft Chips"
-                        },
-                        new
-                        {
-                            Id = 26L,
-                            ChatId = 7L,
-                            CreatedAt = new DateTime(2023, 3, 25, 23, 53, 31, 897, DateTimeKind.Utc).AddTicks(640),
-                            IsDeleted = true,
-                            IsRead = true,
-                            Text = "portals B2C ADP motivating"
-                        },
-                        new
-                        {
-                            Id = 27L,
-                            ChatId = 18L,
-                            CreatedAt = new DateTime(2023, 3, 30, 8, 52, 26, 964, DateTimeKind.Utc).AddTicks(4600),
-                            IsDeleted = false,
-                            IsRead = true,
-                            Text = "Multi-channelled Credit Card Account Supervisor programming French Southern Territories feed Investment Account payment Strategist IB synergies Refined digital Avon website transmitting Re-contextualized multi-byte Colorado"
-                        },
-                        new
-                        {
-                            Id = 28L,
-                            ChatId = 8L,
-                            CreatedAt = new DateTime(2023, 3, 29, 4, 25, 33, 646, DateTimeKind.Utc).AddTicks(3207),
-                            IsDeleted = true,
-                            IsRead = true,
-                            Text = "deposit payment withdrawal calculate payment Generic Granite Bike wireless synthesizing South Carolina Mount Turnpike experiences deposit Refined Associate Garden & Industrial"
-                        },
-                        new
-                        {
-                            Id = 29L,
-                            ChatId = 3L,
-                            CreatedAt = new DateTime(2023, 3, 25, 20, 31, 21, 27, DateTimeKind.Utc).AddTicks(9142),
-                            IsDeleted = false,
-                            IsRead = true,
-                            Text = "open system concept"
-                        },
-                        new
-                        {
-                            Id = 30L,
-                            ChatId = 20L,
-                            CreatedAt = new DateTime(2023, 3, 29, 0, 21, 12, 74, DateTimeKind.Utc).AddTicks(4610),
-                            IsDeleted = false,
-                            IsRead = true,
-                            Text = "real-time dedicated 4th generation yellow payment Reduced feed Somalia deposit Summit copying Credit Card Account"
-                        },
-                        new
-                        {
-                            Id = 31L,
-                            ChatId = 3L,
-                            CreatedAt = new DateTime(2023, 3, 28, 3, 39, 36, 238, DateTimeKind.Utc).AddTicks(9462),
-                            IsDeleted = false,
-                            IsRead = true,
-                            Text = "white Robust deposit virtual Oregon mobile Ford magnetic Forward seamless Sleek Rubber Hat Fantastic Metal Salad Awesome Steel Bacon Finland Regional Berkshire Generic Fresh Mouse upward-trending"
-                        },
-                        new
-                        {
-                            Id = 32L,
-                            ChatId = 18L,
-                            CreatedAt = new DateTime(2023, 3, 26, 0, 51, 40, 606, DateTimeKind.Utc).AddTicks(445),
-                            IsDeleted = false,
-                            IsRead = true,
-                            Text = "Shoes infrastructures SMS Seychelles Rupee Saint Helena Pound functionalities Corporate Developer Architect Incredible Frozen Sausages Run monitor Engineer"
-                        },
-                        new
-                        {
-                            Id = 33L,
-                            ChatId = 11L,
-                            CreatedAt = new DateTime(2023, 3, 26, 6, 3, 54, 892, DateTimeKind.Utc).AddTicks(6894),
-                            IsDeleted = true,
-                            IsRead = true,
-                            Text = "Refined Creative payment payment magenta 1080p compress Solutions content-based e-business Front-line Gorgeous monitoring orchestrate connect Sleek encryption application De-engineered Jewelery"
-                        },
-                        new
-                        {
-                            Id = 34L,
-                            ChatId = 20L,
-                            CreatedAt = new DateTime(2023, 3, 27, 17, 3, 49, 552, DateTimeKind.Utc).AddTicks(2553),
-                            IsDeleted = false,
-                            IsRead = true,
-                            Text = "matrix Buckinghamshire Metrics"
-                        },
-                        new
-                        {
-                            Id = 35L,
-                            ChatId = 1L,
-                            CreatedAt = new DateTime(2023, 3, 26, 22, 55, 25, 693, DateTimeKind.Utc).AddTicks(4411),
-                            IsDeleted = false,
-                            IsRead = true,
-                            Text = "1080p firewall Specialist Buckinghamshire alarm help-desk Cambridgeshire SAS Intelligent Fantastic Rubber Mouse SDD Ridge PCI online Balboa Beauty & Home"
-                        },
-                        new
-                        {
-                            Id = 36L,
-                            ChatId = 12L,
-                            CreatedAt = new DateTime(2023, 3, 27, 21, 54, 27, 996, DateTimeKind.Utc).AddTicks(5217),
-                            IsDeleted = false,
-                            IsRead = true,
-                            Text = "productivity"
-                        },
-                        new
-                        {
-                            Id = 37L,
-                            ChatId = 14L,
-                            CreatedAt = new DateTime(2023, 3, 23, 22, 38, 4, 423, DateTimeKind.Utc).AddTicks(3693),
-                            IsDeleted = false,
-                            IsRead = true,
-                            Text = "Borders Corporate CSS programming Rubber HDD"
-                        },
-                        new
-                        {
-                            Id = 38L,
-                            ChatId = 7L,
-                            CreatedAt = new DateTime(2023, 3, 26, 10, 35, 26, 459, DateTimeKind.Utc).AddTicks(78),
-                            IsDeleted = false,
-                            IsRead = true,
-                            Text = "Automotive Som Division"
-                        },
-                        new
-                        {
-                            Id = 39L,
-                            ChatId = 3L,
-                            CreatedAt = new DateTime(2023, 3, 25, 20, 55, 47, 217, DateTimeKind.Utc).AddTicks(9102),
-                            IsDeleted = false,
-                            IsRead = true,
-                            Text = "Small Fresh Pizza demand-driven cohesive bleeding-edge"
-                        },
-                        new
-                        {
-                            Id = 40L,
-                            ChatId = 4L,
-                            CreatedAt = new DateTime(2023, 3, 28, 10, 52, 43, 915, DateTimeKind.Utc).AddTicks(8232),
-                            IsDeleted = false,
-                            IsRead = true,
-                            Text = "Cotton District USB quantify ivory Metal Unbranded Rubber Computer next-generation Brooks optical optimizing Money Market Account deposit Handcrafted benchmark Tunnel"
-                        });
                 });
 
             modelBuilder.Entity("EasySpeak.Core.DAL.Entities.Notification", b =>
@@ -1477,7 +784,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             RelatedTo = 0L,
                             Text = "Facere possimus eligendi quisquam ullam iure praesentium numquam sapiente distinctio.",
                             Type = 3,
-                            UserId = 5L
+                            UserId = 4L
                         },
                         new
                         {
@@ -1487,7 +794,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             RelatedTo = 0L,
                             Text = "Voluptatibus ad et adipisci hic amet ratione corporis.",
                             Type = 3,
-                            UserId = 5L
+                            UserId = 1L
                         },
                         new
                         {
@@ -1497,7 +804,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             RelatedTo = 0L,
                             Text = "A provident rerum nemo dolores debitis dicta voluptatem.",
                             Type = 1,
-                            UserId = 5L
+                            UserId = 2L
                         },
                         new
                         {
@@ -1507,7 +814,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             RelatedTo = 0L,
                             Text = "Ipsam adipisci illo quidem.",
                             Type = 2,
-                            UserId = 1L
+                            UserId = 2L
                         },
                         new
                         {
@@ -1517,7 +824,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             RelatedTo = 0L,
                             Text = "Ea dolor animi quod laborum quia perspiciatis sunt tempora.",
                             Type = 3,
-                            UserId = 2L
+                            UserId = 5L
                         },
                         new
                         {
@@ -1527,7 +834,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             RelatedTo = 0L,
                             Text = "Est quasi incidunt perferendis.",
                             Type = 4,
-                            UserId = 3L
+                            UserId = 4L
                         },
                         new
                         {
@@ -1547,7 +854,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             RelatedTo = 0L,
                             Text = "Eos enim consequatur et praesentium ad ut beatae eius.",
                             Type = 4,
-                            UserId = 5L
+                            UserId = 3L
                         },
                         new
                         {
@@ -1557,7 +864,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             RelatedTo = 0L,
                             Text = "Error et velit autem ipsa atque consequuntur vitae sit.",
                             Type = 4,
-                            UserId = 3L
+                            UserId = 5L
                         },
                         new
                         {
@@ -1567,7 +874,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             RelatedTo = 0L,
                             Text = "Nisi omnis quia est facilis rem architecto laboriosam.",
                             Type = 3,
-                            UserId = 4L
+                            UserId = 5L
                         },
                         new
                         {
@@ -1597,7 +904,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             RelatedTo = 0L,
                             Text = "Nobis nulla dignissimos voluptas nemo cumque tenetur quod et placeat.",
                             Type = 2,
-                            UserId = 2L
+                            UserId = 5L
                         },
                         new
                         {
@@ -1607,7 +914,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             RelatedTo = 0L,
                             Text = "Eos similique fuga enim.",
                             Type = 2,
-                            UserId = 5L
+                            UserId = 3L
                         },
                         new
                         {
@@ -1617,7 +924,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             RelatedTo = 0L,
                             Text = "Velit magnam placeat voluptatem itaque.",
                             Type = 1,
-                            UserId = 4L
+                            UserId = 5L
                         },
                         new
                         {
@@ -1627,7 +934,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             RelatedTo = 0L,
                             Text = "Ut atque dolore accusantium soluta cumque perferendis labore magni adipisci.",
                             Type = 2,
-                            UserId = 1L
+                            UserId = 5L
                         },
                         new
                         {
@@ -1637,7 +944,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             RelatedTo = 0L,
                             Text = "Ratione et quibusdam consequatur voluptatem velit expedita eos maxime.",
                             Type = 3,
-                            UserId = 2L
+                            UserId = 1L
                         },
                         new
                         {
@@ -1647,7 +954,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             RelatedTo = 0L,
                             Text = "Quia nobis iusto aspernatur nihil iure ut blanditiis veritatis.",
                             Type = 4,
-                            UserId = 4L
+                            UserId = 3L
                         },
                         new
                         {
@@ -1657,7 +964,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             RelatedTo = 0L,
                             Text = "Illum quod atque nulla voluptas quos beatae.",
                             Type = 4,
-                            UserId = 1L
+                            UserId = 2L
                         },
                         new
                         {
@@ -1687,7 +994,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             RelatedTo = 0L,
                             Text = "Necessitatibus doloremque omnis facilis unde exercitationem consectetur culpa porro.",
                             Type = 3,
-                            UserId = 2L
+                            UserId = 4L
                         },
                         new
                         {
@@ -1697,7 +1004,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             RelatedTo = 0L,
                             Text = "Vel rem rerum eum harum.",
                             Type = 1,
-                            UserId = 2L
+                            UserId = 1L
                         },
                         new
                         {
@@ -1707,7 +1014,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             RelatedTo = 0L,
                             Text = "Est officia accusamus doloremque perferendis ea.",
                             Type = 3,
-                            UserId = 2L
+                            UserId = 5L
                         },
                         new
                         {
@@ -1717,7 +1024,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             RelatedTo = 0L,
                             Text = "Laudantium ut amet repellendus enim consequatur.",
                             Type = 3,
-                            UserId = 4L
+                            UserId = 2L
                         },
                         new
                         {
@@ -1727,7 +1034,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             RelatedTo = 0L,
                             Text = "Sed expedita dolorem aperiam ipsa omnis.",
                             Type = 1,
-                            UserId = 4L
+                            UserId = 3L
                         },
                         new
                         {
@@ -1757,7 +1064,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             RelatedTo = 0L,
                             Text = "Aut modi corrupti corrupti.",
                             Type = 3,
-                            UserId = 4L
+                            UserId = 3L
                         },
                         new
                         {
@@ -1767,7 +1074,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             RelatedTo = 0L,
                             Text = "Explicabo provident omnis culpa earum modi eos.",
                             Type = 2,
-                            UserId = 1L
+                            UserId = 4L
                         },
                         new
                         {
@@ -1777,7 +1084,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             RelatedTo = 0L,
                             Text = "Deleniti labore veritatis dolorum.",
                             Type = 4,
-                            UserId = 1L
+                            UserId = 3L
                         },
                         new
                         {
@@ -1787,7 +1094,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             RelatedTo = 0L,
                             Text = "Ut sit nulla.",
                             Type = 1,
-                            UserId = 5L
+                            UserId = 1L
                         },
                         new
                         {
@@ -1797,7 +1104,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             RelatedTo = 0L,
                             Text = "Voluptas ut itaque nesciunt.",
                             Type = 1,
-                            UserId = 2L
+                            UserId = 5L
                         },
                         new
                         {
@@ -1807,7 +1114,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             RelatedTo = 0L,
                             Text = "Molestias porro exercitationem omnis et eius.",
                             Type = 3,
-                            UserId = 5L
+                            UserId = 1L
                         },
                         new
                         {
@@ -1817,7 +1124,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             RelatedTo = 0L,
                             Text = "Esse sit quia dolorem sequi.",
                             Type = 2,
-                            UserId = 2L
+                            UserId = 1L
                         },
                         new
                         {
@@ -1827,7 +1134,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             RelatedTo = 0L,
                             Text = "Perspiciatis qui dignissimos.",
                             Type = 1,
-                            UserId = 1L
+                            UserId = 2L
                         },
                         new
                         {
@@ -1837,7 +1144,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             RelatedTo = 0L,
                             Text = "Saepe facere eos eum perferendis nisi.",
                             Type = 1,
-                            UserId = 3L
+                            UserId = 2L
                         },
                         new
                         {
@@ -1847,7 +1154,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             RelatedTo = 0L,
                             Text = "Repudiandae ut nobis voluptas rerum ullam.",
                             Type = 4,
-                            UserId = 2L
+                            UserId = 1L
                         },
                         new
                         {
@@ -1857,7 +1164,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             RelatedTo = 0L,
                             Text = "Ea voluptatibus voluptas sint et et asperiores omnis recusandae saepe.",
                             Type = 2,
-                            UserId = 1L
+                            UserId = 2L
                         },
                         new
                         {
@@ -1867,7 +1174,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             RelatedTo = 0L,
                             Text = "Non consequatur voluptatem in aut quia quo quo.",
                             Type = 2,
-                            UserId = 1L
+                            UserId = 2L
                         });
                 });
 
@@ -1902,56 +1209,56 @@ namespace EasySpeak.Core.DAL.Migrations
                         {
                             Id = 1L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LessonId = 7L,
+                            LessonId = 9L,
                             Topic = "input Singapore Dollar functionalities Field Branding impactful"
                         },
                         new
                         {
                             Id = 2L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LessonId = 2L,
+                            LessonId = 5L,
                             Topic = "Engineer Intelligent Frozen Mouse Incredible Metal Hat Platinum Thailand"
                         },
                         new
                         {
                             Id = 3L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LessonId = 10L,
+                            LessonId = 4L,
                             Topic = "Fresh Incredible"
                         },
                         new
                         {
                             Id = 4L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LessonId = 2L,
+                            LessonId = 5L,
                             Topic = "Concrete complexity"
                         },
                         new
                         {
                             Id = 5L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LessonId = 7L,
+                            LessonId = 8L,
                             Topic = "Savings Account"
                         },
                         new
                         {
                             Id = 6L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LessonId = 2L,
+                            LessonId = 7L,
                             Topic = "navigating plum pixel"
                         },
                         new
                         {
                             Id = 7L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LessonId = 7L,
+                            LessonId = 10L,
                             Topic = "New Hampshire"
                         },
                         new
                         {
                             Id = 8L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LessonId = 7L,
+                            LessonId = 4L,
                             Topic = "EXE olive"
                         },
                         new
@@ -1972,70 +1279,70 @@ namespace EasySpeak.Core.DAL.Migrations
                         {
                             Id = 11L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LessonId = 7L,
+                            LessonId = 2L,
                             Topic = "ability"
                         },
                         new
                         {
                             Id = 12L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LessonId = 5L,
+                            LessonId = 10L,
                             Topic = "Gardens revolutionary Universal input"
                         },
                         new
                         {
                             Id = 13L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LessonId = 5L,
+                            LessonId = 6L,
                             Topic = "deposit auxiliary Avon Intelligent"
                         },
                         new
                         {
                             Id = 14L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LessonId = 2L,
+                            LessonId = 7L,
                             Topic = "SMTP enterprise"
                         },
                         new
                         {
                             Id = 15L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LessonId = 8L,
+                            LessonId = 4L,
                             Topic = "Credit Card Account Avon"
                         },
                         new
                         {
                             Id = 16L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LessonId = 6L,
+                            LessonId = 10L,
                             Topic = "Ridges Awesome Malta"
                         },
                         new
                         {
                             Id = 17L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LessonId = 6L,
+                            LessonId = 1L,
                             Topic = "optical Infrastructure"
                         },
                         new
                         {
                             Id = 18L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LessonId = 7L,
+                            LessonId = 5L,
                             Topic = "interface Israel orchestrate Balanced invoice Peso Uruguayo"
                         },
                         new
                         {
                             Id = 19L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LessonId = 5L,
+                            LessonId = 9L,
                             Topic = "B2C Platinum system"
                         },
                         new
                         {
                             Id = 20L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LessonId = 7L,
+                            LessonId = 4L,
                             Topic = "navigating fuchsia New York hybrid flexibility"
                         });
                 });
@@ -2069,77 +1376,77 @@ namespace EasySpeak.Core.DAL.Migrations
                         {
                             Id = 1L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 20L,
+                            QuestionId = 19L,
                             Text = "Possimus eligendi quisquam ullam iure praesentium numquam sapiente distinctio.\nMolestias tempore voluptatibus ad et.\nHic amet ratione corporis.\nCupiditate soluta a provident rerum nemo dolores debitis.\nVoluptatem labore dolores."
                         },
                         new
                         {
                             Id = 2L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 14L,
+                            QuestionId = 18L,
                             Text = "Adipisci illo quidem sit dolores."
                         },
                         new
                         {
                             Id = 3L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 5L,
+                            QuestionId = 18L,
                             Text = "Dolor animi quod laborum quia perspiciatis.\nTempora rerum cupiditate velit est quasi incidunt.\nOmnis voluptas quas.\nBeatae vitae sunt a.\nSed repellendus sapiente accusamus eos."
                         },
                         new
                         {
                             Id = 4L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 7L,
+                            QuestionId = 1L,
                             Text = "Et praesentium ad.\nBeatae eius sint omnis voluptas."
                         },
                         new
                         {
                             Id = 5L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 11L,
+                            QuestionId = 6L,
                             Text = "Velit autem ipsa atque consequuntur vitae sit nostrum.\nSoluta nisi omnis quia est facilis rem architecto laboriosam.\nCumque dicta in occaecati perspiciatis amet autem."
                         },
                         new
                         {
                             Id = 6L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 17L,
+                            QuestionId = 12L,
                             Text = "Perspiciatis pariatur quod eum sint molestiae quis neque tempora ab.\nAut nobis nulla dignissimos voluptas nemo cumque tenetur.\nEt placeat voluptas nihil sit eos similique fuga.\nDolores ullam suscipit velit magnam.\nVoluptatem itaque sapiente et saepe ut atque dolore."
                         },
                         new
                         {
                             Id = 7L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 14L,
+                            QuestionId = 1L,
                             Text = "Cumque perferendis labore magni adipisci labore corrupti quo."
                         },
                         new
                         {
                             Id = 8L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 7L,
+                            QuestionId = 18L,
                             Text = "Quibusdam consequatur voluptatem velit expedita eos maxime."
                         },
                         new
                         {
                             Id = 9L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 12L,
+                            QuestionId = 9L,
                             Text = "Facere quia nobis iusto aspernatur nihil iure ut.\nVeritatis quas hic et illum quod.\nNulla voluptas quos beatae quaerat consequatur.\nAb placeat tenetur perferendis et omnis.\nDoloremque corrupti deserunt sint enim ex sit."
                         },
                         new
                         {
                             Id = 10L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 16L,
+                            QuestionId = 14L,
                             Text = "Impedit aut necessitatibus doloremque.\nFacilis unde exercitationem consectetur culpa porro consequatur sed aliquam.\nRem rerum eum harum est ratione voluptate est officia."
                         },
                         new
                         {
                             Id = 11L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 10L,
+                            QuestionId = 14L,
                             Text = "Perferendis ea maiores.\nIure laudantium ut amet repellendus enim consequatur.\nPorro voluptate sed expedita dolorem aperiam ipsa omnis dolores.\nOmnis ipsa quia cupiditate.\nNecessitatibus asperiores corporis doloremque corporis nesciunt."
                         },
                         new
@@ -2153,196 +1460,196 @@ namespace EasySpeak.Core.DAL.Migrations
                         {
                             Id = 13L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 11L,
+                            QuestionId = 6L,
                             Text = "Dolorum ut omnis.\nUt sit nulla."
                         },
                         new
                         {
                             Id = 14L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 18L,
+                            QuestionId = 19L,
                             Text = "Voluptatem voluptas ut itaque.\nEsse neque ea molestias.\nExercitationem omnis et eius pariatur est consequatur esse.\nQuia dolorem sequi doloribus corporis."
                         },
                         new
                         {
                             Id = 15L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 1L,
+                            QuestionId = 16L,
                             Text = "Qui dignissimos voluptatum qui in saepe facere."
                         },
                         new
                         {
                             Id = 16L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 9L,
+                            QuestionId = 1L,
                             Text = "Perferendis nisi alias et ducimus repudiandae.\nNobis voluptas rerum ullam omnis placeat non ea voluptatibus voluptas.\nEt et asperiores omnis recusandae saepe laborum.\nPorro non consequatur voluptatem in.\nQuia quo quo."
                         },
                         new
                         {
                             Id = 17L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 9L,
+                            QuestionId = 7L,
                             Text = "Aliquid aut quaerat adipisci rem.\nEa maxime doloribus qui."
                         },
                         new
                         {
                             Id = 18L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 4L,
+                            QuestionId = 14L,
                             Text = "Nesciunt quidem vel.\nQuibusdam iure labore velit.\nQui dolor velit."
                         },
                         new
                         {
                             Id = 19L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 12L,
+                            QuestionId = 1L,
                             Text = "Ducimus perspiciatis nostrum ut repudiandae."
                         },
                         new
                         {
                             Id = 20L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 9L,
+                            QuestionId = 14L,
                             Text = "Et velit harum ex."
                         },
                         new
                         {
                             Id = 21L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 1L,
+                            QuestionId = 11L,
                             Text = "Omnis in voluptatem dolorum debitis velit eos.\nSoluta voluptatem officiis voluptate.\nMollitia at aliquam ut nihil veritatis.\nSequi omnis vel qui.\nDeleniti nihil non perspiciatis modi placeat dolor molestiae."
                         },
                         new
                         {
                             Id = 22L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 20L,
+                            QuestionId = 8L,
                             Text = "Quo a eum corporis repellat dolor fugit voluptas.\nEsse itaque laudantium dolores quis ea excepturi.\nNostrum quo consequatur est omnis cumque reiciendis qui omnis non.\nPraesentium enim explicabo atque culpa repudiandae perferendis ullam.\nEa et aut."
                         },
                         new
                         {
                             Id = 23L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 10L,
+                            QuestionId = 7L,
                             Text = "Quis aperiam nihil."
                         },
                         new
                         {
                             Id = 24L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 7L,
+                            QuestionId = 5L,
                             Text = "Rerum sit impedit illum corrupti non et voluptates architecto quaerat."
                         },
                         new
                         {
                             Id = 25L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 10L,
+                            QuestionId = 13L,
                             Text = "Modi magnam qui corporis magnam quia blanditiis rerum qui ad.\nDignissimos non tempora.\nVoluptas omnis rem nam ad vel pariatur nostrum.\nFacere blanditiis id enim vitae alias.\nIpsa eius dolores nulla est officia quo eaque quo dolore."
                         },
                         new
                         {
                             Id = 26L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 15L,
+                            QuestionId = 13L,
                             Text = "Consequatur quia ut nostrum voluptatem."
                         },
                         new
                         {
                             Id = 27L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 9L,
+                            QuestionId = 13L,
                             Text = "Voluptatem id deserunt in.\nQuis a aut unde quibusdam quisquam sit.\nCulpa suscipit voluptatem modi doloremque eum perferendis quod ab."
                         },
                         new
                         {
                             Id = 28L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 2L,
+                            QuestionId = 7L,
                             Text = "Doloremque magnam quas molestiae ex corrupti neque laboriosam et voluptates.\nSuscipit ducimus facilis ut rem assumenda laborum neque labore.\nEt voluptas omnis doloremque aut ipsa voluptatem aut praesentium et."
                         },
                         new
                         {
                             Id = 29L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 4L,
+                            QuestionId = 14L,
                             Text = "Rerum unde ad accusamus."
                         },
                         new
                         {
                             Id = 30L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 16L,
+                            QuestionId = 2L,
                             Text = "Veritatis quidem eum eum saepe minus repellat."
                         },
                         new
                         {
                             Id = 31L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 10L,
+                            QuestionId = 3L,
                             Text = "Veritatis voluptates dolore magni rerum velit sapiente.\nEt quod saepe aliquam dignissimos ut praesentium laboriosam deleniti placeat.\nAut aspernatur optio animi."
                         },
                         new
                         {
                             Id = 32L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 19L,
+                            QuestionId = 17L,
                             Text = "Aspernatur animi est soluta iusto doloremque doloremque non laudantium velit.\nNumquam corporis numquam ut soluta qui aliquid magni eos commodi.\nId et ipsa velit maiores eum assumenda.\nConsequatur enim excepturi eos temporibus mollitia."
                         },
                         new
                         {
                             Id = 33L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 19L,
+                            QuestionId = 6L,
                             Text = "Corrupti impedit eos qui voluptatibus.\nCorrupti consequuntur dolor provident velit consequuntur excepturi nisi."
                         },
                         new
                         {
                             Id = 34L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 11L,
+                            QuestionId = 20L,
                             Text = "Fuga deleniti et nobis rerum voluptatem quae.\nOmnis voluptatibus fugiat distinctio.\nNeque molestiae autem quia corporis et quam minima."
                         },
                         new
                         {
                             Id = 35L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 5L,
+                            QuestionId = 8L,
                             Text = "Eaque iusto repudiandae ut qui et rerum ut.\nVoluptas sint excepturi.\nQui tempore rerum laudantium nam.\nDelectus repellat et eum nihil perferendis odit dolorem."
                         },
                         new
                         {
                             Id = 36L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 19L,
+                            QuestionId = 1L,
                             Text = "Deleniti ab ipsam maiores.\nEum magnam est temporibus mollitia sunt sed perferendis vel.\nRepellendus et sed facilis et distinctio in possimus et.\nRerum ipsum id corrupti eius nisi aut voluptas.\nPerspiciatis temporibus animi cupiditate laudantium ut quam repudiandae tempore."
                         },
                         new
                         {
                             Id = 37L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 18L,
+                            QuestionId = 12L,
                             Text = "Pariatur maiores illo."
                         },
                         new
                         {
                             Id = 38L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 13L,
+                            QuestionId = 8L,
                             Text = "Commodi maiores sit voluptatem omnis beatae nostrum cumque."
                         },
                         new
                         {
                             Id = 39L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 13L,
+                            QuestionId = 4L,
                             Text = "Expedita facilis labore sunt.\nVoluptas minima aliquam ut doloremque."
                         },
                         new
                         {
                             Id = 40L,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 17L,
+                            QuestionId = 4L,
                             Text = "Expedita quod incidunt maxime."
                         });
                 });
@@ -2360,6 +1667,10 @@ namespace EasySpeak.Core.DAL.Migrations
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("getutcdate()");
 
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -2372,98 +1683,142 @@ namespace EasySpeak.Core.DAL.Migrations
                         new
                         {
                             Id = 1L,
-                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
-                            Name = "Architecture"
-                        },
-                        new
-                        {
-                            Id = 2L,
-                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageUrl = "ArtistPalette.svg",
                             Name = "Arts"
                         },
                         new
                         {
+                            Id = 2L,
+                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageUrl = "Briefcase.svg",
+                            Name = "Business"
+                        },
+                        new
+                        {
                             Id = 3L,
-                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
-                            Name = "Cars"
+                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageUrl = "ClassicalBuilding.svg",
+                            Name = "Culture"
                         },
                         new
                         {
                             Id = 4L,
-                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
-                            Name = "Celebrities"
+                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageUrl = "GraduationCap.svg",
+                            Name = "Education"
                         },
                         new
                         {
                             Id = 5L,
-                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
-                            Name = "Cooking"
+                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageUrl = "Kite.svg",
+                            Name = "Environment"
                         },
                         new
                         {
                             Id = 6L,
-                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
-                            Name = "Dancing"
+                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageUrl = "Dress.svg",
+                            Name = "Fashion"
                         },
                         new
                         {
                             Id = 7L,
-                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
-                            Name = "Ecology"
+                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageUrl = "Sandwich.svg",
+                            Name = "Food"
                         },
                         new
                         {
                             Id = 8L,
-                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
-                            Name = "Design"
+                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageUrl = "Dna.svg",
+                            Name = "Health"
                         },
                         new
                         {
                             Id = 9L,
-                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageUrl = "CrossedSwords.svg",
                             Name = "History"
                         },
                         new
                         {
                             Id = 10L,
-                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
-                            Name = "Fashion"
+                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageUrl = "Books.svg",
+                            Name = "Literature"
                         },
                         new
                         {
                             Id = 11L,
-                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
-                            Name = "Medicine"
+                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageUrl = "ClapperBoard.svg",
+                            Name = "Movies"
                         },
                         new
                         {
                             Id = 12L,
-                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
-                            Name = "Technologies"
+                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageUrl = "Drum.svg",
+                            Name = "Music"
                         },
                         new
                         {
                             Id = 13L,
-                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
-                            Name = "Pets"
+                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageUrl = "FourLeafClover.svg",
+                            Name = "Nature"
                         },
                         new
                         {
                             Id = 14L,
-                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageUrl = "FaceWithMonocle.svg",
                             Name = "Philosophy"
                         },
                         new
                         {
                             Id = 15L,
-                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
-                            Name = "Photography"
+                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageUrl = "TopHat.svg",
+                            Name = "Politics"
                         },
                         new
                         {
                             Id = 16L,
-                            CreatedAt = new DateTime(2023, 3, 30, 11, 0, 0, 0, DateTimeKind.Utc),
-                            Name = "Politics"
+                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageUrl = "TestTube.svg",
+                            Name = "Science"
+                        },
+                        new
+                        {
+                            Id = 17L,
+                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageUrl = "MobilePhone.svg",
+                            Name = "Social Media"
+                        },
+                        new
+                        {
+                            Id = 18L,
+                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageUrl = "BoxingGlove.svg",
+                            Name = "Sports"
+                        },
+                        new
+                        {
+                            Id = 19L,
+                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageUrl = "Robot.svg",
+                            Name = "Technologies"
+                        },
+                        new
+                        {
+                            Id = 20L,
+                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageUrl = "DesertIsland.svg",
+                            Name = "Travel"
                         });
                 });
 
@@ -2487,6 +1842,10 @@ namespace EasySpeak.Core.DAL.Migrations
                         .HasDefaultValueSql("getutcdate()");
 
                     b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EmojiName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -2541,6 +1900,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             Country = 196,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "Della.Rosenbaum@yahoo.com",
+                            EmojiName = "",
                             FirstName = "Della",
                             IsAdmin = true,
                             IsBanned = false,
@@ -2559,6 +1919,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             Country = 215,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "Randall_Hegmann56@hotmail.com",
+                            EmojiName = "",
                             FirstName = "Randall",
                             IsAdmin = true,
                             IsBanned = false,
@@ -2577,6 +1938,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             Country = 68,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "Alfred89@hotmail.com",
+                            EmojiName = "",
                             FirstName = "Alfred",
                             IsAdmin = true,
                             IsBanned = false,
@@ -2595,6 +1957,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             Country = 42,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "Sandra57@gmail.com",
+                            EmojiName = "",
                             FirstName = "Sandra",
                             IsAdmin = true,
                             IsBanned = false,
@@ -2613,6 +1976,7 @@ namespace EasySpeak.Core.DAL.Migrations
                             Country = 236,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "Frances.Lemke37@gmail.com",
+                            EmojiName = "",
                             FirstName = "Frances",
                             IsAdmin = false,
                             IsBanned = false,

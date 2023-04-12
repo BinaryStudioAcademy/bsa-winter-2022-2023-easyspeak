@@ -1,18 +1,12 @@
 @import "src/styles/colors.sass"
 
-html
-    padding: 0
-    width: 100%
-    height: 100%
-    background-color: $white
-
 .container
     margin-top: 80px
+    background-color: $white
+    min-height: calc(100vh - 80px)
 
 .content-wrp
     width: 100%
-    height: 1460px
-    padding: 0
     display: flex
     flex-direction: column
     align-items: center
@@ -31,8 +25,8 @@ html
         font-size: 24px
 
 .body-wrp
-    width: 1326px
-    height: 1253px
+    flex-grow: 1
+    padding-bottom: 20px
 
 .tabs
     width: 100%

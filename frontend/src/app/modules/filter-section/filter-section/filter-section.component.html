@@ -13,7 +13,7 @@
             </div>
             <div *ngFor="let selectedInterest of this.selectedInterestsFilters">
                 <div *ngIf="selectedInterest" class="selected-filter-item">
-                    {{selectedInterest}}
+                    {{selectedInterest.name}}
                     <mat-icon (click)="removeInterest(selectedInterest)">close</mat-icon>
                 </div>
             </div>

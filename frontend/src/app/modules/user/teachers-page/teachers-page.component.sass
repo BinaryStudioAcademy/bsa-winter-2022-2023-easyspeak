@@ -1,0 +1,162 @@
+@import "src/styles/colors"
+    
+.profile-container
+    padding: 30px 55px
+    margin-top: 80px
+    display: flex
+    flex-direction: column
+    align-items: center
+    background-color: $white
+
+.profile
+    width: 100%
+
+.profile-header
+    display: flex
+    justify-content: center
+    padding-bottom: 30px
+
+.profile-card
+    height: 158px
+    padding: 30px
+    border-radius: 15px
+    background-color: $gray-100
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+
+.profile-card-left
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+
+.bio
+    display: flex
+    flex-direction: row
+
+.avatar
+    width: 50px
+    height: 50px
+    border-radius: 50%
+    margin-right: 10px
+    overflow: hidden
+    font-size: 50px
+
+.greeting
+    display: flex
+    flex-direction: column
+    justify-content: center
+
+.name
+    font-size: 18px
+    font-weight: 700
+    color: $black-100
+
+.question
+    font-size: 14px
+    font-weight: 400
+    color: $gray-300
+
+.stats
+    display: flex
+    flex-direction: row
+    gap: 15px
+
+.profile-card-right
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    align-items: center
+    padding: 0 35px 0 65px
+    border-left: 1px solid $inactive-color
+
+.create-lesson-button
+    width: 200px
+    height: 45px
+
+    border-radius: 50px
+    border: none
+    background-color: $blue-200
+
+    color: $white
+    font-style: normal
+    font-weight: 500
+    font-size: 16px
+    line-height: 150%
+    text-align: center
+
+    cursor: pointer
+
+    &:hover
+        box-shadow: $box-shadow
+
+.lessons-container
+    padding: 30px 55px
+
+.lessons-header
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+
+.lessons-title
+    font-size: 18px
+    font-weight: 700
+    color: $black-100
+
+.mat-button-toggle-group
+    height: 30px
+    align-items: center
+    border: none
+    box-shadow: none
+
+.mat-button-toggle
+    background-color: $inactive-color
+    color: $gray-300
+    font-weight: 700
+    width: 115px
+    border-radius: 2px
+
+.mat-button-toggle-checked 
+    background-color: $blue-200
+    color: $white
+
+.day-with-lessons
+    display: flex
+    flex-direction: column
+    align-items: center
+
+.date-container
+    display: flex
+    justify-content: center
+    align-items: center
+    margin-top: 30px
+    height: 40px
+    width: 200px
+
+    background: $inactive-color
+    border-radius: 5px
+
+.date
+    font-weight: 500
+    font-size: 16px
+    line-height: 24px
+
+    color: $black-100
+
+.lessons-section
+    width: 100%
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+    gap: 55px
+
+.lessons-column
+    display: flex
+    flex-direction: column
+    width: calc( (100% - 55px) / 2 )
+
+.no-lessons
+    display: flex
+    justify-content: center
+    align-items: center
+    margin-top: 30px

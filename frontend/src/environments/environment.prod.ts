@@ -2,6 +2,7 @@ export const environment = {
     production: true,
     coreUrl: '/api',
     notifierUrl: '/notifier',
+    webrtcUrl: '/communicator',
     iceServers: [
         { urls: 'stun:stun.1.google.com:19302' },
         { urls: 'stun:stun1.l.google.com:19302' },

@@ -25,6 +25,7 @@ export class SuitableLessonComponent implements OnInit {
         this.lessonService.lessonAdded$.subscribe(() => {
             this.setDays();
         });
+        this.onDateSelected(new Date());
     }
 
     select(event: Date | null) {
