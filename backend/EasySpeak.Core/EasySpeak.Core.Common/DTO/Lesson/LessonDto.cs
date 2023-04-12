@@ -8,6 +8,7 @@ public class LessonDto
     public string? Name { get; set; }
     public string? MediaPath { get; set; }
     public DateTime StartAt { get; set; }
+    public int? LimitOfUsers { get; set; }
     public string? LanguageLevel { get; set; }
     public int SubscribersCount { get; set; }
     public string? YoutubeVideoId { get; set; } 
