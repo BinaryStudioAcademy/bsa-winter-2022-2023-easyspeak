@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ChatHubService } from '@core/hubs/chat-hub.service';
 import { WebrtcHubService } from '@core/hubs/webrtc-hub.service';
 import { HttpService } from '@core/services/http.service';
@@ -36,6 +36,7 @@ export class ChatPageComponent implements OnInit, OnDestroy {
         private httpService: HttpService,
         private chatHub: ChatHubService,
         private webrtcHub: WebrtcHubService,
+        private route: ActivatedRoute,
     ) {
 
     }
@@ -53,6 +54,10 @@ export class ChatPageComponent implements OnInit, OnDestroy {
                 'AddToGroup',
                 this.people.map(p => p.chatId),
             );
+            this.route.params.subscribe(({ id }) => {
+                [this.currentPerson] = this.people.filter(person => person.chatId === Number(id));
+                this.getChat(this.currentPerson);
+            });
         });
         this.setActionsForMessages();
 

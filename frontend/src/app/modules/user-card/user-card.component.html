@@ -48,7 +48,7 @@
             </div>
         </div>
         <div *ngIf="user.userFriendshipStatus === eUserFriendshipStatus.Regular" class="buttons">
-            <button (click)="buttonGoToMessage()" class="button">
+            <button (click)="message()" class="button">
                 <img src="assets/user-card-icons/message.svg" alt="book" />
                 <span>Message</span>
             </button>
@@ -58,7 +58,7 @@
             </button>
         </div>
         <div *ngIf="user.userFriendshipStatus === eUserFriendshipStatus.Acceptor" class="buttons">
-            <button class="button">
+            <button class="button" (click)="message()">
                 <img src="assets/user-card-icons/mail.svg" alt="message">
                 <span>Message</span>
             </button>
@@ -78,7 +78,7 @@
             </button>
         </div>
         <div *ngIf="user.userFriendshipStatus === eUserFriendshipStatus.Friend" class="buttons">
-            <button class="button">
+            <button class="button" (click)="message()">
                 <img src="assets/user-card-icons/mail.svg" alt="message">
                 <span>Message</span>
             </button>

@@ -2,6 +2,8 @@ import { UserCard } from '../models/user/user-card';
 
 export class Utils {
     static user: UserCard = {
+        id: 10,
+
         name: 'Kaiya Torff',
 
         country: 'Canada',
