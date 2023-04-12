@@ -12,4 +12,7 @@ export const validationErrorMessage: { [id: string]: string } = {
     passwordpattern: 'At least 1 upper, 1 lowercase Latin letter, min 6, max 25',
     incorrectPassword: 'Incorrect password',
     notExists: 'User with such email doesn’t exist',
+    passwordrepeat: 'Password/Repeat password don’t match',
+    namepattern: 'Latin letters/hyphen, min 2, max 25',
+    namerequired: 'Name is required',
 };

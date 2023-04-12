@@ -8,7 +8,7 @@ import { UserService } from '@core/services/user.service';
 import { NgSelectComponent } from '@ng-select/ng-select';
 import { Ages } from '@shared/data/ages.util';
 import { LanguageLevel } from '@shared/data/languageLevel';
-import { passFormatRegex } from '@shared/data/regex.util';
+import { emailFormatRegex, nameFormatRegex, passFormatRegex } from '@shared/data/regex.util';
 import { Sex } from '@shared/data/sex';
 import { INewUser } from '@shared/models/INewUser';
 import { ToastrService } from 'ngx-toastr';
@@ -52,20 +52,26 @@ export class SignUpComponent extends BaseComponent implements OnInit {
     @ViewChild('levelDropdown') levelDropdown: NgSelectComponent;
 
     registerForm = new FormGroup({
-        email: new FormControl('', [Validators.required, Validators.maxLength(30)]),
-        firstName: new FormControl('', [Validators.required]),
-        lastName: new FormControl('', [Validators.required]),
+        email: new FormControl(
+            '',
+            [Validators.required,
+                Validators.maxLength(50),
+                Validators.pattern(emailFormatRegex)],
+        ),
+        firstName: new FormControl('', [Validators.required, Validators.pattern(nameFormatRegex)]),
+        lastName: new FormControl('', [Validators.required, Validators.pattern(nameFormatRegex)]),
         sex: new FormControl('', [Validators.required]),
         languageLevel: new FormControl('', [Validators.required]),
         country: new FormControl('', [Validators.required]),
         language: new FormControl('', [Validators.required]),
         dateOfBirth: new FormControl('', [Validators.required]),
-        password: new FormControl('', [Validators.required, Validators.pattern(passFormatRegex),
-            Validators.minLength(6), Validators.maxLength(25)]),
+        password: new FormControl('', [Validators.required, Validators.pattern(passFormatRegex)]),
         passwordConfirmation: new FormControl('', [Validators.required]),
     }, { validators: matchpassword });
 
     user: INewUser;
+
+    isChanged = { email: false, firstName: false, lastName: false, password: false, passwordConfirmation: false };
 
     constructor(
         private formBuilder: FormBuilder,
@@ -100,22 +106,29 @@ export class SignUpComponent extends BaseComponent implements OnInit {
     }
 
     private signUp() {
-        this.authService
-            .signUp(this.email.value, this.password.value)
-            .pipe(switchMap(() => this.createUser().pipe(this.untilThis)))
-            .subscribe((user) => {
-                const userShort = {
-                    email: user.email,
-                    firstName: user.firstName,
-                    lastName: user.lastName,
-                    imagePath: '',
-                    isAdmin: false,
-                };
+        this.isChanged.password = true;
+        this.isChanged.email = true;
+        this.isChanged.firstName = true;
+        this.isChanged.lastName = true;
+        this.isChanged.passwordConfirmation = true;
+        if (this.registerForm.valid) {
+            this.authService
+                .signUp(this.email.value, this.password.value)
+                .pipe(switchMap(() => this.createUser().pipe(this.untilThis)))
+                .subscribe((user) => {
+                    const userShort = {
+                        email: user.email,
+                        firstName: user.firstName,
+                        lastName: user.lastName,
+                        imagePath: '',
+                        isAdmin: false,
+                    };
 
-                this.authService.setUser(userShort);
-                this.toastr.success('Account successfully created', 'Success!');
-                this.router.navigate(['topics']);
-            });
+                    this.authService.setUser(userShort);
+                    this.toastr.success('Account successfully created', 'Success!');
+                    this.router.navigate(['topics']);
+                });
+        }
     }
 
     private validateForm() {
@@ -159,7 +172,69 @@ export class SignUpComponent extends BaseComponent implements OnInit {
         return '';
     }
 
-    expandAgeDropdown = () => this.ageDropdown.open();
+    ClearErrors(control: FormControl) {
+        if (control === this.password) {
+            this.isChanged.password = false;
+        }
+        if (control === this.email) {
+            this.isChanged.email = false;
+        }
+        if (control === this.firstName) {
+            this.isChanged.firstName = false;
+        }
+        if (control === this.lastName) {
+            this.isChanged.lastName = false;
+        }
+        if (control === this.passwordConfirmation) {
+            this.isChanged.passwordConfirmation = false;
+        }
+    }
+
+    GetErrorMessageByKey(id: string) {
+        return Object.entries(validationErrorMessage).find(([t]) => t === id)?.[1];
+    }
+
+    getFireBaseMessage(code: string) {
+        switch (code) {
+            case 'auth/email-already-in-use':
+                return this.GetErrorMessageByKey('Email is already registered');
+            default: return undefined;
+        }
+    }
+
+    CheckCondition(control: FormControl, condition: string) {
+        let isChanged = false;
+
+        if (control === this.password) {
+            isChanged = this.isChanged.password;
+        }
+
+        if (control === this.email) {
+            isChanged = this.isChanged.email;
+        }
+
+        if (control === this.firstName) {
+            isChanged = this.isChanged.firstName;
+        }
+
+        if (control === this.lastName) {
+            isChanged = this.isChanged.lastName;
+        }
+
+        if (control === this.passwordConfirmation) {
+            isChanged = this.isChanged.passwordConfirmation;
+        }
+
+        switch (condition) {
+            case 'required':
+                return ((control.errors?.[condition] && control.touched) || control.pristine) && isChanged;
+            case 'pattern':
+                return control.errors?.[condition] && isChanged;
+            case 'repeat':
+                return control.errors?.[condition] && isChanged;
+            default: return undefined;
+        }
+    }
 
     expandSexDropdown = () => this.sexDropdown.open();
 

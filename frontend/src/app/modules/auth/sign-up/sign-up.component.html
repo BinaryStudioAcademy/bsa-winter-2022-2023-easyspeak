@@ -3,17 +3,21 @@
         <h1>Create Account</h1>
         <form #userRegisterForm="ngForm" [formGroup]="registerForm" class="form-content" autocomplete="off" (submit)="submitForm()">
             <div class="form-group-item">
-                <input type="email" formControlName="email" placeholder="Email" required email="{{this.email}}" />
-
-                <div class="errors-wrp">
-                    <mat-error class="error" *ngIf="this.email.invalid && this.userRegisterForm.submitted">
-                        <img src="/assets/user-profile/alert-triangle.svg">
-                        {{getErrorMessage(email)}}
+                <input
+                    formControlName="email"
+                    placeholder="Email"
+                    email="{{this.email}}"
+                    (keyup)="ClearErrors(email)"
+                    [ngClass]="{'submitted': isChanged.email}"
+                    />
+                <div class="errors-wrp"  *ngFor="let condition of ['required','pattern'] ">
+                    <mat-error class="error"
+                               *ngIf="CheckCondition(email,condition)">
+                        <img src="/assets/user-profile/alert-triangle.svg" alt="">
+                        {{GetErrorMessageByKey('email'+condition)}}
                     </mat-error>
                 </div>
 
-                <div class="error-surface" *ngIf="this.email.invalid && this.userRegisterForm.submitted">
-                </div>
             </div>
 
             <div class="name-section">
@@ -168,24 +172,39 @@
                 <div *ngIf="this.password.invalid && this.userRegisterForm.submitted" class="error-surface">
                 </div>
             </div>
+<!--            <div class="form-group-item">-->
+<!--                <input type="password"  formControlName="passwordConfirmation" placeholder="Repeat Password" autocomplete="new-password"-->
+<!--                    appPasswordVisibility />-->
+
+<!--                <div class="errors-wrp">-->
+<!--                    <mat-error class="error"-->
+<!--                        *ngIf="this.registerForm.errors?.['matchError'] && this.userRegisterForm.submitted">-->
+<!--                        <img src="/assets/user-profile/alert-triangle.svg" alt="">-->
+<!--                        {{getFormErrorMessage(this.registerForm)}}-->
+<!--                    </mat-error>-->
+<!--                </div>-->
+
+<!--                <div class="error-surface"-->
+<!--                    *ngIf="(this.registerForm.errors?.['matchError'] || this.passwordConfirmation.errors?.['required']) && this.userRegisterForm.submitted">-->
+<!--                </div>-->
+<!--            </div>-->
             <div class="form-group-item">
-                <input type="password"  formControlName="passwordConfirmation" placeholder="Repeat Password" autocomplete="new-password"
-                    appPasswordVisibility />
-
-                <div class="errors-wrp">
+                <input formControlName="passwordConfirmation"
+                       placeholder="Repeat Password"
+                       type="password"
+                       appPasswordVisibility
+                       autocomplete="new-password"
+                       (keyup)="ClearErrors(passwordConfirmation)"
+                       [ngClass]="{'submitted': isChanged.passwordConfirmation}"/>
+                <div class="errors-wrp"  *ngFor="let condition of ['required','pattern','repeat'] ">
                     <mat-error class="error"
-                        *ngIf="this.registerForm.errors?.['matchError'] && this.userRegisterForm.submitted">
+                               *ngIf="CheckCondition(passwordConfirmation,condition)">
                         <img src="/assets/user-profile/alert-triangle.svg" alt="">
-                        {{getFormErrorMessage(this.registerForm)}}
+                        {{GetErrorMessageByKey('passwordConfirmation'+condition)}}
                     </mat-error>
-                </div>
-
-                <div class="error-surface"
-                    *ngIf="(this.registerForm.errors?.['matchError'] || this.passwordConfirmation.errors?.['required']) && this.userRegisterForm.submitted">
                 </div>
             </div>
             <button class="submit-btn" mat-button type="submit">
-
                 Create Account
             </button>
         </form>
