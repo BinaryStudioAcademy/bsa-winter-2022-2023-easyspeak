@@ -16,6 +16,7 @@ import { Subscription } from 'rxjs';
     selector: 'app-chat-page',
     templateUrl: './chat-page.component.html',
     styleUrls: ['./chat-page.component.sass'],
+    providers: [ChatHubService],
 })
 export class ChatPageComponent implements OnInit, OnDestroy {
     @ViewChild(ScrollToBottomDirective) scroll: ScrollToBottomDirective;
@@ -97,6 +98,7 @@ export class ChatPageComponent implements OnInit, OnDestroy {
 
     async ngOnDestroy(): Promise<void> {
         await this.allMessagesSubscription.unsubscribe();
+        await this.chatHub.end();
     }
 
     addMessage(msg: IMessage): void {
