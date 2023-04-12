@@ -8,6 +8,6 @@ export interface INewLesson {
     startAt: Date,
     limitOfUsers?: number,
     youtubeVideoId: string,
-    questions: INewQuestion[],
+    questions: string,
     tags: INewTag[],
 }

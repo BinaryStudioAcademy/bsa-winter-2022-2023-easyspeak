@@ -108,10 +108,7 @@ export class LessonsCreateComponent implements OnInit {
             return;
         }
 
-        const lessonQuestions: INewQuestion[] = this.questions?.value
-            .split('\n')
-            .filter((entry: string) => entry.trim() !== '')
-            .map((element: string) => ({ topic: element, subquestions: [] }));
+        const lessonQuestions: string = this.questions?.value;
 
         const lessonTags: IIcon[] = this.tagsList;
 

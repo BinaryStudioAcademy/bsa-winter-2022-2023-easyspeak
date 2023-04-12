@@ -7,7 +7,7 @@ export interface ILesson {
     languageLevel: number;
     mediaPath: string;
     name: string;
-    questions: IQuestion[];
+    questions: string;
     startAt: string;
     limitOfUsers: number;
     subscribersCount: number;

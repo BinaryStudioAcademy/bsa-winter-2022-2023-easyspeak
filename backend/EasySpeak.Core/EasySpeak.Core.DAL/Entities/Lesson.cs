@@ -17,15 +17,15 @@ namespace EasySpeak.Core.DAL.Entities
         
         public bool IsCalculated { get; set; }
 
+        public string Questions { get; set; } = string.Empty;
+
         public ICollection<User> Subscribers { get; private set; }
         public ICollection<Tag> Tags { get; set; }
-        public ICollection<Question> Questions { get; private set; }
 
         public Lesson()
         {
             Subscribers = new List<User>();
             Tags = new List<Tag>();
-            Questions = new List<Question>();
             Subscribers = new List<User>();
         }
     }

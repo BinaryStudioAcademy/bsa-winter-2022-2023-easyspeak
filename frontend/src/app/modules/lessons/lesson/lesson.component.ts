@@ -23,7 +23,7 @@ export class LessonComponent extends BaseComponent implements OnInit {
 
     previewImage: string;
 
-    questions: Question[] = [];
+    questions: string;
 
     isShowQuestions = true;
 
@@ -57,24 +57,14 @@ export class LessonComponent extends BaseComponent implements OnInit {
         });
     }
 
-    showQuestions(id: number) {
+    showQuestions() {
         if (this.questions.length) {
             this.isShowQuestions = !this.isShowQuestions;
         }
 
         if (this.isShowQuestions) {
-            this.getQuestions(id);
+            this.questions = this.lesson.questions;
         }
-    }
-
-    private getQuestions(id: number) {
-        this.isLoading = true;
-        this.spinner.show();
-        this.lessonsService.getQuestions(id).subscribe((questions) => {
-            this.questions = questions;
-            this.isLoading = false;
-            this.spinner.hide();
-        });
     }
 
     joinLesson() {
