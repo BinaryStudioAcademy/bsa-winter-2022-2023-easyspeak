@@ -103,7 +103,8 @@ export class SignUpComponent extends BaseComponent implements OnInit {
         this.authService
             .signUp(this.email.value, this.password.value)
             .pipe(switchMap(() => this.createUser().pipe(this.untilThis)))
-            .subscribe(() => {
+            .subscribe((user) => {
+                localStorage.setItem('user', JSON.stringify(user));
                 this.toastr.success('Account successfully created', 'Success!');
                 this.router.navigate(['topics']);
             });
