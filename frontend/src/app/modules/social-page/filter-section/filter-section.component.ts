@@ -47,8 +47,7 @@ export class FilterSectionComponent implements OnInit {
     ngOnInit(): void {
         this.dataService.getAllTags().subscribe((tags) => {
             this.topics = tags.map((tag): IIcon => ({
-                id: tag.id,
-                name: tag.name,
+                ...tag,
                 link: `assets/topic-icons/${tag.imageUrl}`,
             }));
         });

@@ -69,8 +69,7 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
         });
         this.dataService.getAllTags().subscribe((tags) => {
             this.tagsList = tags.map((tag): IIcon => ({
-                id: tag.id,
-                name: tag.name,
+                ...tag,
                 link: `assets/topic-icons/${tag.imageUrl}`,
             }));
         });
@@ -84,15 +83,7 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
             .getUser()
             .pipe(this.untilThis)
             .subscribe((resp) => {
-                this.detailsForm.patchValue({
-                    firstName: resp.firstName,
-                    lastName: resp.lastName,
-                    email: resp.email,
-                    country: resp.country,
-                    sex: resp.sex,
-                    language: resp.language,
-                    languageLevel: resp.languageLevel,
-                    birthDate: resp.birthDate });
+                this.detailsForm.patchValue({ ...resp });
 
                 this.userService.getUserTags().pipe(this.untilThis)
                     .subscribe(tags => {
