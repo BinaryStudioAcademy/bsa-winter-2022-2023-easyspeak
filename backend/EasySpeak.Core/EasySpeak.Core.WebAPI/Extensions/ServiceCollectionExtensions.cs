@@ -1,8 +1,10 @@
-﻿using Azure.Storage.Blobs;
+﻿using System.Reflection;
+using Azure.Storage.Blobs;
 using EasySpeak.Core.BLL.Interfaces;
 using EasySpeak.Core.BLL.MappingProfiles;
 using EasySpeak.Core.BLL.Options;
 using EasySpeak.Core.BLL.Services;
+using EasySpeak.Core.Common.Options;
 using EasySpeak.Core.DAL.Context;
 using EasySpeak.Core.WebAPI.Validators;
 using EasySpeak.RabbitMQ;
@@ -14,8 +16,6 @@ using Google.Apis.Auth.OAuth2;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using System.Reflection;
-
 
 namespace EasySpeak.Core.WebAPI.Extensions
 {
@@ -25,23 +25,30 @@ namespace EasySpeak.Core.WebAPI.Extensions
         {
             services
                 .AddControllers()
-                .AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+                .AddNewtonsoftJson(options =>
+                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             services.AddTransient<ILessonsService, LessonsService>();
             services.AddTransient<IZoomApiService, ZoomApiService>();
             services.AddScoped<IFriendService, FriendService>();
-            services.AddSingleton<IConnectionProvider>(_ => new ConnectionProvider(configuration.GetValue<string>("Rabbit")));
+            services.AddSingleton<IConnectionProvider>(_ =>
+                new ConnectionProvider(configuration.GetValue<string>("Rabbit")));
             services.AddTransient<IMessageProducer, MessageProducer>();
             services.AddTransient<IHttpRequestService, HttpRequestService>();
             services.AddScoped<IFirebaseAuthService, FirebaseAuthService>();
-            services.AddScoped<IUserService, UserService>();
             services.AddScoped<IDataService, DataService>();
             services.AddScoped<IChatService, ChatService>();
             services.AddFirebaseApp();
-            services.AddScoped<INotificationService, NotificationService>();
+            services.Configure<RecommendationServiceOptions>(configuration.GetSection("RecommendationService"));
+            services.Configure<RabbitQueuesOptions>(configuration.GetSection("RabbitQueues"))
+                .AddScoped<INotificationService, NotificationService>()
+                .AddScoped<IUserService, UserService>();
             services.Configure<RabbitQueuesOptions>(configuration.GetSection("RabbitQueues"));
             services.Configure<LessonSchedulerOptions>(configuration.GetSection("LessonSchedulerOptions"));
             services.AddHostedService<LessonSchedulerService>();
+            services.Configure<LessonBackgroundOptions>(configuration.GetSection("LessonBackgroundService"));
+            services.AddHostedService<LessonBackgroundService>();
+            services.AddScoped<QueriesSenderService>();
         }
 
         public static void AddAutoMapper(this IServiceCollection services)

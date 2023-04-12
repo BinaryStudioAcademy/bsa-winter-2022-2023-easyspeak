@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BaseComponent } from '@core/base/base.component';
 import { NotificationsHubService } from '@core/hubs/notifications-hub.service';
-import { AuthService } from '@core/services/auth.service';
 import { NotificationService } from '@core/services/notification.service';
 import { INotification } from '@shared/models/INotification';
 import { NotificationType } from '@shared/utils/user-notifications.util';
@@ -26,7 +25,6 @@ export class UserNotificationComponent extends BaseComponent implements OnInit, 
         notificationsHub: NotificationsHubService,
         private notificationService: NotificationService,
         private router: Router,
-        public authService: AuthService,
     ) {
         super();
         this.notificationsHub = notificationsHub;
@@ -39,9 +37,11 @@ export class UserNotificationComponent extends BaseComponent implements OnInit, 
     }
 
     async getNotifications() {
-        this.notifySubscription = await this.notificationService.getNotifications().subscribe((data) => {
-            this.notifications = data;
-        });
+        this.notifySubscription = await this.notificationService.getNotifications()
+            .pipe(this.untilThis)
+            .subscribe((data) => {
+                this.notifications = data;
+            });
     }
 
     async setUpHub() {
