@@ -19,7 +19,7 @@ export class WriteEmailComponent {
     constructor(private router: Router, private authService: AuthService, private toastr: ToastrService) {}
 
     async sendMail() {
-        this.isMatchFormat = emailFormatRegex.test(this.email);
+        this.isMatchFormat = new RegExp(emailFormatRegex).test(this.email);
 
         this.buttonClicked = true;
 
@@ -36,7 +36,7 @@ export class WriteEmailComponent {
     }
 
     changedMail(): void {
-        this.isMatchFormat = emailFormatRegex.test(this.email);
+        this.isMatchFormat = new RegExp(emailFormatRegex).test(this.email);
 
         this.buttonClicked = false;
     }

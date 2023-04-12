@@ -3,12 +3,13 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { NotificationsHubService } from '@core/hubs/notifications-hub.service';
 import { WebrtcHubService } from '@core/hubs/webrtc-hub.service';
 import { HttpService } from '@core/services/http.service';
 import { IUserShort } from '@shared/models/IUserShort';
 import * as auth from 'firebase/auth';
 import firebase from 'firebase/compat';
-import { defer, first, firstValueFrom, from, Subject, tap } from 'rxjs';
+import { BehaviorSubject, defer, first, firstValueFrom, from, tap } from 'rxjs';
 
 import { NotificationService } from 'src/app/services/notification.service';
 
@@ -18,7 +19,11 @@ import { UserService } from './user.service';
     providedIn: 'root',
 })
 export class AuthService {
-    user = new Subject<IUserShort>();
+    user = new BehaviorSubject<IUserShort>({} as IUserShort);
+
+    setUser(userShort: IUserShort) {
+        this.user.next(userShort);
+    }
 
     constructor(
         private afs: AngularFirestore,
@@ -30,6 +35,7 @@ export class AuthService {
         private userService: UserService,
         private toastr: NotificationService,
         private webRtcHub: WebrtcHubService,
+        private notificationsHub: NotificationsHubService,
     ) {
         this.afAuth.onIdTokenChanged(user => {
             if (user) {
@@ -44,6 +50,10 @@ export class AuthService {
 
             this.webRtcHub.start().then(() => {
                 this.webRtcHub.connect(userCredential.user?.email as string);
+            });
+
+            this.notificationsHub.start().then(() => {
+                this.notificationsHub.connect(userCredential.user?.email as string);
             });
         }
     }
@@ -127,6 +137,7 @@ export class AuthService {
         const user: IUserShort = JSON.parse(localStorage.getItem('user') as string);
 
         this.webRtcHub.disconnectUser(user.email).then();
+        this.notificationsHub.disconnectUser(user.email).then();
 
         localStorage.removeItem('accessToken');
         localStorage.removeItem('user');

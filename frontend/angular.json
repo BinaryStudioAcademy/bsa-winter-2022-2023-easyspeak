@@ -55,7 +55,9 @@
               "node_modules/ngx-toastr/toastr.css",
               "src/styles/index.sass"
             ],
-            "scripts": [],
+            "scripts": [
+                "node_modules/marked/marked.min.js"
+            ],
             "allowedCommonJsDependencies": [
               "moment-timezone"
             ]

@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using EasySpeak.Notifier.Hubs;
 using EasySpeak.Notifier.Hubs.Interfaces;
+using EasySpeak.Notifier.WebAPI.Hubs;
 
 namespace EasySpeak.Notifier.Controllers
 {

@@ -13,6 +13,7 @@ import { AuthModule } from '@modules/auth/auth.module';
 import { SelectTopicsPageComponent } from '@modules/user-profile/select-topics-page/select-topics-page.component';
 import { MaterialModule } from '@shared/material/material.module';
 import { SharedModule } from '@shared/shared.module';
+import { MarkdownModule } from 'ngx-markdown';
 import { ToastrModule } from 'ngx-toastr';
 
 import { AppComponent } from './app.component';
@@ -25,6 +26,7 @@ import { AppRoutingModule } from './app-routing.module';
         SharedModule,
         AppRoutingModule,
         ToastrModule.forRoot(),
+        MarkdownModule.forRoot(),
         AngularFireModule.initializeApp(environment.firebaseConfig, 'EasySpeak'),
         AngularFireAuthModule,
         AngularFirestoreModule,

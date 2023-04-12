@@ -25,9 +25,6 @@
                     <img src="{{userLanguageFlag}}"/>
                     <div class="img-description">{{user.language}}</div>
                 </div>
-                <div class="social-icon">
-                    <img src="assets/user-card-icons/great-britain.svg" alt="instagram-icon" />
-                </div>
             </div>
         </div>
         <div class="tags">
@@ -37,10 +34,10 @@
         </div>
     </div>
     <div class="bottom">
-        <div class="progress-container">
+        <div class="progress-container" *ngIf="user.userFriendshipStatus !== eUserFriendshipStatus.Friend">
             <div class="progress">
-                <app-round-progress-bar [status]="user.status ?? 0"></app-round-progress-bar>
-                <div>{{ user.status ?? 0 }}%</div>
+                <app-round-progress-bar [status]="user.compatibility"></app-round-progress-bar>
+                <div>{{ user.compatibility}}%</div>
             </div>
             <div class="progress">
                 <img src="assets/user-card-icons/rocket-icon.svg" alt="rocket" />
@@ -48,17 +45,17 @@
             </div>
         </div>
         <div *ngIf="user.userFriendshipStatus === eUserFriendshipStatus.Regular" class="buttons">
-            <button (click)="message()" class="button">
+            <button (click)="message()" class="button hover">
                 <img src="assets/user-card-icons/message.svg" alt="book" />
                 <span>Message</span>
             </button>
-            <button (click)="onFollowClick()" class="button">
+            <button (click)="onFollowClick()" class="button hover">
                 <img src="assets/user-card-icons/follow-icon.svg" alt="follow" />
                 <span>Add to Friends</span>
             </button>
         </div>
         <div *ngIf="user.userFriendshipStatus === eUserFriendshipStatus.Acceptor" class="buttons">
-            <button class="button" (click)="message()">
+            <button class="button hover" (click)="message()">
                 <img src="assets/user-card-icons/mail.svg" alt="message">
                 <span>Message</span>
             </button>
@@ -68,23 +65,19 @@
             </button>
         </div>
         <div *ngIf="user.userFriendshipStatus === eUserFriendshipStatus.Requester" class="buttons">
-            <button class="button accept-button" (click)="onAcceptClicked()">
+            <button class="button accept-button hover" (click)="onAcceptClicked()">
                 <img src="assets/user-card-icons/accept.svg" alt="message">
                 <span>Accept</span>
             </button>
-            <button class="button" (click)="onRejectClicked()">
+            <button class="button hover" (click)="onRejectClicked()">
                 <img src="assets/user-card-icons/cancel.svg" alt="follow">
                 <span>Cancel</span>
             </button>
         </div>
         <div *ngIf="user.userFriendshipStatus === eUserFriendshipStatus.Friend" class="buttons">
-            <button class="button" (click)="message()">
+            <button class="button hover" (click)="message()">
                 <img src="assets/user-card-icons/mail.svg" alt="message">
                 <span>Message</span>
-            </button>
-            <button class="button button-gray" disabled>
-                <img src="assets/user-card-icons/follow-icon.svg" alt="follow">
-                <span>Added to friends</span>
             </button>
         </div>
     </div>
