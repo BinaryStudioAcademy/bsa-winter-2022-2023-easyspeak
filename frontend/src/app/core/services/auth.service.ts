@@ -30,7 +30,13 @@ export class AuthService {
         private userService: UserService,
         private toastr: NotificationService,
         private webRtcHub: WebrtcHubService,
-    ) {}
+    ) {
+        this.afAuth.onIdTokenChanged(user => {
+            if (user) {
+                this.setAccessToken(user);
+            }
+        });
+    }
 
     async handleUserCredential(userCredential: firebase.auth.UserCredential) {
         if (userCredential.user) {

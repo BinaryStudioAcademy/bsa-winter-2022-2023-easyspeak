@@ -7,7 +7,7 @@ public class FiltersRequest
 {
     public ICollection<LanguageLevel>? LanguageLevels { get; set; }
 
-    public ICollection<TagForLessonDto>? Tags { get; set; }
+    public ICollection<TagForFiltrationDto>? Tags { get; set; }
 
     [JsonRequired]
     public DateTime Date { get; set; }
