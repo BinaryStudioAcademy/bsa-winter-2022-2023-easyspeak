@@ -118,8 +118,8 @@ export class ChatPageComponent implements OnInit, OnDestroy {
         }
     }
 
-    getChat(person: IChatPerson) {
-        this.httpService.get<IMessageGroup[]>(`/chat/chatMessages/${person.chatId}`).subscribe((groupedMessages) => {
+    async getChat(person: IChatPerson) {
+        await this.httpService.get<IMessageGroup[]>(`/chat/chatMessages/${person.chatId}`).subscribe((groupedMessages) => {
             this.groupedMessages = groupedMessages.map((messageGroup): IMessageGroup => ({
                 date: new Date(messageGroup.date),
                 messages: messageGroup.messages.map((message): IMessage => ({
