@@ -90,6 +90,8 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
                         this.allTags = tags;
                         this.selectedTags = tags.filter(t => t.isSelected);
                     });
+
+                this.languageLevel.setValue(Object.entries(LanguageLevel).find(([key, ]) => key === resp.languageLevel)?.[1]);
                 this.userFirstName = resp.firstName;
                 this.userLastName = resp.lastName;
                 this.imagePath = resp.imagePath;
@@ -99,7 +101,11 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
     }
 
     onSubmit() {
+        const languageLevelKey: string = Object.keys(LanguageLevel)[Object.values(LanguageLevel).indexOf(this.languageLevel.value)];
+
         const userDetails = <IUserInfo> this.detailsForm.value;
+
+        userDetails.languageLevel = languageLevelKey;
 
         userDetails.tags = this.selectedTags;
 

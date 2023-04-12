@@ -114,6 +114,8 @@ export class SignUpComponent extends BaseComponent implements OnInit {
     }
 
     private createUser() {
+        const languageLevelKey: string = Object.keys(LanguageLevel)[Object.values(LanguageLevel).indexOf(this.languageLevel.value)];
+
         this.user = {
             firstName: this.firstName.value,
             lastName: this.lastName.value,
@@ -121,7 +123,7 @@ export class SignUpComponent extends BaseComponent implements OnInit {
             birthDate: this.dateOfBirth.value,
             sex: this.sex.value,
             language: this.language.value,
-            languageLevel: this.languageLevel.value,
+            languageLevel: languageLevelKey,
             country: this.country.value,
         };
 
