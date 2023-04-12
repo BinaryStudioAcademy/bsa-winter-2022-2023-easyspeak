@@ -1,10 +1,16 @@
 import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { CoreHubFactoryService } from '@core/hubs/hubFactories/core-hub-factory.service';
 import { HubConnection, HubConnectionState } from '@microsoft/signalr';
+import { SessionCallComponent } from '@modules/session-call/session-call/session-call.component';
 import { AcceptCallComponent } from '@shared/components/accept-call/accept-call.component';
-import { IModal } from '@shared/models/IModal';
+import { IAcceptCallInfo } from '@shared/models/chat/IAcceptCallInfo';
+import { ICallInfo } from '@shared/models/chat/ICallInfo';
+import { ICallUserInfo } from '@shared/models/chat/ICallUserInfo';
 import { Subject, Subscription } from 'rxjs';
+
+import { NotificationService } from 'src/app/services/notification.service';
+
+import { WebrtcHubFactoryService } from './hubFactories/webrtc-hub-factory.service';
 
 @Injectable({
     providedIn: 'root',
@@ -18,7 +24,7 @@ export class WebrtcHubService {
 
     private subscriptions: Subscription[] = [];
 
-    constructor(private hubFactory: CoreHubFactoryService, private dialogRef: MatDialog) {}
+    constructor(private hubFactory: WebrtcHubFactoryService, private dialogRef: MatDialog, private toastr: NotificationService) {}
 
     async start() {
         if (!this.hubConnection || this.hubConnection.state === HubConnectionState.Disconnected) {
@@ -61,31 +67,112 @@ export class WebrtcHubService {
             this.messages.next(msg);
         });
 
-        this.hubConnection.on('call', (roomName: string) => {
-            const config: MatDialogConfig<IModal> = {
-                data: {
-                    header: roomName,
-                },
-            };
+        this.hubConnection.on(
+            'startCall',
+            (
+                chatId: number,
+                callerId: number,
+                callerEmail: string,
+                callerFullName: string,
+                callerImgPath: string,
+                roomName: string,
+            ) => {
+                const config: MatDialogConfig<ICallInfo> = {
+                    data: {
+                        chatId,
+                        callerId,
+                        roomName,
+                        remoteEmail: callerEmail,
+                        remoteName: callerFullName,
+                        remoteImgPath: callerImgPath,
+                    },
+                };
 
-            this.dialogRef.open(AcceptCallComponent, config);
+                this.dialogRef.open(AcceptCallComponent, config);
+            },
+        );
+
+        this.hubConnection.on(
+            'accept',
+            (chatId: number, callerId: number, calleeEmail: string, calleeFullName: string, roomName: string) => {
+                const config: MatDialogConfig<ICallInfo> = {
+                    minWidth: '100vw',
+                    data: {
+                        chatId,
+                        callerId,
+                        roomName,
+                        remoteEmail: calleeEmail,
+                        remoteName: calleeFullName,
+                    },
+                };
+
+                this.dialogRef.open(SessionCallComponent, config);
+            },
+        );
+
+        this.hubConnection.on('reject', () => {
+            this.messages.next('Rejected');
+        });
+
+        this.hubConnection.on('endCall', () => {
+            this.dialogRef.closeAll();
         });
     }
 
     public async connect(email: string) {
         await this.hubConnection.invoke('Connect', email).catch((err) => {
-            console.error(err);
+            this.toastr.showError(err, 'Error!');
         });
     }
 
     public async disconnectUser(email: string) {
         await this.hubConnection.invoke('Disconnect', email).catch((err) => {
-            console.error(err);
+            this.toastr.showError(err, 'Error!');
         });
     }
 
-    public async callUser(email: string, roomName: string) {
-        await this.hubConnection.invoke('CallUser', email, roomName).catch((err) => console.error(err));
+    public async callUser(callInfo: ICallUserInfo) {
+        await this.hubConnection
+            .invoke(
+                'CallUser',
+                callInfo.chatId,
+                callInfo.calleeEmail,
+                callInfo.callerId,
+                callInfo.callerEmail,
+                callInfo.callerFullName,
+                callInfo.callerImgPath,
+            )
+            .catch((err) => {
+                this.toastr.showError(err, 'Error!');
+            });
+    }
+
+    public async acceptCall(callInfo: IAcceptCallInfo) {
+        await this.hubConnection
+            .invoke(
+                'AcceptCall',
+                callInfo.chatId,
+                callInfo.callerId,
+                callInfo.callerEmail,
+                callInfo.calleeEmail,
+                callInfo.calleeFullName,
+                callInfo.roomName,
+            )
+            .catch((err) => {
+                this.toastr.showError(err, 'Error!');
+            });
+    }
+
+    public async rejectCall(email: string) {
+        await this.hubConnection.invoke('RejectCall', email).catch((err) => {
+            this.toastr.showError(err, 'Error!');
+        });
+    }
+
+    public async endCall(chatId: number, userId: number, startedAt: Date, finishedAt: Date) {
+        await this.hubConnection.invoke('EndCall', chatId, userId, startedAt, finishedAt).catch((err) => {
+            this.toastr.showError(err, 'Error!');
+        });
     }
 
     async invoke(methodName: string, ...args: unknown[]): Promise<unknown> {

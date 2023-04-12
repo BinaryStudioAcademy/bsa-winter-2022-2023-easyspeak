@@ -25,6 +25,7 @@ namespace EasySpeak.Core.BLL.Services
                          .Include(chat => chat.Messages)
                          .Select(chat => new ChatPersonDto
                          {
+                             Email = chat.Users.First(user => user.Id != _firebaseAuthService.UserId).Email,
                              FirstName = chat.Users.First(user => user.Id != _firebaseAuthService.UserId).FirstName,
                              LastName = chat.Users.First(user => user.Id != _firebaseAuthService.UserId).LastName,
                              LastMessageDate = chat.Messages.Any() ? chat.Messages.Max(message => message.CreatedAt) : null,
@@ -45,6 +46,7 @@ namespace EasySpeak.Core.BLL.Services
                          .Include(chat => chat.Messages)
                          .Select(chat => new ChatPersonDto
                          {
+                             Email = chat.Users.First(user => user.Id != id).Email,
                              FirstName = chat.Users.First(user => user.Id != id).FirstName,
                              LastName = chat.Users.First(user => user.Id != id).LastName,
                              LastMessageDate = chat.Messages.Any() ? chat.Messages.Max(message => message.CreatedAt) : null,
