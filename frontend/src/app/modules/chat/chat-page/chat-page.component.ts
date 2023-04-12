@@ -5,6 +5,7 @@ import { ChatHubService } from '@core/hubs/chat-hub.service';
 import { WebrtcHubService } from '@core/hubs/webrtc-hub.service';
 import { HttpService } from '@core/services/http.service';
 import { ScrollToBottomDirective } from '@shared/directives/scroll-to-bottom-directive';
+import { ICallUserInfo } from '@shared/models/chat/ICallUserInfo';
 import { IChatPerson } from '@shared/models/chat/IChatPerson';
 import { IMessage } from '@shared/models/chat/IMessage';
 import { IMessageGroup } from '@shared/models/chat/IMessageGroup';
@@ -149,14 +150,15 @@ export class ChatPageComponent implements OnInit, OnDestroy {
 
     startSessionCall(): void {
         const fullName = `${this.currentUser.firstName} ${this.currentUser.lastName}`;
+        const callInfo: ICallUserInfo = {
+            chatId: this.currentChatId,
+            calleeEmail: this.currentPerson.email,
+            callerId: <number>this.currentUser.id,
+            callerEmail: this.currentUser.email,
+            callerFullName: fullName,
+            callerImgPath: this.currentUser.imagePath,
+        };
 
-        this.webrtcHub.callUser(
-            this.currentChatId,
-            this.currentPerson.email,
-            <number> this.currentUser.id,
-            this.currentUser.email,
-            fullName,
-            this.currentUser.imagePath,
-        );
+        this.webrtcHub.callUser(callInfo);
     }
 }

@@ -8,6 +8,7 @@ import { ICallInfo } from '@shared/models/chat/ICallInfo';
 import { Subject, Subscription } from 'rxjs';
 
 import { WebrtcHubFactoryService } from './hubFactories/webrtc-hub-factory.service';
+import { ICallUserInfo } from '@shared/models/chat/ICallUserInfo';
 
 @Injectable({
     providedIn: 'root',
@@ -128,16 +129,17 @@ export class WebrtcHubService {
         });
     }
 
-    public async callUser(
-        chatId: number,
-        calleeEmail: string,
-        callerId: number,
-        callerEmail: string,
-        callerFullName: string,
-        callerImgPath: string,
-    ) {
+    public async callUser(callInfo: ICallUserInfo) {
         await this.hubConnection
-            .invoke('CallUser', chatId, calleeEmail, callerId, callerEmail, callerFullName, callerImgPath)
+            .invoke(
+                'CallUser',
+                callInfo.chatId,
+                callInfo.calleeEmail,
+                callInfo.callerId,
+                callInfo.callerEmail,
+                callInfo.callerFullName,
+                callInfo.callerImgPath,
+            )
             .catch((err) => {
                 console.error(err);
             });
