@@ -29,12 +29,11 @@ namespace EasySpeak.Notifier.WebAPI.Services
             await base.StopAsync(cancellationToken);
         }
 
-        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+        protected override Task ExecuteAsync(CancellationToken stoppingToken)
         {
-
             try
             {
-                _consumer.Recieve<Tuple<string, NotificationDto>>(async (data) =>
+                _consumer.Recieve<Tuple<string, NotificationDto>>( async data =>
                 {
                     if (data is not null)
                     {
@@ -46,6 +45,8 @@ namespace EasySpeak.Notifier.WebAPI.Services
             {
                 _logger.LogError(ex, "Exception");
             }
+
+            return Task.CompletedTask;
         }
     }
 }
