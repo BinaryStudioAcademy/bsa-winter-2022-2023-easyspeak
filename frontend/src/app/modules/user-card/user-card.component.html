@@ -37,7 +37,7 @@
         </div>
     </div>
     <div class="bottom">
-        <div class="progress-container">
+        <div class="progress-container" *ngIf="user.userFriendshipStatus !== eUserFriendshipStatus.Friend">
             <div class="progress">
                 <app-round-progress-bar [status]="user.status ?? 0"></app-round-progress-bar>
                 <div>{{ user.status ?? 0 }}%</div>
@@ -77,14 +77,10 @@
                 <span>Cancel</span>
             </button>
         </div>
-        <div *ngIf="user.userFriendshipStatus === eUserFriendshipStatus.Friend" class="buttons">
+        <div *ngIf="user.userFriendshipStatus === eUserFriendshipStatus.Friend" class="one-button-in-card">
             <button class="button">
                 <img src="assets/user-card-icons/mail.svg" alt="message">
                 <span>Message</span>
-            </button>
-            <button class="button button-gray" disabled>
-                <img src="assets/user-card-icons/follow-icon.svg" alt="follow">
-                <span>Added to friends</span>
             </button>
         </div>
     </div>
