@@ -36,13 +36,16 @@ namespace EasySpeak.Core.BLL.Services
         public async Task<bool> AddFriendAsync(FriendEmailDto friendDto)
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == friendDto.Email);
-            if(user is null || await _context.Friends.AnyAsync(f => (f.RequesterId == user.Id && f.UserId == _authService.UserId
-            || f.UserId == user.Id && f.RequesterId == _authService.UserId) && f.FriendshipStatus != FriendshipStatus.Rejected))
+            if (user is null || await _context.Friends
+                .AnyAsync(f => 
+                (f.RequesterId == user.Id && f.UserId == _authService.UserId 
+                    || f.UserId == user.Id && f.RequesterId == _authService.UserId)
+                && f.FriendshipStatus != FriendshipStatus.Rejected))
             {
                 return false;
             }
             var friendship = await _context.Friends.FirstOrDefaultAsync(f => f.UserId == user.Id && f.RequesterId == _authService.UserId);
-            if(friendship is null)
+            if (friendship is null)
             {
                 var friend = new Friend
                 {
