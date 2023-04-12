@@ -5,6 +5,7 @@ import { WebrtcHubService } from '@core/hubs/webrtc-hub.service';
 import { WebrtcUtils } from '@core/services/webrtc-utils.service';
 import { environment } from '@env/environment';
 import { ICallInfo } from '@shared/models/chat/ICallInfo';
+import { NotificationService } from 'src/app/services/notification.service';
 
 const useWebrtcUtils = true;
 
@@ -47,6 +48,7 @@ export class SessionCallComponent implements OnInit, OnDestroy {
         private webrtcHub: WebrtcHubService,
         private snack: MatSnackBar,
         private dialogRef: MatDialogRef<SessionCallComponent>,
+        private toastr: NotificationService,
     ) { }
 
     async ngOnInit() {
@@ -119,7 +121,7 @@ export class SessionCallComponent implements OnInit, OnDestroy {
                 }
             })
             .catch((e) => {
-                console.error(`getUserMedia() error: ${e.name}: ${e.message}`);
+                this.toastr.showError(`getUserMedia() error: ${e.name}: ${e.message}`, 'Error!');
             });
     }
 
@@ -179,7 +181,7 @@ export class SessionCallComponent implements OnInit, OnDestroy {
                 };
             }
         } catch (e: unknown) {
-            console.error('Failed to create PeerConnection.');
+            this.toastr.showError('Failed to create PeerConnection.', 'Error!');
         }
     }
 

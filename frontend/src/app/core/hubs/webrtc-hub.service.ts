@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 import { HubConnection, HubConnectionState } from '@microsoft/signalr';
 import { SessionCallComponent } from '@modules/session-call/session-call/session-call.component';
 import { AcceptCallComponent } from '@shared/components/accept-call/accept-call.component';
@@ -10,6 +9,7 @@ import { Subject, Subscription } from 'rxjs';
 import { WebrtcHubFactoryService } from './hubFactories/webrtc-hub-factory.service';
 import { ICallUserInfo } from '@shared/models/chat/ICallUserInfo';
 import { IAcceptCallInfo } from '@shared/models/chat/IAcceptCallInfo';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Injectable({
     providedIn: 'root',
@@ -23,7 +23,7 @@ export class WebrtcHubService {
 
     private subscriptions: Subscription[] = [];
 
-    constructor(private hubFactory: WebrtcHubFactoryService, private dialogRef: MatDialog, private router: Router) {}
+    constructor(private hubFactory: WebrtcHubFactoryService, private dialogRef: MatDialog, private toastr: NotificationService) {}
 
     async start() {
         if (!this.hubConnection || this.hubConnection.state === HubConnectionState.Disconnected) {
@@ -120,13 +120,13 @@ export class WebrtcHubService {
 
     public async connect(email: string) {
         await this.hubConnection.invoke('Connect', email).catch((err) => {
-            console.error(err);
+            this.toastr.showError(err, 'Error!');
         });
     }
 
     public async disconnectUser(email: string) {
         await this.hubConnection.invoke('Disconnect', email).catch((err) => {
-            console.error(err);
+            this.toastr.showError(err, 'Error!');
         });
     }
 
@@ -142,7 +142,7 @@ export class WebrtcHubService {
                 callInfo.callerImgPath,
             )
             .catch((err) => {
-                console.error(err);
+                this.toastr.showError(err, 'Error!');
             });
     }
 
@@ -158,19 +158,19 @@ export class WebrtcHubService {
                 callInfo.roomName,
             )
             .catch((err) => {
-                console.error(err);
+                this.toastr.showError(err, 'Error!');
             });
     }
 
     public async rejectCall(email: string) {
         await this.hubConnection.invoke('RejectCall', email).catch((err) => {
-            console.error(err);
+            this.toastr.showError(err, 'Error!');
         });
     }
 
     public async endCall(chatId: number, userId: number, startedAt: Date, finishedAt: Date) {
         await this.hubConnection.invoke('EndCall', chatId, userId, startedAt, finishedAt).catch((err) => {
-            console.error(err);
+            this.toastr.showError(err, 'Error!');
         });
     }
 
