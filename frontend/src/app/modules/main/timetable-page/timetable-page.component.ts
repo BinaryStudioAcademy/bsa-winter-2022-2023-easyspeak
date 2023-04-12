@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {IIcon} from "@shared/models/IIcon";
+import { IIcon } from '@shared/models/IIcon';
 
 @Component({
     selector: 'app-timetable-page',

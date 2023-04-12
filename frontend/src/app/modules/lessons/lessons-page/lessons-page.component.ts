@@ -4,6 +4,7 @@ import { UserService } from '@core/services/user.service';
 import { applyTimeOffset, filterColumn } from '@modules/lessons/lesson/lesson.helper';
 import { ModalComponent } from '@shared/components/modal/modal.component';
 import { YoutubePlayerComponent } from '@shared/components/youtube-player/youtube-player.component';
+import { IIcon } from '@shared/models/IIcon';
 import { IModal } from '@shared/models/IModal';
 import { ILesson } from '@shared/models/lesson/ILesson';
 import { LanguageLevels } from '@shared/models/lesson/LanguageLevels';
@@ -12,7 +13,6 @@ import * as moment from 'moment';
 import { LessonsService } from 'src/app/services/lessons.service';
 
 import { LessonsCreateComponent } from '../lessons-create/lessons-create.component';
-import {IIcon} from "@shared/models/IIcon";
 
 @Component({
     selector: 'app-lessons-page',
