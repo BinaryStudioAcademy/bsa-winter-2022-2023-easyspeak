@@ -17,6 +17,6 @@ public class LessonDto
     public bool isCanceled { get; set; }
 
     public UserForLessonDto? User { get; set; }
-    public ICollection<TagForLessonDto>? Tags { get; set; }
+    public ICollection<TagForFiltrationDto>? Tags { get; set; }
     public ICollection<QuestionForLessonDto>? Questions { get; set; }
 }
