@@ -9,7 +9,7 @@ import { HttpService } from '@core/services/http.service';
 import { IUserShort } from '@shared/models/IUserShort';
 import * as auth from 'firebase/auth';
 import firebase from 'firebase/compat';
-import { defer, first, firstValueFrom, from, Subject, tap } from 'rxjs';
+import { BehaviorSubject, defer, first, firstValueFrom, from, tap } from 'rxjs';
 
 import { NotificationService } from 'src/app/services/notification.service';
 
@@ -19,7 +19,11 @@ import { UserService } from './user.service';
     providedIn: 'root',
 })
 export class AuthService {
-    user = new Subject<IUserShort>();
+    user = new BehaviorSubject<IUserShort>({} as IUserShort);
+
+    setUser(userShort: IUserShort) {
+        this.user.next(userShort);
+    }
 
     constructor(
         private afs: AngularFirestore,
