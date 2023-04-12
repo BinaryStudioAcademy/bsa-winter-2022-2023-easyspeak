@@ -9,6 +9,10 @@ const routes: Routes = [
         path: '',
         component: ChatPageComponent,
     },
+    {
+        path: ':id',
+        component: ChatPageComponent,
+    },
 ];
 
 @NgModule({
