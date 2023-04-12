@@ -91,7 +91,7 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
                         this.selectedTags = tags.filter(t => t.isSelected);
                     });
 
-                this.languageLevel.setValue(Object.entries(LanguageLevel).find(([key, ]) => key === resp.languageLevel)?.[1]);
+                this.languageLevel.setValue(Object.entries(LanguageLevel).find(([key]) => key === resp.languageLevel)?.[1]);
                 this.userFirstName = resp.firstName;
                 this.userLastName = resp.lastName;
                 this.imagePath = resp.imagePath;
