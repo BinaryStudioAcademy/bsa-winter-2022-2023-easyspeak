@@ -1,36 +1,31 @@
 ﻿using EasySpeak.RabbitMQ.Interfaces;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace EasySpeak.RabbitMQ.Services
+namespace EasySpeak.RabbitMQ.Services;
+
+public class MessageProducer: IMessageProducer
 {
-    public class MessageProducer: IMessageProducer
+    private readonly IModel _channel;
+    private string _queue = string.Empty;
+    private string _exchange = string.Empty; 
+
+    public MessageProducer(IConnectionProvider connectionProvider)
     {
-        private readonly IModel channel;
-        private string queue = string.Empty;
-        private string exchange = string.Empty; 
+        _channel = connectionProvider.Connection!.CreateModel();
+    }
 
-        public MessageProducer(IConnectionProvider connectionProvider)
-        {
-            channel = connectionProvider.Connection!.CreateModel();
-        }
-
-        public void Init(string queue, string exchange)
-        {
-            this.queue = queue ?? string.Empty;
-            this.exchange = exchange ?? string.Empty;
-            channel.QueueDeclare(queue, true, false, false);
-        }
-        public void SendMessage<T>(T message)
-        {
-            var json = JsonConvert.SerializeObject(message);
-            var body = Encoding.UTF8.GetBytes(json);
-            channel.BasicPublish(exchange: exchange, routingKey: queue, body: body);
-        }
+    public void Init(string queue, string exchange)
+    {
+        this._queue = queue;
+        this._exchange = exchange;
+        _channel.QueueDeclare(queue, true, false, false);
+    }
+    public void SendMessage<T>(T message)
+    {
+        var json = JsonConvert.SerializeObject(message);
+        var body = Encoding.UTF8.GetBytes(json);
+        _channel.BasicPublish(exchange: _exchange, routingKey: _queue, body: body);
     }
 }

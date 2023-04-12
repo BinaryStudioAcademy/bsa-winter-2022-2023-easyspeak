@@ -16,4 +16,5 @@ export interface UserCard {
     tags: string[]
     flag: string;
     userFriendshipStatus?: UserFriendshipStatus
+    compatibility: number
 }

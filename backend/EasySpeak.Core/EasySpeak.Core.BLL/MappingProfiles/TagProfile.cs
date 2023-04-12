@@ -12,5 +12,6 @@ public class TagProfile : Profile
         CreateMap<Tag, TagDto>().ReverseMap();
         CreateMap<Tag, TagWithImageDto>().ReverseMap();
         CreateMap<Tag, TagForFiltrationDto>().ReverseMap();
+        CreateMap<Tag, TagForLessonDto>().ReverseMap();
     }
 }

@@ -5,6 +5,7 @@ import { ChatHubService } from '@core/hubs/chat-hub.service';
 import { WebrtcHubService } from '@core/hubs/webrtc-hub.service';
 import { HttpService } from '@core/services/http.service';
 import { ScrollToBottomDirective } from '@shared/directives/scroll-to-bottom-directive';
+import { ICallUserInfo } from '@shared/models/chat/ICallUserInfo';
 import { IChatPerson } from '@shared/models/chat/IChatPerson';
 import { IMessage } from '@shared/models/chat/IMessage';
 import { IMessageGroup } from '@shared/models/chat/IMessageGroup';
@@ -52,7 +53,7 @@ export class ChatPageComponent implements OnInit, OnDestroy {
             this.people = people;
             this.chatHub.invoke(
                 'AddToGroup',
-                this.people.map(p => p.chatId),
+                this.people.map((p) => p.chatId),
             );
             this.route.params.subscribe(({ id }) => {
                 [this.currentPerson] = this.people.filter(person => person.chatId === Number(id));
@@ -67,17 +68,9 @@ export class ChatPageComponent implements OnInit, OnDestroy {
     private setActionsForMessages() {
         this.chatHub.listenMessages((msg) => {
             this.addMessage(msg);
-            this.chatHub.invoke(
-                'GetChatsAsync',
-                msg.chatId,
-                this.currentUser.id,
-            );
+            this.chatHub.invoke('GetChatsAsync', msg.chatId, this.currentUser.id);
             if (this.currentUser.id !== msg.createdBy) {
-                this.chatHub.invoke(
-                    'ReadMessages',
-                    this.currentChatId,
-                    this.currentUser.id,
-                );
+                this.chatHub.invoke('ReadMessages', this.currentChatId, this.currentUser.id);
             }
             this.scroll.scrollToBottom();
         });
@@ -116,13 +109,17 @@ export class ChatPageComponent implements OnInit, OnDestroy {
 
     getChat(person: IChatPerson) {
         this.httpService.get<IMessageGroup[]>(`/chat/chatMessages/${person.chatId}`).subscribe((groupedMessages) => {
-            this.groupedMessages = groupedMessages.map((messageGroup): IMessageGroup => ({
-                date: new Date(messageGroup.date),
-                messages: messageGroup.messages.map((message): IMessage => ({
-                    ...message,
-                    createdAt: new Date(message.createdAt),
-                })),
-            }));
+            this.groupedMessages = groupedMessages.map(
+                (messageGroup): IMessageGroup => ({
+                    date: new Date(messageGroup.date),
+                    messages: messageGroup.messages.map(
+                        (message): IMessage => ({
+                            ...message,
+                            createdAt: new Date(message.createdAt),
+                        }),
+                    ),
+                }),
+            );
             this.currentChatId = person.chatId;
             this.currentPerson = person;
         });
@@ -141,10 +138,7 @@ export class ChatPageComponent implements OnInit, OnDestroy {
                 createdAt: new Date(Date.now()),
             };
 
-            this.chatHub.invoke(
-                'SendMessageAsync',
-                msg,
-            );
+            this.chatHub.invoke('SendMessageAsync', msg);
         }
     }
 
@@ -162,9 +156,16 @@ export class ChatPageComponent implements OnInit, OnDestroy {
     });
 
     startSessionCall(): void {
-        const videoCallId = crypto.randomUUID();
+        const fullName = `${this.currentUser.firstName} ${this.currentUser.lastName}`;
+        const callInfo: ICallUserInfo = {
+            chatId: this.currentChatId,
+            calleeEmail: this.currentPerson.email,
+            callerId: <number> this.currentUser.id,
+            callerEmail: this.currentUser.email,
+            callerFullName: fullName,
+            callerImgPath: this.currentUser.imagePath,
+        };
 
-        this.webrtcHub.callUser('stagetest@gmail.com', videoCallId);
-        this.router.navigate([`session-call/${videoCallId}`]);
+        this.webrtcHub.callUser(callInfo);
     }
 }
