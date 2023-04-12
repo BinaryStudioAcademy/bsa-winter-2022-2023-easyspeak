@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Neo4j.Driver" Version="5.7.0" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\EasySpeak.Core\EasySpeak.Core.Common\EasySpeak.Core.Common.csproj" />
+      <ProjectReference Include="..\..\EasySpeak.RabbitMQ\EasySpeak.RabbitMQ.csproj" />
+    </ItemGroup>
+
+</Project>

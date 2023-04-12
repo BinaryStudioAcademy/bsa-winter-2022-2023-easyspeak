@@ -29,6 +29,8 @@ export class LessonComponent extends BaseComponent implements OnInit {
 
     isLoading = false;
 
+    buttonHover: string;
+
     constructor(
         private dialogRef: MatDialog,
         private lessonsService: LessonsService,
@@ -127,6 +129,8 @@ export class LessonComponent extends BaseComponent implements OnInit {
                 } if (this.lesson.isSubscribed) {
                     return 'Subscribed';
                 }
+
+                this.buttonHover = 'join-hover';
 
                 return 'Join';
 

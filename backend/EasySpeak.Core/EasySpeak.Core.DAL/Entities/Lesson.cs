@@ -14,6 +14,8 @@ namespace EasySpeak.Core.DAL.Entities
         public string ZoomMeetingLinkHost { get; set; } = string.Empty;
         public bool IsCanceled { get; set; }
         public LanguageLevel LanguageLevel { get; set; }
+        
+        public bool IsCalculated { get; set; }
 
         public ICollection<User> Subscribers { get; private set; }
         public ICollection<Tag> Tags { get; set; }

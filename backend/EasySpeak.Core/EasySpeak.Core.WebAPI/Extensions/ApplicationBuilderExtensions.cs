@@ -1,7 +1,7 @@
 ﻿using EasySpeak.Core.DAL.Context;
 using Microsoft.EntityFrameworkCore;
 
-namespace EasySpeak.Core.WebAPI.Extentions
+namespace EasySpeak.Core.WebAPI.Extensions
 {
     public static class ApplicationBuilderExtensions
     {

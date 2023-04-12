@@ -164,7 +164,7 @@ h1
         box-sizing: border-box
         box-shadow: 0 1px 4px $error-color
         border-radius: 50px
-        z-index: 1
+        z-index: -1
     .errors-wrp
         position: absolute
         font-size: 12px
@@ -216,7 +216,8 @@ input
     color: $white !important
     font-weight: 500
     font-size: 16px
-
+    &:hover
+        box-shadow: $box-shadow
 
 ::ng-deep.custom
     height: 100%

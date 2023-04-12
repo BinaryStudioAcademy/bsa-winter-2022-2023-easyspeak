@@ -1,14 +1,19 @@
-﻿using AutoMapper;
+﻿using System.Net.Http.Json;
+using AutoMapper;
 using EasySpeak.Core.BLL.Interfaces;
+using EasySpeak.Core.BLL.Options;
 using EasySpeak.Core.Common.DTO.Filter;
 using EasySpeak.Core.Common.DTO.Lesson;
+using EasySpeak.Core.Common.DTO.User;
 using EasySpeak.Core.Common.DTO.Tag;
 using EasySpeak.Core.Common.DTO.UploadFile;
-using EasySpeak.Core.Common.DTO.User;
 using EasySpeak.Core.DAL.Context;
 using EasySpeak.Core.DAL.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using EasySpeak.Core.Common.Enums;
+using Microsoft.Extensions.Options;
+using UserShortInfoDto = EasySpeak.Core.Common.DTO.User.UserShortInfoDto;
 
 namespace EasySpeak.Core.BLL.Services;
 
@@ -16,12 +21,22 @@ public class UserService : BaseService, IUserService
 {
     private readonly IEasySpeakFileService _fileService;
     private readonly IFirebaseAuthService _authService;
-
-    public UserService(IEasySpeakFileService fileService, EasySpeakCoreContext context, IMapper mapper, IFirebaseAuthService authService)
-        : base(context, mapper)
+    private readonly IHttpClientFactory _clientFactory;
+    private readonly RecommendationServiceOptions _recommendationServiceOptions;
+    private readonly QueriesSenderService _queriesSender;
+    private readonly INotificationService _notificationService;
+    
+    public UserService(IEasySpeakFileService fileService, EasySpeakCoreContext context, 
+            IMapper mapper, IFirebaseAuthService authService, IHttpClientFactory clientFactory,
+            IOptions<RecommendationServiceOptions> recommendationServiceOptions,
+            QueriesSenderService queriesSender, INotificationService notificationService) : base(context, mapper)
     {
         _authService = authService;
         _fileService = fileService;
+        _clientFactory = clientFactory;
+        _recommendationServiceOptions = recommendationServiceOptions.Value;
+        _queriesSender = queriesSender;
+        _notificationService = notificationService;
     }
 
     public async Task<UserDto> CreateUser(UserRegisterDto userDto)
@@ -32,7 +47,10 @@ public class UserService : BaseService, IUserService
 
         await _context.SaveChangesAsync();
 
-        return _mapper.Map<UserDto>(userEntity);
+        void AfterMapAction(User user, UserDto dto) 
+            => _queriesSender.SendAddUserQuery(user.Id, dto);
+
+        return _mapper.Map<User, UserDto>(userEntity, opts => opts.AfterMap(AfterMapAction));
     }
 
     public async Task<UserDto?> GetUserAsync()
@@ -45,7 +63,7 @@ public class UserService : BaseService, IUserService
             return userDto;
         }
 
-        userDto.ImagePath = user!.EmojiName != string.Empty ? user!.EmojiName : await GetProfileImageUrl(user!.ImageId);
+        userDto.ImagePath = user!.EmojiName != string.Empty ? user.EmojiName : await GetProfileImageUrl(user.ImageId);
 
         return userDto;
     }
@@ -61,6 +79,8 @@ public class UserService : BaseService, IUserService
         user!.Tags = await _context.Tags.Where(t => tagsNames.Contains(t.Name)).ToListAsync();
 
         await _context.SaveChangesAsync();
+        
+        _queriesSender.SendAddTagsQuery(user.Id, tags);
 
         return _mapper.Map<UserDto>(user);
     }
@@ -93,8 +113,28 @@ public class UserService : BaseService, IUserService
         {
             filteredUsers = filteredUsers.Where(u => u.Tags.Any(t => filter.Topics.Select(t=>t.Id).Contains(t.Id)));
         }
+
+
         var filteredUsersList = await filteredUsers.ToListAsync();
-        return _mapper.Map<List<UserShortInfoDto>>(filteredUsersList);
+
+        return await AddCompatibility(filteredUsersList, filter.Compatibility);
+    }
+
+    private async Task<List<UserShortInfoDto>> AddCompatibility(List<User> users, int compatibility)
+    {
+        var compatabilityInformation =
+            await GetRecommendedUsers(compatibility, users.Select(x => x.Id).ToList());
+        
+        var compatibleUsers = users.Where(x => compatabilityInformation.ContainsKey(x.Id)).Select(x => x).ToList();
+        
+        var result = _mapper.Map<List<UserShortInfoDto>>(compatibleUsers);
+        
+        foreach (var user in result)
+        {
+            user.Compatibility = compatabilityInformation[user.Id];
+        }
+
+        return result;
     }
 
     private async Task FillUserFriendshipStatus(List<UserShortInfoDto> users)
@@ -122,12 +162,16 @@ public class UserService : BaseService, IUserService
     {
         var userId = _authService.UserId;
 
-        var user = _context.Users.SingleOrDefault(u => u.Id == userId) ?? throw new ArgumentException($"Failed to find the user with id {userId}");
-        var lesson = _context.Lessons.SingleOrDefault(l => l.Id == lessonId) ?? throw new ArgumentException($"Failed to find the lesson with id {lessonId}");
+        var user = _context.Users.SingleOrDefault(u => u.Id == userId) ??
+                   throw new ArgumentException($"Failed to find the user with id {userId}");
+        var lesson = _context.Lessons.SingleOrDefault(l => l.Id == lessonId) ??
+                     throw new ArgumentException($"Failed to find the lesson with id {lessonId}");
 
         user.Lessons.Add(lesson);
 
         await _context.SaveChangesAsync();
+
+        await _notificationService.AddNotificationAsync(NotificationType.classJoin, lesson.Id);
 
         void AfterMapAction(Lesson o, LessonDto dto) => dto.SubscribersCount = _context.Lessons
             .Select(t => new { Id = t.Id, SbCount = t.Subscribers.Count })
@@ -246,8 +290,29 @@ public class UserService : BaseService, IUserService
             user.IsAdmin = true;
             await _context.SaveChangesAsync();
         }
-        UserDto userDto = _mapper.Map<UserDto>(user);
+
+        var userDto = _mapper.Map<UserDto>(user);
         return userDto;
+    }
+
+    private async Task<Dictionary<long, long>> GetRecommendedUsers(int compatibility, List<long> filteredUsers)
+    {
+        var recommendationRequestBody = new NewRecommendationDto()
+        {
+            Compatibility = compatibility,
+            Id = _authService.UserId,
+            Users = filteredUsers
+        };
+
+        var client = _clientFactory.CreateClient("RecommendationClient");
+
+        var response = await client.PostAsJsonAsync(_recommendationServiceOptions.Host + "/recommendation",
+            recommendationRequestBody);
+
+        response.EnsureSuccessStatusCode();
+
+        return await response.Content.ReadFromJsonAsync<Dictionary<long, long>>() ?? new();
+
     }
 
     public async Task<long> GetUserIdByEmail(string email)

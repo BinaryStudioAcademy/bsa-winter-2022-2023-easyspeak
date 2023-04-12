@@ -1,8 +1,6 @@
 ﻿using EasySpeak.Core.Common.DTO.Notification;
 using EasySpeak.Notifier.WebAPI.Hubs;
 using EasySpeak.RabbitMQ.Interfaces;
-using Microsoft.AspNetCore.SignalR;
-using Newtonsoft.Json;
 
 namespace EasySpeak.Notifier.WebAPI.Services
 {
@@ -10,13 +8,13 @@ namespace EasySpeak.Notifier.WebAPI.Services
     {
         private readonly IMessageConsumer _consumer;
         private readonly ILogger<ConsumerHostedService> _logger;
-        private readonly IHubContext<NotificationHub> _hubContext;
-        public ConsumerHostedService(IMessageConsumer consumer, ILogger<ConsumerHostedService> logger, IHubContext<NotificationHub> hubContext)
+        private readonly NotificationHub _hub;
+        public ConsumerHostedService(IMessageConsumer consumer, ILogger<ConsumerHostedService> logger, NotificationHub hub)
         {
             _consumer = consumer;
             _logger = logger;
-            _hubContext = hubContext;
-            _consumer.Init("notifier");
+            _hub = hub;
+            _consumer.Init("notifications");
         }
 
         public override async Task StartAsync(CancellationToken cancellationToken)
@@ -29,17 +27,15 @@ namespace EasySpeak.Notifier.WebAPI.Services
             await base.StopAsync(cancellationToken);
         }
 
-        protected override Task ExecuteAsync(CancellationToken stoppingToken)
+        protected override Task ExecuteAsync(CancellationToken cancellationToken)
         {
-
             try
             {
-                _consumer.Recieve<Tuple<string, NotificationDto>>((data) =>
+                _consumer.Receive<Tuple<string, NotificationDto>>( async data =>
                 {
                     if (data is not null)
                     {
-                        _hubContext.Clients.User(data.Item1).SendAsync("Notify", JsonConvert.SerializeObject(data.Item2));
-                        Console.WriteLine(data);
+                        await _hub.SendNotification(data.Item1, data.Item2);
                     }
                 });
             }
@@ -47,6 +43,7 @@ namespace EasySpeak.Notifier.WebAPI.Services
             {
                 _logger.LogError(ex, "Exception");
             }
+
             return Task.CompletedTask;
         }
     }
