@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.SignalR;
-using EasySpeak.Notifier.Hubs.Interfaces;
+﻿using EasySpeak.Notifier.Hubs.Interfaces;
+using Microsoft.AspNetCore.SignalR;
 
-namespace EasySpeak.Notifier.Hubs
+namespace EasySpeak.Notifier.WebAPI.Hubs
 {
     public class BroadcastHub : Hub<IBroadcastHubClient>
     {

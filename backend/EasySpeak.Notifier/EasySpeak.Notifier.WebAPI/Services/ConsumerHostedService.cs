@@ -16,7 +16,7 @@ namespace EasySpeak.Notifier.WebAPI.Services
             _consumer = consumer;
             _logger = logger;
             _hubContext = hubContext;
-            _consumer.Init("notifier");
+            _consumer.Init("notifications");
         }
 
         public override async Task StartAsync(CancellationToken cancellationToken)
@@ -29,16 +29,16 @@ namespace EasySpeak.Notifier.WebAPI.Services
             await base.StopAsync(cancellationToken);
         }
 
-        protected override Task ExecuteAsync(CancellationToken stoppingToken)
+        protected override Task ExecuteAsync(CancellationToken cancellationToken)
         {
 
             try
             {
-                _consumer.Recieve<Tuple<string, NotificationDto>>((data) =>
+                _consumer.Receive<Tuple<string, NotificationDto>>((data) =>
                 {
                     if (data is not null)
                     {
-                        _hubContext.Clients.User(data.Item1).SendAsync("Notify", JsonConvert.SerializeObject(data.Item2));
+                        _hubContext.Clients.User(data.Item1).SendAsync("Notify", JsonConvert.SerializeObject(data.Item2),  cancellationToken);
                         Console.WriteLine(data);
                     }
                 });

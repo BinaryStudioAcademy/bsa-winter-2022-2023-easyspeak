@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace EasySpeak.RabbitMQ.Interfaces;
 
-namespace EasySpeak.RabbitMQ.Interfaces
+public interface IMessageConsumer
 {
-    public interface IMessageConsumer
-    {
-        void Init(string queue);
-        void Recieve<T>(Action<T?> onMessage);
-    }
+    void Init(string queue);
+    void Receive<T>(Action<T?> onMessage);
 }
