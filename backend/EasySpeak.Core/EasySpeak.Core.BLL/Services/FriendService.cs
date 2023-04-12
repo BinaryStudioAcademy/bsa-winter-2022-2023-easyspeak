@@ -30,7 +30,7 @@ namespace EasySpeak.Core.BLL.Services
         {
             await SetFriendshipStatus(friendDto.Email, FriendshipStatus.Confirmed);
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == friendDto.Email);
-            await notificationService.AddNotificationAsync(Common.Enums.NotificationType.friendshipAcception, user!.Id);
+            await _notificationService.AddNotificationAsync(Common.Enums.NotificationType.friendshipAcception, user!.Id);
         }
 
         public async Task<bool> AddFriendAsync(FriendEmailDto friendDto)
@@ -58,7 +58,7 @@ namespace EasySpeak.Core.BLL.Services
 
                 await _context.SaveChangesAsync();
 
-                await notificationService.AddNotificationAsync(Common.Enums.NotificationType.friendshipRequest, user!.Id);
+                await _notificationService.AddNotificationAsync(Common.Enums.NotificationType.friendshipRequest, user!.Id);
             }
             else
             {
