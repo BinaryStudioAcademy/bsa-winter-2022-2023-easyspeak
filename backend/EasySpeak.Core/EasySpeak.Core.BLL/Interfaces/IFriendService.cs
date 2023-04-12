@@ -9,8 +9,8 @@ namespace EasySpeak.Core.BLL.Interfaces
 {
     public interface IFriendService
     {
-        Task<FriendEmailDto> AcceptFriendshipAsync(FriendEmailDto friendDto);
-        Task<FriendEmailDto> AddFriendAsync(FriendEmailDto friendDto);
-        Task<FriendEmailDto> RejectFriendshipAsync(FriendEmailDto friendDto);
+        Task AcceptFriendshipAsync(FriendEmailDto friendDto);
+        Task<bool> AddFriendAsync(FriendEmailDto friendDto);
+        Task RejectFriendshipAsync(FriendEmailDto friendDto);
     }
 }
