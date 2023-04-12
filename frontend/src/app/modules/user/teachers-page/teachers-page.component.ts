@@ -32,6 +32,8 @@ export class TeachersPageComponent implements OnInit {
         nextClass: null,
     };
 
+    selectedDaysCount: number;
+
     datesWithLessons: IDateWithLessons[] = [];
 
     constructor(
@@ -45,11 +47,15 @@ export class TeachersPageComponent implements OnInit {
             this.currentUser = user;
         });
 
+        this.loadStatistics();
+
+        this.loadLessons(7);
+    }
+
+    loadStatistics() {
         this.lessonsService.getTeacherStatistics().subscribe((data) => {
             this.statistics = data;
         });
-
-        this.loadLessons(7);
     }
 
     openCreate() {
@@ -61,10 +67,17 @@ export class TeachersPageComponent implements OnInit {
             },
         };
 
-        this.dialogRef.open(ModalComponent, config);
+        this.dialogRef
+            .open(ModalComponent, config)
+            .afterClosed()
+            .subscribe(() => {
+                this.loadLessons(this.selectedDaysCount);
+                this.loadStatistics();
+            });
     }
 
     loadLessons(daysCount: number) {
+        this.selectedDaysCount = daysCount;
         this.lessonsService
             .getTeacherLessonsAtPeriod(
                 new Date().toISOString(),
