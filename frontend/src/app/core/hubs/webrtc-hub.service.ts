@@ -9,6 +9,7 @@ import { Subject, Subscription } from 'rxjs';
 
 import { WebrtcHubFactoryService } from './hubFactories/webrtc-hub-factory.service';
 import { ICallUserInfo } from '@shared/models/chat/ICallUserInfo';
+import { IAcceptCallInfo } from '@shared/models/chat/IAcceptCallInfo';
 
 @Injectable({
     providedIn: 'root',
@@ -145,16 +146,17 @@ export class WebrtcHubService {
             });
     }
 
-    public async acceptCall(
-        chatId: number,
-        callerId: number,
-        callerEmail: string,
-        calleeEmail: string,
-        calleeFullName: string,
-        roomName: string,
-    ) {
+    public async acceptCall(callInfo: IAcceptCallInfo) {
         await this.hubConnection
-            .invoke('AcceptCall', chatId, callerId, callerEmail, calleeEmail, calleeFullName, roomName)
+            .invoke(
+                'AcceptCall',
+                callInfo.chatId,
+                callInfo.callerId,
+                callInfo.callerEmail,
+                callInfo.calleeEmail,
+                callInfo.calleeFullName,
+                callInfo.roomName,
+            )
             .catch((err) => {
                 console.error(err);
             });

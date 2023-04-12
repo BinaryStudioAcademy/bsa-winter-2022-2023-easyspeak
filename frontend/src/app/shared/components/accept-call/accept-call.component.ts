@@ -3,6 +3,7 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogConfig } from '@angular/material/d
 import { Router } from '@angular/router';
 import { WebrtcHubService } from '@core/hubs/webrtc-hub.service';
 import { SessionCallComponent } from '@modules/session-call/session-call/session-call.component';
+import { IAcceptCallInfo } from '@shared/models/chat/IAcceptCallInfo';
 import { ICallInfo } from '@shared/models/chat/ICallInfo';
 import { IUserShort } from '@shared/models/IUserShort';
 
@@ -33,15 +34,16 @@ export class AcceptCallComponent implements OnInit {
 
     async answerCall() {
         const fullName = `${this.user.firstName} ${this.user.lastName}`;
+        const callInfo: IAcceptCallInfo = {
+            chatId: this.callInfo.chatId,
+            callerId: this.callInfo.callerId,
+            callerEmail: this.callInfo.remoteEmail,
+            calleeEmail: this.user.email,
+            calleeFullName: fullName,
+            roomName: this.callInfo.roomName,
+        };
 
-        await this.webRtcHub.acceptCall(
-            this.callInfo.chatId,
-            this.callInfo.callerId,
-            this.callInfo.remoteEmail,
-            this.user.email,
-            fullName,
-            this.callInfo.roomName,
-        );
+        await this.webRtcHub.acceptCall(callInfo);
 
         const config: MatDialogConfig<ICallInfo> = {
             minWidth: '100vw',
