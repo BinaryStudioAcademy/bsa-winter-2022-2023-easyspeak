@@ -1,5 +1,4 @@
 import { ILessonUser } from './ILessonUser';
-import { IQuestion } from './IQuestion';
 import { ITag } from './ITag';
 
 export interface ILesson {

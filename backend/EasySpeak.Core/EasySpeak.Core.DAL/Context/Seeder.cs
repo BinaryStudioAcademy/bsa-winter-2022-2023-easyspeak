@@ -39,7 +39,7 @@ public static class Seeder
             Timezone = Timezone.Abidjan,
             BirthDate = new DateTime(1998, 4, 4, 0, 0, 0, DateTimeKind.Utc),
             Email = "easymeats.service@gmail.com",
-            EmojiName = "FP",
+            EmojiName = "",
             ImageId = null,
             Sex = Sex.Male,
             LanguageLevel = LanguageLevel.C2,
@@ -61,7 +61,7 @@ public static class Seeder
 
     private static IList<Lesson> GenerateLessons(User user, int count = 80)
     {
-        Faker.GlobalUniqueIndex = 0;
+        Faker.GlobalUniqueIndex = -count-1;
 
         return new Faker<Lesson>()
             .UseSeed(10)

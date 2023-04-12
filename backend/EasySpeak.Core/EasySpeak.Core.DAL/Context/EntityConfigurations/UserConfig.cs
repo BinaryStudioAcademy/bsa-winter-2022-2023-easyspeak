@@ -24,8 +24,7 @@ namespace EasySpeak.Core.DAL.Context.EntityConfigurations
 
             builder.HasMany(u => u.CreatedLessons)
                 .WithOne(l => l.User)
-                .HasForeignKey(l => l.CreatedBy)
-                .OnDelete(DeleteBehavior.Cascade);
+                .HasForeignKey(l => l.CreatedBy);
 
             builder.HasOne(u => u.Image)
                 .WithOne(f => f.User)

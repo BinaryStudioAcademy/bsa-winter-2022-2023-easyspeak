@@ -83,7 +83,7 @@
                         [textContent]="getButtonContent()"
                         (click)="cancelLesson()"></button>
                 </ng-template>
-                <button class="expand" (click)="showQuestions(lesson.id)">
+                <button class="expand" (click)="showQuestions()">
                     <span>See questions</span>
                     <img src="assets/lesson-icons/expand.svg" alt="expand-icon" />
                 </button>
@@ -94,12 +94,8 @@
         <div class="spinner-container" *ngIf="isLoading">
             <app-loading-spinner class="spinner"></app-loading-spinner>'
         </div>
-        <div class="question" *ngFor="let question of questions">
-            <markdown class="question-text" [data]="question.topic"></markdown>
-            <div class="subquestion" *ngFor="let subquestion of question.subQuestions">
-                <img class="subquestion-elipse" src="assets/lesson-icons/bullet.svg" alt="bullet-icon" />
-                <p class="subquestion-text">{{ subquestion.text }}</p>
-            </div>
+        <div class="question">
+            <markdown class="question-text" [data]="questions"></markdown>
         </div>
     </div>
 </div>

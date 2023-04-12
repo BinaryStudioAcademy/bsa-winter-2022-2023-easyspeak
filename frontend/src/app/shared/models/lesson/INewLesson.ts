@@ -1,4 +1,3 @@
-import { INewQuestion } from './INewQuestion';
 import { INewTag } from './INewTag';
 
 export interface INewLesson {

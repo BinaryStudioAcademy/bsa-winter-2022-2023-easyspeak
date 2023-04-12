@@ -6,7 +6,6 @@ import { UserService } from '@core/services/user.service';
 import { YoutubePlayerComponent } from '@shared/components/youtube-player/youtube-player.component';
 import { ILesson } from '@shared/models/lesson/ILesson';
 
-import { Question } from 'src/app/models/lessons/question';
 import { CountriesTzLangProviderService } from 'src/app/services/countries-tz-lang-provider.service';
 import { LessonsService } from 'src/app/services/lessons.service';
 import { NotificationService } from 'src/app/services/notification.service';
@@ -58,7 +57,7 @@ export class LessonComponent extends BaseComponent implements OnInit {
     }
 
     showQuestions() {
-        if (this.questions.length) {
+        if (this.questions) {
             this.isShowQuestions = !this.isShowQuestions;
         }
 
