@@ -48,17 +48,17 @@
             </div>
         </div>
         <div *ngIf="user.userFriendshipStatus === eUserFriendshipStatus.Regular" class="buttons">
-            <button (click)="buttonGoToMessage()" class="button" id="hover">
+            <button (click)="buttonGoToMessage()" class="button hover">
                 <img src="assets/user-card-icons/message.svg" alt="book" />
                 <span>Message</span>
             </button>
-            <button (click)="onFollowClick()" class="button" id="hover">
+            <button (click)="onFollowClick()" class="button hover">
                 <img src="assets/user-card-icons/follow-icon.svg" alt="follow" />
                 <span>Add to Friends</span>
             </button>
         </div>
         <div *ngIf="user.userFriendshipStatus === eUserFriendshipStatus.Acceptor" class="buttons">
-            <button class="button" id="hover">
+            <button class="button hover">
                 <img src="assets/user-card-icons/mail.svg" alt="message">
                 <span>Message</span>
             </button>
@@ -68,17 +68,17 @@
             </button>
         </div>
         <div *ngIf="user.userFriendshipStatus === eUserFriendshipStatus.Requester" class="buttons">
-            <button class="button accept-button" (click)="onAcceptClicked()" id="hover">
+            <button class="button accept-button hover" (click)="onAcceptClicked()">
                 <img src="assets/user-card-icons/accept.svg" alt="message">
                 <span>Accept</span>
             </button>
-            <button class="button" (click)="onRejectClicked()" id="hover">
+            <button class="button hover" (click)="onRejectClicked()">
                 <img src="assets/user-card-icons/cancel.svg" alt="follow">
                 <span>Cancel</span>
             </button>
         </div>
         <div *ngIf="user.userFriendshipStatus === eUserFriendshipStatus.Friend" class="buttons">
-            <button class="button" id="hover">
+            <button class="button hover">
                 <img src="assets/user-card-icons/mail.svg" alt="message">
                 <span>Message</span>
             </button>
