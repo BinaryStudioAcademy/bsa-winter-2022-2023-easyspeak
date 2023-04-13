@@ -27,7 +27,7 @@ public class LessonsService : BaseService, ILessonsService
         var lessonsFromContext = _context.Lessons
             .Include(l => l.Tags)
             .Include(l => l.User)
-            .ThenInclude(user => user.Image)
+            .ThenInclude(user => user!.Image)
             .Where(x => x.StartAt.Date == filtersRequest.Date && !x.IsCanceled);
 
         if (tagsIds is not null && tagsIds.Any())
@@ -55,7 +55,7 @@ public class LessonsService : BaseService, ILessonsService
         {
             t.SubscribersCount = subscribersInfoDict[t.Id].SbCount;
             t.isSubscribed = subscribersInfoDict[t.Id].isSubscribed;
-            t.User.ImagePath = lessonsFromContext.First(lesson => lesson.Id == t.Id).User.Image?.Url;
+            t.User!.ImagePath = lessonsFromContext.First(lesson => lesson.Id == t.Id).User!.Image?.Url;
         });
 
         return lessonDtos;
