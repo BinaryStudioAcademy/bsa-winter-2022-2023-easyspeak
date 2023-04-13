@@ -78,26 +78,20 @@ erDiagram
     int friendshipStatus
   }
 
-  Subquestions {
-	  bigint id PK
-	  bigint questionId FK
-	  nvarchar text
-  }
-
   Chats ||--|{ Messages : chatId
   Chats ||--|{ Calls : chatId
   Chats {
     bigint id PK
     nvarchar name
   }
-
-  Lessons ||--|{ Questions : lessonId
+  
   Lessons {
     bigint id PK
     bigint createdBy FK
     nvarchar name
     nvarchar description
     nvarchar mediaPath
+    nvarchar questions
     datetime startsAt
     int limitOfUsers
     int languageLevel
@@ -125,13 +119,6 @@ erDiagram
     nvarchar text
     datetime createdAt
     boolean isDeleted
-  }
-
-  Questions ||--|{ Subquestions : questionId
-  Questions {
-    bigint id PK
-    bigint lessonId FK
-    nvarchar topic
   }
 
 ```

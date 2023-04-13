@@ -1,4 +1,3 @@
-import { INewQuestion } from './INewQuestion';
 import { INewTag } from './INewTag';
 
 export interface INewLesson {
@@ -8,6 +7,6 @@ export interface INewLesson {
     startAt: Date,
     limitOfUsers?: number,
     youtubeVideoId: string,
-    questions: INewQuestion[],
+    questions: string,
     tags: INewTag[],
 }

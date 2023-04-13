@@ -6,7 +6,6 @@ import { UserService } from '@core/services/user.service';
 import { YoutubePlayerComponent } from '@shared/components/youtube-player/youtube-player.component';
 import { ILesson } from '@shared/models/lesson/ILesson';
 
-import { Question } from 'src/app/models/lessons/question';
 import { CountriesTzLangProviderService } from 'src/app/services/countries-tz-lang-provider.service';
 import { LessonsService } from 'src/app/services/lessons.service';
 import { NotificationService } from 'src/app/services/notification.service';
@@ -23,7 +22,7 @@ export class LessonComponent extends BaseComponent implements OnInit {
 
     previewImage: string;
 
-    questions: Question[] = [];
+    questions: string;
 
     isShowQuestions = true;
 
@@ -57,24 +56,14 @@ export class LessonComponent extends BaseComponent implements OnInit {
         });
     }
 
-    showQuestions(id: number) {
-        if (this.questions.length) {
+    showQuestions() {
+        if (this.questions) {
             this.isShowQuestions = !this.isShowQuestions;
         }
 
         if (this.isShowQuestions) {
-            this.getQuestions(id);
+            this.questions = this.lesson.questions;
         }
-    }
-
-    private getQuestions(id: number) {
-        this.isLoading = true;
-        this.spinner.show();
-        this.lessonsService.getQuestions(id).subscribe((questions) => {
-            this.questions = questions;
-            this.isLoading = false;
-            this.spinner.hide();
-        });
     }
 
     joinLesson() {
