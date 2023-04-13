@@ -18,67 +18,36 @@
                     </mat-error>
                 </div>
             </div>
-
-            <div class="form-group-item">
-                <input
-                    formControlName="firstName"
-                    placeholder="First Name"
-                    (keyup)="ClearErrors(firstName)"
-                    [ngClass]="{'submitted': isChanged.firstName}"/>
-                <div class="errors-wrp"  *ngFor="let condition of ['required','pattern'] ">
-                    <mat-error class="error"
-                               *ngIf="CheckCondition(firstName,condition)">
-                        <img src="/assets/user-profile/alert-triangle.svg" alt="">
-                        {{GetErrorMessageByKey('name'+condition)}}
-                    </mat-error>
+            <div class="name-section">
+                <div class="form-group-item">
+                    <input
+                        formControlName="firstName"
+                        placeholder="First Name"
+                        (keyup)="ClearErrors(firstName)"
+                        [ngClass]="{'submitted': isChanged.firstName}"/>
+                    <div class="errors-wrp"  *ngFor="let condition of ['required','pattern'] ">
+                        <mat-error class="error"
+                                   *ngIf="CheckCondition(firstName,condition)">
+                            <img src="/assets/user-profile/alert-triangle.svg" alt="">
+                            {{GetErrorMessageByKey('name'+condition)}}
+                        </mat-error>
+                    </div>
+                </div>
+                <div class="form-group-item">
+                    <input
+                        formControlName="lastName"
+                        placeholder="Last Name"
+                        (keyup)="ClearErrors(lastName)"
+                        [ngClass]="{'submitted': isChanged.lastName}"/>
+                    <div class="errors-wrp"  *ngFor="let condition of ['required','pattern'] ">
+                        <mat-error class="error"
+                                   *ngIf="CheckCondition(lastName,condition)">
+                            <img src="/assets/user-profile/alert-triangle.svg" alt="">
+                            {{GetErrorMessageByKey('name'+condition)}}
+                        </mat-error>
+                    </div>
                 </div>
             </div>
-
-            <div class="form-group-item">
-                <input
-                    formControlName="lastName"
-                    placeholder="Last Name"
-                    (keyup)="ClearErrors(lastName)"
-                    [ngClass]="{'submitted': isChanged.lastName}"/>
-                <div class="errors-wrp"  *ngFor="let condition of ['required','pattern'] ">
-                    <mat-error class="error"
-                               *ngIf="CheckCondition(lastName,condition)">
-                        <img src="/assets/user-profile/alert-triangle.svg" alt="">
-                        {{GetErrorMessageByKey('name'+condition)}}
-                    </mat-error>
-                </div>
-            </div>
-
-<!--            <div class="name-section">-->
-<!--                <div class="form-group-item">-->
-<!--                    <input type="text" formControlName="firstName" placeholder="First Name" />-->
-
-<!--                    <div class="errors-wrp">-->
-<!--                        <mat-error class="error" *ngIf="this.firstName.invalid && this.userRegisterForm.submitted">-->
-<!--                            <img src="/assets/user-profile/alert-triangle.svg">-->
-<!--                            Field is required-->
-<!--                        </mat-error>-->
-<!--                    </div>-->
-
-<!--                    <div class="error-surface" *ngIf="this.firstName.invalid && this.userRegisterForm.submitted">-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--                <div class="form-group-item">-->
-<!--                    <input type="text" formControlName="lastName" placeholder="Last Name" matInput required />-->
-
-<!--                    <div class="errors-wrp">-->
-<!--                        <mat-error class="error" *ngIf="this.lastName.invalid && this.userRegisterForm.submitted">-->
-<!--                            <img src="/assets/user-profile/alert-triangle.svg">-->
-<!--                            {{getErrorMessage(lastName)}}-->
-<!--                        </mat-error>-->
-<!--                    </div>-->
-
-<!--                    <div class="error-surface"-->
-<!--                        *ngIf="this.lastName.errors?.['required'] && this.userRegisterForm.submitted">-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
             <div class="age-sex-section">
                 <div class="form-group-item">
                     <app-calendar id="dateOfBirth" formControlName="dateOfBirth" name="dateOfBirth" placeholder="Date of Birth"></app-calendar>
