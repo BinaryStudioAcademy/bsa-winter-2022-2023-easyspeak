@@ -7,6 +7,7 @@
     <div class="localVideoContainer">
         <video #localVideo id="localVideo" autoplay></video>
         <p id="localUser">You</p>
+        <img id="muted-icon" *ngIf="audioMuted" src="assets/session-call/mic_muted.svg" alt="mic_icon">
     </div>
 
     <div class="remoteVideoContainer">
@@ -15,8 +16,8 @@
     </div>
 
     <div class="footer">
-        <img src="assets/session-call/mic_icon.svg" alt="" (click)="toggleTrack('audio')">
+        <img class="audio-icon" [src]="audioMuted ? 'assets/session-call/mic_muted.svg' : 'assets/session-call/mic.svg'" alt="mic_icon" (click)="toggleTrack('audio')">
         <img src="assets/session-call/hangup_icon.svg" alt="" (click)="closeModal()">
-        <img src="assets/session-call/video_icon.svg" alt="" (click)="toggleTrack('video')">
+        <img class="video-icon" [src]="videoMuted ? 'assets/session-call/video_muted.svg' : 'assets/session-call/video.svg'" alt="video_icon" (click)="toggleTrack('video')">
     </div>
 </div>

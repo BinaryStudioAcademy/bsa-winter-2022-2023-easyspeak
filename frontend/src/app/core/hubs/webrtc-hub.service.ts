@@ -79,6 +79,7 @@ export class WebrtcHubService {
             ) => {
                 const config: MatDialogConfig<ICallInfo> = {
                     data: {
+                        hasButtons: true,
                         chatId,
                         callerId,
                         roomName,
@@ -98,6 +99,7 @@ export class WebrtcHubService {
                 const config: MatDialogConfig<ICallInfo> = {
                     minWidth: '100vw',
                     data: {
+                        hasButtons: true,
                         chatId,
                         callerId,
                         roomName,
@@ -106,12 +108,13 @@ export class WebrtcHubService {
                     },
                 };
 
+                this.dialogRef.closeAll();
                 this.dialogRef.open(SessionCallComponent, config);
             },
         );
 
         this.hubConnection.on('reject', () => {
-            this.messages.next('Rejected');
+            this.dialogRef.closeAll();
         });
 
         this.hubConnection.on('endCall', () => {
