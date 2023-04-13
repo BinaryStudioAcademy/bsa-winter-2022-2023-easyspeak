@@ -33,6 +33,10 @@ export class SignInComponent {
         private router: Router,
     ) { }
 
+    redirectToSignUp() {
+        this.router.navigate(['auth', 'sign-up']);
+    }
+
     public signIn() {
         this.isChanged.password = true;
         this.isChanged.email = true;
