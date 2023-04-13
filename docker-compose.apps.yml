@@ -46,6 +46,21 @@ services:
       environment:
           ASPNETCORE_ENVIRONMENT: 'Development'
 
+  easyspeak_recommendator_service:
+      build:
+        context: ./backend
+        dockerfile: ./EasySpeak.RecommendationService/Dockerfile
+        args:
+          - PROJECT_PORT=5110
+      container_name: 'easyspeak_recommendator_service'
+      restart: on-failure
+      ports:
+          - "5110:5110"
+      networks: 
+          - back
+      environment:
+          ASPNETCORE_ENVIRONMENT: 'Development'
+
   easyspeak_communicator:
       build:
         context: ./backend
@@ -66,6 +81,8 @@ services:
         - easyspeak_core
         - easyspeak_notifier
         - easyspeak_communicator
+        - easyspeak_recommendator_service
+        - easyspeak_emailer
     build:
         context: ./frontend
         dockerfile: Dockerfile.dev

@@ -1,13 +1,12 @@
 ﻿using AutoMapper;
 using EasySpeak.Core.BLL.Interfaces;
-using EasySpeak.Core.BLL.Options;
 using EasySpeak.Core.Common.DTO.Notification;
 using EasySpeak.Core.Common.Enums;
+using EasySpeak.Core.Common.Options;
 using EasySpeak.Core.DAL.Context;
 using EasySpeak.Core.DAL.Entities;
 using EasySpeak.RabbitMQ.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.Options;
 
 namespace EasySpeak.Core.BLL.Services

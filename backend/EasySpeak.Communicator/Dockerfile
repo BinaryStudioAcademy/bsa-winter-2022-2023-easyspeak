@@ -6,7 +6,7 @@ EXPOSE $PROJECT_PORT
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["EasySpeak.Communicator/EasySpeak.Communicator.WebAPI/EasySpeak.Communicator.WebAPI.csproj", "EasySpeak.Communicator.WebAPI/"]
-COPY ["EasySpeak.Core.DAL/EasySpeak.Core.DAL.csproj", "EasySpeak.Core.DAL/"]
+COPY ["EasySpeak.Core/EasySpeak.Core.DAL/EasySpeak.Core.DAL.csproj", "EasySpeak.Core.DAL/"]
 
 RUN dotnet restore "EasySpeak.Communicator.WebAPI/EasySpeak.Communicator.WebAPI.csproj"
 COPY . .

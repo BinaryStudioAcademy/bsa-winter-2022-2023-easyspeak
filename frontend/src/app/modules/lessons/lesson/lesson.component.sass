@@ -75,6 +75,8 @@
     margin-right: 10px
     vertical-align: top
 
+    word-wrap: break-word
+
     overflow: hidden
     text-overflow: ellipsis
     display: -webkit-box
@@ -240,6 +242,10 @@
     color: $white
     cursor: pointer
 
+#join-hover
+    &:hover
+        box-shadow: $box-shadow
+
 .join:disabled, .join[disabled], .cancel:disabled, .cancel[disabled]
     height: 25px
     background: $gray-200
@@ -323,5 +329,5 @@
     color: $gray-200
     cursor: default
 
-.edit-disabled-icon    
+.edit-disabled-icon
     filter: invert(98%) sepia(5%) saturate(1411%) hue-rotate(185deg) brightness(85%) contrast(91%)

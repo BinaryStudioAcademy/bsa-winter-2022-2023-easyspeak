@@ -55,11 +55,26 @@ services:
         env_file:
             - /etc/environment
 
+    easyspeak_recommendator_service:
+        image: tatihutii/easyspeak_recommendator_service:latest
+        container_name: 'easyspeak_recommendator_service'
+        restart: on-failure
+        networks:
+            - back
+        ports: 
+            - "5110:5110"
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Production
+        env_file:
+            - /etc/environment
+
     easyspeak_frontend:
         depends_on:
             - easyspeak_core
             - easyspeak_notifier
             - easyspeak_communicator
+            - easyspeak_recommendator_service
+            - easyspeak_emailer
         image: tatihutii/easyspeak_frontend:latest
         container_name: 'easyspeak_frontend'
         restart: on-failure

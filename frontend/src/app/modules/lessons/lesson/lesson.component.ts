@@ -29,6 +29,8 @@ export class LessonComponent extends BaseComponent implements OnInit {
 
     isLoading = false;
 
+    buttonHover: string;
+
     constructor(
         private dialogRef: MatDialog,
         private lessonsService: LessonsService,
@@ -40,8 +42,8 @@ export class LessonComponent extends BaseComponent implements OnInit {
         super();
     }
 
-    openDialog(youtubeVideoId: string) {
-        if (!youtubeVideoId) {
+    openDialog(videoId: string) {
+        if (!videoId) {
             return;
         }
         this.dialogRef.open(YoutubePlayerComponent, {
@@ -50,7 +52,7 @@ export class LessonComponent extends BaseComponent implements OnInit {
             height: '80%',
             width: '80%',
             data: {
-                youtubeVideoId,
+                videoId,
             },
         });
     }
@@ -127,6 +129,8 @@ export class LessonComponent extends BaseComponent implements OnInit {
                 } if (this.lesson.isSubscribed) {
                     return 'Subscribed';
                 }
+
+                this.buttonHover = 'join-hover';
 
                 return 'Join';
 

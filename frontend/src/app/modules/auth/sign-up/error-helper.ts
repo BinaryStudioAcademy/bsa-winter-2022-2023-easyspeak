@@ -3,6 +3,13 @@ export const validationErrorMessage: { [id: string]: string } = {
     maxlength: 'Value is too long',
     email: 'Not valid email adress',
     minlength: 'Value is too short',
+    name: 'Can contain latin letters and hyphen, min 2, max 25',
     pattern: 'Should have at least one small and one capital letter',
     matchError: 'Not match',
+    emailrequired: 'Email is required',
+    emailpattern: 'Incorrect email format',
+    passwordrequired: 'Password is required',
+    passwordpattern: 'At least 1 upper, 1 lowercase Latin letter, min 6, max 25',
+    incorrectPassword: 'Incorrect password',
+    notExists: 'User with such email doesn’t exist',
 };

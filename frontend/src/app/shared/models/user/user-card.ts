@@ -5,6 +5,7 @@ export enum UserFriendshipStatus {
     Friend
 }
 export interface UserCard {
+    id: number,
     name: string,
     email?: string,
     country: string,
@@ -15,4 +16,5 @@ export interface UserCard {
     tags: string[]
     flag: string;
     userFriendshipStatus?: UserFriendshipStatus
+    compatibility: number
 }

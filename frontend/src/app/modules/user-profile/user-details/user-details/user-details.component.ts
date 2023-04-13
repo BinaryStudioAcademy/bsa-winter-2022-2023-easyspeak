@@ -73,7 +73,14 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
                 ...tag,
                 link: `assets/topic-icons/${tag.imageUrl}`,
             }));
+
+            this.allTags = tags.map((item) => ({
+                name: item.name,
+                id: item.id,
+                isSelected: false,
+            }));
         });
+
         this.detailsForm = detailsGroup(this.fb);
         this.sexOptions = Object.values(this.sexEnumeration) as string[];
         this.languageLevelOptions = Object.values(LanguageLevel).map(level => mapLanguageLevelToString(level));
@@ -86,18 +93,16 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
             .subscribe((resp) => {
                 this.detailsForm.patchValue({ ...resp });
 
-                this.userService.getUserTags().pipe(this.untilThis)
-                    .subscribe(tags => {
-                        this.allTags = tags;
-                        this.selectedTags = tags.filter(t => t.isSelected);
-                    });
-
                 this.languageLevel.setValue(mapLanguageLevelToString(resp.languageLevel));
                 this.userFirstName = resp.firstName;
                 this.userLastName = resp.lastName;
                 this.imagePath = resp.imagePath;
             });
 
+        this.userService.getUserTags().pipe(this.untilThis)
+            .subscribe(tags => {
+                this.selectedTags = tags.filter(t => t.isSelected);
+            });
         this.authService.user.subscribe((user) => this.setImgPath(user));
     }
 
