@@ -130,12 +130,14 @@ export class LessonComponent extends BaseComponent implements OnInit {
                     return 'Subscribed';
                 }
 
-                this.buttonHover = 'join-hover';
+                this.buttonHover = 'hover';
 
                 return 'Join';
 
             case this.isTeachersPage:
                 if (!this.lesson.isCanceled) {
+                    this.buttonHover = 'hover';
+
                     return 'Cancel';
                 }
 
