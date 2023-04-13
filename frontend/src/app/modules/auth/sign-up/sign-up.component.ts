@@ -84,6 +84,10 @@ export class SignUpComponent extends BaseComponent implements OnInit {
         this.setUpData();
     }
 
+    redirectToSignIn() {
+        this.router.navigate(['auth', 'sign-in']);
+    }
+
     submitForm() {
         if (this.validateForm()) {
             this.signUp();
