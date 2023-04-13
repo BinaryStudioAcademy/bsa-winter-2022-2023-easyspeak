@@ -67,6 +67,24 @@ export class LessonComponent extends BaseComponent implements OnInit {
             this.isQuestionsOpened = true;
             this.getQuestions(id);
             this.questionsOpened.emit();
+
+            const observer = new MutationObserver(() => {
+                const container = document.querySelector('.lesson-card-questions') as HTMLElement;
+
+                if (
+                    container &&
+                    document.querySelector('.question-text') &&
+                    document.querySelectorAll('.lesson-card-questions').length === 1
+                ) {
+                    observer.disconnect();
+
+                    if (container.scrollHeight > container.clientHeight) {
+                        container.style.height = '460px';
+                    }
+                }
+            });
+
+            observer.observe(document.body, { childList: true, subtree: true });
         }
     }
 
