@@ -76,6 +76,7 @@ export class TeachersPageComponent implements OnInit {
     }
 
     loadLessons(daysCount: number) {
+        this.openedLessonIndex = -1;
         this.selectedDaysCount = daysCount;
         this.lessonsService
             .getTeacherLessonsAtPeriod(

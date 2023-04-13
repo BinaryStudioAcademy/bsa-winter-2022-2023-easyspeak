@@ -62,7 +62,9 @@ export class LessonComponent extends BaseComponent implements OnInit {
     showQuestions(id: number) {
         if (this.questions.length > 0 && this.isQuestionsOpened) {
             this.questions = [];
+            this.isQuestionsOpened = false;
         } else {
+            this.isQuestionsOpened = true;
             this.getQuestions(id);
             this.questionsOpened.emit();
         }

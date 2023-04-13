@@ -82,6 +82,7 @@ export class LessonsPageComponent implements OnInit, OnChanges {
     }
 
     getLessons() {
+        this.openedLessonIndex = -1;
         this.lessonService
             .getFilteredLessons({
                 languageLevels: this.selectedLanguageFilters.map((level: string) =>
