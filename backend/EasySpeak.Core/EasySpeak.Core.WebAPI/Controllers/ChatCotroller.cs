@@ -38,5 +38,11 @@ namespace EasySpeak.Core.WebAPI.Controllers
         {
             return Ok(await _chatService.CreateChat(userIds[0], userIds[1]));
         }
+
+        [HttpGet("getUnreadMessages/{userId}")]
+        public async Task<ActionResult<long>> GetNumberOfUnreadMessages(long userId)
+        {
+            return Ok(await _chatService.GetNumberOfUnreadMessages(userId));
+        }
     }
 }

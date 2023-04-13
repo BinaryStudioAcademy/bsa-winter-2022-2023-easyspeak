@@ -155,5 +155,23 @@ namespace EasySpeak.Core.BLL.Services
 
             return chat.Id;
         }
+
+        public async Task<long> GetNumberOfUnreadMessages(long userId)
+        {
+            return await _context.Chats
+                .Include(chat => chat.Users)
+                .Where(chat => chat.Users.Any(user => user.Id == userId))
+                .Include(chat => chat.Messages)
+                .SelectMany(chat => chat.Messages)
+                .CountAsync(message => message.CreatedBy != userId && !message.IsRead);
+        }
+
+        public async Task<long[]> GetChatsById(long userId)
+        {
+            return await _context.Chats
+                .Where(chat => chat.Users.Any(user => user.Id == userId))
+                .Select(chat => chat.Id)
+                .ToArrayAsync();
+        }
     }
 }
