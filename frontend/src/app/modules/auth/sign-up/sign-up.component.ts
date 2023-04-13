@@ -13,6 +13,7 @@ import { Sex } from '@shared/data/sex';
 import { INewUser } from '@shared/models/INewUser';
 import { ToastrService } from 'ngx-toastr';
 import { switchMap } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 import { CountriesTzLangProviderService } from 'src/app/services/countries-tz-lang-provider.service';
 
@@ -52,26 +53,42 @@ export class SignUpComponent extends BaseComponent implements OnInit {
     @ViewChild('levelDropdown') levelDropdown: NgSelectComponent;
 
     registerForm = new FormGroup({
-        email: new FormControl(
-            '',
-            [Validators.required,
-                Validators.maxLength(50),
-                Validators.pattern(emailFormatRegex)],
-        ),
-        firstName: new FormControl('', [Validators.required, Validators.pattern(nameFormatRegex)]),
-        lastName: new FormControl('', [Validators.required, Validators.pattern(nameFormatRegex)]),
-        sex: new FormControl('', [Validators.required]),
+        email: new FormControl('', {
+            validators: [Validators.required, Validators.maxLength(50), Validators.pattern(emailFormatRegex)],
+            updateOn: 'submit',
+        }),
+        firstName: new FormControl('', {
+            validators: [Validators.required, Validators.pattern(nameFormatRegex)],
+            updateOn: 'submit',
+        }),
+        lastName: new FormControl('', {
+            validators: [Validators.required, Validators.pattern(nameFormatRegex)],
+            updateOn: 'submit',
+        }),
+        password: new FormControl('', {
+            validators: [Validators.required, Validators.pattern(passFormatRegex)],
+            updateOn: 'submit',
+        }),
+        passwordConfirmation: new FormControl('', {
+            validators: [Validators.required],
+            updateOn: 'submit',
+        }),
+        sex: new FormControl('', {
+            validators: [Validators.required],
+            updateOn: 'submit',
+        }),
         languageLevel: new FormControl('', [Validators.required]),
         country: new FormControl('', [Validators.required]),
         language: new FormControl('', [Validators.required]),
         dateOfBirth: new FormControl('', [Validators.required]),
-        password: new FormControl('', [Validators.required, Validators.pattern(passFormatRegex)]),
-        passwordConfirmation: new FormControl('', [Validators.required]),
-    }, { validators: matchpassword });
+
+    }, {
+        validators: matchpassword,
+    });
 
     user: INewUser;
 
-    isChanged = { email: false, firstName: false, lastName: false, password: false, passwordConfirmation: false };
+    isChanged = { email: false, firstName: false, lastName: false, password: false, passwordConfirmation: false, sex: false };
 
     constructor(
         private formBuilder: FormBuilder,
@@ -106,12 +123,7 @@ export class SignUpComponent extends BaseComponent implements OnInit {
     }
 
     private signUp() {
-        this.isChanged.password = true;
-        this.isChanged.email = true;
-        this.isChanged.firstName = true;
-        this.isChanged.lastName = true;
-        this.isChanged.passwordConfirmation = true;
-        if (this.registerForm.valid) {
+        if (this.registerForm.valid || true) {
             this.authService
                 .signUp(this.email.value, this.password.value)
                 .pipe(switchMap(() => this.createUser().pipe(this.untilThis)))
@@ -127,11 +139,24 @@ export class SignUpComponent extends BaseComponent implements OnInit {
                     this.authService.setUser(userShort);
                     this.toastr.success('Account successfully created', 'Success!');
                     this.router.navigate(['topics']);
+                }, error => {
+                    const errorMessage: string | undefined = this.getFireBaseMessage(error.code);
+
+                    this.toastr.error(errorMessage, 'Sign up');
                 });
         }
     }
 
     private validateForm() {
+        this.isChanged.password = true;
+        this.isChanged.email = true;
+        this.isChanged.firstName = true;
+        this.isChanged.lastName = true;
+        this.isChanged.passwordConfirmation = true;
+        this.isChanged.sex = true;
+
+        return true;
+
         return this.registerForm.valid;
     }
 
@@ -187,6 +212,10 @@ export class SignUpComponent extends BaseComponent implements OnInit {
         }
         if (control === this.passwordConfirmation) {
             this.isChanged.passwordConfirmation = false;
+            control.setErrors({ matchError: false });
+        }
+        if (control === this.sex) {
+            this.isChanged.sex = false;
         }
     }
 
@@ -197,7 +226,7 @@ export class SignUpComponent extends BaseComponent implements OnInit {
     getFireBaseMessage(code: string) {
         switch (code) {
             case 'auth/email-already-in-use':
-                return this.GetErrorMessageByKey('Email is already registered');
+                return this.GetErrorMessageByKey('alreadyRegistered');
             default: return undefined;
         }
     }
@@ -225,13 +254,20 @@ export class SignUpComponent extends BaseComponent implements OnInit {
             isChanged = this.isChanged.passwordConfirmation;
         }
 
+        if (control === this.sex) {
+            isChanged = this.isChanged.sex;
+
+            //            return (control.valid && isChanged);
+        }
         switch (condition) {
             case 'required':
                 return ((control.errors?.[condition] && control.touched) || control.pristine) && isChanged;
             case 'pattern':
                 return control.errors?.[condition] && isChanged;
-            case 'repeat':
-                return control.errors?.[condition] && isChanged;
+            case 'matchError':
+                control.setErrors({ matchError: true });
+
+                return this.registerForm.errors?.[condition] && isChanged;
             default: return undefined;
         }
     }
