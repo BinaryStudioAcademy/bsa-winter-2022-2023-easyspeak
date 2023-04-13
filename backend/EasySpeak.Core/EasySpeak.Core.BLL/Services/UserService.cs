@@ -116,9 +116,8 @@ public class UserService : BaseService, IUserService
 
 
         var filteredUsersList = await filteredUsers.ToListAsync();
-        return _mapper.Map<List<UserShortInfoDto>>(filteredUsersList);
 
-        //return await AddCompatibility(filteredUsersList, filter.Compatibility);
+        return await AddCompatibility(filteredUsersList, filter.Compatibility);
     }
 
     private async Task<List<UserShortInfoDto>> AddCompatibility(List<User> users, int compatibility)
