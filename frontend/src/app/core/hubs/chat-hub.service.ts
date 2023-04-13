@@ -43,12 +43,6 @@ export class ChatHubService {
         });
     }
 
-    // public async connect(email: string) {
-    //     await this.hubConnection.invoke('Connect', email).catch((err) => {
-    //         console.error(err);
-    //     });
-    // }
-
     public async end() {
         await this.people.unsubscribe();
         await this.messages.unsubscribe();
