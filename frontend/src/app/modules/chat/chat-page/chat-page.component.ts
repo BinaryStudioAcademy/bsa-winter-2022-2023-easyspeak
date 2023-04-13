@@ -4,6 +4,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ChatHubService } from '@core/hubs/chat-hub.service';
 import { WebrtcHubService } from '@core/hubs/webrtc-hub.service';
+import { ChatService } from '@core/services/chat.service';
 import { HttpService } from '@core/services/http.service';
 import { AcceptCallComponent } from '@shared/components/accept-call/accept-call.component';
 import { ScrollToBottomDirective } from '@shared/directives/scroll-to-bottom-directive';
@@ -47,6 +48,7 @@ export class ChatPageComponent implements OnInit, OnDestroy {
         private chatHub: ChatHubService,
         private webrtcHub: WebrtcHubService,
         private route: ActivatedRoute,
+        private chatService: ChatService,
         private dialogRef: MatDialog,
     ) {
 
@@ -57,9 +59,7 @@ export class ChatPageComponent implements OnInit, OnDestroy {
 
         await this.chatHub.start();
 
-        await this.webrtcHub.start();
-
-        this.httpService.get<IChatPerson[]>('/chat/lastSendMessages').subscribe((people) => {
+        this.chatService.getChats().subscribe((people) => {
             this.people = people;
             this.filteredPeople = people;
             this.chatHub.invoke(
@@ -84,13 +84,17 @@ export class ChatPageComponent implements OnInit, OnDestroy {
                     new Date(msg.createdAt).setMinutes(new Date(msg.createdAt).getMinutes() + new Date().getTimezoneOffset()),
                 ),
             });
-            this.chatHub.invoke(
-                'GetChatsAsync',
-                msg.chatId,
-                this.currentUser.id,
-            );
+            this.chatService.getChats().subscribe((people) => {
+                this.people = people;
+                this.filteredPeople = people;
+            });
             if (this.currentUser.id !== msg.createdBy) {
-                this.chatHub.invoke('ReadMessages', this.currentChatId, this.currentUser.id);
+                this.chatService.readMessages(this.currentChatId).subscribe(() => {
+                    this.chatService.getChats().subscribe((people) => {
+                        this.people = people;
+                        this.filteredPeople = people;
+                    });
+                });
             }
             this.scroll.scrollToBottom();
         });
@@ -129,8 +133,8 @@ export class ChatPageComponent implements OnInit, OnDestroy {
         }
     }
 
-    async getChat(person: IChatPerson) {
-        await this.httpService.get<IMessageGroup[]>(`/chat/chatMessages/${person.chatId}`).subscribe((groupedMessages) => {
+    getChat(person: IChatPerson) {
+        this.chatService.getOneChat(person.chatId).subscribe((groupedMessages) => {
             this.groupedMessages = groupedMessages.map((messageGroup): IMessageGroup => ({
                 date: new Date(messageGroup.date),
                 messages: messageGroup.messages.map((message): IMessage => ({
@@ -141,7 +145,12 @@ export class ChatPageComponent implements OnInit, OnDestroy {
             this.currentChatId = person.chatId;
             this.currentPerson = person;
         });
-        this.chatHub.invoke('ReadMessages', person.chatId, this.currentUser.id);
+        this.chatService.readMessages(person.chatId).subscribe(() => {
+            this.chatService.getChats().subscribe((people) => {
+                this.people = people;
+                this.filteredPeople = people;
+            });
+        });
     }
 
     sendMessage() {
@@ -154,9 +163,12 @@ export class ChatPageComponent implements OnInit, OnDestroy {
                 createdBy: this.currentUser.id,
                 text: message,
                 createdAt: new Date(Date.now()),
+                isRead: false,
             };
 
-            this.chatHub.invoke('SendMessageAsync', msg);
+            this.chatService.sendMessage(msg).subscribe(() => {
+                this.chatHub.invoke('SendMessageAsync', msg);
+            });
         }
     }
 
