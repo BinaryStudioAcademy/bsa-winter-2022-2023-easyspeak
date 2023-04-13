@@ -10,6 +10,7 @@ import { IChatPerson } from '@shared/models/chat/IChatPerson';
 import { IMessage } from '@shared/models/chat/IMessage';
 import { IMessageGroup } from '@shared/models/chat/IMessageGroup';
 import { IUserShort } from '@shared/models/IUserShort';
+import { TimeUtils } from '@shared/utils/time.utils';
 import { Subscription } from 'rxjs';
 import {NotificationsHubService} from "@core/hubs/notifications-hub.service";
 
@@ -17,11 +18,14 @@ import {NotificationsHubService} from "@core/hubs/notifications-hub.service";
     selector: 'app-chat-page',
     templateUrl: './chat-page.component.html',
     styleUrls: ['./chat-page.component.sass'],
+    providers: [ChatHubService],
 })
 export class ChatPageComponent implements OnInit, OnDestroy {
     @ViewChild(ScrollToBottomDirective) scroll: ScrollToBottomDirective;
 
     people: IChatPerson[];
+
+    filteredPeople: IChatPerson[];
 
     groupedMessages: IMessageGroup[] = [];
 
@@ -32,6 +36,8 @@ export class ChatPageComponent implements OnInit, OnDestroy {
     currentChatId: number;
 
     allMessagesSubscription: Subscription;
+
+    addTimeOffset = TimeUtils.addTimeOffset;
 
     constructor(
         private router: Router,
@@ -53,6 +59,7 @@ export class ChatPageComponent implements OnInit, OnDestroy {
 
         this.httpService.get<IChatPerson[]>('/chat/lastSendMessages').subscribe((people) => {
             this.people = people;
+            this.filteredPeople = people;
             this.chatHub.invoke(
                 'AddToGroup',
                 this.people.map((p) => p.chatId),
@@ -69,8 +76,17 @@ export class ChatPageComponent implements OnInit, OnDestroy {
 
     private setActionsForMessages() {
         this.chatHub.listenMessages((msg) => {
-            this.addMessage(msg);
-            this.chatHub.invoke('GetChatsAsync', msg.chatId, this.currentUser.id);
+            this.addMessage({
+                ...msg,
+                createdAt: new Date(
+                    new Date(msg.createdAt).setMinutes(new Date(msg.createdAt).getMinutes() + new Date().getTimezoneOffset()),
+                ),
+            });
+            this.chatHub.invoke(
+                'GetChatsAsync',
+                msg.chatId,
+                this.currentUser.id,
+            );
             if (this.currentUser.id !== msg.createdBy) {
                 this.chatHub.invoke('ReadMessages', this.currentChatId, this.currentUser.id);
             }
@@ -81,11 +97,13 @@ export class ChatPageComponent implements OnInit, OnDestroy {
     setActionsForChats() {
         this.chatHub.listenChats((people) => {
             this.people = people;
+            this.filteredPeople = people;
         });
     }
 
     async ngOnDestroy(): Promise<void> {
         await this.allMessagesSubscription.unsubscribe();
+        await this.chatHub.end();
     }
 
     addMessage(msg: IMessage): void {
@@ -109,19 +127,15 @@ export class ChatPageComponent implements OnInit, OnDestroy {
         }
     }
 
-    getChat(person: IChatPerson) {
-        this.httpService.get<IMessageGroup[]>(`/chat/chatMessages/${person.chatId}`).subscribe((groupedMessages) => {
-            this.groupedMessages = groupedMessages.map(
-                (messageGroup): IMessageGroup => ({
-                    date: new Date(messageGroup.date),
-                    messages: messageGroup.messages.map(
-                        (message): IMessage => ({
-                            ...message,
-                            createdAt: new Date(message.createdAt),
-                        }),
-                    ),
-                }),
-            );
+    async getChat(person: IChatPerson) {
+        await this.httpService.get<IMessageGroup[]>(`/chat/chatMessages/${person.chatId}`).subscribe((groupedMessages) => {
+            this.groupedMessages = groupedMessages.map((messageGroup): IMessageGroup => ({
+                date: new Date(messageGroup.date),
+                messages: messageGroup.messages.map((message): IMessage => ({
+                    ...message,
+                    createdAt: new Date(message.createdAt),
+                })),
+            }));
             this.currentChatId = person.chatId;
             this.currentPerson = person;
         });
@@ -145,8 +159,24 @@ export class ChatPageComponent implements OnInit, OnDestroy {
         }
     }
 
+    filterForm = new FormGroup({
+        filterInput: new FormControl(''),
+    });
+
+    filterPeople() {
+        const value = this.filterForm.value.filterInput?.toLowerCase();
+
+        this.filteredPeople = this.people.filter(person => `${person.firstName} ${person.lastName}`
+            .toLowerCase()
+            .includes(value as string));
+    }
+
     getTotalUnreadMessages(): number {
-        return this.people.reduce((sum, person) => sum + person.numberOfUnreadMessages, 0);
+        if (this.people) {
+            return this.people.reduce((sum, person) => sum + person.numberOfUnreadMessages, 0);
+        }
+
+        return 0;
     }
 
     lotsOfMessages(value: number): string {
@@ -155,7 +185,6 @@ export class ChatPageComponent implements OnInit, OnDestroy {
 
     form = new FormGroup({
         message: new FormControl('', { nonNullable: true }),
-        file: new FormControl(''),
     });
 
     startSessionCall(): void {

@@ -21,6 +21,8 @@ export class CropImageDialogComponent extends BaseComponent {
 
     cropImgPreview: string = '';
 
+    isError = false;
+
     constructor(
         public dialogRef: MatDialogRef<UserDetailsComponent>,
         @Inject(MAT_DIALOG_DATA) public data: { imgChangeEvt: HTMLInputEvent },
@@ -59,5 +61,9 @@ export class CropImageDialogComponent extends BaseComponent {
 
             this.onNoClick();
         }
+    }
+
+    loadImageFailed() {
+        this.isError = true;
     }
 }

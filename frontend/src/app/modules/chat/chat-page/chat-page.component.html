@@ -7,7 +7,9 @@
             </div>
         </div>
         <mat-form-field appearance="fill">
-            <input matInput placeholder="Type a name..."/>
+            <form [formGroup]="filterForm">
+                <input matInput placeholder="Type a name..." (input)="filterPeople()" formControlName="filterInput"/>
+            </form>
             <mat-icon matSuffix>search</mat-icon>
         </mat-form-field>
         <div class="line"></div>
@@ -19,13 +21,21 @@
                   'unread': person.numberOfUnreadMessages,
                   'read': !person.numberOfUnreadMessages
                 }"
-                 *ngFor="let person of people"
+                 *ngFor="let person of filteredPeople"
                 (click)="getChat(person)">
                 <div class="img-name-status-time">
                     <div class="img-name-status">
                         <div class="img-online">
-                            <img src="assets/header/avatar.svg" alt="img">
+                            <div class="avatar-div">
+                                <app-avatar
+                                    [imageSize]="36"
+                                    [firstName]="person.firstName"
+                                    [lastName]="person.lastName"
+                                    [imagePath]="person.imageUrl">
+                                </app-avatar>
+                            </div>
                             <div [ngClass]="{
+                                'status' : true,
                                 'online' : person.isOnline,
                                 'offline' : !person.isOnline
                              }"></div>
@@ -35,7 +45,7 @@
                             <span class="person-online">{{person.isOnline ? 'online' : 'offline'}}</span>
                         </div>
                     </div>
-                    <span>{{person.lastMessageDate | date: 'HH:mm'}}</span>
+                    <span>{{addTimeOffset(person.lastMessageDate) | date: 'HH:mm'}}</span>
                 </div>
                 <div class="last-message-total">
                     <span class="last-message">{{person.lastMessage}}</span>
@@ -59,9 +69,6 @@
                 <button class="send-button" (click)="startSessionCall()">
                     <img src="assets/chat/Camera.svg" alt="img">
                 </button>
-                <button class="more-button">
-                    <img src="assets/chat/More.svg" alt="img">
-                </button>
             </div>
         </header>
         <div class="chat-body" #scrollMe [scrollTop]="scrollMe.scrollHeight" *ngIf="groupedMessages.length > 0">
@@ -70,6 +77,7 @@
                 [message]="message"
                 [i]="i"
                 [currentUser]="currentUser"
+                [currentPerson]="currentPerson"
             >
             </app-message-group>
         </div>
@@ -79,14 +87,10 @@
         <div class="chat-input">
             <form [formGroup]="form" (ngSubmit)="sendMessage()">
                 <div class="message-input">
-                    <label for="file-upload" class="custom-file-upload">
-                        <input type="file" id="file-upload" formControlName="file">
-                        <img src="assets/chat/Pin.svg" alt="img">
-                    </label>
                     <input placeholder="Type a message..." formControlName="message">
                     <label for="input-more" class="custom-file-upload">
                         <button class="input-more" id="input-more" type="button"></button>
-                        <img src="assets/chat/More-input.svg" alt="img">
+                        <img src="assets/chat/emoji.svg" alt="img">
                     </label>
                 </div>
                 <div class="vertical-line"></div>

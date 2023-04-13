@@ -7,5 +7,6 @@ export interface IChatPerson {
     lastMessage: string,
     lastMessageDate: string,
     numberOfUnreadMessages: number,
-    chatId: number
+    chatId: number,
+    imageUrl: string
 }

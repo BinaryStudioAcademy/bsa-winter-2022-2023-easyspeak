@@ -1,8 +1,20 @@
 <div class="crop-avatar">
-    <image-cropper [imageChangedEvent]="data.imgChangeEvt" [maintainAspectRatio]="true" [aspectRatio]="4 / 4"
-    [resizeToWidth]="100" (imageCropped)="cropImg($event)">
+    <image-cropper 
+    [imageChangedEvent]="data.imgChangeEvt" 
+    [maintainAspectRatio]="true" 
+    [aspectRatio]="1 / 1"
+    [resizeToWidth]="128" 
+    [resizeToWidth]="256"
+    (loadImageFailed)="loadImageFailed()"
+    [containWithinAspectRatio]="false"
+    [roundCropper]="true"
+    (imageCropped)="cropImg($event)">
     </image-cropper>
-    <div mat-dialog-actions>
+    <div *ngIf="isError" class="error">
+      This type of file cannot be processed
+      <button mat-button class="cancel" (click)="onNoClick()">Ok</button>
+    </div>
+    <div mat-dialog-actions *ngIf="!isError">
       <button mat-button class="cancel" (click)="onNoClick()">Cancel</button>
       <button mat-button (click)="saveAvatar()">Ok</button>
     </div>
