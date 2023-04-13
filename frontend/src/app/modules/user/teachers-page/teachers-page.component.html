@@ -76,8 +76,8 @@
                     <app-lesson
                         [lesson]="lesson"
                         [isTeachersPage]="true"
-                        [isQuestionsOpened]="isLessonOpenedQuestions(i * datesWithLessons.length + j)"
-                        (questionsOpened)="onLessonOpenedQuestions(i * datesWithLessons.length + j)"></app-lesson>
+                        [isQuestionsOpened]="isLessonOpenedQuestions(lesson.id)"
+                        (questionsOpened)="onLessonOpenedQuestions(lesson.id)"></app-lesson>
                 </div>
             </div>
             <div class="lessons-column">
@@ -85,8 +85,8 @@
                     <app-lesson
                         [lesson]="lesson"
                         [isTeachersPage]="true"
-                        [isQuestionsOpened]="isLessonOpenedQuestions(i * datesWithLessons.length + j + day.lessonsColumn1.length)"
-                        (questionsOpened)="onLessonOpenedQuestions(i * datesWithLessons.length + j + day.lessonsColumn1.length)"></app-lesson>
+                        [isQuestionsOpened]="isLessonOpenedQuestions(lesson.id)"
+                        (questionsOpened)="onLessonOpenedQuestions(lesson.id)"></app-lesson>
                 </div>
             </div>
         </div>

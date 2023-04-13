@@ -9,8 +9,8 @@
                 <app-lesson
                     [lesson]="lesson"
                     [isTeachersPage]="false"
-                    [isQuestionsOpened]="isLessonOpenedQuestions(i)"
-                    (questionsOpened)="onLessonOpenedQuestions(i)"></app-lesson>
+                    [isQuestionsOpened]="isLessonOpenedQuestions(lesson.id)"
+                    (questionsOpened)="onLessonOpenedQuestions(lesson.id)"></app-lesson>
             </div>
         </div>
         <div class="lessons-column">
@@ -18,8 +18,8 @@
                 <app-lesson
                     [lesson]="lesson"
                     [isTeachersPage]="false"
-                    [isQuestionsOpened]="isLessonOpenedQuestions(i + lessonsColumn1.length)"
-                    (questionsOpened)="onLessonOpenedQuestions(i + lessonsColumn1.length)"></app-lesson>
+                    [isQuestionsOpened]="isLessonOpenedQuestions(lesson.id)"
+                    (questionsOpened)="onLessonOpenedQuestions(lesson.id)"></app-lesson>
             </div>
         </div>
     </div>

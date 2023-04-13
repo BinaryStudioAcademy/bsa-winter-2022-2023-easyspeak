@@ -36,7 +36,7 @@ export class LessonsPageComponent implements OnInit, OnChanges {
 
     userIsAdmin = false;
 
-    openedLessonIndex: number;
+    openedLessonId: number;
 
     constructor(
         private dialogRef: MatDialog,
@@ -82,7 +82,7 @@ export class LessonsPageComponent implements OnInit, OnChanges {
     }
 
     getLessons() {
-        this.openedLessonIndex = -1;
+        this.openedLessonId = -1;
         this.lessonService
             .getFilteredLessons({
                 languageLevels: this.selectedLanguageFilters.map((level: string) =>
@@ -113,11 +113,11 @@ export class LessonsPageComponent implements OnInit, OnChanges {
         }
     }
 
-    onLessonOpenedQuestions(index: number) {
-        this.openedLessonIndex = index;
+    onLessonOpenedQuestions(id: number) {
+        this.openedLessonId = id;
     }
 
-    isLessonOpenedQuestions(index: number) {
-        return this.openedLessonIndex === index;
+    isLessonOpenedQuestions(id: number) {
+        return this.openedLessonId === id;
     }
 }

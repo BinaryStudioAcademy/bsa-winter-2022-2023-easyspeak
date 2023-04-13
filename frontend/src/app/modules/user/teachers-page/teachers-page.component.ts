@@ -31,7 +31,7 @@ export class TeachersPageComponent implements OnInit {
 
     datesWithLessons: IDateWithLessons[] = [];
 
-    openedLessonIndex: number;
+    openedLessonId: number;
 
     constructor(
         private authService: AuthService,
@@ -76,7 +76,7 @@ export class TeachersPageComponent implements OnInit {
     }
 
     loadLessons(daysCount: number) {
-        this.openedLessonIndex = -1;
+        this.openedLessonId = -1;
         this.selectedDaysCount = daysCount;
         this.lessonsService
             .getTeacherLessonsAtPeriod(
@@ -97,11 +97,11 @@ export class TeachersPageComponent implements OnInit {
         });
     }
 
-    onLessonOpenedQuestions(index: number) {
-        this.openedLessonIndex = index;
+    onLessonOpenedQuestions(id: number) {
+        this.openedLessonId = id;
     }
 
-    isLessonOpenedQuestions(index: number) {
-        return this.openedLessonIndex === index;
+    isLessonOpenedQuestions(id: number) {
+        return this.openedLessonId === id;
     }
 }

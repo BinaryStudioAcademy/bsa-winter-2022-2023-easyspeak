@@ -61,28 +61,30 @@ export class LessonComponent extends BaseComponent implements OnInit {
     }
 
     showQuestions() {
-        if (this.questions && this.isQuestionsOpened) {
+        if (this.isQuestionsOpened) {
             this.questions = '';
-            this.isQuestionsOpened = false;
         } else {
-            this.isQuestionsOpened = true;
             this.questions = this.lesson.questions;
             this.questionsOpened.emit();
-
-            const observer = new MutationObserver(() => {
-                const container = document.querySelector('.lesson-card-questions') as HTMLElement;
-
-                if (container) {
-                    observer.disconnect();
-
-                    if (container.scrollHeight > container.clientHeight) {
-                        container.style.height = '460px';
-                    }
-                }
-            });
-
-            observer.observe(document.body, { childList: true, subtree: true });
+            this.changeCardHeight();
         }
+        this.isQuestionsOpened = !this.isQuestionsOpened;
+    }
+
+    changeCardHeight() {
+        const observer = new MutationObserver(() => {
+            const container = document.querySelector('.lesson-card-questions') as HTMLElement;
+
+            if (container) {
+                observer.disconnect();
+
+                if (container.scrollHeight > container.clientHeight) {
+                    container.style.height = '460px';
+                }
+            }
+        });
+
+        observer.observe(document.body, { childList: true, subtree: true });
     }
 
     joinLesson() {
@@ -125,7 +127,7 @@ export class LessonComponent extends BaseComponent implements OnInit {
             );
         }
         if (this.isTeachersPage) {
-            return this.lesson.isCanceled || new Date() > new Date(this.lesson.startAt);
+            return this.lesson.isCanceled;
         }
 
         return false;
