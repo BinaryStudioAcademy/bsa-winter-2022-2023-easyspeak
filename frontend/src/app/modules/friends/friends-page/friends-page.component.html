@@ -1,8 +1,8 @@
 <div class="block">
     <ng-container *ngIf="requests">
+        <h2 class="requests-header">Requests</h2>
         <div class="user-grid" *ngIf="requests.length">
-            <h2 class="requests-header">Requests</h2>
-            <app-user-card class="user-card" *ngFor="let request of requests" [user]="request"></app-user-card>
+            <app-user-card *ngFor="let request of requests" [user]="request"></app-user-card>
         </div>
     </ng-container>
     <h2 class="requests-header">Friends</h2>
