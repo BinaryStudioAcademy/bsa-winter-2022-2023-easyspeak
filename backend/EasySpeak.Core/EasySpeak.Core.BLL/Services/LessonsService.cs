@@ -20,17 +20,6 @@ public class LessonsService : BaseService, ILessonsService
         _zoomApiService = zoomApiService;
     }
 
-    public async Task<ICollection<QuestionForLessonDto>> GetQuestionsByLessonIdAsync(int id)
-    {
-        var questions = await _context.Questions.Include(q => q.Subquestions)
-                                                .Where(q => q.LessonId == id)
-                                                .ToListAsync();
-
-        var questionDtos = _mapper.Map<ICollection<Question>, ICollection<QuestionForLessonDto>>(questions);
-
-        return questionDtos;
-    }
-
     public async Task<ICollection<LessonDto>> GetAllLessonsAsync(FiltersRequest filtersRequest)
     {
         var tagsIds = filtersRequest.Tags?.Select(x => x.Id).ToList();

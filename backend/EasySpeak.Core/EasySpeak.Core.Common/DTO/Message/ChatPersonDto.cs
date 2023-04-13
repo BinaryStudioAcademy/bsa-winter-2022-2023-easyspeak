@@ -11,5 +11,6 @@
         public string LastMessage { get; set; } = string.Empty;
         public int? NumberOfUnreadMessages { get; set; }
         public long ChatId { get; set; }
+        public string ImageUrl { get; set; } = string.Empty;
     }
 }

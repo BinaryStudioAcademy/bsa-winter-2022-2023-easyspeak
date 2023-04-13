@@ -6,7 +6,6 @@ import { UserService } from '@core/services/user.service';
 import { YoutubePlayerComponent } from '@shared/components/youtube-player/youtube-player.component';
 import { ILesson } from '@shared/models/lesson/ILesson';
 
-import { Question } from 'src/app/models/lessons/question';
 import { CountriesTzLangProviderService } from 'src/app/services/countries-tz-lang-provider.service';
 import { LessonsService } from 'src/app/services/lessons.service';
 import { NotificationService } from 'src/app/services/notification.service';
@@ -27,7 +26,9 @@ export class LessonComponent extends BaseComponent implements OnInit {
 
     previewImage: string;
 
-    questions: Question[] = [];
+    questions: string;
+
+    isShowQuestions = true;
 
     isLoading = false;
 
@@ -59,13 +60,13 @@ export class LessonComponent extends BaseComponent implements OnInit {
         });
     }
 
-    showQuestions(id: number) {
+    showQuestions() {
         if (this.questions.length > 0 && this.isQuestionsOpened) {
-            this.questions = [];
+            this.questions = '';
             this.isQuestionsOpened = false;
         } else {
             this.isQuestionsOpened = true;
-            this.getQuestions(id);
+            this.questions = this.lesson.questions;
             this.questionsOpened.emit();
 
             const observer = new MutationObserver(() => {
@@ -86,16 +87,6 @@ export class LessonComponent extends BaseComponent implements OnInit {
 
             observer.observe(document.body, { childList: true, subtree: true });
         }
-    }
-
-    private getQuestions(id: number) {
-        this.isLoading = true;
-        this.spinner.show();
-        this.lessonsService.getQuestions(id).subscribe((questions) => {
-            this.questions = questions;
-            this.isLoading = false;
-            this.spinner.hide();
-        });
     }
 
     joinLesson() {
@@ -154,12 +145,14 @@ export class LessonComponent extends BaseComponent implements OnInit {
                     return 'Subscribed';
                 }
 
-                this.buttonHover = 'join-hover';
+                this.buttonHover = 'hover';
 
                 return 'Join';
 
             case this.isTeachersPage:
                 if (!this.lesson.isCanceled) {
+                    this.buttonHover = 'hover';
+
                     return 'Cancel';
                 }
 

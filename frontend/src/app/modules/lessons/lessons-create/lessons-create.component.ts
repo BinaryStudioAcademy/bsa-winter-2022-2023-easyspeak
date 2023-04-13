@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { mapStringToLanguageLevel } from '@shared/data/LanguageLevelMapper';
 import { youtubeVideoLinkRegex } from '@shared/data/regex.util';
 import { IIcon } from '@shared/models/IIcon';
 import { INewLesson } from '@shared/models/lesson/INewLesson';
-import { INewQuestion } from '@shared/models/lesson/INewQuestion';
 import { LanguageLevels } from '@shared/models/lesson/LanguageLevels';
 import Utils from '@shared/utils/lesson.utils';
 import * as moment from 'moment';
@@ -108,17 +108,14 @@ export class LessonsCreateComponent implements OnInit {
             return;
         }
 
-        const lessonQuestions: INewQuestion[] = this.questions?.value
-            .split('\n')
-            .filter((entry: string) => entry.trim() !== '')
-            .map((element: string) => ({ topic: element, subquestions: [] }));
+        const lessonQuestions: string = this.questions?.value;
 
         const lessonTags: IIcon[] = this.tagsList;
 
         const lessonToCreate: INewLesson = {
             name: this.name?.value,
             mediaPath: '',
-            languageLevel: Object.values(LanguageLevels).indexOf(this.level),
+            languageLevel: Object.values(LanguageLevels).indexOf(mapStringToLanguageLevel(this.level)),
             startAt,
             questions: lessonQuestions,
             tags: lessonTags.map(f => ({ id: f.id })),

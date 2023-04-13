@@ -39,8 +39,8 @@
             </div>
         </div>
     </div>
-    <div class="notifications" *ngIf="!(notifications.length > 0)">
-        <button class="notification-element">
+    <div class="notifications" *ngIf="!notifications.length">
+        <button class="notification-element disabled">
             <span class="notification-text">There are no notifications</span>
         </button>
     </div>

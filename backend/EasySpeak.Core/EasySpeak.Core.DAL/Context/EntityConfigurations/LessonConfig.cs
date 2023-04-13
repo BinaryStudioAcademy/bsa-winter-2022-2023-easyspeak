@@ -8,10 +8,6 @@ namespace EasySpeak.Core.DAL.Context.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<Lesson> builder)
         {
-            builder.HasMany(l => l.Questions)
-                .WithOne(q => q.Lesson)
-                .HasForeignKey(q => q.LessonId);
-
             builder.HasOne(l => l.User)
                 .WithMany(u => u.CreatedLessons)
                 .HasForeignKey(l => l.CreatedBy)
