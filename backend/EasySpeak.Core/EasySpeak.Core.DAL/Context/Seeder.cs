@@ -69,7 +69,7 @@ public static class Seeder
             .RuleFor(l => l.Name, f => f.Random.Word())
             .RuleFor(l => l.MediaPath, f => f.Image.PicsumUrl())
             .RuleFor(l => l.StartAt, f => f.Date.Between(new DateTime(2023, 4, 1, 0, 0, 0, DateTimeKind.Utc), new DateTime(2023, 4, 30, 0, 0, 0, DateTimeKind.Utc)))
-            .RuleFor(l => l.LimitOfUsers, f => f.Random.Int(20, 200).OrNull(f, .2f))
+            .RuleFor(l => l.LimitOfUsers, f => f.Random.Int(20, 200))
             .RuleFor(l => l.YoutubeVideoId, f => f.PickRandom(YoutubeTags))
             .RuleFor(l => l.IsCanceled, false)
             .RuleFor(l => l.CreatedBy, f => user.Id)
