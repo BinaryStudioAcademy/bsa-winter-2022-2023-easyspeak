@@ -325,6 +325,10 @@ export class SessionCallComponent implements OnInit, OnDestroy {
             }
         });
 
-        type === 'audio' ? this.audioMuted = !this.audioMuted : this.videoMuted = !this.videoMuted;
+        if (type === 'audio') {
+            this.audioMuted = !this.audioMuted;
+        } else {
+            this.videoMuted = !this.videoMuted;
+        }
     }
 }

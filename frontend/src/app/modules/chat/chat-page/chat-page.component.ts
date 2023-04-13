@@ -208,7 +208,7 @@ export class ChatPageComponent implements OnInit, OnDestroy {
                 callerId: 0,
                 roomName: '',
                 remoteEmail: '',
-                remoteName: this.currentPerson.firstName + ' ' + this.currentPerson.lastName,
+                remoteName: `${this.currentPerson.firstName} ${this.currentPerson.lastName}`,
                 remoteImgPath: this.currentPerson.imageUrl,
             },
         };
