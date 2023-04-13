@@ -49,10 +49,10 @@ export default class Utils {
     ];
 
     static levelsList: string[] = [
-        'B1',
-        'B2',
-        'C1',
-        'C2',
+        'B1 (Intermediate)',
+        'B2 (Upper-Intermediate)',
+        'C1 (Advanced)',
+        'C2 (Proficient)',
     ];
 
     static group(fb: FormBuilder) {

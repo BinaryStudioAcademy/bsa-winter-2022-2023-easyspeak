@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { mapStringToLanguageLevel } from '@shared/data/LanguageLevelMapper';
 import { youtubeVideoLinkRegex } from '@shared/data/regex.util';
 import { IIcon } from '@shared/models/IIcon';
 import { INewLesson } from '@shared/models/lesson/INewLesson';
@@ -118,7 +119,7 @@ export class LessonsCreateComponent implements OnInit {
         const lessonToCreate: INewLesson = {
             name: this.name?.value,
             mediaPath: '',
-            languageLevel: Object.values(LanguageLevels).indexOf(this.level),
+            languageLevel: Object.values(LanguageLevels).indexOf(mapStringToLanguageLevel(this.level)),
             startAt,
             questions: lessonQuestions,
             tags: lessonTags.map(f => ({ id: f.id })),

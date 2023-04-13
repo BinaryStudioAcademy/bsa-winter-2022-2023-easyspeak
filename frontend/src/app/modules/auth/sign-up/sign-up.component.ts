@@ -8,6 +8,7 @@ import { UserService } from '@core/services/user.service';
 import { NgSelectComponent } from '@ng-select/ng-select';
 import { Ages } from '@shared/data/ages.util';
 import { LanguageLevel } from '@shared/data/languageLevel';
+import { mapLanguageLevelToString, mapStringToLanguageLevel } from '@shared/data/LanguageLevelMapper';
 import { passFormatRegex } from '@shared/data/regex.util';
 import { Sex } from '@shared/data/sex';
 import { INewUser } from '@shared/models/INewUser';
@@ -94,7 +95,7 @@ export class SignUpComponent extends BaseComponent implements OnInit {
         this.dataService.getAllLanguages().subscribe((languages) => {
             this.languages = languages;
         });
-        this.languageLevels = Object.values(LanguageLevel) as string[];
+        this.languageLevels = Object.values(LanguageLevel).map(level => mapLanguageLevelToString(level));
         this.sexOptions = Object.values(this.sexEnumeration) as string[];
         this.ages = Ages;
     }
@@ -114,8 +115,6 @@ export class SignUpComponent extends BaseComponent implements OnInit {
     }
 
     private createUser() {
-        const languageLevelKey: string = Object.keys(LanguageLevel)[Object.values(LanguageLevel).indexOf(this.languageLevel.value)];
-
         this.user = {
             firstName: this.firstName.value,
             lastName: this.lastName.value,
@@ -123,7 +122,7 @@ export class SignUpComponent extends BaseComponent implements OnInit {
             birthDate: this.dateOfBirth.value,
             sex: this.sex.value,
             language: this.language.value,
-            languageLevel: languageLevelKey,
+            languageLevel: mapStringToLanguageLevel(this.languageLevel.value),
             country: this.country.value,
         };
 

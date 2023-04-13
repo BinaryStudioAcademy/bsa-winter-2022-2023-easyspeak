@@ -9,6 +9,7 @@ import { UserService } from '@core/services/user.service';
 import { environment } from '@env/environment';
 import { CropImageDialogComponent } from '@modules/user-profile/crop-image.dialog/crop-image.dialog.component';
 import { LanguageLevel } from '@shared/data/languageLevel';
+import { mapLanguageLevelToString, mapStringToLanguageLevel } from '@shared/data/LanguageLevelMapper';
 import { Sex } from '@shared/data/sex';
 import { IIcon } from '@shared/models/IIcon';
 import { IUserInfo } from '@shared/models/IUserInfo';
@@ -75,7 +76,7 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
         });
         this.detailsForm = detailsGroup(this.fb);
         this.sexOptions = Object.values(this.sexEnumeration) as string[];
-        this.languageLevelOptions = Object.values(LanguageLevel) as string[];
+        this.languageLevelOptions = Object.values(LanguageLevel).map(level => mapLanguageLevelToString(level));
     }
 
     ngOnInit(): void {
@@ -91,7 +92,7 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
                         this.selectedTags = tags.filter(t => t.isSelected);
                     });
 
-                this.languageLevel.setValue(Object.entries(LanguageLevel).find(([key]) => key === resp.languageLevel)?.[1]);
+                this.languageLevel.setValue(mapLanguageLevelToString(resp.languageLevel));
                 this.userFirstName = resp.firstName;
                 this.userLastName = resp.lastName;
                 this.imagePath = resp.imagePath;
@@ -101,11 +102,9 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
     }
 
     onSubmit() {
-        const languageLevelKey: string = Object.keys(LanguageLevel)[Object.values(LanguageLevel).indexOf(this.languageLevel.value)];
-
         const userDetails = <IUserInfo> this.detailsForm.value;
 
-        userDetails.languageLevel = languageLevelKey;
+        userDetails.languageLevel = mapStringToLanguageLevel(this.languageLevel.value);
 
         userDetails.tags = this.selectedTags;
 
