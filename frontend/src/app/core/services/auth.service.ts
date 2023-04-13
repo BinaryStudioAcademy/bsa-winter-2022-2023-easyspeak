@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { ChatHubService } from '@core/hubs/chat-hub.service';
 import { NotificationsHubService } from '@core/hubs/notifications-hub.service';
 import { WebrtcHubService } from '@core/hubs/webrtc-hub.service';
 import { HttpService } from '@core/services/http.service';
@@ -14,7 +15,6 @@ import { BehaviorSubject, defer, first, firstValueFrom, from, tap } from 'rxjs';
 import { NotificationService } from 'src/app/services/notification.service';
 
 import { UserService } from './user.service';
-import {ChatHubService} from "@core/hubs/chat-hub.service";
 
 @Injectable({
     providedIn: 'root',

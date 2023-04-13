@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from '@core/services/http.service';
+import { IChatPerson } from '@shared/models/chat/IChatPerson';
+import { IMessage } from '@shared/models/chat/IMessage';
+import { IMessageGroup } from '@shared/models/chat/IMessageGroup';
 import { IUserShort } from '@shared/models/IUserShort';
 import { Observable } from 'rxjs';
-import {IChatPerson} from "@shared/models/chat/IChatPerson";
-import {IMessageGroup} from "@shared/models/chat/IMessageGroup";
-import {IMessage} from "@shared/models/chat/IMessage";
 
 @Injectable({
     providedIn: 'root',

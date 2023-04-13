@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { CoreHubFactoryService } from '@core/hubs/hubFactories/core-hub-factory.service';
+import { NotifierHubFactoryService } from '@core/hubs/hubFactories/notifier-hub-factory.service';
 import { HubConnection, HubConnectionState } from '@microsoft/signalr';
 import { IChatPerson } from '@shared/models/chat/IChatPerson';
 import { IMessage } from '@shared/models/chat/IMessage';
 import { Subject, Subscription } from 'rxjs';
-import {NotifierHubFactoryService} from "@core/hubs/hubFactories/notifier-hub-factory.service";
 
 @Injectable({
     providedIn: 'root',
