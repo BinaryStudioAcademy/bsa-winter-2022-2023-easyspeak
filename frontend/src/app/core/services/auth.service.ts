@@ -14,6 +14,7 @@ import { BehaviorSubject, defer, first, firstValueFrom, from, tap } from 'rxjs';
 import { NotificationService } from 'src/app/services/notification.service';
 
 import { UserService } from './user.service';
+import {ChatHubService} from "@core/hubs/chat-hub.service";
 
 @Injectable({
     providedIn: 'root',
@@ -36,6 +37,7 @@ export class AuthService {
         private toastr: NotificationService,
         private webRtcHub: WebrtcHubService,
         private notificationsHub: NotificationsHubService,
+        private chatHub: ChatHubService,
     ) {
         this.afAuth.onIdTokenChanged(user => {
             if (user) {
@@ -55,6 +57,8 @@ export class AuthService {
             this.notificationsHub.start().then(() => {
                 this.notificationsHub.connect(userCredential.user?.email as string);
             });
+
+            await this.chatHub.start();
         }
     }
 

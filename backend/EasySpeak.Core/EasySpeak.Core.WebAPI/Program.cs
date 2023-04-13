@@ -65,7 +65,6 @@ app.UseMiddleware<FirebaseAuthMiddleware>();
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapHealthChecks("/health");
-    endpoints.MapHub<ChatHub>("/chatting");
     endpoints.MapControllers();
 });
 

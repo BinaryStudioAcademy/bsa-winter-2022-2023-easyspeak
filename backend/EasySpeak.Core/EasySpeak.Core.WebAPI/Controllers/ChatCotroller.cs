@@ -44,5 +44,18 @@ namespace EasySpeak.Core.WebAPI.Controllers
         {
             return Ok(await _chatService.GetNumberOfUnreadMessages(userId));
         }
+
+        [HttpPost("sendMessage")]
+        public async Task<ActionResult<NewMessageDto>> SendMessageAsync([FromBody] NewMessageDto message)
+        {
+            return Ok(await _chatService.SendMessageAsync(message));
+        }
+
+        [HttpPut("readMessage")]
+        public async Task<ActionResult> ReadMessageAsync([FromBody] long[] chatIduserId)
+        {
+            await _chatService.SetMessagesAsRead(chatIduserId[0], chatIduserId[1]);
+            return Ok();
+        }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using EasySpeak.Core.Common.DTO;
 using Microsoft.AspNetCore.SignalR;
 
-namespace EasySpeak.Core.WebAPI.Hubs
+namespace EasySpeak.Notifier.WebAPI.Hubs
 {
     public class ChatHub : Hub
     {

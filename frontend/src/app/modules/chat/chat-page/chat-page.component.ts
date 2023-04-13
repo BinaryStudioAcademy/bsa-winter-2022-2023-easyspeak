@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ChatHubService } from '@core/hubs/chat-hub.service';
 import { WebrtcHubService } from '@core/hubs/webrtc-hub.service';
+import { ChatService } from '@core/services/chat.service';
 import { HttpService } from '@core/services/http.service';
 import { ScrollToBottomDirective } from '@shared/directives/scroll-to-bottom-directive';
 import { ICallUserInfo } from '@shared/models/chat/ICallUserInfo';
@@ -12,7 +13,6 @@ import { IMessageGroup } from '@shared/models/chat/IMessageGroup';
 import { IUserShort } from '@shared/models/IUserShort';
 import { TimeUtils } from '@shared/utils/time.utils';
 import { Subscription } from 'rxjs';
-import {NotificationsHubService} from "@core/hubs/notifications-hub.service";
 
 @Component({
     selector: 'app-chat-page',
@@ -45,7 +45,7 @@ export class ChatPageComponent implements OnInit, OnDestroy {
         private chatHub: ChatHubService,
         private webrtcHub: WebrtcHubService,
         private route: ActivatedRoute,
-        private notificationHub: NotificationsHubService,
+        private chatService: ChatService,
     ) {
 
     }
@@ -55,9 +55,7 @@ export class ChatPageComponent implements OnInit, OnDestroy {
 
         await this.chatHub.start();
 
-        await this.webrtcHub.start();
-
-        this.httpService.get<IChatPerson[]>('/chat/lastSendMessages').subscribe((people) => {
+        this.chatService.getChats().subscribe((people) => {
             this.people = people;
             this.filteredPeople = people;
             this.chatHub.invoke(
@@ -82,13 +80,17 @@ export class ChatPageComponent implements OnInit, OnDestroy {
                     new Date(msg.createdAt).setMinutes(new Date(msg.createdAt).getMinutes() + new Date().getTimezoneOffset()),
                 ),
             });
-            this.chatHub.invoke(
-                'GetChatsAsync',
-                msg.chatId,
-                this.currentUser.id,
-            );
+            this.chatService.getChats().subscribe((people) => {
+                this.people = people;
+                this.filteredPeople = people;
+            });
             if (this.currentUser.id !== msg.createdBy) {
-                this.chatHub.invoke('ReadMessages', this.currentChatId, this.currentUser.id);
+                this.chatService.readMessages(this.currentChatId, this.currentUser.id as number).subscribe(() => {
+                    this.chatService.getChats().subscribe((people) => {
+                        this.people = people;
+                        this.filteredPeople = people;
+                    });
+                });
             }
             this.scroll.scrollToBottom();
         });
@@ -127,8 +129,8 @@ export class ChatPageComponent implements OnInit, OnDestroy {
         }
     }
 
-    async getChat(person: IChatPerson) {
-        await this.httpService.get<IMessageGroup[]>(`/chat/chatMessages/${person.chatId}`).subscribe((groupedMessages) => {
+    getChat(person: IChatPerson) {
+        this.chatService.getOneChat(person.chatId).subscribe((groupedMessages) => {
             this.groupedMessages = groupedMessages.map((messageGroup): IMessageGroup => ({
                 date: new Date(messageGroup.date),
                 messages: messageGroup.messages.map((message): IMessage => ({
@@ -139,7 +141,12 @@ export class ChatPageComponent implements OnInit, OnDestroy {
             this.currentChatId = person.chatId;
             this.currentPerson = person;
         });
-        this.chatHub.invoke('ReadMessages', person.chatId, this.currentUser.id);
+        this.chatService.readMessages(person.chatId, this.currentUser.id as number).subscribe(() => {
+            this.chatService.getChats().subscribe((people) => {
+                this.people = people;
+                this.filteredPeople = people;
+            });
+        });
     }
 
     sendMessage() {
@@ -155,7 +162,9 @@ export class ChatPageComponent implements OnInit, OnDestroy {
                 isRead: false,
             };
 
-            this.chatHub.invoke('SendMessageAsync', msg);
+            this.chatService.sendMessage(msg).subscribe(() => {
+                this.chatHub.invoke('SendMessageAsync', msg);
+            });
         }
     }
 

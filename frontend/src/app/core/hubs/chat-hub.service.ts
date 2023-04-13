@@ -4,6 +4,7 @@ import { HubConnection, HubConnectionState } from '@microsoft/signalr';
 import { IChatPerson } from '@shared/models/chat/IChatPerson';
 import { IMessage } from '@shared/models/chat/IMessage';
 import { Subject, Subscription } from 'rxjs';
+import {NotifierHubFactoryService} from "@core/hubs/hubFactories/notifier-hub-factory.service";
 
 @Injectable({
     providedIn: 'root',
@@ -19,11 +20,13 @@ export class ChatHubService {
 
     private subscriptions: Subscription[] = [];
 
-    constructor(private hubFactory: CoreHubFactoryService) {}
+    constructor(private hubFactory: NotifierHubFactoryService) {}
 
     async start() {
-        this.hubConnection = this.hubFactory.createHub(this.hubUrl);
-        await this.init();
+        if (!this.hubConnection || this.hubConnection.state === HubConnectionState.Disconnected) {
+            this.hubConnection = this.hubFactory.createHub(this.hubUrl);
+            await this.init();
+        }
     }
 
     private async init() {
@@ -40,6 +43,12 @@ export class ChatHubService {
             this.people.next(people);
         });
     }
+
+    // public async connect(email: string) {
+    //     await this.hubConnection.invoke('Connect', email).catch((err) => {
+    //         console.error(err);
+    //     });
+    // }
 
     public async end() {
         await this.people.unsubscribe();

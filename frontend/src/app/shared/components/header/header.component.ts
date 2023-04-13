@@ -27,7 +27,6 @@ export class HeaderComponent implements OnInit {
             this.chatService.getUnreadMessages(this.currentUser.id as number).subscribe((numberOfMessages) => {
                 this.numberOfMessages = numberOfMessages;
             });
-            console.log(user);
         });
     }
 
