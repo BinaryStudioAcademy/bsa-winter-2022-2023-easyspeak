@@ -10,6 +10,7 @@ import { IChatPerson } from '@shared/models/chat/IChatPerson';
 import { IMessage } from '@shared/models/chat/IMessage';
 import { IMessageGroup } from '@shared/models/chat/IMessageGroup';
 import { IUserShort } from '@shared/models/IUserShort';
+import { TimeUtils } from '@shared/utils/time.utils';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -34,6 +35,8 @@ export class ChatPageComponent implements OnInit, OnDestroy {
     currentChatId: number;
 
     allMessagesSubscription: Subscription;
+
+    addTimeOffset = TimeUtils.addTimeOffset;
 
     constructor(
         private router: Router,
@@ -163,15 +166,6 @@ export class ChatPageComponent implements OnInit, OnDestroy {
         this.filteredPeople = this.people.filter(person => `${person.firstName} ${person.lastName}`
             .toLowerCase()
             .includes(value as string));
-    }
-
-    addTimeOffset(date: string): string {
-        const offset = new Date().getTimezoneOffset();
-        const dateObject = new Date(date);
-
-        dateObject.setMinutes(dateObject.getMinutes() - offset);
-
-        return dateObject.toString();
     }
 
     getTotalUnreadMessages(): number {

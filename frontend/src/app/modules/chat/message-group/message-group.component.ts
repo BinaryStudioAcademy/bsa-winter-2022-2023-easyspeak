@@ -2,6 +2,7 @@ import { Component, Inject, Input, LOCALE_ID } from '@angular/core';
 import { IChatPerson } from '@shared/models/chat/IChatPerson';
 import { IMessageGroup } from '@shared/models/chat/IMessageGroup';
 import { IUserShort } from '@shared/models/IUserShort';
+import { TimeUtils } from '@shared/utils/time.utils';
 import * as moment from 'moment';
 
 @Component({
@@ -26,6 +27,8 @@ export class MessageGroupComponent {
 
     showDate: boolean;
 
+    addTimeOffset = TimeUtils.addTimeOffset;
+
     getDateText(date: Date): string {
         if (moment(date).isSame(moment().startOf('day'))) {
             return 'Today';
@@ -35,14 +38,5 @@ export class MessageGroupComponent {
         }
 
         return date.toLocaleDateString(this.locale, { day: 'numeric', month: 'short' });
-    }
-
-    addTimeOffset(date: string): string {
-        const offset = new Date().getTimezoneOffset();
-        const dateObject = new Date(date);
-
-        dateObject.setMinutes(dateObject.getMinutes() - offset);
-
-        return dateObject.toString();
     }
 }
