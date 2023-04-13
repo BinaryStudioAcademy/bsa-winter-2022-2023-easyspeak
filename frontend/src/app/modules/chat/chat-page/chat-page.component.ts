@@ -1,10 +1,13 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ChatHubService } from '@core/hubs/chat-hub.service';
 import { WebrtcHubService } from '@core/hubs/webrtc-hub.service';
 import { HttpService } from '@core/services/http.service';
+import { AcceptCallComponent } from '@shared/components/accept-call/accept-call.component';
 import { ScrollToBottomDirective } from '@shared/directives/scroll-to-bottom-directive';
+import { ICallInfo } from '@shared/models/chat/ICallInfo';
 import { ICallUserInfo } from '@shared/models/chat/ICallUserInfo';
 import { IChatPerson } from '@shared/models/chat/IChatPerson';
 import { IMessage } from '@shared/models/chat/IMessage';
@@ -44,6 +47,7 @@ export class ChatPageComponent implements OnInit, OnDestroy {
         private chatHub: ChatHubService,
         private webrtcHub: WebrtcHubService,
         private route: ActivatedRoute,
+        private dialogRef: MatDialog,
     ) {
 
     }
@@ -196,5 +200,19 @@ export class ChatPageComponent implements OnInit, OnDestroy {
         };
 
         this.webrtcHub.callUser(callInfo);
+
+        const config: MatDialogConfig<ICallInfo> = {
+            data: {
+                hasButtons: false,
+                chatId: 0,
+                callerId: 0,
+                roomName: '',
+                remoteEmail: '',
+                remoteName: `${this.currentPerson.firstName} ${this.currentPerson.lastName}`,
+                remoteImgPath: this.currentPerson.imageUrl,
+            },
+        };
+
+        this.dialogRef.open(AcceptCallComponent, config);
     }
 }
