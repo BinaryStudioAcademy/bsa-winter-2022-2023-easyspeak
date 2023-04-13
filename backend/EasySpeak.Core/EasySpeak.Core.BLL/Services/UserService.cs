@@ -109,15 +109,16 @@ public class UserService : BaseService, IUserService
         {
             filteredUsers = filteredUsers.Where(u => filter.LangLevels.Contains(u.LanguageLevel));
         }
-        if (filter.Topics is not null && filter.Topics.Any())
+        if (filter.Tags is not null && filter.Tags.Any())
         {
-            filteredUsers = filteredUsers.Where(u => u.Tags.Any(t => filter.Topics.Select(t=>t.Id).Contains(t.Id)));
+            filteredUsers = filteredUsers.Where(u => u.Tags.Any(t => filter.Tags.Select(t=>t.Id).Contains(t.Id)));
         }
 
 
         var filteredUsersList = await filteredUsers.ToListAsync();
+        return _mapper.Map<List<UserShortInfoDto>>(filteredUsersList);
 
-        return await AddCompatibility(filteredUsersList, filter.Compatibility);
+        //return await AddCompatibility(filteredUsersList, filter.Compatibility);
     }
 
     private async Task<List<UserShortInfoDto>> AddCompatibility(List<User> users, int compatibility)
