@@ -11,6 +11,7 @@ import { IMessage } from '@shared/models/chat/IMessage';
 import { IMessageGroup } from '@shared/models/chat/IMessageGroup';
 import { IUserShort } from '@shared/models/IUserShort';
 import { Subscription } from 'rxjs';
+import {NotificationsHubService} from "@core/hubs/notifications-hub.service";
 
 @Component({
     selector: 'app-chat-page',
@@ -38,6 +39,7 @@ export class ChatPageComponent implements OnInit, OnDestroy {
         private chatHub: ChatHubService,
         private webrtcHub: WebrtcHubService,
         private route: ActivatedRoute,
+        private notificationHub: NotificationsHubService,
     ) {
 
     }
@@ -136,6 +138,7 @@ export class ChatPageComponent implements OnInit, OnDestroy {
                 createdBy: this.currentUser.id,
                 text: message,
                 createdAt: new Date(Date.now()),
+                isRead: false,
             };
 
             this.chatHub.invoke('SendMessageAsync', msg);

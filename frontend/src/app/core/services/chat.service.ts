@@ -22,4 +22,8 @@ export class ChatService {
     createChat(userId: number): Observable<number> {
         return this.httpService.post(`${this.routePrefix}/createChat`, [userId, this.currentUser.id]);
     }
+
+    getUnreadMessages(userId: number): Observable<number> {
+        return this.httpService.get(`${this.routePrefix}/getUnreadMessages/${userId}`);
+    }
 }
