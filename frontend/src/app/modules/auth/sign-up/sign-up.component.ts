@@ -75,7 +75,6 @@ export class SignUpComponent extends BaseComponent implements OnInit {
         }),
         sex: new FormControl('', {
             validators: [Validators.required],
-            updateOn: 'submit',
         }),
         languageLevel: new FormControl('', [Validators.required]),
         country: new FormControl('', [Validators.required]),
@@ -88,7 +87,15 @@ export class SignUpComponent extends BaseComponent implements OnInit {
 
     user: INewUser;
 
-    isChanged = { email: false, firstName: false, lastName: false, password: false, passwordConfirmation: false, sex: false };
+    isChanged = { email: false,
+        firstName: false,
+        lastName: false,
+        password: false,
+        passwordConfirmation: false,
+        sex: false,
+        country: false,
+        language: false,
+        languageLevel: false };
 
     constructor(
         private formBuilder: FormBuilder,
@@ -154,8 +161,9 @@ export class SignUpComponent extends BaseComponent implements OnInit {
         this.isChanged.lastName = true;
         this.isChanged.passwordConfirmation = true;
         this.isChanged.sex = true;
-
-        return true;
+        this.isChanged.country = true;
+        this.isChanged.language = true;
+        this.isChanged.languageLevel = true;
 
         return this.registerForm.valid;
     }
@@ -217,6 +225,15 @@ export class SignUpComponent extends BaseComponent implements OnInit {
         if (control === this.sex) {
             this.isChanged.sex = false;
         }
+        if (control === this.country) {
+            this.isChanged.country = false;
+        }
+        if (control === this.language) {
+            this.isChanged.language = false;
+        }
+        if (control === this.languageLevel) {
+            this.isChanged.languageLevel = false;
+        }
     }
 
     GetErrorMessageByKey(id: string) {
@@ -256,18 +273,32 @@ export class SignUpComponent extends BaseComponent implements OnInit {
 
         if (control === this.sex) {
             isChanged = this.isChanged.sex;
-
-            //            return (control.valid && isChanged);
         }
+
+        if (control === this.country) {
+            isChanged = this.isChanged.country;
+        }
+        if (control === this.language) {
+            isChanged = this.isChanged.language;
+        }
+        if (control === this.languageLevel) {
+            isChanged = this.isChanged.languageLevel;
+        }
+
         switch (condition) {
             case 'required':
+
                 return ((control.errors?.[condition] && control.touched) || control.pristine) && isChanged;
+
             case 'pattern':
+
                 return control.errors?.[condition] && isChanged;
+
             case 'matchError':
                 control.setErrors({ matchError: true });
 
                 return this.registerForm.errors?.[condition] && isChanged;
+
             default: return undefined;
         }
     }

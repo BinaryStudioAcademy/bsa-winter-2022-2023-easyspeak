@@ -79,111 +79,106 @@
 <!--                    </div>-->
 <!--                </div>-->
 <!--            </div>-->
-<!--            <div class="age-sex-section">-->
-<!--                <div class="form-group-item">-->
-<!--                    <app-calendar id="dateOfBirth" formControlName="dateOfBirth" name="dateOfBirth" placeholder="Date of Birth"></app-calendar>-->
+            <div class="age-sex-section">
+                <div class="form-group-item">
+                    <app-calendar id="dateOfBirth" formControlName="dateOfBirth" name="dateOfBirth" placeholder="Date of Birth"></app-calendar>
 
-<!--                    <div class="errors-wrp">-->
-<!--                        <mat-error class="error" *ngIf="this.dateOfBirth.invalid && this.userRegisterForm.submitted">-->
+                    <div class="errors-wrp">
+                        <mat-error class="error" *ngIf="this.dateOfBirth.invalid && this.userRegisterForm.submitted">
 
-<!--                            <img src="/assets/user-profile/alert-triangle.svg">-->
-<!--                            {{getErrorMessage(dateOfBirth)}}-->
-<!--                        </mat-error>-->
-<!--                    </div>-->
+                            <img src="/assets/user-profile/alert-triangle.svg">
+                            {{getErrorMessage(dateOfBirth)}}
+                        </mat-error>
+                    </div>
 
-<!--                    <div class="error-surface" *ngIf="this.dateOfBirth.invalid && this.userRegisterForm.submitted">-->
-<!--                    </div>-->
-<!--                </div>-->
+                    <div class="error-surface" *ngIf="this.dateOfBirth.invalid && this.userRegisterForm.submitted">
+                    </div>
+                </div>
+
                 <div class="form-group-item">
                     <ng-select #sexDropdown [items]="sexOptions" class="custom" dropdownPosition="bottom"
-                        appearance="underline" formControlName="sex" [ngClass]="{'submitted': isChanged.sex}">
+                        appearance="underline" formControlName="sex" [ngClass]="{'submitted': isChanged.sex &&!this.sex.value}">
                     </ng-select>
 
                     <div class="placeholder" *ngIf="!this.sex.value" (click)="expandSexDropdown()">
                         Sex
                     </div>
-
                     <mat-icon class="expand-icon" (click)="expandSexDropdown()">
                         expand_more
                     </mat-icon>
-                    <div class="errors-wrp"  *ngFor="let condition of ['required'] ">
+                    <div class="errors-wrp" >
                         <mat-error class="error"
-                                   *ngIf="CheckCondition(sex,condition)">
+                                   *ngIf="CheckCondition(sex,'required')">
                             <img src="/assets/user-profile/alert-triangle.svg" alt="">
-                            {{GetErrorMessageByKey(condition)}}
+                            {{GetErrorMessageByKey('required')}}
                         </mat-error>
                     </div>
                 </div>
-<!--            </div>-->
-<!--            <div class="form-group-item">-->
-<!--                <ng-select #countryDropdown [items]="countries" class="custom" dropdownPosition="bottom"-->
-<!--                    appearance="underline" formControlName="country">-->
-<!--                </ng-select>-->
+            </div>
 
-<!--                <div class="placeholder" *ngIf="!this.country.value" (click)="expandCountryDropdown()">-->
-<!--                    Country-->
-<!--                </div>-->
+            <div class="form-group-item">
+                <ng-select #countryDropdown [items]="countries" class="custom" dropdownPosition="bottom"
+                    appearance="underline" formControlName="country" [ngClass]="{'submitted': isChanged.country &&!this.country.value}">
+                </ng-select>
 
-<!--                <mat-icon class="expand-icon" (click)="expandCountryDropdown()">-->
-<!--                    expand_more-->
-<!--                </mat-icon>-->
+                <div class="placeholder" *ngIf="!this.country.value" (click)="expandCountryDropdown()">
+                    Country
+                </div>
 
-<!--                <div class="errors-wrp">-->
-<!--                    <mat-error class="error" *ngIf="this.country.invalid && this.userRegisterForm.submitted">-->
+                <mat-icon class="expand-icon" (click)="expandCountryDropdown()">
+                    expand_more
+                </mat-icon>
 
-<!--                        <img src="/assets/user-profile/alert-triangle.svg">-->
-<!--                        {{getErrorMessage(country)}}-->
-<!--                    </mat-error>-->
-<!--                </div>-->
+                <div class="errors-wrp">
+                    <mat-error class="error" *ngIf="CheckCondition(country,'required')">
+                        <img src="/assets/user-profile/alert-triangle.svg">
+                        {{getErrorMessage(country)}}
+                    </mat-error>
+                </div>
 
-<!--                <div class="error-surface" *ngIf="this.country.invalid && this.userRegisterForm.submitted"></div>-->
-<!--            </div>-->
-<!--            <div class="form-group-item">-->
-<!--                <ng-select #languageDropdown [items]="languages" class="custom" dropdownPosition="bottom"-->
-<!--                    appearance="underline" formControlName="language">-->
-<!--                </ng-select>-->
+            </div>
+            <div class="form-group-item">
+                <ng-select #languageDropdown [items]="languages" class="custom" dropdownPosition="bottom"
+                    appearance="underline" formControlName="language" [ngClass]="{'submitted': isChanged.language &&!this.language.value}">
+                </ng-select>
 
-<!--                <div class="placeholder" *ngIf="!this.language.value" (click)="expandLanguageDropdown()">-->
-<!--                    Language-->
-<!--                </div>-->
+                <div class="placeholder" *ngIf="!this.language.value" (click)="expandLanguageDropdown()">
+                    Language
+                </div>
 
-<!--                <mat-icon class="expand-icon" (click)="expandLanguageDropdown()">-->
-<!--                    expand_more-->
-<!--                </mat-icon>-->
+                <mat-icon class="expand-icon" (click)="expandLanguageDropdown()">
+                    expand_more
+                </mat-icon>
 
-<!--                <div class="errors-wrp">-->
-<!--                    <mat-error class="error" *ngIf="this.language.invalid && this.userRegisterForm.submitted">-->
+                <div class="errors-wrp">
+                    <mat-error class="error" *ngIf="CheckCondition(language,'required')">
 
-<!--                        <img src="/assets/user-profile/alert-triangle.svg">-->
-<!--                        {{getErrorMessage(language)}}-->
-<!--                    </mat-error>-->
-<!--                </div>-->
+                        <img src="/assets/user-profile/alert-triangle.svg">
+                        {{getErrorMessage(language)}}
+                    </mat-error>
+                </div>
+            </div>
+            <div class="form-group-item">
+                <ng-select #levelDropdown [items]="languageLevels" class="custom" dropdownPosition="bottom"
+                    appearance="underline" formControlName="languageLevel" [ngClass]="{'submitted': isChanged.languageLevel &&!this.languageLevel.value}">
+                </ng-select>
 
-<!--                <div class="error-surface" *ngIf="this.language.invalid && this.userRegisterForm.submitted"></div>-->
-<!--            </div>-->
-<!--            <div class="form-group-item">-->
-<!--                <ng-select #levelDropdown [items]="languageLevels" class="custom" dropdownPosition="bottom"-->
-<!--                    appearance="underline" formControlName="languageLevel">-->
-<!--                </ng-select>-->
+                <mat-icon class="expand-icon" (click)="expandLevelDropdown()">
+                    expand_more
+                </mat-icon>
 
-<!--                <mat-icon class="expand-icon" (click)="expandLevelDropdown()">-->
-<!--                    expand_more-->
-<!--                </mat-icon>-->
+                <div class="errors-wrp">
+                    <mat-error class="error" *ngIf="CheckCondition(languageLevel,'required')">
 
-<!--                <div class="errors-wrp">-->
-<!--                    <mat-error class="error" *ngIf="this.languageLevel.invalid && this.userRegisterForm.submitted">-->
-
-<!--                        <img src="/assets/user-profile/alert-triangle.svg">-->
-<!--                        {{getErrorMessage(languageLevel)}}-->
-<!--                    </mat-error>-->
-<!--                </div>-->
-
+                        <img src="/assets/user-profile/alert-triangle.svg">
+                        {{getErrorMessage(languageLevel)}}
+                    </mat-error>
+                </div>
 <!--                <div class="error-surface" *ngIf="this.languageLevel.invalid && this.userRegisterForm.submitted"></div>-->
-
-<!--                <div class="placeholder" *ngIf="!this.languageLevel.value" (click)="expandLevelDropdown()">-->
-<!--                    Level of English-->
-<!--                </div>-->
-<!--            </div>-->
+                <div class="placeholder" *ngIf="!this.languageLevel.value" (click)="expandLevelDropdown()">
+                    Level of English
+                </div>
+            </div>
 <!--            <div class="form-group-item">-->
 <!--                <input type="password" formControlName="password" placeholder="Password" autocomplete="new-password" required-->
 <!--                    appPasswordVisibility />-->
