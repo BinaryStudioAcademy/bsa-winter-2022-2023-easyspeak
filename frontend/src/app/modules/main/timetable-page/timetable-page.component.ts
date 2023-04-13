@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LanguageLevel } from '@shared/data/languageLevel';
 import { IIcon } from '@shared/models/IIcon';
 
 @Component({
@@ -7,13 +8,13 @@ import { IIcon } from '@shared/models/IIcon';
     styleUrls: ['./timetable-page.component.sass'],
 })
 export class TimetablePageComponent {
-    selectedLanguageFilters: string[] = [];
+    selectedLanguageFilters: LanguageLevel[] = [];
 
     selectedInterestsFilters: IIcon[] = [];
 
     selectedDateFilter: Date;
 
-    onSelectedLanguageFiltersChange(selectedLanguageFilters: string[]) {
+    onSelectedLanguageFiltersChange(selectedLanguageFilters: LanguageLevel[]) {
         this.selectedLanguageFilters = [...selectedLanguageFilters];
     }
 

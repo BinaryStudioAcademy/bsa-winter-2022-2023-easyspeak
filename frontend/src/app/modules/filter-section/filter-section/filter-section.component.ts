@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { langLevelsSample } from '@modules/filter-section/filter-section/filter-section.util';
+import { LanguageLevel } from '@shared/data/languageLevel';
 import { IIcon } from '@shared/models/IIcon';
 import { Subject } from 'rxjs';
 
@@ -11,7 +12,7 @@ import { Filter } from 'src/app/models/filters/filter';
     styleUrls: ['./filter-section.component.sass'],
 })
 export class FilterSectionComponent implements OnInit {
-    @Output() selectedLanguageFiltersChange = new EventEmitter<string[]>();
+    @Output() selectedLanguageFiltersChange = new EventEmitter<LanguageLevel[]>();
 
     @Output() selectedInterestsFiltersChange = new EventEmitter<IIcon[]>();
 
@@ -19,7 +20,7 @@ export class FilterSectionComponent implements OnInit {
 
     public langBtnLabel = 'Level';
 
-    @Input() selectedLanguageFilters: string[] = [];
+    @Input() selectedLanguageFilters: LanguageLevel[] = [];
 
     public selectedLevelWithSubtitleFilters: string[] = [];
 
@@ -34,18 +35,20 @@ export class FilterSectionComponent implements OnInit {
     removeLangLevel(title: string) {
         const splitedTitle = title.split(':');
 
-        this.selectedLanguageFilters = this.selectedLanguageFilters.filter(filterTitle => filterTitle !== splitedTitle[0]);
+        this.selectedLanguageFilters = this.selectedLanguageFilters.filter(
+            (filterTitle) => filterTitle !== splitedTitle[0],
+        );
         this.selectedLevelWithSubtitleFilters = this.getLanguageLevelWithSubtitle();
         this.selectedLanguageFiltersChange.emit(this.selectedLanguageFilters);
     }
 
     removeInterest(topic: IIcon) {
-        this.selectedInterestsFilters = this.selectedInterestsFilters.filter(filter => filter !== topic);
+        this.selectedInterestsFilters = this.selectedInterestsFilters.filter((filter) => filter !== topic);
         this.selectedInterestsFiltersChange.emit(this.selectedInterestsFilters);
     }
 
     updateLangFilters(eventData: string[]) {
-        this.selectedLanguageFilters = eventData;
+        this.selectedLanguageFilters = eventData as LanguageLevel[];
         this.selectedLevelWithSubtitleFilters = this.getLanguageLevelWithSubtitle();
         this.selectedLanguageFiltersChange.emit(this.selectedLanguageFilters);
     }
@@ -69,8 +72,8 @@ export class FilterSectionComponent implements OnInit {
     isVisibilityButton = () => this.selectedInterestsFilters.length || this.selectedLanguageFilters.length;
 
     private getLanguageLevelWithSubtitle() {
-        return this.selectedLanguageFilters.map(f => {
-            const level = this.langLevels.find(l => l.title === f);
+        return this.selectedLanguageFilters.map((f) => {
+            const level = this.langLevels.find((l) => l.title === f);
 
             return `${level?.title}: ${level?.subtitle}`;
         });

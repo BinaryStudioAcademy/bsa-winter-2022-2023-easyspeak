@@ -6,9 +6,8 @@ import { AuthService } from '@core/services/auth.service';
 import { DataService } from '@core/services/data.service';
 import { UserService } from '@core/services/user.service';
 import { NgSelectComponent } from '@ng-select/ng-select';
-import { Ages } from '@shared/data/ages.util';
 import { LanguageLevel } from '@shared/data/languageLevel';
-import { mapLanguageLevelToString, mapStringToLanguageLevel } from '@shared/data/LanguageLevelMapper';
+import { mapLanguageLevelToString } from '@shared/data/LanguageLevelMapper';
 import { passFormatRegex } from '@shared/data/regex.util';
 import { Sex } from '@shared/data/sex';
 import { INewUser } from '@shared/models/INewUser';
@@ -26,17 +25,11 @@ import { matchpassword } from './matchpassword.validator';
     styleUrls: ['./sign-up.component.sass'],
 })
 export class SignUpComponent extends BaseComponent implements OnInit {
-    languageLevelEnumeration = LanguageLevel;
+    languageLevels: LanguageLevel[];
 
-    sexEnumeration = Sex;
-
-    languageLevels: string[];
-
-    ages: string[];
+    sexOptions: Sex[];
 
     countries: string[];
-
-    sexOptions: string[];
 
     languages: string[];
 
@@ -52,19 +45,26 @@ export class SignUpComponent extends BaseComponent implements OnInit {
 
     @ViewChild('levelDropdown') levelDropdown: NgSelectComponent;
 
-    registerForm = new FormGroup({
-        email: new FormControl('', [Validators.required, Validators.maxLength(30)]),
-        firstName: new FormControl('', [Validators.required]),
-        lastName: new FormControl('', [Validators.required]),
-        sex: new FormControl('', [Validators.required]),
-        languageLevel: new FormControl('', [Validators.required]),
-        country: new FormControl('', [Validators.required]),
-        language: new FormControl('', [Validators.required]),
-        dateOfBirth: new FormControl('', [Validators.required]),
-        password: new FormControl('', [Validators.required, Validators.pattern(passFormatRegex),
-            Validators.minLength(6), Validators.maxLength(25)]),
-        passwordConfirmation: new FormControl('', [Validators.required]),
-    }, { validators: matchpassword });
+    registerForm = new FormGroup(
+        {
+            email: new FormControl('', [Validators.required, Validators.maxLength(30)]),
+            firstName: new FormControl('', [Validators.required]),
+            lastName: new FormControl('', [Validators.required]),
+            sex: new FormControl('', [Validators.required]),
+            languageLevel: new FormControl('', [Validators.required]),
+            country: new FormControl('', [Validators.required]),
+            language: new FormControl('', [Validators.required]),
+            dateOfBirth: new FormControl('', [Validators.required]),
+            password: new FormControl('', [
+                Validators.required,
+                Validators.pattern(passFormatRegex),
+                Validators.minLength(6),
+                Validators.maxLength(25),
+            ]),
+            passwordConfirmation: new FormControl('', [Validators.required]),
+        },
+        { validators: matchpassword },
+    );
 
     user: INewUser;
 
@@ -94,14 +94,15 @@ export class SignUpComponent extends BaseComponent implements OnInit {
         }
     }
 
+    getLevelFormattedValue = (level: LanguageLevel) => mapLanguageLevelToString(level);
+
     private setUpData() {
         this.countries = this.countriesTzLangProvider.getCountriesList().map((x) => x.name);
         this.dataService.getAllLanguages().subscribe((languages) => {
             this.languages = languages;
         });
-        this.languageLevels = Object.values(LanguageLevel).map(level => mapLanguageLevelToString(level));
-        this.sexOptions = Object.values(this.sexEnumeration) as string[];
-        this.ages = Ages;
+        this.languageLevels = Object.values(LanguageLevel);
+        this.sexOptions = Object.values(Sex);
     }
 
     private signUp() {
@@ -135,7 +136,7 @@ export class SignUpComponent extends BaseComponent implements OnInit {
             birthDate: this.dateOfBirth.value,
             sex: this.sex.value,
             language: this.language.value,
-            languageLevel: mapStringToLanguageLevel(this.languageLevel.value),
+            languageLevel: this.languageLevel.value,
             country: this.country.value,
         };
 
@@ -143,8 +144,7 @@ export class SignUpComponent extends BaseComponent implements OnInit {
     }
 
     getErrorMessage(control: FormControl): string {
-        const errorEntry = Object.entries(validationErrorMessage)
-            .find(([key]) => control.hasError(key));
+        const errorEntry = Object.entries(validationErrorMessage).find(([key]) => control.hasError(key));
 
         if (errorEntry) {
             return errorEntry[1];
@@ -154,8 +154,7 @@ export class SignUpComponent extends BaseComponent implements OnInit {
     }
 
     getFormErrorMessage(formGroup: FormGroup): string {
-        const errorEntry = Object.entries(validationErrorMessage)
-            .find(([key]) => formGroup.hasError(key));
+        const errorEntry = Object.entries(validationErrorMessage).find(([key]) => formGroup.hasError(key));
 
         if (errorEntry) {
             return errorEntry[1];

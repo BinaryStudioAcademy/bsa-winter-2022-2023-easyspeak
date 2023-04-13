@@ -9,7 +9,7 @@ import { UserService } from '@core/services/user.service';
 import { environment } from '@env/environment';
 import { CropImageDialogComponent } from '@modules/user-profile/crop-image.dialog/crop-image.dialog.component';
 import { LanguageLevel } from '@shared/data/languageLevel';
-import { mapLanguageLevelToString, mapStringToLanguageLevel } from '@shared/data/LanguageLevelMapper';
+import { mapLanguageLevelToString } from '@shared/data/LanguageLevelMapper';
 import { Sex } from '@shared/data/sex';
 import { IIcon } from '@shared/models/IIcon';
 import { IUserInfo } from '@shared/models/IUserInfo';
@@ -39,11 +39,11 @@ export class UserDetailsComponent extends BaseComponent implements OnInit, After
 
     languages: string[];
 
-    languageLevelOptions: string[] = [];
+    languageLevelOptions: LanguageLevel[] = [];
 
     sexEnumeration = Sex;
 
-    sexOptions: string[] = [];
+    sexOptions: Sex[] = [];
 
     detailsForm;
 
@@ -71,10 +71,12 @@ export class UserDetailsComponent extends BaseComponent implements OnInit, After
             this.languages = languages;
         });
         this.dataService.getAllTags().subscribe((tags) => {
-            this.tagsList = tags.map((tag): IIcon => ({
-                ...tag,
-                link: `assets/topic-icons/${tag.imageUrl}`,
-            }));
+            this.tagsList = tags.map(
+                (tag): IIcon => ({
+                    ...tag,
+                    link: `assets/topic-icons/${tag.imageUrl}`,
+                }),
+            );
 
             this.allTags = tags.map((item) => ({
                 name: item.name,
@@ -84,8 +86,8 @@ export class UserDetailsComponent extends BaseComponent implements OnInit, After
         });
 
         this.detailsForm = detailsGroup(this.fb);
-        this.sexOptions = Object.values(this.sexEnumeration) as string[];
-        this.languageLevelOptions = Object.values(LanguageLevel).map(level => mapLanguageLevelToString(level));
+        this.sexOptions = Object.values(Sex);
+        this.languageLevelOptions = Object.values(LanguageLevel);
     }
 
     ngOnInit(): void {
@@ -101,9 +103,11 @@ export class UserDetailsComponent extends BaseComponent implements OnInit, After
                 this.imagePath = resp.imagePath;
             });
 
-        this.userService.getUserTags().pipe(this.untilThis)
-            .subscribe(tags => {
-                this.selectedTags = tags.filter(t => t.isSelected);
+        this.userService
+            .getUserTags()
+            .pipe(this.untilThis)
+            .subscribe((tags) => {
+                this.selectedTags = tags.filter((t) => t.isSelected);
             });
         this.authService.user.subscribe((user) => this.setImgPath(user));
     }
@@ -115,9 +119,9 @@ export class UserDetailsComponent extends BaseComponent implements OnInit, After
     }
 
     onSubmit() {
-        const userDetails = <IUserInfo> this.detailsForm.value;
+        const userDetails = <IUserInfo>this.detailsForm.value;
 
-        userDetails.languageLevel = mapStringToLanguageLevel(this.languageLevel.value);
+        userDetails.languageLevel = this.languageLevel.value;
 
         userDetails.tags = this.selectedTags;
 
@@ -138,11 +142,9 @@ export class UserDetailsComponent extends BaseComponent implements OnInit, After
     }
 
     setEmojiAvatar(emojiName: string) {
-        this.http.post(
-            `${environment.coreUrl}/api/userprofile/setemoji/${emojiName}`,
-            emojiName,
-            { responseType: 'text' },
-        ).pipe(switchMap(async () => this.authService.loadUser().subscribe()))
+        this.http
+            .post(`${environment.coreUrl}/api/userprofile/setemoji/${emojiName}`, emojiName, { responseType: 'text' })
+            .pipe(switchMap(async () => this.authService.loadUser().subscribe()))
             .subscribe();
     }
 
@@ -184,16 +186,16 @@ export class UserDetailsComponent extends BaseComponent implements OnInit, After
 
     selectInterest(tag: ITag) {
         this.selectedTags = this.includesTags(tag.id)
-            ? this.selectedTags.filter(x => x.id !== tag.id)
+            ? this.selectedTags.filter((x) => x.id !== tag.id)
             : [...this.selectedTags, tag];
     }
 
     findTag<T extends IBaseTag>(collection: T[], id: number) {
-        return collection.find(t => t.id === id);
+        return collection.find((t) => t.id === id);
     }
 
     getIconById(id: number) {
-        return (this.findTag<IIcon>(this.tagsList, id))?.link;
+        return this.findTag<IIcon>(this.tagsList, id)?.link;
     }
 
     includesTags(id: number) {

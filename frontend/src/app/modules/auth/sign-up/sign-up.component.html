@@ -1,19 +1,23 @@
 <div class="container">
     <div class="form-wrp">
         <h1>Create Account</h1>
-        <form #userRegisterForm="ngForm" [formGroup]="registerForm" class="form-content" autocomplete="off" (submit)="submitForm()">
+        <form
+            #userRegisterForm="ngForm"
+            [formGroup]="registerForm"
+            class="form-content"
+            autocomplete="off"
+            (submit)="submitForm()">
             <div class="form-group-item">
-                <input type="email" formControlName="email" placeholder="Email" required email="{{this.email}}" />
+                <input type="email" formControlName="email" placeholder="Email" required email="{{ this.email }}" />
 
                 <div class="errors-wrp">
                     <mat-error class="error" *ngIf="this.email.invalid && this.userRegisterForm.submitted">
-                        <img src="/assets/user-profile/alert-triangle.svg">
-                        {{getErrorMessage(email)}}
+                        <img src="/assets/user-profile/alert-triangle.svg" />
+                        {{ getErrorMessage(email) }}
                     </mat-error>
                 </div>
 
-                <div class="error-surface" *ngIf="this.email.invalid && this.userRegisterForm.submitted">
-                </div>
+                <div class="error-surface" *ngIf="this.email.invalid && this.userRegisterForm.submitted"></div>
             </div>
 
             <div class="name-section">
@@ -22,13 +26,12 @@
 
                     <div class="errors-wrp">
                         <mat-error class="error" *ngIf="this.firstName.invalid && this.userRegisterForm.submitted">
-                            <img src="/assets/user-profile/alert-triangle.svg">
+                            <img src="/assets/user-profile/alert-triangle.svg" />
                             Field is required
                         </mat-error>
                     </div>
 
-                    <div class="error-surface" *ngIf="this.firstName.invalid && this.userRegisterForm.submitted">
-                    </div>
+                    <div class="error-surface" *ngIf="this.firstName.invalid && this.userRegisterForm.submitted"></div>
                 </div>
 
                 <div class="form-group-item">
@@ -36,49 +39,53 @@
 
                     <div class="errors-wrp">
                         <mat-error class="error" *ngIf="this.lastName.invalid && this.userRegisterForm.submitted">
-                            <img src="/assets/user-profile/alert-triangle.svg">
-                            {{getErrorMessage(lastName)}}
+                            <img src="/assets/user-profile/alert-triangle.svg" />
+                            {{ getErrorMessage(lastName) }}
                         </mat-error>
                     </div>
 
-                    <div class="error-surface"
-                        *ngIf="this.lastName.errors?.['required'] && this.userRegisterForm.submitted">
-                    </div>
+                    <div
+                        class="error-surface"
+                        *ngIf="this.lastName.errors?.['required'] && this.userRegisterForm.submitted"></div>
                 </div>
             </div>
             <div class="age-sex-section">
                 <div class="form-group-item">
-                    <app-calendar id="dateOfBirth" formControlName="dateOfBirth" name="dateOfBirth" placeholder="Date of Birth"></app-calendar>
+                    <app-calendar
+                        id="dateOfBirth"
+                        formControlName="dateOfBirth"
+                        name="dateOfBirth"
+                        placeholder="Date of Birth"></app-calendar>
 
                     <div class="errors-wrp">
                         <mat-error class="error" *ngIf="this.dateOfBirth.invalid && this.userRegisterForm.submitted">
-
-                            <img src="/assets/user-profile/alert-triangle.svg">
-                            {{getErrorMessage(dateOfBirth)}}
+                            <img src="/assets/user-profile/alert-triangle.svg" />
+                            {{ getErrorMessage(dateOfBirth) }}
                         </mat-error>
                     </div>
 
-                    <div class="error-surface" *ngIf="this.dateOfBirth.invalid && this.userRegisterForm.submitted">
-                    </div>
+                    <div
+                        class="error-surface"
+                        *ngIf="this.dateOfBirth.invalid && this.userRegisterForm.submitted"></div>
                 </div>
                 <div class="form-group-item">
-                    <ng-select #sexDropdown [items]="sexOptions" class="custom" dropdownPosition="bottom"
-                        appearance="underline" formControlName="sex">
+                    <ng-select
+                        #sexDropdown
+                        [items]="sexOptions"
+                        class="custom"
+                        dropdownPosition="bottom"
+                        appearance="underline"
+                        formControlName="sex">
                     </ng-select>
 
-                    <div class="placeholder" *ngIf="!this.sex.value" (click)="expandSexDropdown()">
-                        Sex
-                    </div>
+                    <div class="placeholder" *ngIf="!this.sex.value" (click)="expandSexDropdown()">Sex</div>
 
-                    <mat-icon class="expand-icon" (click)="expandSexDropdown()">
-                        expand_more
-                    </mat-icon>
+                    <mat-icon class="expand-icon" (click)="expandSexDropdown()"> expand_more </mat-icon>
 
                     <div class="errors-wrp">
                         <mat-error class="error" *ngIf="this.sex.invalid && this.userRegisterForm.submitted">
-
-                            <img src="/assets/user-profile/alert-triangle.svg">
-                            {{getErrorMessage(sex)}}
+                            <img src="/assets/user-profile/alert-triangle.svg" />
+                            {{ getErrorMessage(sex) }}
                         </mat-error>
                     </div>
 
@@ -86,65 +93,72 @@
                 </div>
             </div>
             <div class="form-group-item">
-                <ng-select #countryDropdown [items]="countries" class="custom" dropdownPosition="bottom"
-                    appearance="underline" formControlName="country">
+                <ng-select
+                    #countryDropdown
+                    [items]="countries"
+                    class="custom"
+                    dropdownPosition="bottom"
+                    appearance="underline"
+                    formControlName="country">
                 </ng-select>
 
-                <div class="placeholder" *ngIf="!this.country.value" (click)="expandCountryDropdown()">
-                    Country
-                </div>
+                <div class="placeholder" *ngIf="!this.country.value" (click)="expandCountryDropdown()">Country</div>
 
-                <mat-icon class="expand-icon" (click)="expandCountryDropdown()">
-                    expand_more
-                </mat-icon>
+                <mat-icon class="expand-icon" (click)="expandCountryDropdown()"> expand_more </mat-icon>
 
                 <div class="errors-wrp">
                     <mat-error class="error" *ngIf="this.country.invalid && this.userRegisterForm.submitted">
-
-                        <img src="/assets/user-profile/alert-triangle.svg">
-                        {{getErrorMessage(country)}}
+                        <img src="/assets/user-profile/alert-triangle.svg" />
+                        {{ getErrorMessage(country) }}
                     </mat-error>
                 </div>
 
                 <div class="error-surface" *ngIf="this.country.invalid && this.userRegisterForm.submitted"></div>
             </div>
             <div class="form-group-item">
-                <ng-select #languageDropdown [items]="languages" class="custom" dropdownPosition="bottom"
-                    appearance="underline" formControlName="language">
+                <ng-select
+                    #languageDropdown
+                    [items]="languages"
+                    class="custom"
+                    dropdownPosition="bottom"
+                    appearance="underline"
+                    formControlName="language">
                 </ng-select>
 
-                <div class="placeholder" *ngIf="!this.language.value" (click)="expandLanguageDropdown()">
-                    Language
-                </div>
+                <div class="placeholder" *ngIf="!this.language.value" (click)="expandLanguageDropdown()">Language</div>
 
-                <mat-icon class="expand-icon" (click)="expandLanguageDropdown()">
-                    expand_more
-                </mat-icon>
+                <mat-icon class="expand-icon" (click)="expandLanguageDropdown()"> expand_more </mat-icon>
 
                 <div class="errors-wrp">
                     <mat-error class="error" *ngIf="this.language.invalid && this.userRegisterForm.submitted">
-
-                        <img src="/assets/user-profile/alert-triangle.svg">
-                        {{getErrorMessage(language)}}
+                        <img src="/assets/user-profile/alert-triangle.svg" />
+                        {{ getErrorMessage(language) }}
                     </mat-error>
                 </div>
 
                 <div class="error-surface" *ngIf="this.language.invalid && this.userRegisterForm.submitted"></div>
             </div>
             <div class="form-group-item">
-                <ng-select #levelDropdown [items]="languageLevels" class="custom" dropdownPosition="bottom"
-                    appearance="underline" formControlName="languageLevel">
+                <ng-select
+                    #levelDropdown
+                    [items]="languageLevels"
+                    class="custom"
+                    dropdownPosition="bottom"
+                    appearance="underline"
+                    formControlName="languageLevel">
+                    <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
+                        <div class="item">
+                            <div>{{ getLevelFormattedValue(item) }}</div>
+                        </div>
+                    </ng-template>
                 </ng-select>
 
-                <mat-icon class="expand-icon" (click)="expandLevelDropdown()">
-                    expand_more
-                </mat-icon>
+                <mat-icon class="expand-icon" (click)="expandLevelDropdown()"> expand_more </mat-icon>
 
                 <div class="errors-wrp">
                     <mat-error class="error" *ngIf="this.languageLevel.invalid && this.userRegisterForm.submitted">
-
-                        <img src="/assets/user-profile/alert-triangle.svg">
-                        {{getErrorMessage(languageLevel)}}
+                        <img src="/assets/user-profile/alert-triangle.svg" />
+                        {{ getErrorMessage(languageLevel) }}
                     </mat-error>
                 </div>
 
@@ -155,39 +169,44 @@
                 </div>
             </div>
             <div class="form-group-item">
-                <input type="password" formControlName="password" placeholder="Password" autocomplete="new-password" required
+                <input
+                    type="password"
+                    formControlName="password"
+                    placeholder="Password"
+                    autocomplete="new-password"
+                    required
                     appPasswordVisibility />
                 <div class="errors-wrp">
-
                     <mat-error class="error" *ngIf="this.password.invalid && this.userRegisterForm.submitted">
-                        <img src="/assets/user-profile/alert-triangle.svg" alt="">
-                        {{getErrorMessage(password)}}
+                        <img src="/assets/user-profile/alert-triangle.svg" alt="" />
+                        {{ getErrorMessage(password) }}
                     </mat-error>
                 </div>
 
-                <div *ngIf="this.password.invalid && this.userRegisterForm.submitted" class="error-surface">
-                </div>
+                <div *ngIf="this.password.invalid && this.userRegisterForm.submitted" class="error-surface"></div>
             </div>
             <div class="form-group-item">
-                <input type="password"  formControlName="passwordConfirmation" placeholder="Repeat Password" autocomplete="new-password"
+                <input
+                    type="password"
+                    formControlName="passwordConfirmation"
+                    placeholder="Repeat Password"
+                    autocomplete="new-password"
                     appPasswordVisibility />
 
                 <div class="errors-wrp">
-                    <mat-error class="error"
+                    <mat-error
+                        class="error"
                         *ngIf="this.registerForm.errors?.['matchError'] && this.userRegisterForm.submitted">
-                        <img src="/assets/user-profile/alert-triangle.svg" alt="">
-                        {{getFormErrorMessage(this.registerForm)}}
+                        <img src="/assets/user-profile/alert-triangle.svg" alt="" />
+                        {{ getFormErrorMessage(this.registerForm) }}
                     </mat-error>
                 </div>
 
-                <div class="error-surface"
-                    *ngIf="(this.registerForm.errors?.['matchError'] || this.passwordConfirmation.errors?.['required']) && this.userRegisterForm.submitted">
-                </div>
+                <div
+                    class="error-surface"
+                    *ngIf="(this.registerForm.errors?.['matchError'] || this.passwordConfirmation.errors?.['required']) && this.userRegisterForm.submitted"></div>
             </div>
-            <button class="submit-btn" mat-button type="submit">
-
-                Create Account
-            </button>
+            <button class="submit-btn" mat-button type="submit">Create Account</button>
         </form>
     </div>
     <div id="has-account">

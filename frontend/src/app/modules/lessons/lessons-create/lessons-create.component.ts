@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { mapStringToLanguageLevel } from '@shared/data/LanguageLevelMapper';
+import { LanguageLevel } from '@shared/data/languageLevel';
 import { youtubeVideoLinkRegex } from '@shared/data/regex.util';
 import { IIcon } from '@shared/models/IIcon';
 import { INewLesson } from '@shared/models/lesson/INewLesson';
-import { LanguageLevels } from '@shared/models/lesson/LanguageLevels';
-import Utils from '@shared/utils/lesson.utils';
+import { group, timesList } from '@shared/utils/lesson.utils';
 import * as moment from 'moment';
 
 import { LessonsService } from 'src/app/services/lessons.service';
@@ -20,13 +19,13 @@ import { NotificationService } from 'src/app/services/notification.service';
 export class LessonsCreateComponent implements OnInit {
     tagsList: IIcon[] = [];
 
-    timesList: string[] = Utils.timesList;
+    timesList: string[] = timesList;
 
-    levelsList: string[] = Utils.levelsList;
+    levelsList: LanguageLevel[];
+
+    level: LanguageLevel | string;
 
     time: string;
-
-    level: string;
 
     timeDropdownVisible = false;
 
@@ -46,7 +45,8 @@ export class LessonsCreateComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.myForm = Utils.group(this.fb);
+        this.myForm = group(this.fb);
+        this.levelsList = Object.values(LanguageLevel);
     }
 
     get name() {
@@ -115,10 +115,10 @@ export class LessonsCreateComponent implements OnInit {
         const lessonToCreate: INewLesson = {
             name: this.name?.value,
             mediaPath: '',
-            languageLevel: Object.values(LanguageLevels).indexOf(mapStringToLanguageLevel(this.level)),
+            languageLevel: this.level as LanguageLevel,
             startAt,
             questions: lessonQuestions,
-            tags: lessonTags.map(f => ({ id: f.id })),
+            tags: lessonTags.map((f) => ({ id: f.id })),
             limitOfUsers: parseInt(this.studentsCount?.value, 10),
             youtubeVideoId: this.getYoutubeVideoId(this.videoLink?.value),
         };
