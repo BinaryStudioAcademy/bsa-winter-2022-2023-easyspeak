@@ -14,7 +14,7 @@ namespace EasySpeak.Core.BLL.Interfaces
         Task<List<MessageGroupDto>> GetChatMessages(long chatId);
         Task<NewMessageDto> SendMessageAsync(NewMessageDto newMessageDto);
         Task<long> GetAnotherUserId(long chatId, long id);
-        Task<List<ChatPersonDto>> SetMessagesAsRead(long chatId, long userId);
+        Task<List<ChatPersonDto>> SetMessagesAsRead(long chatId);
         Task<long> CheckIfChatExists(long firstUserId, long secondUserId);
         Task<long> CreateChat(long firstUserId, long secondUserId);
         Task<long> GetNumberOfUnreadMessages(long userId);

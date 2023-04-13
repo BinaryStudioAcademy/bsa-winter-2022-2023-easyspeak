@@ -85,7 +85,7 @@ export class ChatPageComponent implements OnInit, OnDestroy {
                 this.filteredPeople = people;
             });
             if (this.currentUser.id !== msg.createdBy) {
-                this.chatService.readMessages(this.currentChatId, this.currentUser.id as number).subscribe(() => {
+                this.chatService.readMessages(this.currentChatId).subscribe(() => {
                     this.chatService.getChats().subscribe((people) => {
                         this.people = people;
                         this.filteredPeople = people;
@@ -141,7 +141,7 @@ export class ChatPageComponent implements OnInit, OnDestroy {
             this.currentChatId = person.chatId;
             this.currentPerson = person;
         });
-        this.chatService.readMessages(person.chatId, this.currentUser.id as number).subscribe(() => {
+        this.chatService.readMessages(person.chatId).subscribe(() => {
             this.chatService.getChats().subscribe((people) => {
                 this.people = people;
                 this.filteredPeople = people;

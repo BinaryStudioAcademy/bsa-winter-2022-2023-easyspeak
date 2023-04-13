@@ -42,7 +42,7 @@ export class ChatService {
         return this.httpService.post<IMessage>(`${this.routePrefix}/sendMessage`, message);
     }
 
-    readMessages(chatId: number, userId: number): Observable<number[]> {
-        return this.httpService.put<number[]>(`${this.routePrefix}/readMessage`, [chatId, userId]);
+    readMessages(chatId: number): Observable<number> {
+        return this.httpService.put<number>(`${this.routePrefix}/readMessage`, chatId);
     }
 }

@@ -114,7 +114,7 @@ namespace EasySpeak.Core.BLL.Services
             return chat.Users.First(user => user.Id != id).Id;
         }
 
-        public async Task<List<ChatPersonDto>> SetMessagesAsRead(long chatId, long userId)
+        public async Task<List<ChatPersonDto>> SetMessagesAsRead(long chatId)
         {
             var currentChat = await _context.Chats.Include(chat => chat.Messages.Where(message => !message.IsRead))
                 .FirstOrDefaultAsync(chat => chat.Id == chatId);
@@ -123,7 +123,7 @@ namespace EasySpeak.Core.BLL.Services
                 return new List<ChatPersonDto>();
 
             currentChat.Messages
-                .Where(message => message.CreatedBy != userId)
+                .Where(message => message.CreatedBy != _firebaseAuthService.UserId)
                 .ToList()
                 .ForEach(message => message.IsRead = true);
 
@@ -131,7 +131,7 @@ namespace EasySpeak.Core.BLL.Services
 
             await _context.SaveChangesAsync();
 
-            return await GetUnreadAndLastSendMessageAsync(userId);
+            return await GetUnreadAndLastSendMessageAsync(_firebaseAuthService.UserId);
         }
 
         public async Task<long> CheckIfChatExists(long firstUserId, long secondUserId)

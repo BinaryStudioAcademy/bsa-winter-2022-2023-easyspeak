@@ -52,9 +52,9 @@ namespace EasySpeak.Core.WebAPI.Controllers
         }
 
         [HttpPut("readMessage")]
-        public async Task<ActionResult> ReadMessageAsync([FromBody] long[] chatIduserId)
+        public async Task<ActionResult> ReadMessageAsync([FromBody] long chatId)
         {
-            await _chatService.SetMessagesAsRead(chatIduserId[0], chatIduserId[1]);
+            await _chatService.SetMessagesAsRead(chatId);
             return Ok();
         }
     }
