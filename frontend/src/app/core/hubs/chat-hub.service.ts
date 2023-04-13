@@ -41,6 +41,11 @@ export class ChatHubService {
         });
     }
 
+    public async end() {
+        await this.people.unsubscribe();
+        await this.messages.unsubscribe();
+    }
+
     public listenChats(action: (people: IChatPerson[]) => void) {
         this.subscriptions.push(this.people.subscribe({ next: action }));
     }
