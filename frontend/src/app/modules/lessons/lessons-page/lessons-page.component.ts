@@ -36,6 +36,8 @@ export class LessonsPageComponent implements OnInit, OnChanges {
 
     userIsAdmin = false;
 
+    openedLessonIndex: number;
+
     constructor(
         private dialogRef: MatDialog,
         private lessonService: LessonsService,
@@ -108,5 +110,13 @@ export class LessonsPageComponent implements OnInit, OnChanges {
             default:
                 return 'Oops, there are no lessons with such levels for this day. Please consider another date';
         }
+    }
+
+    onLessonOpenedQuestions(index: number) {
+        this.openedLessonIndex = index;
+    }
+
+    isLessonOpenedQuestions(index: number) {
+        return this.openedLessonIndex === index;
     }
 }

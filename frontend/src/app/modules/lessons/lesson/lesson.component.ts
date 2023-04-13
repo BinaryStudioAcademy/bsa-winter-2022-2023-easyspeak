@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { BaseComponent } from '@core/base/base.component';
 import { SpinnerService } from '@core/services/spinner.service';
@@ -21,11 +21,13 @@ export class LessonComponent extends BaseComponent implements OnInit {
 
     @Input() isTeachersPage: boolean;
 
+    @Input() isQuestionsOpened: boolean;
+
+    @Output() questionsOpened = new EventEmitter<void>();
+
     previewImage: string;
 
     questions: Question[] = [];
-
-    isShowQuestions = true;
 
     isLoading = false;
 
@@ -58,12 +60,11 @@ export class LessonComponent extends BaseComponent implements OnInit {
     }
 
     showQuestions(id: number) {
-        if (this.questions.length) {
-            this.isShowQuestions = !this.isShowQuestions;
-        }
-
-        if (this.isShowQuestions) {
+        if (this.questions.length > 0 && this.isQuestionsOpened) {
+            this.questions = [];
+        } else {
             this.getQuestions(id);
+            this.questionsOpened.emit();
         }
     }
 
@@ -109,10 +110,12 @@ export class LessonComponent extends BaseComponent implements OnInit {
 
     isDisabled() {
         if (!this.isTeachersPage) {
-            return this.lesson.isSubscribed
-                || new Date() > new Date(this.lesson.startAt)
-                || this.lesson.limitOfUsers === null
-                || this.lesson.subscribersCount === this.lesson.limitOfUsers;
+            return (
+                this.lesson.isSubscribed ||
+                new Date() > new Date(this.lesson.startAt) ||
+                this.lesson.limitOfUsers === null ||
+                this.lesson.subscribersCount === this.lesson.limitOfUsers
+            );
         }
         if (this.isTeachersPage) {
             return this.lesson.isCanceled || new Date() > new Date(this.lesson.startAt);
@@ -126,7 +129,8 @@ export class LessonComponent extends BaseComponent implements OnInit {
             case !this.isTeachersPage:
                 if (new Date() > new Date(this.lesson.startAt)) {
                     return 'Expired';
-                } if (this.lesson.isSubscribed) {
+                }
+                if (this.lesson.isSubscribed) {
                     return 'Subscribed';
                 }
 

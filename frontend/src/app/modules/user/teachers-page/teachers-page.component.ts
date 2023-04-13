@@ -31,6 +31,8 @@ export class TeachersPageComponent implements OnInit {
 
     datesWithLessons: IDateWithLessons[] = [];
 
+    openedLessonIndex: number;
+
     constructor(
         private authService: AuthService,
         private dialogRef: MatDialog,
@@ -92,5 +94,13 @@ export class TeachersPageComponent implements OnInit {
             dateWithLessons.lessonsColumn1 = filterColumn(dateWithLessons.lessons, 1);
             dateWithLessons.lessonsColumn2 = filterColumn(dateWithLessons.lessons, 2);
         });
+    }
+
+    onLessonOpenedQuestions(index: number) {
+        this.openedLessonIndex = index;
+    }
+
+    isLessonOpenedQuestions(index: number) {
+        return this.openedLessonIndex === index;
     }
 }
