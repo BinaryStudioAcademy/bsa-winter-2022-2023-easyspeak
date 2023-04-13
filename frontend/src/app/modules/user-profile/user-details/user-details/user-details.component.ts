@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { BaseComponent } from '@core/base/base.component';
@@ -27,7 +27,9 @@ import { detailsGroup } from '../user-details.component.util';
     templateUrl: './user-details.component.html',
     styleUrls: ['./user-details.component.sass'],
 })
-export class UserDetailsComponent extends BaseComponent implements OnInit {
+export class UserDetailsComponent extends BaseComponent implements OnInit, AfterViewInit {
+    @ViewChild('fileInput', { static: false }) fileInput: ElementRef;
+
     tagsList: IIcon[];
 
     allTags: ITag[];
@@ -96,6 +98,12 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
             });
 
         this.authService.user.subscribe((user) => this.setImgPath(user));
+    }
+
+    ngAfterViewInit() {
+        this.fileInput.nativeElement.onclick = () => {
+            this.fileInput.nativeElement.value = null;
+        };
     }
 
     onSubmit() {
