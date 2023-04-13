@@ -100,10 +100,6 @@ export class LessonsCreateComponent implements OnInit {
         return this.myForm.get('studentsCount');
     }
 
-    get meetLink() {
-        return this.myForm.get('meetLink');
-    }
-
     expandTimeDropdown() {
         this.timeDropdownVisible = !this.timeDropdownVisible;
     }

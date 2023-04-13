@@ -62,7 +62,6 @@ export default class Utils {
             questions: ['', [Validators.required]],
             videoLink: ['', [Validators.required]],
             studentsCount: ['', [Validators.required]],
-            meetLink: ['', [Validators.required]],
         });
     }
 }
