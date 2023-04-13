@@ -61,7 +61,7 @@ export class LessonComponent extends BaseComponent implements OnInit {
     }
 
     showQuestions() {
-        if (this.questions.length > 0 && this.isQuestionsOpened) {
+        if (this.questions && this.isQuestionsOpened) {
             this.questions = '';
             this.isQuestionsOpened = false;
         } else {
@@ -72,11 +72,7 @@ export class LessonComponent extends BaseComponent implements OnInit {
             const observer = new MutationObserver(() => {
                 const container = document.querySelector('.lesson-card-questions') as HTMLElement;
 
-                if (
-                    container &&
-                    document.querySelector('.question-text') &&
-                    document.querySelectorAll('.lesson-card-questions').length === 1
-                ) {
+                if (container) {
                     observer.disconnect();
 
                     if (container.scrollHeight > container.clientHeight) {
