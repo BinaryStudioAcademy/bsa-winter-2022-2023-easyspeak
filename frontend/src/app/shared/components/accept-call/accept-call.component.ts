@@ -48,6 +48,7 @@ export class AcceptCallComponent implements OnInit {
         const config: MatDialogConfig<ICallInfo> = {
             minWidth: '100vw',
             data: {
+                hasButtons: true,
                 chatId: this.callInfo.chatId,
                 callerId: this.callInfo.callerId,
                 roomName: this.callInfo.roomName,
