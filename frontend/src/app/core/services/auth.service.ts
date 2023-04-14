@@ -3,13 +3,14 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { ChatHubService } from '@core/hubs/chat-hub.service';
 import { NotificationsHubService } from '@core/hubs/notifications-hub.service';
 import { WebrtcHubService } from '@core/hubs/webrtc-hub.service';
 import { HttpService } from '@core/services/http.service';
 import { IUserShort } from '@shared/models/IUserShort';
 import * as auth from 'firebase/auth';
 import firebase from 'firebase/compat';
-import { defer, first, firstValueFrom, from, Subject, tap } from 'rxjs';
+import { BehaviorSubject, defer, first, firstValueFrom, from, tap } from 'rxjs';
 
 import { NotificationService } from 'src/app/services/notification.service';
 
@@ -19,7 +20,11 @@ import { UserService } from './user.service';
     providedIn: 'root',
 })
 export class AuthService {
-    user = new Subject<IUserShort>();
+    user = new BehaviorSubject<IUserShort>({} as IUserShort);
+
+    setUser(userShort: IUserShort) {
+        this.user.next(userShort);
+    }
 
     constructor(
         private afs: AngularFirestore,
@@ -32,6 +37,7 @@ export class AuthService {
         private toastr: NotificationService,
         private webRtcHub: WebrtcHubService,
         private notificationsHub: NotificationsHubService,
+        private chatHub: ChatHubService,
     ) {
         this.afAuth.onIdTokenChanged(user => {
             if (user) {
@@ -51,6 +57,8 @@ export class AuthService {
             this.notificationsHub.start().then(() => {
                 this.notificationsHub.connect(userCredential.user?.email as string);
             });
+
+            await this.chatHub.start();
         }
     }
 

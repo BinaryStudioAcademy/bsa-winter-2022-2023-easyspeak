@@ -13,6 +13,6 @@ namespace EasySpeak.Core.Common.DTO
         public string YoutubeVideoId { get; set; } = string.Empty;
         public UserForLessonDto? User { get; set; }
         public ICollection<TagForFiltrationDto>? Tags { get; set; }
-        public ICollection<QuestionForLessonDto>? Questions { get; set; }
+        public string Questions { get; set; } = string.Empty;
     }
 }

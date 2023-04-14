@@ -55,6 +55,10 @@ export class NotificationsHubService {
         });
     }
 
+    async invoke(methodName: string, ...args: unknown[]): Promise<unknown> {
+        return this.hubConnection.invoke(methodName, ...args);
+    }
+
     isConnected(): boolean {
         return this.hubConnection && this.hubConnection.state === HubConnectionState.Connected;
     }

@@ -25,9 +25,6 @@
                     <img src="{{userLanguageFlag}}"/>
                     <div class="img-description">{{user.language}}</div>
                 </div>
-                <div class="social-icon">
-                    <img src="assets/user-card-icons/great-britain.svg" alt="instagram-icon" />
-                </div>
             </div>
         </div>
         <div class="tags">
@@ -37,7 +34,7 @@
         </div>
     </div>
     <div class="bottom">
-        <div class="progress-container">
+        <div class="progress-container" *ngIf="user.userFriendshipStatus !== eUserFriendshipStatus.Friend">
             <div class="progress">
                 <app-round-progress-bar [status]="user.compatibility"></app-round-progress-bar>
                 <div>{{ user.compatibility}}%</div>
@@ -48,7 +45,7 @@
             </div>
         </div>
         <div *ngIf="user.userFriendshipStatus === eUserFriendshipStatus.Regular" class="buttons">
-            <button (click)="buttonGoToMessage()" class="button hover">
+            <button (click)="message()" class="button hover">
                 <img src="assets/user-card-icons/message.svg" alt="book" />
                 <span>Message</span>
             </button>
@@ -58,7 +55,7 @@
             </button>
         </div>
         <div *ngIf="user.userFriendshipStatus === eUserFriendshipStatus.Acceptor" class="buttons">
-            <button class="button hover">
+            <button class="button hover" (click)="message()">
                 <img src="assets/user-card-icons/mail.svg" alt="message">
                 <span>Message</span>
             </button>
@@ -78,13 +75,9 @@
             </button>
         </div>
         <div *ngIf="user.userFriendshipStatus === eUserFriendshipStatus.Friend" class="buttons">
-            <button class="button hover">
+            <button class="button hover" (click)="message()">
                 <img src="assets/user-card-icons/mail.svg" alt="message">
                 <span>Message</span>
-            </button>
-            <button class="button button-gray" disabled>
-                <img src="assets/user-card-icons/follow-icon.svg" alt="follow">
-                <span>Added to friends</span>
             </button>
         </div>
     </div>

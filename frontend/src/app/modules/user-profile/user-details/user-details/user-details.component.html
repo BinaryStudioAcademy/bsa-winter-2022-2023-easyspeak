@@ -13,7 +13,7 @@
                 </app-avatar>
             </div>
             <div class="edit-avatar-icon">
-                <input type="file" (change)="onFileChange($event)">
+                <input type="file" accept="image/*" (change)="onFileChange($event)" #fileInput>
                 <img src="/assets/user-profile//edit-icon.svg" alt="edit" />
             </div>
             <div class="vertical-line"></div>

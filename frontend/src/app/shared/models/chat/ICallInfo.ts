@@ -1,4 +1,5 @@
 export interface ICallInfo {
+    hasButtons: boolean,
     chatId: number,
     callerId: number,
     roomName: string,
