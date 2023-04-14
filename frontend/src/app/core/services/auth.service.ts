@@ -80,7 +80,7 @@ export class AuthService {
                     next: (userCredential) => {
                         from(this.handleUserCredential(userCredential));
                     },
-                    error: () => { throw new Error('This email is already registered. Try another one'); },
+                    error: (e) => { throw e; },
                 }),
             );
     }
