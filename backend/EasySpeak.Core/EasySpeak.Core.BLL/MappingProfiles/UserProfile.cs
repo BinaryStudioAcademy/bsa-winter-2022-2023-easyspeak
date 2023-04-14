@@ -28,7 +28,12 @@ public class UserProfile : Profile
 
         CreateMap<User, UserShortInfoDto>()
             .ForMember(user => user.Name, src => src.MapFrom(user => $"{user.FirstName} {user.LastName}"))
-            .ForMember(user => user.ImagePath, src => src.MapFrom(user => string.IsNullOrEmpty(user.EmojiName) ? user.ImageId != null ? user.Image.Url : "" : user.EmojiName))
+            .ForMember(user => user.ImagePath, src => src.MapFrom(user => string.IsNullOrEmpty(user.EmojiName) ? UserImage(user) : user.EmojiName))
             .ForMember(user => user.Tags, src => src.MapFrom(user => user.Tags.Select(t => t.Name)));
+    }
+
+    private static string? UserImage(User user)
+    {
+        return user.ImageId != null ? user.Image.Url : "";
     }
 }

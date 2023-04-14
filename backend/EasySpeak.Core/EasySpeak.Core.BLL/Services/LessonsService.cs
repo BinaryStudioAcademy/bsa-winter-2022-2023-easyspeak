@@ -61,11 +61,16 @@ public class LessonsService : BaseService, ILessonsService
             t.SubscribersCount = subscribersInfoDict[t.Id].SbCount;
             t.isSubscribed = subscribersInfoDict[t.Id].isSubscribed;
             var user = lessonsFromContext.First(lesson => lesson.Id == t.Id).User!;
-            var imgUrl = string.IsNullOrEmpty(user.EmojiName) ? user.ImageId != null ? user.Image.Url : "" : user.EmojiName;
+            var imgUrl = string.IsNullOrEmpty(user.EmojiName) ? UserImage(user) : user.EmojiName;
             t.User!.ImagePath = imgUrl;
         });
 
         return lessonDtos;
+    }
+
+    private static string? UserImage(User user)
+    {
+        return user.ImageId != null ? user.Image.Url : "";
     }
 
     public async Task<ICollection<DayCardDto>?> GetDayCardsOfWeekAsync(RequestDayCardDto requestDto)
