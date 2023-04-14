@@ -1,0 +1,49 @@
+@import "src/styles/colors.sass"
+.container
+    margin-top: 30px
+    display: flex
+    flex-direction: row
+    flex-wrap: nowrap
+    column-gap: 8px
+
+.circle
+    position: relative
+    display: flex
+    justify-content: center
+    align-items: center
+    width: 32px
+    height: 32px
+    color: $gray-300
+    border: 1px solid $gray-200
+    border-radius: 50%
+    &:hover
+        box-shadow: $box-shadow
+        cursor: pointer
+
+.active
+    color: $white
+    border-color: $turquoise-100
+    background-color: $turquoise-100
+    mat-icon
+        color: $white
+mat-icon
+    transform: scale(0.8)
+    color: $gray-300
+
+.aside-left
+    position: absolute
+    top: 4px
+    left: 8px
+
+.aside-right
+    position: absolute
+    top: 4px
+    left: 2px
+
+.max-size
+    display: flex
+    flex-direction: row
+    flex-wrap: nowrap
+    column-gap: 8px
+        
+
