@@ -10,9 +10,9 @@ namespace EasySpeak.Core.BLL.Helpers
 {
     public static class UserHelper
     {
-        public static string GetUserAvatar(this User user)
+        public static string? GetUserAvatar(this User user)
         {
-            return string.IsNullOrEmpty(user.EmojiName) ? UserImage(user) : user.EmojiName;
+            return string.IsNullOrEmpty(user.EmojiName) ? GetUserImage(user) : user.EmojiName;
         }
 
         private static string? GetUserImage(User user)
