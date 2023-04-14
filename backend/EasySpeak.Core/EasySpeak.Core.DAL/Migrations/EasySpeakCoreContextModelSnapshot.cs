@@ -35,108 +35,6 @@ namespace EasySpeak.Core.DAL.Migrations
                     b.HasIndex("UsersId");
 
                     b.ToTable("ChatUser");
-
-                    b.HasData(
-                        new
-                        {
-                            ChatsId = 1L,
-                            UsersId = 1L
-                        },
-                        new
-                        {
-                            ChatsId = 2L,
-                            UsersId = 1L
-                        },
-                        new
-                        {
-                            ChatsId = 3L,
-                            UsersId = 1L
-                        },
-                        new
-                        {
-                            ChatsId = 4L,
-                            UsersId = 1L
-                        },
-                        new
-                        {
-                            ChatsId = 5L,
-                            UsersId = 2L
-                        },
-                        new
-                        {
-                            ChatsId = 6L,
-                            UsersId = 2L
-                        },
-                        new
-                        {
-                            ChatsId = 7L,
-                            UsersId = 2L
-                        },
-                        new
-                        {
-                            ChatsId = 8L,
-                            UsersId = 2L
-                        },
-                        new
-                        {
-                            ChatsId = 9L,
-                            UsersId = 3L
-                        },
-                        new
-                        {
-                            ChatsId = 10L,
-                            UsersId = 3L
-                        },
-                        new
-                        {
-                            ChatsId = 11L,
-                            UsersId = 3L
-                        },
-                        new
-                        {
-                            ChatsId = 12L,
-                            UsersId = 3L
-                        },
-                        new
-                        {
-                            ChatsId = 13L,
-                            UsersId = 4L
-                        },
-                        new
-                        {
-                            ChatsId = 14L,
-                            UsersId = 4L
-                        },
-                        new
-                        {
-                            ChatsId = 15L,
-                            UsersId = 4L
-                        },
-                        new
-                        {
-                            ChatsId = 16L,
-                            UsersId = 4L
-                        },
-                        new
-                        {
-                            ChatsId = 17L,
-                            UsersId = 5L
-                        },
-                        new
-                        {
-                            ChatsId = 18L,
-                            UsersId = 5L
-                        },
-                        new
-                        {
-                            ChatsId = 19L,
-                            UsersId = 5L
-                        },
-                        new
-                        {
-                            ChatsId = 20L,
-                            UsersId = 5L
-                        });
                 });
 
             modelBuilder.Entity("EasySpeak.Core.DAL.Entities.Call", b =>
@@ -185,108 +83,6 @@ namespace EasySpeak.Core.DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Chats");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 2L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 3L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 4L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 5L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 6L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 7L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 8L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 9L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 10L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 11L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 12L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 13L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 14L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 15L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 16L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 17L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 18L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 19L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 20L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        });
                 });
 
             modelBuilder.Entity("EasySpeak.Core.DAL.Entities.EasySpeakFile", b =>
@@ -340,168 +136,6 @@ namespace EasySpeak.Core.DAL.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Friends");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FriendshipStatus = 2,
-                            RequesterId = 3L,
-                            UserId = 3L
-                        },
-                        new
-                        {
-                            Id = 2L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FriendshipStatus = 2,
-                            RequesterId = 1L,
-                            UserId = 4L
-                        },
-                        new
-                        {
-                            Id = 3L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FriendshipStatus = 2,
-                            RequesterId = 2L,
-                            UserId = 3L
-                        },
-                        new
-                        {
-                            Id = 4L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FriendshipStatus = 2,
-                            RequesterId = 3L,
-                            UserId = 5L
-                        },
-                        new
-                        {
-                            Id = 5L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FriendshipStatus = 2,
-                            RequesterId = 5L,
-                            UserId = 2L
-                        },
-                        new
-                        {
-                            Id = 6L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FriendshipStatus = 0,
-                            RequesterId = 3L,
-                            UserId = 3L
-                        },
-                        new
-                        {
-                            Id = 7L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FriendshipStatus = 1,
-                            RequesterId = 5L,
-                            UserId = 5L
-                        },
-                        new
-                        {
-                            Id = 8L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FriendshipStatus = 1,
-                            RequesterId = 1L,
-                            UserId = 1L
-                        },
-                        new
-                        {
-                            Id = 9L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FriendshipStatus = 0,
-                            RequesterId = 1L,
-                            UserId = 1L
-                        },
-                        new
-                        {
-                            Id = 10L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FriendshipStatus = 2,
-                            RequesterId = 4L,
-                            UserId = 5L
-                        },
-                        new
-                        {
-                            Id = 11L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FriendshipStatus = 1,
-                            RequesterId = 3L,
-                            UserId = 3L
-                        },
-                        new
-                        {
-                            Id = 12L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FriendshipStatus = 0,
-                            RequesterId = 1L,
-                            UserId = 3L
-                        },
-                        new
-                        {
-                            Id = 13L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FriendshipStatus = 1,
-                            RequesterId = 5L,
-                            UserId = 5L
-                        },
-                        new
-                        {
-                            Id = 14L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FriendshipStatus = 2,
-                            RequesterId = 1L,
-                            UserId = 5L
-                        },
-                        new
-                        {
-                            Id = 15L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FriendshipStatus = 2,
-                            RequesterId = 3L,
-                            UserId = 2L
-                        },
-                        new
-                        {
-                            Id = 16L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FriendshipStatus = 0,
-                            RequesterId = 5L,
-                            UserId = 4L
-                        },
-                        new
-                        {
-                            Id = 17L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FriendshipStatus = 0,
-                            RequesterId = 4L,
-                            UserId = 5L
-                        },
-                        new
-                        {
-                            Id = 18L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FriendshipStatus = 0,
-                            RequesterId = 2L,
-                            UserId = 2L
-                        },
-                        new
-                        {
-                            Id = 19L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FriendshipStatus = 2,
-                            RequesterId = 5L,
-                            UserId = 3L
-                        },
-                        new
-                        {
-                            Id = 20L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            FriendshipStatus = 0,
-                            RequesterId = 5L,
-                            UserId = 2L
-                        });
                 });
 
             modelBuilder.Entity("EasySpeak.Core.DAL.Entities.Lesson", b =>
@@ -520,6 +154,9 @@ namespace EasySpeak.Core.DAL.Migrations
                     b.Property<long?>("CreatedBy")
                         .HasColumnType("bigint");
 
+                    b.Property<bool>("IsCalculated")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsCanceled")
                         .HasColumnType("bit");
 
@@ -534,6 +171,10 @@ namespace EasySpeak.Core.DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Questions")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -561,148 +202,1361 @@ namespace EasySpeak.Core.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = -80L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
                             CreatedBy = 1L,
+                            IsCalculated = false,
                             IsCanceled = false,
                             LanguageLevel = 0,
                             LimitOfUsers = 150,
                             MediaPath = "https://picsum.photos/640/480/?image=822",
                             Name = "Mobility",
-                            StartAt = new DateTime(2023, 4, 20, 5, 39, 54, 568, DateTimeKind.Utc).AddTicks(9782),
-                            YoutubeVideoId = "",
+                            Questions = "Field Branding impactful",
+                            StartAt = new DateTime(2023, 4, 21, 2, 2, 34, 750, DateTimeKind.Utc).AddTicks(123),
+                            YoutubeVideoId = "vaeoTDOnRsE",
                             ZoomMeetingLink = "",
                             ZoomMeetingLinkHost = ""
                         },
                         new
                         {
-                            Id = 2L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = -79L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
                             CreatedBy = 1L,
+                            IsCalculated = false,
                             IsCanceled = false,
                             LanguageLevel = 0,
-                            LimitOfUsers = 139,
-                            MediaPath = "https://picsum.photos/640/480/?image=232",
-                            Name = "brand",
-                            StartAt = new DateTime(2023, 4, 28, 7, 4, 30, 405, DateTimeKind.Utc).AddTicks(2189),
-                            YoutubeVideoId = "",
+                            LimitOfUsers = 55,
+                            MediaPath = "https://picsum.photos/640/480/?image=298",
+                            Name = "invoice",
+                            Questions = "Incredible Metal Hat Platinum",
+                            StartAt = new DateTime(2023, 4, 2, 21, 54, 31, 518, DateTimeKind.Utc).AddTicks(9243),
+                            YoutubeVideoId = "7B60bwTXFNc",
                             ZoomMeetingLink = "",
                             ZoomMeetingLinkHost = ""
                         },
                         new
                         {
-                            Id = 3L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreatedBy = 2L,
-                            IsCanceled = false,
-                            LanguageLevel = 0,
-                            MediaPath = "https://picsum.photos/640/480/?image=1065",
-                            Name = "Oman",
-                            StartAt = new DateTime(2023, 4, 7, 17, 24, 52, 871, DateTimeKind.Utc).AddTicks(8972),
-                            YoutubeVideoId = "",
-                            ZoomMeetingLink = "",
-                            ZoomMeetingLinkHost = ""
-                        },
-                        new
-                        {
-                            Id = 4L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreatedBy = 5L,
-                            IsCanceled = false,
-                            LanguageLevel = 0,
-                            LimitOfUsers = 143,
-                            MediaPath = "https://picsum.photos/640/480/?image=157",
-                            Name = "Directives",
-                            StartAt = new DateTime(2023, 4, 8, 12, 1, 17, 422, DateTimeKind.Utc).AddTicks(3002),
-                            YoutubeVideoId = "",
-                            ZoomMeetingLink = "",
-                            ZoomMeetingLinkHost = ""
-                        },
-                        new
-                        {
-                            Id = 5L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreatedBy = 5L,
-                            IsCanceled = false,
-                            LanguageLevel = 0,
-                            MediaPath = "https://picsum.photos/640/480/?image=576",
-                            Name = "Platinum",
-                            StartAt = new DateTime(2023, 4, 25, 23, 15, 50, 87, DateTimeKind.Utc).AddTicks(5649),
-                            YoutubeVideoId = "",
-                            ZoomMeetingLink = "",
-                            ZoomMeetingLinkHost = ""
-                        },
-                        new
-                        {
-                            Id = 6L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreatedBy = 4L,
-                            IsCanceled = false,
-                            LanguageLevel = 0,
-                            MediaPath = "https://picsum.photos/640/480/?image=345",
-                            Name = "SDD",
-                            StartAt = new DateTime(2023, 4, 6, 15, 15, 36, 36, DateTimeKind.Utc).AddTicks(7593),
-                            YoutubeVideoId = "",
-                            ZoomMeetingLink = "",
-                            ZoomMeetingLinkHost = ""
-                        },
-                        new
-                        {
-                            Id = 7L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = -78L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
                             CreatedBy = 1L,
+                            IsCalculated = false,
                             IsCanceled = false,
                             LanguageLevel = 0,
-                            LimitOfUsers = 52,
-                            MediaPath = "https://picsum.photos/640/480/?image=60",
-                            Name = "complexity",
-                            StartAt = new DateTime(2023, 4, 18, 12, 32, 59, 586, DateTimeKind.Utc).AddTicks(5964),
-                            YoutubeVideoId = "",
+                            LimitOfUsers = 179,
+                            MediaPath = "https://picsum.photos/640/480/?image=335",
+                            Name = "Thailand",
+                            Questions = "Customer-focused orange",
+                            StartAt = new DateTime(2023, 4, 4, 21, 45, 18, 995, DateTimeKind.Utc).AddTicks(2261),
+                            YoutubeVideoId = "oGQzYnkYwBs",
                             ZoomMeetingLink = "",
                             ZoomMeetingLinkHost = ""
                         },
                         new
                         {
-                            Id = 8L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreatedBy = 5L,
-                            IsCanceled = false,
-                            LanguageLevel = 0,
-                            LimitOfUsers = 153,
-                            MediaPath = "https://picsum.photos/640/480/?image=194",
-                            Name = "navigating",
-                            StartAt = new DateTime(2023, 4, 17, 11, 50, 19, 566, DateTimeKind.Utc).AddTicks(9665),
-                            YoutubeVideoId = "",
-                            ZoomMeetingLink = "",
-                            ZoomMeetingLinkHost = ""
-                        },
-                        new
-                        {
-                            Id = 9L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = -77L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
                             CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 109,
+                            MediaPath = "https://picsum.photos/640/480/?image=689",
+                            Name = "green",
+                            Questions = "plum pixel Granite",
+                            StartAt = new DateTime(2023, 4, 6, 6, 44, 1, 367, DateTimeKind.Utc).AddTicks(9012),
+                            YoutubeVideoId = "SmtkrruHmAM",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -76L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 55,
+                            MediaPath = "https://picsum.photos/640/480/?image=962",
+                            Name = "Flat",
+                            Questions = "Advanced",
+                            StartAt = new DateTime(2023, 4, 16, 5, 33, 54, 259, DateTimeKind.Utc).AddTicks(7190),
+                            YoutubeVideoId = "9OnINP-fGm4",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -75L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 34,
+                            MediaPath = "https://picsum.photos/640/480/?image=545",
+                            Name = "input",
+                            Questions = "Functionality South Carolina Accountability Plastic",
+                            StartAt = new DateTime(2023, 4, 5, 8, 27, 11, 696, DateTimeKind.Utc).AddTicks(4276),
+                            YoutubeVideoId = "oGQzYnkYwBs",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -74L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 59,
+                            MediaPath = "https://picsum.photos/640/480/?image=376",
+                            Name = "Health & Home",
+                            Questions = "quantify deposit auxiliary Avon Intelligent",
+                            StartAt = new DateTime(2023, 4, 3, 6, 52, 6, 876, DateTimeKind.Utc).AddTicks(6340),
+                            YoutubeVideoId = "7B60bwTXFNc",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -73L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 157,
+                            MediaPath = "https://picsum.photos/640/480/?image=736",
+                            Name = "strategy",
+                            Questions = "withdrawal Incredible Ridges Awesome",
+                            StartAt = new DateTime(2023, 4, 10, 23, 31, 3, 105, DateTimeKind.Utc).AddTicks(5377),
+                            YoutubeVideoId = "2UHU93KF9k",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -72L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
                             IsCanceled = false,
                             LanguageLevel = 0,
                             LimitOfUsers = 180,
-                            MediaPath = "https://picsum.photos/640/480/?image=620",
-                            Name = "Granite",
-                            StartAt = new DateTime(2023, 4, 6, 5, 31, 35, 722, DateTimeKind.Utc).AddTicks(2772),
-                            YoutubeVideoId = "",
+                            MediaPath = "https://picsum.photos/640/480/?image=204",
+                            Name = "Malta",
+                            Questions = "calculating synthesize Islands Intelligent Steel Tuna",
+                            StartAt = new DateTime(2023, 4, 23, 23, 43, 5, 282, DateTimeKind.Utc).AddTicks(5503),
+                            YoutubeVideoId = "7B60bwTXFNc",
                             ZoomMeetingLink = "",
                             ZoomMeetingLinkHost = ""
                         },
                         new
                         {
-                            Id = 10L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreatedBy = 2L,
+                            Id = -71L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
                             IsCanceled = false,
                             LanguageLevel = 0,
-                            LimitOfUsers = 22,
-                            MediaPath = "https://picsum.photos/640/480/?image=75",
+                            LimitOfUsers = 78,
+                            MediaPath = "https://picsum.photos/640/480/?image=918",
+                            Name = "SMTP",
+                            Questions = "Mobility Shoals navigating fuchsia New York",
+                            StartAt = new DateTime(2023, 4, 13, 20, 24, 10, 588, DateTimeKind.Utc).AddTicks(2367),
+                            YoutubeVideoId = "2UHU93KF9k",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -70L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 55,
+                            MediaPath = "https://picsum.photos/640/480/?image=322",
+                            Name = "hybrid",
+                            Questions = "Industrial, Computers & Outdoors Multi-tiered Ameliorated Seychelles Rupee Music",
+                            StartAt = new DateTime(2023, 4, 10, 16, 31, 25, 955, DateTimeKind.Utc).AddTicks(4657),
+                            YoutubeVideoId = "N1urEuxzH34",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -69L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 46,
+                            MediaPath = "https://picsum.photos/640/480/?image=528",
+                            Name = "white",
+                            Questions = "Electronics invoice circuit application cross-platform",
+                            StartAt = new DateTime(2023, 4, 25, 7, 40, 35, 566, DateTimeKind.Utc).AddTicks(9135),
+                            YoutubeVideoId = "INatfKtRXKc",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -68L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 82,
+                            MediaPath = "https://picsum.photos/640/480/?image=458",
+                            Name = "Corners",
+                            Questions = "Uruguay",
+                            StartAt = new DateTime(2023, 4, 12, 6, 49, 37, 448, DateTimeKind.Utc).AddTicks(1947),
+                            YoutubeVideoId = "Eg0-a22-XBM",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -67L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 173,
+                            MediaPath = "https://picsum.photos/640/480/?image=805",
+                            Name = "Solomon Islands",
+                            Questions = "Gorgeous online Handmade Frozen Chair",
+                            StartAt = new DateTime(2023, 4, 15, 0, 6, 37, 57, DateTimeKind.Utc).AddTicks(6333),
+                            YoutubeVideoId = "2UHU93KF9k",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -66L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 108,
+                            MediaPath = "https://picsum.photos/640/480/?image=636",
+                            Name = "Auto Loan Account",
+                            Questions = "even-keeled Games & Clothing solid state Baby, Toys & Home",
+                            StartAt = new DateTime(2023, 4, 1, 22, 0, 4, 651, DateTimeKind.Utc).AddTicks(6176),
+                            YoutubeVideoId = "fjWd1qZW6ng",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -65L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 116,
+                            MediaPath = "https://picsum.photos/640/480/?image=777",
+                            Name = "salmon",
+                            Questions = "Cambridgeshire quantifying Canadian Dollar users Track",
+                            StartAt = new DateTime(2023, 4, 24, 12, 11, 38, 587, DateTimeKind.Utc).AddTicks(9834),
+                            YoutubeVideoId = "vaeoTDOnRsE",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -64L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 90,
+                            MediaPath = "https://picsum.photos/640/480/?image=1069",
+                            Name = "Garden",
+                            Questions = "indigo explicit",
+                            StartAt = new DateTime(2023, 4, 16, 21, 30, 24, 382, DateTimeKind.Utc).AddTicks(5766),
+                            YoutubeVideoId = "Eg0-a22-XBM",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -63L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 138,
+                            MediaPath = "https://picsum.photos/640/480/?image=442",
+                            Name = "synthesize",
+                            Questions = "Licensed Granite Bike",
+                            StartAt = new DateTime(2023, 4, 6, 19, 55, 15, 979, DateTimeKind.Utc).AddTicks(5797),
+                            YoutubeVideoId = "SmtkrruHmAM",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -62L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 90,
+                            MediaPath = "https://picsum.photos/640/480/?image=351",
+                            Name = "back up",
+                            Questions = "algorithm capacity alarm orange Savings Account interactive",
+                            StartAt = new DateTime(2023, 4, 16, 5, 51, 17, 68, DateTimeKind.Utc).AddTicks(6278),
+                            YoutubeVideoId = "SJ854on-V2I",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -61L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 49,
+                            MediaPath = "https://picsum.photos/640/480/?image=588",
+                            Name = "web-enabled",
+                            Questions = "Berkshire Run",
+                            StartAt = new DateTime(2023, 4, 4, 1, 26, 52, 406, DateTimeKind.Utc).AddTicks(7331),
+                            YoutubeVideoId = "y_IeU_ut2z4",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -60L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 125,
+                            MediaPath = "https://picsum.photos/640/480/?image=576",
+                            Name = "California",
+                            Questions = "SDD reinvent",
+                            StartAt = new DateTime(2023, 4, 23, 14, 10, 20, 908, DateTimeKind.Utc).AddTicks(7997),
+                            YoutubeVideoId = "7B60bwTXFNc",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -59L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 195,
+                            MediaPath = "https://picsum.photos/640/480/?image=67",
+                            Name = "Bedfordshire",
+                            Questions = "e-business",
+                            StartAt = new DateTime(2023, 4, 18, 23, 23, 34, 817, DateTimeKind.Utc).AddTicks(4037),
+                            YoutubeVideoId = "RGrL8lqg-AU",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -58L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 158,
+                            MediaPath = "https://picsum.photos/640/480/?image=252",
+                            Name = "synthesizing",
+                            Questions = "Practical Wooden Shirt Puerto Rico process improvement Intelligent Fresh Soap strategize e-business",
+                            StartAt = new DateTime(2023, 4, 5, 8, 17, 8, 871, DateTimeKind.Utc).AddTicks(8959),
+                            YoutubeVideoId = "N1urEuxzH34",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -57L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 46,
+                            MediaPath = "https://picsum.photos/640/480/?image=47",
+                            Name = "Rustic Frozen Gloves",
+                            Questions = "Cotton Legacy AI",
+                            StartAt = new DateTime(2023, 4, 16, 19, 42, 39, 345, DateTimeKind.Utc).AddTicks(1398),
+                            YoutubeVideoId = "Fx9dLmhl7nY",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -56L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 195,
+                            MediaPath = "https://picsum.photos/640/480/?image=486",
+                            Name = "Books & Movies",
+                            Questions = "Paradigm Pennsylvania Markets Consultant Nauru",
+                            StartAt = new DateTime(2023, 4, 27, 12, 35, 23, 874, DateTimeKind.Utc).AddTicks(2786),
+                            YoutubeVideoId = "iXEqUxwTraI",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -55L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 68,
+                            MediaPath = "https://picsum.photos/640/480/?image=970",
+                            Name = "Tasty Soft Sausages",
+                            Questions = "monetize synergies gold compressing facilitate AGP",
+                            StartAt = new DateTime(2023, 4, 18, 18, 50, 48, 175, DateTimeKind.Utc).AddTicks(4112),
+                            YoutubeVideoId = "Rl298m9JZ9M",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -54L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 154,
+                            MediaPath = "https://picsum.photos/640/480/?image=243",
+                            Name = "turquoise",
+                            Questions = "Bangladesh Generic Cotton Keyboard cross-platform",
+                            StartAt = new DateTime(2023, 4, 11, 9, 26, 1, 750, DateTimeKind.Utc).AddTicks(9091),
+                            YoutubeVideoId = "zIfHrp2REWY",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -53L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 52,
+                            MediaPath = "https://picsum.photos/640/480/?image=117",
+                            Name = "Inverse",
+                            Questions = "hierarchy",
+                            StartAt = new DateTime(2023, 4, 14, 2, 26, 27, 3, DateTimeKind.Utc).AddTicks(5198),
+                            YoutubeVideoId = "vx_SFqP75hY",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -52L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 36,
+                            MediaPath = "https://picsum.photos/640/480/?image=378",
+                            Name = "Iowa",
+                            Questions = "systems user-centric Marshall Islands Dale",
+                            StartAt = new DateTime(2023, 4, 27, 11, 53, 24, 487, DateTimeKind.Utc).AddTicks(4197),
+                            YoutubeVideoId = "y_IeU_ut2z4",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -51L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 57,
+                            MediaPath = "https://picsum.photos/640/480/?image=217",
+                            Name = "Personal Loan Account",
+                            Questions = "AI",
+                            StartAt = new DateTime(2023, 4, 25, 22, 54, 43, 108, DateTimeKind.Utc).AddTicks(8718),
+                            YoutubeVideoId = "iXEqUxwTraI",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -50L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 183,
+                            MediaPath = "https://picsum.photos/640/480/?image=924",
+                            Name = "Pine",
+                            Questions = "Rustic Soft Bacon",
+                            StartAt = new DateTime(2023, 4, 8, 9, 52, 48, 904, DateTimeKind.Utc).AddTicks(2525),
+                            YoutubeVideoId = "Rl298m9JZ9M",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -49L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 188,
+                            MediaPath = "https://picsum.photos/640/480/?image=521",
+                            Name = "Port",
+                            Questions = "application Human",
+                            StartAt = new DateTime(2023, 4, 13, 6, 46, 0, 978, DateTimeKind.Utc).AddTicks(7592),
+                            YoutubeVideoId = "INatfKtRXKc",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -48L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 74,
+                            MediaPath = "https://picsum.photos/640/480/?image=1038",
+                            Name = "US Dollar",
+                            Questions = "Soft Iraq",
+                            StartAt = new DateTime(2023, 4, 25, 1, 46, 28, 481, DateTimeKind.Utc).AddTicks(8271),
+                            YoutubeVideoId = "zIfHrp2REWY",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -47L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 85,
+                            MediaPath = "https://picsum.photos/640/480/?image=537",
+                            Name = "Applications",
+                            Questions = "paradigm drive synthesize Coordinator reboot withdrawal",
+                            StartAt = new DateTime(2023, 4, 9, 9, 8, 15, 922, DateTimeKind.Utc).AddTicks(3707),
+                            YoutubeVideoId = "INatfKtRXKc",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -46L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 185,
+                            MediaPath = "https://picsum.photos/640/480/?image=525",
+                            Name = "asynchronous",
+                            Questions = "Fantastic Steel Chips Small Plastic Chair",
+                            StartAt = new DateTime(2023, 4, 17, 20, 26, 17, 584, DateTimeKind.Utc).AddTicks(3695),
+                            YoutubeVideoId = "GZb6LNwAeRQ",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -45L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 53,
+                            MediaPath = "https://picsum.photos/640/480/?image=1007",
+                            Name = "Lek",
+                            Questions = "Bedfordshire Cambridgeshire Gorgeous programming Ergonomic",
+                            StartAt = new DateTime(2023, 4, 19, 13, 42, 9, 342, DateTimeKind.Utc).AddTicks(2750),
+                            YoutubeVideoId = "Rl298m9JZ9M",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -44L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 102,
+                            MediaPath = "https://picsum.photos/640/480/?image=273",
+                            Name = "Grove",
+                            Questions = "actuating Mountain Re-engineered enterprise",
+                            StartAt = new DateTime(2023, 4, 10, 9, 47, 13, 477, DateTimeKind.Utc).AddTicks(4256),
+                            YoutubeVideoId = "SJ854on-V2I",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -43L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 173,
+                            MediaPath = "https://picsum.photos/640/480/?image=299",
+                            Name = "Borders",
+                            Questions = "connect Garden Small",
+                            StartAt = new DateTime(2023, 4, 12, 1, 8, 44, 934, DateTimeKind.Utc).AddTicks(2967),
+                            YoutubeVideoId = "vaeoTDOnRsE",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -42L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 172,
+                            MediaPath = "https://picsum.photos/640/480/?image=237",
+                            Name = "Program",
+                            Questions = "Argentine Peso Ethiopian Birr Plastic embrace",
+                            StartAt = new DateTime(2023, 4, 15, 8, 48, 34, 744, DateTimeKind.Utc).AddTicks(4277),
+                            YoutubeVideoId = "Rl298m9JZ9M",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -41L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 51,
+                            MediaPath = "https://picsum.photos/640/480/?image=285",
+                            Name = "discrete",
+                            Questions = "Parkways Haiti Metrics South Carolina",
+                            StartAt = new DateTime(2023, 4, 14, 16, 38, 56, 676, DateTimeKind.Utc).AddTicks(4169),
+                            YoutubeVideoId = "vx_SFqP75hY",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -40L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 80,
+                            MediaPath = "https://picsum.photos/640/480/?image=870",
+                            Name = "microchip",
+                            Questions = "Books & Shoes Practical Frozen Chair",
+                            StartAt = new DateTime(2023, 4, 17, 21, 15, 28, 144, DateTimeKind.Utc).AddTicks(2268),
+                            YoutubeVideoId = "GZb6LNwAeRQ",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -39L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 108,
+                            MediaPath = "https://picsum.photos/640/480/?image=1003",
+                            Name = "hybrid",
+                            Questions = "solid state copying Port",
+                            StartAt = new DateTime(2023, 4, 11, 7, 29, 11, 159, DateTimeKind.Utc).AddTicks(4004),
+                            YoutubeVideoId = "vx_SFqP75hY",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -38L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 49,
+                            MediaPath = "https://picsum.photos/640/480/?image=833",
+                            Name = "Architect",
+                            Questions = "Incredible Soft Chair Small system-worthy Lane Rustic Home Loan Account",
+                            StartAt = new DateTime(2023, 4, 18, 17, 37, 41, 40, DateTimeKind.Utc).AddTicks(19),
+                            YoutubeVideoId = "N1urEuxzH34",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -37L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 31,
+                            MediaPath = "https://picsum.photos/640/480/?image=36",
+                            Name = "systemic",
+                            Questions = "e-enable matrix Pass",
+                            StartAt = new DateTime(2023, 4, 18, 23, 29, 3, 530, DateTimeKind.Utc).AddTicks(1251),
+                            YoutubeVideoId = "9OnINP-fGm4",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -36L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 194,
+                            MediaPath = "https://picsum.photos/640/480/?image=962",
+                            Name = "Unbranded Concrete Keyboard",
+                            Questions = "circuit grid-enabled Central interactive microchip primary",
+                            StartAt = new DateTime(2023, 4, 6, 17, 27, 27, 660, DateTimeKind.Utc).AddTicks(8301),
+                            YoutubeVideoId = "zIfHrp2REWY",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -35L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 38,
+                            MediaPath = "https://picsum.photos/640/480/?image=796",
+                            Name = "Nepalese Rupee",
+                            Questions = "Won Beauty Fall Manager",
+                            StartAt = new DateTime(2023, 4, 29, 18, 8, 37, 509, DateTimeKind.Utc).AddTicks(8768),
+                            YoutubeVideoId = "9OnINP-fGm4",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -34L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 125,
+                            MediaPath = "https://picsum.photos/640/480/?image=1051",
+                            Name = "conglomeration",
+                            Questions = "Cotton",
+                            StartAt = new DateTime(2023, 4, 20, 16, 42, 56, 591, DateTimeKind.Utc).AddTicks(1084),
+                            YoutubeVideoId = "2eRtd_-WVkM",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -33L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 94,
+                            MediaPath = "https://picsum.photos/640/480/?image=1002",
+                            Name = "Credit Card Account",
+                            Questions = "connect envisioneer Burkina Faso multi-byte B2B",
+                            StartAt = new DateTime(2023, 4, 2, 4, 55, 3, 826, DateTimeKind.Utc).AddTicks(7337),
+                            YoutubeVideoId = "zIfHrp2REWY",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -32L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 197,
+                            MediaPath = "https://picsum.photos/640/480/?image=935",
+                            Name = "Buckinghamshire",
+                            Questions = "Wooden Congo Granite",
+                            StartAt = new DateTime(2023, 4, 22, 1, 57, 53, 436, DateTimeKind.Utc).AddTicks(6718),
+                            YoutubeVideoId = "iXEqUxwTraI",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -31L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 107,
+                            MediaPath = "https://picsum.photos/640/480/?image=644",
+                            Name = "web-enabled",
+                            Questions = "Checking Account Intelligent Soft Chips quantifying Chilean Peso portals",
+                            StartAt = new DateTime(2023, 4, 19, 3, 50, 22, 783, DateTimeKind.Utc).AddTicks(877),
+                            YoutubeVideoId = "SJ854on-V2I",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -30L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 70,
+                            MediaPath = "https://picsum.photos/640/480/?image=938",
+                            Name = "B2C",
+                            Questions = "Practical Frozen Bike Plaza Personal Loan Account Automotive, Beauty & Home",
+                            StartAt = new DateTime(2023, 4, 13, 4, 46, 32, 117, DateTimeKind.Utc).AddTicks(2982),
+                            YoutubeVideoId = "9OnINP-fGm4",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -29L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 140,
+                            MediaPath = "https://picsum.photos/640/480/?image=695",
+                            Name = "feed",
+                            Questions = "Facilitator navigating Sports digital Avon website",
+                            StartAt = new DateTime(2023, 4, 14, 11, 1, 0, 952, DateTimeKind.Utc).AddTicks(4673),
+                            YoutubeVideoId = "iXEqUxwTraI",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -28L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 162,
+                            MediaPath = "https://picsum.photos/640/480/?image=270",
+                            Name = "transmitting",
+                            Questions = "Steel neural bluetooth Metal",
+                            StartAt = new DateTime(2023, 4, 22, 1, 26, 13, 452, DateTimeKind.Utc).AddTicks(8506),
+                            YoutubeVideoId = "fjWd1qZW6ng",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -27L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 131,
+                            MediaPath = "https://picsum.photos/640/480/?image=434",
+                            Name = "payment",
+                            Questions = "Generic Granite Bike wireless synthesizing South Carolina",
+                            StartAt = new DateTime(2023, 4, 22, 22, 55, 5, 252, DateTimeKind.Utc).AddTicks(5055),
+                            YoutubeVideoId = "iXEqUxwTraI",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -26L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 96,
+                            MediaPath = "https://picsum.photos/640/480/?image=501",
+                            Name = "Mount",
+                            Questions = "Ergonomic Fresh Chips Small Metal Pants Officer Awesome Steel Gloves Guyana Dollar",
+                            StartAt = new DateTime(2023, 4, 27, 3, 12, 37, 501, DateTimeKind.Utc).AddTicks(6701),
+                            YoutubeVideoId = "7B60bwTXFNc",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -25L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 123,
+                            MediaPath = "https://picsum.photos/640/480/?image=699",
                             Name = "olive",
-                            StartAt = new DateTime(2023, 4, 6, 9, 54, 33, 817, DateTimeKind.Utc).AddTicks(7535),
-                            YoutubeVideoId = "",
+                            Questions = "dedicated 4th generation yellow payment Reduced",
+                            StartAt = new DateTime(2023, 4, 7, 20, 58, 38, 324, DateTimeKind.Utc).AddTicks(7992),
+                            YoutubeVideoId = "vaeoTDOnRsE",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -24L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 138,
+                            MediaPath = "https://picsum.photos/640/480/?image=570",
+                            Name = "feed",
+                            Questions = "transmitting benchmark Djibouti Franc Berkshire",
+                            StartAt = new DateTime(2023, 4, 24, 19, 56, 50, 63, DateTimeKind.Utc).AddTicks(2778),
+                            YoutubeVideoId = "y_IeU_ut2z4",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -23L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 160,
+                            MediaPath = "https://picsum.photos/640/480/?image=278",
+                            Name = "Dynamic",
+                            Questions = "virtual",
+                            StartAt = new DateTime(2023, 4, 8, 1, 31, 4, 617, DateTimeKind.Utc).AddTicks(3145),
+                            YoutubeVideoId = "iXEqUxwTraI",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -22L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 101,
+                            MediaPath = "https://picsum.photos/640/480/?image=854",
+                            Name = "Oregon",
+                            Questions = "Valley cross-platform",
+                            StartAt = new DateTime(2023, 4, 29, 9, 51, 20, 215, DateTimeKind.Utc).AddTicks(1741),
+                            YoutubeVideoId = "N1urEuxzH34",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -21L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 117,
+                            MediaPath = "https://picsum.photos/640/480/?image=536",
+                            Name = "Drives",
+                            Questions = "circuit Awesome Steel Bacon Finland",
+                            StartAt = new DateTime(2023, 4, 17, 0, 56, 11, 120, DateTimeKind.Utc).AddTicks(1594),
+                            YoutubeVideoId = "oGQzYnkYwBs",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -20L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 32,
+                            MediaPath = "https://picsum.photos/640/480/?image=541",
+                            Name = "Regional",
+                            Questions = "white National Investment Account Checking Account ivory infrastructures",
+                            StartAt = new DateTime(2023, 4, 14, 4, 27, 42, 510, DateTimeKind.Utc).AddTicks(4294),
+                            YoutubeVideoId = "9OnINP-fGm4",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -19L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 147,
+                            MediaPath = "https://picsum.photos/640/480/?image=772",
+                            Name = "SMS",
+                            Questions = "cultivate silver",
+                            StartAt = new DateTime(2023, 4, 21, 9, 49, 56, 923, DateTimeKind.Utc).AddTicks(5317),
+                            YoutubeVideoId = "Rl298m9JZ9M",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -18L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 76,
+                            MediaPath = "https://picsum.photos/640/480/?image=483",
+                            Name = "Namibia Dollar",
+                            Questions = "Run monitor Engineer Savings Account Ways Refined",
+                            StartAt = new DateTime(2023, 4, 5, 18, 58, 7, 987, DateTimeKind.Utc).AddTicks(2685),
+                            YoutubeVideoId = "7B60bwTXFNc",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -17L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 136,
+                            MediaPath = "https://picsum.photos/640/480/?image=704",
+                            Name = "Creative",
+                            Questions = "Pa'anga application",
+                            StartAt = new DateTime(2023, 4, 20, 20, 52, 14, 973, DateTimeKind.Utc).AddTicks(6698),
+                            YoutubeVideoId = "fjWd1qZW6ng",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -16L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 63,
+                            MediaPath = "https://picsum.photos/640/480/?image=24",
+                            Name = "User-centric",
+                            Questions = "Front-line Gorgeous",
+                            StartAt = new DateTime(2023, 4, 8, 18, 28, 37, 997, DateTimeKind.Utc).AddTicks(2705),
+                            YoutubeVideoId = "2UHU93KF9k",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -15L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 155,
+                            MediaPath = "https://picsum.photos/640/480/?image=418",
+                            Name = "monitoring",
+                            Questions = "Bedfordshire",
+                            StartAt = new DateTime(2023, 4, 5, 12, 24, 20, 854, DateTimeKind.Utc).AddTicks(5794),
+                            YoutubeVideoId = "Eg0-a22-XBM",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -14L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 50,
+                            MediaPath = "https://picsum.photos/640/480/?image=69",
+                            Name = "encoding",
+                            Questions = "multi-byte Intelligent",
+                            StartAt = new DateTime(2023, 4, 7, 7, 55, 22, 68, DateTimeKind.Utc).AddTicks(7641),
+                            YoutubeVideoId = "GZb6LNwAeRQ",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -13L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 196,
+                            MediaPath = "https://picsum.photos/640/480/?image=859",
+                            Name = "Handmade Frozen Shoes",
+                            Questions = "radical 1080p firewall Specialist Buckinghamshire alarm",
+                            StartAt = new DateTime(2023, 4, 28, 13, 10, 2, 983, DateTimeKind.Utc).AddTicks(6220),
+                            YoutubeVideoId = "2eRtd_-WVkM",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -12L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 179,
+                            MediaPath = "https://picsum.photos/640/480/?image=514",
+                            Name = "help-desk",
+                            Questions = "green",
+                            StartAt = new DateTime(2023, 4, 28, 6, 24, 48, 971, DateTimeKind.Utc).AddTicks(7776),
+                            YoutubeVideoId = "SmtkrruHmAM",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -11L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 38,
+                            MediaPath = "https://picsum.photos/640/480/?image=219",
+                            Name = "benchmark",
+                            Questions = "PCI online Balboa Beauty & Home Northern Mariana Islands",
+                            StartAt = new DateTime(2023, 4, 26, 8, 28, 15, 613, DateTimeKind.Utc).AddTicks(8440),
+                            YoutubeVideoId = "fjWd1qZW6ng",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -10L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 171,
+                            MediaPath = "https://picsum.photos/640/480/?image=394",
+                            Name = "Small Plastic Cheese",
+                            Questions = "Virginia Refined Concrete Bacon Direct",
+                            StartAt = new DateTime(2023, 4, 18, 12, 2, 9, 517, DateTimeKind.Utc).AddTicks(2014),
+                            YoutubeVideoId = "vaeoTDOnRsE",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -9L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 72,
+                            MediaPath = "https://picsum.photos/640/480/?image=670",
+                            Name = "Tunnel",
+                            Questions = "Automotive",
+                            StartAt = new DateTime(2023, 4, 27, 23, 47, 58, 817, DateTimeKind.Utc).AddTicks(4700),
+                            YoutubeVideoId = "Fx9dLmhl7nY",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -8L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 123,
+                            MediaPath = "https://picsum.photos/640/480/?image=1009",
+                            Name = "Som",
+                            Questions = "Small Steel Pizza compressing directional",
+                            StartAt = new DateTime(2023, 4, 13, 14, 30, 47, 970, DateTimeKind.Utc).AddTicks(7425),
+                            YoutubeVideoId = "2UHU93KF9k",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -7L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 131,
+                            MediaPath = "https://picsum.photos/640/480/?image=489",
+                            Name = "pink",
+                            Questions = "Cotton District USB quantify ivory",
+                            StartAt = new DateTime(2023, 4, 20, 0, 0, 18, 668, DateTimeKind.Utc).AddTicks(6576),
+                            YoutubeVideoId = "Eg0-a22-XBM",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -6L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 121,
+                            MediaPath = "https://picsum.photos/640/480/?image=169",
+                            Name = "Metal",
+                            Questions = "navigating Sports, Home & Shoes Money Market Account",
+                            StartAt = new DateTime(2023, 4, 26, 15, 40, 5, 46, DateTimeKind.Utc).AddTicks(4058),
+                            YoutubeVideoId = "y_IeU_ut2z4",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -5L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 84,
+                            MediaPath = "https://picsum.photos/640/480/?image=82",
+                            Name = "deposit",
+                            Questions = "SQL Luxembourg Practical Metal Shirt",
+                            StartAt = new DateTime(2023, 4, 20, 12, 29, 23, 140, DateTimeKind.Utc).AddTicks(6084),
+                            YoutubeVideoId = "9OnINP-fGm4",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -4L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 131,
+                            MediaPath = "https://picsum.photos/640/480/?image=77",
+                            Name = "Throughway",
+                            Questions = "deposit Soft turquoise",
+                            StartAt = new DateTime(2023, 4, 21, 23, 55, 36, 290, DateTimeKind.Utc).AddTicks(9495),
+                            YoutubeVideoId = "y_IeU_ut2z4",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -3L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 115,
+                            MediaPath = "https://picsum.photos/640/480/?image=187",
+                            Name = "Music",
+                            Questions = "Macao supply-chains black Canyon Estates",
+                            StartAt = new DateTime(2023, 4, 24, 9, 29, 41, 754, DateTimeKind.Utc).AddTicks(209),
+                            YoutubeVideoId = "oGQzYnkYwBs",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -2L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 198,
+                            MediaPath = "https://picsum.photos/640/480/?image=671",
+                            Name = "mindshare",
+                            Questions = "Computers",
+                            StartAt = new DateTime(2023, 4, 11, 1, 20, 14, 242, DateTimeKind.Utc).AddTicks(9300),
+                            YoutubeVideoId = "N1urEuxzH34",
+                            ZoomMeetingLink = "",
+                            ZoomMeetingLinkHost = ""
+                        },
+                        new
+                        {
+                            Id = -1L,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedBy = 1L,
+                            IsCalculated = false,
+                            IsCanceled = false,
+                            LanguageLevel = 0,
+                            LimitOfUsers = 102,
+                            MediaPath = "https://picsum.photos/640/480/?image=609",
+                            Name = "Trace",
+                            Questions = "Garden & Garden Investor capacitor world-class Intuitive synthesizing",
+                            StartAt = new DateTime(2023, 4, 16, 18, 46, 14, 27, DateTimeKind.Utc).AddTicks(9944),
+                            YoutubeVideoId = "zIfHrp2REWY",
                             ZoomMeetingLink = "",
                             ZoomMeetingLinkHost = ""
                         });
@@ -774,408 +1628,6 @@ namespace EasySpeak.Core.DAL.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Notifications");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsRead = false,
-                            RelatedTo = 0L,
-                            Text = "Facere possimus eligendi quisquam ullam iure praesentium numquam sapiente distinctio.",
-                            Type = 3,
-                            UserId = 4L
-                        },
-                        new
-                        {
-                            Id = 2L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsRead = false,
-                            RelatedTo = 0L,
-                            Text = "Voluptatibus ad et adipisci hic amet ratione corporis.",
-                            Type = 3,
-                            UserId = 1L
-                        },
-                        new
-                        {
-                            Id = 3L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsRead = false,
-                            RelatedTo = 0L,
-                            Text = "A provident rerum nemo dolores debitis dicta voluptatem.",
-                            Type = 1,
-                            UserId = 2L
-                        },
-                        new
-                        {
-                            Id = 4L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsRead = false,
-                            RelatedTo = 0L,
-                            Text = "Ipsam adipisci illo quidem.",
-                            Type = 2,
-                            UserId = 2L
-                        },
-                        new
-                        {
-                            Id = 5L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsRead = false,
-                            RelatedTo = 0L,
-                            Text = "Ea dolor animi quod laborum quia perspiciatis sunt tempora.",
-                            Type = 3,
-                            UserId = 5L
-                        },
-                        new
-                        {
-                            Id = 6L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsRead = false,
-                            RelatedTo = 0L,
-                            Text = "Est quasi incidunt perferendis.",
-                            Type = 4,
-                            UserId = 4L
-                        },
-                        new
-                        {
-                            Id = 7L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsRead = false,
-                            RelatedTo = 0L,
-                            Text = "Voluptatem beatae vitae sunt a ut sed.",
-                            Type = 4,
-                            UserId = 1L
-                        },
-                        new
-                        {
-                            Id = 8L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsRead = false,
-                            RelatedTo = 0L,
-                            Text = "Eos enim consequatur et praesentium ad ut beatae eius.",
-                            Type = 4,
-                            UserId = 3L
-                        },
-                        new
-                        {
-                            Id = 9L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsRead = false,
-                            RelatedTo = 0L,
-                            Text = "Error et velit autem ipsa atque consequuntur vitae sit.",
-                            Type = 4,
-                            UserId = 5L
-                        },
-                        new
-                        {
-                            Id = 10L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsRead = false,
-                            RelatedTo = 0L,
-                            Text = "Nisi omnis quia est facilis rem architecto laboriosam.",
-                            Type = 3,
-                            UserId = 5L
-                        },
-                        new
-                        {
-                            Id = 11L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsRead = false,
-                            RelatedTo = 0L,
-                            Text = "In occaecati perspiciatis.",
-                            Type = 4,
-                            UserId = 4L
-                        },
-                        new
-                        {
-                            Id = 12L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsRead = true,
-                            RelatedTo = 0L,
-                            Text = "Recusandae perspiciatis pariatur quod eum sint molestiae quis neque tempora.",
-                            Type = 3,
-                            UserId = 5L
-                        },
-                        new
-                        {
-                            Id = 13L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsRead = false,
-                            RelatedTo = 0L,
-                            Text = "Nobis nulla dignissimos voluptas nemo cumque tenetur quod et placeat.",
-                            Type = 2,
-                            UserId = 5L
-                        },
-                        new
-                        {
-                            Id = 14L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsRead = false,
-                            RelatedTo = 0L,
-                            Text = "Eos similique fuga enim.",
-                            Type = 2,
-                            UserId = 3L
-                        },
-                        new
-                        {
-                            Id = 15L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsRead = false,
-                            RelatedTo = 0L,
-                            Text = "Velit magnam placeat voluptatem itaque.",
-                            Type = 1,
-                            UserId = 5L
-                        },
-                        new
-                        {
-                            Id = 16L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsRead = false,
-                            RelatedTo = 0L,
-                            Text = "Ut atque dolore accusantium soluta cumque perferendis labore magni adipisci.",
-                            Type = 2,
-                            UserId = 5L
-                        },
-                        new
-                        {
-                            Id = 17L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsRead = false,
-                            RelatedTo = 0L,
-                            Text = "Ratione et quibusdam consequatur voluptatem velit expedita eos maxime.",
-                            Type = 3,
-                            UserId = 1L
-                        },
-                        new
-                        {
-                            Id = 18L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsRead = false,
-                            RelatedTo = 0L,
-                            Text = "Quia nobis iusto aspernatur nihil iure ut blanditiis veritatis.",
-                            Type = 4,
-                            UserId = 3L
-                        },
-                        new
-                        {
-                            Id = 19L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsRead = false,
-                            RelatedTo = 0L,
-                            Text = "Illum quod atque nulla voluptas quos beatae.",
-                            Type = 4,
-                            UserId = 2L
-                        },
-                        new
-                        {
-                            Id = 20L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsRead = false,
-                            RelatedTo = 0L,
-                            Text = "Ab placeat tenetur perferendis et omnis.",
-                            Type = 1,
-                            UserId = 4L
-                        },
-                        new
-                        {
-                            Id = 21L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsRead = true,
-                            RelatedTo = 0L,
-                            Text = "Deserunt sint enim ex sit culpa.",
-                            Type = 3,
-                            UserId = 3L
-                        },
-                        new
-                        {
-                            Id = 22L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsRead = false,
-                            RelatedTo = 0L,
-                            Text = "Necessitatibus doloremque omnis facilis unde exercitationem consectetur culpa porro.",
-                            Type = 3,
-                            UserId = 4L
-                        },
-                        new
-                        {
-                            Id = 23L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsRead = false,
-                            RelatedTo = 0L,
-                            Text = "Vel rem rerum eum harum.",
-                            Type = 1,
-                            UserId = 1L
-                        },
-                        new
-                        {
-                            Id = 24L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsRead = false,
-                            RelatedTo = 0L,
-                            Text = "Est officia accusamus doloremque perferendis ea.",
-                            Type = 3,
-                            UserId = 5L
-                        },
-                        new
-                        {
-                            Id = 25L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsRead = false,
-                            RelatedTo = 0L,
-                            Text = "Laudantium ut amet repellendus enim consequatur.",
-                            Type = 3,
-                            UserId = 2L
-                        },
-                        new
-                        {
-                            Id = 26L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsRead = false,
-                            RelatedTo = 0L,
-                            Text = "Sed expedita dolorem aperiam ipsa omnis.",
-                            Type = 1,
-                            UserId = 3L
-                        },
-                        new
-                        {
-                            Id = 27L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsRead = false,
-                            RelatedTo = 0L,
-                            Text = "Ipsa quia cupiditate iure necessitatibus asperiores corporis doloremque corporis.",
-                            Type = 3,
-                            UserId = 4L
-                        },
-                        new
-                        {
-                            Id = 28L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsRead = false,
-                            RelatedTo = 0L,
-                            Text = "Consectetur enim rerum consectetur magnam perspiciatis ut rem.",
-                            Type = 1,
-                            UserId = 2L
-                        },
-                        new
-                        {
-                            Id = 29L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsRead = false,
-                            RelatedTo = 0L,
-                            Text = "Aut modi corrupti corrupti.",
-                            Type = 3,
-                            UserId = 3L
-                        },
-                        new
-                        {
-                            Id = 30L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsRead = true,
-                            RelatedTo = 0L,
-                            Text = "Explicabo provident omnis culpa earum modi eos.",
-                            Type = 2,
-                            UserId = 4L
-                        },
-                        new
-                        {
-                            Id = 31L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsRead = false,
-                            RelatedTo = 0L,
-                            Text = "Deleniti labore veritatis dolorum.",
-                            Type = 4,
-                            UserId = 3L
-                        },
-                        new
-                        {
-                            Id = 32L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsRead = false,
-                            RelatedTo = 0L,
-                            Text = "Ut sit nulla.",
-                            Type = 1,
-                            UserId = 1L
-                        },
-                        new
-                        {
-                            Id = 33L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsRead = false,
-                            RelatedTo = 0L,
-                            Text = "Voluptas ut itaque nesciunt.",
-                            Type = 1,
-                            UserId = 5L
-                        },
-                        new
-                        {
-                            Id = 34L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsRead = false,
-                            RelatedTo = 0L,
-                            Text = "Molestias porro exercitationem omnis et eius.",
-                            Type = 3,
-                            UserId = 1L
-                        },
-                        new
-                        {
-                            Id = 35L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsRead = false,
-                            RelatedTo = 0L,
-                            Text = "Esse sit quia dolorem sequi.",
-                            Type = 2,
-                            UserId = 1L
-                        },
-                        new
-                        {
-                            Id = 36L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsRead = false,
-                            RelatedTo = 0L,
-                            Text = "Perspiciatis qui dignissimos.",
-                            Type = 1,
-                            UserId = 2L
-                        },
-                        new
-                        {
-                            Id = 37L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsRead = true,
-                            RelatedTo = 0L,
-                            Text = "Saepe facere eos eum perferendis nisi.",
-                            Type = 1,
-                            UserId = 2L
-                        },
-                        new
-                        {
-                            Id = 38L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsRead = false,
-                            RelatedTo = 0L,
-                            Text = "Repudiandae ut nobis voluptas rerum ullam.",
-                            Type = 4,
-                            UserId = 1L
-                        },
-                        new
-                        {
-                            Id = 39L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsRead = false,
-                            RelatedTo = 0L,
-                            Text = "Ea voluptatibus voluptas sint et et asperiores omnis recusandae saepe.",
-                            Type = 2,
-                            UserId = 2L
-                        },
-                        new
-                        {
-                            Id = 40L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsRead = false,
-                            RelatedTo = 0L,
-                            Text = "Non consequatur voluptatem in aut quia quo quo.",
-                            Type = 2,
-                            UserId = 2L
-                        });
                 });
 
             modelBuilder.Entity("EasySpeak.Core.DAL.Entities.Question", b =>
@@ -1191,160 +1643,13 @@ namespace EasySpeak.Core.DAL.Migrations
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("getutcdate()");
 
-                    b.Property<long>("LessonId")
-                        .HasColumnType("bigint");
-
                     b.Property<string>("Topic")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("LessonId");
-
                     b.ToTable("Questions");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LessonId = 9L,
-                            Topic = "input Singapore Dollar functionalities Field Branding impactful"
-                        },
-                        new
-                        {
-                            Id = 2L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LessonId = 5L,
-                            Topic = "Engineer Intelligent Frozen Mouse Incredible Metal Hat Platinum Thailand"
-                        },
-                        new
-                        {
-                            Id = 3L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LessonId = 4L,
-                            Topic = "Fresh Incredible"
-                        },
-                        new
-                        {
-                            Id = 4L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LessonId = 5L,
-                            Topic = "Concrete complexity"
-                        },
-                        new
-                        {
-                            Id = 5L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LessonId = 8L,
-                            Topic = "Savings Account"
-                        },
-                        new
-                        {
-                            Id = 6L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LessonId = 7L,
-                            Topic = "navigating plum pixel"
-                        },
-                        new
-                        {
-                            Id = 7L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LessonId = 10L,
-                            Topic = "New Hampshire"
-                        },
-                        new
-                        {
-                            Id = 8L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LessonId = 4L,
-                            Topic = "EXE olive"
-                        },
-                        new
-                        {
-                            Id = 9L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LessonId = 9L,
-                            Topic = "Advanced"
-                        },
-                        new
-                        {
-                            Id = 10L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LessonId = 4L,
-                            Topic = "generate Ergonomic Steel Towels Functionality South Carolina Accountability"
-                        },
-                        new
-                        {
-                            Id = 11L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LessonId = 2L,
-                            Topic = "ability"
-                        },
-                        new
-                        {
-                            Id = 12L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LessonId = 10L,
-                            Topic = "Gardens revolutionary Universal input"
-                        },
-                        new
-                        {
-                            Id = 13L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LessonId = 6L,
-                            Topic = "deposit auxiliary Avon Intelligent"
-                        },
-                        new
-                        {
-                            Id = 14L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LessonId = 7L,
-                            Topic = "SMTP enterprise"
-                        },
-                        new
-                        {
-                            Id = 15L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LessonId = 4L,
-                            Topic = "Credit Card Account Avon"
-                        },
-                        new
-                        {
-                            Id = 16L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LessonId = 10L,
-                            Topic = "Ridges Awesome Malta"
-                        },
-                        new
-                        {
-                            Id = 17L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LessonId = 1L,
-                            Topic = "optical Infrastructure"
-                        },
-                        new
-                        {
-                            Id = 18L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LessonId = 5L,
-                            Topic = "interface Israel orchestrate Balanced invoice Peso Uruguayo"
-                        },
-                        new
-                        {
-                            Id = 19L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LessonId = 9L,
-                            Topic = "B2C Platinum system"
-                        },
-                        new
-                        {
-                            Id = 20L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            LessonId = 4L,
-                            Topic = "navigating fuchsia New York hybrid flexibility"
-                        });
                 });
 
             modelBuilder.Entity("EasySpeak.Core.DAL.Entities.Subquestion", b =>
@@ -1370,288 +1675,6 @@ namespace EasySpeak.Core.DAL.Migrations
                     b.HasIndex("QuestionId");
 
                     b.ToTable("Subquestions");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 19L,
-                            Text = "Possimus eligendi quisquam ullam iure praesentium numquam sapiente distinctio.\nMolestias tempore voluptatibus ad et.\nHic amet ratione corporis.\nCupiditate soluta a provident rerum nemo dolores debitis.\nVoluptatem labore dolores."
-                        },
-                        new
-                        {
-                            Id = 2L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 18L,
-                            Text = "Adipisci illo quidem sit dolores."
-                        },
-                        new
-                        {
-                            Id = 3L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 18L,
-                            Text = "Dolor animi quod laborum quia perspiciatis.\nTempora rerum cupiditate velit est quasi incidunt.\nOmnis voluptas quas.\nBeatae vitae sunt a.\nSed repellendus sapiente accusamus eos."
-                        },
-                        new
-                        {
-                            Id = 4L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 1L,
-                            Text = "Et praesentium ad.\nBeatae eius sint omnis voluptas."
-                        },
-                        new
-                        {
-                            Id = 5L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 6L,
-                            Text = "Velit autem ipsa atque consequuntur vitae sit nostrum.\nSoluta nisi omnis quia est facilis rem architecto laboriosam.\nCumque dicta in occaecati perspiciatis amet autem."
-                        },
-                        new
-                        {
-                            Id = 6L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 12L,
-                            Text = "Perspiciatis pariatur quod eum sint molestiae quis neque tempora ab.\nAut nobis nulla dignissimos voluptas nemo cumque tenetur.\nEt placeat voluptas nihil sit eos similique fuga.\nDolores ullam suscipit velit magnam.\nVoluptatem itaque sapiente et saepe ut atque dolore."
-                        },
-                        new
-                        {
-                            Id = 7L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 1L,
-                            Text = "Cumque perferendis labore magni adipisci labore corrupti quo."
-                        },
-                        new
-                        {
-                            Id = 8L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 18L,
-                            Text = "Quibusdam consequatur voluptatem velit expedita eos maxime."
-                        },
-                        new
-                        {
-                            Id = 9L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 9L,
-                            Text = "Facere quia nobis iusto aspernatur nihil iure ut.\nVeritatis quas hic et illum quod.\nNulla voluptas quos beatae quaerat consequatur.\nAb placeat tenetur perferendis et omnis.\nDoloremque corrupti deserunt sint enim ex sit."
-                        },
-                        new
-                        {
-                            Id = 10L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 14L,
-                            Text = "Impedit aut necessitatibus doloremque.\nFacilis unde exercitationem consectetur culpa porro consequatur sed aliquam.\nRem rerum eum harum est ratione voluptate est officia."
-                        },
-                        new
-                        {
-                            Id = 11L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 14L,
-                            Text = "Perferendis ea maiores.\nIure laudantium ut amet repellendus enim consequatur.\nPorro voluptate sed expedita dolorem aperiam ipsa omnis dolores.\nOmnis ipsa quia cupiditate.\nNecessitatibus asperiores corporis doloremque corporis nesciunt."
-                        },
-                        new
-                        {
-                            Id = 12L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 20L,
-                            Text = "Consectetur enim rerum consectetur magnam perspiciatis ut rem.\nOdit dolorem aut modi corrupti corrupti qui.\nPerspiciatis explicabo provident omnis culpa earum modi eos.\nAutem consectetur deleniti."
-                        },
-                        new
-                        {
-                            Id = 13L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 6L,
-                            Text = "Dolorum ut omnis.\nUt sit nulla."
-                        },
-                        new
-                        {
-                            Id = 14L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 19L,
-                            Text = "Voluptatem voluptas ut itaque.\nEsse neque ea molestias.\nExercitationem omnis et eius pariatur est consequatur esse.\nQuia dolorem sequi doloribus corporis."
-                        },
-                        new
-                        {
-                            Id = 15L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 16L,
-                            Text = "Qui dignissimos voluptatum qui in saepe facere."
-                        },
-                        new
-                        {
-                            Id = 16L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 1L,
-                            Text = "Perferendis nisi alias et ducimus repudiandae.\nNobis voluptas rerum ullam omnis placeat non ea voluptatibus voluptas.\nEt et asperiores omnis recusandae saepe laborum.\nPorro non consequatur voluptatem in.\nQuia quo quo."
-                        },
-                        new
-                        {
-                            Id = 17L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 7L,
-                            Text = "Aliquid aut quaerat adipisci rem.\nEa maxime doloribus qui."
-                        },
-                        new
-                        {
-                            Id = 18L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 14L,
-                            Text = "Nesciunt quidem vel.\nQuibusdam iure labore velit.\nQui dolor velit."
-                        },
-                        new
-                        {
-                            Id = 19L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 1L,
-                            Text = "Ducimus perspiciatis nostrum ut repudiandae."
-                        },
-                        new
-                        {
-                            Id = 20L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 14L,
-                            Text = "Et velit harum ex."
-                        },
-                        new
-                        {
-                            Id = 21L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 11L,
-                            Text = "Omnis in voluptatem dolorum debitis velit eos.\nSoluta voluptatem officiis voluptate.\nMollitia at aliquam ut nihil veritatis.\nSequi omnis vel qui.\nDeleniti nihil non perspiciatis modi placeat dolor molestiae."
-                        },
-                        new
-                        {
-                            Id = 22L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 8L,
-                            Text = "Quo a eum corporis repellat dolor fugit voluptas.\nEsse itaque laudantium dolores quis ea excepturi.\nNostrum quo consequatur est omnis cumque reiciendis qui omnis non.\nPraesentium enim explicabo atque culpa repudiandae perferendis ullam.\nEa et aut."
-                        },
-                        new
-                        {
-                            Id = 23L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 7L,
-                            Text = "Quis aperiam nihil."
-                        },
-                        new
-                        {
-                            Id = 24L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 5L,
-                            Text = "Rerum sit impedit illum corrupti non et voluptates architecto quaerat."
-                        },
-                        new
-                        {
-                            Id = 25L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 13L,
-                            Text = "Modi magnam qui corporis magnam quia blanditiis rerum qui ad.\nDignissimos non tempora.\nVoluptas omnis rem nam ad vel pariatur nostrum.\nFacere blanditiis id enim vitae alias.\nIpsa eius dolores nulla est officia quo eaque quo dolore."
-                        },
-                        new
-                        {
-                            Id = 26L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 13L,
-                            Text = "Consequatur quia ut nostrum voluptatem."
-                        },
-                        new
-                        {
-                            Id = 27L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 13L,
-                            Text = "Voluptatem id deserunt in.\nQuis a aut unde quibusdam quisquam sit.\nCulpa suscipit voluptatem modi doloremque eum perferendis quod ab."
-                        },
-                        new
-                        {
-                            Id = 28L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 7L,
-                            Text = "Doloremque magnam quas molestiae ex corrupti neque laboriosam et voluptates.\nSuscipit ducimus facilis ut rem assumenda laborum neque labore.\nEt voluptas omnis doloremque aut ipsa voluptatem aut praesentium et."
-                        },
-                        new
-                        {
-                            Id = 29L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 14L,
-                            Text = "Rerum unde ad accusamus."
-                        },
-                        new
-                        {
-                            Id = 30L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 2L,
-                            Text = "Veritatis quidem eum eum saepe minus repellat."
-                        },
-                        new
-                        {
-                            Id = 31L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 3L,
-                            Text = "Veritatis voluptates dolore magni rerum velit sapiente.\nEt quod saepe aliquam dignissimos ut praesentium laboriosam deleniti placeat.\nAut aspernatur optio animi."
-                        },
-                        new
-                        {
-                            Id = 32L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 17L,
-                            Text = "Aspernatur animi est soluta iusto doloremque doloremque non laudantium velit.\nNumquam corporis numquam ut soluta qui aliquid magni eos commodi.\nId et ipsa velit maiores eum assumenda.\nConsequatur enim excepturi eos temporibus mollitia."
-                        },
-                        new
-                        {
-                            Id = 33L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 6L,
-                            Text = "Corrupti impedit eos qui voluptatibus.\nCorrupti consequuntur dolor provident velit consequuntur excepturi nisi."
-                        },
-                        new
-                        {
-                            Id = 34L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 20L,
-                            Text = "Fuga deleniti et nobis rerum voluptatem quae.\nOmnis voluptatibus fugiat distinctio.\nNeque molestiae autem quia corporis et quam minima."
-                        },
-                        new
-                        {
-                            Id = 35L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 8L,
-                            Text = "Eaque iusto repudiandae ut qui et rerum ut.\nVoluptas sint excepturi.\nQui tempore rerum laudantium nam.\nDelectus repellat et eum nihil perferendis odit dolorem."
-                        },
-                        new
-                        {
-                            Id = 36L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 1L,
-                            Text = "Deleniti ab ipsam maiores.\nEum magnam est temporibus mollitia sunt sed perferendis vel.\nRepellendus et sed facilis et distinctio in possimus et.\nRerum ipsum id corrupti eius nisi aut voluptas.\nPerspiciatis temporibus animi cupiditate laudantium ut quam repudiandae tempore."
-                        },
-                        new
-                        {
-                            Id = 37L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 12L,
-                            Text = "Pariatur maiores illo."
-                        },
-                        new
-                        {
-                            Id = 38L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 8L,
-                            Text = "Commodi maiores sit voluptatem omnis beatae nostrum cumque."
-                        },
-                        new
-                        {
-                            Id = 39L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 4L,
-                            Text = "Expedita facilis labore sunt.\nVoluptas minima aliquam ut doloremque."
-                        },
-                        new
-                        {
-                            Id = 40L,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            QuestionId = 4L,
-                            Text = "Expedita quod incidunt maxime."
-                        });
                 });
 
             modelBuilder.Entity("EasySpeak.Core.DAL.Entities.Tag", b =>
@@ -1683,140 +1706,140 @@ namespace EasySpeak.Core.DAL.Migrations
                         new
                         {
                             Id = 1L,
-                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2023, 3, 5, 0, 0, 0, 0, DateTimeKind.Utc),
                             ImageUrl = "ArtistPalette.svg",
                             Name = "Arts"
                         },
                         new
                         {
                             Id = 2L,
-                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2023, 3, 5, 0, 0, 0, 0, DateTimeKind.Utc),
                             ImageUrl = "Briefcase.svg",
                             Name = "Business"
                         },
                         new
                         {
                             Id = 3L,
-                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2023, 3, 5, 0, 0, 0, 0, DateTimeKind.Utc),
                             ImageUrl = "ClassicalBuilding.svg",
                             Name = "Culture"
                         },
                         new
                         {
                             Id = 4L,
-                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2023, 3, 5, 0, 0, 0, 0, DateTimeKind.Utc),
                             ImageUrl = "GraduationCap.svg",
                             Name = "Education"
                         },
                         new
                         {
                             Id = 5L,
-                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2023, 3, 5, 0, 0, 0, 0, DateTimeKind.Utc),
                             ImageUrl = "Kite.svg",
                             Name = "Environment"
                         },
                         new
                         {
                             Id = 6L,
-                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2023, 3, 5, 0, 0, 0, 0, DateTimeKind.Utc),
                             ImageUrl = "Dress.svg",
                             Name = "Fashion"
                         },
                         new
                         {
                             Id = 7L,
-                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2023, 3, 5, 0, 0, 0, 0, DateTimeKind.Utc),
                             ImageUrl = "Sandwich.svg",
                             Name = "Food"
                         },
                         new
                         {
                             Id = 8L,
-                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2023, 3, 5, 0, 0, 0, 0, DateTimeKind.Utc),
                             ImageUrl = "Dna.svg",
                             Name = "Health"
                         },
                         new
                         {
                             Id = 9L,
-                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2023, 3, 5, 0, 0, 0, 0, DateTimeKind.Utc),
                             ImageUrl = "CrossedSwords.svg",
                             Name = "History"
                         },
                         new
                         {
                             Id = 10L,
-                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2023, 3, 5, 0, 0, 0, 0, DateTimeKind.Utc),
                             ImageUrl = "Books.svg",
                             Name = "Literature"
                         },
                         new
                         {
                             Id = 11L,
-                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2023, 3, 5, 0, 0, 0, 0, DateTimeKind.Utc),
                             ImageUrl = "ClapperBoard.svg",
                             Name = "Movies"
                         },
                         new
                         {
                             Id = 12L,
-                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2023, 3, 5, 0, 0, 0, 0, DateTimeKind.Utc),
                             ImageUrl = "Drum.svg",
                             Name = "Music"
                         },
                         new
                         {
                             Id = 13L,
-                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2023, 3, 5, 0, 0, 0, 0, DateTimeKind.Utc),
                             ImageUrl = "FourLeafClover.svg",
                             Name = "Nature"
                         },
                         new
                         {
                             Id = 14L,
-                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2023, 3, 5, 0, 0, 0, 0, DateTimeKind.Utc),
                             ImageUrl = "FaceWithMonocle.svg",
                             Name = "Philosophy"
                         },
                         new
                         {
                             Id = 15L,
-                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2023, 3, 5, 0, 0, 0, 0, DateTimeKind.Utc),
                             ImageUrl = "TopHat.svg",
                             Name = "Politics"
                         },
                         new
                         {
                             Id = 16L,
-                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2023, 3, 5, 0, 0, 0, 0, DateTimeKind.Utc),
                             ImageUrl = "TestTube.svg",
                             Name = "Science"
                         },
                         new
                         {
                             Id = 17L,
-                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2023, 3, 5, 0, 0, 0, 0, DateTimeKind.Utc),
                             ImageUrl = "MobilePhone.svg",
                             Name = "Social Media"
                         },
                         new
                         {
                             Id = 18L,
-                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2023, 3, 5, 0, 0, 0, 0, DateTimeKind.Utc),
                             ImageUrl = "BoxingGlove.svg",
                             Name = "Sports"
                         },
                         new
                         {
                             Id = 19L,
-                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2023, 3, 5, 0, 0, 0, 0, DateTimeKind.Utc),
                             ImageUrl = "Robot.svg",
                             Name = "Technologies"
                         },
                         new
                         {
                             Id = 20L,
-                            CreatedAt = new DateTime(2023, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2023, 3, 5, 0, 0, 0, 0, DateTimeKind.Utc),
                             ImageUrl = "DesertIsland.svg",
                             Name = "Travel"
                         });
@@ -1896,97 +1919,21 @@ namespace EasySpeak.Core.DAL.Migrations
                         new
                         {
                             Id = 1L,
-                            BirthDate = new DateTime(2003, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Country = 196,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "Della.Rosenbaum@yahoo.com",
+                            BirthDate = new DateTime(1998, 4, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Country = 6,
+                            CreatedAt = new DateTime(2023, 3, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Email = "easymeats.service@gmail.com",
                             EmojiName = "",
-                            FirstName = "Della",
+                            FirstName = "Fred",
                             IsAdmin = true,
                             IsBanned = false,
-                            IsSubscribed = true,
-                            Language = 175,
-                            LanguageLevel = 2,
-                            LastName = "Rosenbaum",
-                            Sex = 1,
-                            Status = 0,
-                            Timezone = 275
-                        },
-                        new
-                        {
-                            Id = 2L,
-                            BirthDate = new DateTime(2003, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Country = 215,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "Randall_Hegmann56@hotmail.com",
-                            EmojiName = "",
-                            FirstName = "Randall",
-                            IsAdmin = true,
-                            IsBanned = false,
-                            IsSubscribed = true,
-                            Language = 103,
-                            LanguageLevel = 0,
-                            LastName = "Hegmann",
-                            Sex = 1,
-                            Status = 1,
-                            Timezone = 197
-                        },
-                        new
-                        {
-                            Id = 3L,
-                            BirthDate = new DateTime(2003, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Country = 68,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "Alfred89@hotmail.com",
-                            EmojiName = "",
-                            FirstName = "Alfred",
-                            IsAdmin = true,
-                            IsBanned = false,
-                            IsSubscribed = true,
-                            Language = 65,
-                            LanguageLevel = 2,
-                            LastName = "Rohan",
-                            Sex = 2,
-                            Status = 2,
-                            Timezone = 6
-                        },
-                        new
-                        {
-                            Id = 4L,
-                            BirthDate = new DateTime(2003, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Country = 42,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "Sandra57@gmail.com",
-                            EmojiName = "",
-                            FirstName = "Sandra",
-                            IsAdmin = true,
-                            IsBanned = false,
-                            IsSubscribed = true,
-                            Language = 21,
-                            LanguageLevel = 0,
-                            LastName = "Satterfield",
-                            Sex = 2,
-                            Status = 1,
-                            Timezone = 71
-                        },
-                        new
-                        {
-                            Id = 5L,
-                            BirthDate = new DateTime(2003, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Country = 236,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "Frances.Lemke37@gmail.com",
-                            EmojiName = "",
-                            FirstName = "Frances",
-                            IsAdmin = false,
-                            IsBanned = false,
-                            IsSubscribed = true,
+                            IsSubscribed = false,
                             Language = 55,
                             LanguageLevel = 3,
-                            LastName = "Lemke",
-                            Sex = 2,
-                            Status = 3,
-                            Timezone = 175
+                            LastName = "Pitt",
+                            Sex = 0,
+                            Status = 1,
+                            Timezone = 96
                         });
                 });
 
@@ -2007,53 +1954,303 @@ namespace EasySpeak.Core.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            LessonsId = 1L,
+                            LessonsId = -80L,
                             TagsId = 1L
                         },
                         new
                         {
-                            LessonsId = 2L,
+                            LessonsId = -79L,
+                            TagsId = 1L
+                        },
+                        new
+                        {
+                            LessonsId = -78L,
+                            TagsId = 1L
+                        },
+                        new
+                        {
+                            LessonsId = -77L,
                             TagsId = 2L
                         },
                         new
                         {
-                            LessonsId = 3L,
+                            LessonsId = -76L,
+                            TagsId = 2L
+                        },
+                        new
+                        {
+                            LessonsId = -75L,
+                            TagsId = 2L
+                        },
+                        new
+                        {
+                            LessonsId = -74L,
                             TagsId = 3L
                         },
                         new
                         {
-                            LessonsId = 4L,
+                            LessonsId = -73L,
+                            TagsId = 3L
+                        },
+                        new
+                        {
+                            LessonsId = -72L,
+                            TagsId = 3L
+                        },
+                        new
+                        {
+                            LessonsId = -71L,
                             TagsId = 4L
                         },
                         new
                         {
-                            LessonsId = 5L,
+                            LessonsId = -70L,
+                            TagsId = 4L
+                        },
+                        new
+                        {
+                            LessonsId = -69L,
+                            TagsId = 4L
+                        },
+                        new
+                        {
+                            LessonsId = -68L,
                             TagsId = 5L
                         },
                         new
                         {
-                            LessonsId = 6L,
+                            LessonsId = -67L,
+                            TagsId = 5L
+                        },
+                        new
+                        {
+                            LessonsId = -66L,
+                            TagsId = 5L
+                        },
+                        new
+                        {
+                            LessonsId = -65L,
                             TagsId = 6L
                         },
                         new
                         {
-                            LessonsId = 7L,
+                            LessonsId = -64L,
+                            TagsId = 6L
+                        },
+                        new
+                        {
+                            LessonsId = -63L,
+                            TagsId = 6L
+                        },
+                        new
+                        {
+                            LessonsId = -62L,
                             TagsId = 7L
                         },
                         new
                         {
-                            LessonsId = 8L,
+                            LessonsId = -61L,
+                            TagsId = 7L
+                        },
+                        new
+                        {
+                            LessonsId = -60L,
+                            TagsId = 7L
+                        },
+                        new
+                        {
+                            LessonsId = -59L,
                             TagsId = 8L
                         },
                         new
                         {
-                            LessonsId = 9L,
+                            LessonsId = -58L,
+                            TagsId = 8L
+                        },
+                        new
+                        {
+                            LessonsId = -57L,
+                            TagsId = 8L
+                        },
+                        new
+                        {
+                            LessonsId = -56L,
                             TagsId = 9L
                         },
                         new
                         {
-                            LessonsId = 10L,
+                            LessonsId = -55L,
+                            TagsId = 9L
+                        },
+                        new
+                        {
+                            LessonsId = -54L,
+                            TagsId = 9L
+                        },
+                        new
+                        {
+                            LessonsId = -53L,
                             TagsId = 10L
+                        },
+                        new
+                        {
+                            LessonsId = -52L,
+                            TagsId = 10L
+                        },
+                        new
+                        {
+                            LessonsId = -51L,
+                            TagsId = 10L
+                        },
+                        new
+                        {
+                            LessonsId = -50L,
+                            TagsId = 11L
+                        },
+                        new
+                        {
+                            LessonsId = -49L,
+                            TagsId = 11L
+                        },
+                        new
+                        {
+                            LessonsId = -48L,
+                            TagsId = 11L
+                        },
+                        new
+                        {
+                            LessonsId = -47L,
+                            TagsId = 12L
+                        },
+                        new
+                        {
+                            LessonsId = -46L,
+                            TagsId = 12L
+                        },
+                        new
+                        {
+                            LessonsId = -45L,
+                            TagsId = 12L
+                        },
+                        new
+                        {
+                            LessonsId = -44L,
+                            TagsId = 13L
+                        },
+                        new
+                        {
+                            LessonsId = -43L,
+                            TagsId = 13L
+                        },
+                        new
+                        {
+                            LessonsId = -42L,
+                            TagsId = 13L
+                        },
+                        new
+                        {
+                            LessonsId = -41L,
+                            TagsId = 14L
+                        },
+                        new
+                        {
+                            LessonsId = -40L,
+                            TagsId = 14L
+                        },
+                        new
+                        {
+                            LessonsId = -39L,
+                            TagsId = 14L
+                        },
+                        new
+                        {
+                            LessonsId = -38L,
+                            TagsId = 15L
+                        },
+                        new
+                        {
+                            LessonsId = -37L,
+                            TagsId = 15L
+                        },
+                        new
+                        {
+                            LessonsId = -36L,
+                            TagsId = 15L
+                        },
+                        new
+                        {
+                            LessonsId = -35L,
+                            TagsId = 16L
+                        },
+                        new
+                        {
+                            LessonsId = -34L,
+                            TagsId = 16L
+                        },
+                        new
+                        {
+                            LessonsId = -33L,
+                            TagsId = 16L
+                        },
+                        new
+                        {
+                            LessonsId = -32L,
+                            TagsId = 17L
+                        },
+                        new
+                        {
+                            LessonsId = -31L,
+                            TagsId = 17L
+                        },
+                        new
+                        {
+                            LessonsId = -30L,
+                            TagsId = 17L
+                        },
+                        new
+                        {
+                            LessonsId = -29L,
+                            TagsId = 18L
+                        },
+                        new
+                        {
+                            LessonsId = -28L,
+                            TagsId = 18L
+                        },
+                        new
+                        {
+                            LessonsId = -27L,
+                            TagsId = 18L
+                        },
+                        new
+                        {
+                            LessonsId = -26L,
+                            TagsId = 19L
+                        },
+                        new
+                        {
+                            LessonsId = -25L,
+                            TagsId = 19L
+                        },
+                        new
+                        {
+                            LessonsId = -24L,
+                            TagsId = 19L
+                        },
+                        new
+                        {
+                            LessonsId = -23L,
+                            TagsId = 20L
+                        },
+                        new
+                        {
+                            LessonsId = -22L,
+                            TagsId = 20L
+                        },
+                        new
+                        {
+                            LessonsId = -21L,
+                            TagsId = 20L
                         });
                 });
 
@@ -2070,58 +2267,6 @@ namespace EasySpeak.Core.DAL.Migrations
                     b.HasIndex("SubscribersId");
 
                     b.ToTable("LessonUser");
-
-                    b.HasData(
-                        new
-                        {
-                            LessonsId = 1L,
-                            SubscribersId = 1L
-                        },
-                        new
-                        {
-                            LessonsId = 2L,
-                            SubscribersId = 1L
-                        },
-                        new
-                        {
-                            LessonsId = 3L,
-                            SubscribersId = 2L
-                        },
-                        new
-                        {
-                            LessonsId = 4L,
-                            SubscribersId = 2L
-                        },
-                        new
-                        {
-                            LessonsId = 5L,
-                            SubscribersId = 3L
-                        },
-                        new
-                        {
-                            LessonsId = 6L,
-                            SubscribersId = 3L
-                        },
-                        new
-                        {
-                            LessonsId = 7L,
-                            SubscribersId = 4L
-                        },
-                        new
-                        {
-                            LessonsId = 8L,
-                            SubscribersId = 4L
-                        },
-                        new
-                        {
-                            LessonsId = 9L,
-                            SubscribersId = 5L
-                        },
-                        new
-                        {
-                            LessonsId = 10L,
-                            SubscribersId = 5L
-                        });
                 });
 
             modelBuilder.Entity("TagUser", b =>
@@ -2153,66 +2298,6 @@ namespace EasySpeak.Core.DAL.Migrations
                         {
                             TagsId = 3L,
                             UsersId = 1L
-                        },
-                        new
-                        {
-                            TagsId = 4L,
-                            UsersId = 2L
-                        },
-                        new
-                        {
-                            TagsId = 5L,
-                            UsersId = 2L
-                        },
-                        new
-                        {
-                            TagsId = 6L,
-                            UsersId = 2L
-                        },
-                        new
-                        {
-                            TagsId = 7L,
-                            UsersId = 3L
-                        },
-                        new
-                        {
-                            TagsId = 8L,
-                            UsersId = 3L
-                        },
-                        new
-                        {
-                            TagsId = 9L,
-                            UsersId = 3L
-                        },
-                        new
-                        {
-                            TagsId = 10L,
-                            UsersId = 4L
-                        },
-                        new
-                        {
-                            TagsId = 11L,
-                            UsersId = 4L
-                        },
-                        new
-                        {
-                            TagsId = 12L,
-                            UsersId = 4L
-                        },
-                        new
-                        {
-                            TagsId = 13L,
-                            UsersId = 5L
-                        },
-                        new
-                        {
-                            TagsId = 14L,
-                            UsersId = 5L
-                        },
-                        new
-                        {
-                            TagsId = 15L,
-                            UsersId = 5L
                         });
                 });
 
@@ -2293,17 +2378,6 @@ namespace EasySpeak.Core.DAL.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("EasySpeak.Core.DAL.Entities.Question", b =>
-                {
-                    b.HasOne("EasySpeak.Core.DAL.Entities.Lesson", "Lesson")
-                        .WithMany("Questions")
-                        .HasForeignKey("LessonId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Lesson");
-                });
-
             modelBuilder.Entity("EasySpeak.Core.DAL.Entities.Subquestion", b =>
                 {
                     b.HasOne("EasySpeak.Core.DAL.Entities.Question", "Question")
@@ -2380,11 +2454,6 @@ namespace EasySpeak.Core.DAL.Migrations
                 {
                     b.Navigation("User")
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("EasySpeak.Core.DAL.Entities.Lesson", b =>
-                {
-                    b.Navigation("Questions");
                 });
 
             modelBuilder.Entity("EasySpeak.Core.DAL.Entities.Question", b =>

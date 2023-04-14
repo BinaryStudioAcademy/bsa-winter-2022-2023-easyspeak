@@ -1,4 +1,3 @@
-using EasySpeak.Notifier.Hubs;
 using EasySpeak.Notifier.WebAPI.Extentions;
 using EasySpeak.Notifier.WebAPI.Hubs;
 using EasySpeak.Notifier.WebAPI.Services;
@@ -56,6 +55,7 @@ app.UseEndpoints(endpoints =>
     endpoints.MapControllers();
     endpoints.MapHub<BroadcastHub>("/broadcastHub");
     endpoints.MapHub<NotificationHub>("/notificationsHub");
+    endpoints.MapHub<ChatHub>("/chatting");
     endpoints.MapHealthChecks("/health");
 });
 

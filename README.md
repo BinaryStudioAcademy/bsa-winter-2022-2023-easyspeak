@@ -31,6 +31,7 @@ By default, apps run on the following ports:
 | EasySpeak.**Communicator**  | 5080 |
 | EasySpeak.**Emailer**       | 5090 |
 | RabbitMQ                    | 5672 |
+| EasySpeak.**Recommendator** | 5110 |
 
 _Tip: If you want to connect to the specific service outside of docker, then use "localhost" as a service name, but if both services are inside docker, use service_name from a "docker-compose" file instead._
 
@@ -77,26 +78,20 @@ erDiagram
     int friendshipStatus
   }
 
-  Subquestions {
-	  bigint id PK
-	  bigint questionId FK
-	  nvarchar text
-  }
-
   Chats ||--|{ Messages : chatId
   Chats ||--|{ Calls : chatId
   Chats {
     bigint id PK
     nvarchar name
   }
-
-  Lessons ||--|{ Questions : lessonId
+  
   Lessons {
     bigint id PK
     bigint createdBy FK
     nvarchar name
     nvarchar description
     nvarchar mediaPath
+    nvarchar questions
     datetime startsAt
     int limitOfUsers
     int languageLevel
@@ -124,13 +119,6 @@ erDiagram
     nvarchar text
     datetime createdAt
     boolean isDeleted
-  }
-
-  Questions ||--|{ Subquestions : questionId
-  Questions {
-    bigint id PK
-    bigint lessonId FK
-    nvarchar topic
   }
 
 ```

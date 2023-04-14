@@ -32,7 +32,7 @@ export class FilterSectionComponent implements OnInit {
 
     public selectedCompatibilityFilters: string[] = [];
 
-    public topics: IIcon[];
+    public tags: IIcon[];
 
     public langLevels: Filter[];
 
@@ -46,7 +46,7 @@ export class FilterSectionComponent implements OnInit {
 
     ngOnInit(): void {
         this.dataService.getAllTags().subscribe((tags) => {
-            this.topics = tags.map((tag): IIcon => ({
+            this.tags = tags.map((tag): IIcon => ({
                 ...tag,
                 link: `assets/topic-icons/${tag.imageUrl}`,
             }));
@@ -70,7 +70,7 @@ export class FilterSectionComponent implements OnInit {
 
     removeTopic(topic: IIcon) {
         this.selectedTopicsFilters = this.selectedTopicsFilters.filter((s) => s !== topic);
-        this.userFilters.topics = this.selectedTopicsFilters;
+        this.userFilters.tags = this.selectedTopicsFilters;
     }
 
     remove(param: FilterOption, title: string) {
@@ -98,7 +98,7 @@ export class FilterSectionComponent implements OnInit {
 
     updateTopics(eventData: IIcon[]) {
         this.selectedTopicsFilters = eventData;
-        this.userFilters.topics = this.selectedTopicsFilters.map(f => ({ id: f.id }));
+        this.userFilters.tags = this.selectedTopicsFilters.map(f => ({ id: f.id }));
         this.filterChange.emit(this.userFilters);
     }
 

@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ChatService } from '@core/services/chat.service';
 import { FriendshipService } from '@core/services/friendship.service';
 import { UserCard, UserFriendshipStatus } from '@shared/models/user/user-card';
 import languagesLib from 'iso-639-1';
@@ -26,6 +28,8 @@ export class UserCardComponent implements OnInit {
     constructor(
         private countriesService: CountriesTzLangProviderService,
         private friendService: FriendshipService,
+        private router: Router,
+        private chatService: ChatService,
     ) {}
 
     ngOnInit(): void {
@@ -52,10 +56,6 @@ export class UserCardComponent implements OnInit {
         }
     }
 
-    buttonGoToMessage() {
-        return true;
-    }
-
     getUserFirstName(): string {
         return this.user.name.split(' ')[0];
     }
@@ -80,6 +80,17 @@ export class UserCardComponent implements OnInit {
     onRejectClicked() {
         this.friendService.rejectFriendship({ email: this.user.email! }).subscribe(() => {
             this.user.userFriendshipStatus = UserFriendshipStatus.Regular;
+        });
+    }
+
+    message() {
+        this.chatService.checkForChat(this.user.id).subscribe((chatIdIfExists) => {
+            if (!chatIdIfExists) {
+                this.chatService.createChat(this.user.id).subscribe((chatId) => {
+                    this.router.navigate(['/chat', chatId]);
+                });
+            }
+            this.router.navigate(['/chat', chatIdIfExists]);
         });
     }
 

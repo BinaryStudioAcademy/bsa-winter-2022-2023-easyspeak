@@ -33,6 +33,7 @@ namespace EasySpeak.Core.BLL.Services
                              LastMessage = chat.Messages.Any() ? chat.Messages.OrderBy(message => message.CreatedAt).Last().Text : string.Empty,
                              NumberOfUnreadMessages = chat.Messages.Any() ? chat.Messages.Count(message => !message.IsRead && message.CreatedBy != _firebaseAuthService.UserId) : null,
                              ChatId = chat.Id,
+                             ImageUrl = chat.Users.First(user => user.Id != _firebaseAuthService.UserId).Image.Url?? string.Empty
                          })
                          .OrderByDescending(entity => entity.LastMessageDate)
                          .ToListAsync();
@@ -54,6 +55,7 @@ namespace EasySpeak.Core.BLL.Services
                              LastMessage = chat.Messages.Any() ? chat.Messages.OrderBy(message => message.CreatedAt).Last().Text : string.Empty,
                              NumberOfUnreadMessages = chat.Messages.Any() ? chat.Messages.Count(message => !message.IsRead && message.CreatedBy != id) : null,
                              ChatId = chat.Id,
+                             ImageUrl = chat.Users.First(user => user.Id != id).Image.Url ?? string.Empty
                          })
                          .OrderByDescending(entity => entity.LastMessageDate)
                          .ToListAsync();
@@ -112,7 +114,7 @@ namespace EasySpeak.Core.BLL.Services
             return chat.Users.First(user => user.Id != id).Id;
         }
 
-        public async Task<List<ChatPersonDto>> SetMessagesAsRead(long chatId, long userId)
+        public async Task<List<ChatPersonDto>> SetMessagesAsRead(long chatId)
         {
             var currentChat = await _context.Chats.Include(chat => chat.Messages.Where(message => !message.IsRead))
                 .FirstOrDefaultAsync(chat => chat.Id == chatId);
@@ -121,7 +123,7 @@ namespace EasySpeak.Core.BLL.Services
                 return new List<ChatPersonDto>();
 
             currentChat.Messages
-                .Where(message => message.CreatedBy != userId)
+                .Where(message => message.CreatedBy != _firebaseAuthService.UserId)
                 .ToList()
                 .ForEach(message => message.IsRead = true);
 
@@ -129,7 +131,49 @@ namespace EasySpeak.Core.BLL.Services
 
             await _context.SaveChangesAsync();
 
-            return await GetUnreadAndLastSendMessageAsync(userId);
+            return await GetUnreadAndLastSendMessageAsync(_firebaseAuthService.UserId);
+        }
+
+        public async Task<long> CheckIfChatExists(long firstUserId, long secondUserId)
+        {
+            var chat = await _context.Chats
+                .Include(c => c.Users)
+                .Where(c => c.Users.Any(u => u.Id == firstUserId))
+                .FirstOrDefaultAsync(c => c.Users.Any(u => u.Id == secondUserId));
+            return chat?.Id ?? 0;
+        }
+
+        public async Task<long> CreateChat(long firstUserId, long secondUserId)
+        {
+            Chat chat = new Chat();
+
+            chat.Users.Add(await _context.Users.FirstAsync(user => user.Id == firstUserId));
+
+            chat.Users.Add(await _context.Users.FirstAsync(user => user.Id == secondUserId));
+
+            _context.Chats.Add(chat);
+
+            await _context.SaveChangesAsync();
+
+            return chat.Id;
+        }
+
+        public async Task<long> GetNumberOfUnreadMessages(long userId)
+        {
+            return await _context.Chats
+                .Include(chat => chat.Users)
+                .Where(chat => chat.Users.Any(user => user.Id == userId))
+                .Include(chat => chat.Messages)
+                .SelectMany(chat => chat.Messages)
+                .CountAsync(message => message.CreatedBy != userId && !message.IsRead);
+        }
+
+        public async Task<long[]> GetChatsById(long userId)
+        {
+            return await _context.Chats
+                .Where(chat => chat.Users.Any(user => user.Id == userId))
+                .Select(chat => chat.Id)
+                .ToArrayAsync();
         }
     }
 }

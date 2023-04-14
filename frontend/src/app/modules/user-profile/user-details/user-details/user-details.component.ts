@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { BaseComponent } from '@core/base/base.component';
@@ -9,6 +9,7 @@ import { UserService } from '@core/services/user.service';
 import { environment } from '@env/environment';
 import { CropImageDialogComponent } from '@modules/user-profile/crop-image.dialog/crop-image.dialog.component';
 import { LanguageLevel } from '@shared/data/languageLevel';
+import { mapLanguageLevelToString, mapStringToLanguageLevel } from '@shared/data/LanguageLevelMapper';
 import { Sex } from '@shared/data/sex';
 import { IIcon } from '@shared/models/IIcon';
 import { IUserInfo } from '@shared/models/IUserInfo';
@@ -27,7 +28,9 @@ import { detailsGroup } from '../user-details.component.util';
     templateUrl: './user-details.component.html',
     styleUrls: ['./user-details.component.sass'],
 })
-export class UserDetailsComponent extends BaseComponent implements OnInit {
+export class UserDetailsComponent extends BaseComponent implements OnInit, AfterViewInit {
+    @ViewChild('fileInput', { static: false }) fileInput: ElementRef;
+
     tagsList: IIcon[];
 
     allTags: ITag[];
@@ -72,10 +75,17 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
                 ...tag,
                 link: `assets/topic-icons/${tag.imageUrl}`,
             }));
+
+            this.allTags = tags.map((item) => ({
+                name: item.name,
+                id: item.id,
+                isSelected: false,
+            }));
         });
+
         this.detailsForm = detailsGroup(this.fb);
         this.sexOptions = Object.values(this.sexEnumeration) as string[];
-        this.languageLevelOptions = Object.values(LanguageLevel) as string[];
+        this.languageLevelOptions = Object.values(LanguageLevel).map(level => mapLanguageLevelToString(level));
     }
 
     ngOnInit(): void {
@@ -85,21 +95,29 @@ export class UserDetailsComponent extends BaseComponent implements OnInit {
             .subscribe((resp) => {
                 this.detailsForm.patchValue({ ...resp });
 
-                this.userService.getUserTags().pipe(this.untilThis)
-                    .subscribe(tags => {
-                        this.allTags = tags;
-                        this.selectedTags = tags.filter(t => t.isSelected);
-                    });
+                this.languageLevel.setValue(mapLanguageLevelToString(resp.languageLevel));
                 this.userFirstName = resp.firstName;
                 this.userLastName = resp.lastName;
                 this.imagePath = resp.imagePath;
             });
 
+        this.userService.getUserTags().pipe(this.untilThis)
+            .subscribe(tags => {
+                this.selectedTags = tags.filter(t => t.isSelected);
+            });
         this.authService.user.subscribe((user) => this.setImgPath(user));
+    }
+
+    ngAfterViewInit() {
+        this.fileInput.nativeElement.onclick = () => {
+            this.fileInput.nativeElement.value = null;
+        };
     }
 
     onSubmit() {
         const userDetails = <IUserInfo> this.detailsForm.value;
+
+        userDetails.languageLevel = mapStringToLanguageLevel(this.languageLevel.value);
 
         userDetails.tags = this.selectedTags;
 

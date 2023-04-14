@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CoreHubFactoryService } from '@core/hubs/hubFactories/core-hub-factory.service';
+import { NotifierHubFactoryService } from '@core/hubs/hubFactories/notifier-hub-factory.service';
 import { HubConnection, HubConnectionState } from '@microsoft/signalr';
 import { IChatPerson } from '@shared/models/chat/IChatPerson';
 import { IMessage } from '@shared/models/chat/IMessage';
@@ -19,11 +19,13 @@ export class ChatHubService {
 
     private subscriptions: Subscription[] = [];
 
-    constructor(private hubFactory: CoreHubFactoryService) {}
+    constructor(private hubFactory: NotifierHubFactoryService) {}
 
     async start() {
-        this.hubConnection = this.hubFactory.createHub(this.hubUrl);
-        await this.init();
+        if (!this.hubConnection || this.hubConnection.state === HubConnectionState.Disconnected) {
+            this.hubConnection = this.hubFactory.createHub(this.hubUrl);
+            await this.init();
+        }
     }
 
     private async init() {
@@ -39,6 +41,11 @@ export class ChatHubService {
         this.hubConnection.on('chats', (people: IChatPerson[]) => {
             this.people.next(people);
         });
+    }
+
+    public async end() {
+        await this.people.unsubscribe();
+        await this.messages.unsubscribe();
     }
 
     public listenChats(action: (people: IChatPerson[]) => void) {

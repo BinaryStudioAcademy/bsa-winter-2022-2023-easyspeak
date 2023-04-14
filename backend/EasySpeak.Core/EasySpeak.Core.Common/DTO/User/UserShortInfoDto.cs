@@ -16,6 +16,7 @@ namespace EasySpeak.Core.Common.DTO.User
         public string Language { get; set; } = string.Empty;
         public string LanguageLevel { get; set; } = string.Empty;
         public string[] Tags { get; set; } = null!;
+        public long? ImageId { get; set; }
         public string ImagePath { get; set; } = string.Empty;
         public UserFriendshipStatus UserFriendshipStatus { get; set; }
         

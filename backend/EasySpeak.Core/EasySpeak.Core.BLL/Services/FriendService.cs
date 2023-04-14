@@ -9,50 +9,64 @@ namespace EasySpeak.Core.BLL.Services
 {
     public class FriendService : IFriendService
     {
-        private readonly IMapper _mapper;
         private readonly EasySpeakCoreContext _context;
         private readonly IFirebaseAuthService _authService;
         private readonly INotificationService _notificationService;
 
-        public FriendService(IMapper mapper, EasySpeakCoreContext context, IFirebaseAuthService authService, INotificationService notificationService)
+        public FriendService(EasySpeakCoreContext context, IFirebaseAuthService authService, INotificationService notificationService)
         {
-            _mapper = mapper;
             _context = context;
             _authService = authService;
             _notificationService = notificationService;
         }
 
-        public async Task<FriendEmailDto> AcceptFriendshipAsync(FriendEmailDto friendDto)
+        public async Task AcceptFriendshipAsync(FriendEmailDto friendDto)
         {
             await SetFriendshipStatus(friendDto.Email, FriendshipStatus.Confirmed);
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == friendDto.Email);
             await _notificationService.AddNotificationAsync(Common.Enums.NotificationType.friendshipAcception, user!.Id);
-            return friendDto;
         }
 
-        public async Task<FriendEmailDto> AddFriendAsync(FriendEmailDto friendDto)
+        public async Task<bool> AddFriendAsync(FriendEmailDto friendDto)
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == friendDto.Email);
-            var friend = new Friend
+            if (user is null || await _context.Friends
+                .AnyAsync(f => 
+                (f.RequesterId == user.Id && f.UserId == _authService.UserId 
+                    || f.UserId == user.Id && f.RequesterId == _authService.UserId)
+                && f.FriendshipStatus != FriendshipStatus.Rejected))
             {
-                UserId = user!.Id,
-                RequesterId = _authService.UserId,
-                FriendshipStatus = FriendshipStatus.Pending,
-            };
+                return false;
+            }
+            var friendship = await _context.Friends.FirstOrDefaultAsync(f => f.UserId == user.Id && f.RequesterId == _authService.UserId);
+            if (friendship is null)
+            {
+                var friend = new Friend
+                {
+                    UserId = user!.Id,
+                    RequesterId = _authService.UserId,
+                    FriendshipStatus = FriendshipStatus.Pending,
+                };
 
-            _context.Friends.Add(friend);
+                _context.Friends.Add(friend);
 
-            await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
 
-            await _notificationService.AddNotificationAsync(Common.Enums.NotificationType.friendshipRequest, user!.Id);
+                await _notificationService.AddNotificationAsync(Common.Enums.NotificationType.friendshipRequest, user!.Id);
+            }
+            else
+            {
+                friendship.FriendshipStatus = FriendshipStatus.Pending;
+                _context.Friends.Update(friendship);
+                await _context.SaveChangesAsync();
+            }
 
-            return _mapper.Map<FriendEmailDto>(friend);
+            return true;
         }
 
-        public async Task<FriendEmailDto> RejectFriendshipAsync(FriendEmailDto friendDto)
+        public async Task RejectFriendshipAsync(FriendEmailDto friendDto)
         {
             await SetFriendshipStatus(friendDto.Email, FriendshipStatus.Rejected);
-            return friendDto;
         }
 
         private async Task SetFriendshipStatus(string requesterEmail, FriendshipStatus friendshipStatus)

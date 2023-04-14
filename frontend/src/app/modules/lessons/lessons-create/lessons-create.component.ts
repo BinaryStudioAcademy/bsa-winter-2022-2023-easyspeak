@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component, forwardRef, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MomentDateAdapter } from '@angular/material-moment-adapter';
+import { mapStringToLanguageLevel } from '@shared/data/LanguageLevelMapper';
 import { youtubeVideoLinkRegex } from '@shared/data/regex.util';
 import { IIcon } from '@shared/models/IIcon';
 import { INewLesson } from '@shared/models/lesson/INewLesson';
-import { INewQuestion } from '@shared/models/lesson/INewQuestion';
 import { LanguageLevels } from '@shared/models/lesson/LanguageLevels';
 import Utils from '@shared/utils/lesson.utils';
 import * as moment from 'moment';
@@ -12,10 +14,38 @@ import * as moment from 'moment';
 import { LessonsService } from 'src/app/services/lessons.service';
 import { NotificationService } from 'src/app/services/notification.service';
 
+export const MY_FORMATS = {
+    parse: {
+        dateInput: 'LL',
+    },
+    display: {
+        dateInput: 'D MMMM YYYY',
+        monthYearLabel: 'MMM YYYY',
+        dateA11yLabel: 'LL',
+        monthYearA11yLabel: 'MMMM YYYY',
+    },
+};
+
 @Component({
     selector: 'app-lessons-create',
     templateUrl: './lessons-create.component.html',
     styleUrls: ['./lessons-create.component.sass'],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => this),
+            multi: true,
+        },
+        {
+            provide: DateAdapter,
+            useClass: MomentDateAdapter,
+            deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS],
+        },
+        {
+            provide: MAT_DATE_FORMATS,
+            useValue: MY_FORMATS,
+        },
+    ],
 })
 export class LessonsCreateComponent implements OnInit {
     tagsList: IIcon[] = [];
@@ -69,10 +99,6 @@ export class LessonsCreateComponent implements OnInit {
         return this.myForm.get('studentsCount');
     }
 
-    get meetLink() {
-        return this.myForm.get('meetLink');
-    }
-
     expandTimeDropdown() {
         this.timeDropdownVisible = !this.timeDropdownVisible;
     }
@@ -108,17 +134,14 @@ export class LessonsCreateComponent implements OnInit {
             return;
         }
 
-        const lessonQuestions: INewQuestion[] = this.questions?.value
-            .split('\n')
-            .filter((entry: string) => entry.trim() !== '')
-            .map((element: string) => ({ topic: element, subquestions: [] }));
+        const lessonQuestions: string = this.questions?.value;
 
         const lessonTags: IIcon[] = this.tagsList;
 
         const lessonToCreate: INewLesson = {
             name: this.name?.value,
             mediaPath: '',
-            languageLevel: Object.values(LanguageLevels).indexOf(this.level),
+            languageLevel: Object.values(LanguageLevels).indexOf(mapStringToLanguageLevel(this.level)),
             startAt,
             questions: lessonQuestions,
             tags: lessonTags.map(f => ({ id: f.id })),

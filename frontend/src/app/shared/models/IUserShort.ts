@@ -4,4 +4,5 @@ export interface IUserShort {
     firstName: string,
     lastName: string,
     imagePath: string,
+    isAdmin: boolean,
 }
