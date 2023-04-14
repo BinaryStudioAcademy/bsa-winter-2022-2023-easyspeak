@@ -3,9 +3,9 @@ import { Router } from '@angular/router';
 import { BaseComponent } from '@core/base/base.component';
 import { NotificationsHubService } from '@core/hubs/notifications-hub.service';
 import { NotificationService } from '@core/services/notification.service';
+import { addTimeOffset } from '@modules/lessons/lesson/lesson.helper';
 import { INotification } from '@shared/models/INotification';
 import { NotificationType } from '@shared/utils/user-notifications.util';
-import * as moment from 'moment';
 import { Subscription } from 'rxjs';
 
 import { getTimeDiff } from './date-time-diff.helper';
@@ -70,7 +70,7 @@ export class UserNotificationComponent extends BaseComponent implements OnInit, 
     notificationsToTimeZone(newNotifications: INotification[]) {
         this.notifications = newNotifications.map(notification => ({
             ...notification,
-            createdAt: new Date(moment.utc(notification.createdAt).local().format('YYYY-MM-DD HH:mm:ss')),
+            createdAt: new Date(addTimeOffset(notification.createdAt.toString())),
         }));
     }
 
