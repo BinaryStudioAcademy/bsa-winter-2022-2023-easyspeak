@@ -31,23 +31,24 @@ public class LessonSchedulerService : BackgroundService
     
     protected override async Task ExecuteAsync(CancellationToken cancellationToken)
     {
-        while (await _periodicTimer.WaitForNextTickAsync(cancellationToken) && 
-               !cancellationToken.IsCancellationRequested)
+        do
         {
             await using var scope = _services.CreateAsyncScope();
 
             var notificationService = scope.ServiceProvider.GetRequiredService<INotificationService>();
-            
+
             var lessonService = scope.ServiceProvider.GetRequiredService<ILessonsService>();
 
             var lessonsWithReminders = await notificationService.GetCreatedRemindersList();
 
             var lessons = await lessonService.GetLessonsWithDelayTime(lessonsWithReminders);
 
-            var pendingTasks = lessons.Select(l => ScheduleSubscribersNotification(l, lessonService, notificationService));
+            var pendingTasks =
+                lessons.Select(l => ScheduleSubscribersNotification(l, lessonService, notificationService));
 
             await Task.WhenAll(pendingTasks);
-        }
+        } while (await _periodicTimer.WaitForNextTickAsync(cancellationToken) &&
+                 !cancellationToken.IsCancellationRequested);
     }
 
     private async Task ScheduleSubscribersNotification(LessonDelayDto lessonDelayDto, ILessonsService lessonsService, INotificationService notificationService)
