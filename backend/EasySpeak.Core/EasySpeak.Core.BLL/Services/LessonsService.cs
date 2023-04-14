@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using EasySpeak.Core.BLL.Helpers;
 using EasySpeak.Core.BLL.Interfaces;
 using EasySpeak.Core.BLL.Options;
 using EasySpeak.Core.Common.DTO;
@@ -60,7 +61,9 @@ public class LessonsService : BaseService, ILessonsService
         {
             t.SubscribersCount = subscribersInfoDict[t.Id].SbCount;
             t.isSubscribed = subscribersInfoDict[t.Id].isSubscribed;
-            t.User!.ImagePath = lessonsFromContext.First(lesson => lesson.Id == t.Id).User!.Image?.Url;
+            var user = lessonsFromContext.First(lesson => lesson.Id == t.Id).User!;
+            var imgUrl = user.GetUserAvatar();
+            t.User!.ImagePath = imgUrl;
         });
 
         return lessonDtos;

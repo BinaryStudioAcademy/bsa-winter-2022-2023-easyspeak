@@ -324,15 +324,18 @@ public class UserService : BaseService, IUserService
 
     public async Task<List<UserShortInfoDto>> GetFriends()
     {
-        var friendshipsWithUsers = _context.Friends.Include(f => f.User).ThenInclude(user => user.Image).Include(f => f.Requester);
+        var friendshipsWithUsers = _context.Friends
+            .Include(f => f.User)
+                .ThenInclude(user => user.Image)
+            .Include(user => user.User)
+                .ThenInclude(user => user.Tags)
+            .Include(f => f.Requester);
         var users = await friendshipsWithUsers
            .Where(f => f.FriendshipStatus != FriendshipStatus.Rejected && (f.UserId == _authService.UserId || f.RequesterId == _authService.UserId))
            .Select(f => f.UserId == _authService.UserId ? f.Requester : f.User)
            .ToListAsync();
 
         var mappedFriends = _mapper.Map<List<UserShortInfoDto>>(users);
-
-        mappedFriends.ForEach(friend => friend.ImagePath = users.First(user => user.Id == friend.Id).Image?.Url ?? string.Empty);
 
         await FillUserFriendshipStatus(mappedFriends);
 
