@@ -1,6 +1,13 @@
 <div class="container">
     <h1 class="header">{{callInfo.hasButtons ? 'Calling' : 'You are calling'}} {{ remoteFullName }}</h1>
-    <img class="avatar" src="{{ remoteImgPath }}" alt="">
+    <div class="user-avatar-placeholder">
+        <app-avatar
+            [firstName]="'Matt'"
+            [lastName]="'Patt'"
+            [imagePath]="remoteImgPath ? remoteImgPath : ''"
+            [imageSize]="172">
+        </app-avatar>
+    </div>
     <div *ngIf="callInfo.hasButtons" class="controls">
         <button mat-dialog-close="true" class="reject button" (click)="rejectCall()">
             <img src="assets/session-call/reject_icon.svg" alt="">
