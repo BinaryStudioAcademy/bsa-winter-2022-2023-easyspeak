@@ -6,7 +6,7 @@ import * as moment from 'moment';
 
 export const MY_FORMATS = {
     parse: {
-        dateInput: 'LL',
+        dateInput: 'DD.MM.YYYY',
     },
     display: {
         dateInput: 'D MMMM YYYY',
@@ -46,17 +46,28 @@ export class CalendarComponent implements ControlValueAccessor {
 
     _value: moment.Moment;
 
+    dateRegex = new RegExp('^\s*(3[01]|[12][0-9]|0?[1-9])\.(1[012]|0?[1-9])\.((?:19|20)\d{2})\s*$');
+
     onChange?: (_: string) => void;
 
     onTouch?: (_: string) => void;
 
     set value(val: moment.Moment) {
-        this._value = moment(val.format('MM-DD-YYYY'));
+        console.log(val.format('DD.MM.YYYY'));
+        console.log(this.dateRegex.test(val.format('DD.MM.YYYY')));
+        //if( true) {
+        if(this.dateRegex.test(val.format('DD.MM.YYYY'))) {
+            console.log('if');
+            this._value = moment(val.format('MM-DD-YYYY'));
 
-        const date = val.format('MM-DD-YYYY');
+            const date = val.format('MM-DD-YYYY');
 
-        this.onChange?.(date);
-        this.onTouch?.(date);
+            this.onChange?.(date);
+            this.onTouch?.(date);
+        }
+        else{
+            console.log('else');
+        }
     }
 
     get value() {
