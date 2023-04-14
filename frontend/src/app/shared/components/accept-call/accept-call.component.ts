@@ -22,11 +22,11 @@ export class AcceptCallComponent implements OnInit {
 
     user: IUserShort;
 
+    remoteFirstName: string;
+
+    remoteLastName: string;
+
     remoteFullName: string;
-
-    remoteName: string;
-
-    remoteLastname: string;
 
     remoteImgPath: string | undefined;
 
@@ -35,7 +35,7 @@ export class AcceptCallComponent implements OnInit {
         this.remoteFullName = this.callInfo.remoteName;
         this.remoteImgPath = this.callInfo.remoteImgPath;
 
-        [this.remoteName, this.remoteLastname] = this.remoteFullName.split(' ');
+        [this.remoteFirstName, this.remoteLastName] = this.remoteFullName.split(' ');
     }
 
     async answerCall() {

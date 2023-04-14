@@ -27,6 +27,15 @@
     height: 172px
     overflow: hidden
     font-size: 172px
+    animation: pulse 2s infinite
+
+@keyframes pulse
+  0%
+    box-shadow: 0 0 0 0 $turqoise-100-semi-transparent
+  70%
+    box-shadow: 0 0 0 20px $turqoise-100-transparent
+  100%
+    box-shadow: 0 0 0 0 $turqoise-100-transparent
 
 .avatar
     display: block

@@ -2,8 +2,8 @@
     <h1 class="header">{{callInfo.hasButtons ? 'Calling' : 'You are calling'}} {{ remoteFullName }}</h1>
     <div class="user-avatar-placeholder">
         <app-avatar
-            [firstName]="remoteName"
-            [lastName]="remoteLastname"
+            [firstName]="remoteFirstName"
+            [lastName]="remoteLastName"
             [imagePath]="remoteImgPath ? remoteImgPath : ''"
             [imageSize]="172">
         </app-avatar>
