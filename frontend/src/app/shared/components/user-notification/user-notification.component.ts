@@ -78,9 +78,8 @@ export class UserNotificationComponent extends BaseComponent implements OnInit, 
         this.notificationService.readAllNotifications().subscribe();
     }
 
-    override ngOnDestroy() {
-        this.notificationsHub.stop();
-        this.notifySubscription.unsubscribe();
+    override ngOnDestroy(): void {
+        this.notificationsHub.stop().then();
     }
 
     getNotificationTypeIcon(type: NotificationType) {

@@ -8,6 +8,7 @@ namespace EasySpeak.Notifier.WebAPI.Hubs
     public class NotificationHub : Hub
     {
         private static readonly Dictionary<string, string> ConnectedUsers = new();
+
         public void Connect(string email)
         {
             if (!ConnectedUsers.ContainsKey(email))
@@ -15,16 +16,20 @@ namespace EasySpeak.Notifier.WebAPI.Hubs
                 ConnectedUsers[email] = Context.ConnectionId;
             }
         }
-        
+
         public void Disconnect(string email)
         {
-            ConnectedUsers.Remove(email);
+            if (!ConnectedUsers.ContainsKey(email))
+            {
+                ConnectedUsers.Remove(email);
+            }
         }
 
         public async Task SendNotification(string email, NotificationDto message)
         {
-            var user = ConnectedUsers[email];
-            await Clients.Client(user).SendAsync("Notify", JsonConvert.SerializeObject(message));
+            string connectionId = ConnectedUsers[email];
+            
+            await Clients.Client(connectionId).SendAsync("Notify", JsonConvert.SerializeObject(message));
         }
     }
 }

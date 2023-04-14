@@ -1,15 +1,9 @@
 ﻿using AutoMapper;
 using EasySpeak.Core.BLL.Interfaces;
 using EasySpeak.Core.Common.DTO.Friend;
-using EasySpeak.Core.Common.DTO.User;
 using EasySpeak.Core.DAL.Context;
 using EasySpeak.Core.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EasySpeak.Core.BLL.Services
 {

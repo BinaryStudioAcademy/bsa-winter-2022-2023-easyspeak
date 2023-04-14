@@ -44,6 +44,8 @@ namespace EasySpeak.Core.WebAPI.Extensions
                 .AddScoped<INotificationService, NotificationService>()
                 .AddScoped<IUserService, UserService>();
             services.Configure<RabbitQueuesOptions>(configuration.GetSection("RabbitQueues"));
+            services.Configure<LessonSchedulerOptions>(configuration.GetSection("LessonSchedulerOptions"));
+            services.AddHostedService<LessonSchedulerService>();
             services.Configure<LessonBackgroundOptions>(configuration.GetSection("LessonBackgroundService"));
             services.AddHostedService<LessonBackgroundService>();
             services.AddScoped<QueriesSenderService>();
