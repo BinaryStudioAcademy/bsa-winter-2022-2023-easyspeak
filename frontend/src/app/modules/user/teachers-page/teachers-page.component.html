@@ -49,7 +49,7 @@
                 <div class="next-lesson-card">
                     <app-stats-card
                         [description]="'The Nearest Group Class'"
-                        [text]="statistics.nextClass | date: 'd MMMM yyyy, EEE'"
+                        [text]="statistics.nextClass | date : 'd MMMM yyyy, EEE'"
                         [iconPath]="'assets/teachers-page-icons/next-icon.svg'">
                     </app-stats-card>
                 </div>
@@ -68,21 +68,30 @@
     </div>
     <div class="day-with-lessons" *ngFor="let day of datesWithLessons">
         <div class="date-container">
-            <h2 class="date">{{day.lessonsDate | date: "dd MMMM yyyy, EEEE"}}</h2>
+            <h2 class="date">{{ day.lessonsDate | date : 'dd MMMM yyyy, EEEE' }}</h2>
         </div>
         <div class="lessons-section" *ngIf="day.lessons">
             <div class="lessons-column">
                 <div class="lesson" *ngFor="let lesson of day.lessonsColumn1">
-                    <app-lesson [lesson]="lesson" [isTeachersPage]="true"></app-lesson>
+                    <app-lesson
+                        [lesson]="lesson"
+                        [isTeachersPage]="true"
+                        [isQuestionsOpened]="isLessonOpenedQuestions(lesson.id)"
+                        (questionsOpened)="onLessonOpenedQuestions(lesson.id)"></app-lesson>
                 </div>
             </div>
             <div class="lessons-column">
                 <div class="lesson" *ngFor="let lesson of day.lessonsColumn2">
-                    <app-lesson [lesson]="lesson" [isTeachersPage]="true"></app-lesson>
+                    <app-lesson
+                        [lesson]="lesson"
+                        [isTeachersPage]="true"
+                        [isQuestionsOpened]="isLessonOpenedQuestions(lesson.id)"
+                        (questionsOpened)="onLessonOpenedQuestions(lesson.id)"></app-lesson>
                 </div>
             </div>
         </div>
     </div>
     <div class="no-lessons" *ngIf="!datesWithLessons?.length">
         <h1>No Group Classes</h1>
+    </div>
 </div>

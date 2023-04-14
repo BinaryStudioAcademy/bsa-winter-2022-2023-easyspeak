@@ -6,12 +6,20 @@
     <div class="lessons-section" *ngIf="lessons">
         <div class="lessons-column">
             <div class="lesson" *ngFor="let lesson of lessonsColumn1">
-                <app-lesson [lesson]="lesson" [isTeachersPage]="false"></app-lesson>
+                <app-lesson
+                    [lesson]="lesson"
+                    [isTeachersPage]="false"
+                    [isQuestionsOpened]="isLessonOpenedQuestions(lesson.id)"
+                    (questionsOpened)="onLessonOpenedQuestions(lesson.id)"></app-lesson>
             </div>
         </div>
         <div class="lessons-column">
             <div class="lesson" *ngFor="let lesson of lessonsColumn2">
-                <app-lesson [lesson]="lesson" [isTeachersPage]="false"></app-lesson>
+                <app-lesson
+                    [lesson]="lesson"
+                    [isTeachersPage]="false"
+                    [isQuestionsOpened]="isLessonOpenedQuestions(lesson.id)"
+                    (questionsOpened)="onLessonOpenedQuestions(lesson.id)"></app-lesson>
             </div>
         </div>
     </div>
