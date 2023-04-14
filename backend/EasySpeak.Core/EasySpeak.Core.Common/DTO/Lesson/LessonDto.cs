@@ -21,7 +21,7 @@ public class LessonDto
 
     public UserForLessonDto? User { get; set; }
     public ICollection<TagForLessonDto>? Tags { get; set; }
-    public ICollection<QuestionForLessonDto>? Questions { get; set; }
+    public string Questions { get; set; } = string.Empty;
 
     public Dictionary<string, object> ToDictionary()
     {

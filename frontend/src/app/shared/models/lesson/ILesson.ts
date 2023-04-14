@@ -1,5 +1,4 @@
 import { ILessonUser } from './ILessonUser';
-import { IQuestion } from './IQuestion';
 import { ITag } from './ITag';
 
 export interface ILesson {
@@ -7,7 +6,7 @@ export interface ILesson {
     languageLevel: number;
     mediaPath: string;
     name: string;
-    questions: IQuestion[];
+    questions: string;
     startAt: string;
     limitOfUsers: number;
     subscribersCount: number;

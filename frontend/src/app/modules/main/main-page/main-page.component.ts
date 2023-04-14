@@ -11,6 +11,8 @@ export class MainComponent implements OnInit, OnDestroy {
     constructor(private broadcastHub: BroadcastHubService) {}
 
     async ngOnInit() {
+        window.scrollTo(0, 0);
+
         await this.broadcastHub.start();
         this.broadcastHub.listenMessages((msg) => {
             console.info(`The next broadcast message was received: ${msg}`);

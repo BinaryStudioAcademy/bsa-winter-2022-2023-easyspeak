@@ -3,4 +3,5 @@ export interface IMessage {
     createdBy?: number;
     text: string;
     createdAt: Date;
+    isRead: boolean;
 }

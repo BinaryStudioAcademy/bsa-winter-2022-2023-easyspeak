@@ -109,9 +109,9 @@ public class UserService : BaseService, IUserService
         {
             filteredUsers = filteredUsers.Where(u => filter.LangLevels.Contains(u.LanguageLevel));
         }
-        if (filter.Topics is not null && filter.Topics.Any())
+        if (filter.Tags is not null && filter.Tags.Any())
         {
-            filteredUsers = filteredUsers.Where(u => u.Tags.Any(t => filter.Topics.Select(t=>t.Id).Contains(t.Id)));
+            filteredUsers = filteredUsers.Where(u => u.Tags.Any(t => filter.Tags.Select(t=>t.Id).Contains(t.Id)));
         }
 
 
@@ -324,13 +324,15 @@ public class UserService : BaseService, IUserService
 
     public async Task<List<UserShortInfoDto>> GetFriends()
     {
-        var friendshipsWithUsers = _context.Friends.Include(f => f.User).Include(f => f.Requester);
+        var friendshipsWithUsers = _context.Friends.Include(f => f.User).ThenInclude(user => user.Image).Include(f => f.Requester);
         var users = await friendshipsWithUsers
            .Where(f => f.FriendshipStatus != FriendshipStatus.Rejected && (f.UserId == _authService.UserId || f.RequesterId == _authService.UserId))
            .Select(f => f.UserId == _authService.UserId ? f.Requester : f.User)
            .ToListAsync();
 
         var mappedFriends = _mapper.Map<List<UserShortInfoDto>>(users);
+
+        mappedFriends.ForEach(friend => friend.ImagePath = users.First(user => user.Id == friend.Id).Image?.Url ?? string.Empty);
 
         await FillUserFriendshipStatus(mappedFriends);
 

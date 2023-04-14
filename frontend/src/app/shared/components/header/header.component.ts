@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '@core/services/auth.service';
+import { ChatService } from '@core/services/chat.service';
 import { IUserShort } from '@shared/models/IUserShort';
 
 import { UserNotificationComponent } from '../user-notification/user-notification.component';
@@ -12,18 +13,26 @@ import { UserNotificationComponent } from '../user-notification/user-notificatio
 export class HeaderComponent implements OnInit {
     @ViewChild('notificationsMenu') notificationsMenu: UserNotificationComponent;
 
-    constructor(public authService: AuthService) {}
+    constructor(public authService: AuthService, private chatService: ChatService) {}
 
     currentUser: IUserShort;
+
+    numberOfMessages: number;
 
     ngOnInit(): void {
         this.authService.loadUser().subscribe();
 
-        this.authService.user.subscribe((user) => this.setCurrentUser(user));
+        this.authService.user.subscribe((user) => {
+            this.setCurrentUser(user);
+            this.chatService.getUnreadMessages(this.currentUser.id as number).subscribe((numberOfMessages) => {
+                this.numberOfMessages = numberOfMessages;
+            });
+        });
     }
 
     private setCurrentUser(user: IUserShort) {
         this.currentUser = {
+            id: user.id,
             email: user.email,
             firstName: user.firstName,
             lastName: user.lastName,

@@ -27,8 +27,10 @@ export class SuitableLessonDayComponent {
 
     onDayClick(eventData: Event) {
         const target = eventData.target as HTMLElement;
+        const targetClasses = target.classList;
+        const classesToCheck = ['day-elem-grey', 'disabled', 'meetings-grey'];
 
-        if (!target.classList.contains('day-elem-grey')) {
+        if (!classesToCheck.some(className => targetClasses.contains(className))) {
             this.dateSelected.emit(this.item);
         }
     }

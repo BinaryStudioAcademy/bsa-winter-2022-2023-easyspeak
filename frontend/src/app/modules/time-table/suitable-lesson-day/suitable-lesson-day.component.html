@@ -1,11 +1,13 @@
-<div [ngClass]="{ 'day-elem-blue': isSelectedDay(), 'day-elem-grey': isBeforeToday(), 'day-elem' : true }" (click)="onDayClick($event)">
+<div [ngClass]="{ 'day-elem-blue': isSelectedDay(), 'day-elem-grey': isBeforeToday(), 'day-elem' : true }"
+    (click)="onDayClick($event)">
     {{ item | date : 'dd MMMM' }}
 
-    <h2>{{ item | date : 'EEEE' }}</h2>
+    <h2 [ngClass]="{ 'disabled': isBeforeToday() }">{{ item | date : 'EEEE' }}</h2>
 
     <div class="labels">
         <div *ngIf="isToday()" class="meetings today-label">today</div>
 
-        <div [ngClass]="{ 'meetings-grey': isBeforeToday() }" class="meetings">{{ meetingCount }} {{ meetingNumber()}}</div>
+        <div [ngClass]="{ 'meetings-grey': isBeforeToday() }" class="meetings">{{ meetingCount }} {{ meetingNumber()}}
+        </div>
     </div>
 </div>

@@ -33,6 +33,20 @@
     z-index: 10
     height: 100%
 
+#muted-icon
+    position: absolute
+    top: 7px
+    left: 10px
+    z-index: 100
+
+    width: 16px
+    height: 16px
+    padding: 8px
+
+    background: $turquoise-100
+    opacity: 0.7
+
+    border-radius: 50%
 
 #localUser
     padding: 9px 25px
@@ -50,10 +64,11 @@
     bottom: 0
 
 .remoteVideoContainer
+    top: 51px
     position: absolute
     left: 50%
     transform: translateX(-50%)
-    height: 99vh
+    height: calc( 100vh - 110px )
 
 #remoteVideo
     position: relative
@@ -73,7 +88,7 @@
     opacity: 0.7
 
     position: absolute
-    bottom: 52px
+    bottom: 0
 
 .footer
     position: absolute
@@ -88,3 +103,7 @@
     gap: 16px
     img
         cursor: pointer
+
+.audio-icon, .video-icon
+    width: 24px
+    max-height: 24px
