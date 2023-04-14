@@ -79,7 +79,7 @@ export class UserNotificationComponent extends BaseComponent implements OnInit, 
     }
 
     override ngOnDestroy(): void {
-        this.notificationsHub.stop();
+        this.notificationsHub.stop().then();
     }
 
     getNotificationTypeIcon(type: NotificationType) {

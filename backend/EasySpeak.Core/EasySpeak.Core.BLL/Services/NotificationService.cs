@@ -215,5 +215,29 @@ namespace EasySpeak.Core.BLL.Services
                    ?? throw new ArgumentException($"File with id {id} not found");
         }
 
+        public async Task<List<long>> GetCreatedRemindersList()
+        {
+            return await _context.Notifications.Where(n => n.Type == NotificationType.reminding)
+                .Select(n => n.RelatedTo)
+                .ToListAsync();
+        }
+
+        public async Task SaveNotificationsRange(List<NewNotificationDto> newNotifications)
+        {
+            var notifications = _mapper.Map<List<Notification>>(newNotifications);
+            
+            await _context.Notifications.AddRangeAsync(notifications);
+
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<List<Notification>> GetReminderNotificationByLesson(long lessonId)
+        {
+            return await _context.Notifications
+                .Include(n => n.User)
+                .Where(n => n.RelatedTo == lessonId)
+                .ToListAsync();
+        }
+
     }
 }

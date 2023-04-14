@@ -1,21 +1,20 @@
 using System.Data.Entity;
 using AutoMapper;
+using EasySpeak.Core.BLL.Interfaces;
 using EasySpeak.Core.BLL.Options;
+using EasySpeak.Core.Common.DTO.Lesson;
 using EasySpeak.Core.Common.DTO.Notification;
 using EasySpeak.Core.Common.Enums;
-using EasySpeak.Core.DAL.Context;
 using EasySpeak.Core.DAL.Entities;
 using EasySpeak.RabbitMQ.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
-using EntityFrameworkQueryableExtensions = Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions;
 
 namespace EasySpeak.Core.BLL.Services;
 
 public class LessonSchedulerService : BackgroundService
 {
-    private readonly LessonSchedulerOptions _schedulerOptions;
     private readonly IServiceProvider _services;
     private readonly IMessageProducer _messageProducer;
     private readonly IMapper _mapper;
@@ -24,11 +23,10 @@ public class LessonSchedulerService : BackgroundService
     public LessonSchedulerService(IServiceProvider services, IMessageProducer messageProducer,
         IOptions<LessonSchedulerOptions> schedulerOptions, IMapper mapper)
     {
-        _schedulerOptions = schedulerOptions.Value;
         _services = services;
         _messageProducer = messageProducer;
         _mapper = mapper;
-        _periodicTimer = new PeriodicTimer(TimeSpan.FromMinutes(_schedulerOptions.CheckPeriod));
+        _periodicTimer = new PeriodicTimer(TimeSpan.FromMinutes(schedulerOptions.Value.CheckPeriod));
     }
     
     protected override async Task ExecuteAsync(CancellationToken cancellationToken)
@@ -36,80 +34,48 @@ public class LessonSchedulerService : BackgroundService
         while (await _periodicTimer.WaitForNextTickAsync(cancellationToken) && 
                !cancellationToken.IsCancellationRequested)
         {
-            var lessons = await GetLessons(cancellationToken);
+            await using var scope = _services.CreateAsyncScope();
 
-            var pendingTasks = lessons.Select(ScheduleSubscribersNotification);
+            var notificationService = scope.ServiceProvider.GetRequiredService<INotificationService>();
+            
+            var lessonService = scope.ServiceProvider.GetRequiredService<ILessonsService>();
+
+            var lessonsWithReminders = await notificationService.GetCreatedRemindersList();
+
+            var lessons = await lessonService.GetLessonsWithDelayTime(lessonsWithReminders);
+
+            var pendingTasks = lessons.Select(l => ScheduleSubscribersNotification(l, lessonService, notificationService));
 
             await Task.WhenAll(pendingTasks);
         }
     }
 
-    private async Task<List<LessonDelayDto>> GetLessons(CancellationToken cancellationToken)
-    {
-        var currentTime = DateTime.UtcNow;
-
-        var fromTime = currentTime.AddMinutes(_schedulerOptions.CheckPeriod);
-
-        var toTime = currentTime.AddMinutes(_schedulerOptions.CheckPeriod * 2);
-
-        using var scope = _services.CreateScope();
-        
-        var context = scope.ServiceProvider.GetRequiredService<EasySpeakCoreContext>();
-
-        var lessonsWithCreatedReminder = await GetCreatedRemindersList(cancellationToken);
-
-        var lessons = await EntityFrameworkQueryableExtensions.ToListAsync(context.Lessons
-            .Where(l => l.StartAt >= fromTime
-                        && l.StartAt <= toTime
-                        && lessonsWithCreatedReminder.Contains(l.Id))
-            .Select(l => new LessonDelayDto
-            {
-                LessonId = l.Id,
-                DelayInMinutes = (l.StartAt - fromTime).Minutes - currentTime.Minute
-            }), cancellationToken);
-
-        return lessons.OrderBy(l => l.DelayInMinutes).ToList();
-    } 
-
-    private async Task ScheduleSubscribersNotification(LessonDelayDto lessonDelayDto)
+    private async Task ScheduleSubscribersNotification(LessonDelayDto lessonDelayDto, ILessonsService lessonsService, INotificationService notificationService)
     {
         var pendingTime = TimeSpan.FromMinutes(lessonDelayDto.DelayInMinutes);
         
         await Task.Delay(pendingTime).ContinueWith(async _ =>
         {
-            await using var scope = _services.CreateAsyncScope();
-            
-            var context = scope.ServiceProvider.GetRequiredService<EasySpeakCoreContext>();
+            var lessonWithSubscribers = await lessonsService.GetLessonById(lessonDelayDto.LessonId);
 
-            var lessonSubscribers = await EntityFrameworkQueryableExtensions.FirstOrDefaultAsync(context.Lessons
-                .Where(x => lessonDelayDto.LessonId == x.Id)
-                .Include(l => l.Subscribers)
-                .Include(l => l.User)
-                .Select(l => new LessonSubscribersNotifyDto()
-                {
-                    Lesson = l,
-                    Author = l.User!,
-                    Subscribers = l.Subscribers.ToList()
-                }));
-
-            if (lessonSubscribers is not null) await SendNotificationToSubscriber(lessonSubscribers);
+            await SendNotificationToSubscriber(lessonWithSubscribers, notificationService);
         });
     }
 
-    private async Task SendNotificationToSubscriber(LessonSubscribersNotifyDto shortInfo)
+    private async Task SendNotificationToSubscriber(Lesson lesson, INotificationService notificationService)
     {
-        var newNotifications = GetSubscribersNotificationList(shortInfo);
+        var newNotifications = GetSubscribersNotificationList(lesson);
+
+        await notificationService.SaveNotificationsRange(newNotifications);
         
-        await SaveNotification(newNotifications);
-        
-        await RemindSubscribers(shortInfo.Lesson.Id);
+        await RemindSubscribers(lesson.Id, notificationService);
     }
 
-    private List<NewNotificationDto> GetSubscribersNotificationList(LessonSubscribersNotifyDto shortInfo)
+    private List<NewNotificationDto> GetSubscribersNotificationList(Lesson lesson)
     {
-        shortInfo.Subscribers.Add(shortInfo.Author);
+        lesson.Subscribers.Add(lesson.User!);
 
-        var newNotifications = shortInfo.Subscribers.Select(CreateNotification).ToList();
+        var newNotifications = lesson.Subscribers.Select(CreateNotification).ToList();
         
         return newNotifications;
 
@@ -120,76 +86,33 @@ public class LessonSchedulerService : BackgroundService
                 IsRead = false,
                 UserId = subscriber.Id,
                 Email = subscriber.Email,
-                RelatedTo = shortInfo.Lesson.Id,
+                RelatedTo = lesson.Id,
                 CreatedAt = DateTime.UtcNow,
                 Type = NotificationType.reminding,
                 Text = "The lesson is starting in <strong>30 minutes</strong>! Don't miss it.",
-                ImageId = shortInfo.Author.ImageId
+                ImageId = lesson.User!.ImageId
             };
         }
     }
-    
-    private async Task SaveNotification(List<NewNotificationDto> newNotifications)
+
+    public async Task RemindSubscribers(long lessonId, INotificationService notificationService)
     {
-        await using var scope = _services.CreateAsyncScope();
-        
-        var context = scope.ServiceProvider.GetRequiredService<EasySpeakCoreContext>();
+        var reminders = await notificationService.GetReminderNotificationByLesson(lessonId);
 
-        var notifications = _mapper.Map<List<Notification>>(newNotifications);
-            
-        await context.Notifications.AddRangeAsync(notifications);
+        var reminderMessages = reminders.Select(x => new
+        {
+            Notification = _mapper.Map<NotificationDto>(x), x.User.Email
+        });
 
-        await context.SaveChangesAsync();
-    }
-
-    public async Task RemindSubscribers(long lessonId)
-    {
-        await using var scope = _services.CreateAsyncScope();
-        
-        var context = scope.ServiceProvider.GetRequiredService<EasySpeakCoreContext>();
-
-        var notifications = await EntityFrameworkQueryableExtensions.ToListAsync(context.Notifications
-            .Include(n => n.User)
-            .Where(n => n.RelatedTo == lessonId)
-            .Select(x => new
-            {
-                Notification = _mapper.Map<NotificationDto>(x), x.User.Email
-            }));
-
-        foreach (var item in notifications)
+        foreach (var item in reminderMessages)
         {
             SendToRabbit(item.Email, item.Notification);
         }
     }
 
-    private async Task<List<long>> GetCreatedRemindersList(CancellationToken cancellationToken)
-    {
-        using (var scope = _services.CreateScope())
-        {
-            var context = scope.ServiceProvider.GetRequiredService<EasySpeakCoreContext>();
-
-            return await EntityFrameworkQueryableExtensions.ToListAsync(context.Notifications
-                 .Where(n => n.Type == NotificationType.reminding)
-                 .Select(n => n.RelatedTo), cancellationToken);
-        }
-    }
-    
     private void SendToRabbit(string email, NotificationDto notification)
     {
         _messageProducer.Init("notifications", "");
         _messageProducer.SendMessage(new Tuple<string, NotificationDto>(email, notification));
     }
-}
-
-public class LessonDelayDto
-{
-    public long LessonId { get; set; }
-    public int DelayInMinutes { get; set; }
-}
-
-public class LessonSubscribersNotifyDto
-{
-    public Lesson Lesson { get; set; } = null!;
-    public List<User> Subscribers { get; set; } = new();
-    public User Author { get; set; } = null!;
 }
