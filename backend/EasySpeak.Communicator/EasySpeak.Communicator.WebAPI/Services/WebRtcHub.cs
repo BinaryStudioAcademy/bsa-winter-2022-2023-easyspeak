@@ -32,6 +32,10 @@ namespace EasySpeak.Communicator.WebAPI.Services
 
             var roomName = Guid.NewGuid().ToString();
 
+            ConnectedClients.Add(roomName, new List<string>());
+            ConnectedClients[roomName].Add(Context.ConnectionId);
+            await EmitJoinRoom(roomName);
+
             await Clients.Client(connectionId).SendAsync("startCall", chatId, callerId, callerEmail, callerFullName, callerImgPath, roomName);
         }
 
@@ -72,33 +76,32 @@ namespace EasySpeak.Communicator.WebAPI.Services
 
         public async Task CreateOrJoinRoom(string roomName)
         {
-            CreateRoom(roomName);
-
-            AddClientToRoom(roomName);
-
-            await EmitJoinRoom(roomName);
-
-            var numberOfClients = ConnectedClients[roomName].Count;
-
-            if (numberOfClients == 1)
+            if (!ConnectedClients[roomName].Contains(Context.ConnectionId))
             {
-                await EmitCreated();
-                await EmitLog("Client " + Context.ConnectionId + " created the room " + roomName, roomName);
+                AddClientToRoom(roomName);
+                await EmitJoinRoom(roomName);
+                await EmitJoined(roomName); 
             }
             else
             {
-                await EmitJoined(roomName);
-                await EmitLog("Client " + Context.ConnectionId + " joined the room " + roomName, roomName);
+                await EmitCreated();
             }
-
-            await EmitLog("Room " + roomName + " now has " + numberOfClients + " client(s)", roomName);
         }
 
-        private static void CreateRoom(string roomName)
+        private async Task CreateRoom(string roomName)
         {
             if (!ConnectedClients.ContainsKey(roomName))
             {
                 ConnectedClients.Add(roomName, new List<string>());
+                AddClientToRoom(roomName);
+                await EmitJoinRoom(roomName);
+                await EmitCreated();
+            }
+            else
+            {
+                AddClientToRoom(roomName);
+                await EmitJoinRoom(roomName);
+                await EmitJoined(roomName);
             }
         }
 

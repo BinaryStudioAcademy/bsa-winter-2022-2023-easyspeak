@@ -5,6 +5,7 @@ import { ChatService } from '@core/services/chat.service';
 import { IUserShort } from '@shared/models/IUserShort';
 
 import { UserNotificationComponent } from '../user-notification/user-notification.component';
+import { WebrtcHubService } from '@core/hubs/webrtc-hub.service';
 
 @Component({
     selector: 'app-header',
@@ -18,6 +19,7 @@ export class HeaderComponent implements OnInit {
         public authService: AuthService,
         private chatService: ChatService,
         private chatHub: ChatHubService,
+        private webrtcHub: WebrtcHubService,
     ) {}
 
     currentUser: IUserShort;
@@ -26,12 +28,18 @@ export class HeaderComponent implements OnInit {
 
     async ngOnInit(): Promise<void> {
         this.authService.loadUser().subscribe();
+        await this.webrtcHub.start();
 
         this.authService.user.subscribe((user) => {
             this.setCurrentUser(user);
+
             this.chatService.getUnreadMessages(user.id as number).subscribe((numberOfMessages) => {
                 this.numberOfMessages = numberOfMessages;
             });
+
+            if (this.currentUser.email) {
+                this.webrtcHub.connect(this.currentUser.email);
+            }
         });
 
         await this.chatHub.start();
