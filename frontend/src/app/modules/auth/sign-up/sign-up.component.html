@@ -7,12 +7,12 @@
                 <input
                     formControlName="email"
                     placeholder="Email"
-                    (keyup)="ClearErrors(email)"
-                    [ngClass]="{'submitted': isChanged.email}"
+                    (keyup)="ClearErrors('email')"
+                    [ngClass]="{'submitted': inputMap.get('email')}"
                     />
                 <div class="errors-wrp"  *ngFor="let condition of ['required','pattern'] ">
                     <mat-error class="error"
-                               *ngIf="CheckCondition(email,condition)">
+                               *ngIf="CheckCondition('email',condition)">
                         <img src="/assets/user-profile/alert-triangle.svg" alt="">
                         {{GetErrorMessageByKey('email'+condition)}}
                     </mat-error>
@@ -23,11 +23,11 @@
                     <input
                         formControlName="firstName"
                         placeholder="First Name"
-                        (keyup)="ClearErrors(firstName)"
-                        [ngClass]="{'submitted': isChanged.firstName}"/>
+                        (keyup)="ClearErrors('firstName')"
+                        [ngClass]="{'submitted': inputMap.get('firstName')}"/>
                     <div class="errors-wrp"  *ngFor="let condition of ['required','pattern'] ">
                         <mat-error class="error"
-                                   *ngIf="CheckCondition(firstName,condition)">
+                                   *ngIf="CheckCondition('firstName',condition)">
                             <img src="/assets/user-profile/alert-triangle.svg" alt="">
                             {{GetErrorMessageByKey('name'+condition)}}
                         </mat-error>
@@ -37,11 +37,11 @@
                     <input
                         formControlName="lastName"
                         placeholder="Last Name"
-                        (keyup)="ClearErrors(lastName)"
-                        [ngClass]="{'submitted': isChanged.lastName}"/>
+                        (keyup)="ClearErrors('lastName')"
+                        [ngClass]="{'submitted':  inputMap.get('lastName')}"/>
                     <div class="errors-wrp"  *ngFor="let condition of ['required','pattern'] ">
                         <mat-error class="error"
-                                   *ngIf="CheckCondition(lastName,condition)">
+                                   *ngIf="CheckCondition( 'lastName',condition)">
                             <img src="/assets/user-profile/alert-triangle.svg" alt="">
                             {{GetErrorMessageByKey('name'+condition)}}
                         </mat-error>
@@ -66,7 +66,7 @@
 
                 <div class="form-group-item">
                     <ng-select #sexDropdown [items]="sexOptions" class="custom" dropdownPosition="bottom"
-                        appearance="underline" formControlName="sex" [ngClass]="{'submitted': isChanged.sex &&!this.sex.value}">
+                        appearance="underline" formControlName="sex" [ngClass]="{'submitted':  inputMap.get('sex') &&!this.sex.value}">
                     </ng-select>
 
                     <div class="placeholder" *ngIf="!this.sex.value" (click)="expandSexDropdown()">
@@ -77,7 +77,7 @@
                     </mat-icon>
                     <div class="errors-wrp" >
                         <mat-error class="error"
-                                   *ngIf="CheckCondition(sex,'required')">
+                                   *ngIf="CheckCondition( 'sex','required')">
                             <img src="/assets/user-profile/alert-triangle.svg" alt="">
                             {{GetErrorMessageByKey('required')}}
                         </mat-error>
@@ -87,7 +87,7 @@
 
             <div class="form-group-item">
                 <ng-select #countryDropdown [items]="countries" class="custom" dropdownPosition="bottom"
-                    appearance="underline" formControlName="country" [ngClass]="{'submitted': isChanged.country &&!this.country.value}">
+                    appearance="underline" formControlName="country" [ngClass]="{'submitted': inputMap.get('country') &&!this.country.value}">
                 </ng-select>
 
                 <div class="placeholder" *ngIf="!this.country.value" (click)="expandCountryDropdown()">
@@ -99,7 +99,7 @@
                 </mat-icon>
 
                 <div class="errors-wrp">
-                    <mat-error class="error" *ngIf="CheckCondition(country,'required')">
+                    <mat-error class="error" *ngIf="CheckCondition( 'country','required')">
                         <img src="/assets/user-profile/alert-triangle.svg">
                         {{getErrorMessage(country)}}
                     </mat-error>
@@ -108,7 +108,7 @@
             </div>
             <div class="form-group-item">
                 <ng-select #languageDropdown [items]="languages" class="custom" dropdownPosition="bottom"
-                    appearance="underline" formControlName="language" [ngClass]="{'submitted': isChanged.language &&!this.language.value}">
+                    appearance="underline" formControlName="language" [ngClass]="{'submitted': inputMap.get('language') &&!this.language.value}">
                 </ng-select>
 
                 <div class="placeholder" *ngIf="!this.language.value" (click)="expandLanguageDropdown()">
@@ -120,7 +120,7 @@
                 </mat-icon>
 
                 <div class="errors-wrp">
-                    <mat-error class="error" *ngIf="CheckCondition(language,'required')">
+                    <mat-error class="error" *ngIf="CheckCondition('language','required')">
 
                         <img src="/assets/user-profile/alert-triangle.svg">
                         {{getErrorMessage(language)}}
@@ -129,7 +129,7 @@
             </div>
             <div class="form-group-item">
                 <ng-select #levelDropdown [items]="languageLevels" class="custom" dropdownPosition="bottom"
-                    appearance="underline" formControlName="languageLevel" [ngClass]="{'submitted': isChanged.languageLevel &&!this.languageLevel.value}">
+                    appearance="underline" formControlName="languageLevel" [ngClass]="{'submitted': inputMap.get('languageLevel') &&!this.languageLevel.value}">
                 </ng-select>
 
                 <mat-icon class="expand-icon" (click)="expandLevelDropdown()">
@@ -137,58 +137,27 @@
                 </mat-icon>
 
                 <div class="errors-wrp">
-                    <mat-error class="error" *ngIf="CheckCondition(languageLevel,'required')">
+                    <mat-error class="error" *ngIf="CheckCondition( 'languageLevel','required')">
 
                         <img src="/assets/user-profile/alert-triangle.svg">
                         {{getErrorMessage(languageLevel)}}
                     </mat-error>
                 </div>
-<!--                <div class="error-surface" *ngIf="this.languageLevel.invalid && this.userRegisterForm.submitted"></div>-->
                 <div class="placeholder" *ngIf="!this.languageLevel.value" (click)="expandLevelDropdown()">
                     Level of English
                 </div>
             </div>
-<!--            <div class="form-group-item">-->
-<!--                <input type="password" formControlName="password" placeholder="Password" autocomplete="new-password" required-->
-<!--                    appPasswordVisibility />-->
-<!--                <div class="errors-wrp">-->
-
-<!--                    <mat-error class="error" *ngIf="this.password.invalid && this.userRegisterForm.submitted">-->
-<!--                        <img src="/assets/user-profile/alert-triangle.svg" alt="">-->
-<!--                        {{getErrorMessage(password)}}-->
-<!--                    </mat-error>-->
-<!--                </div>-->
-
-<!--                <div *ngIf="this.password.invalid && this.userRegisterForm.submitted" class="error-surface">-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="form-group-item">-->
-<!--                <input type="password"  formControlName="passwordConfirmation" placeholder="Repeat Password" autocomplete="new-password"-->
-<!--                    appPasswordVisibility />-->
-
-<!--                <div class="errors-wrp">-->
-<!--                    <mat-error class="error"-->
-<!--                        *ngIf="this.registerForm.errors?.['matchError'] && this.userRegisterForm.submitted">-->
-<!--                        <img src="/assets/user-profile/alert-triangle.svg" alt="">-->
-<!--                        {{getFormErrorMessage(this.registerForm)}}-->
-<!--                    </mat-error>-->
-<!--                </div>-->
-
-<!--                <div class="error-surface"-->
-<!--                    *ngIf="(this.registerForm.errors?.['matchError'] || this.passwordConfirmation.errors?.['required']) && this.userRegisterForm.submitted">-->
-<!--                </div>-->
-<!--            </div>-->
             <div class="form-group-item">
                 <input formControlName="password"
                        placeholder="Password"
                        type="password"
                        appPasswordVisibility
                        autocomplete="new-password"
-                       (keyup)="ClearErrors(password)"
-                       [ngClass]="{'submitted': isChanged.password}"/>
+                       (keyup)="ClearErrors('password')"
+                       [ngClass]="{'submitted': inputMap.get('password')}"/>
                 <div class="errors-wrp"  *ngFor="let condition of ['required','pattern'] ">
                     <mat-error class="error"
-                               *ngIf="CheckCondition(password,condition)">
+                               *ngIf="CheckCondition( 'password',condition)">
                         <img src="/assets/user-profile/alert-triangle.svg" alt="">
                         {{GetErrorMessageByKey('password'+condition)}}
                     </mat-error>
@@ -201,13 +170,13 @@
                        type="password"
                        appPasswordVisibility
                        autocomplete="new-password"
-                       (keyup)="ClearErrors(passwordConfirmation)"
-                       [ngClass]="{'submitted': isChanged.passwordConfirmation}"/>
-                <div class="errors-wrp"  *ngFor="let condition of ['matchError'] ">
+                       (keyup)="ClearErrors('passwordConfirmation')"
+                       [ngClass]="{'submitted':inputMap.get('passwordConfirmation')}"/>
+                <div class="errors-wrp"  *ngFor="let condition of ['required','matchError'] ">
                     <mat-error class="error"
-                               *ngIf="CheckCondition(passwordConfirmation,condition)">
+                               *ngIf="CheckCondition( 'passwordConfirmation',condition)">
                         <img src="/assets/user-profile/alert-triangle.svg" alt="">
-                        {{GetErrorMessageByKey('password'+condition)}}
+                        {{GetErrorMessageByKey('passwordConfirmation'+condition)}}
                     </mat-error>
                 </div>
             </div>

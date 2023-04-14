@@ -13,7 +13,6 @@ import { Sex } from '@shared/data/sex';
 import { INewUser } from '@shared/models/INewUser';
 import { ToastrService } from 'ngx-toastr';
 import { switchMap } from 'rxjs';
-import { catchError } from 'rxjs/operators';
 
 import { CountriesTzLangProviderService } from 'src/app/services/countries-tz-lang-provider.service';
 
@@ -87,15 +86,17 @@ export class SignUpComponent extends BaseComponent implements OnInit {
 
     user: INewUser;
 
-    isChanged = { email: false,
-        firstName: false,
-        lastName: false,
-        password: false,
-        passwordConfirmation: false,
-        sex: false,
-        country: false,
-        language: false,
-        languageLevel: false };
+    inputMap = new Map<string, boolean>([
+        ['firstName', false],
+        ['lastName', false],
+        ['password', false],
+        ['passwordConfirmation', false],
+        ['sex', false],
+        ['country', false],
+        ['language', false],
+        ['languageLevel', false],
+        ['email', false],
+    ]);
 
     constructor(
         private formBuilder: FormBuilder,
@@ -130,7 +131,7 @@ export class SignUpComponent extends BaseComponent implements OnInit {
     }
 
     private signUp() {
-        if (this.registerForm.valid || true) {
+        if (this.registerForm.valid) {
             this.authService
                 .signUp(this.email.value, this.password.value)
                 .pipe(switchMap(() => this.createUser().pipe(this.untilThis)))
@@ -155,15 +156,9 @@ export class SignUpComponent extends BaseComponent implements OnInit {
     }
 
     private validateForm() {
-        this.isChanged.password = true;
-        this.isChanged.email = true;
-        this.isChanged.firstName = true;
-        this.isChanged.lastName = true;
-        this.isChanged.passwordConfirmation = true;
-        this.isChanged.sex = true;
-        this.isChanged.country = true;
-        this.isChanged.language = true;
-        this.isChanged.languageLevel = true;
+        [...this.inputMap.keys()].forEach((key) => {
+            this.inputMap.set(key, true);
+        });
 
         return this.registerForm.valid;
     }
@@ -205,35 +200,9 @@ export class SignUpComponent extends BaseComponent implements OnInit {
         return '';
     }
 
-    ClearErrors(control: FormControl) {
-        if (control === this.password) {
-            this.isChanged.password = false;
-        }
-        if (control === this.email) {
-            this.isChanged.email = false;
-        }
-        if (control === this.firstName) {
-            this.isChanged.firstName = false;
-        }
-        if (control === this.lastName) {
-            this.isChanged.lastName = false;
-        }
-        if (control === this.passwordConfirmation) {
-            this.isChanged.passwordConfirmation = false;
-            control.setErrors({ matchError: false });
-        }
-        if (control === this.sex) {
-            this.isChanged.sex = false;
-        }
-        if (control === this.country) {
-            this.isChanged.country = false;
-        }
-        if (control === this.language) {
-            this.isChanged.language = false;
-        }
-        if (control === this.languageLevel) {
-            this.isChanged.languageLevel = false;
-        }
+    ClearErrors(controlName: string) {
+        this.inputMap.set(controlName, false);
+        this.registerForm.setErrors(null);
     }
 
     GetErrorMessageByKey(id: string) {
@@ -248,57 +217,24 @@ export class SignUpComponent extends BaseComponent implements OnInit {
         }
     }
 
-    CheckCondition(control: FormControl, condition: string) {
-        let isChanged = false;
-
-        if (control === this.password) {
-            isChanged = this.isChanged.password;
-        }
-
-        if (control === this.email) {
-            isChanged = this.isChanged.email;
-        }
-
-        if (control === this.firstName) {
-            isChanged = this.isChanged.firstName;
-        }
-
-        if (control === this.lastName) {
-            isChanged = this.isChanged.lastName;
-        }
-
-        if (control === this.passwordConfirmation) {
-            isChanged = this.isChanged.passwordConfirmation;
-        }
-
-        if (control === this.sex) {
-            isChanged = this.isChanged.sex;
-        }
-
-        if (control === this.country) {
-            isChanged = this.isChanged.country;
-        }
-        if (control === this.language) {
-            isChanged = this.isChanged.language;
-        }
-        if (control === this.languageLevel) {
-            isChanged = this.isChanged.languageLevel;
-        }
+    CheckCondition(controlName: string, condition: string) {
+        const isChanged = this.inputMap.get(controlName) ?? false;
+        const control = this.registerForm.get(controlName) as FormControl;
 
         switch (condition) {
             case 'required':
-
-                return ((control.errors?.[condition] && control.touched) || control.pristine) && isChanged;
-
+                return ((control.errors?.[condition] && control.touched)
+                    || control.pristine) && isChanged;
             case 'pattern':
-
                 return control.errors?.[condition] && isChanged;
-
             case 'matchError':
-                control.setErrors({ matchError: true });
+                if (control?.parent?.errors?.[condition] && !control.errors?.['required']) {
+                    control.setErrors({ matchError: true });
 
-                return this.registerForm.errors?.[condition] && isChanged;
+                    return this.registerForm.errors?.[condition] && isChanged;
+                }
 
+                return false;
             default: return undefined;
         }
     }
