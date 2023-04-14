@@ -2,11 +2,12 @@ import { Component, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MomentDateAdapter } from '@angular/material-moment-adapter';
+import { addTimeOffset } from '@modules/lessons/lesson/lesson.helper';
 import * as moment from 'moment';
 
 export const MY_FORMATS = {
     parse: {
-        dateInput: 'LL',
+        dateInput: 'D MM YYYY',
     },
     display: {
         dateInput: 'D MMMM YYYY',
@@ -44,16 +45,16 @@ export class CalendarComponent implements ControlValueAccessor {
 
     @Input() placeholder: string;
 
-    _value: moment.Moment;
+    _value: string;
 
     onChange?: (_: string) => void;
 
     onTouch?: (_: string) => void;
 
-    set value(val: moment.Moment) {
-        this._value = moment(val.format('MM-DD-YYYY'));
+    set value(val: string) {
+        this._value = val;
 
-        const date = val.format('MM-DD-YYYY');
+        const date = moment(addTimeOffset(val)).format('D MMMM YYYY');
 
         this.onChange?.(date);
         this.onTouch?.(date);
@@ -63,7 +64,7 @@ export class CalendarComponent implements ControlValueAccessor {
         return this._value;
     }
 
-    writeValue(value: moment.Moment) {
+    writeValue(value: string) {
         this._value = value;
     }
 
