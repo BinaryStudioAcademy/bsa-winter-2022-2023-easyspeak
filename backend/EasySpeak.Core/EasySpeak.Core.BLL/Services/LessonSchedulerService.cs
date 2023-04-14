@@ -103,22 +103,24 @@ public class LessonSchedulerService : BackgroundService
 
     private async Task SendNotificationToSubscriber(LessonSubscribersNotifyDto shortInfo)
     {
-        var newNotifications = GetSubscribersNotificationsList(shortInfo);
+        var newNotifications = GetSubscribersNotificationList(shortInfo);
         
         await SaveNotification(newNotifications);
         
         await RemindSubscribers(shortInfo.Lesson.Id);
     }
 
-    private List<NewNotificationDto> GetSubscribersNotificationsList(LessonSubscribersNotifyDto shortInfo)
+    private List<NewNotificationDto> GetSubscribersNotificationList(LessonSubscribersNotifyDto shortInfo)
     {
-        List<NewNotificationDto> newNotifications = new();
-        
         shortInfo.Subscribers.Add(shortInfo.Author);
+
+        var newNotifications = shortInfo.Subscribers.Select(CreateNotification).ToList();
         
-        foreach (var subscriber in shortInfo.Subscribers)
+        return newNotifications;
+
+        NewNotificationDto CreateNotification(User subscriber)
         {
-            var notification = new NewNotificationDto()
+            return new NewNotificationDto
             {
                 IsRead = false,
                 UserId = subscriber.Id,
@@ -129,11 +131,7 @@ public class LessonSchedulerService : BackgroundService
                 Text = "The lesson is starting in <strong>30 minutes</strong>! Don't miss it.",
                 ImageId = shortInfo.Author.ImageId
             };
-
-            newNotifications.Add(notification);
         }
-
-        return newNotifications;
     }
     
     private async Task SaveNotification(List<NewNotificationDto> newNotifications)
