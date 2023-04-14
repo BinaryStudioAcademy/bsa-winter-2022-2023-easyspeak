@@ -52,52 +52,47 @@ public class LessonSchedulerService : BackgroundService
 
         var toTime = currentTime.AddMinutes(_schedulerOptions.CheckPeriod * 2);
 
-        using (var scope = _services.CreateScope())
-        {
-            var context = scope.ServiceProvider.GetRequiredService<EasySpeakCoreContext>();
+        using var scope = _services.CreateScope();
+        
+        var context = scope.ServiceProvider.GetRequiredService<EasySpeakCoreContext>();
 
-            var lessonsWithCreatedReminder = await GetCreatedRemindersList(cancellationToken);
+        var lessonsWithCreatedReminder = await GetCreatedRemindersList(cancellationToken);
 
-            var lessons = await EntityFrameworkQueryableExtensions.ToListAsync(context.Lessons
-                .Where(l => l.StartAt >= fromTime
-                            && l.StartAt <= toTime
-                            && lessonsWithCreatedReminder.Contains(l.Id))
-                .Select(l => new LessonDelayDto
-                {
-                    LessonId = l.Id,
-                    DelayInMinutes = (l.StartAt - fromTime).Minutes - currentTime.Date.Minute
-                }), cancellationToken);
+        var lessons = await EntityFrameworkQueryableExtensions.ToListAsync(context.Lessons
+            .Where(l => l.StartAt >= fromTime
+                        && l.StartAt <= toTime
+                        && lessonsWithCreatedReminder.Contains(l.Id))
+            .Select(l => new LessonDelayDto
+            {
+                LessonId = l.Id,
+                DelayInMinutes = (l.StartAt - fromTime).Minutes - currentTime.Minute
+            }), cancellationToken);
 
-            return lessons.OrderBy(l => l.DelayInMinutes).ToList();
-        }
+        return lessons.OrderBy(l => l.DelayInMinutes).ToList();
     } 
 
     private async Task ScheduleSubscribersNotification(LessonDelayDto lessonDelayDto)
     {
         var pendingTime = TimeSpan.FromMinutes(lessonDelayDto.DelayInMinutes);
+        
         await Task.Delay(pendingTime).ContinueWith(async _ =>
         {
-            using (var scope = _services.CreateScope())
-            {
-                var context = scope.ServiceProvider.GetRequiredService<EasySpeakCoreContext>();
+            await using var scope = _services.CreateAsyncScope();
+            
+            var context = scope.ServiceProvider.GetRequiredService<EasySpeakCoreContext>();
 
-                var lessonSubscribers = await EntityFrameworkQueryableExtensions.FirstOrDefaultAsync(context.Lessons
-                    .Where(x => lessonDelayDto.LessonId == x.Id)
-                    .Include(l => l.Subscribers)
-                    .Include(l => l.User)
-                    .Select(l => new LessonSubscribersNotifyDto()
-                    {
-                        Lesson = l,
-                        Author = l.User!,
-                        Subscribers = l.Subscribers.ToList()
-                    }));
-
-                if (lessonSubscribers != null)
+            var lessonSubscribers = await EntityFrameworkQueryableExtensions.FirstOrDefaultAsync(context.Lessons
+                .Where(x => lessonDelayDto.LessonId == x.Id)
+                .Include(l => l.Subscribers)
+                .Include(l => l.User)
+                .Select(l => new LessonSubscribersNotifyDto()
                 {
-                    lessonSubscribers.Subscribers.Add(lessonSubscribers.Author);
-                    await SendNotificationToSubscriber(lessonSubscribers);
-                }
-            }
+                    Lesson = l,
+                    Author = l.User!,
+                    Subscribers = l.Subscribers.ToList()
+                }));
+
+            if (lessonSubscribers is not null) await SendNotificationToSubscriber(lessonSubscribers);
         });
     }
 
@@ -136,36 +131,34 @@ public class LessonSchedulerService : BackgroundService
     
     private async Task SaveNotification(List<NewNotificationDto> newNotifications)
     {
-        using (var scope = _services.CreateScope())
-        {
-            var context = scope.ServiceProvider.GetRequiredService<EasySpeakCoreContext>();
+        await using var scope = _services.CreateAsyncScope();
+        
+        var context = scope.ServiceProvider.GetRequiredService<EasySpeakCoreContext>();
 
-            var notifications = _mapper.Map<List<Notification>>(newNotifications);
+        var notifications = _mapper.Map<List<Notification>>(newNotifications);
             
-            await context.Notifications.AddRangeAsync(notifications);
+        await context.Notifications.AddRangeAsync(notifications);
 
-            await context.SaveChangesAsync();
-        }
+        await context.SaveChangesAsync();
     }
 
     public async Task RemindSubscribers(long lessonId)
     {
-        using (var scope = _services.CreateAsyncScope())
-        {
-            var context = scope.ServiceProvider.GetRequiredService<EasySpeakCoreContext>();
+        await using var scope = _services.CreateAsyncScope();
+        
+        var context = scope.ServiceProvider.GetRequiredService<EasySpeakCoreContext>();
 
-            var notifications = await EntityFrameworkQueryableExtensions.ToListAsync(context.Notifications
-                .Include(n => n.User)
-                .Where(n => n.RelatedTo == lessonId)
-                .Select(x => new
-                {
-                    Notification = _mapper.Map<NotificationDto>(x), x.User.Email
-                }));
-
-            foreach (var item in notifications)
+        var notifications = await EntityFrameworkQueryableExtensions.ToListAsync(context.Notifications
+            .Include(n => n.User)
+            .Where(n => n.RelatedTo == lessonId)
+            .Select(x => new
             {
-                SendToRabbit(item.Email, item.Notification);
-            }
+                Notification = _mapper.Map<NotificationDto>(x), x.User.Email
+            }));
+
+        foreach (var item in notifications)
+        {
+            SendToRabbit(item.Email, item.Notification);
         }
     }
 
