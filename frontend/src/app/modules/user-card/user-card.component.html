@@ -69,12 +69,12 @@
                 <img src="assets/user-card-icons/accept.svg" alt="message">
                 <span>Accept</span>
             </button>
-            <button class="button hover" (click)="onRejectClicked()">
+            <button class="button cancel-button hover" (click)="onRejectClicked()">
                 <img src="assets/user-card-icons/cancel.svg" alt="follow">
                 <span>Cancel</span>
             </button>
         </div>
-        <div *ngIf="user.userFriendshipStatus === eUserFriendshipStatus.Friend" class="buttons">
+        <div *ngIf="user.userFriendshipStatus === eUserFriendshipStatus.Friend" class="one-button-in-card">
             <button class="button hover" (click)="message()">
                 <img src="assets/user-card-icons/mail.svg" alt="message">
                 <span>Message</span>
