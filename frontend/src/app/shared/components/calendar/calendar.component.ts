@@ -3,10 +3,11 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MomentDateAdapter } from '@angular/material-moment-adapter';
 import * as moment from 'moment';
+import { addTimeOffset } from '@modules/lessons/lesson/lesson.helper';
 
 export const MY_FORMATS = {
     parse: {
-        dateInput: 'DD.MM.YYYY',
+        dateInput: 'D MM YYYY',
     },
     display: {
         dateInput: 'D MMMM YYYY',
@@ -44,37 +45,26 @@ export class CalendarComponent implements ControlValueAccessor {
 
     @Input() placeholder: string;
 
-    _value: moment.Moment;
-
-    dateRegex = new RegExp('^\s*(3[01]|[12][0-9]|0?[1-9])\.(1[012]|0?[1-9])\.((?:19|20)\d{2})\s*$');
+    _value: string;
 
     onChange?: (_: string) => void;
 
     onTouch?: (_: string) => void;
 
-    set value(val: moment.Moment) {
-        console.log(val.format('DD.MM.YYYY'));
-        console.log(this.dateRegex.test(val.format('DD.MM.YYYY')));
-        //if( true) {
-        if(this.dateRegex.test(val.format('DD.MM.YYYY'))) {
-            console.log('if');
-            this._value = moment(val.format('MM-DD-YYYY'));
+    set value(val: string) {
+        this._value = val;
 
-            const date = val.format('MM-DD-YYYY');
+        const date = moment(addTimeOffset(val)).format('D MMMM YYYY');
 
-            this.onChange?.(date);
-            this.onTouch?.(date);
-        }
-        else{
-            console.log('else');
-        }
+        this.onChange?.(date);
+        this.onTouch?.(date);
     }
 
     get value() {
         return this._value;
     }
 
-    writeValue(value: moment.Moment) {
+    writeValue(value: string) {
         this._value = value;
     }
 
