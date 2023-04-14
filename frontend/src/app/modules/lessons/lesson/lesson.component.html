@@ -70,7 +70,7 @@
 
             <div class="lesson-actions">
                 <button
-                    *ngIf="!isTeachersPage; else cancel"
+                    *ngIf="!isTeachersPage && !isLessonAuthor; else cancel"
                     class="join"
                     id="{{buttonHover}}"
                     [disabled]="isDisabled()"
