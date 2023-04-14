@@ -63,7 +63,8 @@
                         <img class="menu-icon" src="/assets/header/book-icon.svg" />
                         <span class="menu-text">Teacher profile</span>
                     </button>
-                    <button mat-menu-item class="menu-element">
+                    <button [routerLink]="['/profile/change-pass']" mat-menu-item class="menu-element">
+
                         <img class="menu-icon" src="/assets/header/lock-icon.svg" />
                         <span class="menu-text">Change Password</span>
                     </button>
