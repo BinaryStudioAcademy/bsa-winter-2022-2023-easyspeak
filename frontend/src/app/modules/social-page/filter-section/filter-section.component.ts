@@ -79,7 +79,7 @@ export class FilterSectionComponent implements OnInit {
         switch (param) {
             case 'lang':
                 this.selectedLanguagesFilters = this.selectedLanguagesFilters.filter((s) => s !== title);
-                this.userFilters.language = null;
+                this.userFilters.language = this.selectedLanguagesFilters;
                 break;
             case 'level':
                 this.selectedLevelFilters = this.selectedLevelFilters.filter((s) => s !== splitedTitle[0]);
@@ -106,7 +106,7 @@ export class FilterSectionComponent implements OnInit {
         switch (param) {
             case 'lang':
                 this.selectedLanguagesFilters = eventData;
-                [this.userFilters.language] = eventData;
+                this.userFilters.language = eventData;
                 break;
             case 'level':
                 this.selectedLevelFilters = eventData;

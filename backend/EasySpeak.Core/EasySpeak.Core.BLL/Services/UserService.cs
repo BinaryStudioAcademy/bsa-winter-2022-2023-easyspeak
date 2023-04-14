@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using EasySpeak.Core.Common.Enums;
 using Microsoft.Extensions.Options;
 using UserShortInfoDto = EasySpeak.Core.Common.DTO.User.UserShortInfoDto;
+using System.Linq;
 
 namespace EasySpeak.Core.BLL.Services;
 
@@ -101,9 +102,9 @@ public class UserService : BaseService, IUserService
 
         IQueryable<User> filteredUsers = users;
 
-        if (filter.Language is not null)
+        if (filter.Language is not null && filter.Language.Any())
         {
-            filteredUsers = filteredUsers.Where(u => u.Language == filter.Language);
+            filteredUsers = filteredUsers.Where(u => filter.Language.Contains(u.Language));
         }
         if (filter.LangLevels is not null && filter.LangLevels.Any())
         {
