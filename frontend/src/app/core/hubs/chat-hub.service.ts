@@ -44,8 +44,8 @@ export class ChatHubService {
             this.people.next(people);
         });
 
-        this.hubConnection.on('read', (unread: number) => {
-            this.numberOfMessages.next(unread);
+        this.hubConnection.on('read', (unreadMessages: number) => {
+            this.numberOfMessages.next(unreadMessages);
         });
     }
 
