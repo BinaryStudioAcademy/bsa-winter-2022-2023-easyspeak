@@ -5,6 +5,7 @@ import { NotificationsHubService } from '@core/hubs/notifications-hub.service';
 import { NotificationService } from '@core/services/notification.service';
 import { INotification } from '@shared/models/INotification';
 import { NotificationType } from '@shared/utils/user-notifications.util';
+import * as moment from 'moment';
 import { Subscription } from 'rxjs';
 
 import { getTimeDiff } from './date-time-diff.helper';
@@ -40,7 +41,7 @@ export class UserNotificationComponent extends BaseComponent implements OnInit, 
         this.notifySubscription = await this.notificationService.getNotifications()
             .pipe(this.untilThis)
             .subscribe((data) => {
-                this.notifications = data;
+                this.notificationsToTimeZone(data);
             });
     }
 
@@ -62,7 +63,15 @@ export class UserNotificationComponent extends BaseComponent implements OnInit, 
             };
 
             this.notifications.push(messages);
+            this.notificationsToTimeZone(this.notifications);
         });
+    }
+
+    notificationsToTimeZone(newNotifications: INotification[]) {
+        this.notifications = newNotifications.map(notification => ({
+            ...notification,
+            createdAt: new Date(moment.utc(notification.createdAt).local().format('YYYY-MM-DD HH:mm:ss')),
+        }));
     }
 
     readNotification(notification: INotification) {
