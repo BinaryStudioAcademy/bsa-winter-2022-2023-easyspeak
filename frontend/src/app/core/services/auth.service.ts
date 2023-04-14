@@ -133,6 +133,7 @@ export class AuthService {
         const user: IUserShort = JSON.parse(localStorage.getItem('user') as string);
 
         this.webRtcHub.disconnectUser(user.email).then();
+
         this.notificationsHub.disconnectUser(user.email).then();
 
         localStorage.removeItem('accessToken');

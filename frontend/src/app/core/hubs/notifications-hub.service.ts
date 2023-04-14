@@ -28,8 +28,7 @@ export class NotificationsHubService {
         this.subscriptions.push(this.messages.subscribe({ next: action }));
     }
 
-    stop(): void {
-        this.hubConnection.stop();
+    async stop() {
         this.subscriptions.forEach((s) => s.unsubscribe());
     }
 
