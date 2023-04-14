@@ -14,5 +14,10 @@ namespace EasySpeak.Notifier.WebAPI.Hubs
         {
             await Clients.Group(message.ChatId.ToString()).SendAsync("message", message);
         }
+
+        public async Task ReadMessageAsync(long unreadMessages)
+        {
+            await Clients.Caller.SendAsync("read", unreadMessages);
+        }
     }
 }

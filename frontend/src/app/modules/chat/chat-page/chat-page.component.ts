@@ -78,21 +78,24 @@ export class ChatPageComponent implements OnInit, OnDestroy {
 
     private setActionsForMessages() {
         this.chatHub.listenMessages((msg) => {
-            this.addMessage({
-                ...msg,
-                createdAt: new Date(
-                    new Date(msg.createdAt).setMinutes(new Date(msg.createdAt).getMinutes() + new Date().getTimezoneOffset()),
-                ),
-            });
+            if (this.currentChatId === msg.chatId) {
+                this.addMessage({
+                    ...msg,
+                    createdAt: new Date(
+                        new Date(msg.createdAt).setMinutes(new Date(msg.createdAt).getMinutes() + new Date().getTimezoneOffset()),
+                    ),
+                });
+            }
             this.chatService.getChats().subscribe((people) => {
                 this.people = people;
                 this.filteredPeople = people;
             });
-            if (this.currentUser.id !== msg.createdBy) {
+            if (this.currentUser.id !== msg.createdBy && msg.chatId === this.currentChatId) {
                 this.chatService.readMessages(this.currentChatId).subscribe(() => {
                     this.chatService.getChats().subscribe((people) => {
                         this.people = people;
                         this.filteredPeople = people;
+                        this.chatHub.invoke('ReadMessageAsync', 1);
                     });
                 });
             }
@@ -144,6 +147,13 @@ export class ChatPageComponent implements OnInit, OnDestroy {
             }));
             this.currentChatId = person.chatId;
             this.currentPerson = person;
+            const unreadMessages = groupedMessages.reduce((acc, group) => {
+                const unreadMessagesInGroup = group.messages.filter(msg => !msg.isRead && msg.createdBy !== this.currentUser.id).length;
+
+                return acc + unreadMessagesInGroup;
+            }, 0);
+
+            this.chatHub.invoke('ReadMessageAsync', unreadMessages);
         });
         this.chatService.readMessages(person.chatId).subscribe(() => {
             this.chatService.getChats().subscribe((people) => {
