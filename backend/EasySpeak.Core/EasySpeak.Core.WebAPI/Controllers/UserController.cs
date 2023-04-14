@@ -59,6 +59,13 @@ namespace EasySpeak.Core.WebAPI.Controllers
             return await _userService.GetFilteredUsers(userFilter);
         }
 
+        [HttpPost("recommendedinRange")]
+        public async Task<ActionResult<UserShortInfoPaginationDto>> GetSuitableUsersInRange([FromBody] UserFilterWithNumberDto userFilterinRange)
+        {
+            var userShorInfos = await _userService.GetFilteredUsersWithPagination(userFilterinRange);
+            return userShorInfos;
+        }
+
         [HttpPut("makeAdmin/{userId}")]
         public async Task<ActionResult<UserDto>> MakeAdminAsync(int userId, string secret)
         {
@@ -81,5 +88,6 @@ namespace EasySpeak.Core.WebAPI.Controllers
         {
             return Ok(await _userService.GetAmountOfItemsOnPage());
         }
+       
     }
 }

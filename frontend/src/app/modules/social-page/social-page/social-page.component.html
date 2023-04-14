@@ -5,9 +5,9 @@
     <div class="filters">
         <app-filter-section (filterChange)="onFilterChanges($event)"></app-filter-section>
     </div>
-    <ng-container *ngIf="slicedUsers$ | async as slicedUsers">
-        <div class="user-grid" *ngIf="slicedUsers[currentPage]; else noUsers">
-            <app-user-card *ngFor="let slicedUser of slicedUsers[currentPage]" [user]="slicedUser"></app-user-card>
+    <ng-container *ngIf="users$ | async as users">
+        <div class="user-grid" *ngIf="pagesCount !== 0; else noUsers">
+            <app-user-card *ngFor="let user of users" [user]="user"></app-user-card>
         </div>
     </ng-container>
 </div>
@@ -18,9 +18,7 @@
     </div>
 </ng-template>
 
-<div *ngIf="userCount$ | async as userCount">
-    <div *ngIf="userCount > itemsOnPage" class="pagination">
-        <app-pagination (pageNumberChanged)="onChanged($event)"
-            [pageCount]="getPageAmount(userCount)"></app-pagination>
-    </div>
+<div *ngIf="pagesCount > 1" class="pagination">
+    <app-pagination (pageNumberChanged)="onChanged($event)"
+        [pageCount]="pagesCount"></app-pagination>
 </div>

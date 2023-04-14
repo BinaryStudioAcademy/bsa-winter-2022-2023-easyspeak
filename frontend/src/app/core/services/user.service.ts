@@ -4,8 +4,10 @@ import { ITopic } from '@shared/models/ITopic';
 import { IUserInfo } from '@shared/models/IUserInfo';
 import { ITag } from '@shared/models/user/ITag';
 import { UserCard } from '@shared/models/user/user-card';
+import { UserCardsWithPages } from '@shared/models/user/user-with-pages';
 import { Observable } from 'rxjs';
 
+import { UserFilterPagination } from 'src/app/models/filters/userFilterPagination';
 import { Lesson } from 'src/app/models/lessons/lesson';
 
 import { UserFilter } from '../../models/filters/userFilter';
@@ -46,6 +48,15 @@ export class UserService {
 
     public getUsers(userFilter?: UserFilter): Observable<UserCard[]> {
         return this.httpService.post<UserCard[]>(`${this.routePrefix}/recommended`, userFilter ?? ({} as UserFilter));
+    }
+
+    public getUsersPagination(inNumber: number, userFilter?: UserFilter): Observable<UserCardsWithPages> {
+        const userFilterPagination: UserFilterPagination = {
+            filter: userFilter ?? ({} as UserFilter),
+            pageNumber: inNumber,
+        };
+
+        return this.httpService.post<UserCardsWithPages>(`${this.routePrefix}/recommendedinRange`, userFilterPagination);
     }
 
     public isAdmin(): boolean {

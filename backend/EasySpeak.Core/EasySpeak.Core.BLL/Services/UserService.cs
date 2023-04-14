@@ -121,6 +121,32 @@ public class UserService : BaseService, IUserService
         return await AddCompatibility(filteredUsersList, filter.Compatibility);
     }
 
+    public async Task<UserShortInfoPaginationDto> GetFilteredUsersWithPagination(UserFilterWithNumberDto userFilter)
+    {
+        var originaUsers = await GetFilteredUsers(userFilter.Filter);
+
+        int usersCount = originaUsers.Count;
+
+        int remainingRange = usersCount - userFilter.PageNumber * AmountOfItemsOnPage;
+
+        int pagesCount = usersCount % AmountOfItemsOnPage == 0 ? usersCount / AmountOfItemsOnPage : usersCount / AmountOfItemsOnPage + 1;
+
+        int startIndex = userFilter.PageNumber * AmountOfItemsOnPage;
+        List<UserShortInfoDto> usersWithPagination;
+
+        if (remainingRange >= (AmountOfItemsOnPage))
+        {
+            usersWithPagination = originaUsers.GetRange(startIndex, AmountOfItemsOnPage);
+        }
+        else
+        {
+            usersWithPagination = originaUsers.GetRange(startIndex, remainingRange);
+        }
+
+        var result = new UserShortInfoPaginationDto { PagesCount = pagesCount, UserShortInfoDtos = usersWithPagination };
+        return result;
+    }
+
     private async Task<List<UserShortInfoDto>> AddCompatibility(List<User> users, int compatibility)
     {
         var compatabilityInformation =

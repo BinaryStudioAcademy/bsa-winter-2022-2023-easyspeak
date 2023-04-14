@@ -12,6 +12,7 @@ namespace EasySpeak.Core.BLL.Interfaces
         Task<UserDto> AddTagsAsync(List<TagDto> tags);
         Task<LessonDto> EnrollUserToLesson(long lessonId);
         Task<List<UserShortInfoDto>> GetFilteredUsers(UserFilterDto userFilter);
+        Task<UserShortInfoPaginationDto> GetFilteredUsersWithPagination(UserFilterWithNumberDto userFilter);
         Task<UserDto?> GetUserAsync();
         Task<bool> GetAdminStatus();
         Task<string> UploadProfilePhoto(IFormFile file);
