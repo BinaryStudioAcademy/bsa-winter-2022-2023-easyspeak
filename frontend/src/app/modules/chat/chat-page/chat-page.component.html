@@ -8,7 +8,7 @@
         </div>
         <mat-form-field appearance="fill">
             <form [formGroup]="filterForm">
-                <input class="filter-container" style="margin: 0" matInput placeholder="Type a name..." (input)="filterPeople()" formControlName="filterInput"/>
+                <input id="filter-box" matInput placeholder="Type a name..." (input)="filterPeople()" formControlName="filterInput"/>
             </form>
             <mat-icon matSuffix>search</mat-icon>
         </mat-form-field>
