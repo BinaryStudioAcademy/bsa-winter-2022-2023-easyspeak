@@ -21,5 +21,6 @@ namespace EasySpeak.Core.BLL.Interfaces
         Task<UserDto> MakeAdminAsync(int userId);
         Task<long> GetUserIdByEmail(string email);
         Task<List<UserShortInfoDto>> GetFriends();
+        Task<int> GetAmountOfItemsOnPage();
     }
 }

@@ -3,12 +3,12 @@
         <mat-icon>keyboard_arrow_left</mat-icon>
     </div>
 
-    <div *ngIf="currentPage !== 1 && currentPage !== lastPage" class="max-size">
+    <div *ngIf="currentPage !== 1 && currentPage !== pageCount" class="max-size">
         <div (click)="decCurrent()" class="circle" [ngClass]="{'active': currentPage === getLeft()}">
             {{getLeft()}}
         </div>
 
-        <div *ngIf="currentPage > 1 && currentPage < lastPage" class="circle active" ngClass="">
+        <div *ngIf="currentPage > 1 && currentPage < pageCount" class="circle active" ngClass="">
             {{currentPage}}
         </div>
 
@@ -18,20 +18,20 @@
     </div>
 
 
-    <div *ngIf="currentPage === 1 ||  currentPage === lastPage" class="max-size">
+    <div *ngIf="currentPage === 1 ||  currentPage === pageCount" class="max-size">
         <div (click)="onChoose(1)" class="circle" [ngClass]="{'active': currentPage === 1}">
             1
         </div>
-        <div *ngIf="lastPage > 2" class="circle">
+        <div *ngIf="pageCount > 2" class="circle">
             ...
         </div>
-        <div (click)="onChoose(lastPage)" class="circle" [ngClass]="{'active': currentPage === lastPage}">
-            {{lastPage}}
+        <div (click)="onChoose(pageCount)" class="circle" [ngClass]="{'active': currentPage === pageCount}">
+            {{pageCount}}
         </div>
     </div>
 
 
-    <div (click)="incCurrent()" *ngIf="lastPage !== currentPage" class="circle">
+    <div (click)="incCurrent()" *ngIf="pageCount !== currentPage" class="circle">
         <mat-icon>keyboard_arrow_right</mat-icon>
     </div>
 </div>

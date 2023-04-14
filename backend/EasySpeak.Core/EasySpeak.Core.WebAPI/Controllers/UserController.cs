@@ -75,5 +75,11 @@ namespace EasySpeak.Core.WebAPI.Controllers
         {
             return Ok(await _userService.GetFriends());
         }
+
+        [HttpGet("amountOfItemsOnPage")]
+        public async Task<ActionResult<int>> GetAmountOfItems()
+        {
+            return Ok(await _userService.GetAmountOfItemsOnPage());
+        }
     }
 }

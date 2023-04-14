@@ -61,4 +61,8 @@ export class UserService {
     public getFriends(): Observable<UserCard[]> {
         return this.httpService.get<UserCard[]>(`${this.routePrefix}/friends`);
     }
+
+    public getAmountOfItemsOnPage(): Observable<number> {
+        return this.httpService.get<number>(`${this.routePrefix}/amountOfItemsOnPage`);
+    }
 }

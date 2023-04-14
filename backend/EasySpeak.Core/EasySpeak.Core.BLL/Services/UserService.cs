@@ -25,7 +25,8 @@ public class UserService : BaseService, IUserService
     private readonly RecommendationServiceOptions _recommendationServiceOptions;
     private readonly QueriesSenderService _queriesSender;
     private readonly INotificationService _notificationService;
-    
+    private readonly int AmountOfItemsOnPage = 10;
+
     public UserService(IEasySpeakFileService fileService, EasySpeakCoreContext context, 
             IMapper mapper, IFirebaseAuthService authService, IHttpClientFactory clientFactory,
             IOptions<RecommendationServiceOptions> recommendationServiceOptions,
@@ -335,5 +336,10 @@ public class UserService : BaseService, IUserService
         await FillUserFriendshipStatus(mappedFriends);
 
         return mappedFriends;
+    }
+
+    public async Task<int> GetAmountOfItemsOnPage()
+    {
+        return AmountOfItemsOnPage;
     }
 }

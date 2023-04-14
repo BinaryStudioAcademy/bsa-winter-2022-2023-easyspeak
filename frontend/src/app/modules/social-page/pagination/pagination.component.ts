@@ -6,19 +6,19 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
     styleUrls: ['./pagination.component.sass'],
 })
 export class PaginationComponent {
-    @Input() lastPage: number = 3;
+    @Input() pageCount: number;
 
     @Output() pageNumberChanged = new EventEmitter<number>();
 
     currentPage: number = 1;
 
-    onChoose = (inNumber: number) => {
-        this.currentPage = inNumber;
+    onChoose(selectedPage: number) {
+        this.currentPage = selectedPage;
         this.onChanged();
-    };
+    }
 
     incCurrent() {
-        if (this.currentPage < this.lastPage) {
+        if (this.currentPage < this.pageCount) {
             this.currentPage++;
             this.onChanged();
         }
@@ -31,9 +31,9 @@ export class PaginationComponent {
         }
     }
 
-    onChanged = () => this.pageNumberChanged.emit(this.currentPage);
+    onChanged = () => this.pageNumberChanged.emit(this.currentPage - 1);
 
     getLeft = () => (this.currentPage > 1 ? this.currentPage - 1 : 1);
 
-    getRight = () => (this.currentPage < this.lastPage ? this.currentPage + 1 : this.lastPage);
+    getRight = () => (this.currentPage < this.pageCount ? this.currentPage + 1 : this.pageCount);
 }

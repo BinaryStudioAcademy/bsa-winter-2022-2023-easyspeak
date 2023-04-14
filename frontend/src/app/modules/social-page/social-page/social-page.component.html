@@ -19,8 +19,8 @@
 </ng-template>
 
 <div *ngIf="userCount$ | async as userCount">
-    <div *ngIf="userCount > paginationPages" class="pagination">
+    <div *ngIf="userCount > itemsOnPage" class="pagination">
         <app-pagination (pageNumberChanged)="onChanged($event)"
-            [lastPage]="getPageAmount(userCount,paginationPages)"></app-pagination>
+            [pageCount]="getPageAmount(userCount)"></app-pagination>
     </div>
 </div>
