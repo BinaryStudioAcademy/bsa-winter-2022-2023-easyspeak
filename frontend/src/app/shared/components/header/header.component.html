@@ -39,7 +39,7 @@
                     </mat-menu>
                 </div>
             </div>
-            <div [matMenuTriggerFor]="menu" class="user-area">
+            <div [matMenuTriggerFor]="menu" class="user-area" *ngIf="currentUser">
                 <div class="user-avatar-placeholder">
                     <app-avatar
                         [firstName]="currentUser.firstName"
