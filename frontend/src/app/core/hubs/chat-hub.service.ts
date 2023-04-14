@@ -52,7 +52,6 @@ export class ChatHubService {
     public async end() {
         await this.people.unsubscribe();
         await this.messages.unsubscribe();
-        await this.numberOfMessages.unsubscribe();
     }
 
     public listenChats(action: (people: IChatPerson[]) => void) {
