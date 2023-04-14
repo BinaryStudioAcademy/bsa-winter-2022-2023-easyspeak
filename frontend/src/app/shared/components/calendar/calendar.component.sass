@@ -14,7 +14,7 @@
     font-size: 10px
     margin-top: 3px
 
-::ng-deep mat-form-field
+:host::ng-deep mat-form-field
     width: 100% !important
     height: 100% !important
 
@@ -39,8 +39,9 @@ mat-label
     font-style: normal
     line-height: 146%
 
-::ng-deep.mat-mdc-form-field-flex
+:host::ng-deep.mat-mdc-form-field-flex
     height: 36px !important
+    align-self: center !important
 
 ::ng-deep.mat-mdc-form-field-infix
     padding-top: 0 !important
@@ -55,3 +56,5 @@ mat-label
 ::ng-deep.mat-mdc-floating-label
     top: 20px !important
 
+::ng-deep.mat-mdc-icon-button svg
+    margin: 0
