@@ -1,9 +1,12 @@
 <div class="container">
     <h1 class="header">Calling {{ remoteFullName }}</h1>
-    <img class="avatar" *ngIf="remoteImgPath" src="{{ remoteImgPath }}" alt="">
-    <app-avatar *ngIf="!remoteImgPath" class="avatar"
-        [firstName]="remoteName"
-        [lastName]="remoteLastname"></app-avatar>
+    <div class="rounded-avatar">
+        <app-avatar *ngIf="!remoteImgPath" class="avatar"
+                    [firstName]="remoteName"
+                    [lastName]="remoteLastname"></app-avatar>
+        <app-avatar *ngIf="remoteImgPath" class="avatar"
+                    [imagePath]="remoteImgPath"></app-avatar>
+    </div>
     <div class="controls">
         <button mat-dialog-close="true" class="reject button" (click)="rejectCall()">
             <img src="assets/session-call/reject_icon.svg" alt="">
