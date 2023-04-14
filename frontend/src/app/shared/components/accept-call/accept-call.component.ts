@@ -35,8 +35,7 @@ export class AcceptCallComponent implements OnInit {
         this.remoteFullName = this.callInfo.remoteName;
         this.remoteImgPath = this.callInfo.remoteImgPath;
 
-        this.remoteFirstName = this.remoteFullName.split(' ')[0];
-        this.remoteLastName = this.remoteFullName.split(' ')[1];
+        [this.remoteFirstName, this.remoteLastName] = this.remoteFullName.split(' ');
     }
 
     async answerCall() {
