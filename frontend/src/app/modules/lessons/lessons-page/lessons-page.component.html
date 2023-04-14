@@ -5,7 +5,7 @@
 
     <div class="lessons-section" *ngIf="lessons">
         <div class="lessons-column">
-            <div class="lesson" *ngFor="let lesson of lessonsColumn1; let i = index">
+            <div class="lesson" *ngFor="let lesson of lessonsColumn1">
                 <app-lesson
                     [lesson]="lesson"
                     [isTeachersPage]="false"
@@ -14,7 +14,7 @@
             </div>
         </div>
         <div class="lessons-column">
-            <div class="lesson" *ngFor="let lesson of lessonsColumn2; let i = index">
+            <div class="lesson" *ngFor="let lesson of lessonsColumn2">
                 <app-lesson
                     [lesson]="lesson"
                     [isTeachersPage]="false"
