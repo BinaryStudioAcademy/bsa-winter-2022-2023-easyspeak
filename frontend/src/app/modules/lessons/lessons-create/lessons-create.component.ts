@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { fromStringToLanguageLevel } from '@shared/data/FromStringToLanguageLevel';
 import { LanguageLevel } from '@shared/data/languageLevel';
+import { mapLanguageLevelToString } from '@shared/data/LanguageLevelMapper';
 import { youtubeVideoLinkRegex } from '@shared/data/regex.util';
 import { IIcon } from '@shared/models/IIcon';
 import { INewLesson } from '@shared/models/lesson/INewLesson';
@@ -23,7 +25,7 @@ export class LessonsCreateComponent implements OnInit {
 
     levelsList: LanguageLevel[];
 
-    level: LanguageLevel | string;
+    level: LanguageLevel;
 
     time: string;
 
@@ -48,6 +50,8 @@ export class LessonsCreateComponent implements OnInit {
         this.myForm = group(this.fb);
         this.levelsList = Object.values(LanguageLevel);
     }
+
+    getLevelFormattedValue = (level: LanguageLevel) => mapLanguageLevelToString(level);
 
     get name() {
         return this.myForm.get('name');
@@ -115,7 +119,7 @@ export class LessonsCreateComponent implements OnInit {
         const lessonToCreate: INewLesson = {
             name: this.name?.value,
             mediaPath: '',
-            languageLevel: this.level as LanguageLevel,
+            languageLevel: this.level,
             startAt,
             questions: lessonQuestions,
             tags: lessonTags.map((f) => ({ id: f.id })),
@@ -144,6 +148,8 @@ export class LessonsCreateComponent implements OnInit {
     updateLevel(evendData: MouseEvent) {
         const target = evendData.target as HTMLElement;
 
-        this.level = target.textContent || 'Level';
+        if (target.textContent) {
+            this.level = fromStringToLanguageLevel(target.textContent);
+        }
     }
 }

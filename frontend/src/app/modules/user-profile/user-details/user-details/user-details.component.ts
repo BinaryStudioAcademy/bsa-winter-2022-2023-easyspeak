@@ -119,7 +119,7 @@ export class UserDetailsComponent extends BaseComponent implements OnInit, After
     }
 
     onSubmit() {
-        const userDetails = <IUserInfo>this.detailsForm.value;
+        const userDetails = <IUserInfo> this.detailsForm.value;
 
         userDetails.languageLevel = this.languageLevel.value;
 
@@ -147,6 +147,8 @@ export class UserDetailsComponent extends BaseComponent implements OnInit, After
             .pipe(switchMap(async () => this.authService.loadUser().subscribe()))
             .subscribe();
     }
+
+    getLevelFormattedValue = (level: LanguageLevel) => mapLanguageLevelToString(level);
 
     private setImgPath(user: IUserShort) {
         this.imagePath = user.imagePath;

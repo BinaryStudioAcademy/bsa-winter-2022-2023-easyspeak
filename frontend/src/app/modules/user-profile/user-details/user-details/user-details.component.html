@@ -160,7 +160,7 @@
             <ng-select class="custom" dropdownPosition="bottom" appearance="underline" #languageLevelSelect
                        formControlName="languageLevel">
                 <ng-option class="select-option" *ngFor="let level of languageLevelOptions" value="{{level}}">
-                    {{level}}
+                    {{getLevelFormattedValue(level)}}
                 </ng-option>
             </ng-select>
             <mat-icon class="expand-icon">expand_more</mat-icon>

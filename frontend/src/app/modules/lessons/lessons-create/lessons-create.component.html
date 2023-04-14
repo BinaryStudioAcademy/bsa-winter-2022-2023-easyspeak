@@ -73,12 +73,12 @@
                 <div class="label">
                     <img src="assets/user-card-icons/rocket-icon.svg" alt="rocket-icon" class="icon" />
                     <span *ngIf="!level" class="noTime">Level</span>
-                    <span *ngIf="level" class="time">{{ level }}</span>
+                    <span *ngIf="level" class="time">{{ getLevelFormattedValue(level) }}</span>
                 </div>
 
                 <img src="assets/interestsDropdown/chevron_down.svg" alt="chevron_down-icon" class="timeDropdown" />
                 <div *ngIf="levelDropdownVisible" class="dropdownContent">
-                    <p *ngFor="let level of levelsList" (click)="updateLevel($event)">{{ level }}</p>
+                    <p *ngFor="let level of levelsList" (click)="updateLevel($event)">{{ getLevelFormattedValue(level) }}</p>
                 </div>
             </div>
 
