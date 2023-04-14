@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChatHubService } from '@core/hubs/chat-hub.service';
+import { WebrtcHubService } from '@core/hubs/webrtc-hub.service';
 import { AuthService } from '@core/services/auth.service';
 import { ChatService } from '@core/services/chat.service';
 import { IUserShort } from '@shared/models/IUserShort';
 
 import { UserNotificationComponent } from '../user-notification/user-notification.component';
-import { WebrtcHubService } from '@core/hubs/webrtc-hub.service';
 
 @Component({
     selector: 'app-header',
