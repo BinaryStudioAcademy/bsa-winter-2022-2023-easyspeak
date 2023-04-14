@@ -60,7 +60,9 @@ public class LessonsService : BaseService, ILessonsService
         {
             t.SubscribersCount = subscribersInfoDict[t.Id].SbCount;
             t.isSubscribed = subscribersInfoDict[t.Id].isSubscribed;
-            t.User!.ImagePath = lessonsFromContext.First(lesson => lesson.Id == t.Id).User!.Image?.Url;
+            var user = lessonsFromContext.First(lesson => lesson.Id == t.Id).User!;
+            var imgUrl = string.IsNullOrEmpty(user.EmojiName) ? user.ImageId != null ? user.Image.Url : "" : user.EmojiName;
+            t.User!.ImagePath = imgUrl;
         });
 
         return lessonDtos;
