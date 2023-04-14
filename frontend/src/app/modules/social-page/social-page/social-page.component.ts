@@ -66,9 +66,6 @@ export class SocialPageComponent implements OnInit {
     private chunkArray(myArray: UserCard[], chunkSize: number): UserCard[][] {
         const results = [];
 
-        // while (myArray.length) {
-        //     results.push(myArray.splice(0, chunkSize));
-        // }
         for (let i = 0; i < myArray.length; i += chunkSize) {
             results.push(myArray.slice(i, i + chunkSize));
         }
