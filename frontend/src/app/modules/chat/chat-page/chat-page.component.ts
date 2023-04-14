@@ -74,6 +74,8 @@ export class ChatPageComponent implements OnInit, OnDestroy {
         this.setActionsForMessages();
 
         this.setActionsForChats();
+
+        this.setActionsForRead();
     }
 
     private setActionsForMessages() {
@@ -93,6 +95,7 @@ export class ChatPageComponent implements OnInit, OnDestroy {
                     this.chatService.getChats().subscribe((people) => {
                         this.people = people;
                         this.filteredPeople = people;
+                        this.chatHub.invoke('ReadMessageAsync', 1);
                     });
                 });
             }
@@ -104,6 +107,12 @@ export class ChatPageComponent implements OnInit, OnDestroy {
         this.chatHub.listenChats((people) => {
             this.people = people;
             this.filteredPeople = people;
+        });
+    }
+
+    setActionsForRead() {
+        this.chatHub.listenRead((numberOfMessages) => {
+            console.log(numberOfMessages);
         });
     }
 
@@ -144,6 +153,13 @@ export class ChatPageComponent implements OnInit, OnDestroy {
             }));
             this.currentChatId = person.chatId;
             this.currentPerson = person;
+            const unread = groupedMessages.reduce((acc, group) => {
+                const unreadMessagesInGroup = group.messages.filter(msg => !msg.isRead && msg.createdBy !== this.currentUser.id).length;
+
+                return acc + unreadMessagesInGroup;
+            }, 0);
+
+            this.chatHub.invoke('ReadMessageAsync', unread);
         });
         this.chatService.readMessages(person.chatId).subscribe(() => {
             this.chatService.getChats().subscribe((people) => {

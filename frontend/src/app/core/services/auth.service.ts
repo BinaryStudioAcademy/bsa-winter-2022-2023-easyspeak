@@ -3,7 +3,6 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { ChatHubService } from '@core/hubs/chat-hub.service';
 import { NotificationsHubService } from '@core/hubs/notifications-hub.service';
 import { WebrtcHubService } from '@core/hubs/webrtc-hub.service';
 import { HttpService } from '@core/services/http.service';
@@ -37,7 +36,6 @@ export class AuthService {
         private toastr: NotificationService,
         private webRtcHub: WebrtcHubService,
         private notificationsHub: NotificationsHubService,
-        private chatHub: ChatHubService,
     ) {
         this.afAuth.onIdTokenChanged(user => {
             if (user) {
@@ -57,8 +55,6 @@ export class AuthService {
             this.notificationsHub.start().then(() => {
                 this.notificationsHub.connect(userCredential.user?.email as string);
             });
-
-            await this.chatHub.start();
         }
     }
 

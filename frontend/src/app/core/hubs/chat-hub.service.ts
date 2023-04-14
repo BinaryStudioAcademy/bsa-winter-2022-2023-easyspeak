@@ -17,6 +17,8 @@ export class ChatHubService {
 
     readonly people = new Subject<IChatPerson[]>();
 
+    readonly numberOfMessages = new Subject<number>();
+
     private subscriptions: Subscription[] = [];
 
     constructor(private hubFactory: NotifierHubFactoryService) {}
@@ -41,11 +43,16 @@ export class ChatHubService {
         this.hubConnection.on('chats', (people: IChatPerson[]) => {
             this.people.next(people);
         });
+
+        this.hubConnection.on('read', (unread: number) => {
+            this.numberOfMessages.next(unread);
+        });
     }
 
     public async end() {
         await this.people.unsubscribe();
         await this.messages.unsubscribe();
+        await this.numberOfMessages.unsubscribe();
     }
 
     public listenChats(action: (people: IChatPerson[]) => void) {
@@ -54,6 +61,10 @@ export class ChatHubService {
 
     public listenMessages(action: (msg: IMessage) => void) {
         this.subscriptions.push(this.messages.subscribe({ next: action }));
+    }
+
+    public listenRead(action: (numberOfMessages: number) => void) {
+        this.subscriptions.push(this.numberOfMessages.subscribe({ next: action }));
     }
 
     async invoke(methodName: string, ...args: unknown[]): Promise<unknown> {
