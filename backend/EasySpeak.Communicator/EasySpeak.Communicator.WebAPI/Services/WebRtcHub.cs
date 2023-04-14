@@ -88,23 +88,6 @@ namespace EasySpeak.Communicator.WebAPI.Services
             }
         }
 
-        private async Task CreateRoom(string roomName)
-        {
-            if (!ConnectedClients.ContainsKey(roomName))
-            {
-                ConnectedClients.Add(roomName, new List<string>());
-                AddClientToRoom(roomName);
-                await EmitJoinRoom(roomName);
-                await EmitCreated();
-            }
-            else
-            {
-                AddClientToRoom(roomName);
-                await EmitJoinRoom(roomName);
-                await EmitJoined(roomName);
-            }
-        }
-
         private void AddClientToRoom(string roomName)
         {
             if (!ConnectedClients[roomName].Contains(Context.ConnectionId))
