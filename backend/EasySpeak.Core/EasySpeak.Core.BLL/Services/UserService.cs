@@ -132,6 +132,7 @@ public class UserService : BaseService, IUserService
         int pagesCount = usersCount % AmountOfItemsOnPage == 0 ? usersCount / AmountOfItemsOnPage : usersCount / AmountOfItemsOnPage + 1;
 
         int startIndex = userFilter.PageNumber * AmountOfItemsOnPage;
+
         List<UserShortInfoDto> usersWithPagination;
 
         if (remainingRange >= (AmountOfItemsOnPage))
@@ -144,6 +145,7 @@ public class UserService : BaseService, IUserService
         }
 
         var result = new UserShortInfoPaginationDto { PagesCount = pagesCount, UserShortInfoDtos = usersWithPagination };
+
         return result;
     }
 
@@ -364,7 +366,7 @@ public class UserService : BaseService, IUserService
         return mappedFriends;
     }
 
-    public async Task<int> GetAmountOfItemsOnPage()
+    public int GetAmountOfItemsOnPage()
     {
         return AmountOfItemsOnPage;
     }
