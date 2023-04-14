@@ -24,12 +24,18 @@ export class AcceptCallComponent implements OnInit {
 
     remoteFullName: string;
 
+    remoteName: string;
+
+    remoteLastname: string;
+
     remoteImgPath: string | undefined;
 
     ngOnInit(): void {
         this.user = JSON.parse(localStorage.getItem('user') as string);
         this.remoteFullName = this.callInfo.remoteName;
         this.remoteImgPath = this.callInfo.remoteImgPath;
+
+        [this.remoteName, this.remoteLastname] = this.remoteFullName.split(' ');
     }
 
     async answerCall() {

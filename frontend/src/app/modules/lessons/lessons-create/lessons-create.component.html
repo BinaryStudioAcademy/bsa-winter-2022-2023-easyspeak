@@ -1,11 +1,9 @@
 <div class="container">
     <form [formGroup]="myForm" autocomplete="off">
         <div class="form-field">
-            <div id="floatContainer" class="float-container">
-                <label for="groupClassName">The Name of the Group Class</label>
-                <input id="groupClassName" type="text" formControlName="name" />
+            <div class="input">
+                <input type="text" placeholder="The Name of the Group Class" formControlName="name" />
             </div>
-
             <mat-error class="error-container">
                 <div class="error" *ngIf="name?.invalid && submitted">
                     <img src="/assets/user-profile/alert-triangle.svg" alt="" />
