@@ -3,4 +3,5 @@ export interface ILessonUser {
     firstName: string;
     lastName: string;
     imagePath: string;
+    id?: number;
 }

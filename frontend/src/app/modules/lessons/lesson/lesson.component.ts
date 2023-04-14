@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { BaseComponent } from '@core/base/base.component';
+import { AuthService } from '@core/services/auth.service';
 import { SpinnerService } from '@core/services/spinner.service';
 import { UserService } from '@core/services/user.service';
 import { YoutubePlayerComponent } from '@shared/components/youtube-player/youtube-player.component';
@@ -34,6 +35,8 @@ export class LessonComponent extends BaseComponent implements OnInit {
 
     buttonHover: string;
 
+    isLessonAuthor: boolean;
+
     constructor(
         private dialogRef: MatDialog,
         private lessonsService: LessonsService,
@@ -41,6 +44,7 @@ export class LessonComponent extends BaseComponent implements OnInit {
         private spinner: SpinnerService,
         private notificationService: NotificationService,
         private countriesService: CountriesTzLangProviderService,
+        private authService: AuthService,
     ) {
         super();
     }
@@ -115,9 +119,18 @@ export class LessonComponent extends BaseComponent implements OnInit {
         this.previewImage = this.lesson.youtubeVideoId
             ? `//img.youtube.com/vi/${this.lesson.youtubeVideoId}/maxresdefault.jpg`
             : '';
+
+        this.authService.user.subscribe(
+            u => {
+                this.isLessonAuthor = (u.id === this.lesson.user.id);
+            },
+        );
     }
 
     isDisabled() {
+        if (this.isTeachersPage || (!this.isTeachersPage && this.isLessonAuthor)) {
+            return this.lesson.isCanceled;
+        }
         if (!this.isTeachersPage) {
             return (
                 this.lesson.isSubscribed ||
@@ -126,15 +139,21 @@ export class LessonComponent extends BaseComponent implements OnInit {
                 this.lesson.subscribersCount === this.lesson.limitOfUsers
             );
         }
-        if (this.isTeachersPage) {
-            return this.lesson.isCanceled;
-        }
 
         return false;
     }
 
     getButtonContent() {
         switch (true) {
+            case (this.isTeachersPage || (!this.isTeachersPage && this.isLessonAuthor)):
+                if (!this.lesson.isCanceled) {
+                    this.buttonHover = 'hover';
+
+                    return 'Cancel';
+                }
+
+                return 'Canceled';
+
             case !this.isTeachersPage:
                 if (new Date() > new Date(this.lesson.startAt)) {
                     return 'Expired';
@@ -146,15 +165,6 @@ export class LessonComponent extends BaseComponent implements OnInit {
                 this.buttonHover = 'hover';
 
                 return 'Join';
-
-            case this.isTeachersPage:
-                if (!this.lesson.isCanceled) {
-                    this.buttonHover = 'hover';
-
-                    return 'Cancel';
-                }
-
-                return 'Canceled';
 
             default:
                 return '';
