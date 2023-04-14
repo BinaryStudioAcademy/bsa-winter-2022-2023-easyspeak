@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CoreHubFactoryService } from '@core/hubs/hubFactories/core-hub-factory.service';
+import { NotifierHubFactoryService } from '@core/hubs/hubFactories/notifier-hub-factory.service';
 import { HubConnection, HubConnectionState } from '@microsoft/signalr';
 import { IChatPerson } from '@shared/models/chat/IChatPerson';
 import { IMessage } from '@shared/models/chat/IMessage';
@@ -17,13 +17,17 @@ export class ChatHubService {
 
     readonly people = new Subject<IChatPerson[]>();
 
+    readonly numberOfMessages = new Subject<number>();
+
     private subscriptions: Subscription[] = [];
 
-    constructor(private hubFactory: CoreHubFactoryService) {}
+    constructor(private hubFactory: NotifierHubFactoryService) {}
 
     async start() {
-        this.hubConnection = this.hubFactory.createHub(this.hubUrl);
-        await this.init();
+        if (!this.hubConnection || this.hubConnection.state === HubConnectionState.Disconnected) {
+            this.hubConnection = this.hubFactory.createHub(this.hubUrl);
+            await this.init();
+        }
     }
 
     private async init() {
@@ -39,6 +43,10 @@ export class ChatHubService {
         this.hubConnection.on('chats', (people: IChatPerson[]) => {
             this.people.next(people);
         });
+
+        this.hubConnection.on('read', (unreadMessages: number) => {
+            this.numberOfMessages.next(unreadMessages);
+        });
     }
 
     public async end() {
@@ -52,6 +60,10 @@ export class ChatHubService {
 
     public listenMessages(action: (msg: IMessage) => void) {
         this.subscriptions.push(this.messages.subscribe({ next: action }));
+    }
+
+    public listenRead(action: (numberOfMessages: number) => void) {
+        this.subscriptions.push(this.numberOfMessages.subscribe({ next: action }));
     }
 
     async invoke(methodName: string, ...args: unknown[]): Promise<unknown> {

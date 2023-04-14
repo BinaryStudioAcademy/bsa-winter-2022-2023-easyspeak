@@ -1,13 +1,14 @@
 <div class="container">
-    <h1 class="header">Calling {{ remoteFullName }}</h1>
-    <div class="rounded-avatar">
-        <app-avatar *ngIf="!remoteImgPath" class="avatar"
-                    [firstName]="remoteName"
-                    [lastName]="remoteLastname"></app-avatar>
-        <app-avatar *ngIf="remoteImgPath" class="avatar"
-                    [imagePath]="remoteImgPath"></app-avatar>
+    <h1 class="header">{{callInfo.hasButtons ? 'Calling' : 'You are calling'}} {{ remoteFullName }}</h1>
+    <div class="user-avatar-placeholder">
+        <app-avatar
+            [firstName]="remoteName"
+            [lastName]="remoteLastname"
+            [imagePath]="remoteImgPath ? remoteImgPath : ''"
+            [imageSize]="172">
+        </app-avatar>
     </div>
-    <div class="controls">
+    <div *ngIf="callInfo.hasButtons" class="controls">
         <button mat-dialog-close="true" class="reject button" (click)="rejectCall()">
             <img src="assets/session-call/reject_icon.svg" alt="">
         </button>
