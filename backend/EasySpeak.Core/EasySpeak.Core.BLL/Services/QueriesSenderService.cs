@@ -28,6 +28,15 @@ public class QueriesSenderService
         SendQueryToRabbit(queryParams);
     }
 
+    public void SendUpdateUserQuery(long id, UserDto user)
+    {
+        var queryParams = new RecommendationServiceMessageDto(QueryType.UpdateUser, user.ToDictionary());
+        
+        queryParams.Parameters.Add("id", id);
+        
+        SendQueryToRabbit(queryParams);
+    }
+
     public void SendAddTagsQuery(long id, List<TagDto> tags)
     {
 

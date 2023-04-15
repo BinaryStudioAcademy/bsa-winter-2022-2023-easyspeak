@@ -30,13 +30,13 @@ public static class QueryHelper
             DELETE oldLevelIs
             WITH u
             OPTIONAL MATCH (u)-[oldAgeIs: AGE_IS]->(oldAgeCategory)
-            WHERE oldAgeCategory.age <> $age
+            WHERE oldAgeCategory.age <> $ageGroup
             DELETE oldAgeIs
             WITH u
             MERGE (c:Country { name: $country })
             MERGE (l:Language { name: $language })
             MERGE (lvl:LanguageLevel { name: $languageLevel })
-            MERGE (a:AgeCategory { age: $age })
+            MERGE (a:AgeCategory { name: $ageGroup })
             MERGE (u)-[:LIVES_IN { weight: 4 }]->(c)
             MERGE (u)-[:TALKS_IN { weight: 2 }]->(l)
             MERGE (u)-[:LEVEL_IS { weight: 2 }]->(lvl)
@@ -73,6 +73,6 @@ public static class QueryHelper
             WITH similar, SUM(r.weight) as commonWeight, maxWeight
             WITH similar, commonWeight * 100 / maxWeight as percentage
             ORDER BY percentage DESC
-            WHERE percentage > $compatibility
+            WHERE percentage >= $compatibility
             RETURN COLLECT([similar.id, percentage])";
 }

@@ -16,14 +16,7 @@ public class RecommendationService : IRecommendationService
 
     public async Task AddUser(Dictionary<string, object> parameters)
     {
-        try
-        {
-            await _dataAccessService.ExecuteWriteActionAsync(QueryHelper.AddUserQuery, parameters);
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex);
-        }
+        await _dataAccessService.ExecuteWriteActionAsync(QueryHelper.AddUserQuery, parameters);
     }
 
     public async Task UpdateUser(Dictionary<string, object> parameters)
@@ -36,11 +29,18 @@ public class RecommendationService : IRecommendationService
 
     public async Task AddTags(Dictionary<string, object> parameters, string[] parameterList)
     {
-        parameters.Add("tags", parameterList);
+        try
+        {
+            parameters.Add("tags", parameterList);
 
-        await RemoveTags(parameters);
+            await RemoveTags(parameters);
 
-        await _dataAccessService.ExecuteWriteActionAsync(QueryHelper.AddTagsQuery, parameters);
+            await _dataAccessService.ExecuteWriteActionAsync(QueryHelper.AddTagsQuery, parameters);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
     }
 
     public async Task<Dictionary<long, long>> GetRecommendedUsers(Dictionary<string, object> parameters)
