@@ -266,6 +266,10 @@ public class UserService : BaseService, IUserService
         _mapper.Map(userDto, user, opt => opt.AfterMap(SetUserTags));
 
         await _context.SaveChangesAsync();
+        
+        _queriesSender.SendUpdateUserQuery(user.Id, userDto);
+        
+        _queriesSender.SendAddTagsQuery(user.Id, _mapper.Map<List<TagDto>>(userDto.Tags));
 
         return _mapper.Map<User, UserDto>(user);
     }
