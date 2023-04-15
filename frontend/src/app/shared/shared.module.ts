@@ -14,6 +14,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 import { AcceptCallComponent } from './components/accept-call/accept-call.component';
 import { AvatarComponent } from './components/avatar/avatar.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
+import { CircleBarComponent } from './components/circle-bar/circle-bar.component';
 import { ConfirmComponent } from './components/confirm/confirm.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { InterestsDropdownComponent } from './components/interests-dropdown/interests-dropdown.component';
@@ -59,6 +60,7 @@ import { TooltipWhenOverflowDirective } from './directives/tooltip-when-overflow
         AvatarComponent,
         ScrollToBottomDirective,
         AcceptCallComponent,
+        CircleBarComponent,
     ],
     exports: [
         CommonModule,
@@ -82,6 +84,7 @@ import { TooltipWhenOverflowDirective } from './directives/tooltip-when-overflow
         AvatarComponent,
         ScrollToBottomDirective,
         ImageCropperModule,
+        CircleBarComponent,
     ],
 })
 export class SharedModule {}
