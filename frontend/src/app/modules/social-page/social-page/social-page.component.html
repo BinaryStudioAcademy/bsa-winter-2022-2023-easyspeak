@@ -17,7 +17,7 @@
         <p>Oops, there are no users matching your filters</p>
     </div>
 </ng-template>
-filteredCardsCount {{filteredCardsCount}}
+
 <div *ngIf="getPageCount() > 1" class="pagination">
     <app-pagination (pageNumberChanged)="onChanged($event)"
         [pageCount]="getPageCount()"></app-pagination>

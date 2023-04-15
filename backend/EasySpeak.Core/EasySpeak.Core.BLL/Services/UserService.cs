@@ -145,17 +145,17 @@ public class UserService : BaseService, IUserService
 
         IQueryable<User> filteredUsers = users;
 
-        if (filter.Language is not null)
+        if (filter.Language is not null && filter.Language.Any())
         {
-            filteredUsers = filteredUsers.Where(u => u.Language == filter.Language);
+            filteredUsers = filteredUsers.Where(u => filter.Language.Contains(u.Language));
         }
         if (filter.LangLevels is not null && filter.LangLevels.Any())
         {
             filteredUsers = filteredUsers.Where(u => filter.LangLevels.Contains(u.LanguageLevel));
         }
-        if (filter.Topics is not null && filter.Topics.Any())
+        if (filter.Tags is not null && filter.Tags.Any())
         {
-            filteredUsers = filteredUsers.Where(u => u.Tags.Any(t => filter.Tags.Select(t=>t.Id).Contains(t.Id)));
+            filteredUsers = filteredUsers.Where(u => u.Tags.Any(t => filter.Tags.Select(t => t.Id).Contains(t.Id)));
         }
 
 
