@@ -117,7 +117,6 @@ public class UserService : BaseService, IUserService
 
 
         var filteredUsersList = await filteredUsers.ToListAsync();
-
         return await AddCompatibility(filteredUsersList, filter.Compatibility);
     }
 
@@ -331,10 +330,18 @@ public class UserService : BaseService, IUserService
             .Include(user => user.User)
                 .ThenInclude(user => user.Tags)
             .Include(f => f.Requester);
+
         var users = await friendshipsWithUsers
            .Where(f => f.FriendshipStatus != FriendshipStatus.Rejected && (f.UserId == _authService.UserId || f.RequesterId == _authService.UserId))
            .Select(f => f.UserId == _authService.UserId ? f.Requester : f.User)
            .ToListAsync();
+
+        users.ForEach(user => 
+            {
+                user.Image = _context.EasySpeakFiles.FirstOrDefault(img => img.Id == user.ImageId) ?? null!;
+                user.Tags =  _context.Tags.Include(t => t.Users).Where(t => t.Users.Any(u => u.Id == user.Id)).ToList();
+            }
+        );
 
         var mappedFriends = _mapper.Map<List<UserShortInfoDto>>(users);
 

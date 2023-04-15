@@ -10,14 +10,14 @@ namespace EasySpeak.Core.BLL.Helpers
 {
     public static class UserHelper
     {
-        public static string? GetUserAvatar(this User user)
+        public static string? GetUserAvatar(this User user, EasySpeakFile? easySpeakFile = null)
         {
-            return string.IsNullOrEmpty(user.EmojiName) ? GetUserImage(user) : user.EmojiName;
+            return string.IsNullOrEmpty(user.EmojiName) ? GetUserImage(user, easySpeakFile) : user.EmojiName;
         }
 
-        private static string? GetUserImage(User user)
+        private static string? GetUserImage(User user, EasySpeakFile? easySpeakFile = null)
         {
-            return user.ImageId != null ? user.Image.Url : "";
+            return easySpeakFile != null ? user.Image.Url : "";
         }
     }
 }
