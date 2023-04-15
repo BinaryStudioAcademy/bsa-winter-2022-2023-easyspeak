@@ -80,7 +80,7 @@ export class AuthService {
                     next: (userCredential) => {
                         from(this.handleUserCredential(userCredential));
                     },
-                    error: () => { throw new Error('This email is already registered. Try another one'); },
+                    error: (e) => { throw e; },
                 }),
             );
     }
@@ -137,6 +137,7 @@ export class AuthService {
         const user: IUserShort = JSON.parse(localStorage.getItem('user') as string);
 
         this.webRtcHub.disconnectUser(user.email).then();
+
         this.notificationsHub.disconnectUser(user.email).then();
 
         localStorage.removeItem('accessToken');
@@ -175,5 +176,21 @@ export class AuthService {
         await this.afAuth.confirmPasswordReset(code, newPassword).catch((error) => {
             throw new Error(error.message);
         });
+    }
+
+    async saveNewPassword(oldPassword: string, newPassword: string) {
+        const user = await this.afAuth.currentUser;
+
+        if (user?.email) {
+            await this.afAuth.signInWithEmailAndPassword(user.email, oldPassword)
+                .then(async () => {
+                    await auth.updatePassword(user, newPassword);
+                })
+                .catch((error) => {
+                    throw new Error(error.message);
+                });
+        } else {
+            throw new Error('User email not found!');
+        }
     }
 }

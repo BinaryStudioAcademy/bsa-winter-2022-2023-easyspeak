@@ -24,6 +24,10 @@ export class SessionCallComponent implements OnInit, OnDestroy {
 
     remoteStream: MediaStream;
 
+    videoMuted: boolean;
+
+    audioMuted: boolean;
+
     chatId: number;
 
     callerId: number;
@@ -320,5 +324,11 @@ export class SessionCallComponent implements OnInit, OnDestroy {
                 track.enabled = !track.enabled;
             }
         });
+
+        if (type === 'audio') {
+            this.audioMuted = !this.audioMuted;
+        } else {
+            this.videoMuted = !this.videoMuted;
+        }
     }
 }

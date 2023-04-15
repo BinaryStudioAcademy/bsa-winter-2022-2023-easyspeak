@@ -24,7 +24,7 @@
         </div>
         <div class="header-content right-area">
             <div class="remaindings">
-                <div matBadge="1" class="reminding" routerLink="/chat">
+                <div matBadge="{{numberOfMessages > 0 ? numberOfMessages : ''}}" class="reminding" routerLink="/chat">
                     <img src="/assets/header/mail-icon.svg"  alt="image"/>
                 </div>
                 <div [matMenuTriggerFor]="notifications" class="remaindings">
@@ -39,7 +39,7 @@
                     </mat-menu>
                 </div>
             </div>
-            <div [matMenuTriggerFor]="menu" class="user-area">
+            <div [matMenuTriggerFor]="menu" class="user-area" *ngIf="currentUser">
                 <div class="user-avatar-placeholder">
                     <app-avatar
                         [firstName]="currentUser.firstName"
@@ -63,7 +63,8 @@
                         <img class="menu-icon" src="/assets/header/book-icon.svg" />
                         <span class="menu-text">Teacher profile</span>
                     </button>
-                    <button mat-menu-item class="menu-element">
+                    <button [routerLink]="['/profile/change-pass']" mat-menu-item class="menu-element">
+
                         <img class="menu-icon" src="/assets/header/lock-icon.svg" />
                         <span class="menu-text">Change Password</span>
                     </button>

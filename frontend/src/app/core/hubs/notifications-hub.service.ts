@@ -28,8 +28,7 @@ export class NotificationsHubService {
         this.subscriptions.push(this.messages.subscribe({ next: action }));
     }
 
-    stop(): void {
-        this.hubConnection.stop();
+    async stop() {
         this.subscriptions.forEach((s) => s.unsubscribe());
     }
 
@@ -54,6 +53,10 @@ export class NotificationsHubService {
         this.hubConnection.on('Notify', (msg: string) => {
             this.messages.next(msg);
         });
+    }
+
+    async invoke(methodName: string, ...args: unknown[]): Promise<unknown> {
+        return this.hubConnection.invoke(methodName, ...args);
     }
 
     isConnected(): boolean {

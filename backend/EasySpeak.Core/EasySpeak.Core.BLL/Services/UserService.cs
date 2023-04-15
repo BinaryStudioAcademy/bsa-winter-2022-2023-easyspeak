@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using EasySpeak.Core.Common.Enums;
 using Microsoft.Extensions.Options;
 using UserShortInfoDto = EasySpeak.Core.Common.DTO.User.UserShortInfoDto;
+using System.Linq;
 
 namespace EasySpeak.Core.BLL.Services;
 
@@ -102,17 +103,17 @@ public class UserService : BaseService, IUserService
 
         IQueryable<User> filteredUsers = users;
 
-        if (filter.Language is not null)
+        if (filter.Language is not null && filter.Language.Any())
         {
-            filteredUsers = filteredUsers.Where(u => u.Language == filter.Language);
+            filteredUsers = filteredUsers.Where(u => filter.Language.Contains(u.Language));
         }
         if (filter.LangLevels is not null && filter.LangLevels.Any())
         {
             filteredUsers = filteredUsers.Where(u => filter.LangLevels.Contains(u.LanguageLevel));
         }
-        if (filter.Topics is not null && filter.Topics.Any())
+        if (filter.Tags is not null && filter.Tags.Any())
         {
-            filteredUsers = filteredUsers.Where(u => u.Tags.Any(t => filter.Topics.Select(t => t.Id).Contains(t.Id)));
+            filteredUsers = filteredUsers.Where(u => u.Tags.Any(t => filter.Tags.Select(t=>t.Id).Contains(t.Id)));
         }
 
 
@@ -154,7 +155,7 @@ public class UserService : BaseService, IUserService
         }
         if (filter.Topics is not null && filter.Topics.Any())
         {
-            filteredUsers = filteredUsers.Where(u => u.Tags.Any(t => filter.Topics.Select(t => t.Id).Contains(t.Id)));
+            filteredUsers = filteredUsers.Where(u => u.Tags.Any(t => filter.Tags.Select(t=>t.Id).Contains(t.Id)));
         }
 
 
@@ -450,7 +451,12 @@ public class UserService : BaseService, IUserService
 
     public async Task<List<UserShortInfoDto>> GetFriends()
     {
-        var friendshipsWithUsers = _context.Friends.Include(f => f.User).Include(f => f.Requester);
+        var friendshipsWithUsers = _context.Friends
+            .Include(f => f.User)
+                .ThenInclude(user => user.Image)
+            .Include(user => user.User)
+                .ThenInclude(user => user.Tags)
+            .Include(f => f.Requester);
         var users = await friendshipsWithUsers
            .Where(f => f.FriendshipStatus != FriendshipStatus.Rejected && (f.UserId == _authService.UserId || f.RequesterId == _authService.UserId))
            .Select(f => f.UserId == _authService.UserId ? f.Requester : f.User)

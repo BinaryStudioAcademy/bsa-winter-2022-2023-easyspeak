@@ -31,6 +31,8 @@ export class TeachersPageComponent implements OnInit {
 
     datesWithLessons: IDateWithLessons[] = [];
 
+    openedLessonId: number;
+
     constructor(
         private authService: AuthService,
         private dialogRef: MatDialog,
@@ -74,6 +76,7 @@ export class TeachersPageComponent implements OnInit {
     }
 
     loadLessons(daysCount: number) {
+        this.openedLessonId = -1;
         this.selectedDaysCount = daysCount;
         this.lessonsService
             .getTeacherLessonsAtPeriod(
@@ -92,5 +95,13 @@ export class TeachersPageComponent implements OnInit {
             dateWithLessons.lessonsColumn1 = filterColumn(dateWithLessons.lessons, 1);
             dateWithLessons.lessonsColumn2 = filterColumn(dateWithLessons.lessons, 2);
         });
+    }
+
+    onLessonOpenedQuestions(id: number) {
+        this.openedLessonId = id;
+    }
+
+    isLessonOpenedQuestions(id: number) {
+        return this.openedLessonId === id;
     }
 }

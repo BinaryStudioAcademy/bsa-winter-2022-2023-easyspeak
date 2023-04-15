@@ -11,7 +11,7 @@
                     placeholder="Email"
                     value="{{this.email}}"
                     (keyup)="ClearErrors(email)"
-                    [ngClass]="{'submitted-email': isChanged.email}"/>
+                    [ngClass]="{'submitted': isChanged.email}"/>
                 <div class="errors-wrp"  *ngFor="let condition of ['required','pattern'] ">
                     <mat-error class="error"
                                *ngIf="CheckCondition(email,condition)">
@@ -27,7 +27,7 @@
                        type="password"
                        appPasswordVisibility
                        (keyup)="ClearErrors(password)"
-                       [ngClass]="{'submitted-pas': isChanged.password}"/>
+                       [ngClass]="{'submitted': isChanged.password}"/>
                 <div class="errors-wrp"  *ngFor="let condition of ['required','pattern'] ">
                     <mat-error class="error"
                                *ngIf="CheckCondition(password,condition)">

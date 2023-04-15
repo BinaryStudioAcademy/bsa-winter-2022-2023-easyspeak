@@ -1,5 +1,6 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '@shared/shared.module';
 
 import { CropImageDialogComponent } from './crop-image.dialog/crop-image.dialog.component';
@@ -19,6 +20,8 @@ import { UserProfileRoutingModule } from './user-profile-routing.module';
         SharedModule,
         UserProfileRoutingModule,
         FormsModule,
+        ReactiveFormsModule,
+        CommonModule,
     ],
 })
 export class UserProfileModule {}

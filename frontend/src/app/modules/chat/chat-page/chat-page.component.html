@@ -8,7 +8,7 @@
         </div>
         <mat-form-field appearance="fill">
             <form [formGroup]="filterForm">
-                <input matInput placeholder="Type a name..." (input)="filterPeople()" formControlName="filterInput"/>
+                <input id="filter-box" matInput placeholder="Type a name..." (input)="filterPeople()" formControlName="filterInput"/>
             </form>
             <mat-icon matSuffix>search</mat-icon>
         </mat-form-field>
@@ -34,15 +34,9 @@
                                     [imagePath]="person.imageUrl">
                                 </app-avatar>
                             </div>
-                            <div [ngClass]="{
-                                'status' : true,
-                                'online' : person.isOnline,
-                                'offline' : !person.isOnline
-                             }"></div>
                         </div>
                         <div class="name-status">
                             <span class="person-name">{{person.firstName}} {{person.lastName}}</span>
-                            <span class="person-online">{{person.isOnline ? 'online' : 'offline'}}</span>
                         </div>
                     </div>
                     <span>{{addTimeOffset(person.lastMessageDate) | date: 'HH:mm'}}</span>
@@ -59,10 +53,6 @@
     <div class="container" *ngIf="currentPerson">
         <header>
             <div class="interlocutor">
-                <div [ngClass]="{
-                'online': currentPerson.isOnline,
-                'offline': !currentPerson.isOnline
-                }"></div>
                 <span class="person-name">{{currentPerson.firstName}} {{currentPerson.lastName}}</span>
             </div>
             <div class="buttons">

@@ -1,10 +1,13 @@
 ﻿using AutoMapper;
+using EasySpeak.Core.BLL.Helpers;
 using EasySpeak.Core.BLL.Interfaces;
+using EasySpeak.Core.BLL.Options;
 using EasySpeak.Core.Common.DTO;
 using EasySpeak.Core.Common.DTO.Lesson;
 using EasySpeak.Core.DAL.Context;
 using EasySpeak.Core.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 namespace EasySpeak.Core.BLL.Services;
 
@@ -13,11 +16,14 @@ public class LessonsService : BaseService, ILessonsService
     private readonly IZoomApiService _zoomApiService;
     private readonly IFirebaseAuthService _authService;
     public const int DaysInWeek = 7;
+    private readonly LessonSchedulerOptions _schedulerOptions;
 
-    public LessonsService(EasySpeakCoreContext context, IMapper mapper, IFirebaseAuthService authService, IZoomApiService zoomApiService) : base(context, mapper)
+    public LessonsService(EasySpeakCoreContext context, IMapper mapper, IFirebaseAuthService authService,
+        IZoomApiService zoomApiService, IOptions<LessonSchedulerOptions> shedulerOptions) : base(context, mapper)
     {
         _authService = authService;
         _zoomApiService = zoomApiService;
+        _schedulerOptions = shedulerOptions.Value;
     }
 
     public async Task<ICollection<LessonDto>> GetAllLessonsAsync(FiltersRequest filtersRequest)
@@ -27,6 +33,7 @@ public class LessonsService : BaseService, ILessonsService
         var lessonsFromContext = _context.Lessons
             .Include(l => l.Tags)
             .Include(l => l.User)
+            .ThenInclude(user => user!.Image)
             .Where(x => x.StartAt.Date == filtersRequest.Date && !x.IsCanceled);
 
         if (tagsIds is not null && tagsIds.Any())
@@ -54,6 +61,9 @@ public class LessonsService : BaseService, ILessonsService
         {
             t.SubscribersCount = subscribersInfoDict[t.Id].SbCount;
             t.isSubscribed = subscribersInfoDict[t.Id].isSubscribed;
+            var user = lessonsFromContext.First(lesson => lesson.Id == t.Id).User!;
+            var imgUrl = user.GetUserAvatar();
+            t.User!.ImagePath = imgUrl;
         });
 
         return lessonDtos;
@@ -168,5 +178,36 @@ public class LessonsService : BaseService, ILessonsService
         await _context.SaveChangesAsync();
 
         return _mapper.Map<LessonDto>(lesson);
+    }
+
+    public async Task<List<LessonDelayDto>> GetLessonsWithDelayTime(List<long> createdReminders)
+    {
+        var currentTime = DateTime.UtcNow;
+
+        var fromTime = currentTime.AddMinutes(_schedulerOptions.CheckPeriod);
+
+        var toTime = currentTime.AddMinutes(_schedulerOptions.CheckPeriod * 2);
+
+        var lessons = await _context.Lessons
+            .Where(l => l.StartAt >= fromTime
+                        && l.StartAt <= toTime
+                        && !createdReminders.Contains(l.Id))
+            .Select(l => new LessonDelayDto
+            {
+                LessonId = l.Id,
+                DelayInMinutes = (l.StartAt - fromTime).Minutes - currentTime.Minute
+            })
+            .ToListAsync();
+
+        return lessons.OrderBy(x => x.DelayInMinutes).ToList();
+    }
+
+    public async Task<Lesson> GetLessonById(long id)
+    {
+        return await _context.Lessons
+                .Include(l => l.User)
+                .Include(l => l.Subscribers)
+                .FirstOrDefaultAsync(l => l.Id == id)
+            ?? throw new ArgumentException($"{typeof(Lesson)} with id {id} not found");
     }
 }

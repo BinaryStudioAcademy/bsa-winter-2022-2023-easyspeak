@@ -4,7 +4,7 @@
     box-sizing: border-box
 
 .container
-    width: 100%
+    width: 1326px
     height: 100%
     background-color: $gray-100
     box-sizing: border-box
@@ -72,12 +72,15 @@
         display: flex
         align-items: center
         justify-content: center
+        cursor: pointer
         input
             position: absolute
             height: 100%
             width: 70%
             opacity: 0
 
+::-webkit-file-upload-button
+    cursor: pointer
 
 .avatar-placeholder
     margin: 0
@@ -413,6 +416,6 @@
 :host::ng-deep.ng-value-label
     margin-left: 0
 
-::ng-deep.mat-mdc-form-field-has-icon-prefix
+:host::ng-deep.mat-mdc-form-field-has-icon-prefix
     padding-top: 5.5px !important
     height: 30px !important

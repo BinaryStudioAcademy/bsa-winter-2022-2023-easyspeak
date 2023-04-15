@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { BaseComponent } from '@core/base/base.component';
+import { AuthService } from '@core/services/auth.service';
 import { SpinnerService } from '@core/services/spinner.service';
 import { UserService } from '@core/services/user.service';
 import { YoutubePlayerComponent } from '@shared/components/youtube-player/youtube-player.component';
@@ -20,6 +21,10 @@ export class LessonComponent extends BaseComponent implements OnInit {
 
     @Input() isTeachersPage: boolean;
 
+    @Input() isQuestionsOpened: boolean;
+
+    @Output() questionsOpened = new EventEmitter<void>();
+
     previewImage: string;
 
     questions: string;
@@ -30,6 +35,8 @@ export class LessonComponent extends BaseComponent implements OnInit {
 
     buttonHover: string;
 
+    isLessonAuthor: boolean;
+
     constructor(
         private dialogRef: MatDialog,
         private lessonsService: LessonsService,
@@ -37,6 +44,7 @@ export class LessonComponent extends BaseComponent implements OnInit {
         private spinner: SpinnerService,
         private notificationService: NotificationService,
         private countriesService: CountriesTzLangProviderService,
+        private authService: AuthService,
     ) {
         super();
     }
@@ -57,13 +65,30 @@ export class LessonComponent extends BaseComponent implements OnInit {
     }
 
     showQuestions() {
-        if (this.questions) {
-            this.isShowQuestions = !this.isShowQuestions;
-        }
-
-        if (this.isShowQuestions) {
+        if (this.isQuestionsOpened) {
+            this.questions = '';
+        } else {
             this.questions = this.lesson.questions;
+            this.questionsOpened.emit();
+            this.changeCardHeight();
         }
+        this.isQuestionsOpened = !this.isQuestionsOpened;
+    }
+
+    changeCardHeight() {
+        const observer = new MutationObserver(() => {
+            const container = document.querySelector('.lesson-card-questions') as HTMLElement;
+
+            if (container) {
+                observer.disconnect();
+
+                if (container.scrollHeight > container.clientHeight) {
+                    container.style.height = '460px';
+                }
+            }
+        });
+
+        observer.observe(document.body, { childList: true, subtree: true });
     }
 
     joinLesson() {
@@ -94,17 +119,25 @@ export class LessonComponent extends BaseComponent implements OnInit {
         this.previewImage = this.lesson.youtubeVideoId
             ? `//img.youtube.com/vi/${this.lesson.youtubeVideoId}/maxresdefault.jpg`
             : '';
+
+        this.authService.user.subscribe(
+            u => {
+                this.isLessonAuthor = (u.id === this.lesson.user.id);
+            },
+        );
     }
 
     isDisabled() {
-        if (!this.isTeachersPage) {
-            return this.lesson.isSubscribed
-                || new Date() > new Date(this.lesson.startAt)
-                || this.lesson.limitOfUsers === null
-                || this.lesson.subscribersCount === this.lesson.limitOfUsers;
+        if (this.isTeachersPage || (!this.isTeachersPage && this.isLessonAuthor)) {
+            return this.lesson.isCanceled;
         }
-        if (this.isTeachersPage) {
-            return this.lesson.isCanceled || new Date() > new Date(this.lesson.startAt);
+        if (!this.isTeachersPage) {
+            return (
+                this.lesson.isSubscribed ||
+                new Date() > new Date(this.lesson.startAt) ||
+                this.lesson.limitOfUsers === null ||
+                this.lesson.subscribersCount === this.lesson.limitOfUsers
+            );
         }
 
         return false;
@@ -112,18 +145,7 @@ export class LessonComponent extends BaseComponent implements OnInit {
 
     getButtonContent() {
         switch (true) {
-            case !this.isTeachersPage:
-                if (new Date() > new Date(this.lesson.startAt)) {
-                    return 'Expired';
-                } if (this.lesson.isSubscribed) {
-                    return 'Subscribed';
-                }
-
-                this.buttonHover = 'hover';
-
-                return 'Join';
-
-            case this.isTeachersPage:
+            case (this.isTeachersPage || (!this.isTeachersPage && this.isLessonAuthor)):
                 if (!this.lesson.isCanceled) {
                     this.buttonHover = 'hover';
 
@@ -131,6 +153,18 @@ export class LessonComponent extends BaseComponent implements OnInit {
                 }
 
                 return 'Canceled';
+
+            case !this.isTeachersPage:
+                if (new Date() > new Date(this.lesson.startAt)) {
+                    return 'Expired';
+                }
+                if (this.lesson.isSubscribed) {
+                    return 'Subscribed';
+                }
+
+                this.buttonHover = 'hover';
+
+                return 'Join';
 
             default:
                 return '';

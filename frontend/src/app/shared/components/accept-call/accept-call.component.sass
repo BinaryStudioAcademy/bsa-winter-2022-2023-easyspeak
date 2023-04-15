@@ -20,11 +20,33 @@
     font-size: 24px
     line-height: 146%
 
+.user-avatar-placeholder
+    margin: 0
+    border-radius: 50%
+    width: 172px
+    height: 172px
+    overflow: hidden
+    font-size: 172px
+    animation: pulse 2s infinite
+
+@keyframes pulse
+  0%
+    box-shadow: 0 0 0 0 $turqoise-100-semi-transparent
+  70%
+    box-shadow: 0 0 0 20px $turqoise-100-transparent
+  100%
+    box-shadow: 0 0 0 0 $turqoise-100-transparent
+
 .avatar
     display: block
     width: 172px
     height: 172px
-    border-radius: 111px
+    border-radius: 50%
+    font-size: 60px
+
+.rounded-avatar
+    border-radius: 50%
+    overflow: hidden
 
 .controls
     display: flex

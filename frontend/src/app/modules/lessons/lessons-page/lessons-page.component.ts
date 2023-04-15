@@ -36,6 +36,8 @@ export class LessonsPageComponent implements OnInit, OnChanges {
 
     userIsAdmin = false;
 
+    openedLessonId: number;
+
     constructor(
         private dialogRef: MatDialog,
         private lessonService: LessonsService,
@@ -80,6 +82,7 @@ export class LessonsPageComponent implements OnInit, OnChanges {
     }
 
     getLessons() {
+        this.openedLessonId = -1;
         this.lessonService
             .getFilteredLessons({
                 languageLevels: this.selectedLanguageFilters.map((level: string) =>
@@ -108,5 +111,13 @@ export class LessonsPageComponent implements OnInit, OnChanges {
             default:
                 return 'Oops, there are no lessons with such levels for this day. Please consider another date';
         }
+    }
+
+    onLessonOpenedQuestions(id: number) {
+        this.openedLessonId = id;
+    }
+
+    isLessonOpenedQuestions(id: number) {
+        return this.openedLessonId === id;
     }
 }

@@ -2,7 +2,7 @@
     <div class="lesson-card-content">
         <div class="up">
             <div class="lesson-preview">
-                <div class="photo" (click)="openDialog(lesson.youtubeVideoId)">
+                <div [class.photo-exist]="previewImage" class="photo" (click)="openDialog(lesson.youtubeVideoId)">
                     <img src="{{ previewImage || 'assets/lesson-icons/no-video.png' }}" alt="thumbnail" />
                     <div class="circle" *ngIf="previewImage">
                         <img src="assets/lesson-icons/circle.svg" alt="circle-icon" />
@@ -63,14 +63,14 @@
         <div class="bottom">
             <div class="lesson-level">
                 <img src="assets/lesson-icons/people-icon.svg" alt="people-icon" />
-                <span class="count">{{ lesson.limitOfUsers }}</span>
+                <span class="count">{{ lesson.subscribersCount }}</span>
                 <img src="assets/lesson-icons/rocket-icon.svg" alt="rocket-icon" />
                 <span class="count">{{ lesson.languageLevel }}</span>
             </div>
 
             <div class="lesson-actions">
                 <button
-                    *ngIf="!isTeachersPage; else cancel"
+                    *ngIf="!isTeachersPage && !isLessonAuthor; else cancel"
                     class="join"
                     id="{{buttonHover}}"
                     [disabled]="isDisabled()"
@@ -90,7 +90,7 @@
             </div>
         </div>
     </div>
-    <div class="lesson-card-questions" *ngIf="isShowQuestions">
+    <div class="lesson-card-questions" *ngIf="isQuestionsOpened">
         <div class="spinner-container" *ngIf="isLoading">
             <app-loading-spinner class="spinner"></app-loading-spinner>'
         </div>

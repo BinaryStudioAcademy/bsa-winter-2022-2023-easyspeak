@@ -1,11 +1,9 @@
 <div class="container">
     <form [formGroup]="myForm" autocomplete="off">
         <div class="form-field">
-            <div id="floatContainer" class="float-container">
-                <label for="groupClassName">The Name of the Group Class</label>
-                <input id="groupClassName" type="text" formControlName="name" />
+            <div class="input">
+                <input type="text" placeholder="The Name of the Group Class" formControlName="name" />
             </div>
-
             <mat-error class="error-container">
                 <div class="error" *ngIf="name?.invalid && submitted">
                     <img src="/assets/user-profile/alert-triangle.svg" alt="" />
@@ -117,20 +115,6 @@
                 <div class="error" *ngIf="studentsCount?.value && studentsCount?.value < 1 && studentsCount?.touched">
                     <img src="/assets/user-profile/alert-triangle.svg" alt="" />
                     <p>Number of students cannot be less than 1</p>
-                </div>
-            </mat-error>
-        </div>
-
-        <div class="form-field">
-            <div class="input">
-                <img src="assets/lesson-icons/chains.svg" alt="chains-icon" class="icon" />
-                <input type="text" placeholder="Zoom Link to the Lesson" formControlName="meetLink" />
-            </div>
-
-            <mat-error class="error-container">
-                <div class="error" *ngIf="meetLink?.invalid && submitted">
-                    <img src="/assets/user-profile/alert-triangle.svg" alt="" />
-                    <p>Meet Link is Required</p>
                 </div>
             </mat-error>
         </div>

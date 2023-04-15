@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { BaseComponent } from '@core/base/base.component';
 import { NotificationsHubService } from '@core/hubs/notifications-hub.service';
 import { NotificationService } from '@core/services/notification.service';
+import { addTimeOffset } from '@modules/lessons/lesson/lesson.helper';
 import { INotification } from '@shared/models/INotification';
 import { NotificationType } from '@shared/utils/user-notifications.util';
 import { Subscription } from 'rxjs';
@@ -40,7 +41,7 @@ export class UserNotificationComponent extends BaseComponent implements OnInit, 
         this.notifySubscription = await this.notificationService.getNotifications()
             .pipe(this.untilThis)
             .subscribe((data) => {
-                this.notifications = data;
+                this.notificationsToTimeZone(data);
             });
     }
 
@@ -62,7 +63,15 @@ export class UserNotificationComponent extends BaseComponent implements OnInit, 
             };
 
             this.notifications.push(messages);
+            this.notificationsToTimeZone(this.notifications);
         });
+    }
+
+    notificationsToTimeZone(newNotifications: INotification[]) {
+        this.notifications = newNotifications.map(notification => ({
+            ...notification,
+            createdAt: new Date(addTimeOffset(notification.createdAt.toString())),
+        }));
     }
 
     readNotification(notification: INotification) {
@@ -78,9 +87,8 @@ export class UserNotificationComponent extends BaseComponent implements OnInit, 
         this.notificationService.readAllNotifications().subscribe();
     }
 
-    override ngOnDestroy() {
-        this.notificationsHub.stop();
-        this.notifySubscription.unsubscribe();
+    override ngOnDestroy(): void {
+        this.notificationsHub.stop().then();
     }
 
     getNotificationTypeIcon(type: NotificationType) {

@@ -10,5 +10,8 @@ namespace EasySpeak.Core.BLL.Interfaces
         Task<NotificationDto> AddNotificationAsync(NotificationType type, long id);
         Task<long> ReadNotificationAsync(long id);
         Task ReadAllNotificationsAsync();
+        Task<List<long>> GetCreatedRemindersList();
+        Task SaveNotificationsRange(List<NewNotificationDto> newNotifications);
+        Task<List<Notification>> GetReminderNotificationByLesson(long lessonId);
     }
 }
