@@ -55,7 +55,7 @@ public class LessonSchedulerService : BackgroundService
     {
         var pendingTime = TimeSpan.FromMinutes(lessonDelayDto.DelayInMinutes);
         
-        await Task.Delay(pendingTime).ContinueWith(async _ =>
+        await Task.Delay(Math.Abs(pendingTime.Milliseconds)).ContinueWith(async _ =>
         {
             var lessonWithSubscribers = await lessonsService.GetLessonById(lessonDelayDto.LessonId);
 
@@ -91,7 +91,8 @@ public class LessonSchedulerService : BackgroundService
                 CreatedAt = DateTime.UtcNow,
                 Type = NotificationType.reminding,
                 Text = "The lesson is starting in <strong>30 minutes</strong>! Don't miss it.",
-                ImageId = lesson.User!.ImageId
+                ImageId = lesson.User!.ImageId,
+                Link = subscriber.Id == lesson.User.Id ? lesson.ZoomMeetingLinkHost : lesson.ZoomMeetingLink
             };
         }
     }

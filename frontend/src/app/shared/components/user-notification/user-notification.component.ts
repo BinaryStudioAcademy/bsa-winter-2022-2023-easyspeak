@@ -1,12 +1,13 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BaseComponent } from '@core/base/base.component';
 import { NotificationsHubService } from '@core/hubs/notifications-hub.service';
+import { AuthService } from '@core/services/auth.service';
 import { NotificationService } from '@core/services/notification.service';
 import { addTimeOffset } from '@modules/lessons/lesson/lesson.helper';
 import { INotification } from '@shared/models/INotification';
 import { NotificationType } from '@shared/utils/user-notifications.util';
-import { Subscription } from 'rxjs';
+import { first, of, Subscription } from 'rxjs';
 
 import { getTimeDiff } from './date-time-diff.helper';
 
@@ -15,8 +16,10 @@ import { getTimeDiff } from './date-time-diff.helper';
     templateUrl: './user-notification.component.html',
     styleUrls: ['./user-notification.component.sass'],
 })
-export class UserNotificationComponent extends BaseComponent implements OnInit, OnDestroy {
+export class UserNotificationComponent extends BaseComponent implements OnInit, AfterViewInit, OnDestroy {
     readonly notificationsHub: NotificationsHubService;
+
+    storageHasData: boolean;
 
     notifications: INotification[] = [];
 
@@ -26,6 +29,7 @@ export class UserNotificationComponent extends BaseComponent implements OnInit, 
         notificationsHub: NotificationsHubService,
         private notificationService: NotificationService,
         private router: Router,
+        private authService: AuthService,
     ) {
         super();
         this.notificationsHub = notificationsHub;
@@ -33,8 +37,23 @@ export class UserNotificationComponent extends BaseComponent implements OnInit, 
 
     async ngOnInit() {
         await this.getNotifications();
+    }
 
-        await this.setUpHub();
+    async ngAfterViewInit() {
+        this.waitForUserData().then(() => {
+            this.setUpHub();
+        });
+    }
+
+    async waitForUserData() {
+        const source = of(this.authService.user.value);
+        const result = source.pipe(first(user => user !== null));
+
+        result.subscribe(() => {
+            this.notificationsHub.start().then(() => {
+                this.notificationsHub.connect(this.authService.user.value.email);
+            });
+        });
     }
 
     async getNotifications() {
@@ -46,8 +65,6 @@ export class UserNotificationComponent extends BaseComponent implements OnInit, 
     }
 
     async setUpHub() {
-        await this.notificationsHub.start();
-
         this.notificationsHub.listenMessages((msg) => {
             const broadcastMessage = JSON.parse(msg);
 
@@ -60,6 +77,7 @@ export class UserNotificationComponent extends BaseComponent implements OnInit, 
                 isRead: broadcastMessage.IsRead,
                 createdAt: broadcastMessage.CreatedAt,
                 imagePath: broadcastMessage.imagePath,
+                link: broadcastMessage.link,
             };
 
             this.notifications.push(messages);

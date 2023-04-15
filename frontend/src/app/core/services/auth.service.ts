@@ -21,6 +21,8 @@ import { UserService } from './user.service';
 export class AuthService {
     user = new BehaviorSubject<IUserShort>({} as IUserShort);
 
+    public userData$ = this.user.asObservable();
+
     setUser(userShort: IUserShort) {
         this.user.next(userShort);
     }
@@ -50,10 +52,6 @@ export class AuthService {
 
             this.webRtcHub.start().then(() => {
                 this.webRtcHub.connect(userCredential.user?.email as string);
-            });
-
-            this.notificationsHub.start().then(() => {
-                this.notificationsHub.connect(userCredential.user?.email as string);
             });
         }
     }
@@ -136,11 +134,12 @@ export class AuthService {
     logout(): Promise<void> {
         const user: IUserShort = JSON.parse(localStorage.getItem('user') as string);
 
-        this.webRtcHub.disconnectUser(user.email).then();
+        this.webRtcHub.disconnectUser(user.email);
 
-        this.notificationsHub.disconnectUser(user.email).then();
+        this.notificationsHub.disconnectUser(user.email);
 
         localStorage.removeItem('accessToken');
+
         localStorage.removeItem('user');
 
         this.router.navigate(['auth/sign-in']);

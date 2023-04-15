@@ -27,7 +27,7 @@
                     <div class="notification-text" [innerHTML]="notification.text"></div>
                     <div *ngIf="notification.link" class="notification-link">
                         <img src="/assets/notifications/link.svg">
-                        <a [href]="notification.link">lesson link</a>
+                        <a [href]="notification.link">link</a>
                     </div>
                     <div class="notification-timespan">
                         {{timeDiff(notification.createdAt)}}
