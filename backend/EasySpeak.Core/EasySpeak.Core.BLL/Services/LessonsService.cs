@@ -62,7 +62,7 @@ public class LessonsService : BaseService, ILessonsService
             t.SubscribersCount = subscribersInfoDict[t.Id].SbCount;
             t.isSubscribed = subscribersInfoDict[t.Id].isSubscribed;
             var user = lessonsFromContext.First(lesson => lesson.Id == t.Id).User!;
-            var imgUrl = user.GetUserAvatar();
+            var imgUrl = user.GetUserAvatar(user.Image);
             t.User!.ImagePath = imgUrl;
         });
 

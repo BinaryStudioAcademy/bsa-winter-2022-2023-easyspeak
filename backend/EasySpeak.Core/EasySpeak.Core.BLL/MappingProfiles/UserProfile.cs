@@ -28,7 +28,7 @@ public class UserProfile : Profile
 
         CreateMap<User, UserShortInfoDto>()
             .ForMember(user => user.Name, src => src.MapFrom(user => $"{user.FirstName} {user.LastName}"))
-            .ForMember(user => user.ImagePath, src => src.MapFrom(user => user.GetUserAvatar()))
+            .ForMember(user => user.ImagePath, src => src.MapFrom(user => user.GetUserAvatar(user.Image)))
             .ForMember(user => user.Tags, src => src.MapFrom(user => user.Tags.Select(t => t.Name)));
     }
 }
