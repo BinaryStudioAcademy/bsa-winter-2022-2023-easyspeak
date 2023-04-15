@@ -25,7 +25,7 @@ public class UserService : BaseService, IUserService
     private readonly RecommendationServiceOptions _recommendationServiceOptions;
     private readonly QueriesSenderService _queriesSender;
     private readonly INotificationService _notificationService;
-    private readonly int AmountOfItemsOnPage = 10;
+    private readonly int AmountOfItemsOnPage = 8;
 
     public UserService(IEasySpeakFileService fileService, EasySpeakCoreContext context, 
             IMapper mapper, IFirebaseAuthService authService, IHttpClientFactory clientFactory,
@@ -112,7 +112,49 @@ public class UserService : BaseService, IUserService
         }
         if (filter.Topics is not null && filter.Topics.Any())
         {
-            filteredUsers = filteredUsers.Where(u => u.Tags.Any(t => filter.Topics.Select(t=>t.Id).Contains(t.Id)));
+            filteredUsers = filteredUsers.Where(u => u.Tags.Any(t => filter.Topics.Select(t => t.Id).Contains(t.Id)));
+        }
+
+
+        var filteredUsersList = await filteredUsers.ToListAsync();
+
+        return await AddCompatibility(filteredUsersList, filter.Compatibility);
+    }
+
+    private async Task<List<UserShortInfoDto>> GetFilteredUserByRange(UserFilterDto userFilter, int startIndex, int takeCount)
+    {
+        if((_context.Users.Count() - startIndex) < takeCount)
+        {
+            takeCount = _context.Users.Count() - startIndex;
+        }
+        var users = _context.Users
+            .Include(u => u.Tags)
+            .Include(u => u.Image)
+            .Skip(startIndex)
+            .Take(takeCount)
+            .Where(u =>
+                !_context.Friends.Any(f =>
+                    (f.UserId == _authService.UserId || f.RequesterId == _authService.UserId)
+                    && (f.UserId == u.Id || f.RequesterId == u.Id)
+                    && f.FriendshipStatus != FriendshipStatus.Rejected)
+                && u.Id != _authService.UserId
+            );
+   
+        var filter = _mapper.Map<UserFilter>(userFilter);
+
+        IQueryable<User> filteredUsers = users;
+
+        if (filter.Language is not null)
+        {
+            filteredUsers = filteredUsers.Where(u => u.Language == filter.Language);
+        }
+        if (filter.LangLevels is not null && filter.LangLevels.Any())
+        {
+            filteredUsers = filteredUsers.Where(u => filter.LangLevels.Contains(u.LanguageLevel));
+        }
+        if (filter.Topics is not null && filter.Topics.Any())
+        {
+            filteredUsers = filteredUsers.Where(u => u.Tags.Any(t => filter.Topics.Select(t => t.Id).Contains(t.Id)));
         }
 
 
@@ -123,28 +165,83 @@ public class UserService : BaseService, IUserService
 
     public async Task<UserShortInfoPaginationDto> GetFilteredUsersWithPagination(UserFilterWithNumberDto userFilter)
     {
-        var originaUsers = await GetFilteredUsers(userFilter.Filter);
+        int usersLength = _context.Users.Count();
 
-        int usersCount = originaUsers.Count;
+        List<UserShortInfoDto> originaUsers = new List<UserShortInfoDto>();
 
-        int remainingRange = usersCount - userFilter.PageNumber * AmountOfItemsOnPage;
+        var allUsers = await GetFilteredUsers(userFilter.Filter);
 
-        int pagesCount = usersCount % AmountOfItemsOnPage == 0 ? usersCount / AmountOfItemsOnPage : usersCount / AmountOfItemsOnPage + 1;
+        int filteredCardsCount = allUsers.FirstOrDefault() != null ? allUsers.Count() : 0;
 
-        int startIndex = userFilter.PageNumber * AmountOfItemsOnPage;
+        int skippedFiCards = userFilter.PageNumber * AmountOfItemsOnPage;
 
-        List<UserShortInfoDto> usersWithPagination;
-
-        if (remainingRange >= (AmountOfItemsOnPage))
+        for (int i = 0; i < usersLength; i += AmountOfItemsOnPage)
         {
-            usersWithPagination = originaUsers.GetRange(startIndex, AmountOfItemsOnPage);
-        }
-        else
-        {
-            usersWithPagination = originaUsers.GetRange(startIndex, remainingRange);
+            int takeNumber = AmountOfItemsOnPage;
+            if (usersLength < i + AmountOfItemsOnPage)
+            {
+                takeNumber = usersLength - i;
+            }
+            var users = await GetFilteredUserByRange(userFilter.Filter, i, takeNumber);
+
+            if (skippedFiCards > 0)
+            {
+                if (users.FirstOrDefault() != null)
+                {
+                    if (skippedFiCards < users.Count())
+                    {
+                        users = users.GetRange(skippedFiCards, users.Count() - skippedFiCards);
+                        skippedFiCards = 0;
+
+                        if (originaUsers.Count() + users.Count() > AmountOfItemsOnPage)
+                        {
+                            int numberToTake = AmountOfItemsOnPage - originaUsers.Count();
+
+                            var tempUsers = users.GetRange(0, numberToTake);
+
+                            originaUsers = originaUsers.Concat(tempUsers).ToList();
+                        }
+                        else
+                        {
+                            originaUsers = originaUsers.Concat(users).ToList();
+                        }
+                    }
+                    else
+                    {
+                        skippedFiCards -= users.Count();
+                    }
+                }
+            }
+            else
+            {
+                if (originaUsers.Count() < AmountOfItemsOnPage)
+                {
+
+                    var user = users.FirstOrDefault();
+                    if (user != null)
+                    {
+                        if (originaUsers.Count() + users.Count() > AmountOfItemsOnPage)
+                        {
+                            int numberToTake = AmountOfItemsOnPage - originaUsers.Count();
+
+                            var tempUsers = users.GetRange(0, numberToTake);
+
+                            originaUsers = originaUsers.Concat(tempUsers).ToList();
+                        }
+                        else
+                        {
+                            originaUsers = originaUsers.Concat(users).ToList();
+                        }
+                    }
+                }
+                else
+                {
+                    break;
+                }
+            }
         }
 
-        var result = new UserShortInfoPaginationDto { PagesCount = pagesCount, UserShortInfoDtos = usersWithPagination };
+        var result = new UserShortInfoPaginationDto { FilteredCardsCount = filteredCardsCount, UserShortInfoDtos = originaUsers };
 
         return result;
     }

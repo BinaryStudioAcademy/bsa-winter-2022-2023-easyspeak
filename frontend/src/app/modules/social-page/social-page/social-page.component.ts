@@ -18,7 +18,7 @@ export class SocialPageComponent implements OnInit {
 
     itemsOnPage: number;
 
-    pagesCount: number;
+    filteredCardsCount: number;
 
     filtersSaved: UserFilter;
 
@@ -52,7 +52,15 @@ export class SocialPageComponent implements OnInit {
         );
 
         this.userService.getUsersPagination(this.currentPage, filters).subscribe(users => {
-            this.pagesCount = users.pagesCount;
+            this.filteredCardsCount = users.filteredCardsCount;
         });
+    }
+
+    getPageCount() {
+        const x = this.filteredCardsCount;
+
+        const y = this.itemsOnPage;
+
+        return x % y === 0 ? Math.floor(x / y) : (Math.floor(x / y) + 1);
     }
 }

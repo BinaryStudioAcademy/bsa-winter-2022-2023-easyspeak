@@ -6,7 +6,7 @@
         <app-filter-section (filterChange)="onFilterChanges($event)"></app-filter-section>
     </div>
     <ng-container *ngIf="users$ | async as users">
-        <div class="user-grid" *ngIf="pagesCount !== 0; else noUsers">
+        <div class="user-grid" *ngIf="getPageCount() !== 0; else noUsers">
             <app-user-card *ngFor="let user of users" [user]="user"></app-user-card>
         </div>
     </ng-container>
@@ -17,8 +17,8 @@
         <p>Oops, there are no users matching your filters</p>
     </div>
 </ng-template>
-
-<div *ngIf="pagesCount > 1" class="pagination">
+filteredCardsCount {{filteredCardsCount}}
+<div *ngIf="getPageCount() > 1" class="pagination">
     <app-pagination (pageNumberChanged)="onChanged($event)"
-        [pageCount]="pagesCount"></app-pagination>
+        [pageCount]="getPageCount()"></app-pagination>
 </div>
