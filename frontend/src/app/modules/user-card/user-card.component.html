@@ -36,7 +36,7 @@
     <div class="bottom">
         <div class="progress-container" *ngIf="user.userFriendshipStatus !== eUserFriendshipStatus.Friend">
             <div class="progress">
-                <app-round-progress-bar [status]="user.compatibility"></app-round-progress-bar>
+                <app-circle-bar [progress]="user.compatibility"></app-circle-bar>
                 <div>{{ user.compatibility}}%</div>
             </div>
             <div class="progress">
