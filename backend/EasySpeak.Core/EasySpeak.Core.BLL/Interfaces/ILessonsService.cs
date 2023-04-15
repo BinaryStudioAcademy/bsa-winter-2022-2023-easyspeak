@@ -1,6 +1,5 @@
 ﻿using EasySpeak.Core.Common.DTO;
 using EasySpeak.Core.Common.DTO.Lesson;
-using EasySpeak.Core.Common.DTO.Notification;
 using EasySpeak.Core.DAL.Entities;
 
 namespace EasySpeak.Core.BLL.Interfaces;

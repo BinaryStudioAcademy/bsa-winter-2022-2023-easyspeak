@@ -11,18 +11,12 @@ namespace EasySpeak.Notifier.WebAPI.Hubs
 
         public void Connect(string email)
         {
-            if (!ConnectedUsers.ContainsKey(email))
-            {
-                ConnectedUsers[email] = Context.ConnectionId;
-            }
+            ConnectedUsers[email] = Context.ConnectionId;
         }
 
         public void Disconnect(string email)
         {
-            if (!ConnectedUsers.ContainsKey(email))
-            {
-                ConnectedUsers.Remove(email);
-            }
+            ConnectedUsers.Remove(email);
         }
 
         public async Task SendNotification(string email, NotificationDto message)

@@ -16,6 +16,7 @@ namespace EasySpeak.Core.BLL.Services
         private readonly IFirebaseAuthService _firebaseAuthService;
         private readonly IMessageProducer _messageProducer;
         private readonly RabbitQueuesOptions _queueOptions;
+        private const string FriendsPageRoute = "/friends";
         public NotificationService(
             IFirebaseAuthService firebaseAuthService, 
             EasySpeakCoreContext context, 
@@ -115,7 +116,7 @@ namespace EasySpeak.Core.BLL.Services
                 _ => string.Empty
             };
 
-            return new NewNotificationDto()
+            return new NewNotificationDto
             {
                 IsRead = false,
                 UserId = receiver.Id,
@@ -124,7 +125,8 @@ namespace EasySpeak.Core.BLL.Services
                 CreatedAt = DateTime.UtcNow,
                 Type = type,
                 Text = text,
-                ImageId = sender.ImageId
+                ImageId = sender.ImageId,
+                Link = type == NotificationType.friendshipRequest ? FriendsPageRoute : null
             };
         }
 
@@ -175,7 +177,8 @@ namespace EasySpeak.Core.BLL.Services
                         IsRead = n.Notification.IsRead,
                         Text = n.Notification.Text,
                         Type = n.Notification.Type,
-                        ImagePath = f!.Url
+                        ImagePath = f!.Url,
+                        Link = n.Notification.Type == NotificationType.friendshipRequest ? FriendsPageRoute : null
                     })
                 .OrderByDescending(n => n.CreatedAt)
                 .ToListAsync();

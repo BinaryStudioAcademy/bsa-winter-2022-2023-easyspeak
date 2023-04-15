@@ -52,7 +52,7 @@ namespace EasySpeak.Core.BLL.Services
 
                 await _context.SaveChangesAsync();
 
-                await _notificationService.AddNotificationAsync(Common.Enums.NotificationType.friendshipRequest, user!.Id);
+                await _notificationService.AddNotificationAsync(Common.Enums.NotificationType.friendshipRequest, user.Id);
             }
             else
             {
